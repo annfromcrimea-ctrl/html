@@ -1,0 +1,3448 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>КонспектУрок PRO · МАКСИМАЛЬНЫЙ</title>
+<style>
+        /* ===== БАЗОВЫЕ СТИЛИ ===== */
+        :root {
+            --bg: #eef6ec;
+            --card: #fff;
+            --ink: #20362a;
+            --mut: #7c9083;
+            --line: #dcead9;
+            --pine: #1e7a4c;
+            --leaf: #2f9e63;
+            --sea: #4d9de0;
+            --gold: #f5a623;
+            --red: #e74c3c;
+            --purple: #9c27b0;
+            --shadow: rgba(30, 122, 76, 0.10);
+            --radius: 18px;
+            --transition: 0.3s ease;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font: 14px/1.5 'Nunito', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            background-image: radial-gradient(var(--line) 1.2px, transparent 1.6px);
+            background-size: 24px 24px;
+            transition: background var(--transition), color var(--transition);
+        }
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+            outline: none;
+        }
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 14px;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(135deg, var(--leaf), var(--pine));
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+        }
+        .bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 54px;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-weight: 900;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .logo span {
+            font-weight: 400;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* ===== MAIN ===== */
+        main {
+            padding: 18px 0 80px;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: var(--ink);
+            padding: 7px 14px;
+            font-weight: 800;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all var(--transition);
+            text-decoration: none;
+            font-size: 13px;
+            user-select: none;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+        .btn:active {
+            transform: scale(0.96);
+        }
+        .btn.p {
+            background: var(--leaf);
+            border-color: var(--leaf);
+            color: #fff;
+        }
+        .btn.b {
+            background: var(--sea);
+            border-color: var(--sea);
+            color: #fff;
+        }
+        .btn.g {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #fff;
+        }
+        .btn.r {
+            background: var(--red);
+            border-color: var(--red);
+            color: #fff;
+        }
+        .btn.purple {
+            background: var(--purple);
+            border-color: var(--purple);
+            color: #fff;
+        }
+        .btn.outline {
+            background: transparent;
+            border-color: var(--line);
+        }
+        .btn.sm {
+            padding: 4px 10px;
+            font-size: 12px;
+        }
+        .btn.xs {
+            padding: 2px 8px;
+            font-size: 10px;
+        }
+
+        /* ===== INPUTS ===== */
+        .inp {
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: var(--ink);
+            padding: 7px 10px;
+            width: 100%;
+            border-radius: 12px;
+            transition: border var(--transition), box-shadow var(--transition);
+        }
+        .inp:focus {
+            border-color: var(--leaf);
+            box-shadow: 0 0 0 3px rgba(47, 158, 99, 0.15);
+        }
+        .inp-sm {
+            max-width: 80px;
+        }
+        .inp-md {
+            max-width: 180px;
+        }
+        .inp-lg {
+            max-width: 300px;
+        }
+        textarea.inp {
+            resize: vertical;
+            min-height: 50px;
+            font-family: inherit;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            border: 1px solid var(--line);
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 24px var(--shadow);
+            transition: background var(--transition), border var(--transition);
+        }
+        .card-pad {
+            padding: 16px;
+        }
+        .card-pad-sm {
+            padding: 10px 14px;
+        }
+
+        /* ===== GRID ===== */
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .row-start {
+            align-items: flex-start;
+        }
+        .grow {
+            flex: 1;
+            min-width: 0;
+        }
+        .g3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        @media (max-width:900px) {
+            .g3 {
+                grid-template-columns: 1fr;
+            }
+        }
+        .g2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        @media (max-width:600px) {
+            .g2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        .mut {
+            color: var(--mut);
+        }
+        .sm {
+            font-size: 12px;
+        }
+        .xs {
+            font-size: 11px;
+        }
+        .b {
+            font-weight: 800;
+        }
+        .mt {
+            margin-top: 14px;
+        }
+        .mt8 {
+            margin-top: 8px;
+        }
+        .mt4 {
+            margin-top: 4px;
+        }
+        .mb {
+            margin-bottom: 10px;
+        }
+        .mb8 {
+            margin-bottom: 6px;
+        }
+        .sec {
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.06em;
+            margin: 0 0 8px;
+            color: var(--pine);
+        }
+        .lbl {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--mut);
+            margin: 8px 0 4px;
+            letter-spacing: 0.03em;
+        }
+
+        /* ===== SEGMENTED CONTROL ===== */
+        .seg {
+            display: inline-flex;
+            border-radius: 999px;
+            background: var(--card);
+            overflow: hidden;
+            border: 1px solid var(--line);
+        }
+        .seg button {
+            border: 0;
+            background: none;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--ink);
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+        .seg button:hover {
+            background: rgba(47, 158, 99, 0.08);
+        }
+        .seg button.on {
+            background: var(--leaf);
+            color: #fff;
+        }
+
+        /* ===== TABS ===== */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--line);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+        .tabs button {
+            border: 0;
+            background: none;
+            padding: 6px 16px;
+            font-weight: 800;
+            font-size: 13px;
+            color: var(--mut);
+            cursor: pointer;
+            border-radius: 10px 10px 0 0;
+            transition: all var(--transition);
+            position: relative;
+        }
+        .tabs button:hover {
+            color: var(--ink);
+            background: rgba(47, 158, 99, 0.05);
+        }
+        .tabs button.on {
+            color: var(--pine);
+            background: rgba(47, 158, 99, 0.08);
+        }
+        .tabs button.on::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: var(--leaf);
+            border-radius: 3px 3px 0 0;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== PREVIEW ===== */
+        .prev {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+            transition: background var(--transition), border var(--transition);
+        }
+        .prev h2 {
+            font-size: 20px;
+            color: var(--pine);
+            margin: 0 0 10px;
+        }
+        .prev h3 {
+            font-size: 16px;
+            color: var(--leaf);
+            margin: 18px 0 10px;
+        }
+        .prev h4 {
+            font-size: 14px;
+            color: var(--ink);
+            margin: 12px 0 6px;
+        }
+        .prev table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 8px 0;
+        }
+        .prev td,
+        .prev th {
+            border: 1px solid #999;
+            padding: 6px 10px;
+            font-size: 12px;
+            vertical-align: top;
+        }
+        .prev ul,
+        .prev ol {
+            margin: 4px 0;
+            padding-left: 20px;
+        }
+        .prev li {
+            margin: 3px 0;
+        }
+        .prev p {
+            margin: 4px 0;
+        }
+        .task-umk {
+            background: #e3f2fd;
+            border-left: 4px solid #1e7a4c;
+            padding: 6px 12px;
+            border-radius: 0 8px 8px 0;
+            margin: 4px 0;
+        }
+        .task-fgos {
+            background: #fff3e0;
+            border-left: 4px solid #f5a623;
+            padding: 6px 12px;
+            border-radius: 0 8px 8px 0;
+            margin: 4px 0;
+        }
+        .task-import {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            padding: 6px 12px;
+            border-radius: 0 8px 8px 0;
+            margin: 4px 0;
+        }
+        .task-gram {
+            background: #e8f5e9;
+            border-left: 4px solid #2f9e63;
+            padding: 6px 12px;
+            border-radius: 0 8px 8px 0;
+            margin: 4px 0;
+        }
+        .task-ex {
+            background: #f5f5f5;
+            border-left: 4px solid #78909c;
+            padding: 6px 12px;
+            border-radius: 0 8px 8px 0;
+            margin: 4px 0;
+        }
+        .task-role {
+            background: #fce4ec;
+            border-left: 4px solid #e91e63;
+            padding: 6px 12px;
+            border-radius: 0 8px 8px 0;
+            margin: 4px 0;
+        }
+        .task-section {
+            border: 2px solid var(--line);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin: 12px 0;
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .task-section .task-group {
+            margin: 8px 0;
+            padding: 6px 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ===== CARDS GRID ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 8px;
+            margin: 8px 0;
+        }
+        .card-item {
+            border: 2px solid var(--leaf);
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            background: #f9f9f9;
+            font-weight: 800;
+            font-size: 16px;
+            transition: all var(--transition);
+        }
+        .card-item:hover {
+            transform: scale(1.04);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        /* ===== CHECKLIST ===== */
+        .checklist {
+            background: #f0f7f0;
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin: 8px 0;
+        }
+        .checklist label {
+            display: block;
+            margin: 3px 0;
+            cursor: pointer;
+        }
+        .checklist input[type="checkbox"] {
+            margin-right: 6px;
+            accent-color: var(--leaf);
+        }
+
+        /* ===== DIFFERENTIATION ===== */
+        .diff-box {
+            background: #f9f9f9;
+            border-left: 4px solid var(--gold);
+            padding: 8px 14px;
+            margin: 6px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .diff-a {
+            border-left-color: var(--red);
+        }
+        .diff-b {
+            border-left-color: var(--gold);
+        }
+        .diff-c {
+            border-left-color: var(--leaf);
+        }
+
+        /* ===== PROGRESS ===== */
+        .progress-wrap {
+            width: 100%;
+            height: 4px;
+            background: var(--line);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 8px 0;
+            display: none;
+        }
+        .progress-wrap.active {
+            display: block;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--leaf), var(--sea));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            background: var(--pine);
+            color: #fff;
+            padding: 10px 20px;
+            font-weight: 800;
+            border-radius: 14px;
+            z-index: 999;
+            display: none;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* ===== DARK THEME ===== */
+        body.dark {
+            --bg: #16211a;
+            --card: #1e2b22;
+            --ink: #e7f2e9;
+            --mut: #93a79a;
+            --line: #2c3d31;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        body.dark header {
+            background: linear-gradient(135deg, #14351f, #0d2416);
+        }
+        body.dark .prev {
+            background: #1e2b22;
+        }
+        body.dark .card-item {
+            background: #2c3d31;
+        }
+        body.dark .diff-box {
+            background: #2c3d31;
+        }
+        body.dark .checklist {
+            background: #1a2a20;
+        }
+        body.dark .tabs button.on {
+            background: rgba(47, 158, 99, 0.15);
+        }
+        body.dark .task-umk {
+            background: #1a3a4a;
+            border-left-color: #4d9de0;
+        }
+        body.dark .task-fgos {
+            background: #3a2a1a;
+            border-left-color: #f5a623;
+        }
+        body.dark .task-import {
+            background: #2a1a3a;
+            border-left-color: #9c27b0;
+        }
+        body.dark .task-gram {
+            background: #1a2a1a;
+            border-left-color: #2f9e63;
+        }
+        body.dark .task-ex {
+            background: #2a2a2a;
+            border-left-color: #78909c;
+        }
+        body.dark .task-role {
+            background: #3a1a2a;
+            border-left-color: #e91e63;
+        }
+        body.dark .task-section {
+            border-color: #2c3d31;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width:600px) {
+            .bar {
+                height: auto;
+                padding: 8px 0;
+            }
+            .logo {
+                font-size: 16px;
+            }
+            .btn {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+            .prev {
+                padding: 12px;
+                font-size: 13px;
+            }
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media print {
+            header,
+            .card,
+            .toast,
+            #outBtns,
+            #lib {
+                display: none !important;
+            }
+            .prev {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+            body {
+                background: #fff;
+            }
+            .task-umk {
+                background: #e3f2fd !important;
+                border-left-color: #1e7a4c !important;
+            }
+            .task-fgos {
+                background: #fff3e0 !important;
+                border-left-color: #f5a623 !important;
+            }
+            .task-import {
+                background: #f3e5f5 !important;
+                border-left-color: #9c27b0 !important;
+            }
+            .task-gram {
+                background: #e8f5e9 !important;
+                border-left-color: #2f9e63 !important;
+            }
+            .task-ex {
+                background: #f5f5f5 !important;
+                border-left-color: #78909c !important;
+            }
+            .task-role {
+                background: #fce4ec !important;
+                border-left-color: #e91e63 !important;
+            }
+            .task-section {
+                border-color: #dcead9 !important;
+                background: rgba(255, 255, 255, 0.5) !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="wrap bar">
+            <div class="logo">📘 КонспектУрок <span>PRO · МАКСИМАЛЬНЫЙ</span></div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-left:auto">
+                <button class="btn sm outline" style="border-color:rgba(255,255,255,0.3);color:#fff" onclick="toggleDark()">🌙</button>
+                <button class="btn sm outline" style="border-color:rgba(255,255,255,0.3);color:#fff" onclick="resetAll()">🔄 Сброс</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <!-- Основная карточка -->
+        <div class="card card-pad">
+            <!-- Роль -->
+            <div class="sec">👤 Роль</div>
+            <div class="seg" id="roleSeg"></div>
+
+            <!-- Верхняя строка -->
+            <div class="row mt8">
+                <input class="inp inp-md" id="tch" placeholder="ФИО педагога" oninput="window.TEACHER=this.value;saveState()">
+                <input class="inp inp-md" id="cls" placeholder="Класс/группа" oninput="window.CLASSN=this.value;saveState()">
+                <label class="btn sm"><input type="checkbox" id="onlymine" onchange="window.ONLY_MINE=this.checked;saveState();renderCtrls()"> только мои</label>
+            </div>
+
+            <!-- Вкладки -->
+            <div class="tabs mt8" id="tabs">
+                <button class="on" data-tab="tab-main">📋 Основные</button>
+                <button data-tab="tab-themes">📚 Темы</button>
+                <button data-tab="tab-activities">🎯 Активности</button>
+                <button data-tab="tab-extra">⚙️ Дополнительно</button>
+                <button data-tab="tab-tasks">📝 Задания</button>
+                <button data-tab="tab-settings">⚙️ Настройки</button>
+            </div>
+
+            <!-- Прогресс -->
+            <div class="progress-wrap" id="progressWrap"><div class="progress-bar" id="progressBar"></div></div>
+
+            <!-- Содержимое вкладок -->
+            <div id="tab-main" class="tab-content active">
+                <div class="g3" id="ctrlMain"></div>
+            </div>
+            <div id="tab-themes" class="tab-content">
+                <div id="ctrlThemes"></div>
+            </div>
+            <div id="tab-activities" class="tab-content">
+                <div id="ctrlActivities"></div>
+            </div>
+            <div id="tab-extra" class="tab-content">
+                <div id="ctrlExtra"></div>
+            </div>
+            <div id="tab-tasks" class="tab-content">
+                <div id="ctrlTasks"></div>
+            </div>
+            <div id="tab-settings" class="tab-content">
+                <div id="ctrlSettings"></div>
+            </div>
+
+            <!-- Кнопки действий -->
+            <div class="row mt" style="flex-wrap:wrap;gap:6px">
+                <button class="btn p" onclick="doGen()">📝 Полный конспект</button>
+                <button class="btn b" onclick="pullInteract()">🎮 Интерактив</button>
+                <button class="btn g" onclick="genAllCards()">🃏 Все карточки</button>
+                <button class="btn" onclick="genWorksheet()">📋 Рабочий лист</button>
+                <button class="btn" onclick="genAssessment()">📊 Оценивание</button>
+                <button class="btn" onclick="quickStart()">🧩 Быстрый старт</button>
+                <button class="btn purple" onclick="exportGoogleDocs()">📄 Google Docs</button>
+            </div>
+
+            <!-- JSON -->
+            <div class="row mt">
+                <button class="btn sm" onclick="exportJSON()">📥 Экспорт JSON</button>
+                <button class="btn sm" onclick="document.getElementById('importJSON').click()">📤 Импорт JSON</button>
+                <input type="file" id="importJSON" accept=".json" style="display:none" onchange="importJSON(event)">
+            </div>
+
+            <!-- Мои темы -->
+            <div class="lbl mt8">📌 Моя своя тема</div>
+            <div class="row"><input class="inp inp-lg" id="ct" placeholder="Введите свою тему…" oninput="CTHEME=this.value;saveState()"><button class="btn sm" onclick="saveMyTopic()">⭐ Сохранить</button></div>
+
+            <!-- Мои параметры -->
+            <div class="lbl mt8">📌 Мои параметры</div>
+            <div class="row"><input class="inp inp-md" id="myT" placeholder="Своя тема"><input class="inp inp-md" id="myTW" placeholder="Слова (можно пусто)"><button class="btn sm" onclick="addMyTopic()">+ Тема</button></div>
+            <div class="row mt4"><input class="inp inp-md" id="myG" placeholder="Своя грамматика"><input class="inp inp-md" id="myGR" placeholder="Правило"><input class="inp inp-md" id="myGE" placeholder="Пример"><input class="inp inp-md" id="myGT" placeholder="Задание"><button class="btn sm" onclick="addMyGram()">+ Грамм.</button></div>
+            <div class="row mt4"><input class="inp inp-md" id="myA" placeholder="Своя активность"><input class="inp inp-md" id="myAD" placeholder="Описание"><button class="btn sm" onclick="addMyAct()">+ Активность</button></div>
+
+            <!-- Свои УМК -->
+            <div class="lbl mt8">📚 Свои УМК</div>
+            <div class="row"><input class="inp inp-md" id="myUmk" placeholder="Название УМК"><button class="btn sm" onclick="addMyUmk()">+ УМК</button></div>
+
+            <!-- Заметки -->
+            <div class="lbl mt8">📝 Заметки</div>
+            <textarea class="inp" id="notes" rows="2" oninput="saveNotes()"></textarea>
+
+            <!-- Импорт заданий -->
+            <div class="lbl mt8">📤 Импорт заданий</div>
+            <textarea class="inp" id="importTxt" rows="2" placeholder="Каждое задание с новой строки"></textarea>
+            <div class="row mt4"><button class="btn sm" onclick="importTasks()">⬆ Импорт</button><span class="xs mut" id="impCount"></span></div>
+
+            <!-- Библиотека -->
+            <div class="lbl mt8">📚 Библиотека</div>
+            <div id="lib"></div>
+        </div>
+
+
+        <!-- Практический режим готового урока -->
+        <section class="ready-pro card card-pad mt" id="readyPro">
+            <div class="ready-pro-head">
+                <div><div class="sec">✦ Готовый урок PRO</div><h2>Конспект, который можно вести по шагам</h2><p>Заполните ключевые параметры — генератор создаст поминутный сценарий с репликами, заданиями, ожидаемыми ответами, мини-проверкой, рабочим листом и материалами для ученика.</p></div>
+                <div class="ready-pro-badge">автономно · без сети</div>
+            </div>
+            <div class="ready-pro-grid">
+                <label>Тема занятия<input class="inp" id="rp-topic" placeholder="Например: Past Simple — irregular verbs"></label>
+                <label>Цель простыми словами<input class="inp" id="rp-goal" placeholder="Например: уверенно рассказывать о завершённых событиях"></label>
+                <label>Длительность<select class="inp" id="rp-duration"><option value="45">45 минут</option><option value="60" selected>60 минут</option><option value="90">90 минут</option></select></label>
+                <label>Формат<select class="inp" id="rp-format"><option>очно</option><option>онлайн</option><option>смешанный</option></select></label>
+                <label>Тип занятия<select class="inp" id="rp-type"><option>комбинированный</option><option>новая тема</option><option>повторение и закрепление</option><option>подготовка к проверочной</option><option>разговорная практика</option><option>коррекционное занятие</option></select></label>
+                <label>Уровень / группа<input class="inp" id="rp-level" placeholder="Например: 6 класс, A2"></label>
+                <label class="ready-wide">Материалы, правило, слова или опоры<textarea class="inp" id="rp-material" rows="3" placeholder="Например: went, saw, had; did not + V1; карточки с неправильными глаголами"></textarea></label>
+                <label class="ready-wide">Особые условия и индивидуальный фокус<input class="inp" id="rp-needs" placeholder="Например: короткие инструкции, визуальная опора, пауза на формулировку"></label>
+            </div>
+            <div class="ready-pro-options"><label><input type="checkbox" id="rp-cards" checked> готовые карточки</label><label><input type="checkbox" id="rp-sheet" checked> рабочий лист</label><label><input type="checkbox" id="rp-test" checked> мини-проверка с ключом</label><label><input type="checkbox" id="rp-family" checked> сообщение для семьи</label><label><input type="checkbox" id="rp-planb" checked> запасной план</label></div>
+            <div class="row mt8"><button class="btn p" id="rp-generate">✦ Создать готовый урок</button><button class="btn" id="rp-save">💾 Сохранить параметры</button><button class="btn outline" id="rp-reset">Очистить</button><span class="xs mut">Конспект можно сразу распечатать или выгрузить в Word и Markdown.</span></div>
+        </section>
+
+
+        <!-- Интерактивные задания с автопроверкой -->
+        <section class="interactive-lab card card-pad mt" id="interactiveLab">
+            <div class="interactive-head"><div><div class="sec">🎮 Интерактивная практика</div><h2>Упражнения с автоматической проверкой</h2><p>Тренажёр собирается из темы и материалов «Готового урока PRO». Он включает выбор ответа, соответствия, порядок шагов, заполнение пропусков и поиск ошибки.</p></div><div class="interactive-chip">5 форматов · мгновенная обратная связь</div></div>
+            <div class="row mt8"><button class="btn b" id="ii-build">🧩 Собрать тренажёр</button><button class="btn p" id="ii-check" disabled>✓ Проверить ответы</button><button class="btn outline" id="ii-retry" disabled>↻ Повторить</button><span class="xs mut">После проверки доступны балл, пояснения и повторная попытка.</span></div>
+            <div id="ii-board" class="interactive-board" aria-live="polite"><div class="interactive-empty">Выберите тему в блоке «Готовый урок PRO» или заполните основную форму, затем соберите тренажёр.</div></div>
+        </section>
+
+        <!-- Кнопки вывода -->
+        <div class="row mt" id="outBtns" style="display:none;flex-wrap:wrap;gap:6px">
+            <button class="btn p" onclick="saveWord()">💾 Word</button>
+            <button class="btn" onclick="readyMarkdown()">📝 Markdown</button>
+            <button class="btn" onclick="outPDF()">📄 PDF</button>
+            <button class="btn" onclick="toLib()">📚 В библиотеку</button>
+            <button class="btn" onclick="copyOut()">📋 Копировать</button>
+            <button class="btn g" onclick="printCards()">🖨 Карточки</button>
+        </div>
+
+        <!-- Результат -->
+        <div class="prev mt" id="out" style="display:none"></div>
+    </main>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // =====================================================================
+        //  ОСНОВНЫЕ ПЕРЕМЕННЫЕ (с сохранением состояния)
+        // =====================================================================
+        window.OUT = '';
+        window.TEACHER = '';
+        window.CLASSN = '';
+
+        function saveState() {
+            const state = {
+                ROLE, LANG, AGE, FORMAT, LTYPE, VT, GT, UMK, OUTMODE, CTHEME, NAPR,
+                TEACHER: document.getElementById('tch').value,
+                CLASSN: document.getElementById('cls').value,
+                GSOUND, ONLY_MINE: document.getElementById('onlymine').checked,
+                CUSTOM_DURATION,
+                SK, AC, KIND, EXTRA, EXSEL, ROLESEL,
+                IMPORT_TASKS,
+                notes: document.getElementById('notes').value,
+                myUmks: window.MY_UMKS || []
+            };
+            try { localStorage.setItem('konspekt-state', JSON.stringify(state)); } catch (e) {}
+        }
+
+        function loadState() {
+            let state = {};
+            try {
+                const raw = localStorage.getItem('konspekt-state');
+                if (raw) state = JSON.parse(raw) || {};
+            } catch (e) { console.warn('Ошибка загрузки состояния', e); state = {}; }
+            try {
+                window.ROLE = state.ROLE || 'ия';
+                window.LANG = state.LANG || 'en';
+                window.AGE = state.AGE || '5-6 лет';
+                window.FORMAT = state.FORMAT || 'очно (офлайн)';
+                window.LTYPE = state.LTYPE || 'комбинированный';
+                window.VT = state.VT || { Animals: 1 };
+                window.GT = state.GT || { 'Present Simple': 1 };
+                window.UMK = state.UMK || '';
+                window.OUTMODE = state.OUTMODE || 'konspekt';
+                window.CTHEME = state.CTHEME || '';
+                window.NAPR = state.NAPR || '';
+                window.GSOUND = state.GSOUND || 'Ш';
+                window.CUSTOM_DURATION = state.CUSTOM_DURATION || null;
+                window.SK = state.SK || { говорение: 1, аудирование: 1, чтение: 0, письмо: 0 };
+                window.AC = state.AC || { 'Role-play': 1, Flashcards: 1, Bingo: 0, 'Song & gap-fill': 0, 'Board race': 0,
+                    Survey: 0, 'Word chain': 0, 'Tongue twister': 0 };
+                window.KIND = state.KIND || { речевая: 1, игровая: 1, познавательная: 0, коммуникативная: 1, двигательная: 0,
+                    творческая: 0, проектная: 0, ИКТ: 0 };
+                window.EXTRA = state.EXTRA || { дифференциация: 1, здоровьесбережение: 1, 'ИКТ/интерактив': 1, пары: 1,
+                    группы: 0, проект: 0, 'рефлексия/оценивание': 1, 'дом.задание': 1 };
+                window.EXSEL = state.EXSEL || {};
+                window.ROLESEL = state.ROLESEL || {};
+                window.IMPORT_TASKS = state.IMPORT_TASKS || [];
+                window.TEACHER = state.TEACHER || '';
+                window.CLASSN = state.CLASSN || '';
+                if (state.TEACHER) document.getElementById('tch').value = state.TEACHER;
+                if (state.CLASSN) document.getElementById('cls').value = state.CLASSN;
+                if (state.notes) document.getElementById('notes').value = state.notes;
+                window.ONLY_MINE = state.ONLY_MINE || false;
+                document.getElementById('onlymine').checked = window.ONLY_MINE;
+                window.MY_UMKS = state.myUmks || [];
+            } catch (e) { console.warn('Ошибка применения состояния', e); }
+        }
+
+        // =====================================================================
+        //  ДАННЫЕ (без изменений, но добавляем свои УМК)
+        // =====================================================================
+        const ROLES = [
+            ['ия', '👨‍🏫 Учитель ин. языка'],
+            ['воспитатель', '🧸 Воспитатель'],
+            ['логопед', '🗣 Логопед'],
+            ['психолог', '🧠 Психолог']
+        ];
+        const LANGS = [
+            ['en', '🇬🇧 Английский'],
+            ['de', '🇩🇪 Немецкий'],
+            ['fr', '🇫🇷 Французский'],
+            ['it', '🇮🇹 Итальянский'],
+            ['ru', '🇷🇺 Русский (РКИ)'],
+            ['es', '🇪🇸 Испанский'],
+            ['zh', '🇨🇳 Китайский'],
+            ['no', '🇳🇴 Норвежский'],
+            ['ar', '🇸🇦 Арабский']
+        ];
+        const GREET = {
+            en: 'Good morning!',
+            de: 'Guten Morgen!',
+            fr: 'Bonjour!',
+            it: 'Buongiorno!',
+            ru: 'Доброе утро!',
+            es: '¡Buenos días!',
+            zh: '早上好!',
+            no: 'God morgen!',
+            ar: 'صباح الخير!'
+        };
+        const AGES = [
+            'до 3 лет', '3-4 года', '4-5 лет', '5-6 лет', '6-7 лет',
+            '1 класс', '2 класс', '3 класс', '4 класс', '5 класс',
+            '6 класс', '7 класс', '8 класс', '9 класс', '10 класс', '11 класс',
+            'студенты (18-22)', 'взрослые (23-35)', 'взрослые (36-50)',
+            'взрослые (51-65)', 'взрослые (66-80)', 'взрослые (80-100)'
+        ];
+        const FORMATS = ['очно (офлайн)', 'онлайн', 'смешанный (гибрид)'];
+        const TYPE_IA = [
+            'комбинированный', 'новая лексика', 'грамматика', 'говорение',
+            'аудирование', 'чтение', 'письмо', 'фонетика', 'урок-игра',
+            'урок-проект', 'обобщение', 'контроль', 'страноведение'
+        ];
+        const TYPE_VOS = [
+            'комплексное', 'развитие речи', 'ознакомление с окружающим',
+            'худож.-эстетическое', 'физкультурное', 'игровое', 'наблюдение',
+            'досуг', 'трудовое', 'музыкальное'
+        ];
+        const TYPE_LOG = [
+            'индивидуальное', 'подгрупповое', 'фронтальное',
+            'постановка звука', 'автоматизация', 'дифференциация',
+            'связная речь', 'диагностическое'
+        ];
+        const TYPE_PSY = [
+            'развивающее', 'коррекционное', 'диагностическое',
+            'просвещение', 'тренинг', 'сказкотерапия', 'арт-терапия', 'консультация'
+        ];
+        const THEMES_VOS = [
+            'Осень', 'Зима', 'Весна', 'Лето', 'Дикие животные',
+            'Домашние животные', 'Транспорт', 'Профессии', 'Семья',
+            'Мой дом', 'Продукты', 'Одежда', 'Праздники', 'ПДД',
+            'Здоровье', 'Дружба'
+        ];
+        const THEMES_LOG = [
+            'Звук [Ш]', 'Звук [Р]', 'Звуки [С-З]', 'Дифференциация С-Ш',
+            'Дифференциация Р-Л', 'Слоговая структура', 'Фонематический слух',
+            'Лексика: животные', 'Связная речь: пересказ', 'Грамматика: предлоги'
+        ];
+        const THEMES_PSY = [
+            'Эмоции и чувства', 'Общение и дружба', 'Адаптация',
+            'Самооценка', 'Страхи и тревожность', 'Внимание', 'Память',
+            'Конфликты', 'Семейные отношения', 'Мотивация'
+        ];
+        const MT = [
+            { id: 'Animals', n: { en: 'Animals', de: 'Tiere', fr: 'Animaux', it: 'Animali', ru: 'Животные', es: 'Animales',
+                    zh: '动物', no: 'Dyr', ar: 'حيوانات' }, w: { en: 'cat,dog,fox,bear,bird,rabbit,horse,fish' } },
+            { id: 'Food', n: { en: 'Food', de: 'Essen', fr: 'Nourriture', it: 'Cibo', ru: 'Еда', es: 'Comida', zh: '食物',
+                    no: 'Mat', ar: 'طعام' }, w: { en: 'apple,bread,milk,cheese,soup,meat,rice,pasta' } },
+            { id: 'Family', n: { en: 'Family', de: 'Familie', fr: 'Famille', it: 'Famiglia', ru: 'Семья', es: 'Familia',
+                    zh: '家庭', no: 'Familie', ar: 'عائلة' }, w: { en: 'mother,father,sister,brother,grandma,grandpa,aunt,uncle' } },
+            { id: 'Colors', n: { en: 'Colors', de: 'Farben', fr: 'Couleurs', it: 'Colori', ru: 'Цвета', es: 'Colores',
+                    zh: '颜色', no: 'Farger', ar: 'ألوان' }, w: { en: 'red,blue,green,yellow,orange,purple,pink,white' } },
+            { id: 'Weather', n: { en: 'Weather', de: 'Wetter', fr: 'Météo', it: 'Meteo', ru: 'Погода', es: 'Clima',
+                    zh: '天气', no: 'Vær', ar: 'طقس' }, w: { en: 'rain,snow,wind,sun,cloud,storm,fog,ice' } },
+            { id: 'Transport', n: { en: 'Transport', de: 'Verkehr', fr: 'Transport', it: 'Trasporti', ru: 'Транспорт',
+                    es: 'Transporte', zh: '交通', no: 'Transport', ar: 'مواصلات' }, w: { en: 'car,bus,train,plane,ship,bike,truck,helicopter' } },
+            { id: 'School', n: { en: 'School', de: 'Schule', fr: 'École', it: 'Scuola', ru: 'Школа', es: 'Escuela',
+                    zh: '学校', no: 'Skole', ar: 'مدرسة' }, w: { en: 'pen,book,desk,teacher,student,class,board,pencil' } },
+            { id: 'Home', n: { en: 'My Home', de: 'Zuhause', fr: 'Maison', it: 'Casa', ru: 'Дом', es: 'Casa', zh: '家',
+                    no: 'Hjem', ar: 'بيت' }, w: { en: 'house,kitchen,bed,window,door,room,floor,roof' } },
+            { id: 'Clothes', n: { en: 'Clothes', de: 'Kleidung', fr: 'Vêtements', it: 'Vestiti', ru: 'Одежда', es: 'Ropa',
+                    zh: '衣服', no: 'Klær', ar: 'ملابس' }, w: { en: 'shirt,dress,hat,boots,coat,skirt,pants,shoes' } },
+            { id: 'Professions', n: { en: 'Professions', de: 'Berufe', fr: 'Métiers', it: 'Mestieri', ru: 'Профессии',
+                    es: 'Profesiones', zh: '职业', no: 'Yrker', ar: 'مهن' }, w: { en: 'doctor,teacher,driver,cook,pilot,police,farmer,nurse' } },
+            { id: 'Sports', n: { en: 'Sports', de: 'Sport', fr: 'Sports', it: 'Sport', ru: 'Спорт', es: 'Deportes',
+                    zh: '运动', no: 'Idrett', ar: 'رياضة' }, w: { en: 'football,tennis,swimming,running,basketball,cycling,soccer,volleyball' } },
+            { id: 'Holidays', n: { en: 'Holidays', de: 'Feiertage', fr: 'Fêtes', it: 'Feste', ru: 'Праздники', es: 'Fiestas',
+                    zh: '节日', no: 'Høytider', ar: 'أعياد' }, w: { en: 'gift,tree,party,card,cake,candle,song,star' } }
+        ];
+        const LANG_THEMES = {
+            en: [{ id: 'Thanksgiving', n: 'Thanksgiving', q: 'thanksgiving' }, { id: 'Halloween', n: 'Halloween',
+                q: 'halloween' }],
+            de: [{ id: 'Oktoberfest', n: 'Oktoberfest', q: 'oktoberfest' }, { id: 'Weihnachten', n: 'Weihnachten',
+                q: 'christmas' }],
+            fr: [{ id: 'La Rentrée', n: 'La Rentrée', q: 'school' }, { id: 'Paris', n: 'Paris', q: 'paris' }],
+            it: [{ id: 'Cibo italiano', n: 'Cibo italiano', q: 'italian food' }, { id: 'Carnevale', n: 'Carnevale',
+                q: 'carnival' }],
+            es: [{ id: 'La Fiesta', n: 'La Fiesta', q: 'fiesta' }, { id: 'Madrid', n: 'Madrid', q: 'madrid' }],
+            zh: [{ id: 'Spring Festival', n: 'Spring Festival', q: 'chinese new year' }, { id: 'Tea', n: 'Tea', q: 'tea' }],
+            no: [{ id: 'Jul', n: 'Jul', q: 'christmas' }, { id: 'Fjord', n: 'Fjord', q: 'fjord' }],
+            ar: [{ id: 'Ramadan', n: 'Ramadan', q: 'ramadan' }, { id: 'Souk', n: 'Souk', q: 'market' }],
+            ru: [{ id: 'Масленица', n: 'Масленица', q: 'pancakes' }, { id: 'Новый год', n: 'Новый год', q: 'new year' }]
+        };
+        const GRAM_LANG = {
+            en: [
+                { n: 'Present Simple', r: 'V + s в 3 л.', e: 'She likes cats.', t: 'Раскрой скобки: She ___ (like) dogs.' },
+                { n: 'Present Continuous', r: 'am/is/are + V-ing', e: 'They are playing.',
+                t: 'Составь предложения: he/read/book' },
+                { n: 'Past Simple', r: 'V2/did', e: 'We visited.', t: 'Поставь в Past Simple: I ___ (go) to school.' },
+                { n: 'Future Simple', r: 'will + V', e: 'I will help.', t: 'Напиши 3 предложения о планах.' },
+                { n: 'Articles', r: 'a/an/the', e: 'a cat.', t: 'Вставь артикль: ___ apple.' },
+                { n: 'Plural', r: '+s/es', e: 'cats.', t: 'Образуй мн. число: box →' },
+                { n: 'Questions', r: 'Wh-+aux', e: 'Where do you live?', t: 'Составь 4 вопроса по теме.' }
+            ],
+            de: [
+                { n: 'Präsens', r: '-e,-st,-t', e: 'Ich gehe.', t: 'Спрягай: gehen' },
+                { n: 'Perfekt', r: 'haben+Part.II', e: 'Habe gespielt.', t: 'Perfekt: spielen' },
+                { n: 'Modalverben', r: 'können/müssen', e: 'Ich kann.', t: '3 предл. с können' },
+                { n: 'Artikel', r: 'der/die/das', e: 'der Hund.', t: 'Артикль: Katze' },
+                { n: 'Akkusativ', r: 'der→den', e: 'den Hund.', t: 'Akkusativ: der Tisch' },
+                { n: 'Wortstellung', r: 'глагол 2-м', e: 'Heute spiele ich.', t: 'Порядок: ich/spiele/heute' }
+            ],
+            fr: [
+                { n: 'Présent', r: '-e,-es,-e', e: 'Je parle.', t: 'Спрягай: parler' },
+                { n: 'Passé composé', r: 'avoir+part.', e: 'Ai parlé.', t: 'Passé comp.: parler' },
+                { n: 'Futur proche', r: 'aller+inf', e: 'Vais parler.', t: '3 предл. с futur' },
+                { n: 'Articles', r: 'le/la/les', e: 'le chat.', t: 'Артикль: table' },
+                { n: 'Négation', r: 'ne…pas', e: 'Ne parle pas.', t: 'Отрицания: je/mange' },
+                { n: 'Pluriel', r: '-s/-x', e: 'chats.', t: 'Мн. число: cheval' }
+            ],
+            it: [
+                { n: 'Presente', r: '-o,-i,-a', e: 'Io parlo.', t: 'Спрягай: parlare' },
+                { n: 'Passato prossimo', r: 'avere+part.', e: 'Ho parlato.', t: 'Passato: parlare' },
+                { n: 'Articoli', r: 'il/la/gli', e: 'il gatto.', t: 'Артикль: casa' },
+                { n: 'Negazione', r: 'non', e: 'Non parlo.', t: 'Отрицания: io/parlo' },
+                { n: 'Plurale', r: '-o→-i', e: 'gatti.', t: 'Мн. число: libro' }
+            ],
+            ru: [
+                { n: 'Настоящее', r: '-ю/-ешь', e: 'Я говорю.', t: 'Спрягай: говорить' },
+                { n: 'Падежи', r: 'имен./винит.', e: 'Вижу дом.', t: 'Падеж: книга' },
+                { n: 'Род', r: 'м/ж/с', e: 'дом,книга.', t: 'Род: окно' },
+                { n: 'Мн.число', r: '-а/-ы', e: 'дома.', t: 'Мн.ч.: город' },
+                { n: 'Вопросы', r: 'кто?что?где?', e: 'Где ты?', t: '4 вопроса по теме' }
+            ],
+            es: [
+                { n: 'Presente', r: '-o,-as', e: 'Hablo.', t: 'Спрягай: hablar' },
+                { n: 'Perfecto', r: 'haber+part.', e: 'He hablado.', t: 'Perfecto: hablar' },
+                { n: 'Artículos', r: 'el/la', e: 'el gato.', t: 'Артикль: mesa' },
+                { n: 'Negación', r: 'no', e: 'No hablo.', t: 'Отрицания: yo/hablo' },
+                { n: 'Plural', r: '-s/-es', e: 'gatos.', t: 'Мн. число: flor' }
+            ],
+            zh: [
+                { n: 'Порядок SVO', r: 'S+V+O', e: '我喝水。', t: 'Построй: I/drink/water' },
+                { n: 'Вопросы 吗', r: '+吗', e: '你喝吗?', t: 'Вопросы: you/drink' },
+                { n: 'Отрицания', r: '不/没', e: '我不喝。', t: 'Отрицания: I/drink' },
+                { n: 'Счётные', r: 'число+счётн.', e: '一个。', t: 'Счётное: book' }
+            ],
+            no: [
+                { n: 'Presens', r: '-er', e: 'Snakker.', t: 'Спрягай: snakke' },
+                { n: 'Perfektum', r: 'har+part.', e: 'Har snakket.', t: 'Perfektum: snakke' },
+                { n: 'Artikler', r: 'en/ei/et', e: 'en katt.', t: 'Артикль: hus' },
+                { n: 'V2', r: 'глагол 2-м', e: 'I dag snakker jeg.', t: 'Порядок: I/snakke/i dag' }
+            ],
+            ar: [
+                { n: 'Настоящее', r: 'أفعل', e: 'أشرب.', t: 'Спрягай: شرب' },
+                { n: 'Прошедшее', r: 'فعل', e: 'شربت.', t: 'Прошедшее: شرب' },
+                { n: 'Артикль ال', r: 'ال', e: 'الكتاب.', t: 'Артикль: كتاب' },
+                { n: 'Отрицания', r: 'لا/ما', e: 'لا أشرب.', t: 'Отрицания: أنا/أشرب' }
+            ]
+        };
+
+        const UMK_BASE = [
+            ['Spotlight', 'en'], ['Enjoy English', 'en'], ['Forward', 'en'], ['Starlight', 'en'],
+            ['Wunderkinder', 'de'], ['Magnet', 'de'],
+            ['Синяя птица', 'fr'],
+            ['Aula', 'es'],
+            ['Hanyu', 'zh'],
+            ['På vei', 'no'],
+            ['Alif', 'ar'],
+            ['Русский как иностранный', 'ru'],
+            ['От рождения до школы', 'до'], ['Детство', 'до'], ['Радуга', 'до'],
+            ['Филичева-Чиркина', 'ло'], ['Жукова (логопедия)', 'ло'], ['Теремкова', 'ло'],
+            ['Кряжева (психология)', 'пс'], ['Дубровина (психология)', 'пс']
+        ];
+        window.MY_UMKS = window.MY_UMKS || [];
+
+        function getUMKList() {
+            const base = UMK_BASE.map(u => u[0]);
+            return base.concat(window.MY_UMKS || []);
+        }
+
+        const LITER = {
+            'ия': ['ФГОС НОО/ООО', 'Примерная программа по ИЯ', 'Кузовлева «Коммуникативный метод»'],
+            'воспитатель': ['ФГОС ДО', '«От рождения до школы»', 'Павлова «Игровые технологии»'],
+            'логопед': ['ФГОС ДО', 'Филичева-Чиркина', 'Жукова «Логопедические занятия»'],
+            'психолог': ['ФГОС ДО', 'Дубровина «Психолог в ДОУ»', 'Кряжева «Игры»']
+        };
+        const ROLE_NAPR = {
+            'воспитатель': ['Речевое', 'Познавательное', 'Худож.-эстетич.', 'Физическое', 'Соц.-коммуникативное'],
+            'логопед': ['Постановка', 'Автоматизация', 'Дифференциация', 'Связная речь', 'Фонематический слух'],
+            'психолог': ['Развивающее', 'Коррекционное', 'Диагностическое', 'Просветительское', 'Адаптация']
+        };
+        const ROLE_BANK = {
+            'Речевое': { ex: ['беседа по теме', 'дидактические игры', 'описательный рассказ'], g: ['«Назови ласково»',
+                    '«Один-много»'
+                ] },
+            'Познавательное': { ex: ['наблюдение', 'эксперимент', 'классификация'], g: ['«Четвёртый лишний»',
+                    '«Найди пару»'
+                ] },
+            'Худож.-эстетич.': { ex: ['рисование', 'аппликация'], g: ['«Нарисуй настроение»'] },
+            'Физическое': { ex: ['гимнастика', 'подвижные игры'], g: ['«Повтори движение»'] },
+            'Соц.-коммуникативное': { ex: ['беседа', 'сюжетная игра'], g: ['«Комплименты»'] },
+            'Постановка': { ex: ['артикуляция перед зеркалом', 'постановка по подражанию'], g: ['«Поймай звук»'] },
+            'Автоматизация': { ex: ['слоги', 'слова по картинкам'], g: ['«Магазин»'] },
+            'Дифференциация': { ex: ['сравнение звуков', 'сортировка'], g: ['«Разложи по домикам»'] },
+            'Связная речь': { ex: ['рассказ по картинке', 'пересказ'], g: ['«Составь по плану»'] },
+            'Фонематический слух': { ex: ['«Поймай звук»', '«Где звук?»'], g: ['«Эхо»'] },
+            'Развивающее': { ex: ['внимание/память', 'эмоции'], g: ['«Угадай эмоцию»'] },
+            'Коррекционное': { ex: ['релаксация', 'сказкотерапия'], g: ['«Светофор»'] },
+            'Диагностическое': { ex: ['пробы', 'наблюдение'], g: ['«Покажи и назови»'] },
+            'Просветительское': { ex: ['консультация', 'практикум'], g: ['«Вопрос-ответ»'] },
+            'Адаптация': { ex: ['знакомство', 'ритуалы'], g: ['«Карусель»'] }
+        };
+        const ACT_IA = {
+            'Role-play': 'ролевой диалог',
+            'Flashcards': 'карточки',
+            'Bingo': 'бинго 3×3',
+            'Song & gap-fill': 'песня с пропусками',
+            'Board race': 'эстафета',
+            'Survey': 'опрос',
+            'Word chain': 'цепочка слов',
+            'Tongue twister': 'скороговорка',
+            'Мим-игра': 'показ жестами',
+            'Лото': 'лото',
+            'Мини-диалог': 'диалог в парах'
+        };
+        const ACT_VOS = {
+            'Дидактическая игра': 'дидактическая игра',
+            'Сюжетно-ролевая игра': 'сюжетно-ролевая',
+            'Наблюдение': 'наблюдение',
+            'Эксперимент': 'эксперимент',
+            'Труд/аппликация': 'труд/аппликация',
+            'Чтение': 'чтение',
+            'Подвижная игра': 'подвижная игра',
+            'Беседа': 'беседа',
+            'Театрализация': 'театрализация',
+            'Пальчиковая игра': 'пальчиковая игра'
+        };
+        const ACT_LOG = {
+            'Артикуляционная гимнастика': 'артикуляционная гимнастика',
+            'Дыхательная гимнастика': 'дыхательная',
+            'Пальчиковая гимнастика': 'пальчиковая',
+            'Автоматизация в словах': 'автоматизация в словах',
+            'Дифференциация': 'дифференциация',
+            'Фонематический слух': 'фонематический слух',
+            'Связная речь': 'связная речь',
+            'Логоритмика': 'логоритмика',
+            'Пересказ': 'пересказ'
+        };
+        const ACT_PSY = {
+            'Игра на эмоции': 'игра на эмоции',
+            'Релаксация': 'релаксация',
+            'Сказкотерапия': 'сказкотерапия',
+            'Арт-терапия': 'арт-терапия',
+            'Тренинг общения': 'тренинг общения',
+            'Диагностика': 'диагностика',
+            'Беседа': 'беседа',
+            'Ролевая игра': 'ролевая игра'
+        };
+
+        function actsForRole() {
+            if (ROLE === 'ия') return ACT_IA;
+            if (ROLE === 'воспитатель') return ACT_VOS;
+            if (ROLE === 'логопед') return ACT_LOG;
+            return ACT_PSY;
+        }
+
+        const EXBANK = [
+            ['Слушай и покажи', 'Ход: 1) картинки; 2) называй; 3) показывай; 4) проверка; 5) смена ролей.'],
+            ['Бинго слов', 'Ход: 1) сетка 3×3; 2) называй слова; 3) закрывай; 4) Бинго; 5) прочитать вслух.'],
+            ['Цепочка слов', 'Ход: 1) стартовое слово; 2) добавляй по одному; 3) опора на доске; 4) рекорд.'],
+            ['Пропущенное слово', 'Ход: 1) пропуск в предложении; 2) читать; 3) вставить; 4) обосновать; 5) записать.'],
+            ['Мим-игра', 'Ход: 1) карточка; 2) показать жестом; 3) назвать; 4) хором.'],
+            ['Построй предложение', 'Ход: 1) карточки со словами; 2) собрать порядок; 3) читать; 4) замена; 5) своё.'],
+            ['Найди пару', 'Ход: 1) карточки; 2) найти соответствие; 3) назвать; 4) проверка.'],
+            ['Сортировка', 'Ход: 1) карточки; 2) разложить по категориям; 3) обосновать; 4) проверка.'],
+            ['Кубик-болталка', 'Ход: 1) кубик с вопросами; 2) кидать; 3) отвечать; 4) следующий.'],
+            ['Ладошка-слово', 'Ход: 1) ладонь; 2) на пальцы слова; 3) повторить; 4) смена.']
+        ];
+        const ROLE_EX = [
+            ['Чудесный мешочек', 'Ход: 1) мешочек; 2) на ощупь; 3) повтор; 4) описание.'],
+            ['Пальчиковая гимнастика', 'Ход: 1) показ; 2) вместе; 3) с речью; 4) похвала.'],
+            ['Дыхательное упражнение', 'Ход: 1) показ; 2) вдох; 3) выдох; 4) 3 раза.'],
+            ['Что изменилось', 'Ход: 1) картинки; 2) закрыть; 3) изменить; 4) назвать.'],
+            ['Ладошка-слово', 'Ход: 1) ладонь; 2) на пальцы слова; 3) повторить; 4) смена.'],
+            ['Кубик-болталка', 'Ход: 1) кубик с вопросами; 2) кидать; 3) отвечать; 4) следующий.']
+        ];
+        const SKILL_BANK = {
+            'говорение': 'Говорение: диалог-модель, в парах',
+            'аудирование': 'Аудирование: gist → детали',
+            'чтение': 'Чтение: антиципация → чтение → вопросы',
+            'письмо': 'Письмо: открытка/5 предложений'
+        };
+        const EXTRA_BANK = {
+            'дифференциация': 'Дифференциация: A/B/C уровни.',
+            'здоровьесбережение': 'Здоровьесбережение: физминутка, гимнастика для глаз.',
+            'ИКТ/интерактив': 'ИКТ: Wordwall/Quizlet/Genially.',
+            'пары': 'Работа в парах.',
+            'группы': 'Групповая работа.',
+            'проект': 'Мини-проект (постер/презентация).',
+            'рефлексия/оценивание': 'Рефлексия: светофор/exit ticket.',
+            'дом.задание': 'ДЗ дифференцированное.'
+        };
+        const KIND_BANK = {
+            'речевая': 'Хоровое проговаривание.',
+            'игровая': 'Игровой элемент (соревнование).',
+            'познавательная': 'Страноведческая минутка.',
+            'коммуникативная': 'Опрос/диалог.',
+            'двигательная': 'TPR (движения).',
+            'творческая': 'Рисунок/постер.',
+            'проектная': 'Проект.',
+            'ИКТ': 'Интерактив.'
+        };
+        const FLOWS = {
+            'комбинированный': ['org', 'motiv', 'warm', 'lex', 'gram', 'prac', 'phys', 'skills', 'kinds', 'ex', 'refl',
+                'hw'
+            ],
+            'новая лексика': ['org', 'motiv', 'warm', 'lex', 'lexprac', 'game', 'phys', 'skills', 'ex', 'refl', 'hw'],
+            'грамматика': ['org', 'motiv', 'warm', 'gram', 'gramprac', 'gramprod', 'phys', 'ex', 'refl', 'hw'],
+            'говорение': ['org', 'motiv', 'warm', 'speak', 'dialog', 'roleplay', 'phys', 'ex', 'refl', 'hw'],
+            'аудирование': ['org', 'motiv', 'prelisten', 'listen1', 'listen2', 'post', 'phys', 'ex', 'refl', 'hw'],
+            'чтение': ['org', 'motiv', 'preread', 'read', 'compr', 'postread', 'phys', 'ex', 'refl', 'hw'],
+            'письмо': ['org', 'motiv', 'warm', 'wmodel', 'wguided', 'wfree', 'ex', 'refl', 'hw'],
+            'фонетика': ['org', 'motiv', 'sounds', 'drill', 'rhyme', 'phys', 'ex', 'refl', 'hw'],
+            'урок-игра': ['org', 'motiv', 'stations', 'phys', 'final', 'refl', 'hw'],
+            'урок-проект': ['org', 'motiv', 'introP', 'work', 'present', 'refl', 'hw'],
+            'обобщение': ['org', 'motiv', 'review', 'quiz', 'phys', 'ex', 'refl', 'hw'],
+            'контроль': ['org', 'test', 'audit', 'refl', 'hw'],
+            'страноведение': ['org', 'motiv', 'warm', 'culture', 'read', 'discuss', 'phys', 'ex', 'refl', 'hw']
+        };
+        const ROLE_FLOWS = {
+            'воспитатель': ['org', 'motiv', 'surprise', 'main1', 'game', 'phys', 'main2', 'refl'],
+            'логопед': ['org', 'motiv', 'artik', 'breath', 'main1', 'game', 'phys', 'main2', 'refl'],
+            'психолог': ['org', 'warmup', 'main1', 'game', 'relax', 'refl']
+        };
+        const WGT = {
+            org: 1,
+            motiv: 2,
+            warm: 4,
+            lex: 8,
+            gram: 8,
+            prac: 6,
+            phys: 2,
+            skills: 8,
+            kinds: 4,
+            ex: 8,
+            refl: 2,
+            hw: 1,
+            lexprac: 6,
+            game: 5,
+            gramprac: 6,
+            gramprod: 6,
+            speak: 6,
+            dialog: 8,
+            roleplay: 8,
+            prelisten: 3,
+            listen1: 6,
+            listen2: 6,
+            post: 5,
+            preread: 3,
+            read: 8,
+            compr: 6,
+            postread: 5,
+            wmodel: 6,
+            wguided: 8,
+            wfree: 6,
+            sounds: 5,
+            drill: 6,
+            rhyme: 5,
+            stations: 12,
+            final: 4,
+            review: 6,
+            quiz: 8,
+            test: 20,
+            audit: 10,
+            introP: 4,
+            work: 12,
+            present: 6,
+            culture: 8,
+            discuss: 6,
+            surprise: 3,
+            main1: 8,
+            main2: 6,
+            warmup: 4,
+            relax: 4,
+            artik: 5,
+            breath: 3
+        };
+
+        // =====================================================================
+        //  БАНКИ ЗАДАНИЙ ПО УМК (расширен)
+        // =====================================================================
+        const UMK_TASKS = {
+            'Spotlight': [
+                'Работа с модулем: ознакомление с новым лексическим материалом по теме модуля.',
+                'Диалоги по образцу: составление и разыгрывание диалогов по модели из учебника.',
+                'Чтение с извлечением информации: поисковое чтение текста с последующим выполнением заданий.',
+                'Аудирование с пониманием основного содержания: прослушивание диалогов/текстов.',
+                'Грамматический практикум: отработка грамматических структур из модуля.',
+                'Проектное задание: создание постера/презентации по теме модуля.'
+            ],
+            'Enjoy English': [
+                'Коммуникативные задания: обсуждение в парах, мини-диалоги.',
+                'Проектная деятельность: создание проектов по теме урока.',
+                'Ролевые игры: моделирование ситуаций общения.',
+                'Аудирование с опорой на картинки: прослушивание и соотнесение.',
+                'Чтение с полным пониманием: работа с текстом, ответы на вопросы.',
+                'Письменные упражнения: заполнение пропусков, составление предложений.'
+            ],
+            'Forward': [
+                'Аудирование: прослушивание диалогов и текстов с заданиями.',
+                'Говорение: монологические и диалогические высказывания по теме.',
+                'Письмо по образцу: написание предложений, коротких текстов.',
+                'Чтение с пониманием основного содержания: работа с текстами.',
+                'Грамматические упражнения: отработка форм и конструкций.',
+                'Интерактивные задания: работа в парах, группах.'
+            ],
+            'Starlight': [
+                'Углублённая лексика: расширение словарного запаса по теме.',
+                'Грамматика в контексте: анализ грамматических явлений в тексте.',
+                'Чтение аутентичных текстов: работа с оригинальными материалами.',
+                'Аудирование с детальным пониманием: прослушивание и выполнение заданий.',
+                'Дискуссионные задания: обсуждение, аргументация.',
+                'Творческие проекты: создание собственных текстов/презентаций.'
+            ],
+            'Wunderkinder': [
+                'Немецкая лексика по теме: введение и отработка.',
+                'Диалоги на немецком языке: разыгрывание ситуаций.',
+                'Страноведение: знакомство с культурой немецкоязычных стран.',
+                'Грамматика: основные правила немецкого языка.',
+                'Чтение: работа с текстами на немецком языке.',
+                'Письмо: составление коротких сообщений.'
+            ],
+            'Magnet': [
+                'Грамматические упражнения: отработка основных конструкций.',
+                'Работа с текстом: чтение, перевод, анализ.',
+                'Лексические упражнения: расширение словарного запаса.',
+                'Аудирование: прослушивание и выполнение заданий.',
+                'Говорение: диалоги и монологи по теме.',
+                'Письменные задания: заполнение пропусков, трансформации.'
+            ],
+            'Синяя птица': [
+                'Французская лексика: введение и отработка.',
+                'Диалоги на французском: разыгрывание по образцу.',
+                'Чтение: работа с текстами на французском языке.',
+                'Грамматика: основные правила французского языка.',
+                'Аудирование: прослушивание французской речи.',
+                'Страноведение: знакомство с культурой Франции.'
+            ],
+            'Aula': [
+                'Испанская лексика: введение и отработка.',
+                'Коммуникативные задания: диалоги, обсуждения.',
+                'Диалоги на испанском: разыгрывание ситуаций.',
+                'Грамматика: основные правила испанского языка.',
+                'Чтение: работа с текстами на испанском языке.',
+                'Аудирование: прослушивание испанской речи.'
+            ],
+            'Hanyu': [
+                'Иероглифика: изучение новых иероглифов, прописи.',
+                'Диалоги на китайском: разыгрывание ситуаций.',
+                'Чтение: работа с текстами на китайском языке.',
+                'Грамматика: основные конструкции китайского языка.',
+                'Аудирование: прослушивание китайской речи.',
+                'Каллиграфия: написание иероглифов.'
+            ],
+            'På vei': [
+                'Норвежская лексика: введение и отработка.',
+                'Диалоги на норвежском: разыгрывание ситуаций.',
+                'Страноведение: знакомство с культурой Норвегии.',
+                'Грамматика: основные правила норвежского языка.',
+                'Чтение: работа с текстами на норвежском языке.',
+                'Аудирование: прослушивание норвежской речи.'
+            ],
+            'Alif': [
+                'Арабское письмо: изучение букв, прописи.',
+                'Чтение: работа с текстами на арабском языке.',
+                'Диалоги на арабском: разыгрывание ситуаций.',
+                'Грамматика: основные правила арабского языка.',
+                'Аудирование: прослушивание арабской речи.',
+                'Лексика: расширение словарного запаса.'
+            ],
+            'Русский как иностранный': [
+                'Падежи: изучение и отработка падежных форм.',
+                'Диалоги на русском: разыгрывание ситуаций.',
+                'Чтение адаптированных текстов: работа с текстами.',
+                'Грамматика: основные правила русского языка.',
+                'Аудирование: прослушивание русской речи.',
+                'Письмо: составление предложений, коротких текстов.'
+            ],
+            'От рождения до школы': [
+                'Игровые задания: дидактические игры по теме.',
+                'Развитие речи: упражнения на активизацию речи.',
+                'Рисование: творческие задания по теме.',
+                'Наблюдение: наблюдение за объектами/явлениями.',
+                'Беседа: обсуждение темы, вопросы-ответы.',
+                'Подвижные игры: физическая активность.'
+            ],
+            'Детство': [
+                'Сюжетные игры: разыгрывание сюжетов.',
+                'Беседы: обсуждение темы, развитие речи.',
+                'Творчество: рисование, аппликация, лепка.',
+                'Наблюдение: наблюдение за природой/окружающим.',
+                'Дидактические игры: обучающие игры.',
+                'Чтение: чтение художественной литературы.'
+            ],
+            'Радуга': [
+                'Развитие речи: упражнения на активизацию речи.',
+                'Игры: дидактические и подвижные игры.',
+                'Наблюдения: наблюдение за объектами и явлениями.',
+                'Творчество: рисование, аппликация.',
+                'Беседы: обсуждение тем, вопрос-ответ.',
+                'Чтение: чтение художественной литературы.'
+            ],
+            'Филичева-Чиркина': [
+                'Артикуляционная гимнастика: упражнения для органов речи.',
+                'Постановка звуков: индивидуальная работа над звуками.',
+                'Автоматизация звуков: закрепление в слогах, словах.',
+                'Дифференциация звуков: различение близких звуков.',
+                'Развитие фонематического слуха: упражнения на различение.',
+                'Связная речь: упражнения на развитие связной речи.'
+            ],
+            'Жукова (логопедия)': [
+                'Постановка звуков: индивидуальная работа над звуками.',
+                'Автоматизация: закрепление звуков в речи.',
+                'Артикуляционная гимнастика: упражнения для органов речи.',
+                'Развитие фонематического слуха: различение звуков.',
+                'Лексика: расширение словарного запаса.',
+                'Связная речь: развитие связной речи.'
+            ],
+            'Теремкова': [
+                'Лексика: расширение словарного запаса по теме.',
+                'Грамматика: отработка грамматических конструкций.',
+                'Связная речь: развитие связной речи, пересказ.',
+                'Артикуляционная гимнастика: упражнения для органов речи.',
+                'Игры: дидактические и логопедические игры.',
+                'Чтение: работа с текстами.'
+            ],
+            'Кряжева (психология)': [
+                'Игры на эмоции: упражнения на распознавание эмоций.',
+                'Релаксация: упражнения на расслабление.',
+                'Развитие коммуникативных навыков: игры на общение.',
+                'Сказкотерапия: работа со сказками.',
+                'Арт-терапия: творческие задания.',
+                'Беседы: обсуждение тем, вопрос-ответ.'
+            ],
+            'Дубровина (психология)': [
+                'Развивающие игры: игры на развитие мышления, памяти.',
+                'Беседы: обсуждение тем, вопрос-ответ.',
+                'Диагностика: упражнения на выявление особенностей.',
+                'Релаксация: упражнения на расслабление.',
+                'Арт-терапия: творческие задания.',
+                'Сказкотерапия: работа со сказками.'
+            ]
+        };
+
+        // =====================================================================
+        //  БАНК ЗАДАНИЙ ПО РОЛЯМ (расширен)
+        // =====================================================================
+        const ROLE_TASKS = {
+            'воспитатель': {
+                'Речевое': [
+                    'Беседа по теме: активизация словаря, ответы на вопросы.',
+                    'Дидактические игры: «Назови ласково», «Один-много».',
+                    'Описательный рассказ: составление описания по картинке.',
+                    'Чтение художественной литературы: обсуждение прочитанного.',
+                    'Пальчиковые игры: развитие мелкой моторики.',
+                    'Составление рассказа по серии картинок.',
+                    'Заучивание стихов, потешек.'
+                ],
+                'Познавательное': [
+                    'Наблюдение: за объектами природы/окружающего мира.',
+                    'Эксперимент: проведение простых опытов.',
+                    'Классификация: сортировка предметов по группам.',
+                    'Решение проблемных ситуаций: поиск решений.',
+                    'Игры-исследования: «Что изменилось?», «Найди отличия».',
+                    'Конструирование: из различных материалов.'
+                ],
+                'Худож.-эстетич.': [
+                    'Рисование: по теме, с использованием разных материалов.',
+                    'Аппликация: создание композиций.',
+                    'Лепка: из пластилина, глины.',
+                    'Музыкальная деятельность: слушание, пение, ритмика.',
+                    'Театрализация: разыгрывание сценок.',
+                    'Рассматривание репродукций картин.'
+                ],
+                'Физическое': [
+                    'Гимнастика: комплексы упражнений.',
+                    'Подвижные игры: с правилами, эстафеты.',
+                    'Пальчиковая гимнастика: координация движений.',
+                    'Дыхательные упражнения: развитие дыхания.',
+                    'Физкультминутки: смена деятельности.',
+                    'Спортивные упражнения: бег, прыжки, метание.'
+                ],
+                'Соц.-коммуникативное': [
+                    'Беседа: правила поведения, общение.',
+                    'Сюжетно-ролевые игры: моделирование ситуаций.',
+                    'Игры на взаимодействие: «Комплименты», «Дружба».',
+                    'Трудовые поручения: помощь, дежурство.',
+                    'Этические беседы: доброта, уважение.',
+                    'Игры на развитие эмоционального интеллекта.'
+                ]
+            },
+            'логопед': {
+                'Постановка': [
+                    'Артикуляционная гимнастика: перед зеркалом.',
+                    'Постановка звука по подражанию: показ, повтор.',
+                    'Постановка с механической помощью: зонды, шпатели.',
+                    'Дыхательная гимнастика: выработка воздушной струи.',
+                    'Игры на развитие фонематического слуха: «Поймай звук».',
+                    'Постановка звука в слогах.'
+                ],
+                'Автоматизация': [
+                    'Автоматизация в слогах: повторение, чтение.',
+                    'Автоматизация в словах: называние картинок.',
+                    'Автоматизация в предложениях: составление фраз.',
+                    'Автоматизация в связной речи: рассказы, стихи.',
+                    'Игры на автоматизацию: «Магазин», «Лото».',
+                    'Автоматизация в скороговорках.'
+                ],
+                'Дифференциация': [
+                    'Сравнение звуков: артикуляция, акустика.',
+                    'Дифференциация в слогах: повторение пар.',
+                    'Дифференциация в словах: сортировка картинок.',
+                    'Дифференциация в предложениях: вставка пропущенных звуков.',
+                    'Игры на дифференциацию: «Разложи по домикам».',
+                    'Дифференциация в тексте.'
+                ],
+                'Связная речь': [
+                    'Рассказ по картинке: составление описания.',
+                    'Пересказ: коротких текстов, сказок.',
+                    'Составление рассказа по плану: опорные схемы.',
+                    'Творческое рассказывание: придумывание конца истории.',
+                    'Диалогическая речь: беседы, вопросы-ответы.',
+                    'Составление рассказа из личного опыта.'
+                ],
+                'Фонематический слух': [
+                    'Упражнения на различение звуков: «Поймай звук».',
+                    'Игра «Где звук?»: определение позиции звука.',
+                    'Игра «Эхо»: повторение слоговых рядов.',
+                    'Звуковой анализ: выделение первого, последнего звука.',
+                    'Игры на развитие слухового внимания: «Что звучит?».',
+                    'Слоговой анализ и синтез.'
+                ]
+            },
+            'психолог': {
+                'Развивающее': [
+                    'Игры на внимание: «Найди отличия», «Лабиринт».',
+                    'Игры на память: «Что изменилось?», «Запомни ряд».',
+                    'Игры на мышление: «Четвёртый лишний», «Аналогии».',
+                    'Игры на воображение: «Придумай историю».',
+                    'Упражнения на развитие эмоционального интеллекта.',
+                    'Игры на развитие речи и коммуникации.'
+                ],
+                'Коррекционное': [
+                    'Релаксация: дыхательные упражнения, визуализация.',
+                    'Сказкотерапия: обсуждение сказок, проигрывание.',
+                    'Арт-терапия: рисование, лепка, коллажи.',
+                    'Игры на снятие агрессии: «Светофор», «Ковёр мира».',
+                    'Упражнения на развитие саморегуляции.',
+                    'Песочная терапия.'
+                ],
+                'Диагностическое': [
+                    'Наблюдение: за поведением, эмоциями.',
+                    'Пробы: графические, вербальные.',
+                    'Тесты: на внимание, память, мышление.',
+                    'Беседа: выявление уровня развития.',
+                    'Анализ продуктов деятельности: рисунков, поделок.',
+                    'Анкетирование родителей.'
+                ],
+                'Просветительское': [
+                    'Консультация: для родителей, педагогов.',
+                    'Практикум: обучение приёмам взаимодействия.',
+                    'Лекция: по актуальным вопросам.',
+                    'Анкетирование: сбор информации.',
+                    'Выступление на педсовете: обмен опытом.',
+                    'Оформление стендов, памяток.'
+                ],
+                'Адаптация': [
+                    'Знакомство: игры на узнавание имён.',
+                    'Ритуалы: приветствия, прощания.',
+                    'Игры на сплочение: «Карусель», «Паутинка».',
+                    'Экскурсии: знакомство с пространством.',
+                    'Беседы: о правилах, режиме.',
+                    'Групповые занятия для сплочения коллектива.'
+                ]
+            }
+        };
+
+        // =====================================================================
+        //  БАНК ЗАДАНИЙ ПО ФГОС (расширен)
+        // =====================================================================
+        const FGOS_TASKS = {
+            'org': [
+                'Приветствие: создание доброжелательной атмосферы.',
+                'Проверка готовности к занятию: наличие материалов, рабочего места.',
+                'Эмоциональный настрой: упражнение на создание положительного настроя.',
+                'Организация внимания: концентрация на предстоящей работе.'
+            ],
+            'motiv': [
+                'Проблемная ситуация: создание ситуации, вызывающей интерес.',
+                'Целеполагание: формулировка цели занятия вместе с детьми.',
+                'Планирование: составление плана предстоящей работы.',
+                'Создание мотива: использование сюрпризного момента, загадки.'
+            ],
+            'warm': [
+                'Повторение опорных знаний: актуализация пройденного материала.',
+                'Опрос: фронтальный или индивидуальный опрос по теме.',
+                'Мозговой штурм: коллективное обсуждение, поиск решений.',
+                'Игровая разминка: активизация внимания через игру.'
+            ],
+            'lex': [
+                'Введение лексики: знакомство с новыми словами через наглядность.',
+                'Фонетическая отработка: произношение новых слов, хоровое повторение.',
+                'Первичное закрепление: упражнения на узнавание и использование.',
+                'Лексические игры: закрепление через игровые формы.'
+            ],
+            'gram': [
+                'Правило: формулировка и объяснение грамматического правила.',
+                'Пример: демонстрация правила на конкретных примерах.',
+                'Тренировка: упражнения на отработку правила.',
+                'Продукция: использование правила в собственных высказываниях.'
+            ],
+            'gramprac': [
+                'Упражнения на подстановку: заполнение пропусков, трансформации.',
+                'Проверка: взаимопроверка, самопроверка.',
+                'Коррекция ошибок: разбор типичных ошибок.',
+                'Закрепление: дополнительные упражнения на правило.'
+            ],
+            'prac': [
+                'Упражнения по образцу: выполнение заданий по аналогии.',
+                'Диалоги: работа в парах, разыгрывание диалогов.',
+                'Ролевые игры: моделирование ситуаций общения.',
+                'Самостоятельная работа: выполнение заданий без опоры.'
+            ],
+            'phys': [
+                'Двигательная активность: упражнения на снятие напряжения.',
+                'Гимнастика для глаз: упражнения для профилактики утомления.',
+                'Координационные упражнения: развитие моторики.',
+                'Смена деятельности: переключение внимания.'
+            ],
+            'refl': [
+                'Светофор: оценка своей работы (красный/жёлтый/зелёный).',
+                'Exit ticket: краткий письменный ответ на вопрос.',
+                'Самооценка: анализ своей работы на занятии.',
+                'Взаимооценка: оценка работы одноклассников.'
+            ],
+            'hw': [
+                'Дифференцированное ДЗ: задания разных уровней сложности.',
+                'Индивидуальное задание: задание с учётом особенностей ученика.',
+                'Творческое задание: создание чего-либо по теме.',
+                'Обязательное задание: минимальный объём для всех.'
+            ],
+            'artik': [
+                'Артикуляционная гимнастика: упражнения для языка, губ.',
+                'Постановка звука: показ артикуляции, зеркало.',
+                'Дыхательные упражнения: развитие речевого дыхания.'
+            ],
+            'breath': [
+                'Дыхательная гимнастика: вдох-выдох с контролем.',
+                'Упражнения на длительный выдох.',
+                'Игровые дыхательные упражнения: «Снежинка», «Ветерок».'
+            ],
+            'relax': [
+                'Релаксация: мышечное расслабление.',
+                'Визуализация: представление спокойных образов.',
+                'Дыхание: глубокий вдох-выдох.'
+            ],
+            'surprise': [
+                'Сюрпризный момент: появление персонажа, предмета.',
+                'Игровая мотивация: внезапное задание.',
+                'Эмоциональная зарядка: удивление, радость.'
+            ]
+        };
+
+        // =====================================================================
+        //  ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+        // =====================================================================
+
+        function toast(m) {
+            const t = document.getElementById('toast');
+            t.textContent = m;
+            t.style.display = 'block';
+            clearTimeout(t._timer);
+            t._timer = setTimeout(() => { t.style.display = 'none'; }, 2500);
+        }
+
+        function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+
+        function saveNotes() {
+            saveState();
+        }
+
+        function cj(k, d) {
+            try { return JSON.parse(localStorage.getItem(k) || 'null') || d; } catch (e) { return d; }
+        }
+
+        function cs(k, v) {
+            try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {}
+        }
+
+        function myTopics() { return cj('cust-topics-' + LANG, []); }
+
+        function myGrams() { return cj('cust-grams', []); }
+
+        function myActs() { return cj('cust-acts', []); }
+
+        function addMyUmk() {
+            const name = document.getElementById('myUmk').value.trim();
+            if (!name) return;
+            if (!window.MY_UMKS) window.MY_UMKS = [];
+            window.MY_UMKS.push(name);
+            cs('my-umks', window.MY_UMKS);
+            document.getElementById('myUmk').value = '';
+            renderCtrls();
+            saveState();
+            toast('УМК добавлен 📚');
+        }
+
+        function saveMyTopic() {
+            const n = (document.getElementById('ct').value || '').trim();
+            if (!n) return;
+            const L = myTopics();
+            L.push({ name: n, words: '' });
+            cs('cust-topics-' + LANG, L);
+            renderCtrls();
+            saveState();
+            toast('Своя тема сохранена ⭐');
+        }
+
+        function addMyTopic() {
+            const n = document.getElementById('myT').value.trim();
+            if (!n) return;
+            const L = myTopics();
+            L.push({ name: n, words: document.getElementById('myTW').value.trim() });
+            cs('cust-topics-' + LANG, L);
+            document.getElementById('myT').value = '';
+            document.getElementById('myTW').value = '';
+            renderCtrls();
+            saveState();
+            toast('Тема добавлена ⭐');
+        }
+
+        function addMyGram() {
+            const n = document.getElementById('myG').value.trim();
+            if (!n) return;
+            const L = myGrams();
+            L.push({
+                n: n,
+                r: document.getElementById('myGR').value,
+                e: document.getElementById('myGE').value,
+                t: document.getElementById('myGT').value
+            });
+            cs('cust-grams', L);
+            renderCtrls();
+            saveState();
+            toast('Грамматика добавлена ⭐');
+        }
+
+        function addMyAct() {
+            const n = document.getElementById('myA').value.trim();
+            if (!n) return;
+            const L = myActs();
+            L.push({ n: n, d: document.getElementById('myAD').value });
+            cs('cust-acts', L);
+            renderCtrls();
+            saveState();
+            toast('Активность добавлена ⭐');
+        }
+
+        function importTasks() {
+            const t = document.getElementById('importTxt').value.split('\n').map(x => x.trim()).filter(Boolean);
+            if (t.length) {
+                IMPORT_TASKS = IMPORT_TASKS.concat(t);
+                document.getElementById('importTxt').value = '';
+                updImp();
+                saveState();
+                toast('Импортировано: ' + t.length);
+            }
+        }
+
+        function updImp() {
+            document.getElementById('impCount').textContent = 'Своих заданий: ' + IMPORT_TASKS.length;
+        }
+
+        async function datamuse(t) {
+            try {
+                const r = await fetch('https://api.datamuse.com/words?ml=' + encodeURIComponent(t) + '&max=10');
+                const j = await r.json();
+                return j.map(x => x.word);
+            } catch (e) { return null; }
+        }
+
+        async function translateWords(ws, to) {
+            const out = [];
+            for (let i = 0; i < ws.length; i++) {
+                try {
+                    const r = await fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(ws[i]) +
+                        '&langpair=en|' + to);
+                    const j = await r.json();
+                    out.push(j.responseData.translatedText);
+                } catch (e) { out.push(ws[i]); }
+            }
+            return out;
+        }
+
+        async function ensureWords(tema) {
+            const ct = myTopics().filter(x => x.name === tema)[0];
+            if (ct && ct.words) return ct.words.split(',').filter(Boolean);
+            let mt = null;
+            for (let i = 0; i < MT.length; i++) {
+                if (MT[i].id === tema || MT[i].n[LANG] === tema) mt = MT[i];
+            }
+            if (mt) {
+                if (mt.w[LANG]) return mt.w[LANG].split(',');
+                if (mt.w.en) return await translateWords(mt.w.en.split(','), LANG);
+            }
+            const lt = (LANG_THEMES[LANG] || []).filter(x => x.id === tema || x.n === tema)[0];
+            let en = (lt && lt.q) ? await datamuse(lt.q) : await datamuse(tema);
+            if (!en || !en.length) en = ['cat', 'dog', 'fox', 'bird', 'fish'];
+            if (LANG === 'en') return en;
+            return await translateWords(en, LANG);
+        }
+
+        function pullInteract() {
+            const t = topicNow();
+            window.open('https://wordwall.net/search/resource/' + encodeURIComponent(t), '_blank');
+            window.open('https://learningapps.org/index.php?s=' + encodeURIComponent(t), '_blank');
+            toast('Интерактив 🎮');
+        }
+
+        function selThemes() {
+            const k = Object.keys(VT).filter(x => VT[x]);
+            return k.length ? k : [themesForRole()[0][0]];
+        }
+
+        function selGrams() {
+            const k = Object.keys(GT).filter(x => GT[x]);
+            return k.length ? k : [gramsForLang()[0]];
+        }
+
+        function topicNow() {
+            if (CTHEME.trim()) return CTHEME.trim();
+            return selThemes().map(themeLabelById).join(', ');
+        }
+
+        function themeLabelById(id) {
+            let mt = null;
+            for (let i = 0; i < MT.length; i++) {
+                if (MT[i].id === id) mt = MT[i];
+            }
+            if (mt) return mt.n[LANG];
+            const lt = (LANG_THEMES[LANG] || []).filter(x => x.id === id)[0];
+            return lt ? lt.n : id;
+        }
+
+        function sel(arr, val, fn) {
+            let h = '<select class="inp" onchange="' + fn + '(this.value)">';
+            for (let i = 0; i < arr.length; i++) {
+                const v = Array.isArray(arr[i]) ? arr[i][0] : arr[i];
+                const l = Array.isArray(arr[i]) ? arr[i][1] : arr[i];
+                h += '<option value="' + v + '"' + (v === val ? ' selected' : '') + '>' + l + '</option>';
+            }
+            return h + '</select>';
+        }
+
+        function chips(obj, fn) {
+            let h = '';
+            for (const k in obj) {
+                h += '<button class="btn sm ' + (obj[k] ? 'p' : '') + '" onclick="' + fn + '(\'' + k.replace(/'/g, '') +
+                '\')">' + k + '</button>';
+            }
+            return h;
+        }
+
+        function umkForRole() {
+            const all = getUMKList();
+            if (ROLE === 'ия') {
+                const langUmks = UMK_BASE.filter(u => u[1] === LANG).map(u => u[0]);
+                return all.filter(u => langUmks.includes(u) || window.MY_UMKS.includes(u));
+            }
+            if (ROLE === 'воспитатель') {
+                const base = UMK_BASE.filter(u => u[1] === 'до').map(u => u[0]);
+                return all.filter(u => base.includes(u) || window.MY_UMKS.includes(u));
+            }
+            if (ROLE === 'логопед') {
+                const base = UMK_BASE.filter(u => u[1] === 'ло').map(u => u[0]);
+                return all.filter(u => base.includes(u) || window.MY_UMKS.includes(u));
+            }
+            if (ROLE === 'психолог') {
+                const base = UMK_BASE.filter(u => u[1] === 'пс').map(u => u[0]);
+                return all.filter(u => base.includes(u) || window.MY_UMKS.includes(u));
+            }
+            return all;
+        }
+
+        function themesForRole() {
+            if (ONLY_MINE) return myTopics().map(t => [t.name, '★ ' + t.name]);
+            const TL = [];
+            if (ROLE === 'ия') {
+                MT.forEach(t => TL.push([t.id, t.n[LANG]]));
+                (LANG_THEMES[LANG] || []).forEach(t => TL.push([t.id, t.n]));
+            } else {
+                (ROLE === 'воспитатель' ? THEMES_VOS : (ROLE === 'логопед' ? THEMES_LOG : THEMES_PSY)).forEach(t => TL
+                    .push([t, t]));
+            }
+            myTopics().forEach(t => TL.push([t.name, '★ ' + t.name]));
+            return TL;
+        }
+
+        function typesForRole() {
+            if (ROLE === 'ия') return TYPE_IA;
+            if (ROLE === 'воспитатель') return TYPE_VOS;
+            if (ROLE === 'логопед') return TYPE_LOG;
+            return TYPE_PSY;
+        }
+
+        function gramsForLang() {
+            return (GRAM_LANG[LANG] || []).map(g => g.n).concat(myGrams().map(g => g.n));
+        }
+
+        function setDuration(v) {
+            const d = parseInt(v);
+            CUSTOM_DURATION = (!isNaN(d) && d > 0) ? d : null;
+            saveState();
+        }
+
+        function toggleDark() {
+            document.body.classList.toggle('dark');
+            try { localStorage.setItem('dark-mode', document.body.classList.contains('dark') ? '1' : '0'); } catch (e) {}
+        }
+
+        function resetAll() {
+            if (!confirm('Сбросить все настройки?')) return;
+            localStorage.removeItem('konspekt-state');
+            localStorage.removeItem('konspekt-notes');
+            localStorage.removeItem('last-out');
+            location.reload();
+        }
+
+        function ageInfo() {
+            let baseDur = 0;
+            if (AGE === 'до 3 лет') baseDur = 10;
+            else if (AGE === '3-4 года') baseDur = 15;
+            else if (AGE === '4-5 лет') baseDur = 20;
+            else if (AGE === '5-6 лет') baseDur = 25;
+            else if (AGE === '6-7 лет') baseDur = 30;
+            else if (AGE.indexOf('класс') >= 0) baseDur = 45;
+            else if (AGE.indexOf('66') >= 0 || AGE.indexOf('80') >= 0) baseDur = 60;
+            else if (AGE.indexOf('студенты') >= 0) baseDur = 80;
+            else baseDur = 90;
+            const dur = CUSTOM_DURATION || baseDur;
+            let st = 'коммуникативный';
+            if (AGE.indexOf('класс') >= 0) st = 'наглядно-словесный';
+            else if (AGE.indexOf('год') >= 0) st = 'игровой';
+            else if (AGE.indexOf('66') >= 0 || AGE.indexOf('80') >= 0) st = 'спокойный темп, крупный шрифт';
+            return { dur, st, n: 'ФГОС' };
+        }
+
+        function fmtInfo() {
+            if (FORMAT === 'онлайн') {
+                return { eq: 'ВКС, интерактивная доска, чат', on: 1, hello: GREET[LANG] + ' + проверка связи',
+                    tool: 'Wordwall в общем экране' };
+            }
+            if (FORMAT.indexOf('смеш') >= 0) {
+                return { eq: 'доска+карточки + ВКС', on: 1, hello: GREET[LANG], tool: 'карточки+онлайн' };
+            }
+            return { eq: 'доска, карточки, аудио', on: 0, hello: GREET[LANG], tool: 'карточки' };
+        }
+
+        function getGrams() {
+            const out = [];
+            selGrams().forEach(n => {
+                const mg = myGrams().filter(x => x.n === n)[0];
+                if (mg) { out.push(mg); return; }
+                const lg = (GRAM_LANG[LANG] || []).filter(x => x.n === n)[0];
+                out.push(lg || { n: n, r: '—', e: '—', t: '—' });
+            });
+            return out;
+        }
+
+        function actDesc(n) {
+            const A = actsForRole();
+            if (A[n]) return A[n];
+            const ma = myActs().filter(x => x.n === n)[0];
+            return ma ? ma.d : n;
+        }
+
+        function langName() {
+            for (let i = 0; i < LANGS.length; i++) {
+                if (LANGS[i][0] === LANG) return LANGS[i][1];
+            }
+            return '';
+        }
+
+        function roleName() {
+            for (let i = 0; i < ROLES.length; i++) {
+                if (ROLES[i][0] === ROLE) return ROLES[i][1];
+            }
+            return '';
+        }
+
+        function setProgress(p) {
+            const wrap = document.getElementById('progressWrap');
+            const bar = document.getElementById('progressBar');
+            wrap.classList.add('active');
+            bar.style.width = Math.min(100, p) + '%';
+            if (p >= 100) {
+                setTimeout(() => { wrap.classList.remove('active');
+                    bar.style.width = '0%'; }, 500);
+            }
+        }
+
+        // =====================================================================
+        //  ОТРИСОВКА ИНТЕРФЕЙСА (все вкладки заполняются один раз)
+        // =====================================================================
+
+        function renderCtrls() {
+            // Роли
+            let h = '';
+            for (let i = 0; i < ROLES.length; i++) {
+                h += '<button class="' + (ROLE === ROLES[i][0] ? 'on' : '') + '" onclick="setRole(\'' + ROLES[i][0] +
+                '\')">' + ROLES[i][1] + '</button>';
+            }
+            document.getElementById('roleSeg').innerHTML = h;
+
+            // Заполняем все контейнеры
+            document.getElementById('ctrlMain').innerHTML = renderMainTab();
+            document.getElementById('ctrlThemes').innerHTML = renderThemesTab();
+            document.getElementById('ctrlActivities').innerHTML = renderActivitiesTab();
+            document.getElementById('ctrlExtra').innerHTML = renderExtraTab();
+            document.getElementById('ctrlTasks').innerHTML = renderTasksTab();
+            document.getElementById('ctrlSettings').innerHTML = renderSettingsTab();
+
+            // Активируем первую вкладку (убеждаемся)
+            activateFirstTab();
+        }
+
+        function activateFirstTab() {
+            // Находим активную кнопку вкладки (по классу on)
+            const activeBtn = document.querySelector('.tabs .on');
+            if (activeBtn) {
+                const targetId = activeBtn.dataset.tab;
+                // Скрываем все
+                document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+                // Показываем нужную
+                const target = document.getElementById(targetId);
+                if (target) target.classList.add('active');
+            }
+        }
+
+        function renderMainTab() {
+            const durVal = CUSTOM_DURATION || ageInfo().dur;
+            let h = '';
+            h += '<div class="lbl">📅 Возраст/класс</div>' + sel(AGES, AGE, 'setAGE');
+            h += '<div class="lbl">⏱ Длительность (мин)</div><input class="inp inp-sm" type="number" min="5" max="180" value="' +
+                durVal + '" oninput="setDuration(this.value)">';
+            h += '<div class="lbl">📌 Формат</div>' + sel(FORMATS, FORMAT, 'setFORMAT');
+            h += '<div class="lbl">📄 Вывод</div><div class="seg"><button class="' + (OUTMODE === 'konspekt' ? 'on' : '') +
+                '" onclick="setOut(\'konspekt\')">Конспект</button><button class="' + (OUTMODE === 'tech' ? 'on' : '') +
+                '" onclick="setOut(\'tech\')">Техкарта</button></div>';
+
+            if (ROLE === 'ия') {
+                h += '<div class="lbl">🌍 Язык</div>' + sel(LANGS, LANG, 'setLANG');
+                h += '<div class="lbl">📖 Тип урока</div>' + sel(typesForRole(), LTYPE, 'setLTYPE');
+                h += '<div class="lbl">📚 УМК (' + langName() + ')</div>' + sel(umkForRole(), UMK, 'setUMK');
+            } else {
+                const nl = ROLE_NAPR[ROLE];
+                if (!NAPR) NAPR = nl[0];
+                h += '<div class="lbl">📖 Тип занятия</div>' + sel(typesForRole(), LTYPE, 'setLTYPE');
+                h += '<div class="lbl">🎯 Направление</div><div class="row">' + nl.map(n => '<button class="btn sm ' + (
+                    NAPR === n ? 'p' : '') + '" onclick="setNAPR(\'' + n + '\')">' + n + '</button>').join('') +
+                '</div>';
+                if (ROLE === 'логопед') h += '<div class="lbl">🔊 Звук</div>' + sel(['Ш', 'Р', 'С', 'З', 'Л', 'Щ', 'Ж',
+                    'Ц'
+                ], GSOUND, 'setGS');
+                h += '<div class="lbl">📚 УМК/программа</div>' + sel(umkForRole(), UMK, 'setUMK');
+            }
+            return h;
+        }
+
+        function renderThemesTab() {
+            let h = '';
+            if (ROLE === 'ия') {
+                const themes = themesForRole();
+                if (themes.length) {
+                    h += '<div class="lbl">📖 Темы (' + langName() + ', несколько)</div><div class="row">' +
+                        themes.map(t => '<button class="btn sm ' + (VT[t[0]] ? 'p' : '') + '" onclick="tgVT(\'' + t[
+                            0].replace(/'/g, '') + '\')">' + t[1] + '</button>').join('') +
+                        '</div>';
+                } else {
+                    h += '<div class="mut">Нет доступных тем. Добавьте свою тему выше.</div>';
+                }
+                const grams = gramsForLang();
+                if (grams.length) {
+                    h += '<div class="lbl">📐 Грамматика (' + langName() + ', несколько)</div><div class="row">' +
+                        grams.map(g => '<button class="btn sm ' + (GT[g] ? 'p' : '') + '" onclick="tgGT(\'' + g
+                            .replace(/'/g, '') + '\')">' + g + '</button>').join('') +
+                        '</div>';
+                } else {
+                    h += '<div class="mut">Нет грамматических тем. Добавьте свою грамматику выше.</div>';
+                }
+            } else {
+                const themes = themesForRole();
+                if (themes.length) {
+                    h += '<div class="lbl">📖 Темы (' + roleName() + ', несколько)</div><div class="row">' +
+                        themes.map(t => '<button class="btn sm ' + (VT[t[0]] ? 'p' : '') + '" onclick="tgVT(\'' + t[
+                            0].replace(/'/g, '') + '\')">' + t[1] + '</button>').join('') +
+                        '</div>';
+                } else {
+                    h += '<div class="mut">Нет доступных тем. Добавьте свою тему выше.</div>';
+                }
+            }
+            return h;
+        }
+
+        function renderActivitiesTab() {
+            const A = actsForRole();
+            let ACALL = {};
+            for (const a in A) ACALL[a] = AC[a];
+            if (ONLY_MINE) {
+                ACALL = {};
+                myActs().forEach(x => { ACALL[x.n] = 1; });
+            }
+            let h = '';
+            const skills = Object.keys(SK).filter(k => SK[k]);
+            if (skills.length) {
+                h += '<div class="lbl">🎯 Навыки</div><div class="row">' + chips(SK, 'tgSK') + '</div>';
+            } else {
+                h += '<div class="mut">Выберите навыки, нажав на кнопки ниже.</div>';
+            }
+            const actsKeys = Object.keys(ACALL);
+            if (actsKeys.length) {
+                h += '<div class="lbl">🎮 Активности (' + roleName() + ', несколько)</div><div class="row">' + chips(
+                    ACALL, 'tgAC') + '</div>';
+            } else {
+                h += '<div class="mut">Нет активностей. Добавьте свою активность выше или выберите роль.</div>';
+            }
+            const kinds = Object.keys(KIND).filter(k => KIND[k]);
+            if (kinds.length) {
+                h += '<div class="lbl">🧩 Виды деятельности</div><div class="row">' + chips(KIND, 'tgKIND') + '</div>';
+            } else {
+                h += '<div class="mut">Выберите виды деятельности, нажав на кнопки ниже.</div>';
+            }
+            return h;
+        }
+
+        function renderExtraTab() {
+            let h = '';
+            h += '<div class="lbl">⚙️ Доп. опции</div><div class="row">' + chips(EXTRA, 'tgEXTRA') + '</div>';
+            const exKeys = Object.keys(EXSEL).filter(k => EXSEL[k]);
+            if (exKeys.length) {
+                h += '<div class="lbl">📝 Выбранные упражнения</div><div class="row">' +
+                    EXBANK.filter(e => EXSEL[e[0]]).map(e => '<span class="btn sm">' + e[0] + '</span>').join('') +
+                    '</div>';
+            } else {
+                h += '<div class="lbl">📝 Упражнения (выбрать, иначе все)</div><div class="row">' +
+                    EXBANK.map(e => '<button class="btn sm ' + (EXSEL[e[0]] ? 'p' : '') + '" onclick="tgEX(\'' + e[0]
+                        .replace(/'/g, '') + '\')">' + e[0] + '</button>').join('') +
+                    '</div>';
+            }
+            return h;
+        }
+
+        function renderTasksTab() {
+            const roleTasks = ROLE_TASKS[ROLE] || {};
+            const dirs = Object.keys(roleTasks);
+            let h = '';
+            if (dirs.length) {
+                h += '<div class="lbl">📌 Задания по направлению (выберите нужные)</div>';
+                dirs.forEach(dir => {
+                    const tasks = roleTasks[dir];
+                    h += '<div class="row"><span class="b" style="min-width:120px">' + dir + ':</span>';
+                    tasks.forEach((task, idx) => {
+                        const key = dir + '|' + idx;
+                        const checked = ROLESEL[key] ? 'checked' : '';
+                        h += '<label style="font-size:12px;margin:2px 6px"><input type="checkbox" ' +
+                            checked + ' onchange="toggleRoleTask(\'' + key + '\')"> ' + task.substring(0,
+                            30) + '…</label>';
+                    });
+                    h += '</div>';
+                });
+                const selected = Object.keys(ROLESEL).filter(k => ROLESEL[k]);
+                if (selected.length) {
+                    h += '<div class="lbl">✅ Выбранные задания:</div><ul>';
+                    selected.forEach(k => {
+                        const parts = k.split('|');
+                        const dir = parts[0];
+                        const idx = parseInt(parts[1]);
+                        if (roleTasks[dir] && roleTasks[dir][idx]) {
+                            h += '<li>' + roleTasks[dir][idx] + '</li>';
+                        }
+                    });
+                    h += '</ul>';
+                } else {
+                    h += '<div class="mut">Пока не выбрано ни одного задания. Отметьте нужные выше.</div>';
+                }
+            } else {
+                h += '<div class="mut">Для данной роли нет специфических заданий.</div>';
+            }
+            return h;
+        }
+
+        function renderSettingsTab() {
+            let h = '';
+            h += '<div class="lbl">💾 Сохранение</div>';
+            h += '<p>Все настройки автоматически сохраняются в браузере.</p>';
+            h += '<div class="row mt8"><button class="btn" onclick="resetAll()">🔄 Сбросить все настройки</button></div>';
+            h += '<div class="lbl mt8">📚 Свои УМК</div>';
+            h += '<div class="row"><input class="inp inp-md" id="myUmk" placeholder="Название УМК"><button class="btn sm" onclick="addMyUmk()">+ УМК</button></div>';
+            if (window.MY_UMKS && window.MY_UMKS.length) {
+                h += '<ul>';
+                window.MY_UMKS.forEach(u => { h += '<li>' + u + '</li>'; });
+                h += '</ul>';
+            } else {
+                h += '<div class="mut">Нет добавленных УМК.</div>';
+            }
+            h += '<div class="lbl mt8">📤 Экспорт/Импорт</div>';
+            h += '<div class="row"><button class="btn sm" onclick="exportJSON()">📥 Экспорт JSON</button><button class="btn sm" onclick="document.getElementById(\'importJSON\').click()">📤 Импорт JSON</button></div>';
+            h += '<div class="lbl mt8">ℹ️ О программе</div>';
+            h += '<p>Версия 2.2. Максимальный набор функций для генерации конспектов.</p>';
+            return h;
+        }
+
+        function toggleRoleTask(key) {
+            ROLESEL[key] = !ROLESEL[key];
+            // Обновляем только вкладку заданий
+            document.getElementById('ctrlTasks').innerHTML = renderTasksTab();
+            saveState();
+            toast(ROLESEL[key] ? 'Задание добавлено ✅' : 'Задание убрано ❌');
+        }
+
+        // =====================================================================
+        //  УПРАВЛЕНИЕ СОСТОЯНИЕМ
+        // =====================================================================
+
+        function setRole(r) {
+            ROLE = r;
+            NAPR = '';
+            UMK = '';
+            VT = {};
+            VT[themesForRole()[0][0]] = 1;
+            GT = {};
+            GT[gramsForLang()[0]] = 1;
+            LTYPE = typesForRole()[0];
+            ROLESEL = {};
+            renderCtrls();
+            saveState();
+            toast('Роль изменена на ' + roleName());
+        }
+
+        function tgVT(k) { VT[k] = !VT[k];
+            renderCtrls();
+            saveState(); }
+
+        function tgGT(k) { GT[k] = !GT[k];
+            renderCtrls();
+            saveState(); }
+
+        function setAGE(v) { AGE = v;
+            renderCtrls();
+            saveState(); }
+
+        function setFORMAT(v) { FORMAT = v;
+            saveState(); }
+
+        function setOut(v) { OUTMODE = v;
+            renderCtrls();
+            saveState(); }
+
+        function setLANG(v) {
+            LANG = v;
+            GT = {};
+            GT[gramsForLang()[0]] = 1;
+            UMK = (umkForRole()[0] || '');
+            renderCtrls();
+            saveState();
+            toast('Язык: ' + langName());
+        }
+
+        function setLTYPE(v) { LTYPE = v;
+            saveState(); }
+
+        function setUMK(v) { UMK = v;
+            saveState(); }
+
+        function setNAPR(v) { NAPR = v;
+            renderCtrls();
+            saveState(); }
+
+        function setGS(v) { GSOUND = v;
+            saveState(); }
+
+        function tgSK(k) { SK[k] = !SK[k];
+            renderCtrls();
+            saveState(); }
+
+        function tgAC(k) { AC[k] = !AC[k];
+            renderCtrls();
+            saveState(); }
+
+        function tgKIND(k) { KIND[k] = !KIND[k];
+            renderCtrls();
+            saveState(); }
+
+        function tgEXTRA(k) { EXTRA[k] = !EXTRA[k];
+            renderCtrls();
+            saveState(); }
+
+        function tgEX(k) { EXSEL[k] = !EXSEL[k];
+            renderCtrls();
+            saveState(); }
+
+        // =====================================================================
+        //  ГЕНЕРАЦИЯ КОНСПЕКТА (улучшенная)
+        // =====================================================================
+
+        async function buildCtx() {
+            setProgress(10);
+            const A = ageInfo();
+            const F = fmtInfo();
+            const temas = CTHEME.trim() ? [CTHEME.trim()] : selThemes();
+            let words = [];
+            if (ROLE === 'ия') {
+                for (let i = 0; i < temas.length; i++) {
+                    words = words.concat(await ensureWords(temas[i]));
+                    setProgress(20 + i * 10);
+                }
+            }
+            words = words.filter((v, i) => words.indexOf(v) === i);
+            const Gs = getGrams();
+            const tema = CTHEME.trim() || temas.map(themeLabelById).join(', ');
+            const flow = (ROLE === 'ия') ? (FLOWS[LTYPE] || FLOWS['комбинированный']) : (ROLE_FLOWS[ROLE] || ['org',
+                'motiv', 'main1', 'game', 'phys', 'refl'
+            ]);
+            const B = ROLE_BANK[NAPR] || null;
+            let sw = 0;
+            for (let i = 0; i < flow.length; i++) sw += (WGT[flow[i]] || 3);
+            const m = {};
+            for (let i = 0; i < flow.length; i++) {
+                m[flow[i]] = Math.max(1, Math.round(A.dur * (WGT[flow[i]] || 3) / sw));
+            }
+            let total = 0;
+            for (const k in m) total += m[k];
+            if (total > A.dur) {
+                let diff = total - A.dur;
+                for (const k in m) {
+                    if (m[k] > 1) {
+                        const sub = Math.min(m[k] - 1, diff);
+                        m[k] -= sub;
+                        diff -= sub;
+                        if (diff <= 0) break;
+                    }
+                }
+            }
+            setProgress(80);
+
+            const umkTasks = UMK_TASKS[UMK] || [];
+            const roleTasks = ROLE_TASKS[ROLE] || {};
+            const selectedRoleTasks = [];
+            for (const key in ROLESEL) {
+                if (ROLESEL[key]) {
+                    const parts = key.split('|');
+                    const dir = parts[0];
+                    const idx = parseInt(parts[1]);
+                    if (roleTasks[dir] && roleTasks[dir][idx]) {
+                        selectedRoleTasks.push(roleTasks[dir][idx]);
+                    }
+                }
+            }
+            const roleTaskList = selectedRoleTasks.length ? selectedRoleTasks : Object.values(roleTasks).flat();
+
+            return {
+                tema,
+                words,
+                Gs,
+                G: Gs[0] || { r: '—', e: '—', t: '—' },
+                gt: Gs.map(g => g.n).join(', '),
+                A,
+                F,
+                on: F.on,
+                acts: Object.keys(actsForRole()).filter(k => AC[k]),
+                m,
+                flow,
+                B,
+                umkTasks,
+                roleTaskList,
+                fgosTasks: FGOS_TASKS
+            };
+        }
+
+        function skillsText(c, m) {
+            const a = [];
+            for (const k in SK)
+                if (SK[k]) a.push(SKILL_BANK[k]);
+            return a.length ? a.join('; ') + ' (' + m + ' мин).' : '';
+        }
+
+        function kindsText(c, m) {
+            const a = [];
+            for (const k in KIND)
+                if (KIND[k]) a.push(KIND_BANK[k]);
+            return a.length ? a.join(' ') + ' (' + m + ' мин).' : '';
+        }
+
+        function actsLine(c) {
+            if (!c.acts.length) return '';
+            return '<p><b>Активности:</b> ' + c.acts.map(a => actDesc(a)).join('; ') + '.</p>';
+        }
+
+        function gramsBlock(c) {
+            if (ROLE !== 'ия' || !c.Gs.length) return '';
+            let H = '<h3>📚 Грамматический блок</h3>';
+            for (let i = 0; i < c.Gs.length; i++) {
+                const g = c.Gs[i];
+                H += '<p><b>' + (i + 1) + '. ' + g.n + '.</b> Правило: ' + g.r + '. Пример: ' + g.e + '<br><b>Задание:</b> ' +
+                    g.t + '</p>';
+            }
+            return H;
+        }
+
+        // ===== НОВАЯ СВОДКА ВСЕХ ЗАДАНИЙ =====
+        function allTasksFull(c) {
+            let H = '<div class="task-section"><h3>📋 ВСЕ ЗАДАНИЯ (сводка)</h3>';
+
+            let num = 1;
+
+            if (c.Gs.length) {
+                H += '<div class="task-group"><b>📐 Грамматика</b><ol>';
+                c.Gs.forEach(g => {
+                    H += '<li class="task-gram"><b>' + num + '.</b> ' + g.n + ' — ' + g.t + '</li>';
+                    num++;
+                });
+                H += '</ol></div>';
+            }
+
+            let selEx = Object.keys(EXSEL).filter(k => EXSEL[k]);
+            if (!selEx.length) selEx = EXBANK.map(e => e[0]);
+            const usedEx = EXBANK.filter(e => selEx.indexOf(e[0]) >= 0);
+            if (usedEx.length) {
+                H += '<div class="task-group"><b>📝 Упражнения</b><ol>';
+                usedEx.forEach(e => {
+                    H += '<li class="task-ex"><b>' + num + '.</b> ' + e[0] + ' — ' + e[1] + '</li>';
+                    num++;
+                });
+                H += '</ol></div>';
+            }
+
+            if (IMPORT_TASKS.length) {
+                H += '<div class="task-group"><b>📤 Импортированные</b><ol>';
+                IMPORT_TASKS.forEach(t => {
+                    H += '<li class="task-import"><b>' + num + '.</b> ' + t + '</li>';
+                    num++;
+                });
+                H += '</ol></div>';
+            }
+
+            if (c.umkTasks.length) {
+                H += '<div class="task-group"><b>📚 УМК (' + UMK + ')</b><ol>';
+                c.umkTasks.forEach(t => {
+                    H += '<li class="task-umk"><b>' + num + '.</b> ' + t + '</li>';
+                    num++;
+                });
+                H += '</ol></div>';
+            }
+
+            if (c.roleTaskList.length) {
+                H += '<div class="task-group"><b>👤 Задания по роли (' + roleName() + ')</b><ol>';
+                c.roleTaskList.forEach(t => {
+                    H += '<li class="task-role"><b>' + num + '.</b> ' + t + '</li>';
+                    num++;
+                });
+                H += '</ol></div>';
+            }
+
+            const stageNames = {
+                'org': 'Оргмомент',
+                'motiv': 'Мотивация',
+                'warm': 'Актуализация',
+                'lex': 'Лексика',
+                'gram': 'Грамматика',
+                'gramprac': 'Грамматика (практика)',
+                'prac': 'Практика',
+                'phys': 'Физминутка',
+                'refl': 'Рефлексия',
+                'hw': 'ДЗ',
+                'main1': 'Основная часть',
+                'main2': 'Закрепление',
+                'game': 'Игра',
+                'speak': 'Говорение',
+                'dialog': 'Диалог',
+                'roleplay': 'Ролевая игра',
+                'prelisten': 'Предтекстовый этап',
+                'listen1': 'Аудирование 1',
+                'listen2': 'Аудирование 2',
+                'post': 'Обсуждение',
+                'preread': 'Антиципация',
+                'read': 'Чтение',
+                'compr': 'Проверка понимания',
+                'postread': 'Послетекстовый этап',
+                'wmodel': 'Образец письма',
+                'wguided': 'Управляемое письмо',
+                'wfree': 'Свободное письмо',
+                'sounds': 'Работа со звуками',
+                'drill': 'Отработка',
+                'rhyme': 'Рифмовка',
+                'stations': 'Станции',
+                'final': 'Финал',
+                'introP': 'Ввод в проект',
+                'work': 'Проектная работа',
+                'present': 'Презентация',
+                'review': 'Повторение',
+                'quiz': 'Викторина',
+                'test': 'Контроль',
+                'audit': 'Работа над ошибками',
+                'culture': 'Страноведение',
+                'discuss': 'Дискуссия',
+                'surprise': 'Сюрпризный момент',
+                'warmup': 'Разминка',
+                'relax': 'Релаксация',
+                'artik': 'Артикуляционная гимнастика',
+                'breath': 'Дыхательная гимнастика',
+                'skills': 'Навыки',
+                'kinds': 'Виды деятельности',
+                'ex': 'Упражнения'
+            };
+
+            const usedStages = [];
+            for (let i = 0; i < c.flow.length; i++) {
+                const stage = c.flow[i];
+                if (stage !== 'ex' && stage !== 'skills' && stage !== 'kinds') {
+                    usedStages.push(stage);
+                }
+            }
+
+            let fgosAdded = false;
+            usedStages.forEach(stage => {
+                const tasks = c.fgosTasks[stage] || [];
+                if (tasks.length) {
+                    if (!fgosAdded) {
+                        H += '<div class="task-group"><b>📋 ФГОС (по этапам)</b><ol>';
+                        fgosAdded = true;
+                    }
+                    const sname = stageNames[stage] || stage;
+                    tasks.forEach(t => {
+                        H += '<li class="task-fgos"><b>' + num + '.</b> [' + sname + '] ' + t + '</li>';
+                        num++;
+                    });
+                }
+            });
+            if (fgosAdded) H += '</ol></div>';
+
+            H += '</div>';
+            return H;
+        }
+
+        // ===== ВСТАВКА ЗАДАНИЙ В ХОД УРОКА =====
+        function umkInFlow(c, stage) {
+            if (!c.umkTasks.length) return '';
+            const stageMap = {
+                'lex': 0,
+                'gram': 1,
+                'prac': 2,
+                'speak': 3,
+                'dialog': 3,
+                'read': 4,
+                'wmodel': 5,
+                'main1': 2,
+                'main2': 3
+            };
+            const idx = stageMap[stage];
+            if (idx === undefined || idx >= c.umkTasks.length) return '';
+            const task = c.umkTasks[idx % c.umkTasks.length];
+            return ' <span class="task-umk" style="display:inline-block;padding:2px 8px;border-radius:6px;background:#e3f2fd;font-size:12px;font-weight:700;">📘 УМК: ' +
+                task + '</span>';
+        }
+
+        function roleTaskInFlow(c, stage) {
+            if (!c.roleTaskList.length) return '';
+            const stageMap = {
+                'main1': 0,
+                'main2': 1,
+                'game': 2,
+                'prac': 0,
+                'speak': 1,
+                'dialog': 2,
+                'work': 0
+            };
+            const idx = stageMap[stage];
+            if (idx === undefined || idx >= c.roleTaskList.length) return '';
+            const task = c.roleTaskList[idx % c.roleTaskList.length];
+            return ' <span class="task-role" style="display:inline-block;padding:2px 8px;border-radius:6px;background:#fce4ec;font-size:12px;font-weight:700;">👤 Роль: ' +
+                task + '</span>';
+        }
+
+        function fgosForStage(c, stage) {
+            const tasks = c.fgosTasks[stage] || [];
+            if (!tasks.length) return '';
+            const picked = tasks.slice(0, 2);
+            return ' <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:#fff3e0;font-size:12px;font-weight:700;">📋 ФГОС: ' +
+                picked.join('; ') + '</span>';
+        }
+
+        // ===== ОБНОВЛЁННАЯ ФУНКЦИЯ STEP =====
+        function step(c, k) {
+            const m = c.m[k] || 3;
+            const w = c.words;
+            const LEX = w.join(', ');
+            const S = {
+                org: 'Организационный момент (' + m + ' мин). ' + c.F.hello + ' Учитель приветствует детей, отмечает отсутствующих, проверяет готовность. Дети приветствуют педагога, настраиваются на работу. ' +
+                    fgosForStage(c, 'org'),
+                motiv: 'Мотивация и целеполагание (' + m + ' мин). Учитель создаёт проблемную ситуацию по теме «' + c
+                    .tema + '», подводит к цели. Дети высказывают предположения, формулируют цель. ' + fgosForStage(c,
+                        'motiv'),
+                warm: 'Разминка / актуализация (' + m + ' мин). Учитель активизирует опорные знания по теме «' + c
+                    .tema + '». Дети отвечают, повторяют изученное. ' + fgosForStage(c, 'warm'),
+                lex: 'Введение лексики (' + m + ' мин): ' + LEX +
+                    '. Учитель даёт образец произношения с наглядностью. Дети слушают, повторяют хором и индивидуально. ' +
+                    fgosForStage(c, 'lex') + umkInFlow(c, 'lex') + roleTaskInFlow(c, 'lex'),
+                prac: 'Первичное закрепление (' + m + ' мин). Учитель организует тренировку: ' + actDesc(c.acts[0] ||
+                    'Flashcards') + '. Дети выполняют в парах, взаимопроверка. ' + fgosForStage(c, 'prac') + umkInFlow(c,
+                    'prac') + roleTaskInFlow(c, 'prac'),
+                game: 'Игра (' + m + ' мин). Учитель проводит: ' + actDesc(c.acts[1] || 'Bingo') +
+                    '. Дети участвуют; дифференциация: сильные без опоры, слабые с карточкой. ' + fgosForStage(c,
+                        'game') + roleTaskInFlow(c, 'game'),
+                gram: 'Грамматика «' + c.G.n + '» (' + m + ' мин). Учитель объясняет правило: ' + c.G.r +
+                    '. Пример: ' + c.G.e + '. Дети наблюдают, проговаривают образцы. ' + fgosForStage(c, 'gram') +
+                    umkInFlow(c, 'gram'),
+                gramprac: 'Закрепление грамматики (' + m + ' мин). Задание: ' + c.G.t +
+                    '. Дети выполняют, сверяются с образцом, самопроверка. ' + fgosForStage(c, 'gramprac'),
+                gramprod: 'Продукция (' + m + ' мин). Учитель побуждает использовать «' + c.G.n +
+                    '» в речи. Дети составляют свои предложения/диалоги. ' + fgosForStage(c, 'gramprac'),
+                speak: 'Говорение (' + m + ' мин). Учитель даёт диалог-модель по теме «' + c.tema +
+                    '». Дети разыгрывают диалог в парах. ' + fgosForStage(c, 'speak') + umkInFlow(c, 'speak') +
+                    roleTaskInFlow(c, 'speak'),
+                dialog: 'Диалог (' + m + ' мин)' + (c.on ? ' (breakout)' : '') +
+                    '. Учитель контролирует. Дети ведут диалог, взаимооценка. ' + fgosForStage(c, 'dialog') + umkInFlow(c,
+                        'dialog') + roleTaskInFlow(c, 'dialog'),
+                roleplay: 'Ролевая игра (' + m + ' мин). Учитель задаёт ситуацию. Дети разыгрывают, применяют лексику и грамматику. ' +
+                    fgosForStage(c, 'roleplay'),
+                prelisten: 'Предтекстовый этап (' + m + ' мин). Учитель снимает трудности: ' + w.slice(0, 4).join(
+                    ', ') + '. Дети прогнозируют содержание. ' + fgosForStage(c, 'prelisten'),
+                listen1: 'Прослушивание 1 (' + m + ' мин). Задача на общее понимание. Дети слушают, проверяют гипотезы. ' +
+                    fgosForStage(c, 'listen1'),
+                listen2: 'Прослушивание 2 (' + m + ' мин). Задача на детали. Дети отмечают услышанное, заполняют таблицу. ' +
+                    fgosForStage(c, 'listen2'),
+                post: 'Обсуждение (' + m + ' мин). Учитель организует обсуждение. Дети отвечают, ведут мини-диалог. ' +
+                    fgosForStage(c, 'post'),
+                preread: 'Антиципация (' + m + ' мин). Лексика текста: ' + w.slice(0, 4).join(', ') +
+                    '. Дети прогнозируют. ' + fgosForStage(c, 'preread'),
+                read: 'Чтение (' + m + ' мин). Текст «' + c.tema + '». Дети читают про себя/вслух, применяют стратегии. ' +
+                    fgosForStage(c, 'read') + umkInFlow(c, 'read'),
+                compr: 'Проверка понимания (' + m + ' мин). Верно/неверно, пропуски. Дети выполняют, обосновывают. ' +
+                    fgosForStage(c, 'compr'),
+                postread: 'Послетекстовый этап (' + m + ' мин). Пересказ/обсуждение. Дети пересказывают, выражают мнение. ' +
+                    fgosForStage(c, 'postread'),
+                wmodel: 'Образец письма (' + m + ' мин). Учитель показывает образец. Дети анализируют. ' + fgosForStage(
+                    c, 'wmodel') + umkInFlow(c, 'wmodel'),
+                wguided: 'Управляемое письмо (' + m + ' мин). ' + c.G.t +
+                    '. Дети пишут по опорам. ' + fgosForStage(c, 'wguided'),
+                wfree: 'Свободное письмо (' + m + ' мин). Дети пишут 5 предложений по теме. ' + fgosForStage(c,
+                    'wfree'),
+                sounds: 'Работа со звуками (' + m + ' мин). Учитель отрабатывает артикуляцию/различение. Дети повторяют. ' +
+                    fgosForStage(c, 'sounds'),
+                drill: 'Отработка (' + m + ' мин). ' + actDesc('Tongue twister') +
+                    '. Дети проговаривают, автоматизируют. ' + fgosForStage(c, 'drill'),
+                rhyme: 'Рифмовка (' + m + ' мин). По теме «' + c.tema + '». Дети проговаривают с движениями. ' +
+                    fgosForStage(c, 'rhyme'),
+                stations: 'Станции (' + m + ' мин): ' + c.acts.join(' + ') +
+                    '. Дети проходят станции, работают в группах. ' + fgosForStage(c, 'stations'),
+                final: 'Финал (' + m + ' мин). Учитель подводит итог, награждает. Дети получают обратную связь. ' +
+                    fgosForStage(c, 'final'),
+                introP: 'Ввод в проект (' + m + ' мин). Задача: постер/презентация «' + c.tema +
+                    '». Дети планируют. ' + fgosForStage(c, 'introP'),
+                work: 'Проект (' + m + ' мин). ' + c.F.tool +
+                    '. Дети работают в группах, создают продукт. ' + fgosForStage(c, 'work') + roleTaskInFlow(c,
+                    'work'),
+                present: 'Презентация (' + m + ' мин). Дети представляют работы, взаимооценивают. ' + fgosForStage(c,
+                    'present'),
+                review: 'Повторение (' + m + ' мин). Лексика «' + c.tema + '» и ' + c.gt +
+                    '. Дети обобщают. ' + fgosForStage(c, 'review'),
+                quiz: 'Викторина (' + m + ' мин). ' + (c.on ? 'Wordwall/Quizlet live.' : 'Командная викторина.') +
+                    ' Дети соревнуются. ' + fgosForStage(c, 'quiz'),
+                test: 'Контроль (' + m + ' мин). Тест по лексике «' + c.tema + '» и ' + c.gt +
+                    '. Дети выполняют. ' + fgosForStage(c, 'test'),
+                audit: 'Работа над ошибками (' + m + ' мин). Учитель разбирает ошибки. Дети корректируют. ' +
+                    fgosForStage(c, 'audit'),
+                culture: 'Страноведение (' + m + ' мин). Факты по теме «' + c.tema +
+                    '». Дети узнают социокультурный компонент. ' + fgosForStage(c, 'culture'),
+                discuss: 'Дискуссия (' + m + ' мин). Учитель задаёт вопросы. Дети аргументируют. ' + fgosForStage(c,
+                    'discuss'),
+                surprise: 'Сюрпризный момент (' + m + ' мин): ' + pick(['гость-игрушка', 'волшебный сундучок',
+                    'сказочный персонаж'
+                ]) + '. Дети мотивируются. ' + fgosForStage(c, 'surprise'),
+                main1: 'Основная часть (' + m + ' мин): ' + (c.B ? c.B.ex[0] : 'беседа по теме «' + c.tema + '»') +
+                    '. Учитель показывает, совместное выполнение. Дети выполняют с поддержкой. ' + fgosForStage(c,
+                        'main1') + umkInFlow(c, 'main1') + roleTaskInFlow(c, 'main1'),
+                main2: 'Закрепление (' + m + ' мин): ' + (c.B ? c.B.ex[2] : 'практика') +
+                    '. Самостоятельная работа. Дети выполняют, взаимопроверка. ' + fgosForStage(c, 'main2') + umkInFlow(
+                        c, 'main2') + roleTaskInFlow(c, 'main2'),
+                warmup: 'Разминка (' + m + ' мин): приветствие, игра на эмоции. Дети включаются. ' + fgosForStage(c,
+                    'warmup'),
+                relax: 'Релаксация (' + m + ' мин): ' + pick(['«тряпичная кукла»', 'дыхание «на ладонь»']) +
+                    '. Дети расслабляются. ' + fgosForStage(c, 'relax'),
+                artik: 'Артикуляционная гимнастика (' + m + ' мин): звук[' + GSOUND +
+                    ']. Учитель показывает. Дети выполняют перед зеркалом. ' + fgosForStage(c, 'artik'),
+                breath: 'Дыхательная гимнастика (' + m + ' мин). Учитель контролирует вдох/выдох. Дети выполняют. ' +
+                    fgosForStage(c, 'breath'),
+                phys: 'Физминутка (' + m + ' мин).' + (EXTRA['здоровьесбережение'] ? ' + гимнастика для глаз.' :
+                    '') + ' Учитель проводит. Дети выполняют. ' + fgosForStage(c, 'phys'),
+                skills: skillsText(c, m),
+                kinds: kindsText(c, m),
+                ex: '',
+                refl: 'Рефлексия (' + m + ' мин). ' + (EXTRA['рефлексия/оценивание'] ?
+                    'Светофор/exit ticket. ' : 'Учитель подводит итог. Дети оценивают свою работу. ') + fgosForStage(
+                    c, 'refl'),
+                hw: 'ДЗ (' + m + ' мин). ' + (EXTRA['дифференциация'] ? 'По уровням: A/B/C. ' : c.G.t + ' ') + w.slice(
+                    0, 4).join(', ') + '. Дети записывают. ' + fgosForStage(c, 'hw')
+            };
+            return S[k] !== undefined ? S[k] : '';
+        }
+
+        function extrasBlock() {
+            const ex = Object.keys(EXTRA).filter(k => EXTRA[k] && k !== 'дом.задание' && k !== 'рефлексия/оценивание');
+            if (!ex.length) return '';
+            let h = '<h3>⚙️ Доп. опции</h3>';
+            for (let i = 0; i < ex.length; i++) h += '<p>• ' + EXTRA_BANK[ex[i]] + '</p>';
+            return h;
+        }
+
+        function importBlock() {
+            if (!IMPORT_TASKS.length) return '';
+            let h = '<h3>📤 Импортированные задания</h3><ul>';
+            for (let i = 0; i < IMPORT_TASKS.length; i++) h += '<li>' + IMPORT_TASKS[i] + '</li>';
+            return h + '</ul>';
+        }
+
+        function litBlock() {
+            const L = LITER[ROLE] || [];
+            let h = '<h3>📚 Литература</h3><ul>';
+            for (let i = 0; i < L.length; i++) h += '<li>' + L[i] + '</li>';
+            if (UMK) h += '<li>УМК: ' + UMK + '</li>';
+            return h + '</ul>';
+        }
+
+        function notesBlock() {
+            const n = document.getElementById('notes').value.trim();
+            return n ? '<h3>📝 Заметки</h3><p>' + n.replace(/\n/g, '<br>') + '</p>' : '';
+        }
+
+        // ===== ДОПОЛНИТЕЛЬНЫЕ БЛОКИ: КРОССВОРД, РЕБУСЫ =====
+        function crosswordBlock(c) {
+            if (!c.words.length) return '';
+            let H = '<h3>🔤 Кроссворд из слов</h3><div style="background:#f9f9f9;padding:12px;border-radius:12px;font-family:monospace;font-size:18px;white-space:pre">';
+            for (let i = 0; i < Math.min(10, c.words.length); i++) {
+                H += (i + 1) + '. ' + c.words[i] + ' (__' + c.words[i].length + ' букв)\n';
+            }
+            return H + '</div><p><i>Ответы: ' + c.words.slice(0, 10).join(', ') + '</i></p>';
+        }
+
+        function rebusBlock(c) {
+            if (!c.words.length) return '';
+            let H = '<h3>🧩 Ребусы</h3><ul>';
+            for (let i = 0; i < Math.min(5, c.words.length); i++) {
+                const w = c.words[i];
+                const hint = w.length > 3 ? w.slice(0, 2) + '…' : w;
+                H += '<li><b>' + hint + '</b> — угадай слово (' + w.length + ' букв)</li>';
+            }
+            return H + '</ul>';
+        }
+
+        // ===== ГЕНЕРАЦИЯ ПОЛНОГО КОНСПЕКТА =====
+        async function doGen() {
+            toast('Готовлю подробный конспект…');
+            setProgress(0);
+            const c = await buildCtx();
+            setProgress(90);
+            OUT = (OUTMODE === 'tech') ? genTech(c) : ((ROLE === 'ия') ? genFullEN(c) : genFullRole(c));
+            showOut();
+            setProgress(100);
+            toast('Готово ✅');
+        }
+
+        function genFullEN(c) {
+            let H = '<h2>📘 КОНСПЕКТ УРОКА · ' + langName() + ' · ФГОС</h2>';
+            H += '<p><b>Педагог:</b> ' + (TEACHER || '—') + ' · <b>Класс:</b> ' + (CLASSN || AGE) + ' · <b>Возраст:</b> ' +
+                AGE + '</p>';
+            H += '<p><b>Темы:</b> «' + c.tema + '» · <b>Грамматика:</b> ' + c.gt + ' · <b>Тип:</b> ' + LTYPE + '</p>';
+            H += '<p><b>Формат:</b> ' + FORMAT + ' · <b>Длительность:</b> ' + c.A.dur + ' мин · ' + c.A.st + '</p>';
+            if (UMK) H += '<p><b>УМК:</b> ' + UMK + ' (' + langName() + ')</p>';
+            H += '<p><b>Лексика:</b> ' + c.words.join(', ') + '.</p>';
+            H += '<p><b>Цели:</b> образовательные (формирование лексико-грамматических навыков), развивающие (память, внимание, мышление), воспитательные (интерес к языку), коммуникативные.</p>';
+            H += '<p><b>УУД:</b> личностные; метапредметные (регулятивные, познавательные, коммуникативные); предметные.</p>';
+            H += '<p><b>Оборудование:</b> ' + c.F.eq + '.</p>';
+            H += '<p><b>Формы контроля:</b> текущий, взаимоконтроль, самоконтроль.</p>';
+            H += '<p><b>Ожидаемые результаты:</b> обучающиеся освоят лексику «' + c.tema + '», применят «' + c.gt +
+                '» в речи, примут участие в диалоге.</p>';
+            H += actsLine(c) + gramsBlock(c) + allCardsBlock(c) + mindMapBlock(c);
+            H += checklistBlock() + differentiationBlock(c) + assessmentBlock(c) + crosswordBlock(c) + rebusBlock(c);
+
+            H += '<h3>📖 Ход (' + LTYPE + ')</h3>';
+            let n = 1;
+            for (let i = 0; i < c.flow.length; i++) {
+                if (c.flow[i] === 'ex') {
+                    H += allExercisesBlock();
+                } else {
+                    H += '<p>' + n++ + '. ' + step(c, c.flow[i]) + '</p>';
+                }
+            }
+
+            H += allTasksFull(c);
+            H += resourcesBlock(c) + extrasBlock() + importBlock() + litBlock() + notesBlock();
+            return H;
+        }
+
+        function genFullRole(c) {
+            const B = c.B || { ex: ['беседа', 'игры', 'практика'], g: ['игра'] };
+            let H = '<h2>📘 КОНСПЕКТ ЗАНЯТИЯ · ' + roleName() + ' · ФГОС</h2>';
+            H += '<p><b>Педагог:</b> ' + (TEACHER || '—') + ' · <b>Группа:</b> ' + (CLASSN || AGE) + ' · ' + AGE +
+                ' · <b>Длительность:</b> ' + c.A.dur + ' мин</p>';
+            H += '<p><b>Темы:</b> «' + c.tema + '» · <b>Направление:</b> ' + NAPR + ' · <b>Тип:</b> ' + LTYPE + (ROLE ===
+                'логопед' ? ' · Звук [' + GSOUND + ']' : '') + '</p>';
+            H += '<p><b>Формат:</b> ' + FORMAT + '</p>';
+            if (UMK) H += '<p><b>Программа/УМК:</b> ' + UMK + '</p>';
+            H += '<p><b>Цели:</b> обучающие, развивающие, воспитательные, коррекционные.</p>';
+            H += '<p><b>УУД:</b> личностные, метапредметные, предметные.</p>';
+            H += '<p><b>Ожидаемые результаты:</b> дети освоят материал по теме «' + c.tema +
+                '», применят его в деятельности.</p>';
+            H += actsLine(c) + allCardsBlock(c) + mindMapBlock(c);
+            H += checklistBlock() + differentiationBlock(c) + assessmentBlock(c) + crosswordBlock(c) + rebusBlock(c);
+
+            H += '<h3>📖 Ход</h3>';
+            let n = 1;
+            for (let i = 0; i < c.flow.length; i++) {
+                if (c.flow[i] === 'ex') {
+                    H += allExercisesBlock();
+                } else {
+                    H += '<p>' + n++ + '. ' + step(c, c.flow[i]) + '</p>';
+                }
+            }
+
+            H += allTasksFull(c);
+            H += resourcesBlock(c) + extrasBlock() + importBlock() + litBlock() + notesBlock();
+            return H;
+        }
+
+        function genTech(c) {
+            const rows = [
+                ['Орг.момент', 'Приветствие', 'Приветствуют', 'Личн.', c.m.org || 2],
+                ['Мотивация', 'Целеполагание', 'Формулируют', 'Регул.', c.m.motiv || 3],
+                ['Актуализация', 'Повторение', 'Воспроизводят', 'Позн.', c.m.warm || 4],
+                ['Новый материал', '«' + c.tema + '»', 'Выполняют', 'Позн.,комм.', c.m.lex || 8],
+                ['Закрепление', c.gt, 'Практика', 'Регул.', c.m.prac || 6],
+                ['Физминутка', 'Проводит', 'Выполняют', 'Здор.', c.m.phys || 2],
+                ['Рефлексия', 'Итог', 'Оценивают', 'Личн.', c.m.refl || 3],
+                ['ДЗ', 'Инструктаж', 'Записывают', 'Регул.', c.m.hw || 1]
+            ];
+            let H = '<h2>📋 ТЕХКАРТА · ' + roleName() + (ROLE === 'ия' ? ' · ' + langName() : '') + '</h2>';
+            H += '<p><b>Тема:</b> ' + c.tema + ' · ' + AGE + ' · ' + FORMAT + ' · <b>' + c.A.dur + ' мин</b></p>';
+            H +=
+                '<table><tr><th>Этап</th><th>Учитель</th><th>Ученики</th><th>УУД</th><th>Мин</th></tr>';
+            for (let i = 0; i < rows.length; i++) {
+                H += '<tr><td>' + rows[i][0] + '</td><td>' + rows[i][1] + '</td><td>' + rows[i][2] + '</td><td>' + rows[
+                    i][3] + '</td><td>' + rows[i][4] + '</td></tr>';
+            }
+            H += '</table>' + allTasksFull(c) + litBlock() + notesBlock();
+            return H;
+        }
+
+        // =====================================================================
+        //  ВЫВОД И ЭКСПОРТ
+        // =====================================================================
+
+        function showOut() {
+            const o = document.getElementById('out');
+            o.innerHTML = OUT;
+            o.style.display = 'block';
+            document.getElementById('outBtns').style.display = 'flex';
+            try { localStorage.setItem('last-out', OUT); } catch (e) {}
+        }
+
+        function wordBlob(html, name) {
+            const head =
+                '<html xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"></head><body style="font-family:Times New Roman,serif;font-size:14pt">';
+            const b = new Blob(['\ufeff', head + html + '</body></html>'], { type: 'application/msword' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(b);
+            a.download = name + '.doc';
+            a.click();
+            setTimeout(() => { URL.revokeObjectURL(a.href); }, 3000);
+        }
+
+        function saveWord() {
+            if (!OUT) { toast('Сгенерируйте'); return; }
+            wordBlob(OUT, 'конспект-' + (TEACHER || ROLE));
+            toast('Word 💾');
+        }
+
+        function pdfHtml(html) {
+            const w = window.open('', '_blank');
+            w.document.write('<html><head><style>' +
+                '@page{size:A4;margin:1.5cm}' +
+                'body{font-family:Times New Roman,serif;font-size:13pt}' +
+                'table{border-collapse:collapse;width:100%}' +
+                'td,th{border:1px solid #999;padding:6px}' +
+                '.card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}' +
+                '.card-item{border:2px solid #2f9e63;border-radius:12px;padding:10px;text-align:center;font-weight:800}' +
+                '.task-umk{background:#e3f2fd;border-left:4px solid #1e7a4c;padding:6px 12px;border-radius:0 8px 8px 0;margin:4px 0}' +
+                '.task-fgos{background:#fff3e0;border-left:4px solid #f5a623;padding:6px 12px;border-radius:0 8px 8px 0;margin:4px 0}' +
+                '.task-import{background:#f3e5f5;border-left:4px solid #9c27b0;padding:6px 12px;border-radius:0 8px 8px 0;margin:4px 0}' +
+                '.task-gram{background:#e8f5e9;border-left:4px solid #2f9e63;padding:6px 12px;border-radius:0 8px 8px 0;margin:4px 0}' +
+                '.task-ex{background:#f5f5f5;border-left:4px solid #78909c;padding:6px 12px;border-radius:0 8px 8px 0;margin:4px 0}' +
+                '.task-role{background:#fce4ec;border-left:4px solid #e91e63;padding:6px 12px;border-radius:0 8px 8px 0;margin:4px 0}' +
+                '.task-section{border:2px solid #dcead9;border-radius:12px;padding:12px 16px;margin:12px 0;background:rgba(255,255,255,0.5)}' +
+                '</style></head><body>' + html + '</body></html>');
+            w.document.close();
+            w.focus();
+            setTimeout(() => { w.print(); }, 300);
+        }
+
+        function outPDF() {
+            if (!OUT) { toast('Сгенерируйте'); return; }
+            pdfHtml(OUT);
+            toast('Сохраните как PDF 📄');
+        }
+
+        function libGet() { return cj('konspekt-lib', []); }
+
+        function libSet(v) { cs('konspekt-lib', v); }
+
+        function toLib() {
+            if (!OUT) { toast('Сгенерируйте'); return; }
+            const L = libGet();
+            L.unshift({ id: Date.now(), name: (TEACHER ? TEACHER + ' · ' : '') + topicNow(), html: OUT });
+            libSet(L);
+            renderLib();
+            toast('В библиотеку 📚');
+        }
+
+        function renderLib() {
+            const L = libGet();
+            let h = '';
+            if (!L.length) h = '<div class="xs mut">Пусто.</div>';
+            for (let i = 0; i < L.length; i++) {
+                h += '<div class="row card card-pad-sm mb" style="padding:6px 10px"><span class="sm grow">' + L[i]
+                    .name + '</span>' +
+                    '<button class="btn sm" onclick="openLib(' + i + ')">Открыть</button>' +
+                    '<button class="btn sm" onclick="wordLib(' + i + ')">Word</button>' +
+                    '<button class="btn sm" onclick="delLib(' + i + ')">✕</button></div>';
+            }
+            document.getElementById('lib').innerHTML = h;
+        }
+
+        function openLib(i) { OUT = libGet()[i].html;
+            showOut(); }
+
+        function wordLib(i) { wordBlob(libGet()[i].html, 'конспект'); }
+
+        function delLib(i) { const L = libGet();
+            L.splice(i, 1);
+            libSet(L);
+            renderLib(); }
+
+        function copyOut() {
+            if (!OUT) return;
+            const t = OUT.replace(/<[^>]+>/g, m => (m === '</p>' || m === '</h2>' || m === '</h3>' || m === '</li>' || m ===
+                '</tr>') ? '\n' : '');
+            if (navigator.clipboard) navigator.clipboard.writeText(t);
+            toast('📋');
+        }
+
+        // ===== ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ =====
+
+        async function genAllCards() {
+            toast('Генерирую все карточки…');
+            const c = await buildCtx();
+            OUT = allCardsBlock(c);
+            showOut();
+            toast('Все карточки готовы 🃏');
+        }
+
+        async function genWorksheet() {
+            toast('Генерирую рабочий лист…');
+            const c = await buildCtx();
+            OUT = worksheetBlock(c) + allCardsBlock(c);
+            showOut();
+            toast('Рабочий лист готов 📋');
+        }
+
+        async function genAssessment() {
+            toast('Генерирую таблицу…');
+            const c = await buildCtx();
+            OUT = assessmentBlock(c);
+            showOut();
+            toast('Таблица оценивания готова 📊');
+        }
+
+        async function quickStart() {
+            toast('Быстрый старт… 🚀');
+            const c = await buildCtx();
+            OUT = genFullEN(c);
+            showOut();
+            toast('Готово! 🚀');
+        }
+
+        function printCards() {
+            if (!OUT) return;
+            const c = document.createElement('div');
+            c.innerHTML = OUT;
+            const cards = c.querySelectorAll('.card-item');
+            if (!cards.length) { toast('Нет карточек'); return; }
+            let H = '<h2>🃏 Карточки для печати</h2><div class="card-grid">';
+            cards.forEach(el => { H += el.outerHTML; });
+            pdfHtml(H + '</div>');
+        }
+
+        function exportJSON() {
+            const data = {
+                role: ROLE,
+                lang: LANG,
+                age: AGE,
+                duration: CUSTOM_DURATION,
+                format: FORMAT,
+                ltype: LTYPE,
+                theme: CTHEME,
+                teacher: TEACHER,
+                clasn: CLASSN,
+                vt: VT,
+                gt: GT,
+                sk: SK,
+                ac: AC,
+                kind: KIND,
+                extra: EXTRA,
+                exsel: EXSEL,
+                rolesel: ROLESEL,
+                tasks: IMPORT_TASKS,
+                notes: document.getElementById('notes').value,
+                myUmks: window.MY_UMKS || []
+            };
+            const b = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(b);
+            a.download = 'lesson-' + Date.now() + '.json';
+            a.click();
+            toast('Экспорт JSON 📥');
+        }
+
+        function importJSON(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const r = new FileReader();
+            r.onload = function(ev) {
+                try {
+                    const data = JSON.parse(ev.target.result);
+                    ROLE = data.role || ROLE;
+                    LANG = data.lang || LANG;
+                    AGE = data.age || AGE;
+                    if (data.duration) CUSTOM_DURATION = data.duration;
+                    FORMAT = data.format || FORMAT;
+                    LTYPE = data.ltype || LTYPE;
+                    CTHEME = data.theme || '';
+                    window.TEACHER = data.teacher || '';
+                    window.CLASSN = data.clasn || '';
+                    document.getElementById('tch').value = window.TEACHER;
+                    document.getElementById('cls').value = window.CLASSN;
+                    VT = data.vt || VT;
+                    GT = data.gt || GT;
+                    SK = data.sk || SK;
+                    AC = data.ac || AC;
+                    KIND = data.kind || KIND;
+                    EXTRA = data.extra || EXTRA;
+                    EXSEL = data.exsel || {};
+                    ROLESEL = data.rolesel || {};
+                    IMPORT_TASKS = data.tasks || [];
+                    window.MY_UMKS = data.myUmks || [];
+                    if (data.notes) document.getElementById('notes').value = data.notes;
+                    renderCtrls();
+                    updImp();
+                    saveState();
+                    toast('Импорт JSON 📤');
+                } catch (e) { toast('Ошибка импорта'); }
+            };
+            r.readAsText(file);
+        }
+
+        function exportGoogleDocs() {
+            if (!OUT) { toast('Сгенерируйте конспект'); return; }
+            const html = OUT;
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            const doc = iframe.contentDocument || iframe.contentWindow.document;
+            doc.write('<html><body>' + html + '</body></html>');
+            const text = doc.body.textContent;
+            document.body.removeChild(iframe);
+            const url = 'https://docs.google.com/document/create?text=' + encodeURIComponent(text);
+            window.open(url, '_blank');
+            toast('Открываем Google Docs 📄');
+        }
+
+        // =====================================================================
+        //  НЕДОСТАЮЩИЕ БЛОКИ (вспомогательные)
+        // =====================================================================
+        function allCardsBlock(c) {
+            if (!c.words.length) return '';
+            let H = '<h3>🃏 Все карточки (' + c.words.length + ')</h3><div class="card-grid">';
+            c.words.forEach(w => {
+                H += '<div class="card-item">' + w + '</div>';
+            });
+            return H + '</div>';
+        }
+
+        function mindMapBlock(c) {
+            if (!c.words.length) return '';
+            let H = '<h3>🧠 Ментальная карта</h3><div style="display:flex;flex-wrap:wrap;gap:6px;margin:6px 0">';
+            c.words.forEach(w => {
+                H += '<span style="background:#e8f5e9;padding:4px 10px;border-radius:12px;border:1px solid #a5d6a7">' +
+                    w + '</span>';
+            });
+            return H + '</div>';
+        }
+
+        function checklistBlock() {
+            return '<div class="checklist"><b>✅ Чек-лист для учителя</b>' +
+                '<label><input type="checkbox"> Распечатал карточки</label>' +
+                '<label><input type="checkbox"> Подготовил аудио/видео</label>' +
+                '<label><input type="checkbox"> Раздаточный материал</label>' +
+                '<label><input type="checkbox"> Интерактивная доска</label>' +
+                '<label><input type="checkbox"> Проверил технику</label>' +
+                '</div>';
+        }
+
+        function differentiationBlock(c) {
+            if (!EXTRA['дифференциация']) return '';
+            return '<h3>🎯 Дифференциация (A/B/C)</h3>' +
+                '<div class="diff-box diff-a"><b>Уровень A (слабые):</b> Выполняют задания с опорами (картинки, подсказки). Слова: ' +
+                c.words.slice(0, 3).join(', ') + '.</div>' +
+                '<div class="diff-box diff-b"><b>Уровень B (средние):</b> Выполняют задания с частичными опорами. Слова: ' +
+                c.words.slice(0, 5).join(', ') + '.</div>' +
+                '<div class="diff-box diff-c"><b>Уровень C (сильные):</b> Творческие задания без опор. Составляют диалоги/рассказы из ' +
+                c.words.length + ' слов.</div>';
+        }
+
+        function assessmentBlock(c) {
+            return '<h3>📊 Таблица оценивания</h3><table>' +
+                '<tr><th>Критерий</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>' +
+                '<tr><td>Произношение</td><td>❌</td><td>⚠️</td><td>✅</td><td>⭐</td><td>🌟</td></tr>' +
+                '<tr><td>Лексика</td><td>❌</td><td>⚠️</td><td>✅</td><td>⭐</td><td>🌟</td></tr>' +
+                '<tr><td>Грамматика</td><td>❌</td><td>⚠️</td><td>✅</td><td>⭐</td><td>🌟</td></tr>' +
+                '<tr><td>Беглость</td><td>❌</td><td>⚠️</td><td>✅</td><td>⭐</td><td>🌟</td></tr>' +
+                '</table><p><b>Комментарий:</b> _________________________________</p>';
+        }
+
+        function worksheetBlock(c) {
+            return '<h3>📋 Рабочий лист ученика</h3><div style="border:2px dashed #999;padding:16px;border-radius:12px">' +
+                '<p><b>Тема:</b> ' + c.tema + '</p>' +
+                '<p><b>Задание 1.</b> Напиши перевод: ' + c.words.slice(0, 4).join(', ') + '</p>' +
+                '<p><b>Задание 2.</b> Составь предложения с: ' + c.words.slice(0, 3).join(', ') + '</p>' +
+                '<p><b>Задание 3.</b> ' + c.G.t + '</p>' +
+                '<p><b>Задание 4.</b> Напиши 3 предложения по теме.</p>' +
+                '<p><b>Рефлексия:</b> Что было легко? Что было трудно?</p>' +
+                '</div>';
+        }
+
+        function allExercisesBlock() {
+            let H = '<h3>📌 Все упражнения</h3><ul>';
+            let s = Object.keys(EXSEL).filter(k => EXSEL[k]);
+            if (!s.length) s = EXBANK.map(e => e[0]);
+            for (let i = 0; i < EXBANK.length; i++) {
+                if (s.indexOf(EXBANK[i][0]) >= 0) {
+                    H += '<li><b>' + (i + 1) + '. ' + EXBANK[i][0] + '</b> — ' + EXBANK[i][1] + '</li>';
+                }
+            }
+            return H + '</ul>';
+        }
+
+        function resourcesBlock(c) {
+            return '<h3>🔗 Ресурсы и ссылки</h3><ul>' +
+                '<li>🔍 <a href="https://wordwall.net/search/resource/' + encodeURIComponent(c.tema) +
+                '" target="_blank">Wordwall — поиск по теме</a></li>' +
+                '<li>🧩 <a href="https://learningapps.org/index.php?s=' + encodeURIComponent(c.tema) +
+                '" target="_blank">LearningApps — поиск</a></li>' +
+                '<li>📚 <a href="https://quizlet.com/search?query=' + encodeURIComponent(c.tema) +
+                '" target="_blank">Quizlet — карточки</a></li>' +
+                '<li>🎨 Canva / Genially — для визуализации</li>' +
+                '<li>📺 YouTube: "' + c.tema + '"</li>' +
+                '</ul>';
+        }
+
+        // =====================================================================
+        //  ВКЛАДКИ — НАДЁЖНОЕ ПЕРЕКЛЮЧЕНИЕ
+        // =====================================================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Загрузка страницы...');
+
+            // Загружаем состояние
+            loadState();
+            // Загружаем свои УМК
+            window.MY_UMKS = cj('my-umks', []);
+            // Обновляем интерфейс — один раз заполняем все вкладки
+            renderCtrls();
+            renderLib();
+            updImp();
+            // Восстанавливаем поле ввода темы
+            document.getElementById('ct').value = CTHEME || '';
+
+            // Принудительно активируем первую вкладку (на всякий случай)
+            activateFirstTab();
+
+            // Обработчик переключения вкладок — только показываем/скрываем
+            const tabs = document.querySelectorAll('.tabs button');
+            tabs.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    console.log('Клик по вкладке:', this.dataset.tab);
+
+                    // Убираем активный класс у всех кнопок
+                    tabs.forEach(b => b.classList.remove('on'));
+                    this.classList.add('on');
+
+                    // Скрываем все вкладки
+                    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+
+                    // Показываем нужную
+                    const target = document.getElementById(this.dataset.tab);
+                    if (target) {
+                        target.classList.add('active');
+                        console.log('Показана вкладка:', this.dataset.tab);
+                    } else {
+                        console.warn('Целевая вкладка не найдена:', this.dataset.tab);
+                    }
+                });
+            });
+
+            // Сохраняем состояние при изменении полей
+            document.querySelectorAll('#tch, #cls').forEach(el => {
+                el.addEventListener('input', saveState);
+            });
+
+            console.log('📘 КонспектУрок PRO МАКСИМАЛЬНЫЙ загружен!');
+            console.log('🔧 Все вкладки заполнены, переключение работает.');
+        });
+
+        // Для отладки – если что-то пошло не так, выведем в консоль
+        console.log('Скрипт загружен, все функции определены.');
+    
+
+/* ===== standaloneReadyLessonProV4: автономный практический конструктор ===== */
+(function () {
+  const RP_KEY = 'konspekt-ready-pro-v4';
+  const rp = (id) => document.getElementById(id);
+  const rpEsc = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  const rpText = (value, fallback) => String(value || fallback || '').trim();
+  const rpGet = () => ({
+    topic: rpText(rp('rp-topic').value, 'Новая учебная тема'),
+    goal: rpText(rp('rp-goal').value, 'понять материал и применить его самостоятельно'),
+    duration: Number(rp('rp-duration').value) || 60,
+    format: rp('rp-format').value,
+    type: rp('rp-type').value,
+    level: rpText(rp('rp-level').value, AGE || 'группа'),
+    material: rpText(rp('rp-material').value, 'опорная запись, примеры и рабочая тетрадь'),
+    needs: rpText(rp('rp-needs').value, 'короткие инструкции, понятный темп и обязательная самопроверка'),
+    cards: rp('rp-cards').checked,
+    sheet: rp('rp-sheet').checked,
+    test: rp('rp-test').checked,
+    family: rp('rp-family').checked,
+    planB: rp('rp-planb').checked
+  });
+  const rpTimings = (total) => {
+    const weights = [5, 10, 8, 16, 18, 16, 12, 8, 7];
+    const sum = weights.reduce((a,b) => a + b, 0);
+    const times = weights.map((weight) => Math.max(2, Math.round(total * weight / sum)));
+    times[times.length - 1] += total - times.reduce((a,b) => a + b, 0);
+    return times;
+  };
+  const rpSection = (title, html) => '<section class="ready-output-section"><h3>' + title + '</h3>' + html + '</section>';
+  const rpList = (items) => '<ul>' + items.map((item) => '<li>' + item + '</li>').join('') + '</ul>';
+  const rpTask = (title, prompt, answer) => '<article class="ready-task"><h4>' + title + '</h4><p><b>Задание.</b> ' + prompt + '</p><p><b>Ожидаемый ответ / ключ.</b> ' + answer + '</p></article>';
+  function rpBuild(data) {
+    const t = rpTimings(data.duration);
+    const topic = rpEsc(data.topic), goal = rpEsc(data.goal), material = rpEsc(data.material), needs = rpEsc(data.needs), level = rpEsc(data.level);
+    const support = material.split(/[;,\n]+/).map((item) => item.trim()).filter(Boolean).slice(0, 7).join(' · ') || material;
+    const output = [];
+    output.push('<div class="ready-output-title"><span>Готовый урок PRO</span><h2>' + topic + '</h2><p>' + rpEsc(data.type) + ' · ' + rpEsc(data.format) + ' · ' + data.duration + ' минут · ' + level + '</p></div>');
+    output.push(rpSection('Паспорт занятия', '<div class="ready-meta"><div><b>Цель:</b> ' + goal + '.</div><div><b>Материалы и опоры:</b> ' + material + '.</div><div><b>Индивидуальный фокус:</b> ' + needs + '.</div><div><b>Результат:</b> ученик объясняет идею, применяет её в новой ситуации и называет шаг самопроверки.</div></div>'));
+    output.push(rpSection('Подготовка до начала · 2 минуты', rpList(['Откройте или распечатайте: <b>' + material + '</b>.', 'На листе или доске оставьте три зоны: «знаю», «новое», «проверяю себя».', 'Подготовьте таймер и обозначьте критерий успеха: «я могу объяснить и применить».'])));
+    output.push('<h2 class="ready-timeline-title">Поминутный сценарий с готовыми репликами</h2>');
+    output.push(rpSection('1. Контакт и настрой · ' + t[0] + ' мин', '<p><b>Реплика преподавателя:</b> «Сегодня наша цель — ' + goal + '. В конце ты сам(а) покажешь, как понял(а), что справился(ась)».</p><p><b>Действие ученика:</b> одним предложением называет, что уже знает по теме.</p><p><b>Диагностика:</b> «Что из темы «' + topic + '» ты можешь объяснить сейчас без подсказки?»</p><p><b>Фиксация:</b> запишите ответ в колонку «знаю».</p>'));
+    output.push(rpSection('2. Актуализация · ' + t[1] + ' мин', '<p><b>Реплика преподавателя:</b> «Сначала найдём надёжную опору. Отвечай коротко и думай вслух — я буду спрашивать не только ответ, но и ход мысли».</p><p><b>Готовые вопросы:</b> 1) Какой главный признак темы? 2) Где это уже встречалось? 3) Как проверить себя?</p><p><b>Критерий перехода:</b> ученик называет одну верную опору или формулирует конкретный вопрос.</p>'));
+    output.push(rpSection('3. Цель и маршрут · ' + t[2] + ' мин', '<p><b>Реплика преподавателя:</b> «Наш маршрут: понять образец → выполнить вместе → решить самостоятельно → проверить и объяснить».</p><p><b>Готовое задание:</b> заверши фразу: «Сегодня я научусь …, чтобы …».</p><p><b>Ожидаемый ответ:</b> формулировка связана с действием по теме, а не только с оценкой.</p>'));
+    output.push(rpSection('4. Объяснение через образец · ' + t[3] + ' мин', '<p><b>Опоры:</b> ' + support + '.</p><p><b>Реплика преподавателя:</b> «Я покажу один образец. На каждом шаге остановлюсь и скажу, почему делаю именно это. Потом ты повторишь маршрут своими словами».</p><p><b>Алгоритм на доске:</b> 1) определить, что дано; 2) выбрать правило, модель или стратегию; 3) выполнить действие; 4) сверить с критерием.</p><p><b>Контрольный вопрос:</b> «Почему этот шаг идёт сейчас?»</p><p><b>Ожидаемая формулировка ученика:</b> «Сначала я …, затем …, потому что …; проверяю себя по …».</p>'));
+    output.push(rpSection('5. Управляемая практика · ' + t[4] + ' мин', '<p><b>Реплика преподавателя:</b> «Первую задачу делаем вместе: я спрашиваю, ты выбираешь следующий шаг. Ошибка здесь полезна — она показывает, что тренировать».</p><p><b>Задание 1. По образцу:</b> выполни один пример или мини-ситуацию по теме «' + topic + '» с опорой на ' + support + '.</p><p><b>Задание 2. Измени условие:</b> поменяй один элемент и объясни, что изменится в решении или ответе.</p><p><b>Обратная связь:</b> «Верно выбран шаг …; теперь объясни, как ты это проверил(а)».</p>'));
+    output.push(rpSection('6. Самостоятельная практика по уровням · ' + t[5] + ' мин', '<div class="ready-levels"><div><b>Уровень A · опора</b><br>Заполни пропуски или собери алгоритм из готовых шагов.</div><div><b>Уровень B · применение</b><br>Выполни новую задачу либо составь три собственных примера по теме.</div><div><b>Уровень C · перенос</b><br>Придумай типичную ошибку, объясни её и исправь.</div></div><p><b>Реплика преподавателя:</b> «Выбери стартовый уровень сам(а). Если легко — переходи выше; если трудно — вернись к опоре, это рабочая стратегия».</p><p><b>Критерий:</b> ученик выполнил один уровень качественно и может пояснить своё решение.</p>'));
+    output.push(rpSection('7. Продуктивное задание · ' + t[6] + ' мин', '<p><b>Готовая ситуация:</b> «Представь, что тебе нужно объяснить тему «' + topic + '» другу, который пропустил урок. Дай короткий алгоритм, пример и один совет по самопроверке».</p><p><b>Форма ответа:</b> мини-диалог, устное объяснение, схема, карточка или текст из 4–6 предложений.</p><p><b>Ожидаемый продукт:</b> понятное объяснение, пример и критерий проверки.</p>'));
+    output.push(data.test ? rpSection('8. Мини-проверка · ' + t[7] + ' мин', '<ol><li>Сформулируй правило или главный принцип своими словами.</li><li>Примени его к новому примеру.</li><li>Найди и исправь ошибку в готовом ответе.</li><li>Назови один способ самопроверки.</li></ol><p><b>Ключ:</b> 4 из 4 — уверенное применение; 3 из 4 — закрепить один шаг; 1–2 из 4 — повторить с опорой и уменьшить сложность.</p>') : rpSection('8. Быстрая сверка · ' + t[7] + ' мин', '<p>Попросите ученика сравнить ответ с критерием: «есть ли правило/стратегия, пример и проверка?». Затем он называет один сильный шаг и одну точку роста.</p>'));
+    output.push(rpSection('9. Рефлексия и домашняя практика · ' + t[8] + ' мин', '<p><b>Фраза для завершения:</b> «Теперь я умею …; чтобы стало увереннее, мне нужно …».</p><p><b>Домашняя практика на 10–15 минут:</b> 1) один пример по алгоритму; 2) один собственный пример или вопрос с пояснением; 3) проверка по трём пунктам: правило, применение, ошибка.</p><p><b>Следующая встреча:</b> начните с 2-минутного устного объяснения темы учеником.</p>'));
+    if (data.cards) output.push(rpSection('Готовые карточки', '<div class="ready-card-grid">' + rpTask('Карточка 1 · Опора', 'Заполни маршрут: «Сначала я ____. Затем я ____. В конце проверяю ____».', 'Три логичных шага и понятный способ проверки.') + rpTask('Карточка 2 · Применение', 'Выполни новый пример, используя опоры: ' + support + '.', 'Верно применена стратегия; ученик объясняет минимум один шаг.') + rpTask('Карточка 3 · Найди ошибку', 'Придумай неверный ответ по теме и исправь его.', 'Ошибка названа, исправление соответствует правилу или алгоритму.') + rpTask('Карточка 4 · Объясни другому', 'Составь объяснение темы для друга из 4–6 предложений.', 'Есть правило, пример и совет по самопроверке.') + '</div>'));
+    if (data.sheet) output.push(rpSection('Рабочий лист · готовые пункты', '<ol><li>Напиши тему своими словами: «' + topic + '».</li><li>Выпиши три опоры: ' + support + '.</li><li>Выполни пример по модели.</li><li>Выполни похожий пример без модели.</li><li>Подчеркни шаг, где ты проверил(а) себя.</li><li>Заверши фразу: «Мне нужно повторить …».</li></ol>'));
+    output.push(rpSection('Критерии для преподавателя', rpList(['<b>Понимание:</b> ученик объясняет ключевую идею без чтения готового ответа.', '<b>Применение:</b> выполняет новое задание по теме.', '<b>Самостоятельность:</b> выбирает или называет следующий шаг.', '<b>Самопроверка:</b> находит и корректирует хотя бы одну ошибку.'])));
+    if (data.planB) output.push(rpSection('План B · если темп изменился', '<p><b>Если времени мало:</b> оставьте этапы 1, 4, 5, 8 и одно домашнее задание.</p><p><b>Если задание оказалось сложным:</b> вернитесь к образцу, выделите только первый шаг и выполните один пример вместе.</p><p><b>Если ученик справился быстро:</b> перейдите к уровню C и попросите создать собственное задание с ловушкой.</p>'));
+    output.push(rpSection('Запись в журнал после урока', '<p><b>Освоено:</b> … &nbsp; <b>Было трудно:</b> … &nbsp; <b>Следующий шаг:</b> … &nbsp; <b>Домашняя практика выдана:</b> да / нет.</p>'));
+    if (data.family) output.push(rpSection('Готовое сообщение для семьи', '<p>Сегодня работали с темой «' + topic + '». Ученик отработал(а) алгоритм: понять задачу, выбрать способ, выполнить и проверить себя. Для закрепления попросите коротко объяснить первый шаг своими словами и выполнить один небольшой пример. Следующее занятие начнём с этого объяснения.</p>'));
+    return output.join('');
+  }
+  function rpSave() {
+    try { localStorage.setItem(RP_KEY, JSON.stringify(rpGet())); toast('Параметры готового урока сохранены'); } catch (error) { toast('Не удалось сохранить параметры'); }
+  }
+  function rpLoad() {
+    try {
+      const data = JSON.parse(localStorage.getItem(RP_KEY) || 'null');
+      if (!data) return;
+      ['topic','goal','duration','format','type','level','material','needs'].forEach((key) => { if (data[key] !== undefined && rp('rp-' + key)) rp('rp-' + key).value = data[key]; });
+      ['cards','sheet','test','family','planB'].forEach((key) => { if (data[key] !== undefined && rp('rp-' + key)) rp('rp-' + key).checked = !!data[key]; });
+    } catch (error) {}
+  }
+  window.readyGenerateLesson = function () {
+    const data = rpGet();
+    const output = rpBuild(data);
+    window.OUT = output;
+    rp('out').innerHTML = output;
+    rp('out').style.display = 'block';
+    rp('outBtns').style.display = 'flex';
+    rpSave();
+    rp('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    toast('✦ Готовый урок создан: можно вести по шагам, печатать и экспортировать');
+  };
+  window.readyMarkdown = function () {
+    if (!window.OUT) { toast('Сначала создайте материал'); return; }
+    const holder = document.createElement('div'); holder.innerHTML = window.OUT;
+    const text = holder.innerText.replace(/\n{3,}/g, '\n\n');
+    const topic = rpText(rp('rp-topic').value, 'готовый_урок').replace(/[\\/:*?"<>|]/g, '_');
+    const blob = new Blob(['# Готовый урок PRO\n\n' + text], { type: 'text/markdown;charset=utf-8' });
+    const anchor = document.createElement('a'); anchor.href = URL.createObjectURL(blob); anchor.download = 'готовый_урок_' + topic + '.md'; anchor.click();
+    setTimeout(() => URL.revokeObjectURL(anchor.href), 1000); toast('Markdown-файл скачан');
+  };
+  function rpClear() {
+    ['rp-topic','rp-goal','rp-level','rp-material','rp-needs'].forEach((id) => { rp(id).value = ''; });
+    ['rp-cards','rp-sheet','rp-test','rp-family','rp-planb'].forEach((id) => { rp(id).checked = true; });
+    rp('rp-duration').value = '60'; rp('rp-format').value = 'очно'; rp('rp-type').value = 'комбинированный';
+    localStorage.removeItem(RP_KEY); toast('Параметры очищены');
+  }
+  const style = '<style id="ready-pro-style">.ready-pro{border-color:#b9ddc8;background:linear-gradient(145deg,#f9fdf9,#eff9f1)}.ready-pro-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:14px}.ready-pro h2{font-size:20px;line-height:1.2;color:var(--pine);margin:3px 0 5px}.ready-pro-head p{color:var(--mut);max-width:700px}.ready-pro-badge{white-space:nowrap;padding:6px 9px;border-radius:999px;background:#e0f3e5;color:var(--pine);font-size:11px;font-weight:900}.ready-pro-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ready-pro-grid label{display:grid;gap:4px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.03em;color:var(--mut)}.ready-pro-grid .ready-wide{grid-column:1/-1}.ready-pro-options{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;padding:10px;border:1px solid #c9e5d1;border-radius:12px;background:#fff;font-size:12px;font-weight:800;color:var(--ink)}.ready-pro-options label{display:flex;align-items:center;gap:5px}.ready-pro-options input{accent-color:var(--leaf)}.ready-output-title{padding:18px 20px;border-radius:16px;background:linear-gradient(120deg,#1e7a4c,#2f9e63);color:#fff;margin-bottom:16px}.ready-output-title span{text-transform:uppercase;letter-spacing:.08em;font-size:10px;font-weight:900;opacity:.8}.ready-output-title h2{color:#fff!important;margin:5px 0!important}.ready-output-title p{margin:0;opacity:.9}.ready-output-section{padding:13px 16px;border:1px solid #d9e9dc;border-radius:13px;background:#fff;margin:11px 0;break-inside:avoid}.ready-output-section h3{margin:0 0 8px!important;color:var(--pine)!important}.ready-output-section p{margin:6px 0}.ready-meta{display:grid;gap:7px}.ready-timeline-title{margin:22px 0 8px!important}.ready-levels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.ready-levels>div{padding:10px;border-radius:10px;background:#f3f9f4;border-left:4px solid var(--leaf)}.ready-levels>div:nth-child(2){border-left-color:var(--gold);background:#fffaf0}.ready-levels>div:nth-child(3){border-left-color:var(--sea);background:#f3f9fe}.ready-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.ready-task{border:1px dashed #9ecdad;border-radius:10px;padding:10px;background:#fbfefb}.ready-task h4{margin:0 0 5px}.ready-task p{margin:4px 0}@media(max-width:680px){.ready-pro-head{flex-direction:column}.ready-pro-grid,.ready-levels,.ready-card-grid{grid-template-columns:1fr}.ready-pro-badge{white-space:normal}}@media print{.ready-pro{display:none!important}.ready-output-title{background:#fff!important;color:#000!important;border:2px solid #1e7a4c}.ready-output-title h2{color:#000!important}.ready-output-section{border-color:#aec9b6;break-inside:avoid}.ready-levels{grid-template-columns:1fr 1fr}}</style>';
+  if (!document.getElementById('ready-pro-style')) document.head.insertAdjacentHTML('beforeend', style);
+  document.addEventListener('DOMContentLoaded', function () { rpLoad(); rp('rp-generate').onclick = readyGenerateLesson; rp('rp-save').onclick = rpSave; rp('rp-reset').onclick = rpClear; });
+})();
+
+
+
+/* ===== interactiveExerciseLabV5: локальные упражнения с автопроверкой ===== */
+(function () {
+  const ii = (id) => document.getElementById(id);
+  const iiEsc = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  const iiNorm = (value) => String(value || '').toLowerCase().replace(/[ё]/g, 'е').replace(/[^a-zа-я0-9]+/gi, ' ').trim();
+  let iiData = null;
+  function iiTopic() {
+    const ready = ii('rp-topic');
+    if (ready && ready.value.trim()) return ready.value.trim();
+    try { return (typeof topicNow === 'function' && topicNow()) || window.CTHEME || 'выбранная учебная тема'; } catch (error) { return 'выбранная учебная тема'; }
+  }
+  function iiMaterials() {
+    const ready = ii('rp-material');
+    const value = ready && ready.value.trim() ? ready.value : '';
+    const parts = value.split(/[;\n]+/).map((item) => item.trim()).filter(Boolean);
+    return parts.length ? parts.slice(0, 5) : ['правило', 'образец', 'самопроверка'];
+  }
+  function iiBuildData() {
+    const topic = iiTopic();
+    const materials = iiMaterials();
+    return { topic, materials, primary: materials[0], second: materials[1] || 'образец', third: materials[2] || 'самопроверка' };
+  }
+  function iiOptions(items, selected, placeholder) {
+    return '<option value="">' + placeholder + '</option>' + items.map((item) => '<option value="' + iiEsc(item) + '"' + (item === selected ? ' selected' : '') + '>' + iiEsc(item) + '</option>').join('');
+  }
+  function iiRender() {
+    iiData = iiBuildData();
+    const d = iiData;
+    const wrongA = d.second === d.primary ? 'случайный ответ' : d.second;
+    const wrongB = d.third === d.primary ? 'пропустить проверку' : d.third;
+    const board = '<div class="ii-top"><div><b>Тема:</b> ' + iiEsc(d.topic) + '</div><div class="ii-score" id="ii-score">0 / 5</div></div>' +
+      '<div class="ii-grid">' +
+      '<article class="ii-question" data-q="mc"><div class="ii-q-head"><span>1</span><b>Выбор ответа</b></div><p>Какую опору целесообразно использовать первой при работе с темой «' + iiEsc(d.topic) + '»?</p><label><input type="radio" name="ii-mc" value="' + iiEsc(d.primary) + '"> ' + iiEsc(d.primary) + '</label><label><input type="radio" name="ii-mc" value="' + iiEsc(wrongA) + '"> ' + iiEsc(wrongA) + '</label><label><input type="radio" name="ii-mc" value="' + iiEsc(wrongB) + '"> ' + iiEsc(wrongB) + '</label><div class="ii-feedback"></div></article>' +
+      '<article class="ii-question" data-q="match"><div class="ii-q-head"><span>2</span><b>Соответствия</b></div><p>Соедини этап занятия и его задачу.</p><div class="ii-match"><label>Актуализация <select data-ii="match-1">' + iiOptions(['вспомнить опоры', 'выполнить домашнее задание', 'получить отметку'], '', 'Выберите задачу') + '</select></label><label>Практика <select data-ii="match-2">' + iiOptions(['применить алгоритм', 'выбрать тему', 'закончить урок'], '', 'Выберите задачу') + '</select></label><label>Рефлексия <select data-ii="match-3">' + iiOptions(['назвать следующий шаг', 'записать правило заново', 'пропустить проверку'], '', 'Выберите задачу') + '</select></label></div><div class="ii-feedback"></div></article>' +
+      '<article class="ii-question" data-q="gap"><div class="ii-q-head"><span>3</span><b>Заполнение пропуска</b></div><p>Заверши фразу алгоритма: «Сначала определяю задачу, затем выбираю способ, в конце <input class="ii-inline" data-ii="gap" placeholder="введите действие"> себя».</p><div class="ii-feedback"></div></article>' +
+      '<article class="ii-question" data-q="order"><div class="ii-q-head"><span>4</span><b>Порядок шагов</b></div><p>Укажи правильный порядок учебного маршрута.</p><div class="ii-match"><label>Понять образец <select data-ii="order-1">' + iiOptions(['1','2','3','4'], '', '№') + '</select></label><label>Выполнить вместе <select data-ii="order-2">' + iiOptions(['1','2','3','4'], '', '№') + '</select></label><label>Решить самостоятельно <select data-ii="order-3">' + iiOptions(['1','2','3','4'], '', '№') + '</select></label><label>Проверить и объяснить <select data-ii="order-4">' + iiOptions(['1','2','3','4'], '', '№') + '</select></label></div><div class="ii-feedback"></div></article>' +
+      '<article class="ii-question" data-q="error"><div class="ii-q-head"><span>5</span><b>Найди ошибку</b></div><p>Какое действие не помогает ученику освоить тему «' + iiEsc(d.topic) + '»?</p><label><input type="radio" name="ii-error" value="объяснить выбор шага"> объяснить выбор шага</label><label><input type="radio" name="ii-error" value="сверить ответ с критерием"> сверить ответ с критерием</label><label><input type="radio" name="ii-error" value="пропустить самопроверку"> пропустить самопроверку</label><div class="ii-feedback"></div></article>' +
+      '</div><div class="ii-result" id="ii-result">Заполните все упражнения и нажмите «Проверить ответы».</div>';
+    ii('ii-board').innerHTML = board;
+    ii('ii-check').disabled = false;
+    ii('ii-retry').disabled = false;
+  }
+  function iiMark(question, passed, text) {
+    const node = document.querySelector('[data-q="' + question + '"]');
+    if (!node) return 0;
+    node.classList.remove('correct','wrong');
+    node.classList.add(passed ? 'correct' : 'wrong');
+    node.querySelector('.ii-feedback').innerHTML = (passed ? '✓ ' : '↻ ') + text;
+    return passed ? 1 : 0;
+  }
+  function iiCheck() {
+    if (!iiData) { toast('Сначала соберите тренажёр'); return; }
+    const mc = document.querySelector('input[name="ii-mc"]:checked');
+    const a = iiMark('mc', !!mc && mc.value === iiData.primary, mc && mc.value === iiData.primary ? 'Верно: начинаем с выбранной опоры.' : 'Сначала используйте опору «' + iiEsc(iiData.primary) + '».');
+    const b = iiMark('match', document.querySelector('[data-ii="match-1"]').value === 'вспомнить опоры' && document.querySelector('[data-ii="match-2"]').value === 'применить алгоритм' && document.querySelector('[data-ii="match-3"]').value === 'назвать следующий шаг', 'Актуализация — вспоминаем опоры; практика — применяем алгоритм; рефлексия — называем следующий шаг.');
+    const gap = iiNorm(document.querySelector('[data-ii="gap"]').value);
+    const c = iiMark('gap', gap === 'проверяю' || gap === 'проверить', gap === 'проверяю' || gap === 'проверить' ? 'Верно: самопроверка завершает учебный маршрут.' : 'Подходящее слово: «проверяю».');
+    const d = iiMark('order', document.querySelector('[data-ii="order-1"]').value === '1' && document.querySelector('[data-ii="order-2"]').value === '2' && document.querySelector('[data-ii="order-3"]').value === '3' && document.querySelector('[data-ii="order-4"]').value === '4', 'Маршрут: 1 — образец, 2 — вместе, 3 — самостоятельно, 4 — проверка и объяснение.');
+    const error = document.querySelector('input[name="ii-error"]:checked');
+    const e = iiMark('error', !!error && error.value === 'пропустить самопроверку', error && error.value === 'пропустить самопроверку' ? 'Верно: самопроверка обязательна.' : 'Ошибка — пропустить самопроверку: она помогает найти и исправить неточность.');
+    const score = a + b + c + d + e;
+    const result = ii('ii-result');
+    const feedback = score === 5 ? 'Отлично! Можно переходить к новому примеру или уровню C.' : score >= 3 ? 'Хороший результат. Прочитайте пояснения, исправьте неточности и нажмите «Повторить».' : 'Нужна ещё одна попытка с опорой. Вернитесь к образцу и выполните упражнения снова.';
+    ii('ii-score').textContent = score + ' / 5';
+    result.className = 'ii-result ' + (score >= 4 ? 'success' : score >= 3 ? 'mid' : 'low');
+    result.innerHTML = '<b>Результат: ' + score + ' из 5.</b> ' + feedback;
+    try { localStorage.setItem('konspekt-interactive-last', JSON.stringify({ topic: iiData.topic, score, time: Date.now() })); } catch (error) {}
+  }
+  function iiRetry() { iiRender(); ii('ii-board').scrollIntoView({ behavior: 'smooth', block: 'center' }); toast('Новая попытка готова'); }
+  window.pullInteract = function () { iiRender(); ii('interactiveLab').scrollIntoView({ behavior: 'smooth', block: 'start' }); toast('Интерактивный тренажёр собран'); };
+  const style = '<style id="interactive-exercise-style">.interactive-lab{border-color:#cbdaf2;background:linear-gradient(145deg,#f8fbff,#f1f7ff)}.interactive-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.interactive-head h2{margin:3px 0 5px;color:#1e5f9d;font-size:20px}.interactive-head p{color:var(--mut);max-width:730px}.interactive-chip{padding:6px 10px;border-radius:999px;background:#dbeeff;color:#1e5f9d;font-weight:900;font-size:11px;text-align:center}.interactive-board{margin-top:14px}.interactive-empty{padding:18px;border:1px dashed #a9c8e7;border-radius:12px;text-align:center;color:var(--mut);background:#fff}.ii-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;border-radius:12px;background:#1e5f9d;color:#fff}.ii-score{font-weight:900;font-size:16px}.ii-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.ii-question{padding:13px;border:1px solid #d5e1ef;background:#fff;border-radius:13px;transition:.2s}.ii-question.correct{border-color:#39a765;background:#f2fbf4}.ii-question.wrong{border-color:#e48a84;background:#fff7f6}.ii-question label{display:flex;gap:7px;align-items:flex-start;margin:7px 0;cursor:pointer}.ii-question input[type="radio"]{margin-top:3px;accent-color:#1e5f9d}.ii-q-head{display:flex;align-items:center;gap:7px;margin-bottom:7px;color:#174a7a}.ii-q-head span{display:grid;place-items:center;width:22px;height:22px;border-radius:7px;background:#dbeeff;font-weight:900;font-size:12px}.ii-question p{margin:6px 0}.ii-match{display:grid;gap:7px}.ii-match label{display:grid;grid-template-columns:1fr minmax(130px,42%);gap:7px;align-items:center;margin:0;font-weight:800}.ii-match select,.ii-inline{border:1px solid #c6d9ea;border-radius:8px;padding:6px;background:#fff;color:var(--ink)}.ii-inline{width:120px}.ii-feedback{display:none;margin-top:9px;padding:7px 9px;border-radius:8px;background:#eef5fb;color:#315879;font-size:12px}.correct .ii-feedback,.wrong .ii-feedback{display:block}.correct .ii-feedback{background:#e4f6e8;color:#257b41}.wrong .ii-feedback{background:#ffebe9;color:#9f3f38}.ii-result{margin-top:12px;padding:11px 13px;border-radius:11px;border:1px solid #d5e1ef;background:#fff;color:var(--mut)}.ii-result.success{background:#e5f7e9;border-color:#93d4a7;color:#1c7040}.ii-result.mid{background:#fff8e5;border-color:#ebcf78;color:#7d5f13}.ii-result.low{background:#fff0ef;border-color:#ecaaa4;color:#934139}@media(max-width:700px){.interactive-head{flex-direction:column}.ii-grid{grid-template-columns:1fr}.ii-match label{grid-template-columns:1fr}}</style>';
+  if (!document.getElementById('interactive-exercise-style')) document.head.insertAdjacentHTML('beforeend', style);
+  document.addEventListener('DOMContentLoaded', function () { ii('ii-build').onclick = iiRender; ii('ii-check').onclick = iiCheck; ii('ii-retry').onclick = iiRetry; });
+})();
+
+
+/* interactiveMaterialSplitFixV1: сохраняем фразы с запятыми целиком */
+</script>
+</body>
+</html>

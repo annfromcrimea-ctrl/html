@@ -1,0 +1,18 @@
+/*
+  # Защита от встраивания сайта в iframe.
+  X-Frame-Options: DENY
+  # Запрещаем браузеру угадывать тип файла.
+  X-Content-Type-Options: nosniff
+  # Запрещаем передачу лишнего адреса страницы.
+  Referrer-Policy: strict-origin-when-cross-origin
+  # Разрешаем только нужные браузерные возможности.
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  # Включаем HTTPS после первой успешной загрузки по HTTPS.
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  # Базовая политика источников для статического сайта.
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+
+/cloud-function/*
+  Access-Control-Allow-Origin: https://ВАШ-ДОМЕН.example
+  Access-Control-Allow-Methods: POST, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, X-Requested-Origin

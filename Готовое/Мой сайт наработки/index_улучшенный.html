@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<!-- ════════════════════════════════════════════════════════════
+     ВЕСЬ САЙТ — В ЭТОМ ОДНОМ ФАЙЛЕ.
+
+     БЫСТРЫЙ СТАРТ РЕДАКТИРОВАНИЯ
+     1) Сделайте резервную копию этого HTML-файла.
+     2) Прокрутите В САМЫЙ НИЗ до блока «НАСТРОЙКИ».
+     3) Замените только значения в кавычках "..." и текстовые
+        заглушки в [квадратных скобках]. Не удаляйте запятые,
+        кавычки, квадратные и фигурные скобки.
+     4) Откройте файл в браузере и пройдите обе формы как пользователь.
+     5) Не записывайте сюда пароли, OAuth-токены Яндекс Диска,
+        API-ключи или иные секреты: файл станет доступен посетителям.
+
+     Более подробный порядок действий — в отдельной инструкции .md.
+     ════════════════════════════════════════════════════════════ -->
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Согласие на обработку персональных данных</title>
+<meta name="description" content="Документы оператора персональных данных, согласие по 152-ФЗ, доступ к закрытым сообществам и запись на занятия.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 4C12 22 8 42 14 58c16-2 36-14 46-38C54 10 44 6 32 4z' fill='%232f9e68'/%3E%3C/svg%3E">
+<!-- Внешние шрифты удалены: файл остаётся автономным. -->
+<style>
+  :root{
+    --bg:#f1f7f2; --card:#ffffff; --deep:#175943; --deep2:#0e3d2e;
+    --ink:#22352c; --soft:#5f7268; --acc:#2f9e68; --acc2:#7fd0a4;
+    --sun:#f6c453; --line:#dcebe0; --red:#d9534f;
+    --disp:'Trebuchet MS','Arial Rounded MT Bold',Arial,sans-serif;
+    --body:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+    --mono:'SFMono-Regular',Consolas,'Liberation Mono',monospace;
+    --paper:#fbfffc; --notebook-line:rgba(95,143,180,.15); --notebook-margin:rgba(219,89,100,.20);
+    --r:22px; --shadow:0 14px 34px rgba(23,89,67,.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  /* Тетрадный фон сделан только CSS: он остаётся автономным и не требует изображений. */
+  body{font-family:var(--body);background-color:var(--paper);color:var(--ink);line-height:1.6;overflow-x:hidden;
+    background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--notebook-line) 31px,var(--notebook-line) 32px);
+    background-size:100% 32px;background-attachment:fixed}
+  body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(600px 340px at 8% -60px, rgba(127,208,164,.25), transparent 70%),
+      radial-gradient(700px 420px at 100% 20%, rgba(47,158,104,.10), transparent 70%),
+      radial-gradient(520px 380px at 20% 100%, rgba(246,196,83,.08), transparent 70%);
+  }
+  body::after{content:'';position:fixed;top:0;bottom:0;left:max(28px,calc(50% - 510px));width:2px;z-index:0;pointer-events:none;background:var(--notebook-margin);box-shadow:1px 0 0 rgba(255,255,255,.52)}
+  .leaf{position:fixed;z-index:0;pointer-events:none;opacity:.35;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 4C12 22 8 42 14 58c16-2 36-14 46-38C54 10 44 6 32 4z' fill='%232f9e68'/%3E%3C/svg%3E") no-repeat center/contain;
+    animation:float 14s ease-in-out infinite alternate;
+  }
+  .leaf.l1{width:70px;height:70px;top:16%;left:4%;transform:rotate(-20deg)}
+  .leaf.l2{width:46px;height:46px;top:58%;left:88%;transform:rotate(30deg);animation-duration:18s}
+  .leaf.l3{width:34px;height:34px;top:80%;left:10%;transform:rotate(60deg);animation-duration:11s}
+  .leaf.l4{width:56px;height:56px;top:8%;left:78%;transform:rotate(-40deg);animation-duration:16s}
+  @keyframes float{from{translate:0 0}to{translate:0 -26px}}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px;position:relative;z-index:2}
+
+  .topbar{background:var(--deep);color:#eaf6ee;font-family:var(--mono);font-size:11px;letter-spacing:.06em}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+  .topbar b{color:#fff;font-weight:700}
+  .status{display:flex;align-items:center;gap:8px;text-transform:uppercase}
+  .dot{width:8px;height:8px;border-radius:50%;background:#8ce0ae;animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(140,224,174,.55)}70%{box-shadow:0 0 0 9px rgba(140,224,174,0)}100%{box-shadow:0 0 0 0 rgba(140,224,174,0)}}
+  .clock{font-variant-numeric:tabular-nums;color:#cfe8d8}
+  .tabs{display:flex;gap:8px}
+  .tab{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;background:none;border:1.5px solid rgba(255,255,255,.35);color:#cfe8d8;padding:7px 14px;border-radius:999px;cursor:pointer;transition:all .2s}
+  .tab:hover{border-color:#fff;color:#fff}
+  .tab.on{background:var(--acc);border-color:var(--acc);color:#fff}
+
+  .demobar{background:#fff6dd;border-bottom:1px solid #e5c76a;color:#7a5b12;font-family:var(--mono);font-size:11.5px;text-align:center;padding:9px 16px;position:relative;z-index:3}
+
+  .masthead{padding:56px 0 48px}
+  .masthead .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:center}
+  .herocard{text-align:center;position:relative}
+  .avatarwrap{position:relative;width:230px;height:230px;margin:0 auto 18px}
+  .avatarwrap::before{content:'';position:absolute;inset:-14px;border-radius:46% 54% 52% 48%/50% 46% 54% 50%;
+    background:radial-gradient(circle at 30% 25%, var(--acc2), var(--acc));opacity:.9;animation:blob 9s ease-in-out infinite alternate}
+  @keyframes blob{from{border-radius:46% 54% 52% 48%/50% 46% 54% 50%}to{border-radius:54% 46% 48% 52%/46% 54% 46% 54%}}
+  .avatarwrap img{position:relative;width:100%;height:100%;object-fit:cover;border-radius:50%;border:6px solid #fff;box-shadow:var(--shadow)}
+  .herobadge{display:inline-block;background:#fff;border:1.5px solid var(--line);color:var(--deep);
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    padding:8px 16px;border-radius:999px;box-shadow:var(--shadow)}
+  .overline{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+  .overline::before{content:'';width:34px;height:3px;border-radius:3px;background:var(--acc)}
+  h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,46px);line-height:1.15;margin-bottom:18px;color:var(--deep2)}
+  h1 .accent-name{color:var(--acc)}
+  .lead{font-size:18.5px;color:var(--soft);max-width:560px;margin-bottom:24px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{font-family:var(--mono);font-size:11.5px;border:1.5px solid var(--line);background:#fff;color:var(--deep);
+    padding:8px 15px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s}
+  .chip:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .chip i{width:8px;height:8px;border-radius:50%;background:var(--acc)}
+
+  .rail{position:sticky;top:0;z-index:50;background:rgba(241,247,242,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  .rail .wrap{display:flex;align-items:stretch;padding:0 20px;position:relative}
+  .railstep{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 6px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);transition:color .3s}
+  .railstep .num{width:30px;height:30px;border:2px solid var(--line);background:#fff;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:12px;color:var(--soft);transition:all .35s}
+  .railstep.active{color:var(--deep)}
+  .railstep.active .num{border-color:var(--acc);color:var(--acc);transform:scale(1.1)}
+  .railstep.done{color:var(--acc)}
+  .railstep.done .num{background:var(--acc);border-color:var(--acc);color:#fff}
+  .railprogress{position:absolute;left:0;bottom:-1px;height:3px;background:var(--acc);width:0;transition:width .6s cubic-bezier(.65,0,.35,1)}
+  @media(max-width:720px){.railstep span:not(.num){display:none}}
+
+  section.step{padding:68px 0;border-bottom:1px solid var(--line);position:relative}
+  .stephead{display:flex;align-items:center;gap:18px;margin-bottom:12px}
+  .stepnum{width:64px;height:64px;flex-shrink:0;border-radius:50%;background:var(--deep);color:#fff;
+    font-family:var(--disp);font-weight:700;font-size:24px;display:grid;place-items:center;box-shadow:var(--shadow)}
+  .stephead h2{font-family:var(--disp);font-weight:700;font-size:clamp(20px,2.6vw,28px);color:var(--deep2)}
+  .stepsub{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:32px}
+
+  .previewgrid{display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:start}
+  /* Компактная карточка внешней рукодельной копилки. Все тексты и ссылки
+     редактируются в НАСТРОЙКИ → рукодельная_копилка, не в этой механике. */
+  .craft-preview{display:grid;grid-template-columns:116px 1fr auto;gap:20px;align-items:center;margin-top:30px;padding:18px 20px;background:rgba(255,255,255,.95);border:1.5px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .craft-preview::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 27px,rgba(95,143,180,.055) 27px,rgba(95,143,180,.055) 28px);pointer-events:none}
+  .craft-thumb{height:86px;border-radius:16px;overflow:hidden;position:relative;border:1.5px solid var(--acc2);background:#e7f3ea;z-index:1}
+  .craft-thumb img{width:100%;height:100%;object-fit:cover;display:block}.craft-illustration{position:absolute;inset:0;background:linear-gradient(135deg,#d8f1df,#fbfbdd);overflow:hidden}.craft-illustration::before{content:'';position:absolute;width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#fff7c7 0 9%,#f6c453 10% 35%,#d78e39 36% 100%);right:8px;bottom:-25px;box-shadow:-34px -5px 0 -14px #71c691}.craft-illustration::after{content:'✂';position:absolute;left:14px;top:7px;color:var(--deep);font-size:30px;transform:rotate(-18deg)}
+  .craft-copy{position:relative;z-index:1;min-width:0}.craft-kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);font-weight:700}.craft-copy h3{font-family:var(--disp);font-size:18px;line-height:1.25;color:var(--deep2);margin:4px 0 6px}.craft-copy p{font-size:13.5px;line-height:1.45;color:var(--soft);font-weight:600}.craft-privacy{font-family:var(--mono);font-size:10px!important;margin-top:7px;color:#759080!important}.craft-ad{font-family:var(--mono);font-size:10px!important;letter-spacing:.03em;margin-top:7px;color:var(--deep)!important}.craft-ad b{color:var(--red)}.craft-ad a{color:var(--acc);font-weight:800}
+  .craftgo{position:relative;z-index:1;white-space:nowrap;margin:0!important;min-width:150px}.craftgo.disabled{background:#9cb8a7;color:#fff;pointer-events:none;cursor:not-allowed}.craft-policy{font-family:var(--mono);font-size:10px;color:var(--acc);margin-top:5px;display:inline-block;font-weight:700}
+  @media(max-width:640px){.craft-preview{grid-template-columns:86px 1fr;gap:14px}.craft-thumb{height:76px}.craftgo{grid-column:1/-1;width:100%;min-width:0}.craft-copy h3{font-size:16px}}
+  .previewtext p{font-size:17px;color:var(--soft);margin-bottom:16px}
+  .previewtext p:first-child{font-size:19.5px;color:var(--ink);font-weight:600}
+  .previewtext .accent{border-left:4px solid var(--acc2);background:#fff;border-radius:0 16px 16px 0;
+    padding:14px 18px;margin:22px 0;font-size:17px;font-style:italic;color:var(--deep);box-shadow:var(--shadow)}
+  .inside{background:#fff;border:1.5px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:24px;position:sticky;top:80px}
+  .inside h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;color:var(--acc)}
+  .inside ul{list-style:none}
+  .inside li{padding:10px 0;border-bottom:1px dashed var(--line);font-size:15px;display:flex;gap:11px;align-items:flex-start;font-weight:600}
+  .inside li:last-child{border-bottom:none}
+  .inside li::before{content:'🌿';font-size:14px;flex-shrink:0}
+
+  .doclist{display:flex;flex-direction:column;gap:14px}
+  .docrow{display:grid;grid-template-columns:52px 1fr auto auto;gap:16px;align-items:center;
+    background:#fff;border:1.5px solid var(--line);border-radius:var(--r);padding:18px 22px;transition:all .25s}
+  .docrow:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--acc2)}
+  .docnum{width:44px;height:44px;border-radius:14px;background:var(--bg);color:var(--acc);
+    font-family:var(--mono);font-weight:700;display:grid;place-items:center;font-size:13px}
+  .docname{font-size:16px;font-weight:800;color:var(--deep2)}
+  .docname small{display:block;font-weight:600;font-family:var(--mono);font-size:10.5px;color:var(--soft);margin-top:3px}
+  .docopen{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--acc);
+    text-decoration:none;border:1.5px solid var(--acc);padding:9px 14px;border-radius:999px;transition:all .2s;white-space:nowrap}
+  .docopen:hover{background:var(--acc);color:#fff}
+  .doccheck{display:flex;align-items:center;gap:10px;cursor:pointer;font-family:var(--mono);font-size:10.5px;
+    text-transform:uppercase;color:var(--soft);user-select:none;white-space:nowrap}
+  .doccheck input{display:none}
+  .box{width:24px;height:24px;border:2px solid var(--line);background:#fff;border-radius:8px;flex-shrink:0;
+    display:grid;place-items:center;font-size:14px;color:#fff;transition:all .25s cubic-bezier(.65,0,.35,1)}
+  .doccheck input:checked + .box{background:var(--acc);border-color:var(--acc);transform:rotate(-6deg) scale(1.1)}
+  .doccheck input:checked + .box::after{content:'✓';font-weight:700}
+  .docrow.read .docnum{background:var(--acc);color:#fff}
+  .docnote{margin-top:18px;font-family:var(--mono);font-size:12px;color:var(--soft)}
+  .docnote b{color:var(--acc)}
+
+  .gate{position:relative}
+  .gate.locked .gatebody{filter:blur(3px) grayscale(.5);opacity:.45;pointer-events:none;user-select:none}
+  .gatebar{position:absolute;inset:0;z-index:5;display:none;align-items:center;justify-content:center;text-align:center}
+  .gate.locked .gatebar{display:flex}
+  .plaque{background:var(--deep);color:#eaf6ee;padding:18px 30px;border-radius:18px;transform:rotate(-1.5deg);
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;box-shadow:var(--shadow)}
+  .plaque b{color:var(--sun);display:block;font-size:14px;margin-bottom:6px}
+
+  .formcard{background:#fff;border:1.5px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);
+    padding:36px 34px;max-width:680px;position:relative}
+  .formcard .formtag{position:absolute;top:-14px;left:26px;background:var(--acc);color:#fff;padding:4px 16px;
+    border-radius:999px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+  .frow{margin-bottom:18px}
+  .frow label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;color:var(--deep)}
+  .frow label em{color:var(--red);font-style:normal}
+  input[type=text],input[type=email],input[type=tel],input[type=date],textarea{
+    width:100%;padding:13px 16px;font-family:var(--body);font-size:16px;font-weight:600;
+    border:1.5px solid var(--line);border-radius:14px;background:var(--bg);color:var(--ink);transition:all .2s}
+  textarea{min-height:84px;resize:vertical}
+  input:focus,textarea:focus{outline:none;border-color:var(--acc);background:#fff;box-shadow:0 0 0 4px rgba(47,158,104,.15)}
+  input.invalid,textarea.invalid{border-color:var(--red);background:#fdf1f1;animation:shake .35s}
+  @keyframes shake{25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+  .f2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .fsec{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);
+    margin:28px 0 14px;display:flex;align-items:center;gap:12px;font-weight:700}
+  .fsec:first-child{margin-top:0}
+  .fsec::after{content:'';flex:1;height:1.5px;background:var(--line);border-radius:2px}
+  .fsec .n{color:var(--deep)}
+  .agreeblock{border:1.5px dashed var(--acc2);background:var(--bg);border-radius:16px;padding:18px;margin:8px 0 16px;
+    display:flex;gap:14px;align-items:flex-start;cursor:pointer;user-select:none;transition:background .2s}
+  .agreeblock:hover{background:#e8f4ec}
+  .agreeblock input{display:none}
+  .agreeblock .box{margin-top:2px}
+  .agreeblock input:checked + .box{background:var(--acc);border-color:var(--acc);transform:rotate(-6deg) scale(1.1)}
+  .agreeblock input:checked + .box::after{content:'✓'}
+  .agreetext{font-size:14px;line-height:1.6;color:var(--soft);font-weight:600}
+  .agreetext a{color:var(--acc)}
+  .submitbtn{font-family:var(--disp);font-weight:700;font-size:15px;background:var(--acc);color:#fff;border:none;
+    padding:17px 34px;border-radius:999px;cursor:pointer;width:100%;transition:all .25s;box-shadow:0 8px 20px rgba(47,158,104,.35)}
+  .submitbtn:hover:not(:disabled){background:var(--deep);transform:translateY(-2px)}
+  .submitbtn:disabled{opacity:.55;cursor:wait}
+  .formerr{display:none;margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--red)}
+  .formerr.show{display:block}
+  .formhint{margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--soft)}
+
+  .lesson{display:flex;gap:14px;align-items:flex-start;border:1.5px solid var(--line);background:#fff;border-radius:16px;
+    padding:17px 18px;cursor:pointer;transition:all .2s;margin-bottom:12px;user-select:none}
+  .lesson:hover{transform:translateX(4px);border-color:var(--acc2)}
+  .lesson input{display:none}
+  .lesson .box{margin-top:2px}
+  .lesson.picked{border-color:var(--acc);background:#eef8f1;box-shadow:var(--shadow)}
+  .lesson.picked .box{background:var(--acc);border-color:var(--acc);transform:rotate(-6deg) scale(1.1)}
+  .lesson.picked .box::after{content:'✓';font-weight:700}
+  .lessoninfo h5{font-family:var(--disp);font-weight:700;font-size:15.5px;margin-bottom:4px;color:var(--deep2)}
+  .lessoninfo p{font-size:13.5px;color:var(--soft);font-weight:600}
+  .lessoninfo .meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--acc);margin-top:6px}
+  .dtgrid{display:grid;grid-template-columns:240px 1fr;gap:22px;align-items:start}
+  .slots{display:flex;flex-wrap:wrap;gap:10px}
+  .slot{font-family:var(--mono);font-size:13.5px;border:1.5px solid var(--line);background:#fff;border-radius:999px;
+    padding:10px 18px;cursor:pointer;transition:all .15s;font-weight:700;color:var(--deep)}
+  .slot:hover{border-color:var(--acc);color:var(--acc)}
+  .slot.picked{background:var(--acc);border-color:var(--acc);color:#fff;transform:rotate(-2deg)}
+  .slothint{font-family:var(--mono);font-size:10.5px;color:var(--soft);margin-top:10px}
+
+  .redacted{margin:8px 0 30px;max-width:640px}
+  .redacted i{display:block;height:16px;background:var(--acc2);border-radius:8px;margin-bottom:11px;opacity:.5}
+  .redacted i:nth-child(1){width:88%}.redacted i:nth-child(2){width:64%}
+  .redacted i:nth-child(3){width:93%}.redacted i:nth-child(4){width:41%}
+  .redactednote{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+  .unlocked{display:none}
+  .step.open .unlocked{display:block;animation:fadeup .7s cubic-bezier(.22,1,.36,1)}
+  .step.open .redacted,.step.open .redactednote{display:none}
+  .confirm{display:none;max-width:680px}
+  .confirm.show{display:block;animation:fadeup .7s cubic-bezier(.22,1,.36,1)}
+  @keyframes fadeup{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+  .record{background:#fff;border:1.5px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);
+    padding:30px 32px;position:relative;margin-bottom:34px}
+  .record h4{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;color:var(--deep)}
+  .recrow{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:15px;font-weight:700}
+  .recrow span:first-child{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);padding-top:3px;flex-shrink:0;font-weight:400}
+  .recrow span:last-child{text-align:right}
+  .stampmark{position:absolute;top:-22px;right:24px;transform:rotate(-6deg);border:3px solid var(--acc);color:var(--acc);
+    padding:9px 18px;border-radius:12px;font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.12em;
+    text-transform:uppercase;background:rgba(255,255,255,.9)}
+  .stampmark.slam{animation:slam .55s cubic-bezier(.2,2.2,.4,1)}
+  @keyframes slam{0%{transform:rotate(4deg) scale(2.6);opacity:0}60%{transform:rotate(-9deg) scale(.94);opacity:1}100%{transform:rotate(-6deg) scale(1)}}
+
+  .passes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+  .pass{background:#fff;border:1.5px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;
+    position:relative;transition:all .25s;overflow:hidden}
+  .pass:hover{transform:translate(-3px,-3px);box-shadow:var(--shadow);border-color:var(--acc2)}
+  .passhead{border-bottom:1.5px dashed var(--line);padding:12px 22px;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--acc);display:flex;justify-content:space-between;background:var(--bg)}
+  .passbody{padding:20px 22px 22px;flex:1;display:flex;flex-direction:column}
+  .passbody h5{font-family:var(--disp);font-weight:700;font-size:17px;margin-bottom:8px;color:var(--deep2)}
+  .passbody p{font-size:14px;color:var(--soft);flex:1;font-weight:600}
+  .passgo{margin-top:18px;display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;
+    letter-spacing:.08em;text-transform:uppercase;color:#fff;text-decoration:none;background:var(--acc);
+    padding:11px 18px;border-radius:999px;transition:all .2s;justify-content:center;font-weight:700}
+  .passgo:hover{background:var(--deep)}
+
+  .bookbanner{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:36px;padding:26px 30px;
+    background:var(--deep);color:#eaf6ee;text-decoration:none;border-radius:var(--r);box-shadow:var(--shadow);
+    transition:transform .25s;cursor:pointer}
+  .bookbanner:hover{transform:translateY(-4px)}
+  .bookbanner b{font-family:var(--disp);font-weight:700;font-size:18px;display:block;color:#fff;margin-bottom:5px}
+  .bookbanner .bb-left{font-size:14.5px;color:#cfe8d8;font-weight:600}
+  .bb-btn{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:var(--sun);
+    color:var(--deep2);padding:12px 22px;border-radius:999px;flex-shrink:0;transition:all .2s;font-weight:700}
+  .bookbanner:hover .bb-btn{transform:scale(1.05)}
+  @media(max-width:640px){.bookbanner{flex-direction:column;align-items:flex-start}}
+
+  .confirmbtns{display:flex;gap:14px;flex-wrap:wrap}
+  .ghostbtn{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid var(--acc);
+    background:none;color:var(--acc);padding:14px 22px;border-radius:999px;cursor:pointer;text-decoration:none;
+    display:inline-block;transition:all .2s;font-weight:700}
+  .ghostbtn:hover{background:var(--acc);color:#fff}
+  .booksec{padding:30px 0 84px}
+
+  .journal{background:#fff;border:1.5px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:26px 24px 22px;position:relative}
+  .journal h3{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;border-bottom:2px solid var(--acc);padding-bottom:12px;margin-bottom:6px;font-weight:700;color:var(--deep)}
+  .jrow{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:14.5px;font-weight:700}
+  .jrow:last-of-type{border-bottom:none}
+  .jrow span:first-child{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);padding-top:2px;flex-shrink:0;font-weight:400}
+  .jrow span:last-child{text-align:right}
+  .jfoot{margin-top:14px;padding-top:14px;border-top:2px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--soft);text-transform:uppercase}
+
+  /* cookie-баннер */
+  .cookie{position:fixed;left:20px;bottom:20px;right:20px;z-index:80;max-width:400px;margin:0 auto;background:#fff;
+    border:1.5px solid var(--acc2);border-radius:18px;box-shadow:0 18px 40px rgba(23,89,67,.25);padding:18px 20px;
+    display:none;animation:fadeup .5s}
+  .cookie.show{display:block}
+  .cookie p{font-size:13px;color:var(--soft);font-weight:600;margin-bottom:12px}
+  .cookie a{color:var(--acc)}
+  .cookiebtns{display:flex;gap:10px}
+  .cookiebtn{font-family:var(--mono);font-size:11px;background:var(--acc);color:#fff;border:none;padding:9px 16px;border-radius:999px;cursor:pointer;font-weight:700}
+  @media(min-width:720px){.cookie{right:auto;margin:0}}
+
+  footer{background:var(--deep2);color:#cfe8d8;padding:48px 0 40px}
+  footer .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:40px}
+  footer h5{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;margin-bottom:14px}
+  footer p{font-size:14px;line-height:1.7;font-weight:600}
+  footer a{color:var(--acc2)}
+  .resetbtn{background:none;border:1px dashed #4d7a66;color:#7fa892;font-family:var(--mono);font-size:10.5px;padding:8px 14px;border-radius:999px;cursor:pointer;margin-top:18px;transition:all .2s}
+  .resetbtn:hover{color:#fff;border-color:#fff}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+  .reveal.vis{opacity:1;transform:none}
+
+  /* Бумажные поверхности сохраняют читабельность на тетрадном фоне. */
+  .inside,.docrow,.formcard,.record,.privacycard,.confirm{background-color:rgba(255,255,255,.95);background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 28px,rgba(95,143,180,.055) 28px,rgba(95,143,180,.055) 29px)}
+  .legalnotice{background:#eef8f1;border-block:1px solid var(--acc2);padding:13px 0;position:relative;z-index:3}
+  .legalnotice .wrap{display:flex;gap:13px;align-items:flex-start;font-size:12.5px;color:var(--deep);font-weight:600}.legalnotice strong{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);white-space:nowrap}
+  .privacygrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.privacycard{background:#fff;border:1.5px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:24px}.privacycard h3{font-family:var(--disp);font-size:18px;color:var(--deep2);margin-bottom:9px}.privacycard p,.privacycard li{font-size:14px;color:var(--soft);font-weight:600}.privacycard ul{padding-left:18px;margin-top:10px}.privacycard li+li{margin-top:7px}.privacycard a{color:var(--acc);font-weight:800}
+  .record-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}.record-actions .ghostbtn{background:#fff}.legal-details{margin-top:24px;border:1.5px dashed var(--acc2);border-radius:16px;padding:15px 18px;background:var(--bg)}.legal-details summary{cursor:pointer;font-family:var(--mono);font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--deep)}.legal-details p{font-size:13px;color:var(--soft);margin-top:10px;font-weight:600}.legal-details code{word-break:break-all}
+  .adlabel{display:none;margin:0 auto;max-width:1080px;padding:10px 20px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--soft)}.adlabel.show{display:block}.adlabel b{color:var(--deep)}
+  .privacy-meta{font-family:var(--mono);font-size:11px;color:#7fa892;margin-top:16px}.privacy-meta a{color:var(--acc2)}
+  @media(max-width:860px){
+    .masthead .wrap{grid-template-columns:1fr;gap:40px}
+    .previewgrid{grid-template-columns:1fr}
+    .inside{position:static}
+    .docrow{grid-template-columns:1fr auto;gap:12px}
+    .docnum{display:none}
+    .dtgrid,.f2,.privacygrid{grid-template-columns:1fr}
+    footer .wrap{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<span class="leaf l1"></span><span class="leaf l2"></span><span class="leaf l3"></span><span class="leaf l4"></span>
+
+<div class="topbar">
+  <div class="wrap">
+    <span><b>ОПЕРАТОР ПЕРСОНАЛЬНЫХ ДАННЫХ</b> · 152-ФЗ</span>
+    <span class="tabs">
+      <button class="tab on" data-view="main">Согласие и доступ</button>
+      <button class="tab" data-view="book">Запись на занятия</button>
+    </span>
+    <span class="status"><span class="dot"></span> Реестр открыт</span>
+    <span class="clock" id="clock">—</span>
+  </div>
+</div>
+
+<div class="demobar" id="demobar" style="display:none" role="status" aria-live="polite">
+  ⚠ ЛОКАЛЬНЫЙ РЕЖИМ: запись сохранена только в этом браузере. Для передачи оператору настройте защищённый серверный адрес в блоке «НАСТРОЙКИ».
+</div>
+<div class="legalnotice"><div class="wrap"><strong>Данные и реклама</strong><span id="legalNoticeText">Сайт содержит формы для передачи данных оператору. Перед публикацией заполните реквизиты, ссылки на документы, цели обработки и контакты для обращений.</span></div></div>
+<div class="adlabel" id="adlabel"></div>
+
+<!-- ═══ СТРАНИЦА 1 · СОГЛАСИЕ И ДОСТУП ═══ -->
+<div id="view-main">
+  <header class="masthead">
+    <div class="wrap">
+      <div class="herocard reveal">
+        <div class="avatarwrap"><img id="avatar" alt="Фото оператора"></div>
+        <span class="herobadge">Оператор ПД · 152-ФЗ</span>
+      </div>
+      <div>
+        <div class="overline">Федеральный закон № 152-ФЗ «О персональных данных»</div>
+        <h1>Привет! Я — <span class="accent-name" id="heroName"></span></h1>
+        <p class="lead" id="mastLead"></p>
+        <div class="chips">
+          <span class="chip"><i></i>4 шага</span>
+          <span class="chip"><i></i>≈ 2 минуты</span>
+          <span class="chip"><i></i>доступ после согласия</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="Шаги">
+    <div class="wrap">
+      <div class="railstep"><span class="num">1</span><span>Ознакомление</span></div>
+      <div class="railstep"><span class="num">2</span><span>Документы</span></div>
+      <div class="railstep"><span class="num">3</span><span>Данные и согласие</span></div>
+      <div class="railstep"><span class="num">4</span><span>Доступ</span></div>
+      <div class="railprogress" id="railprogress"></div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="step" id="step1">
+      <div class="wrap">
+        <div class="stephead reveal"><div class="stepnum">01</div><h2>Что вас ждёт в закрытых сообществах</h2></div>
+        <div class="stepsub">Шаг 1 из 4 — ознакомление</div>
+        <div class="previewgrid">
+          <div class="previewtext reveal" id="previewText"></div>
+          <div class="inside reveal">
+            <h4>Внутри сообществ</h4>
+            <ul id="insideList"></ul>
+          </div>
+        </div>
+        <!-- Внешняя ссылка: карточка не содержит форм и не собирает данные. -->
+        <aside class="craft-preview reveal" id="craftPreview" aria-labelledby="craftTitle">
+          <div class="craft-thumb"><img id="craftImage" alt="" style="display:none"><div class="craft-illustration" id="craftIllustration" aria-hidden="true"></div></div>
+          <div class="craft-copy">
+            <div class="craft-kicker" id="craftKicker">Рукодельная копилка</div>
+            <h3 id="craftTitle">Рукодельная копилка</h3>
+            <p id="craftDescription"></p>
+            <p class="craft-privacy" id="craftPrivacy"></p>
+            <p class="craft-ad" id="craftAd" hidden></p>
+            <a class="craft-policy" id="craftPolicy" href="#" target="_blank" rel="noopener" style="display:none">Политика внешней площадки ↗</a>
+          </div>
+          <a class="passgo craftgo" id="craftLink" href="#" target="_blank" rel="noopener">Открыть копилку →</a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="step" id="step2">
+      <div class="wrap">
+        <div class="stephead reveal"><div class="stepnum">02</div><h2>Документы оператора</h2></div>
+        <div class="stepsub">Шаг 2 из 4 — откройте каждый документ и отметьте ознакомление</div>
+        <div class="doclist reveal" id="doclist"></div>
+        <div class="docnote" id="docnote"></div>
+      </div>
+    </section>
+
+    <section class="step" id="step3">
+      <div class="wrap">
+        <div class="stephead reveal"><div class="stepnum">03</div><h2>Регистрация согласия</h2></div>
+        <div class="stepsub">Шаг 3 из 4 — данные фиксируются в реестре оператора</div>
+        <div class="gate locked" id="gate3">
+          <div class="gatebar"><div class="plaque"><b>Шаг заблокирован</b>Сначала отметьте ознакомление со всеми документами на шаге 2</div></div>
+          <div class="gatebody">
+            <form class="formcard" id="consentform" novalidate>
+              <span class="formtag">Форма № ПД-1 · Согласие</span>
+              <div class="frow"><label for="fname">Имя <em>*</em></label>
+                <input type="text" id="fname" autocomplete="given-name" maxlength="60" placeholder="Иван"></div>
+              <div class="frow"><label for="flast">Фамилия <em>*</em></label>
+                <input type="text" id="flast" autocomplete="family-name" maxlength="60" placeholder="Иванов"></div>
+              <div class="frow"><label for="femail">E-mail <span style="color:var(--soft)">(необязательно)</span></label>
+                <input type="email" id="femail" autocomplete="email" maxlength="90" placeholder="you@mail.ru"></div>
+              <label class="agreeblock">
+                <input type="checkbox" id="fagree"><span class="box"></span>
+                <span class="agreetext" id="agreeText"></span>
+              </label>
+              <label class="agreeblock">
+                <input type="checkbox" id="fmailing"><span class="box"></span>
+                <span class="agreetext">Хочу получать письма с анонсами и материалами. Это согласие — <b>отдельное и необязательное</b>, его можно отозвать в любой момент.</span>
+              </label>
+              <button type="submit" class="submitbtn" id="submitbtn">Зарегистрировать согласие</button>
+              <div class="formerr" id="formerr"></div>
+              <div class="formhint">Дата, время, версия документа и выбранные согласия фиксируются в записи. В локальном режиме данные остаются в браузере до выгрузки или очистки.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step4">
+      <div class="wrap">
+        <div class="stephead reveal"><div class="stepnum">04</div><h2>Закрытые сообщества</h2></div>
+        <div class="stepsub">Шаг 4 из 4 — доступ выдаётся после регистрации согласия</div>
+        <div class="gate locked" id="gate4">
+          <div class="gatebar"><div class="plaque"><b>Доступ закрыт</b>Ссылки появятся после шага 3</div></div>
+          <div class="gatebody">
+            <div class="redacted" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <div class="redactednote">Содержимое скрыто до регистрации согласия</div>
+            <div class="unlocked">
+              <div class="record">
+                <div class="stampmark" id="stamp">Зарегистрировано</div>
+                <h4>Запись в реестре согласий</h4>
+                <div class="recrow"><span>№ согласия</span><span id="recNo">—</span></div>
+                <div class="recrow"><span>Субъект ПДн</span><span id="recName">—</span></div>
+                <div class="recrow"><span>Дата и время</span><span id="recDate">—</span></div>
+                <div class="recrow"><span>Версия согласия</span><span id="recVersion">—</span></div>
+                <div class="recrow"><span>Статус</span><span style="color:var(--acc)">АКТИВНО</span></div>
+                <div class="record-actions">
+                  <button type="button" class="ghostbtn" id="downloadConsent">Скачать согласие JSON</button>
+                  <a class="ghostbtn" id="diskFolder" href="#" target="_blank" rel="noopener" style="display:none">Открыть папку Яндекс Диска</a>
+                </div>
+              </div>
+              <div class="passes" id="passes"></div>
+              <a class="bookbanner" id="bookBanner" href="#запись">
+                <span class="bb-left"><b>Нужна личная работа?</b>Идёт запись на занятия — выберите тему и удобное время.</span>
+                <span class="bb-btn">Записаться →</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="privacy">
+      <div class="wrap">
+        <div class="stephead reveal"><div class="stepnum">i</div><h2>Данные, права и контакты</h2></div>
+        <div class="stepsub">Справочная карточка оператора — заполните и проверьте перед публикацией</div>
+        <div class="privacygrid reveal">
+          <article class="privacycard"><h3>Кто обрабатывает данные</h3><p id="privacyOperator"></p><p class="privacy-meta" id="privacyNotice"></p></article>
+          <article class="privacycard"><h3>Для чего и какие данные</h3><ul id="privacyPurposes"></ul></article>
+          <article class="privacycard"><h3>Ваши действия</h3><p>Чтобы отозвать согласие, запросить сведения или уточнить данные, используйте контакт оператора, указанный ниже. Оператор должен обработать обращение в порядке и сроки, установленные законодательством и своей политикой.</p><p class="privacy-meta" id="withdrawalContact"></p></article>
+          <article class="privacycard"><h3>Документы и реклама</h3><p>Ссылки на документы открываются в шаге 2. Если на странице появятся материалы, которые относятся к рекламе, включите редактируемый блок маркировки и заполните сведения о рекламодателе/идентификаторе только после проверки квалификации материала.</p><p class="privacy-meta"><a href="https://pd.rkn.gov.ru/operators-registry/notification/" target="_blank" rel="noopener">Портал уведомлений РКН</a> · <a href="https://fas.gov.ru/pages/reklama_v_internete" target="_blank" rel="noopener">Разъяснения ФАС по рекламе в интернете</a></p></article>
+        </div>
+        <details class="legal-details reveal"><summary>Техническая памятка оператору</summary><p>Публичная ссылка на Яндекс Диск предназначена только для открытия указанной папки. Прямая автоматическая загрузка на Диск требует OAuth‑авторизации или защищённого серверного обработчика; не размещайте токен Яндекс Диска в HTML‑файле. В локальном режиме кнопка скачивает JSON‑копию согласия, которую можно вручную загрузить в рабочую папку.</p></details>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ═══ СТРАНИЦА 2 · ЗАПИСЬ НА ЗАНЯТИЯ ═══ -->
+<div id="view-book" style="display:none">
+  <header class="masthead">
+    <div class="wrap">
+      <div>
+        <div class="overline">Форма № ЗН-1 · запись на занятия</div>
+        <h1>Запись <span class="accent-name">на занятия</span></h1>
+        <p class="lead" id="bookLead"></p>
+        <div class="chips">
+          <span class="chip"><i></i>выберите занятие</span>
+          <span class="chip"><i></i>выберите дату и время</span>
+          <span class="chip"><i></i>подтвердите согласие</span>
+        </div>
+      </div>
+      <aside class="journal reveal">
+        <h3>Журнал записи</h3>
+        <div id="journalRows"></div>
+        <div class="jfoot">Заявки обрабатываются в порядке поступления</div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="booksec">
+    <div class="wrap">
+      <form class="formcard reveal" id="bookform" novalidate>
+        <span class="formtag">Форма № ЗН-1 · Заявка</span>
+        <div class="fsec"><span class="n">01</span> Выберите занятие</div>
+        <div id="lessons"></div>
+
+        <div class="fsec"><span class="n">02</span> Дата и время</div>
+        <div class="dtgrid">
+          <div><input type="date" id="bkdate" aria-label="Дата занятия"></div>
+          <div>
+            <div class="slots" id="slots"></div>
+            <div class="slothint">Список времён меняется в блоке НАСТРОЙКИ → время_записи.</div>
+          </div>
+        </div>
+
+        <div class="fsec"><span class="n">03</span> Контактные данные</div>
+        <div class="f2">
+          <div class="frow"><label for="bkfname">Имя <em>*</em></label>
+            <input type="text" id="bkfname" autocomplete="given-name" maxlength="60" placeholder="Иван"></div>
+          <div class="frow"><label for="bkflast">Фамилия <em>*</em></label>
+            <input type="text" id="bkflast" autocomplete="family-name" maxlength="60" placeholder="Иванов"></div>
+        </div>
+        <div class="f2">
+          <div class="frow"><label for="bkphone">Телефон <em>*</em></label>
+            <input type="tel" id="bkphone" autocomplete="tel" maxlength="20" placeholder="+7 900 000-00-00"></div>
+          <div class="frow"><label for="bkemail">E-mail <span style="color:var(--soft)">(необязательно)</span></label>
+            <input type="email" id="bkemail" autocomplete="email" maxlength="90" placeholder="you@mail.ru"></div>
+        </div>
+        <div class="frow"><label for="bkcomment">Комментарий <span style="color:var(--soft)">(необязательно)</span></label>
+          <textarea id="bkcomment" maxlength="500" placeholder="Вопросы, пожелания, уровень подготовки…"></textarea></div>
+
+        <div class="fsec"><span class="n">04</span> Согласие</div>
+        <label class="agreeblock">
+          <input type="checkbox" id="bkagree"><span class="box"></span>
+          <span class="agreetext" id="bkAgreeText"></span>
+        </label>
+
+        <button type="submit" class="submitbtn" id="bkbtn">Отправить заявку</button>
+        <div class="formerr" id="bkerr"></div>
+        <div class="formhint">Дата отправки заявки фиксируется автоматически и сохраняется в журнале оператора.</div>
+      </form>
+
+      <div class="confirm" id="confirm">
+        <div class="record">
+          <div class="stampmark" id="bstamp">Заявка принята</div>
+          <h4>Ваша запись зарегистрирована</h4>
+          <div class="recrow"><span>№ заявки</span><span id="brecNo">—</span></div>
+          <div class="recrow"><span>Занятие</span><span id="brecLesson">—</span></div>
+          <div class="recrow"><span>Дата и время</span><span id="brecWhen">—</span></div>
+          <div class="recrow"><span>ФИО</span><span id="brecName">—</span></div>
+          <div class="recrow"><span>Телефон</span><span id="brecPhone">—</span></div>
+          <div class="recrow"><span>Статус</span><span style="color:var(--acc)">ОЖИДАЕТ ПОДТВЕРЖДЕНИЯ</span></div>
+          <div class="record-actions"><button type="button" class="ghostbtn" id="downloadBookingConsent">Скачать согласие JSON</button></div>
+        </div>
+        <p style="margin-bottom:22px;color:var(--soft);font-weight:600">Свяжусь с вами для подтверждения записи. Если планы изменятся — просто напишите мне.</p>
+        <div class="confirmbtns">
+          <button class="ghostbtn" id="againbtn">Записать ещё одного</button>
+          <button class="ghostbtn" id="tomainbtn">← На страницу согласия</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- cookie-баннер: показывается своим независимым скриптом ниже -->
+<div class="cookie" id="cookiebar">
+  <p>🌿 Сайт использует cookie и локальное хранилище для работы форм и запоминания согласия.
+  Подробности — в <a id="cookielink" href="cookie.pdf" target="_blank" rel="noopener">Политике cookie</a>.</p>
+  <div class="cookiebtns"><button class="cookiebtn" id="cookieok">Понятно</button></div>
+</div>
+<script>
+/* независимый показ cookie-баннера — работает даже если основной скрипт не запустился */
+(function(){
+  var bar=document.getElementById('cookiebar');
+  var btn=document.getElementById('cookieok');
+  var seen=false;
+  try{seen=!!window.localStorage.getItem('cookie-ok');}catch(e){}
+  if(bar&&!seen){bar.className='cookie show';}
+  if(btn){btn.onclick=function(){try{window.localStorage.setItem('cookie-ok','1');}catch(e){}if(bar){bar.className='cookie';}};}
+})();
+</script>
+
+<!-- «сторож»: если файл сохранён в неверной кодировке, покажет подсказку -->
+<script>
+window.addEventListener('load',function(){
+  try{
+    var d=document.getElementById('doclist');
+    if(d&&!d.children.length){
+      var bar=document.getElementById('demobar');
+      bar.style.display='block';
+      bar.textContent='\u26A0 \u0422\u0435\u043A\u0441\u0442\u044B \u043D\u0435 \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u043B\u0438\u0441\u044C: \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u0435 \u0444\u0430\u0439\u043B \u0432 \u043A\u043E\u0434\u0438\u0440\u043E\u0432\u043A\u0435 UTF-8 (\u0411\u043B\u043E\u043A\u043D\u043E\u0442: \u0424\u0430\u0439\u043B \u2192 \u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043A\u0430\u043A \u2192 \u043A\u043E\u0434\u0438\u0440\u043E\u0432\u043A\u0430 UTF-8).';
+    }
+  }catch(e){}
+});
+</script>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h5>Оператор персональных данных</h5>
+      <p id="footerOp"></p>
+      <button class="resetbtn" id="resetbtn" style="display:none">↺ сбросить сохранённое согласие (для проверки сайта)</button>
+    </div>
+    <div>
+      <h5>Как это работает</h5>
+      <p>Согласия и заявки получают номер, дату, время и версию документа. В автономном режиме записи хранятся только в браузере; передача в реестр оператора выполняется только через настроенный защищённый обработчик.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   НАСТРОЙКИ — ЕДИНСТВЕННОЕ МЕСТО, ГДЕ ВЫ МЕНЯЕТЕ ТЕКСТЫ САЙТА
+   ----------------------------------------------------------------
+   ✏️ Меняйте только текст внутри кавычек "...".
+   ⚠️ Кавычки и запятые в конце строк НЕ удаляйте.
+   Всё, что в [квадратных скобках] — заглушки: замените на фактические данные.
+   Перед публикацией проверьте документы, цели, сроки, реквизиты и контакты с юристом.
+
+   КАК ПОМЕНЯТЬ ФОТО: положите свой файл рядом с index.html
+   (например photo.jpg) и напишите ниже:  фото: "photo.jpg"
+   ══════════════════════════════════════════════════════════════ */
+const НАСТРОЙКИ = {
+
+  /* ── 0 · ФОТО ─────────────────────────────────────────────── */
+  фото: "photo.svg",   // замените на "photo.jpg", когда положите своё фото в папку
+
+  /* ── 1 · ВАШИ ДАННЫЕ (оператор) ─────────────────────────────
+     Заполните фактические сведения до публикации. */
+  имя:             "[ФИО ИП / полное наименование организации]",
+  инн:             "[ИНН]",
+  email:           "[e-mail для обращений по персональным данным]",
+  адрес:           "[адрес оператора]",
+  уведомление_РКН: "[номер и дата уведомления РКН либо основание исключения]",
+  контакт_для_отзыва: "[e-mail или почтовый адрес для отзыва согласия]",
+  версия_согласия: "[например: ПД-1/2026-08-26]",
+  срок_обработки: "[укажите срок или критерий прекращения обработки]",
+  третьи_лица: "[укажите получателей/обработчиков либо «не передаются»]",
+  цели_обработки: [
+    "предоставление доступа к закрытым сообществам и материалам",
+    "обработка заявок на занятия и связь для подтверждения записи",
+    "исполнение обязанностей оператора и рассмотрение обращений субъектов ПД"
+  ],
+
+  /* ── 2 · ГЛАВНАЯ: превью-текст ────────────────────────────── */
+  превью_короткое: "[1–2 предложения в шапке: кто вы и почему доступ выдаётся по согласию]",
+  превью_цитата:   "[короткая цитата-акцент на шаге 1]",
+  превью_абзацы: [
+    "[абзац 1: в чём ценность ваших сообществ]",
+    "[абзац 2: что конкретно получит участник]",
+    "[абзац 3: что нужно сделать — пройти четыре шага]"
+  ],
+  внутри_сообществ: [
+    "[что внутри 1]", "[что внутри 2]", "[что внутри 3]", "[что внутри 4]"
+  ],
+
+  /* ── 3 · ВАШИ ДОКУМЕНТЫ ───────────────────────────────────── */
+  документы: [
+    { название:"Политика обработки персональных данных",   пояснение:"основной документ оператора",        ссылка:"politika.pdf" },
+    { название:"Согласие на обработку персональных данных", пояснение:"цели, состав данных, порядок отзыва", ссылка:"soglasie.pdf" },
+    { название:"Политика использования файлов cookie",      пояснение:"какие данные собирает сайт",          ссылка:"cookie.pdf" },
+    { название:"Правила закрытых сообществ",                пояснение:"условия участия",                     ссылка:"rules.pdf" }
+  ],
+
+  /* ── 4 · ЗАКРЫТЫЕ СООБЩЕСТВА ──────────────────────────────── */
+  сообщества: [
+    { значок:"Telegram", название:"[название канала]",     описание:"[что внутри]", ссылка:"https://t.me/..." },
+    { значок:"Чат",      название:"[название чата]",       описание:"[что внутри]", ссылка:"https://..." },
+    { значок:"VK",       название:"[название сообщества]", описание:"[что внутри]", ссылка:"https://vk.com/..." }
+  ],
+
+  /* ── 5 · РУКОДЕЛЬНАЯ КОПИЛКА: ВНЕШНЯЯ ССЫЛКА И ПРЕВЬЮ ───────
+     Карточка не собирает персональные данные. Вставьте HTTPS-ссылку
+     и замените текст позже. Изображение необязательно: без него
+     останется встроенная рисованная миниатюра, и HTML останется автономным.
+
+     Если конкретное размещение требует маркировки как рекламы, включите
+     ТОЛЬКО вложенный блок маркировка после оценки материала. Заполните
+     рекламодателя и ERID, если это применимо. */
+  рукодельная_копилка: {
+    включено: true,
+    название: "[название вашей рукодельной копилки]",
+    описание: "[коротко: что посетитель найдёт в копилке]",
+    ссылка: "[вставьте HTTPS-ссылку на рукодельную копилку]",
+    текст_кнопки: "Открыть копилку →",
+    превью_изображение: "", // необязательная публичная HTTPS-ссылка на миниатюру; оставьте пустым для встроенного превью
+    alt_изображения: "[краткое описание изображения]",
+    текст_о_данных: "Внешняя ссылка: перед переходом ознакомьтесь с условиями и политикой выбранной площадки.",
+    ссылка_на_политику: "", // необязательная HTTPS-ссылка на политику внешней площадки
+    маркировка: {
+      включено: false,
+      пометка: "Реклама",
+      рекламодатель: "[полное ФИО / наименование рекламодателя]",
+      ссылка_на_рекламодателя: "[HTTPS-ссылка на сведения о рекламодателе]",
+      erid: "[ERID, если применимо]"
+    }
+  },
+
+  /* ── 6 · ЗАПИСЬ НА ЗАНЯТИЯ ────────────────────────────────── */
+  запись_вступление: "[текст в шапке записи: как проходит запись и что дальше]",
+  журнал: {
+    ближайшее: "[дата ближайшего занятия]",
+    формат:    "[онлайн / офлайн]",
+    мест:      "[сколько мест свободно]",
+    запись_до: "[до какой даты идёт запись]"
+  },
+  занятия: [
+    { название:"[занятие 1]", описание:"[для кого и что будет]", детали:"[60 минут · онлайн · 0000 ₽]" },
+    { название:"[занятие 2]", описание:"[описание]",             детали:"[60 минут · онлайн · 0000 ₽]" },
+    { название:"[занятие 3]", описание:"[описание]",             детали:"[90 минут · онлайн · 0000 ₽]" }
+  ],
+  время_записи: ["10:00", "12:00", "15:00", "18:00", "20:00"],
+
+  /* ── 7 · РЕЕСТР СОГЛАСИЙ, ДИСК И РЕЗЕРВНОЕ КОПИРОВАНИЕ ───────
+     РУЧНОЙ РЕЖИМ (по умолчанию): вставьте HTTPS-ссылку на рабочую
+     папку Диска. Она покажет оператору кнопку «Открыть папку», а
+     JSON-файл согласия пользователь скачивает отдельной кнопкой.
+
+     АВТОМАТИЧЕСКИЙ РЕЖИМ: укажите HTTPS-адрес своей серверной
+     функции. Сайт отправит ей данные POST-запросом. Функция должна
+     сама проверить запрос, хранить OAuth-токен в секретах сервера,
+     создать файл на Диске и настроить CORS для опубликованного сайта.
+
+     НИКОГДА не вставляйте OAuth-токен, пароль, API-ключ или секрет
+     в этот HTML. Ниже задаётся только безопасная публичная ссылка и
+     адрес серверного обработчика. */
+  папка_Яндекс_Диска: "[вставьте HTTPS-ссылку на папку Яндекс Диска]",
+  адрес_функции: "",   // только HTTPS-адрес защищённой функции; оставьте пустым для локального режима
+
+  /* Это памятка для оператора и сведения, попадающие в JSON-архив.
+     Значения не запускают автоматические бэкапы сами по себе: в
+     статическом HTML такой бэкап невозможен без серверной функции. */
+  резервное_копирование: {
+    режим: "ручная выгрузка JSON или серверный архив",
+    период: "[например: ежедневно после обработки заявок]",
+    срок_хранения: "[например: по утверждённой политике хранения]",
+    ответственный: "[ФИО или роль ответственного лица]"
+  },
+
+  /* ── 8 · E-MAIL-УВЕДОМЛЕНИЯ АДМИНИСТРАТОРУ ───────────────────
+     Этот блок сообщает СЕРВЕРНОЙ ФУНКЦИИ, когда просить её отправить
+     письмо. Получателя, SMTP-пароль, API-ключ почтового сервиса и
+     другие секреты задавайте ТОЛЬКО в настройках сервера, не здесь.
+
+     Для работы включите:true И укажите HTTPS-адрес в адрес_функции.
+     Если включать_ПД_в_письмо:false, серверу следует присылать только
+     номер записи, тип формы и время — без ФИО, телефона и e-mail. */
+  email_уведомления: {
+    включено: false,
+    отправлять_при: { согласие: true, запись: true },
+    тема: "Новая запись с сайта",
+    включать_ПД_в_письмо: false,
+    заметка_для_администратора: "Откройте защищённый реестр для просмотра данных"
+  },
+
+  /* ── 9 · РЕКЛАМА И СВЕДЕНИЯ О РЕКЛАМОДАТЕЛЕ ───────────────────
+     Оставьте включено:false, если блок не является рекламой.
+     Заполняйте после проверки конкретного размещения. */
+  реклама: {
+    включено: false,
+    пометка: "Реклама",
+    рекламодатель: "[полное ФИО / наименование рекламодателя]",
+    ссылка_на_рекламодателя: "[ссылка на страницу с данными рекламодателя]",
+    erid: "[ERID / идентификатор интернет-рекламы, если применимо]"
+  }
+};
+
+/* ══════════════════════════════════════════════════════════════
+   НИЖЕ НАХОДИТСЯ МЕХАНИКА САЙТА.
+   Обычно её не нужно менять. Если вы всё же меняете код, сначала
+   сделайте копию файла и проверьте обе формы в браузере. Секреты,
+   токены и пароли в код не добавляйте.
+   ══════════════════════════════════════════════════════════════ */
+const byId = id => document.getElementById(id);
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function val(x){return (x && String(x).indexOf('[')!==0) ? x : '';}
+/* безопасная работа с localStorage (не упадёт даже в приватном режиме) */
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){}}
+const О = НАСТРОЙКИ;
+/* Безопасно принимаем публичные ссылки только с http/https. */
+const cleanUrl = value => {
+  const text = val(value);
+  if(!text) return '';
+  try { const url = new URL(text, location.href); return /^https?:$/i.test(url.protocol) ? url.href : ''; }
+  catch(e) { return ''; }
+};
+/* Серверный обработчик должен быть только на HTTPS: он принимает ПД. */
+const cleanHttpsUrl = value => {
+  const text = val(value);
+  if(!text) return '';
+  try { const url = new URL(text); return url.protocol === 'https:' ? url.href : ''; }
+  catch(e) { return ''; }
+};
+const endpointValue = val(О.адрес_функции);
+const endpointUrl = cleanHttpsUrl(endpointValue);
+const endpointConfigError = Boolean(endpointValue && !endpointUrl);
+const backupPlan = О.резервное_копирование || {};
+/* Параметры письма не содержат секретов. Сервер сам выбирает получателей
+   и отправляет письмо через почтовый сервис, ключи которого хранятся вне HTML. */
+const emailNotice = О.email_уведомления || {};
+function emailNotificationFor(eventType, recordNo){
+  const triggers = emailNotice.отправлять_при || {};
+  const enabledForEvent = eventType === 'consent' ? triggers.согласие !== false : triggers.запись !== false;
+  return {
+    requested: Boolean(emailNotice.включено && enabledForEvent),
+    eventType,
+    recordNo,
+    subject: val(emailNotice.тема) || 'Новая запись с сайта',
+    includePersonalData: Boolean(emailNotice.включать_ПД_в_письмо),
+    adminNote: val(emailNotice.заметка_для_администратора) || 'Откройте защищённый реестр для просмотра данных'
+  };
+}
+const policyDoc = О.документы && О.документы[0] ? О.документы[0].ссылка : '#';
+const withdrawal = val(О.контакт_для_отзыва) || val(О.email) || '[контакт для отзыва]';
+
+/* фото с запасным вариантом, если файла нет */
+const FALLBACK='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 400%27%3E%3Crect width=%27400%27 height=%27400%27 fill=%27%237fd0a4%27/%3E%3Ccircle cx=%27200%27 cy=%27158%27 r=%2774%27 fill=%27%23fff%27/%3E%3Cpath d=%27M84 340c10-72 58-108 116-108s106 36 116 108z%27 fill=%27%23fff%27/%3E%3C/svg%3E';
+const av=byId('avatar'); av.src=О.фото; av.onerror=()=>{av.onerror=null;av.src=FALLBACK;};
+
+/* наполнение главной */
+byId('heroName').textContent = val(О.имя) || '[ваше имя]';
+byId('mastLead').textContent = О.превью_короткое;
+byId('footerOp').innerHTML =
+  `${esc(О.имя)}${val(О.инн)?', ИНН '+esc(О.инн):''}${val(О.адрес)?', адрес: '+esc(О.адрес):''}<br>` +
+  `По вопросам обработки персональных данных: <a href="mailto:${esc(О.email)}">${esc(О.email)}</a><br>` +
+  `Уведомление об обработке ПД зарегистрировано Роскомнадзором, ${esc(val(О.уведомление_РКН)||'№ ____')}.`;
+
+const paras = О.превью_абзацы.map(p=>`<p>${esc(p)}</p>`);
+if(О.превью_цитата && paras.length) paras.splice(1,0,`<p class="accent">${esc(О.превью_цитата)}</p>`);
+byId('previewText').innerHTML = paras.join('');
+byId('insideList').innerHTML = О.внутри_сообществ.map(i=>`<li>${esc(i)}</li>`).join('');
+
+byId('doclist').innerHTML = О.документы.map((d,i)=>`
+  <div class="docrow">
+    <div class="docnum">${String(i+1).padStart(2,'0')}</div>
+    <div class="docname">${esc(d.название)}<small>${esc(d.пояснение||'')}</small></div>
+    <a class="docopen" href="${esc(d.ссылка)}" target="_blank" rel="noopener">Открыть ↗</a>
+    <label class="doccheck"><input type="checkbox" class="docbox"><span class="box"></span>Ознакомлен(а)</label>
+  </div>`).join('');
+byId('docnote').innerHTML = `Отмечено <b>0</b> из ${О.документы.length} — без полного ознакомления шаг 3 не откроется.`;
+
+byId('agreeText').innerHTML =
+  `Я, действуя свободно, своей волей и в своём интересе, даю согласие <b>${esc(О.имя)}${val(О.инн)?', ИНН '+esc(О.инн):''}</b> ` +
+  `на обработку моих персональных данных (имя, фамилия, e-mail) для следующих целей: ${esc((О.цели_обработки||[]).join('; '))}. ` +
+  `Согласие оформляется по версии ${esc(val(О.версия_согласия)||'[укажите версию]')} и действует в течение ${esc(val(О.срок_обработки)||'[укажите срок]')}. ` +
+  `Подробные условия приведены в <a href="${esc(policyDoc)}" target="_blank" rel="noopener">Политике обработки ПД</a>. ` +
+  `Отзыв направляется на <a href="mailto:${esc(withdrawal)}">${esc(withdrawal)}</a>.`;
+
+byId('passes').innerHTML = О.сообщества.map((c,i)=>`
+  <div class="pass">
+    <div class="passhead"><span>Пропуск № ${i+1}</span><span>${esc(c.значок||'')}</span></div>
+    <div class="passbody">
+      <h5>${esc(c.название)}</h5><p>${esc(c.описание||'')}</p>
+      <a class="passgo" href="${esc(c.ссылка)}" target="_blank" rel="noopener">Перейти →</a>
+    </div>
+  </div>`).join('');
+
+/* Рендер внешней рукодельной копилки. Ссылка фильтруется так же, как
+   другие внешние ссылки: допускаются только HTTP(S), javascript: не пройдёт. */
+const craft = О.рукодельная_копилка || {};
+function renderCraftPreview(){
+  const preview=byId('craftPreview');
+  if(!preview) return;
+  preview.hidden = craft.включено === false;
+  if(preview.hidden) return;
+  byId('craftKicker').textContent = val(craft.ярлык) || 'Рукодельная копилка';
+  byId('craftTitle').textContent = val(craft.название) || 'Рукодельная копилка';
+  byId('craftDescription').textContent = val(craft.описание) || 'Здесь появится краткое описание вашей рукодельной копилки.';
+  byId('craftPrivacy').textContent = val(craft.текст_о_данных) || 'Внешняя ссылка: перед переходом ознакомьтесь с условиями и политикой выбранной площадки.';
+
+  const link=byId('craftLink'), url=cleanUrl(craft.ссылка);
+  link.textContent = val(craft.текст_кнопки) || 'Открыть копилку →';
+  if(url){ link.href=url; link.classList.remove('disabled'); link.removeAttribute('aria-disabled'); }
+  else { link.removeAttribute('href'); link.classList.add('disabled'); link.setAttribute('aria-disabled','true'); link.textContent='Добавьте HTTPS-ссылку'; }
+
+  const policy=byId('craftPolicy'), policyUrl=cleanUrl(craft.ссылка_на_политику);
+  if(policyUrl){ policy.href=policyUrl; policy.style.display='inline-block'; } else { policy.removeAttribute('href'); policy.style.display='none'; }
+
+  const img=byId('craftImage'), illustration=byId('craftIllustration'), imageUrl=cleanUrl(craft.превью_изображение);
+  img.onerror=()=>{img.style.display='none';illustration.style.display='block';};
+  if(imageUrl){ img.src=imageUrl; img.alt=val(craft.alt_изображения)||'Превью рукодельной копилки'; img.style.display='block'; illustration.style.display='none'; }
+  else { img.removeAttribute('src'); img.alt=''; img.style.display='none'; illustration.style.display='block'; }
+
+  const ad=craft.маркировка || {}, adNode=byId('craftAd');
+  if(ad.включено){
+    const advertiserUrl=cleanUrl(ad.ссылка_на_рекламодателя);
+    const advertiser=advertiserUrl ? `<a href="${esc(advertiserUrl)}" target="_blank" rel="noopener">${esc(val(ad.рекламодатель)||'Сведения о рекламодателе')}</a>` : esc(val(ad.рекламодатель)||'[заполните сведения о рекламодателе]');
+    adNode.innerHTML=`<b>${esc(val(ad.пометка)||'Реклама')}</b> · рекламодатель: ${advertiser}${val(ad.erid)?` · ERID: ${esc(ad.erid)}`:''}`;
+    adNode.hidden=false;
+  } else { adNode.textContent=''; adNode.hidden=true; }
+}
+renderCraftPreview();
+
+/* ссылка на политику cookie в баннере — из списка документов */
+try{ byId('cookielink').href = (О.документы[2]&&О.документы[2].ссылка)||'cookie.pdf'; }catch(e){}
+
+/* наполнение записи */
+byId('bookLead').textContent = О.запись_вступление;
+const j=[['Ближайшее занятие',О.журнал.ближайшее],['Формат',О.журнал.формат],
+         ['Свободно мест',О.журнал.мест],['Запись открыта до',О.журнал.запись_до]];
+byId('journalRows').innerHTML = j.filter(r=>val(r[1]))
+  .map(r=>`<div class="jrow"><span>${r[0]}</span><span>${esc(r[1])}</span></div>`).join('');
+
+byId('lessons').innerHTML = О.занятия.map(z=>`
+  <label class="lesson">
+    <input type="radio" name="lesson" value="${esc(z.название)}">
+    <span class="box"></span>
+    <span class="lessoninfo">
+      <h5>${esc(z.название)}</h5>
+      <p>${esc(z.описание||'')}</p>
+      <div class="meta">${esc(z.детали||'')}</div>
+    </span>
+  </label>`).join('');
+
+const slotsBox = byId('slots'); let pickedSlot=null;
+О.время_записи.forEach(t=>{
+  const b=document.createElement('button');
+  b.type='button'; b.className='slot'; b.textContent=t;
+  b.addEventListener('click',()=>{
+    slotsBox.querySelectorAll('.slot').forEach(s=>s.classList.remove('picked'));
+    b.classList.add('picked'); pickedSlot=t;
+  });
+  slotsBox.appendChild(b);
+});
+
+byId('bkAgreeText').innerHTML =
+  `Я, действуя свободно, своей волей и в своём интересе, даю согласие <b>${esc(О.имя)}${val(О.инн)?', ИНН '+esc(О.инн):''}</b> ` +
+  `на обработку моих персональных данных (имя, фамилия, телефон, e-mail, комментарий) исключительно для записи на занятие и связи для её подтверждения. ` +
+  `Условия и срок обработки: <a href="${esc(policyDoc)}" target="_blank" rel="noopener">Политика обработки ПД</a>; версия ${esc(val(О.версия_согласия)||'[укажите версию]')}. ` +
+  `Отзыв направляется на <a href="mailto:${esc(withdrawal)}">${esc(withdrawal)}</a>.`;
+
+/* переключение страниц */
+function показать(что){
+  byId('view-main').style.display = что==='main' ? '' : 'none';
+  byId('view-book').style.display = что==='book' ? '' : 'none';
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t.dataset.view===что));
+  window.scrollTo({top:0});
+}
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>показать(t.dataset.view)));
+byId('bookBanner').addEventListener('click',e=>{e.preventDefault();показать('book');});
+byId('tomainbtn').addEventListener('click',()=>показать('main'));
+
+/* часы */
+function tickClock(){try{
+  const f=new Intl.DateTimeFormat('ru-RU',{timeZone:'Europe/Moscow',weekday:'short',day:'2-digit',month:'long',hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  byId('clock').textContent=f.format(new Date()).toUpperCase()+' · МСК';
+}catch(e){byId('clock').textContent=new Date().toLocaleString('ru-RU');}}
+tickClock(); setInterval(tickClock,1000);
+
+/* появление блоков */
+const revObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');revObs.unobserve(e.target);}});},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+/* шкала */
+const railSteps=document.querySelectorAll('.railstep');
+const sections=[1,2,3,4].map(n=>byId('step'+n));
+let consentDone=false,s1seen=false,docsDoneFlag=false;
+function refreshRail(){
+  sections.forEach((sec,i)=>{const r=sec.getBoundingClientRect();
+    railSteps[i].classList.toggle('active',r.top<innerHeight*.5&&r.bottom>innerHeight*.35);});
+  railSteps[0].classList.toggle('done',s1seen);
+  railSteps[1].classList.toggle('done',docsDoneFlag);
+  railSteps[2].classList.toggle('done',consentDone);
+  railSteps[3].classList.toggle('done',consentDone);
+  byId('railprogress').style.width=(consentDone?100:docsDoneFlag?55:s1seen?32:12)+'%';
+}
+addEventListener('scroll',refreshRail,{passive:true});
+new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&!s1seen){s1seen=true;refreshRail();}});},{threshold:.4}).observe(byId('step2'));
+
+/* юридические реквизиты и редактируемая маркировка */
+byId('privacyOperator').innerHTML = `<b>${esc(val(О.имя)||'[оператор не заполнен]')}</b><br>ИНН: ${esc(val(О.инн)||'[не заполнен]')}<br>Адрес: ${esc(val(О.адрес)||'[не заполнен]')}<br>Контакт: <a href="mailto:${esc(val(О.email))}">${esc(val(О.email)||'[не заполнен]')}</a>`;
+byId('privacyNotice').textContent = `Уведомление РКН: ${val(О.уведомление_РКН)||'[укажите номер, дату или основание исключения]'}.`;
+byId('privacyPurposes').innerHTML = (Array.isArray(О.цели_обработки)?О.цели_обработки:[]).map(x=>`<li>${esc(x)}</li>`).join('') || '<li>[укажите цели обработки]</li>';
+byId('withdrawalContact').innerHTML = `Контакт для отзыва/обращений: <a href="mailto:${esc(withdrawal)}">${esc(withdrawal)}</a><br>Срок обработки: ${esc(val(О.срок_обработки)||'[укажите]')}<br>Третьи лица / обработчики: ${esc(val(О.третьи_лица)||'[укажите]')}`;
+const ad = О.реклама || {};
+if(ad.включено){
+  const adUrl = cleanUrl(ad.ссылка_на_рекламодателя);
+  const advertiser = adUrl ? `<a href="${esc(adUrl)}" target="_blank" rel="noopener">${esc(ad.рекламодатель || 'Сведения о рекламодателе')}</a>` : esc(ad.рекламодатель || '[заполните сведения о рекламодателе]');
+  byId('adlabel').innerHTML = `<b>${esc(ad.пометка || 'Реклама')}</b> · рекламодатель: ${advertiser}${val(ad.erid)?` · ERID: ${esc(ad.erid)}`:''}`;
+  byId('adlabel').classList.add('show');
+}
+const diskUrl = cleanUrl(О.папка_Яндекс_Диска);
+if(diskUrl){ const disk = byId('diskFolder'); disk.href = diskUrl; disk.style.display = 'inline-block'; }
+
+/* Формат архива единый для основной формы и формы записи. */
+function makeConsentArchive(rec){
+  return {
+    schema: 'consent-record/v1',
+    exportedAt: new Date().toISOString(),
+    operator: { name: val(О.имя)||'[не заполнено]', inn: val(О.инн)||'[не заполнено]', address: val(О.адрес)||'[не заполнено]', privacyContact: val(О.email)||'[не заполнено]', withdrawalContact: withdrawal, rknNotice: val(О.уведомление_РКН)||'[не заполнено]' },
+    consent: rec,
+    policy: { url: policyDoc, version: val(О.версия_согласия)||'[не заполнено]', purposes: Array.isArray(О.цели_обработки)?О.цели_обработки:[], retention: val(О.срок_обработки)||'[не заполнено]', recipients: val(О.третьи_лица)||'[не заполнено]' },
+    backupPlan: { mode: val(backupPlan.режим)||'[не заполнено]', frequency: val(backupPlan.период)||'[не заполнено]', retention: val(backupPlan.срок_хранения)||'[не заполнено]', responsible: val(backupPlan.ответственный)||'[не заполнено]' },
+    emailNotificationPolicy: { enabled: Boolean(emailNotice.включено), includePersonalData: Boolean(emailNotice.включать_ПД_в_письмо), subject: val(emailNotice.тема)||'[не заполнено]' },
+    technicalNote: 'Файл сформирован в браузере. Публичная ссылка на Яндекс Диск не даёт этому HTML права на загрузку; для автоматической передачи нужен защищённый серверный обработчик с OAuth-токеном вне браузера. E-mail-уведомления отправляет только серверная функция; секреты почтового сервиса не должны попадать в HTML.'
+  };
+}
+/* Скачивание создаёт файл только на устройстве пользователя. Затем его
+   можно загрузить в рабочую папку Диска вручную. */
+function downloadJson(data, filename){
+  try{
+    const blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json;charset=utf-8'});
+    const href = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=href; a.download=filename; a.style.display='none'; document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(href),1500);
+  }catch(e){
+    console.error('Не удалось подготовить JSON-архив',e);
+    alert('Не удалось сформировать JSON-файл. Проверьте, что браузер разрешает скачивания.');
+  }
+}
+/* Передача в серверную функцию. Токен Яндекс Диска здесь отсутствует:
+   он должен храниться только на сервере. Таймаут защищает форму от
+   бесконечного ожидания недоступного обработчика. */
+async function transmitToOperator(payload){
+  if(endpointConfigError) throw new Error('CONFIG_ENDPOINT');
+  if(!endpointUrl) return {mode:'local'};
+  const controller = new AbortController();
+  const timer = setTimeout(()=>controller.abort(),12000);
+  try{
+    const response = await fetch(endpointUrl,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload),credentials:'omit',cache:'no-store',signal:controller.signal});
+    if(!response.ok) throw new Error('HTTP '+response.status);
+    return {mode:'remote'};
+  } finally { clearTimeout(timer); }
+}
+let latestConsent = null;
+byId('downloadConsent').addEventListener('click',()=>{
+  const saved = latestConsent || (()=>{try{return JSON.parse(lsGet('pd-consent-v2')||'null')}catch(e){return null}})();
+  if(!saved){ alert('Сначала зарегистрируйте согласие.'); return; }
+  const safeNo = String(saved.no||'consent').replace(/[^a-zA-Zа-яА-Я0-9_-]+/g,'_');
+  downloadJson(makeConsentArchive(saved), `согласие-${safeNo}.json`);
+});
+let latestBooking = null;
+byId('downloadBookingConsent').addEventListener('click',()=>{
+  if(!latestBooking){ alert('Сначала отправьте заявку.'); return; }
+  const safeNo = String(latestBooking.appNo||'booking').replace(/[^a-zA-Zа-яА-Я0-9_-]+/g,'_');
+  downloadJson(makeConsentArchive(latestBooking), `согласие-на-запись-${safeNo}.json`);
+});
+
+/* главная: документы и согласие */
+const docBoxes=[...document.querySelectorAll('.docbox')];
+const gate3=byId('gate3'), gate4=byId('gate4'), step4=byId('step4');
+function refreshDocs(){
+  const n=docBoxes.filter(b=>b.checked).length;
+  docBoxes.forEach(b=>b.closest('.docrow').classList.toggle('read',b.checked));
+  byId('docnote').innerHTML = n===docBoxes.length
+    ? '<b>Все документы отмечены</b> — шаг 3 открыт, переходите к форме согласия ↓'
+    : `Отмечено <b>${n}</b> из ${docBoxes.length} — без полного ознакомления шаг 3 не откроется.`;
+  if(n===docBoxes.length&&!docsDoneFlag){docsDoneFlag=true;gate3.classList.remove('locked');refreshRail();}
+  else if(n<docBoxes.length&&docsDoneFlag&&!consentDone){docsDoneFlag=false;gate3.classList.add('locked');refreshRail();}
+}
+docBoxes.forEach(b=>b.addEventListener('change',refreshDocs));
+
+const form=byId('consentform'), fname=byId('fname'), flast=byId('flast'),
+      femail=byId('femail'), fagree=byId('fagree'), fmailing=byId('fmailing'),
+      formerr=byId('formerr'), submitbtn=byId('submitbtn');
+const nameRe=/^[A-Za-zА-Яа-яЁё][A-Za-zА-Яа-яЁё\- ']{1,59}$/;
+function showErr(m){formerr.textContent=m;formerr.classList.add('show');}
+function nowStamp(){const d=new Date(),p=n=>String(n).padStart(2,'0');
+  return `${p(d.getDate())}.${p(d.getMonth()+1)}.${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;}
+
+form.addEventListener('submit',async e=>{
+  e.preventDefault(); formerr.classList.remove('show');
+  fname.classList.remove('invalid'); flast.classList.remove('invalid');
+  if(!nameRe.test(fname.value.trim())){fname.classList.add('invalid');showErr('Проверьте имя: только буквы, минимум 2 символа.');fname.focus();return;}
+  if(!nameRe.test(flast.value.trim())){flast.classList.add('invalid');showErr('Проверьте фамилию: только буквы, минимум 2 символа.');flast.focus();return;}
+  if(femail.value.trim()&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(femail.value.trim())){showErr('Проверьте формат e-mail.');femail.focus();return;}
+  if(!fagree.checked){showErr('Необходимо подтвердить согласие с документами.');return;}
+
+  const rec={
+    recordType:'consent', first:fname.value.trim(), last:flast.value.trim(), email:femail.value.trim(), at:nowStamp(),
+    no:'ПД-'+new Date().getFullYear()+'-'+Math.floor(1000+Math.random()*9000),
+    consentVersion:val(О.версия_согласия)||'[не заполнено]', policyUrl:policyDoc,
+    purposes:Array.isArray(О.цели_обработки)?О.цели_обработки:[], docsRead:О.документы.map(d=>({name:d.название,url:d.ссылка})),
+    mailing:fmailing.checked?'да':'нет', marketingConsent:!!fmailing.checked
+  };
+  submitbtn.disabled=true; submitbtn.textContent='РЕГИСТРАЦИЯ…';
+  try{
+    const delivery=await transmitToOperator({type:'consent',firstName:rec.first,lastName:rec.last,email:rec.email,
+      consentAt:rec.at,consentNo:rec.no,mailing:rec.mailing,consentVersion:rec.consentVersion,
+      purposes:rec.purposes,docsRead:rec.docsRead,policyUrl:rec.policyUrl,
+      emailNotification:emailNotificationFor('consent',rec.no)});
+    if(delivery.mode==='local'){
+      byId('demobar').style.display='block';
+      await new Promise(res=>setTimeout(res,250));
+    }
+    latestConsent=rec;
+    lsSet('pd-consent-v2',JSON.stringify(rec));
+    grantAccess(rec,true);
+  }catch(err){
+    console.error(err);
+    showErr(err && err.message==='CONFIG_ENDPOINT'
+      ? 'Проверьте «адрес_функции»: для автоматической передачи нужен корректный HTTPS-адрес сервера.'
+      : 'Не удалось передать согласие. Проверьте соединение или настройки серверной функции и попробуйте ещё раз.');
+    submitbtn.disabled=false; submitbtn.textContent='Зарегистрировать согласие';
+  }
+});
+
+function grantAccess(rec,animate){
+  consentDone=true; docsDoneFlag=true;
+  gate3.classList.remove('locked'); gate4.classList.remove('locked'); step4.classList.add('open');
+  byId('recNo').textContent=rec.no;
+  byId('recName').textContent=rec.last+' '+rec.first;
+  byId('recDate').textContent=rec.at;
+  byId('recVersion').textContent=rec.consentVersion || val(О.версия_согласия) || '—';
+  latestConsent=rec;
+  form.style.display='none';
+  docBoxes.forEach(b=>b.checked=true);
+  refreshDocs(); refreshRail();
+  byId('resetbtn').style.display='inline-block';
+  if(animate){
+    const st=byId('stamp'); st.classList.remove('slam'); void st.offsetWidth; st.classList.add('slam');
+    setTimeout(()=>step4.scrollIntoView({behavior:'smooth'}),400);
+  }
+}
+const saved=lsGet('pd-consent-v2') || lsGet('pd-consent-v1');
+if(saved){try{const rec=JSON.parse(saved); latestConsent=rec; grantAccess(rec,false);}catch(e){}}
+byId('resetbtn').addEventListener('click',()=>{lsDel('pd-consent-v1');lsDel('pd-consent-v2');location.reload();});
+
+/* запись на занятия */
+const lessons=[...document.querySelectorAll('.lesson')];
+let pickedLesson=null;
+lessons.forEach(l=>l.addEventListener('click',()=>{
+  lessons.forEach(x=>x.classList.remove('picked'));
+  l.classList.add('picked');
+  pickedLesson=l.querySelector('input').value;
+}));
+const bkdate=byId('bkdate');
+{const t=new Date();
+ bkdate.min=`${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;}
+
+const bookform=byId('bookform'), bkfname=byId('bkfname'), bkflast=byId('bkflast'),
+      bkphone=byId('bkphone'), bkemail=byId('bkemail'), bkcomment=byId('bkcomment'),
+      bkagree=byId('bkagree'), bkerr=byId('bkerr'), bkbtn=byId('bkbtn');
+const phoneRe=/^\+?[0-9()\-\s]{10,20}$/;
+function bkShowErr(m){bkerr.textContent=m;bkerr.classList.add('show');}
+function fmtDateRu(iso){if(!iso)return '';const [y,m,d]=iso.split('-');return `${d}.${m}.${y}`;}
+
+bookform.addEventListener('submit',async e=>{
+  e.preventDefault(); bkerr.classList.remove('show');
+  [bkfname,bkflast,bkphone,bkemail].forEach(i=>i.classList.remove('invalid'));
+  if(!pickedLesson){bkShowErr('Выберите занятие из списка.');return;}
+  if(!bkdate.value){bkShowErr('Выберите дату занятия.');bkdate.classList.add('invalid');return;}
+  if(bkdate.value<bkdate.min){bkShowErr('Дата не может быть в прошлом.');bkdate.classList.add('invalid');return;}
+  if(!pickedSlot){bkShowErr('Выберите свободное время.');return;}
+  if(!nameRe.test(bkfname.value.trim())){bkfname.classList.add('invalid');bkShowErr('Проверьте имя: только буквы, минимум 2 символа.');bkfname.focus();return;}
+  if(!nameRe.test(bkflast.value.trim())){bkflast.classList.add('invalid');bkShowErr('Проверьте фамилию: только буквы, минимум 2 символа.');bkflast.focus();return;}
+  if(!phoneRe.test(bkphone.value.trim())){bkphone.classList.add('invalid');bkShowErr('Проверьте номер телефона.');bkphone.focus();return;}
+  if(bkemail.value.trim()&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(bkemail.value.trim())){bkemail.classList.add('invalid');bkShowErr('Проверьте формат e-mail.');bkemail.focus();return;}
+  if(!bkagree.checked){bkShowErr('Необходимо подтвердить согласие на обработку данных.');return;}
+
+  const now=new Date(),p=n=>String(n).padStart(2,'0');
+  const sentAt=`${p(now.getDate())}.${p(now.getMonth()+1)}.${now.getFullYear()} ${p(now.getHours())}:${p(now.getMinutes())}`;
+  const appNo='ЗН-'+now.getFullYear()+'-'+Math.floor(1000+Math.random()*9000);
+  const payload={recordType:'booking',type:'booking',firstName:bkfname.value.trim(),lastName:bkflast.value.trim(),
+    phone:bkphone.value.trim(),email:bkemail.value.trim(),lesson:pickedLesson,
+    date:fmtDateRu(bkdate.value),time:pickedSlot,comment:bkcomment.value.trim(),appNo,sentAt,
+    consentAt:sentAt,consentConfirmed:true,consentVersion:val(О.версия_согласия)||'[не заполнено]', policyUrl:policyDoc,
+    purpose:'запись на занятие и связь для подтверждения'};
+
+  bkbtn.disabled=true; bkbtn.textContent='ОТПРАВКА…';
+  try{
+    payload.emailNotification=emailNotificationFor('booking',payload.appNo);
+    const delivery=await transmitToOperator(payload);
+    if(delivery.mode==='local'){
+      byId('demobar').style.display='block';
+      await new Promise(res=>setTimeout(res,250));
+    }
+    latestBooking=payload;
+    byId('brecNo').textContent=appNo;
+    byId('brecLesson').textContent=pickedLesson;
+    byId('brecWhen').textContent=fmtDateRu(bkdate.value)+' · '+pickedSlot;
+    byId('brecName').textContent=bkflast.value.trim()+' '+bkfname.value.trim();
+    byId('brecPhone').textContent=bkphone.value.trim();
+    bookform.style.display='none';
+    const conf=byId('confirm'); conf.classList.add('show');
+    const st=byId('bstamp'); st.classList.remove('slam'); void st.offsetWidth; st.classList.add('slam');
+    conf.scrollIntoView({behavior:'smooth'});
+  }catch(err){
+    console.error(err);
+    bkShowErr(err && err.message==='CONFIG_ENDPOINT'
+      ? 'Проверьте «адрес_функции»: для автоматической передачи нужен корректный HTTPS-адрес сервера.'
+      : 'Не удалось передать заявку. Проверьте соединение или настройки серверной функции и попробуйте ещё раз.');
+    bkbtn.disabled=false; bkbtn.textContent='Отправить заявку';
+  }
+});
+
+byId('againbtn').addEventListener('click',()=>{
+  bookform.reset();
+  lessons.forEach(x=>x.classList.remove('picked'));
+  byId('slots').querySelectorAll('.slot').forEach(s=>s.classList.remove('picked'));
+  pickedLesson=null; pickedSlot=null;
+  byId('confirm').classList.remove('show');
+  bookform.style.display='block';
+  bkbtn.disabled=false; bkbtn.textContent='Отправить заявку';
+  bookform.scrollIntoView({behavior:'smooth'});
+});
+
+refreshDocs(); refreshRail();
+</script>
+</body>
+</html>

@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>🗣️ Энциклопедия логопеда — Полный справочник практикующего логопеда</title>
+<style>
+:root{
+  --primary:#2c3e50; --secondary:#00b894; --accent:#fdcb6e;
+  --bg:#f8f9fa; --card:#ffffff; --text:#2d3436; --muted:#636e72;
+  --border:#dfe6e9; --shadow:0 8px 32px rgba(0,184,148,.12);
+  --radius:20px; --success:#00b894; --danger:#e17055; --warning:#fdcb6e;
+  --blue:#0984e3; --pink:#e84393; --orange:#e17055; --purple:#6c5ce7;
+}
+[data-theme="dark"]{
+  --bg:#0a0a1a; --card:#1a1a2e; --text:#f0f0f0; --muted:#b2bec3;
+  --border:#2d2d44; --shadow:0 8px 32px rgba(0,184,148,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.9;
+  transition:.4s;padding-bottom:80px;
+  background-image:radial-gradient(circle at 10% 20%, rgba(0,184,148,.04) 0%, transparent 50%),
+                   radial-gradient(circle at 90% 80%, rgba(253,203,110,.04) 0%, transparent 50%);
+}
+
+/* ===== ШАПКА ===== */
+header{
+  background:linear-gradient(135deg, #00b894, #00cec9);
+  color:#fff;padding:.8rem 1rem;position:sticky;top:0;z-index:100;
+  box-shadow:0 4px 24px rgba(0,184,148,.3)
+}
+header .top-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+header h1{font-size:1.1rem;font-weight:800;display:flex;align-items:center;gap:.5rem}
+header .controls{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap}
+header .controls input{padding:.4rem .8rem;border-radius:30px;border:none;background:rgba(255,255,255,.2);color:#fff;font-size:.85rem;min-width:120px}
+header .controls input::placeholder{color:rgba(255,255,255,.7)}
+header .controls button{background:rgba(255,255,255,.2);border:none;color:#fff;padding:.3rem .8rem;border-radius:30px;cursor:pointer;font-weight:600;font-size:.8rem;transition:.2s}
+header .controls button:hover{background:rgba(255,255,255,.3)}
+.progress-bar{height:4px;background:rgba(255,255,255,.2);margin-top:.5rem;border-radius:4px}
+.progress-fill{height:100%;background:#fdcb6e;width:0%;transition:width .2s;border-radius:4px}
+.nav-toggle{display:none;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;padding:0 .3rem}
+
+/* ===== МОБИЛЬНОЕ МЕНЮ ===== */
+.nav-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:99}
+.nav-overlay.open{display:block}
+.mobile-nav{
+  position:fixed;top:0;left:-300px;width:280px;height:100%;
+  background:var(--card);z-index:100;overflow-y:auto;
+  transition:left .3s;padding:1.2rem;box-shadow:4px 0 30px rgba(0,0,0,.2)
+}
+.mobile-nav.open{left:0}
+.mobile-nav .close-nav{float:right;background:none;border:none;font-size:1.5rem;color:var(--text);cursor:pointer}
+.mobile-nav h3{font-size:.7rem;text-transform:uppercase;color:var(--muted);margin:1rem 0 .3rem;letter-spacing:1px}
+.mobile-nav ul{list-style:none}
+.mobile-nav li{margin-bottom:.2rem}
+.mobile-nav a{text-decoration:none;color:var(--text);padding:.4rem .6rem;display:block;border-radius:8px;font-size:.85rem;transition:.2s;border-left:3px solid transparent}
+.mobile-nav a:hover{background:rgba(0,184,148,.1);border-left-color:#00b894}
+
+/* ===== КОНТЕЙНЕР ===== */
+.container{padding:.8rem 1rem;max-width:1200px;margin:0 auto}
+section{margin-bottom:3.5rem;scroll-margin-top:80px}
+
+/* ===== ЗАГОЛОВКИ ===== */
+h2{
+  font-size:1.7rem;font-weight:800;color:#00b894;
+  display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem;
+  padding-bottom:.5rem;border-bottom:4px solid #fdcb6e
+}
+h2 .emoji-big{font-size:2.2rem}
+h3{font-size:1.3rem;font-weight:700;color:var(--text);margin:1.5rem 0 .8rem}
+h4{font-size:1.05rem;font-weight:600;color:#00b894;margin:.8rem 0 .4rem}
+
+/* ===== КАРТОЧКИ ===== */
+.card{
+  background:var(--card);padding:1.5rem;border-radius:var(--radius);
+  box-shadow:var(--shadow);margin-bottom:1.2rem;
+  border:1px solid rgba(0,184,148,.08);
+  transition:transform .3s, box-shadow .3s
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,184,148,.15)}
+.card .card-icon{font-size:2.5rem;display:block;margin-bottom:.5rem}
+.card.accent{border-left:6px solid #fdcb6e}
+.card.success{border-left:6px solid #00b894}
+.card.danger{border-left:6px solid #e17055}
+.card.warning{border-left:6px solid #fdcb6e}
+.card.purple{border-left:6px solid #6c5ce7}
+.card.blue{border-left:6px solid #0984e3}
+.card.pink{border-left:6px solid #e84393}
+.card.orange{border-left:6px solid #e17055}
+
+/* ===== ТАБЛИЦЫ ===== */
+.table-wrap{overflow-x:auto;margin:.8rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th,td{border:1px solid rgba(0,184,148,.15);padding:.6rem .8rem;text-align:left;vertical-align:top}
+th{background:#00b894;color:#fff;font-weight:700}
+tr:nth-child(even){background:rgba(0,184,148,.04)}
+
+/* ===== ТЭГИ ===== */
+.tag{
+  display:inline-block;padding:.1rem .6rem;border-radius:20px;
+  font-size:.65rem;font-weight:700;margin-right:.2rem
+}
+.tag.green{background:#00b894;color:#fff}
+.tag.gold{background:#fdcb6e;color:#2d3436}
+.tag.red{background:#e17055;color:#fff}
+.tag.blue{background:#0984e3;color:#fff}
+.tag.pink{background:#e84393;color:#fff}
+.tag.purple{background:#6c5ce7;color:#fff}
+
+/* ===== КНОПКИ ===== */
+.btn{
+  background:#00b894;color:#fff;border:none;padding:.6rem 1.2rem;
+  border-radius:30px;cursor:pointer;font-weight:700;font-size:.9rem;
+  transition:.3s;display:inline-block;text-align:center
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,184,148,.3)}
+.btn.accent{background:#fdcb6e;color:#2d3436}
+.btn.success{background:#00b894}
+.btn.danger{background:#e17055}
+.btn.pink{background:#e84393}
+.btn.blue{background:#0984e3}
+.btn.purple{background:#6c5ce7}
+.btn-block{display:block;width:100%}
+.btn-group{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0}
+.btn-group .btn{flex:1;min-width:60px;font-size:.8rem;padding:.4rem .8rem}
+
+/* ===== СЕТКИ ===== */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+
+/* ===== АККОРДЕОН ===== */
+.accordion{background:var(--card);border-radius:var(--radius);margin-bottom:.8rem;border:1px solid rgba(0,184,148,.1);overflow:hidden}
+.accordion-header{padding:.8rem 1rem;cursor:pointer;font-weight:700;display:flex;justify-content:space-between;align-items:center;background:rgba(0,184,148,.04);transition:.2s;font-size:1rem}
+.accordion-header:hover{background:rgba(0,184,148,.08)}
+.accordion-body{padding:0 1rem;max-height:0;overflow:hidden;transition:max-height .5s ease}
+.accordion-body.open{max-height:8000px;padding:1rem}
+.accordion-header .arrow{transition:transform .3s}
+.accordion-header .arrow.open{transform:rotate(180deg)}
+
+/* ===== ВЫВОД ===== */
+.output{
+  margin-top:1rem;padding:1rem;background:var(--bg);
+  border-radius:var(--radius);border:2px solid rgba(0,184,148,.15);
+  display:none;white-space:pre-wrap;font-family:monospace;
+  font-size:.85rem;max-height:450px;overflow-y:auto
+}
+.output.visible{display:block}
+
+/* ===== НИЖНЯЯ НАВИГАЦИЯ ===== */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;background:var(--card);
+  border-top:2px solid rgba(0,184,148,.08);padding:.3rem .5rem;z-index:98;
+  display:flex;justify-content:space-around;align-items:center;height:60px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)
+}
+.bottom-nav button{
+  background:none;border:none;color:var(--muted);font-size:.6rem;
+  cursor:pointer;display:flex;flex-direction:column;align-items:center;
+  gap:1px;padding:.2rem .4rem;border-radius:10px;min-width:40px
+}
+.bottom-nav button span{font-size:1.2rem}
+.bottom-nav button.active{color:#00b894;background:rgba(0,184,148,.08)}
+.bottom-nav .nav-label{font-size:.45rem;font-weight:600}
+
+/* ===== КНОПКА ВВЕРХ ===== */
+.scroll-top-btn{
+  position:fixed;bottom:75px;right:12px;width:44px;height:44px;
+  border-radius:50%;background:#00b894;color:#fff;border:none;
+  font-size:22px;cursor:pointer;box-shadow:0 4px 16px rgba(0,184,148,.3);
+  transition:all .3s;z-index:97;opacity:0;transform:scale(.8);pointer-events:none
+}
+.scroll-top-btn.visible{opacity:1;transform:scale(1);pointer-events:auto}
+
+/* ===== ДОПОЛНИТЕЛЬНО ===== */
+.quote-block{
+  background:linear-gradient(135deg, rgba(0,184,148,.05), rgba(253,203,110,.05));
+  padding:1.2rem;border-radius:var(--radius);border-left:5px solid #00b894;
+  font-style:italic;margin:.8rem 0
+}
+.checklist{list-style:none;padding:0}
+.checklist li{padding:.5rem 0;padding-left:1.8rem;position:relative;cursor:pointer;font-size:.95rem}
+.checklist li::before{content:'✨';position:absolute;left:0;color:#fdcb6e}
+.checklist li.checked::before{content:'✅'}
+
+.step-box{
+  background:var(--bg);padding:1rem 1.2rem;border-radius:var(--radius);
+  border-left:4px solid #00b894;margin:.8rem 0
+}
+.step-box .step-num{
+  display:inline-block;background:#00b894;color:#fff;
+  border-radius:50%;width:28px;height:28px;text-align:center;
+  line-height:28px;font-weight:700;font-size:.85rem;margin-right:.5rem
+}
+
+.definition-box{
+  background:rgba(0,184,148,.05);padding:1rem 1.2rem;
+  border-radius:var(--radius);margin:.8rem 0;border:1px dashed rgba(0,184,148,.2)
+}
+.definition-box strong{color:#00b894}
+
+.highlight-box{background:rgba(253,203,110,.12);padding:1rem 1.2rem;border-radius:var(--radius);border-left:4px solid #fdcb6e;margin:.8rem 0}
+
+/* ===== КАРТОЧКИ С ИКОНКАМИ ===== */
+.icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:.5rem;margin:.5rem 0}
+.icon-item{background:var(--bg);padding:.5rem;border-radius:8px;text-align:center;font-size:.8rem}
+
+/* ===== АДАПТИВ ===== */
+@media(max-width:768px){
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  header h1{font-size:1rem}
+  .controls input{width:100px;font-size:.75rem}
+  .bottom-nav button{min-width:32px}
+  .scroll-top-btn{bottom:70px;right:10px;width:36px;height:36px;font-size:18px}
+  h2{font-size:1.3rem}
+  .card{padding:.8rem}
+  .bottom-nav button span{font-size:1rem}
+  .bottom-nav .nav-label{font-size:.4rem}
+}
+@media(max-width:480px){
+  header .top-row{flex-direction:column;align-items:stretch;gap:.3rem}
+  header .controls{justify-content:center}
+  header .controls input{width:100%}
+  .bottom-nav button{min-width:28px}
+}
+@media(min-width:769px){
+  .mobile-nav,.nav-overlay,.nav-toggle{display:none!important}
+  .bottom-nav{display:none!important}
+}
+</style>
+
+<style id="theme-tools-style-3187686018391355935">.tm-card{margin:0;max-width:1100px;padding:22px;border:1px solid color-mix(in srgb,currentColor 14%,transparent);border-radius:20px;background:color-mix(in srgb,white 88%,transparent);box-shadow:0 8px 24px rgba(20,30,40,.07)}.tm-card h2{margin-top:0}.tm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.tm-grid details,.tm-grid label{padding:14px;border-radius:14px;background:rgba(255,255,255,.7)}.tm-form{display:flex;flex-wrap:wrap;gap:10px}.tm-form input,.tm-form select,.tm-form textarea,.tm-card>textarea{flex:1 1 220px;padding:12px;border:1px solid #b8c5cc;border-radius:10px;font:inherit}.tm-form button,.tm-actions button,.tm-buttons button,.tm-section-nav a{border:0;border-radius:10px;padding:12px 15px;background:#315d73;color:#fff;font:600 14px inherit;cursor:pointer;text-decoration:none}.tm-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}.tm-output, .tm-card pre{white-space:pre-wrap;line-height:1.6;padding:14px;background:rgba(0,0,0,.04);border-radius:12px}.tm-section-nav{display:flex;flex-wrap:wrap;gap:10px}.tm-note{opacity:.75;font-size:.92em}@media(max-width:600px){.tm-card{margin:0 10px;padding:16px;border-radius:16px}.tm-form{display:grid}.tm-form>*{width:100%;box-sizing:border-box}.tm-section-nav a,.tm-buttons button{min-height:46px;display:flex;align-items:center;justify-content:center}.tm-grid{grid-template-columns:1fr}}</style></head>
+<body>
+
+<header>
+  <div class="top-row">
+    <h1>🗣️ Энциклопедия логопеда</h1>
+    <div class="controls">
+      <input type="text" id="search" placeholder="🔍 Поиск...">
+      <button onclick="toggleTheme()">🌓</button>
+      <button onclick="window.print()">🖨️</button>
+      <button class="nav-toggle" onclick="toggleMobileNav()" style="display:block;background:none;border:none;color:#fff;font-size:1.4rem;padding:0 .3rem">☰</button>
+    </div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+</header>
+
+<!-- ===== МОБИЛЬНОЕ МЕНЮ ===== -->
+<div class="nav-overlay" id="navOverlay" onclick="toggleMobileNav()"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <button class="close-nav" onclick="toggleMobileNav()">✕</button>
+  <h3>📚 ОСНОВЫ</h3>
+  <ul>
+    <li><a href="#intro" onclick="toggleMobileNav()">Введение</a></li>
+    <li><a href="#anatomy" onclick="toggleMobileNav()">Анатомия речи</a></li>
+    <li><a href="#norm" onclick="toggleMobileNav()">Нормы развития речи</a></li>
+    <li><a href="#breathing" onclick="toggleMobileNav()">Речевое дыхание</a></li>
+    <li><a href="#voice" onclick="toggleMobileNav()">Голос и просодика</a></li>
+  </ul>
+  <h3>🔍 ДИАГНОСТИКА</h3>
+  <ul>
+    <li><a href="#diagnostics" onclick="toggleMobileNav()">Методы диагностики</a></li>
+    <li><a href="#protocols" onclick="toggleMobileNav()">Протоколы обследования</a></li>
+    <li><a href="#phonemic" onclick="toggleMobileNav()">Фонематический слух</a></li>
+    <li><a href="#tests" onclick="toggleMobileNav()">Тесты и пробы</a></li>
+  </ul>
+  <h3>🗣️ НАРУШЕНИЯ</h3>
+  <ul>
+    <li><a href="#disorders" onclick="toggleMobileNav()">Виды нарушений</a></li>
+    <li><a href="#dyslalia" onclick="toggleMobileNav()">Дислалия</a></li>
+    <li><a href="#dysarthria" onclick="toggleMobileNav()">Дизартрия</a></li>
+    <li><a href="#alalia" onclick="toggleMobileNav()">Алалия</a></li>
+    <li><a href="#stuttering" onclick="toggleMobileNav()">Заикание</a></li>
+    <li><a href="#dyslexia" onclick="toggleMobileNav()">Дислексия/Дисграфия</a></li>
+    <li><a href="#onr" onclick="toggleMobileNav()">ОНР</a></li>
+    <li><a href="#ffn" onclick="toggleMobileNav()">ФФН</a></li>
+  </ul>
+  <h3>🛠️ КОРРЕКЦИЯ</h3>
+  <ul>
+    <li><a href="#correction" onclick="toggleMobileNav()">Методы коррекции</a></li>
+    <li><a href="#articulation" onclick="toggleMobileNav()">Артикуляционная гимнастика</a></li>
+    <li><a href="#games" onclick="toggleMobileNav()">Логопедические игры</a></li>
+    <li><a href="#massage" onclick="toggleMobileNav()">Логопедический массаж</a></li>
+    <li><a href="#finger" onclick="toggleMobileNav()">Пальчиковая гимнастика</a></li>
+  </ul>
+  <h3>📝 КОНСПЕКТЫ</h3>
+  <ul>
+    <li><a href="#lesson-notes" onclick="toggleMobileNav()">Конспекты занятий</a></li>
+  </ul>
+  <h3>🛠️ ИНСТРУМЕНТЫ</h3>
+  <ul>
+    <li><a href="#generator" onclick="toggleMobileNav()">Генератор заданий</a></li>
+    <li><a href="#sound-setup" onclick="toggleMobileNav()">Генератор постановки звука</a></li>
+    <li><a href="#card-generator" onclick="toggleMobileNav()">Генератор карточек</a></li>
+    <li><a href="#lesson-plan" onclick="toggleMobileNav()">Генератор плана занятия</a></li>
+    <li><a href="#tracker" onclick="toggleMobileNav()">Трекер прогресса</a></li>
+    <li><a href="#tongue-twister" onclick="toggleMobileNav()">Генератор скороговорок</a></li>
+    <li><a href="#story" onclick="toggleMobileNav()">Генератор рассказов</a></li>
+  </ul>
+  <h3>📚 РЕСУРСЫ</h3>
+  <ul>
+    <li><a href="#resources" onclick="toggleMobileNav()">Ресурсы</a></li>
+    <li><a href="#bonus" onclick="toggleMobileNav()">Бонусы</a></li>
+  </ul>
+</nav>
+
+<button class="scroll-top-btn" id="scrollTopBtn" onclick="scrollToTop()" title="Наверх">⬆</button>
+
+<!-- ===== НИЖНЯЯ НАВИГАЦИЯ ===== -->
+<nav class="bottom-nav" id="bottomNav">
+  <button onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'})" class="active">
+    <span>🏠</span><span class="nav-label">Главная</span>
+  </button>
+  <button onclick="document.getElementById('diagnostics').scrollIntoView({behavior:'smooth'})">
+    <span>🔍</span><span class="nav-label">Диагностика</span>
+  </button>
+  <button onclick="document.getElementById('disorders').scrollIntoView({behavior:'smooth'})">
+    <span>🗣️</span><span class="nav-label">Нарушения</span>
+  </button>
+  <button onclick="document.getElementById('correction').scrollIntoView({behavior:'smooth'})">
+    <span>🛠️</span><span class="nav-label">Коррекция</span>
+  </button>
+  <button onclick="document.getElementById('generator').scrollIntoView({behavior:'smooth'})">
+    <span>⚙️</span><span class="nav-label">Инструменты</span>
+  </button>
+</nav>
+
+<div class="container">
+
+  <!-- ============================================================ -->
+  <!-- ===== ВВЕДЕНИЕ ===== -->
+  <!-- ============================================================ -->
+  <section id="intro">
+    <h2><span class="emoji-big">🗣️</span> Полная энциклопедия логопеда</h2>
+    <p><strong>Исчерпывающий справочник для практикующего логопеда.</strong> Здесь собраны все методы диагностики, коррекции, постановки звуков, развития речи, а также генераторы заданий, карточек и планов занятий.</p>
+
+    <div class="quote-block">
+      "Речь — это не просто навык, это ключ к мышлению, общению и полноценной жизни." — Лев Выготский
+    </div>
+
+    <div class="card purple">
+      <div class="card-icon">📖</div>
+      <h3>Структура справочника</h3>
+      <div class="grid-4">
+        <div><strong>🔍 Диагностика</strong><br>Методы, протоколы, тесты</div>
+        <div><strong>🗣️ Нарушения</strong><br>Виды, причины, симптоматика</div>
+        <div><strong>🛠️ Коррекция</strong><br>Методы, гимнастика, игры</div>
+        <div><strong>⚙️ Инструменты</strong><br>Генераторы, трекеры, карточки</div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <strong>💡 Важно!</strong> Данный справочник предназначен для специалистов. Все методики должны применяться с учётом индивидуальных особенностей ребёнка и после проведения диагностики.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== АНАТОМИЯ РЕЧИ ===== -->
+  <!-- ============================================================ -->
+  <section id="anatomy">
+    <h2><span class="emoji-big">🧬</span> Анатомия и физиология речи</h2>
+
+    <div class="card purple">
+      <h3>Речевой аппарат — строение и функции</h3>
+      <div class="grid-3">
+        <div>
+          <strong>👃 Дыхательный отдел</strong>
+          <ul>
+            <li>Лёгкие — источник воздушной струи</li>
+            <li>Диафрагма — основная дыхательная мышца</li>
+            <li>Трахея и бронхи — проводники воздуха</li>
+            <li>Межрёберные мышцы — участвуют в дыхании</li>
+          </ul>
+          <p style="font-size:.85rem;color:var(--muted)">Обеспечивает фонационный (речевой) выдох.</p>
+        </div>
+        <div>
+          <strong>🗣️ Голосовой отдел</strong>
+          <ul>
+            <li>Гортань — содержит голосовые складки</li>
+            <li>Голосовые складки — вибрируют, создавая звук</li>
+            <li>Высота голоса зависит от длины и натяжения складок</li>
+            <li>Надгортанник — защищает дыхательные пути</li>
+          </ul>
+          <p style="font-size:.85rem;color:var(--muted)">Нарушения: дисфония, афония, фонастения.</p>
+        </div>
+        <div>
+          <strong>👄 Артикуляционный отдел</strong>
+          <ul>
+            <li>Язык — самый подвижный орган (8 мышц)</li>
+            <li>Губы — создают губные звуки</li>
+            <li>Нёбо (твёрдое и мягкое) — разделяет ротовую и носовую полости</li>
+            <li>Зубы и альвеолы — создают преграды для звуков</li>
+            <li>Щёки и челюсти — участвуют в артикуляции</li>
+          </ul>
+          <p style="font-size:.85rem;color:var(--muted)">Нарушения: дизартрия, ринолалия.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card success">
+      <h3>📊 Артикуляционный уклад звуков</h3>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Звук</th><th>Положение языка</th><th>Положение губ</th><th>Воздушная струя</th><th>Особенности</th></tr>
+        <tr><td>С, З, Ц</td><td>Кончик языка у нижних зубов, спинка поднята</td><td>Улыбка</td><td>Холодная, центральная</td><td>Свистящие</td></tr>
+        <tr><td>Ш, Ж, Ч, Щ</td><td>Язык «чашечкой», кончик у альвеол</td><td>Вытянуты вперёд</td><td>Тёплая, направлена вверх</td><td>Шипящие</td></tr>
+        <tr><td>Р, Рь</td><td>Кончик языка у альвеол, вибрация</td><td>Нейтральные</td><td>Сильная, прерывистая</td><td>Дрожащие (вибранты)</td></tr>
+        <tr><td>Л, Ль</td><td>Кончик языка у верхних зубов или альвеол</td><td>Нейтральные</td><td>Боковая, воздух идёт по бокам</td><td>Боковые</td></tr>
+        <tr><td>К, Г, Х</td><td>Задняя часть спинки языка поднимается к нёбу</td><td>Нейтральные</td><td>Резкая, взрывная</td><td>Заднеязычные</td></tr>
+      </table>
+      </div>
+    </div>
+
+    <div class="card blue">
+      <h3>🧠 Центральные механизмы речи</h3>
+      <ul>
+        <li><strong>Центр Брока</strong> (лобная доля) — отвечает за моторную организацию речи (экспрессивная речь).</li>
+        <li><strong>Центр Вернике</strong> (височная доля) — отвечает за понимание речи (импрессивная речь).</li>
+        <li><strong>Дугообразный пучок</strong> — связывает центры Брока и Вернике.</li>
+        <li><strong>Мозжечок</strong> — координирует движения артикуляционных органов.</li>
+        <li><strong>Подкорковые ядра</strong> — регулируют тонус и плавность речи.</li>
+        <li><strong>Зрительная кора</strong> — участвует в чтении (оптический центр речи).</li>
+      </ul>
+      <p style="font-size:.85rem;color:var(--muted)">Поражение этих зон приводит к афазиям, дизартриям и другим нарушениям.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== НОРМЫ РАЗВИТИЯ РЕЧИ ===== -->
+  <!-- ============================================================ -->
+  <section id="norm">
+    <h2><span class="emoji-big">📊</span> Нормы развития речи</h2>
+
+    <div class="card purple">
+      <h3>Этапы развития речи от 0 до 7 лет</h3>
+      <div class="timeline" style="position:relative;padding-left:2rem">
+        <div style="position:relative;margin-bottom:1.5rem;padding-left:1.2rem;border-left:3px solid #00b894">
+          <span class="tag green">0-3 мес</span>
+          <p><strong>Гуление:</strong> Произнесение гласных звуков (а-а-а, у-у-у). Ребёнок реагирует на голос, улыбается, появляется комплекс оживления.</p>
+          <p style="font-size:.85rem;color:var(--muted)">К 2-3 месяцам гуление становится интонированным.</p>
+        </div>
+        <div style="position:relative;margin-bottom:1.5rem;padding-left:1.2rem;border-left:3px solid #00b894">
+          <span class="tag green">4-6 мес</span>
+          <p><strong>Лепет:</strong> Появление слогов (ба-ба, ма-ма, да-да). Ребёнок начинает понимать интонации, дифференцирует голоса близких.</p>
+          <p style="font-size:.85rem;color:var(--muted)">Лепет — важный этап для развития артикуляционного аппарата.</p>
+        </div>
+        <div style="position:relative;margin-bottom:1.5rem;padding-left:1.2rem;border-left:3px solid #00b894">
+          <span class="tag green">7-12 мес</span>
+          <p><strong>Первые слова:</strong> 5-10 слов (мама, папа, дай, бах). Понимает простые инструкции, реагирует на своё имя.</p>
+          <p style="font-size:.85rem;color:var(--muted)">Слова часто носят ситуативный характер.</p>
+        </div>
+        <div style="position:relative;margin-bottom:1.5rem;padding-left:1.2rem;border-left:3px solid #00b894">
+          <span class="tag green">1-2 года</span>
+          <p><strong>Фразовая речь:</strong> 30-50 слов, простые предложения из 2 слов («мама дай», «идём гулять»). Активно развивается понимание речи.</p>
+          <p style="font-size:.85rem;color:var(--muted)">К 2 годам появляются первые прилагательные и местоимения.</p>
+        </div>
+        <div style="position:relative;margin-bottom:1.5rem;padding-left:1.2rem;border-left:3px solid #00b894">
+          <span class="tag green">2-3 года</span>
+          <p><strong>Активный словарь:</strong> 200-300 слов, предложения из 3-4 слов. Начинает использовать местоимения, появляются вопросы «что?», «где?».</p>
+          <p style="font-size:.85rem;color:var(--muted)">Формируется фразовая речь, появляются прилагательные.</p>
+        </div>
+        <div style="position:relative;margin-bottom:1.5rem;padding-left:1.2rem;border-left:3px solid #00b894">
+          <span class="tag green">3-4 года</span>
+          <p><strong>Фразовая речь:</strong> 500-800 слов, сложные предложения. Появляются вопросы «почему?», «зачем?». Активно использует глаголы и прилагательные.</p>
+          <p style="font-size:.85rem;color:var(--muted)">Совершенствуется грамматический строй.</p>
+        </div>
+        <div style="position:relative;margin-bottom:1.5rem;padding-left:1.2rem;border-left:3px solid #00b894">
+          <span class="tag green">4-5 лет</span>
+          <p><strong>Развёрнутая речь:</strong> 1000-1500 слов. Правильно произносит большинство звуков (кроме Р, Л). Пересказывает сказки, составляет рассказы по картинке.</p>
+          <p style="font-size:.85rem;color:var(--muted)">Активно развивается монологическая речь.</p>
+        </div>
+        <div style="position:relative;margin-bottom:1.5rem;padding-left:1.2rem;border-left:3px solid #00b894">
+          <span class="tag green">5-6 лет</span>
+          <p><strong>Подготовка к школе:</strong> 2000+ слов. Звукопроизношение полностью сформировано (Р, Л появляются к 5-6 годам). Связная речь, логические рассуждения.</p>
+          <p style="font-size:.85rem;color:var(--muted)">Формируется звуко-буквенный анализ и синтез.</p>
+        </div>
+        <div style="position:relative;margin-bottom:1.5rem;padding-left:1.2rem;border-left:3px solid #00b894">
+          <span class="tag green">6-7 лет</span>
+          <p><strong>Школьная готовность:</strong> Сформирована фонетическая, лексическая и грамматическая стороны речи. Готов к обучению грамоте.</p>
+          <p style="font-size:.85rem;color:var(--muted)">Важнейший этап для предупреждения дислексии и дисграфии.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card success">
+      <h3>📋 Когда стоит обратиться к логопеду?</h3>
+      <ul class="checklist">
+        <li>К 2 годам нет фразовой речи (не говорит предложениями)</li>
+        <li>К 3 годам непонятная речь для окружающих</li>
+        <li>К 4 годам неправильное произношение звуков</li>
+        <li>К 5 годам не выговаривает звуки Р, Л, Ш, Ж, Ч, Щ</li>
+        <li>Заикание в любом возрасте</li>
+        <li>Трудности с чтением и письмом после 6-7 лет</li>
+        <li>Ребёнок говорит «в нос» или с нарушением темпа речи</li>
+        <li>Ребёнок не понимает обращённую речь или плохо запоминает</li>
+        <li>Бедный словарный запас по сравнению со сверстниками</li>
+        <li>Трудности в общении со сверстниками</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== РЕЧЕВОЕ ДЫХАНИЕ ===== -->
+  <!-- ============================================================ -->
+  <section id="breathing">
+    <h2><span class="emoji-big">💨</span> Речевое дыхание</h2>
+
+    <div class="card purple">
+      <h3>Основы речевого дыхания</h3>
+      <p>Речевое дыхание — основа голосообразования и плавной речи. Отличается от физиологического дыхания:</p>
+      <ul>
+        <li><strong>Физиологическое дыхание:</strong> Вдох и выдох равны по длительности, пауза между ними.</li>
+        <li><strong>Речевое дыхание:</strong> Вдох короткий, глубокий, выдох удлинённый, плавный.</li>
+      </ul>
+      <div class="definition-box">
+        <strong>Типы дыхания:</strong>
+        <ul>
+          <li><strong>Ключичное (верхнее):</strong> Плечи поднимаются, грудная клетка мало расширяется. Неэффективно для речи.</li>
+          <li><strong>Грудное (реберное):</strong> Расширение грудной клетки в стороны. Часто встречается у женщин.</li>
+          <li><strong>Диафрагмальное (брюшное):</strong> Движение диафрагмы, живот выпячивается на вдохе. Самый эффективный для речи тип.</li>
+          <li><strong>Нижнереберно-диафрагмальное:</strong> Смешанный тип. Оптимальный для речи.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card success">
+      <h3>Упражнения для развития речевого дыхания</h3>
+      <div class="grid-2">
+        <div>
+          <h4>Базовые упражнения</h4>
+          <ul>
+            <li><strong>«Понюхай цветок»</strong> — плавный вдох носом, выдох через рот.</li>
+            <li><strong>«Задуй свечу»</strong> — плавный долгий выдох.</li>
+            <li><strong>«Снежинка»</strong> — сдувать ватку с ладони.</li>
+            <li><strong>«Ветерок»</strong> — дуть на бумажную полоску.</li>
+            <li><strong>«Надуй шарик»</strong> — надувать щёки и сдувать их.</li>
+            <li><strong>«Вертушка»</strong> — крутить вертушку дыханием.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Упражнения с голосом</h4>
+          <ul>
+            <li><strong>«Эхо»</strong> — произнесение гласных на выдохе: А-а-а-а... (долго).</li>
+            <li><strong>«Счёт»</strong> — на одном выдохе посчитать до 5, 10, 15.</li>
+            <li><strong>«Фразы»</strong> — произнесение фразы на одном выдохе (постепенно увеличивать).</li>
+            <li><strong>«Скороговорки»</strong> — произнесение скороговорок на одном выдохе.</li>
+            <li><strong>«Гласный ряд»</strong> — произнесение А-О-У-И-Ы-Э на выдохе.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="highlight-box">
+        <strong>📌 Правила выполнения:</strong> Вдох через нос (плечи неподвижны!), выдох через рот (плавный, без толчков). Упражнения выполнять 3-5 раз, не переутомляя ребёнка.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ГОЛОС И ПРОСОДИКА ===== -->
+  <!-- ============================================================ -->
+  <section id="voice">
+    <h2><span class="emoji-big">🎵</span> Голос и просодика</h2>
+
+    <div class="card purple">
+      <h3>Голос — основа речи</h3>
+      <p><strong>Голос</strong> — это звук, возникающий в результате колебания голосовых складок. Характеристики голоса:</p>
+      <ul>
+        <li><strong>Сила (громкость):</strong> зависит от амплитуды колебаний складок.</li>
+        <li><strong>Высота (тональность):</strong> зависит от частоты колебаний.</li>
+        <li><strong>Тембр (окраска):</strong> зависит от формы резонаторов.</li>
+      </ul>
+      <div class="definition-box">
+        <strong>Нарушения голоса:</strong>
+        <ul>
+          <li><strong>Дисфония:</strong> частичное нарушение голоса.</li>
+          <li><strong>Афония:</strong> полное отсутствие голоса.</li>
+          <li><strong>Фонастения:</strong> быстрая утомляемость голоса.</li>
+          <li><strong>Ринолалия:</strong> гнусавость (открытая или закрытая).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card success">
+      <h3>Просодика — интонационная выразительность речи</h3>
+      <p><strong>Просодика</strong> включает:</p>
+      <ul>
+        <li><strong>Интонацию:</strong> повышение и понижение тона.</li>
+        <li><strong>Темп речи:</strong> скорость произнесения.</li>
+        <li><strong>Ритм:</strong> чередование ударных и безударных слогов.</li>
+        <li><strong>Паузы:</strong> остановки в речи.</li>
+        <li><strong>Логическое ударение:</strong> выделение главного слова.</li>
+      </ul>
+      <h4>Упражнения для развития просодики</h4>
+      <ul>
+        <li><strong>«Читаем с разной интонацией»</strong> — радостно, грустно, удивлённо.</li>
+        <li><strong>«Вопрос-ответ»</strong> — произнесение фраз с вопросительной интонацией.</li>
+        <li><strong>«Скажи как я»</strong> — повторение фраз с заданной интонацией.</li>
+        <li><strong>«Диктор»</strong> — чтение с правильным логическим ударением.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ДИАГНОСТИКА ===== -->
+  <!-- ============================================================ -->
+  <section id="diagnostics">
+    <h2><span class="emoji-big">🔍</span> Диагностика речи</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>Методы логопедической диагностики</h3>
+        <ul>
+          <li><strong>Обследование звукопроизношения:</strong> Проверка всех звуков в разных позициях (в начале, середине, конце слов). Используются предметные картинки.</li>
+          <li><strong>Обследование фонематического слуха:</strong> Узнавание и различение звуков, слогов, слов. Пробы: повторение слогов, выделение звука из ряда.</li>
+          <li><strong>Обследование словарного запаса:</strong> Пассивный и активный словарь, обобщающие понятия, подбор антонимов и синонимов.</li>
+          <li><strong>Обследование грамматического строя:</strong> Словоизменение (падежи, числа), словообразование (уменьшительные формы, приставочные глаголы), согласование.</li>
+          <li><strong>Обследование связной речи:</strong> Составление рассказа по серии картин, пересказ текста, описание предмета.</li>
+          <li><strong>Обследование артикуляционного аппарата:</strong> Подвижность языка, губ, челюсти, наличие анатомических аномалий.</li>
+          <li><strong>Обследование речевого дыхания:</strong> Тип дыхания, длительность выдоха.</li>
+        </ul>
+      </div>
+
+      <div class="card success">
+        <h3>📋 Логопедическое обследование — инструкция</h3>
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Сбор анамнеза:</strong> История развития ребёнка, наследственность, перенесённые заболевания, речевая среда, динамика развития речи.
+        </div>
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Обследование артикуляционного аппарата:</strong> Проверка подвижности языка, губ, челюсти (упражнения: «улыбка», «трубочка», «чашечка», «лошадка», «качели»). Оценка объёма и темпа движений.
+        </div>
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Обследование звукопроизношения:</strong> Проверка всех групп звуков (свистящие, шипящие, сонорные, заднеязычные) с использованием предметных и сюжетных картинок. Фиксация характера нарушения: искажение, замена, пропуск.
+        </div>
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Обследование фонематического слуха:</strong> Различение звуков: «Покажи, где [С], а где [Ш]», повторение слоговых рядов (са-ша, за-жа, са-за-са), выделение звука из ряда слов.
+        </div>
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Обследование словарного запаса:</strong> Название предметов, действий, признаков по картинкам. Подбор обобщающих слов, антонимов.
+        </div>
+        <div class="step-box">
+          <span class="step-num">6</span> <strong>Обследование грамматического строя:</strong> Использование падежей (родительный, дательный, творительный), образование множественного числа, уменьшительно-ласкательных форм.
+        </div>
+        <div class="step-box">
+          <span class="step-num">7</span> <strong>Обследование связной речи:</strong> Составление рассказа по картинке, пересказ знакомой сказки, описание предмета.
+        </div>
+        <div class="step-box">
+          <span class="step-num">8</span> <strong>Заполнение логопедического заключения:</strong> Описание состояния всех компонентов речи, постановка логопедического диагноза.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ТЕСТЫ И ПРОБЫ ===== -->
+  <!-- ============================================================ -->
+  <section id="tests">
+    <h2><span class="emoji-big">📝</span> Тесты и пробы для диагностики</h2>
+
+    <div class="card purple">
+      <h3>Тест на звукопроизношение</h3>
+      <div class="output visible" style="font-family:monospace;font-size:.85rem;background:var(--bg)">
+Попросите ребёнка назвать картинки:
+
+СВИСТЯЩИЕ: сок, сумка, коса, санки, зубы, коза, цыплёнок
+ШИПЯЩИЕ: шапка, машина, каша, жук, нож, ёжик, чайник, щётка
+СОНОРНЫЕ: рыба, корова, топор, лопата, лук, стул, клубок
+ЗАДНЕЯЗЫЧНЫЕ: кот, утка, гусь, хлеб
+
+Оцените:
+— Норма — произносит правильно
+— Искажение — звук произносится неверно
+— Замена — заменяет другим звуком (С→Т, Р→Л)
+— Пропуск — пропускает звук
+      </div>
+    </div>
+
+    <div class="card success">
+      <h3>Тест на фонематический слух</h3>
+      <div class="output visible" style="font-family:monospace;font-size:.85rem;background:var(--bg)">
+1. ПОВТОРИ СЛОГИ:
+   — са-ша, ша-са, са-за, за-жа, ра-ла, ла-ра
+   — па-ба, ба-па, та-да, да-та, ка-га, га-ка
+
+2. НАЙДИ СЛОВО:
+   — Хлопни, когда услышишь звук [С]: дом, сад, кот, сок, нос, рот, суп
+   — Хлопни, когда услышишь звук [Ш]: шапка, лук, шар, стол, жук, шуба
+
+3. ОПРЕДЕЛИ МЕСТО ЗВУКА:
+   — Где находится звук [Р] в слове «рыба» (начало, середина, конец)?
+   — Где находится звук [С] в слове «нос»?
+
+4. РАЗЛИЧЕНИЕ ПАРОНИМОВ:
+   — Покажи, где коса, а где коза
+   — Покажи, где мишка, а где миска
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ФОНЕМАТИЧЕСКИЙ СЛУХ ===== -->
+  <!-- ============================================================ -->
+  <section id="phonemic">
+    <h2><span class="emoji-big">👂</span> Фонематический слух</h2>
+
+    <div class="card purple">
+      <h3>Что такое фонематический слух?</h3>
+      <p><strong>Фонематический слух</strong> — способность человека к распознаванию и различению фонем (звуков) родного языка. Это основа для овладения грамотой, чтением и письмом.</p>
+      <div class="definition-box">
+        <strong>Уровни фонематического восприятия:</strong>
+        <ol>
+          <li><strong>Сенсорный:</strong> Узнавание звуков по их акустическим признакам.</li>
+          <li><strong>Перцептивный:</strong> Различение фонем, близких по звучанию.</li>
+          <li><strong>Смыслоразличительный:</strong> Различение слов-паронимов (бочка — почка, коса — коза).</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card success">
+      <h3>Пробы на фонематический слух</h3>
+      <ul>
+        <li><strong>Узнавание звука:</strong> «Хлопни, когда услышишь звук [С]» (из ряда звуков, слогов, слов).</li>
+        <li><strong>Различение слогов:</strong> Повторение слоговых рядов: са-ша, за-жа, са-за, са-ша-са.</li>
+        <li><strong>Различение слов-паронимов:</strong> Покажи, где «коса», а где «коза»; где «мишка», а где «миска».</li>
+        <li><strong>Звуковой анализ:</strong> Определение позиции звука в слове (начало, середина, конец).</li>
+        <li><strong>Звуковой синтез:</strong> Составление слова из отдельных звуков: [с], [о], [м] → сом.</li>
+        <li><strong>Слоговой анализ:</strong> Деление слов на слоги, определение количества слогов.</li>
+        <li><strong>Фонематические представления:</strong> «Назови слово со звуком [Р]», «Придумай слово, в котором есть звук [С]».</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ПРОТОКОЛЫ ===== -->
+  <!-- ============================================================ -->
+  <section id="protocols">
+    <h2><span class="emoji-big">📋</span> Протоколы логопедического обследования</h2>
+
+    <div class="card purple">
+      <h3>📋 Протокол обследования звукопроизношения</h3>
+      <div class="output visible" style="white-space:pre-wrap;font-family:monospace;font-size:.85rem;background:var(--bg)">
+═══════════════════════════════════════════════
+📋 ПРОТОКОЛ ОБСЛЕДОВАНИЯ ЗВУКОПРОИЗНОШЕНИЯ
+═══════════════════════════════════════════════
+Ф.И.О. ребёнка: ______________________________
+Возраст: _________
+Дата: _________
+
+ГРУППА ЗВУКОВ         НОРМА     ПРОИЗНОШЕНИЕ
+───────────────────────────────────────────────
+Свистящие (С, Сь, З, Зь, Ц)    |  Норма / Искажение / Замена / Пропуск
+Шипящие (Ш, Ж, Ч, Щ)          |  Норма / Искажение / Замена / Пропуск
+Сонорные (Р, Рь, Л, Ль)        |  Норма / Искажение / Замена / Пропуск
+Заднеязычные (К, Г, Х)         |  Норма / Искажение / Замена / Пропуск
+
+ХАРАКТЕР НАРУШЕНИЙ:
+- Сигматизм: ________________________________
+- Ротацизм: _________________________________
+- Ламбдацизм: _______________________________
+- Парасигматизм: ____________________________
+
+ЗАКЛЮЧЕНИЕ: ________________________________
+РЕКОМЕНДАЦИИ: _______________________________
+
+═══════════════════════════════════════════════
+      </div>
+    </div>
+
+    <div class="card success">
+      <h3>📋 Протокол обследования речи (общий)</h3>
+      <div class="output visible" style="white-space:pre-wrap;font-family:monospace;font-size:.85rem;background:var(--bg)">
+═══════════════════════════════════════════════
+📋 ПРОТОКОЛ ЛОГОПЕДИЧЕСКОГО ОБСЛЕДОВАНИЯ
+═══════════════════════════════════════════════
+Ф.И.О. ребёнка: ______________________________
+Дата рождения: _________ Возраст: _________
+Дата обследования: _________
+
+1. АРТИКУЛЯЦИОННЫЙ АППАРАТ
+   - Губы: подвижные / малоподвижные
+   - Язык: подвижный / малоподвижный
+   - Нёбо: норма / расщелина
+   - Прикус: норма / прогнатия / прогения
+
+2. ЗВУКОПРОИЗНОШЕНИЕ
+   - Гласные: норма / нарушены
+   - Согласные: ______________________________
+
+3. ФОНЕМАТИЧЕСКИЙ СЛУХ
+   - Различение звуков: сформировано / нарушено
+
+4. СЛОВАРНЫЙ ЗАПАС
+   - Пассивный: возрастная норма / ниже нормы
+   - Активный: возрастная норма / ниже нормы
+
+5. ГРАММАТИЧЕСКИЙ СТРОЙ
+   - Словоизменение: сформировано / нарушено
+   - Словообразование: сформировано / нарушено
+
+6. СВЯЗНАЯ РЕЧЬ
+   - Фразовая речь: сформирована / не сформирована
+   - Пересказ: доступен / не доступен
+
+ЗАКЛЮЧЕНИЕ: ________________________________
+РЕКОМЕНДАЦИИ: _______________________________
+
+═══════════════════════════════════════════════
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== НАРУШЕНИЯ РЕЧИ ===== -->
+  <!-- ============================================================ -->
+  <section id="disorders">
+    <h2><span class="emoji-big">🗣️</span> Классификация нарушений речи</h2>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🔤 Дислалия — нарушение звукопроизношения</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Дислалия</strong> — нарушение произношения звуков при нормальном слухе и сохранной иннервации речевого аппарата. Самое распространённое нарушение у дошкольников.</p>
+        <h4 id="dyslalia">Виды дислалии:</h4>
+        <ul>
+          <li><strong>Функциональная:</strong> Нарушение из-за неправильного воспитания речи, подражания, педагогической запущенности, двуязычия.</li>
+          <li><strong>Механическая (органическая):</strong> Из-за аномалий строения артикуляционного аппарата (короткая уздечка, неправильный прикус, аномалии нёба, толстые губы).</li>
+        </ul>
+        <h4>Основные проявления (по звукам):</h4>
+        <ul>
+          <li><strong>Сигматизм:</strong> Нарушение произношения свистящих (С, З, Ц) и шипящих (Ш, Ж, Ч, Щ)</li>
+          <li><strong>Ротацизм:</strong> Нарушение произношения Р, Рь</li>
+          <li><strong>Ламбдацизм:</strong> Нарушение произношения Л, Ль</li>
+          <li><strong>Гаммацизм:</strong> Нарушение произношения К, Г, Х</li>
+          <li><strong>Йотацизм:</strong> Нарушение произношения Й</li>
+        </ul>
+        <h4>Формы сигматизма:</h4>
+        <ul>
+          <li><strong>Межзубный:</strong> Язык между зубами.</li>
+          <li><strong>Боковой:</strong> Воздух идёт по бокам языка.</li>
+          <li><strong>Носовой:</strong> Воздух идёт через нос.</li>
+          <li><strong>Губно-зубной:</strong> Звук похож на [Ф].</li>
+          <li><strong>Призубный:</strong> Кончик языка упирается в зубы.</li>
+          <li><strong>Шипящий:</strong> Свистящий звук заменяется на шипящий.</li>
+        </ul>
+        <p><span class="tag gold">Коррекция:</span> Артикуляционная гимнастика, постановка звуков, автоматизация в слогах, словах, фразах. Длительность от 2 до 6 месяцев.</p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🧠 Дизартрия — нарушение произносительной стороны речи</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Дизартрия</strong> — нарушение произносительной стороны речи из-за органического поражения центральной нервной системы, приводящего к расстройству иннервации речевых мышц.</p>
+        <h4>Причины:</h4>
+        <ul>
+          <li>Перинатальная патология (родовые травмы, асфиксия, недоношенность, внутриутробные инфекции)</li>
+          <li>Детский церебральный паралич (ДЦП)</li>
+          <li>Инфекционные заболевания головного мозга (менингит, энцефалит)</li>
+          <li>Травмы головного мозга</li>
+        </ul>
+        <h4 id="dysarthria">Формы дизартрии:</h4>
+        <ul>
+          <li><strong>Бульбарная:</strong> Поражение ядер черепно-мозговых нервов (IX, X, XII). Речь невнятная, гнусавая.</li>
+          <li><strong>Псевдобульбарная:</strong> Двустороннее поражение корково-ядерных путей. Самая частая форма. Речь смазанная, монотонная.</li>
+          <li><strong>Мозжечковая:</strong> Поражение мозжечка. Речь скандированная, толчкообразная.</li>
+          <li><strong>Корковая:</strong> Поражение коры головного мозга. Нарушение отдельных артикуляционных движений.</li>
+          <li><strong>Экстрапирамидная (подкорковая):</strong> Поражение подкорковых ядер. Речь с гиперкинезами.</li>
+          <li><strong>Стёртая дизартрия:</strong> Лёгкая степень, малозаметная. Нарушены только некоторые звуки (Р, Л, шипящие).</li>
+        </ul>
+        <h4>Симптомы:</h4>
+        <ul>
+          <li>Нарушение артикуляционной моторики (язык, губы, челюсть)</li>
+          <li>Смазанность, нечёткость речи («каша во рту»)</li>
+          <li>Нарушение голоса (тихий, хриплый, назализованный)</li>
+          <li>Нарушение речевого дыхания (выдох короткий)</li>
+          <li>Слюнотечение (гиперсаливация)</li>
+          <li>Нарушение темпа и ритма речи</li>
+        </ul>
+        <p><span class="tag red">Коррекция:</span> Логопедический массаж, артикуляционная гимнастика, дыхательные упражнения, работа с просодикой (интонацией, темпом). Требуется комплексный подход с неврологом.</p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🔇 Алалия — отсутствие или недоразвитие речи</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Алалия</strong> — отсутствие или грубое недоразвитие речи при сохранном слухе и интеллекте. Вызвана органическим поражением речевых зон коры головного мозга.</p>
+        <h4 id="alalia">Виды алалии:</h4>
+        <ul>
+          <li><strong>Моторная (экспрессивная) алалия:</strong> Нарушение экспрессивной речи (ребёнок понимает обращённую речь, но не говорит или говорит с трудом). Поражение центра Брока.</li>
+          <li><strong>Сенсорная (импрессивная) алалия:</strong> Нарушение импрессивной речи (ребёнок не понимает обращённую речь, но может говорить). Поражение центра Вернике.</li>
+          <li><strong>Сенсомоторная алалия:</strong> Сочетанное нарушение.</li>
+        </ul>
+        <h4>Симптомы моторной алалии:</h4>
+        <ul>
+          <li>Отсутствие фразовой речи к 3-4 годам (может говорить отдельные слова)</li>
+          <li>Бедный словарный запас (преобладание существительных и глаголов)</li>
+          <li>Аграмматизм (нарушение грамматического строя)</li>
+          <li>Нарушение звукопроизношения (перестановки, замены)</li>
+          <li>Трудности в поиске слов</li>
+        </ul>
+        <h4>Симптомы сенсорной алалии:</h4>
+        <ul>
+          <li>Непонимание обращённой речи (слышит, но не различает звуки)</li>
+          <li>Эхолалия (повторение слов за другими)</li>
+          <li>Речь бессвязная, «словесная окрошка»</li>
+          <li>Трудности в различении звуков</li>
+        </ul>
+        <p><span class="tag red">Коррекция:</span> Комплексный подход: стимуляция речи, развитие артикуляционной моторики, работа с лексикой и грамматикой, логопедический массаж. Занятия требуют длительного времени (от 2 лет).</p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🔁 Заикание — нарушение темпа и ритма речи</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Заикание (логоневроз)</strong> — нарушение темпа, ритма и плавности речи, сопровождающееся судорожными сокращениями мышц речевого аппарата.</p>
+        <h4>Причины:</h4>
+        <ul>
+          <li>Наследственная предрасположенность (слабость нервной системы)</li>
+          <li>Психотравмирующие ситуации (испуг, стресс)</li>
+          <li>Подражание заикающимся</li>
+          <li>Речевые перегрузки (раннее обучение, переучивание левшей)</li>
+          <li>Ослабление организма после болезней</li>
+        </ul>
+        <h4>Виды судорог:</h4>
+        <ul>
+          <li><strong>Тонические:</strong> Длительное напряжение мышц (паузы в речи).</li>
+          <li><strong>Клонические:</strong> Повторные сокращения мышц (повторы звуков, слогов).</li>
+          <li><strong>Смешанные:</strong> Сочетание тонических и клонических.</li>
+        </ul>
+        <h4>Симптомы:</h4>
+        <ul>
+          <li>Повторы звуков, слогов (к-к-к-от)</li>
+          <li>Застревание на звуках (м-м-м-ашина)</li>
+          <li>Сопутствующие движения (зажмуривание, кивание, топанье)</li>
+          <li>Логофобия — страх речи (ребёнок молчит в определённых ситуациях)</li>
+          <li>Нарушение дыхания, голоса</li>
+        </ul>
+        <p><span class="tag gold">Коррекция:</span> Дыхательная гимнастика (А.Н. Стрельниковой), работа с темпом и ритмом (логопедическая ритмика), психотерапия, развитие плавной речи. Важен комплексный подход.</p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>📝 Дислексия и дисграфия — нарушения чтения и письма</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Дислексия</strong> — нарушение процесса чтения. <strong>Дисграфия</strong> — нарушение процесса письма. Часто встречаются вместе.</p>
+        <h4 id="dyslexia">Виды дислексии:</h4>
+        <ul>
+          <li><strong>Фонематическая:</strong> Нарушение звукового анализа и синтеза.</li>
+          <li><strong>Семантическая:</strong> Нарушение понимания прочитанного (техника чтения сохранена).</li>
+          <li><strong>Аграмматическая:</strong> Нарушение грамматического строя чтения (изменение падежей, чисел).</li>
+          <li><strong>Оптическая:</strong> Трудности в различении букв, схожих по начертанию (м-н, ш-щ).</li>
+          <li><strong>Мнестическая:</strong> Нарушение запоминания букв.</li>
+        </ul>
+        <h4>Виды дисграфии:</h4>
+        <ul>
+          <li><strong>Акустическая:</strong> Замены букв, обозначающих близкие по звучанию звуки (ш-ж, с-з).</li>
+          <li><strong>Артикуляторно-акустическая:</strong> Отражение недостатков произношения на письме (пишет как говорит).</li>
+          <li><strong>Оптическая:</strong> Замены оптически сходных букв (б-д, п-т).</li>
+          <li><strong>Грамматическая:</strong> Нарушение грамматического оформления (пропуски, перестановки, ошибки в окончаниях).</li>
+          <li><strong>Зеркальное письмо:</strong> Написание букв в зеркальном отображении.</li>
+        </ul>
+        <p><span class="tag gold">Коррекция:</span> Развитие фонематического слуха, зрительного восприятия, работа с буквами, словами, текстами. Упражнения на звуко-буквенный анализ и синтез.</p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>📊 ОНР — общее недоразвитие речи</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Общее недоразвитие речи (ОНР)</strong> — сложное нарушение, при котором у детей с нормальным слухом и интеллектом нарушены все компоненты речи.</p>
+        <h4 id="onr">Уровни ОНР (по Р.Е. Левиной):</h4>
+        <ul>
+          <li><strong>I уровень:</strong> Отсутствие общеупотребительной речи («безречевые дети»). Используют лепетные слова, звукоподражания.</li>
+          <li><strong>II уровень:</strong> Начатки фразовой речи. Словарь бедный, аграмматизм, нарушение звукопроизношения.</li>
+          <li><strong>III уровень:</strong> Развёрнутая фразовая речь с элементами недоразвития лексики, грамматики и фонетики.</li>
+          <li><strong>IV уровень:</strong> Незначительные нарушения (по Т.Б. Филичевой). Трудности в построении развёрнутых высказываний.</li>
+        </ul>
+        <h4>Характеристика III уровня ОНР:</h4>
+        <ul>
+          <li>Использует простые распространённые предложения</li>
+          <li>Аграмматизмы (ошибки в падежах, числах, предлогах)</li>
+          <li>Бедный словарь (не знает точных названий предметов)</li>
+          <li>Нарушено звукопроизношение (3-4 группы звуков)</li>
+          <li>Нарушен фонематический слух</li>
+        </ul>
+        <p><span class="tag red">Коррекция:</span> Комплексная работа по развитию всех компонентов речи: звукопроизношения, фонематического слуха, словаря, грамматики, связной речи.</p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🔤 ФФН — фонетико-фонематическое недоразвитие</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>ФФН</strong> — нарушение формирования произносительной стороны речи, связанное с недостатками восприятия и произношения фонем.</p>
+        <h4>Характеристика:</h4>
+        <ul>
+          <li>Нарушено произношение одной или нескольких групп звуков</li>
+          <li>Нарушен фонематический слух (трудности в различении звуков)</li>
+          <li>Трудности в звуковом анализе и синтезе</li>
+          <li>Словарный запас и грамматика в норме или с небольшими отклонениями</li>
+        </ul>
+        <p><span class="tag gold">Коррекция:</span> Постановка звуков, автоматизация, дифференциация, развитие фонематического слуха.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== КОРРЕКЦИЯ ===== -->
+  <!-- ============================================================ -->
+  <section id="correction">
+    <h2><span class="emoji-big">🛠️</span> Методы коррекции речи</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>Основные методы коррекции</h3>
+        <ul>
+          <li><strong>Артикуляционная гимнастика:</strong> Упражнения для тренировки органов артикуляции, выработка правильного уклада.</li>
+          <li><strong>Дыхательная гимнастика:</strong> Формирование правильного речевого дыхания (нижнереберно-диафрагмальный тип).</li>
+          <li><strong>Постановка звуков:</strong> Механический (с помощью зондов, шпателей) и подражательный (по показу) способы.</li>
+          <li><strong>Автоматизация звуков:</strong> Закрепление звуков в слогах → словах → предложениях → связной речи.</li>
+          <li><strong>Дифференциация звуков:</strong> Различение близких по звучанию звуков (С-Ш, З-Ж, Р-Л).</li>
+          <li><strong>Логопедический массаж:</strong> Расслабление/активизация мышц артикуляционного аппарата (при дизартрии).</li>
+          <li><strong>Развитие фонематического слуха:</strong> Упражнения на различение звуков, слогов, слов.</li>
+          <li><strong>Развитие связной речи:</strong> Составление рассказов, пересказы, беседы.</li>
+          <li><strong>Пальчиковая гимнастика:</strong> Развитие мелкой моторики, связанной с речевыми центрами.</li>
+        </ul>
+      </div>
+
+      <div class="card success">
+        <h3>📋 План коррекционной работы</h3>
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Диагностика:</strong> Определение уровня развития речи, выявление нарушений, постановка логопедического заключения.
+        </div>
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Подготовительный этап:</strong> Развитие артикуляционной моторики, дыхания, фонематического слуха. Подготовка речевых органов к постановке звуков.
+        </div>
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Постановка звуков:</strong> Формирование правильного артикуляционного уклада. Использование подражательного или механического способа.
+        </div>
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Автоматизация:</strong> Закрепление звуков в слогах → словах → предложениях → связной речи (стихи, рассказы).
+        </div>
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Дифференциация:</strong> Различение звуков, схожих по звучанию или артикуляции.
+        </div>
+        <div class="step-box">
+          <span class="step-num">6</span> <strong>Введение в речь:</strong> Использование звуков в свободном общении, контроль за речью.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== АРТИКУЛЯЦИОННАЯ ГИМНАСТИКА ===== -->
+  <!-- ============================================================ -->
+  <section id="articulation">
+    <h2><span class="emoji-big">👄</span> Артикуляционная гимнастика</h2>
+
+    <div class="grid-3">
+      <div class="card purple">
+        <h3>👄 Упражнения для губ</h3>
+        <ul>
+          <li><strong>«Улыбка»:</strong> Растянуть губы в улыбку, зубы сомкнуты. Держать 5-10 сек.</li>
+          <li><strong>«Трубочка»:</strong> Вытянуть губы вперёд, зубы сомкнуты. Держать 5-10 сек.</li>
+          <li><strong>«Заборчик»:</strong> Улыбка с открытыми зубами (видны верхние и нижние зубы).</li>
+          <li><strong>«Хоботок»:</strong> Вытянуть губы вперёд, изображая хобот слона.</li>
+          <li><strong>«Улыбка-трубочка»:</strong> Чередование улыбки и трубочки (5-10 раз).</li>
+          <li><strong>«Рупор»:</strong> Округлить губы, как при звуке [О].</li>
+        </ul>
+      </div>
+
+      <div class="card success">
+        <h3>👅 Упражнения для языка</h3>
+        <ul>
+          <li><strong>«Лопатка»:</strong> Широкий расслабленный язык лежит на нижней губе (под счёт до 10).</li>
+          <li><strong>«Иголочка»:</strong> Узкий напряжённый язык выдвинут вперёд (под счёт).</li>
+          <li><strong>«Чашечка»:</strong> Боковые края языка подняты, образуя «чашечку» (удержать под счёт).</li>
+          <li><strong>«Лошадка»:</strong> Пощёлкать языком, имитируя цокот копыт (8-10 раз).</li>
+          <li><strong>«Качели»:</strong> Попеременно поднимать язык к верхним и нижним зубам.</li>
+          <li><strong>«Вкусное варенье»:</strong> Облизывать верхнюю губу широким языком (сверху вниз).</li>
+          <li><strong>«Маляр»:</strong> Проводить языком по нёбу от зубов к горлу.</li>
+          <li><strong>«Грибок»:</strong> Присосать язык к нёбу, растянуть подъязычную уздечку.</li>
+          <li><strong>«Гармошка»:</strong> Язык у нёба, открывать и закрывать рот.</li>
+        </ul>
+      </div>
+
+      <div class="card accent">
+        <h3>💨 Дыхательные упражнения</h3>
+        <ul>
+          <li><strong>«Снежинка»:</strong> Сдувать ватку с ладони (удлинённый выдох).</li>
+          <li><strong>«Задуй свечу»:</strong> Плавный выдох, имитация задувания свечи.</li>
+          <li><strong>«Ветерок»:</strong> Выдох на бумажную полоску — она должна шевелиться.</li>
+          <li><strong>«Понюхай цветок»:</strong> Вдох через нос, выдох через рот.</li>
+          <li><strong>«Мыльные пузыри»:</strong> Выдувание мыльных пузырей.</li>
+          <li><strong>«Воздушный шарик»:</strong> Надувать щёки и сдувать их (или постепенно сдувать).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card warning">
+      <h3>📋 Комплекс артикуляционной гимнастики — инструкция</h3>
+      <div class="step-box">
+        <span class="step-num">1</span> Проводить гимнастику ежедневно (5-10 минут) перед зеркалом.
+      </div>
+      <div class="step-box">
+        <span class="step-num">2</span> Выполнять упражнения перед зеркалом (ребёнок видит себя и логопеда). Очень важно для самоконтроля.
+      </div>
+      <div class="step-box">
+        <span class="step-num">3</span> Начинать с простых упражнений (статических), постепенно переходя к динамическим.
+      </div>
+      <div class="step-box">
+        <span class="step-num">4</span> Каждое упражнение выполнять 5-10 раз (в зависимости от возраста и возможностей ребёнка).
+      </div>
+      <div class="step-box">
+        <span class="step-num">5</span> Следить за качеством выполнения (симметричность, амплитуда, точность).
+      </div>
+      <div class="step-box">
+        <span class="step-num">6</span> Использовать игровые приёмы, стихи, считалки для поддержания интереса.
+      </div>
+      <div class="step-box">
+        <span class="step-num">7</span> При утомлении делать перерыв, не перегружать ребёнка.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ПАЛЬЧИКОВАЯ ГИМНАСТИКА ===== -->
+  <!-- ============================================================ -->
+  <section id="finger">
+    <h2><span class="emoji-big">🖐️</span> Пальчиковая гимнастика</h2>
+
+    <div class="card purple">
+      <h3>Связь речи и моторики</h3>
+      <p>Развитие мелкой моторики рук тесно связано с развитием речи. Движения пальцев рук активизируют речевые центры головного мозга.</p>
+      <div class="definition-box">
+        <strong>Принципы:</strong>
+        <ul>
+          <li>Упражнения выполнять ежедневно по 3-5 минут.</li>
+          <li>Начинать с простых движений, постепенно усложняя.</li>
+          <li>Сопровождать движения стихами или считалками.</li>
+          <li>Использовать массаж пальцев рук.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card success">
+      <h3>Упражнения для пальчиков</h3>
+      <div class="grid-2">
+        <div>
+          <h4>Самомассаж кистей</h4>
+          <ul>
+            <li><strong>«Каток»:</strong> Массаж ладоней круговыми движениями.</li>
+            <li><strong>«Зайчик»:</strong> Постукивание по ладони пальцами.</li>
+            <li><strong>«Грабли»:</strong> Разминание пальцев от кончиков к основанию.</li>
+            <li><strong>«Пила»:</strong> Пилим рёбрами ладоней.</li>
+            <li><strong>«Пружинка»:</strong> Сжимание и разжимание пальцев в кулак.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Динамические упражнения</h4>
+          <ul>
+            <li><strong>«Этот пальчик — дедушка»</strong> (пальчиковые стихи).</li>
+            <li><strong>«Сорока-ворона»</strong> (каши варила).</li>
+            <li><strong>«Колечко»</strong> — соединение большого пальца с остальными по очереди.</li>
+            <li><strong>«Кулачок-ладошка»</strong> — смена позиций.</li>
+            <li><strong>«Ножницы»</strong> — разведение и сведение пальцев.</li>
+            <li><strong>«Молоток»</strong> — постукивание кулачком по столу.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ЛОГОПЕДИЧЕСКИЙ МАССАЖ ===== -->
+  <!-- ============================================================ -->
+  <section id="massage">
+    <h2><span class="emoji-big">💆</span> Логопедический массаж</h2>
+
+    <div class="card purple">
+      <h3>Что такое логопедический массаж?</h3>
+      <p><strong>Логопедический массаж</strong> — метод коррекции, основанный на механическом воздействии на мышцы артикуляционного аппарата. Используется при дизартрии, ринолалии, заикании, алалии.</p>
+      <div class="definition-box">
+        <strong>Виды массажа:</strong>
+        <ul>
+          <li><strong>Классический:</strong> Поглаживание, растирание, разминание, вибрация.</li>
+          <li><strong>Точечный:</strong> Воздействие на биологически активные точки.</li>
+          <li><strong>Зондовый:</strong> Использование специальных зондов (по Новиковой).</li>
+          <li><strong>Самомассаж:</strong> Ребёнок выполняет сам (с помощью рук или языка).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card success">
+      <h3>Техника массажа</h3>
+      <div class="grid-2">
+        <div>
+          <h4>Лицо и губы</h4>
+          <ul>
+            <li>Поглаживание лба от центра к вискам.</li>
+            <li>Растирание щёк круговыми движениями.</li>
+            <li>Разминание губ (похлопывание, пощипывание).</li>
+            <li>Поглаживание носогубных складок.</li>
+            <li>Точечный массаж крыльев носа.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Язык и нёбо</h4>
+          <ul>
+            <li>Поглаживание языка от корня к кончику.</li>
+            <li>Растирание боковых краёв языка.</li>
+            <li>Вибрация кончика языка.</li>
+            <li>Поглаживание твёрдого и мягкого нёба.</li>
+            <li>Точечный массаж подъязычной области.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="highlight-box">
+        <strong>⚠️ Важно!</strong> Массаж должен выполняться только специалистом после консультации с неврологом. Противопоказания: острые инфекции, кожные заболевания, судороги в анамнезе.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ЛОГОПЕДИЧЕСКИЕ ИГРЫ ===== -->
+  <!-- ============================================================ -->
+  <section id="games">
+    <h2><span class="emoji-big">🎮</span> Логопедические игры</h2>
+
+    <div class="grid-3">
+      <div class="card purple">
+        <h3>🎯 Игры на звукопроизношение</h3>
+        <ul>
+          <li><strong>«Эхо»:</strong> Повторение слогов и слов за логопедом (развитие слухового внимания).</li>
+          <li><strong>«Поймай звук»:</strong> Хлопнуть, когда услышишь заданный звук.</li>
+          <li><strong>«Звуковой домик»:</strong> Расселение картинок по домикам (по звукам).</li>
+          <li><strong>«Чей голосок?»:</strong> Угадывание животного по звукоподражанию.</li>
+          <li><strong>«Исправь ошибку»:</strong> Нахождение неправильно произнесённых слов.</li>
+          <li><strong>«Звуковая дорожка»:</strong> Провести пальцем по дорожке, называя звуки.</li>
+        </ul>
+      </div>
+
+      <div class="card success">
+        <h3>🎲 Игры на развитие речи</h3>
+        <ul>
+          <li><strong>«Опиши предмет»:</strong> Название признаков предмета (цвет, форма, размер, материал).</li>
+          <li><strong>«Чего не стало?»:</strong> Развитие памяти и внимания (зрительная гимнастика).</li>
+          <li><strong>«Один-много»:</strong> Образование множественного числа существительных.</li>
+          <li><strong>«Назови ласково»:</strong> Образование уменьшительно-ласкательных форм.</li>
+          <li><strong>«Скажи наоборот»:</strong> Подбор антонимов (большой — маленький, горячий — холодный).</li>
+          <li><strong>«Что лишнее?»:</strong> Нахождение лишнего предмета в группе.</li>
+          <li><strong>«Цепочка слов»:</strong> Назвать слово на последний звук предыдущего.</li>
+        </ul>
+      </div>
+
+      <div class="card accent">
+        <h3>🧠 Игры на фонематический слух</h3>
+        <ul>
+          <li><strong>«Хлопни-топни»:</strong> На звук [С] — хлопаем, на [Ш] — топаем.</li>
+          <li><strong>«Звуковая цепочка»:</strong> Назвать слово на последний звук предыдущего.</li>
+          <li><strong>«Найди звук»:</strong> Определить место звука в слове (в начале, середине, конце).</li>
+          <li><strong>«Шифровальщик»:</strong> Заменить один звук в слове, чтобы получилось новое слово.</li>
+          <li><strong>«Слоговые кубики»:</strong> Составление слов из слогов.</li>
+          <li><strong>«Угадай слово»:</strong> Логопед произносит слово по звукам, ребёнок угадывает.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== КОНСПЕКТЫ ЗАНЯТИЙ ===== -->
+  <!-- ============================================================ -->
+  <section id="lesson-notes">
+    <h2><span class="emoji-big">📝</span> Конспекты логопедических занятий</h2>
+
+    <div class="card purple">
+      <h3>Конспект индивидуального занятия по автоматизации звука [С]</h3>
+      <div class="output visible" style="white-space:pre-wrap;font-family:monospace;font-size:.85rem;background:var(--bg)">
+═══════════════════════════════════════════════
+📝 КОНСПЕКТ ИНДИВИДУАЛЬНОГО ЗАНЯТИЯ
+═══════════════════════════════════════════════
+Тема: Автоматизация звука [С] в слогах и словах
+Возраст: 4-5 лет
+Длительность: 25 минут
+
+ЦЕЛИ:
+1. Коррекционно-образовательная:
+   - Автоматизировать звук [С] в слогах и словах.
+   - Закрепить правильный артикуляционный уклад.
+
+2. Коррекционно-развивающая:
+   - Развивать фонематический слух.
+   - Развивать артикуляционную моторику.
+   - Развивать внимание и память.
+
+3. Коррекционно-воспитательная:
+   - Воспитывать самоконтроль.
+   - Формировать положительную мотивацию.
+
+ОБОРУДОВАНИЕ:
+Зеркало, картинки со звуком [С], игрушка (Собачка), счётные палочки.
+
+ХОД ЗАНЯТИЯ:
+
+1. ОРГАНИЗАЦИОННЫЙ МОМЕНТ (2 мин)
+   - Приветствие: «Здравствуй! Я очень рада тебя видеть. Давай поздороваемся с нашей Собачкой. Скажи: "Здравствуй, Собачка!"»
+
+2. АРТИКУЛЯЦИОННАЯ ГИМНАСТИКА (5 мин)
+   - «Улыбка» — удерживать 5 сек.
+   - «Трубочка» — удерживать 5 сек.
+   - «Лопатка» — широкий язык на нижней губе.
+   - «Почистим нижние зубки» (внутренняя сторона).
+   - «Горка» — спинка языка поднимается.
+
+3. ПОСТАНОВКА / АВТОМАТИЗАЦИЯ ЗВУКА [С] (8 мин)
+   - Изолированное произнесение: с-с-с-с (долго).
+   - Слоги: са-со-су-сы (с разной интонацией).
+   - Слова: сок, сон, суп, сыр, сад.
+   - Игра «Поймай звук»: хлопнуть на [С] из ряда звуков.
+
+4. ФИЗМИНУТКА (3 мин)
+   - «Мы топаем ногами, мы хлопаем руками...»
+
+5. РАБОТА С КАРТИНКАМИ (5 мин)
+   - Назвать картинки со звуком [С].
+   - Игра «Один-много»: сад — сады, сок — соки.
+
+6. ИТОГ (2 мин)
+   - «Какой звук мы сегодня учили?» (С)
+   - Похвала, награда (наклейка).
+
+ДОМАШНЕЕ ЗАДАНИЕ:
+- Повторять упражнения перед зеркалом.
+- Найти дома 5 предметов со звуком [С].
+═══════════════════════════════════════════════
+      </div>
+    </div>
+
+    <div class="card success">
+      <h3>Конспект подгруппового занятия по развитию связной речи</h3>
+      <div class="output visible" style="white-space:pre-wrap;font-family:monospace;font-size:.85rem;background:var(--bg)">
+═══════════════════════════════════════════════
+📝 КОНСПЕКТ ПОДГРУППОВОГО ЗАНЯТИЯ
+═══════════════════════════════════════════════
+Тема: «Осень» — развитие связной речи
+Возраст: 5-6 лет (подгруппа 3-4 человека)
+Длительность: 30 минут
+
+ЦЕЛИ:
+1. Коррекционно-образовательная:
+   - Активизировать словарь по теме «Осень».
+   - Учить составлять описательные рассказы.
+
+2. Коррекционно-развивающая:
+   - Развивать связную речь, мышление, внимание.
+   - Развивать грамматический строй (образование прилагательных).
+
+3. Коррекционно-воспитательная:
+   - Воспитывать любовь к природе.
+   - Формировать навыки работы в группе.
+
+ОБОРУДОВАНИЕ:
+Картинки с осенними пейзажами, листья деревьев, мяч.
+
+ХОД ЗАНЯТИЯ:
+
+1. ОРГАНИЗАЦИОННЫЙ МОМЕНТ (3 мин)
+   - Приветствие. Отгадывание загадки: «Пусты поля, мокнет земля, дождь поливает — когда это бывает?» (Осенью).
+
+2. БЕСЕДА ПО КАРТИНЕ (7 мин)
+   - Рассматривание картины «Осень».
+   - Вопросы: «Какое время года?», «Что делают дети?», «Какого цвета листья?».
+
+3. ИГРА «ПОДБЕРИ ПРИЗНАК» (5 мин)
+   - Логопед показывает листья, дети подбирают признаки: лист (какой?) — жёлтый, красный, сухой, красивый.
+
+4. СОСТАВЛЕНИЕ РАССКАЗА (10 мин)
+   - Дети по очереди составляют рассказ из 3-4 предложений по картине.
+   - Помощь логопеда: наводящие вопросы, подсказки.
+
+5. ИТОГ (5 мин)
+   - «О чём мы сегодня говорили?» (Об осени).
+   - Оценка работы каждого ребёнка.
+
+ДОМАШНЕЕ ЗАДАНИЕ:
+- Нарисовать осенний пейзаж.
+- Составить рассказ по рисунку.
+═══════════════════════════════════════════════
+      </div>
+    </div>
+
+    <div class="card purple">
+      <h3>Конспект занятия по постановке звука [Р]</h3>
+      <div class="output visible" style="white-space:pre-wrap;font-family:monospace;font-size:.85rem;background:var(--bg)">
+═══════════════════════════════════════════════
+📝 КОНСПЕКТ ЗАНЯТИЯ ПО ПОСТАНОВКЕ ЗВУКА [Р]
+═══════════════════════════════════════════════
+Тема: Постановка звука [Р]
+Возраст: 5-6 лет
+Длительность: 25 минут
+
+ЦЕЛИ:
+1. Коррекционно-образовательная:
+   - Поставить звук [Р] (дрожащий, вибрант).
+   - Сформировать правильный артикуляционный уклад.
+
+2. Коррекционно-развивающая:
+   - Развивать артикуляционную моторику.
+   - Развивать речевой выдох.
+   - Развивать фонематический слух.
+
+ОБОРУДОВАНИЕ:
+Зеркало, шпатель, зонд для постановки [Р], картинка «лошадка».
+
+ХОД ЗАНЯТИЯ:
+
+1. ОРГАНИЗАЦИОННЫЙ МОМЕНТ (2 мин)
+   - Приветствие. «Сегодня мы будем учиться рычать, как тигр. Хочешь?»
+
+2. АРТИКУЛЯЦИОННАЯ ГИМНАСТИКА (7 мин)
+   - «Улыбка» — «Трубочка» (чередование).
+   - «Лопатка» — широкий язык.
+   - «Иголочка» — узкий язык.
+   - «Лошадка» — пощёлкивание языком.
+   - «Маляр» — движения языка по нёбу.
+   - «Грибок» — присосать язык к нёбу.
+   - «Гармошка» — язык у нёба, открывать рот.
+
+3. ПОСТАНОВКА ЗВУКА (10 мин)
+   - СПОСОБ 1: «Заведи мотор» — длительное произнесение [Д] (д-д-д-д-д) с вибрацией кончика языка.
+   - СПОСОБ 2: Механический — с помощью зонда или шпателя вызывать вибрацию.
+   - СПОСОБ 3: «Песенка комарика» — от [Ж] к [Р].
+   - Закрепление изолированного [Р]: р-р-р-р-р.
+
+4. ФИЗМИНУТКА (3 мин)
+   - «Мы — лошадки» — поскакали, поцокали языком.
+
+5. АВТОМАТИЗАЦИЯ В СЛОГАХ (3 мин)
+   - ра-ро-ру-ры, ар-ор-ур-ыр.
+
+6. ИТОГ (2 мин)
+   - «Какой звук мы учились говорить?» ([Р]).
+   - Похвала, награда.
+
+ДОМАШНЕЕ ЗАДАНИЕ:
+- Повторять «лошадку» и «мотор».
+- Произносить изолированный [Р] перед зеркалом.
+═══════════════════════════════════════════════
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ГЕНЕРАТОРЫ ===== -->
+  <!-- ============================================================ -->
+  <section id="generator">
+    <h2><span class="emoji-big">⚙️</span> Генератор логопедических заданий</h2>
+    <div class="tool">
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Тип задания:</label>
+          <select id="taskType">
+            <option value="sound">Автоматизация звука</option>
+            <option value="vocab">Развитие словаря</option>
+            <option value="grammar">Грамматика</option>
+            <option value="phonemic">Фонематический слух</option>
+            <option value="reading">Чтение</option>
+            <option value="speech">Связная речь</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Звук / Тема:</label>
+          <input type="text" id="taskTopic" placeholder="Например: С, Ш, Р, Л, Осень...">
+        </div>
+        <div class="form-group">
+          <label>Возраст:</label>
+          <select id="taskAge">
+            <option value="3-4">3-4 года</option>
+            <option value="4-5" selected>4-5 лет</option>
+            <option value="5-6">5-6 лет</option>
+            <option value="6-7">6-7 лет</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Количество заданий:</label>
+          <input type="number" id="taskCount" value="6" min="3" max="15">
+        </div>
+      </div>
+      <button class="btn btn-block" onclick="generateTask()">✨ Сгенерировать задания</button>
+      <div id="taskOutput" class="output"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ГЕНЕРАТОР ПОСТАНОВКИ ЗВУКА ===== -->
+  <!-- ============================================================ -->
+  <section id="sound-setup">
+    <h2><span class="emoji-big">🔊</span> Генератор постановки звука</h2>
+    <div class="tool">
+      <div class="form-group">
+        <label>Звук для постановки:</label>
+        <select id="soundSelect">
+          <option value="s">С</option>
+          <option value="sh">Ш</option>
+          <option value="r">Р</option>
+          <option value="l">Л</option>
+          <option value="z">З</option>
+          <option value="zh">Ж</option>
+          <option value="ch">Ч</option>
+          <option value="shch">Щ</option>
+          <option value="k">К</option>
+          <option value="g">Г</option>
+          <option value="x">Х</option>
+        </select>
+      </div>
+      <button class="btn btn-block success" onclick="generateSoundSetup()">🎯 Сгенерировать постановку</button>
+      <div id="soundOutput" class="output"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ГЕНЕРАТОР КАРТОЧЕК ===== -->
+  <!-- ============================================================ -->
+  <section id="card-generator">
+    <h2><span class="emoji-big">🃏</span> Генератор карточек для занятий</h2>
+    <div class="tool">
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Тема карточек:</label>
+          <select id="cardTheme">
+            <option value="animals">Животные</option>
+            <option value="food">Еда</option>
+            <option value="toys">Игрушки</option>
+            <option value="clothes">Одежда</option>
+            <option value="transport">Транспорт</option>
+            <option value="professions">Профессии</option>
+            <option value="fruits">Фрукты</option>
+            <option value="vegetables">Овощи</option>
+            <option value="furniture">Мебель</option>
+            <option value="dishes">Посуда</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Звук для автоматизации:</label>
+          <input type="text" id="cardSound" placeholder="Например: С, Ш, Р...">
+        </div>
+        <div class="form-group">
+          <label>Количество карточек:</label>
+          <input type="number" id="cardCount" value="8" min="4" max="20">
+        </div>
+        <div class="form-group">
+          <label>Формат:</label>
+          <select id="cardFormat">
+            <option value="words">Только слова</option>
+            <option value="phrases">Словосочетания</option>
+            <option value="sentences">Предложения</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-block accent" onclick="generateCards()">🃏 Сгенерировать карточки</button>
+      <div id="cardOutput" class="output"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ГЕНЕРАТОР ПЛАНА ЗАНЯТИЯ ===== -->
+  <!-- ============================================================ -->
+  <section id="lesson-plan">
+    <h2><span class="emoji-big">📋</span> Генератор плана логопедического занятия</h2>
+    <div class="tool">
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Возраст ребёнка:</label>
+          <select id="planAge">
+            <option value="3-4">3-4 года</option>
+            <option value="4-5" selected>4-5 лет</option>
+            <option value="5-6">5-6 лет</option>
+            <option value="6-7">6-7 лет</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Цель занятия:</label>
+          <select id="planGoal">
+            <option value="sound">Постановка/автоматизация звука</option>
+            <option value="vocab">Развитие словаря</option>
+            <option value="grammar">Развитие грамматики</option>
+            <option value="speech">Развитие связной речи</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Звук / Тема:</label>
+          <input type="text" id="planTopic" placeholder="Например: Р, Л, Животные...">
+        </div>
+        <div class="form-group">
+          <label>Длительность (мин):</label>
+          <input type="number" id="planDuration" value="30" min="15" max="60">
+        </div>
+      </div>
+      <button class="btn btn-block pink" onclick="generatePlan()">📋 Сгенерировать план</button>
+      <div id="planOutput" class="output"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ГЕНЕРАТОР СКОРОГОВОРОК ===== -->
+  <!-- ============================================================ -->
+  <section id="tongue-twister">
+    <h2><span class="emoji-big">🗣️</span> Генератор скороговорок</h2>
+    <div class="tool">
+      <div class="form-group">
+        <label>Звук для автоматизации:</label>
+        <select id="twisterSound">
+          <option value="s">С</option>
+          <option value="sh">Ш</option>
+          <option value="r">Р</option>
+          <option value="l">Л</option>
+          <option value="z">З</option>
+          <option value="zh">Ж</option>
+          <option value="ch">Ч</option>
+          <option value="shch">Щ</option>
+          <option value="k">К</option>
+          <option value="g">Г</option>
+          <option value="x">Х</option>
+        </select>
+      </div>
+      <button class="btn btn-block blue" onclick="generateTwister()">🗣️ Сгенерировать скороговорку</button>
+      <div id="twisterOutput" class="output"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ГЕНЕРАТОР РАССКАЗОВ ===== -->
+  <!-- ============================================================ -->
+  <section id="story">
+    <h2><span class="emoji-big">📖</span> Генератор рассказов для пересказа</h2>
+    <div class="tool">
+      <div class="form-group">
+        <label>Тема рассказа:</label>
+        <select id="storyTheme">
+          <option value="animals">Животные</option>
+          <option value="seasons">Времена года</option>
+          <option value="family">Семья</option>
+          <option value="school">Школа</option>
+          <option value="friends">Дружба</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Сложность:</label>
+        <select id="storyLevel">
+          <option value="easy">Простой (3-4 предложения)</option>
+          <option value="medium" selected>Средний (5-7 предложений)</option>
+          <option value="hard">Сложный (8-10 предложений)</option>
+        </select>
+      </div>
+      <button class="btn btn-block purple" onclick="generateStory()">📖 Сгенерировать рассказ</button>
+      <div id="storyOutput" class="output"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ТРЕКЕР ПРОГРЕССА ===== -->
+  <!-- ============================================================ -->
+  <section id="tracker">
+    <h2><span class="emoji-big">📊</span> Трекер логопедического прогресса</h2>
+    <div class="tool">
+      <p>Отслеживайте прогресс ребёнка по звукам и речи. Данные сохраняются в браузере.</p>
+      <div class="form-group">
+        <label>Имя ребёнка:</label>
+        <input type="text" id="childName" placeholder="Введите имя...">
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Звук для отслеживания:</label>
+          <input type="text" id="trackSound" placeholder="Например: С, Ш, Р...">
+        </div>
+        <div class="form-group">
+          <label>Стадия:</label>
+          <select id="trackStage">
+            <option value="setup">Постановка</option>
+            <option value="auto-syllable">Автоматизация в слогах</option>
+            <option value="auto-word">Автоматизация в словах</option>
+            <option value="auto-phrase">Автоматизация в фразах</option>
+            <option value="free">Свободная речь</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-block success" onclick="addTracking()">📌 Добавить запись</button>
+      <div id="trackList" style="margin-top:1rem"></div>
+      <button class="btn danger" onclick="clearTrack()">🗑️ Очистить всё</button>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== РЕСУРСЫ ===== -->
+  <!-- ============================================================ -->
+  <section id="resources">
+    <h2><span class="emoji-big">📚</span> Ресурсы для логопеда</h2>
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>📖 Книги по логопедии</h3>
+        <ul>
+          <li><strong>Правдина О.В.</strong> — «Логопедия» (классика).</li>
+          <li><strong>Волкова Г.А.</strong> — «Методика обследования речи детей».</li>
+          <li><strong>Филичева Т.Б., Чевелева Н.А.</strong> — «Логопедическая работа в специальном детском саду».</li>
+          <li><strong>Каше Г.А.</strong> — «Исправление недостатков речи у дошкольников».</li>
+          <li><strong>Лопатина Л.В.</strong> — «Логопедическая работа с детьми дошкольного возраста».</li>
+          <li><strong>Нищева Н.В.</strong> — «Система коррекционной работы в логопедической группе».</li>
+          <li><strong>Коноваленко В.В., Коноваленко С.В.</strong> — серия книг по автоматизации звуков.</li>
+          <li><strong>Крупенчук О.И.</strong> — «Развитие речи. Готовимся к школе».</li>
+        </ul>
+      </div>
+
+      <div class="card success">
+        <h3>🛠️ Онлайн-инструменты</h3>
+        <ul>
+          <li><strong>Wordwall</strong> — создание интерактивных упражнений, викторин.</li>
+          <li><strong>LearningApps</strong> — игры и упражнения для любого возраста.</li>
+          <li><strong>Canva</strong> — создание карточек и визуальных материалов.</li>
+          <li><strong>Miro</strong> — онлайн-доска для занятий, совместной работы.</li>
+          <li><strong>Zoom / Skype / Discord</strong> — для дистанционных занятий.</li>
+          <li><strong>Яндекс.Диск / Google Диск</strong> — хранение материалов.</li>
+        </ul>
+      </div>
+
+      <div class="card accent">
+        <h3>🎲 Логопедические приложения</h3>
+        <ul>
+          <li><strong>«Логопед»</strong> — постановка звуков, артикуляционная гимнастика.</li>
+          <li><strong>«Учим звуки»</strong> — интерактивные упражнения.</li>
+          <li><strong>«Говорун»</strong> — развитие речи, словарный запас.</li>
+          <li><strong>«Звуки речи»</strong> — фонематический слух.</li>
+          <li><strong>«Читайка»</strong> — обучение чтению, подготовка к школе.</li>
+          <li><strong>«Логопед-онлайн»</strong> — платформа для дистанционных занятий.</li>
+        </ul>
+      </div>
+
+      <div class="card warning">
+        <h3>🧠 Профессиональные сообщества</h3>
+        <ul>
+          <li><strong>Ассоциация логопедов России</strong> — профессиональное сообщество.</li>
+          <li><strong>Логопедический портал</strong> — обмен опытом, статьи.</li>
+          <li><strong>Форум логопедов (defectolog.ru)</strong> — вопросы и ответы.</li>
+          <li><strong>Журнал «Логопед»</strong> — профессиональные статьи, методики.</li>
+          <li><strong>«Дефектология Проф»</strong> — курсы повышения квалификации.</li>
+          <li><strong>Telegram-каналы логопедов</strong> — оперативный обмен опытом.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== БОНУСЫ ===== -->
+  <!-- ============================================================ -->
+  <section id="bonus">
+    <h2><span class="emoji-big">🎁</span> Бонусы для логопеда</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>🧩 Чек-лист для логопеда</h3>
+        <ul class="checklist">
+          <li>Провести диагностику речи ребёнка</li>
+          <li>Заполнить речевую карту</li>
+          <li>Составить индивидуальный план коррекции</li>
+          <li>Подготовить наглядные материалы</li>
+          <li>Провести артикуляционную гимнастику</li>
+          <li>Записать домашнее задание</li>
+          <li>Оценить прогресс за месяц</li>
+          <li>Скорректировать план при необходимости</li>
+          <li>Провести консультацию с родителями</li>
+        </ul>
+      </div>
+
+      <div class="card success">
+        <h3>💡 Советы по работе с родителями</h3>
+        <ul>
+          <li><strong>Объясняйте цели:</strong> Родители должны понимать, зачем нужны упражнения.</li>
+          <li><strong>Давайте чёткие инструкции:</strong> Что делать, как часто, в какой последовательности.</li>
+          <li><strong>Поощряйте участие:</strong> Родители должны выполнять упражнения вместе с ребёнком.</li>
+          <li><strong>Хвалите ребёнка и родителей:</strong> Положительное подкрепление важно.</li>
+          <li><strong>Будьте на связи:</strong> Отвечайте на вопросы, корректируйте выполнение.</li>
+          <li><strong>Используйте наглядность:</strong> Видео-инструкции, памятки, карточки.</li>
+        </ul>
+      </div>
+
+      <div class="card accent">
+        <h3>📌 Памятка для родителей</h3>
+        <div class="highlight-box">
+          <p><strong>Уважаемые родители!</strong></p>
+          <ol>
+            <li>Занимайтесь с ребёнком ежедневно по 10-15 минут.</li>
+            <li>Используйте зеркало для контроля.</li>
+            <li>Следите за правильностью выполнения упражнений.</li>
+            <li>Не ругайте ребёнка за ошибки — хвалите за старания.</li>
+            <li>Занятия должны проходить в игровой форме.</li>
+            <li>Если ребёнок устал — сделайте перерыв.</li>
+            <li>Регулярно показывайте ребёнка логопеду для контроля.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="card warning">
+        <h3>📅 Примерная программа на неделю</h3>
+        <div style="font-size:.9rem;">
+          <p><strong>ПН:</strong> Артикуляционная гимнастика (5 мин), автоматизация звука в слогах (5 мин).</p>
+          <p><strong>ВТ:</strong> Дыхательные упражнения (5 мин), игра на фонематический слух (5 мин).</p>
+          <p><strong>СР:</strong> Артикуляционная гимнастика (5 мин), автоматизация в словах (5 мин).</p>
+          <p><strong>ЧТ:</strong> Развитие словаря (5 мин), игра на грамматику (5 мин).</p>
+          <p><strong>ПТ:</strong> Артикуляционная гимнастика (5 мин), автоматизация во фразах (5 мин).</p>
+          <p><strong>СБ:</strong> Свободное общение, повторение пройденного.</p>
+          <p><strong>ВС:</strong> Отдых, настольные игры на развитие речи.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ==================== ТЕМА ====================
+function toggleTheme(){
+  const b=document.body;
+  if(b.getAttribute('data-theme')==='dark'){b.removeAttribute('data-theme');localStorage.setItem('theme','light')}
+  else{b.setAttribute('data-theme','dark');localStorage.setItem('theme','dark')}
+}
+if(localStorage.getItem('theme')==='dark')document.body.setAttribute('data-theme','dark');
+
+// ==================== ПРОГРЕСС ====================
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('progress').style.width=p+'%';
+  const btn=document.getElementById('scrollTopBtn');
+  if(window.scrollY>400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+function scrollToTop(){
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ==================== МОБИЛЬНАЯ НАВИГАЦИЯ ====================
+function toggleMobileNav(){
+  document.getElementById('mobileNav').classList.toggle('open');
+  document.getElementById('navOverlay').classList.toggle('open');
+}
+document.addEventListener('click',function(e){
+  const nav=document.getElementById('mobileNav');
+  const overlay=document.getElementById('navOverlay');
+  if(nav.classList.contains('open') && !nav.contains(e.target) && e.target.id!=='navOverlay'){
+    nav.classList.remove('open');
+    overlay.classList.remove('open');
+  }
+});
+
+// ==================== АККОРДЕОН ====================
+function toggleAccordion(el){
+  const body=el.nextElementSibling;
+  const arrow=el.querySelector('.arrow');
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+// ==================== ПОИСК ====================
+document.getElementById('search').addEventListener('input',function(e){
+  const q=e.target.value.toLowerCase().trim();
+  document.querySelectorAll('.container section').forEach(s=>{
+    const t=s.textContent.toLowerCase();
+    s.style.display=!q||t.includes(q)?'':'none';
+  });
+});
+
+// ==================== ГЕНЕРАТОР ЗАДАНИЙ ====================
+function generateTask(){
+  const type=document.getElementById('taskType').value;
+  const topic=document.getElementById('taskTopic').value||'звук';
+  const age=document.getElementById('taskAge').value;
+  const count=parseInt(document.getElementById('taskCount').value)||5;
+  const out=document.getElementById('taskOutput');
+
+  const tasks={
+    sound:[
+      `Повтори слоги со звуком [${topic}]: са-со-су-сы-си`,
+      `Назови картинки со звуком [${topic}] в начале слова`,
+      `Назови картинки со звуком [${topic}] в конце слова`,
+      `Придумай слово со звуком [${topic}] в середине`,
+      `Повтори чистоговорки со звуком [${topic}]`,
+      `Составь предложение со словом на звук [${topic}]`,
+      `Найди на картинке все предметы со звуком [${topic}]`,
+      `Повтори за мной: [${topic}]-[${topic}]-[${topic}]`
+    ],
+    vocab:[
+      `Назови предметы по теме "${topic}"`,
+      `Подбери признаки к предмету "${topic}"`,
+      `Назови действия, которые можно делать с "${topic}"`,
+      `Раздели слова по теме "${topic}" на группы`,
+      `Назови части предмета "${topic}"`,
+      `Подбери обобщающее слово к группе предметов`,
+      `Назови профессии, связанные с "${topic}"`,
+      `Расскажи, для чего нужен "${topic}"`
+    ],
+    grammar:[
+      `Образуй множественное число: ${topic}`,
+      `Назови ласково: ${topic}`,
+      `Согласуй прилагательное с существительным: ${topic}`,
+      `Образуй притяжательное прилагательное: ${topic}`,
+      `Составь предложение с предлогом "на" и "${topic}"`,
+      `Образуй действие от существительного: ${topic}`,
+      `Скажи наоборот: ${topic}`,
+      `Подбери родственные слова к "${topic}"`
+    ],
+    phonemic:[
+      `Определи первый звук в слове: ${topic}`,
+      `Определи последний звук в слове: ${topic}`,
+      `Сосчитай сколько звуков в слове: ${topic}`,
+      `Придумай слово на звук [${topic}]`,
+      `Хлопни, если услышишь звук [${topic}] в слове`,
+      `Повтори цепочку слогов: са-ша-са-ша`,
+      `Найди лишнее слово (по звуку)`,
+      `Раздели слова на слоги: ${topic}`
+    ],
+    reading:[
+      `Прочитай слоги с буквой ${topic}`,
+      `Прочитай слова с буквой ${topic}`,
+      `Найди букву ${topic} среди других`,
+      `Составь слово из букв: ${topic}`,
+      `Прочитай предложение с "${topic}"`,
+      `Вставь пропущенную букву ${topic}`,
+      `Напиши букву ${topic} в воздухе`,
+      `Найди все буквы ${topic} в тексте`
+    ],
+    speech:[
+      `Составь рассказ по картинке на тему "${topic}"`,
+      `Перескажи текст о "${topic}"`,
+      `Опиши предмет "${topic}" по плану`,
+      `Придумай сказку о "${topic}"`,
+      `Расскажи, что ты знаешь о "${topic}"`,
+      `Продолжи рассказ: "Однажды ${topic}..."`,
+      `Составь диалог о "${topic}"`,
+      `Объясни, как использовать "${topic}"`
+    ]
+  };
+
+  let selected = tasks[type] || tasks.sound;
+  let result = `📋 ЗАДАНИЯ (${age} лет, тема: ${topic})\n═══════════════════════════════════════\n\n`;
+  for(let i=0; i<Math.min(count, selected.length); i++){
+    result += `${i+1}. ${selected[i]}\n\n`;
+  }
+  out.textContent = result;
+  out.classList.add('visible');
+}
+
+// ==================== ГЕНЕРАТОР ПОСТАНОВКИ ЗВУКА ====================
+function generateSoundSetup(){
+  const sound=document.getElementById('soundSelect').value;
+  const out=document.getElementById('soundOutput');
+  const data = {
+    s: { name:'С', type:'свистящий', setup:'Улыбка, язык за нижними зубами, холодная воздушная струя', exercises:['Улыбка','Лопатка','Подуй на ватку','Почистим нижние зубки'] },
+    sh: { name:'Ш', type:'шипящий', setup:'Губы трубочкой, язык чашечкой, тёплая воздушная струя', exercises:['Трубочка','Чашечка','Подуй на горячую ладонь'] },
+    r: { name:'Р', type:'сонорный', setup:'Широкий язык у альвеол, сильная воздушная струя, вибрация', exercises:['Лошадка','Маляр','Грибок','Гармошка'] },
+    l: { name:'Л', type:'сонорный', setup:'Язык за верхними зубами, воздух по бокам', exercises:['Качели','Парус','Вкусное варенье','Иголочка'] },
+    z: { name:'З', type:'свистящий', setup:'Как С, но с голосом', exercises:['Улыбка','Лопатка','Голос'] },
+    zh: { name:'Ж', type:'шипящий', setup:'Как Ш, но с голосом', exercises:['Трубочка','Чашечка','Голос'] },
+    ch: { name:'Ч', type:'аффриката', setup:'Ть + Щ быстро', exercises:['Ть-ть-ть','Щ-щ-щ','Быстро'] },
+    shch: { name:'Щ', type:'шипящий', setup:'Как Ш, но язык ближе к зубам', exercises:['Улыбка','Лопатка','Длинная струя'] },
+    k: { name:'К', type:'заднеязычный', setup:'Задняя часть языка поднимается к нёбу', exercises:['Киска','Горка','Полоскание'] },
+    g: { name:'Г', type:'заднеязычный', setup:'Как К, но с голосом', exercises:['Киска','Голос'] },
+    x: { name:'Х', type:'заднеязычный', setup:'Как К, но тёплая воздушная струя', exercises:['Погрей руки'] }
+  };
+  const d = data[sound] || data.s;
+  const html = `🔊 ПОСТАНОВКА ЗВУКА [${d.name}]
+═══════════════════════════════════════
+
+📌 ТИП ЗВУКА: ${d.type}
+
+👄 АРТИКУЛЯЦИЯ:
+${d.setup}
+
+🏋️ ПОДГОТОВИТЕЛЬНЫЕ УПРАЖНЕНИЯ:
+${d.exercises.map((e,i)=>`${i+1}. ${e}`).join('\n')}
+
+📋 ЭТАПЫ ПОСТАНОВКИ:
+1. Артикуляционная гимнастика (5-7 мин)
+2. Постановка звука (подражанием или механически)
+3. Закрепление в изолированном произношении
+4. Автоматизация в слогах
+5. Автоматизация в словах
+6. Автоматизация в фразах
+7. Введение в речь
+
+💡 СОВЕТЫ:
+• Проводить занятия ежедневно по 5-10 мин
+• Использовать зеркало
+• Игровая форма — обязательно
+• Хвалить за малейшие успехи
+
+⚠️ ОШИБКИ, КОТОРЫХ СТОИТ ИЗБЕГАТЬ:
+• Не форсировать звук
+• Не критиковать за ошибки
+• Не переутомлять ребёнка
+• Не переходить к сложному без закрепления простого
+`;
+  out.textContent = html;
+  out.classList.add('visible');
+}
+
+// ==================== ГЕНЕРАТОР КАРТОЧЕК ====================
+function generateCards(){
+  const theme=document.getElementById('cardTheme').value;
+  const sound=document.getElementById('cardSound').value||'';
+  const count=parseInt(document.getElementById('cardCount').value)||8;
+  const format=document.getElementById('cardFormat').value;
+  const out=document.getElementById('cardOutput');
+
+  const themes = {
+    animals: ['Кошка','Собака','Корова','Лошадь','Свинья','Овца','Курица','Утка','Гусь','Петух','Заяц','Медведь','Лиса','Волк','Ёж','Белка','Мышь','Слон','Жираф','Лев','Тигр','Обезьяна','Попугай','Черепаха','Крокодил','Зебра','Страус','Пингвин','Дельфин','Кит'],
+    food: ['Хлеб','Молоко','Масло','Сыр','Мясо','Рыба','Яйцо','Яблоко','Груша','Банан','Апельсин','Мандарин','Виноград','Капуста','Морковь','Лук','Чеснок','Огурец','Помидор','Картофель','Сахар','Соль','Печенье','Торт','Шоколад','Мороженое','Сок','Вода','Чай','Кофе'],
+    toys: ['Кукла','Машина','Мяч','Кубик','Пирамидка','Пазл','Конструктор','Робот','Самолёт','Корабль','Паровоз','Домик','Палатка','Качели','Горка','Песок','Ведерко','Лопатка','Формочка','Мозаика','Книжка','Мягкая игрушка','Медвежонок','Зайчик','Собачка','Котёнок'],
+    clothes: ['Платье','Рубашка','Брюки','Джинсы','Юбка','Кофта','Свитер','Куртка','Шуба','Пальто','Шапка','Шарф','Перчатки','Варежки','Носки','Колготки','Обувь','Ботинки','Сапоги','Туфли','Кроссовки','Майка','Футболка','Галстук','Ремень'],
+    transport: ['Машина','Автобус','Трамвай','Троллейбус','Метро','Поезд','Самолёт','Вертолёт','Корабль','Лодка','Катер','Велосипед','Мотоцикл','Трактор','Грузовик','Пожарная машина','Скорая помощь','Полицейская машина','Экскаватор','Кран','Паровоз','Вагон','Теплоход','Катер'],
+    professions: ['Врач','Учитель','Продавец','Повар','Водитель','Лётчик','Моряк','Строитель','Художник','Музыкант','Фотограф','Портной','Сапожник','Парикмахер','Ветеринар','Архитектор','Дизайнер','Программист','Инженер','Механик','Фермер','Актёр','Певец','Писатель','Поэт','Журналист'],
+    fruits: ['Яблоко','Груша','Банан','Апельсин','Мандарин','Лимон','Виноград','Киви','Персик','Абрикос','Слива','Вишня','Черешня','Арбуз','Дыня','Хурма','Гранат','Ананас','Манго','Папайя'],
+    vegetables: ['Картофель','Морковь','Лук','Чеснок','Капуста','Огурец','Помидор','Перец','Баклажан','Кабачок','Тыква','Редис','Свёкла','Горох','Фасоль','Кукуруза','Салат','Укроп','Петрушка','Руккола'],
+    furniture: ['Стол','Стул','Кровать','Диван','Шкаф','Полка','Тумба','Комод','Кресло','Табурет','Буфет','Сервант','Стеллаж','Трюмо','Вешалка','Тумбочка','Пуфик','Банкетка'],
+    dishes: ['Чашка','Тарелка','Блюдце','Салфетка','Вилка','Ложка','Нож','Кастрюля','Сковорода','Чайник','Сахарница','Солонка','Перечница','Графин','Стакан','Кружка','Мисок','Половник','Лопаточка']
+  };
+
+  let words = themes[theme] || themes.animals;
+  let selected = [];
+  for(let i=0; i<Math.min(count, words.length); i++){
+    selected.push(words[i]);
+  }
+
+  let result = `🃏 ЛОГОПЕДИЧЕСКИЕ КАРТОЧКИ\n═══════════════════════════════════════\n📌 Тема: ${theme}\n🔊 Звук: ${sound || 'не задан'}\n📝 Формат: ${format}\n\n`;
+  selected.forEach((word, i) => {
+    let text = word;
+    if(format === 'phrases'){
+      const adj = ['большой','маленький','красивый','новый','старый','весёлый','грустный','умный','добрый','злой','высокий','низкий','твёрдый','мягкий','гладкий'];
+      text = `${adj[Math.floor(Math.random()*adj.length)]} ${word}`;
+    } else if(format === 'sentences'){
+      const actions = ['Я люблю','У меня есть','Я вижу','Я хочу','Я знаю','Я помню','Я слышу','Я чувствую','Мне нравится','Я выбираю'];
+      text = `${actions[Math.floor(Math.random()*actions.length)]} ${word}`;
+    }
+    result += `${i+1}. ${text}\n`;
+  });
+  out.textContent = result;
+  out.classList.add('visible');
+}
+
+// ==================== ГЕНЕРАТОР ПЛАНА ЗАНЯТИЯ ====================
+function generatePlan(){
+  const age=document.getElementById('planAge').value;
+  const goal=document.getElementById('planGoal').value;
+  const topic=document.getElementById('planTopic').value||'звук';
+  const dur=parseInt(document.getElementById('planDuration').value)||30;
+  const out=document.getElementById('planOutput');
+
+  const stages = {
+    sound: [
+      ['Организационный момент', 3, 'Приветствие, создание позитивного настроя'],
+      ['Артикуляционная гимнастика', 5, 'Упражнения для губ, языка, дыхания'],
+      ['Постановка/автоматизация звука', 10, `Работа со звуком [${topic}]: изолированно → в слогах → в словах`],
+      ['Фонематический слух', 5, `Игры на различение звука [${topic}]`],
+      ['Развитие лексики', 5, `Слова со звуком [${topic}], обобщающие понятия`],
+      ['Итог', 2, 'Рефлексия, похвала, домашнее задание']
+    ],
+    vocab: [
+      ['Организационный момент', 3, 'Приветствие, создание позитивного настроя'],
+      ['Артикуляционная гимнастика', 3, 'Упражнения для губ, языка'],
+      ['Введение в тему', 5, `Знакомство с темой "${topic}"`],
+      ['Активизация словаря', 10, `Название предметов, признаков, действий по теме "${topic}"`],
+      ['Игра', 5, `Дидактическая игра по теме "${topic}"`],
+      ['Итог', 4, 'Рефлексия, похвала, домашнее задание']
+    ],
+    grammar: [
+      ['Организационный момент', 3, 'Приветствие, создание позитивного настроя'],
+      ['Артикуляционная гимнастика', 3, 'Упражнения для губ, языка'],
+      ['Грамматическая тема', 10, `Работа с грамматической категорией: ${topic}`],
+      ['Закрепление', 8, 'Упражнения, игры на закрепление'],
+      ['Игра', 3, 'Дидактическая игра на грамматику'],
+      ['Итог', 3, 'Рефлексия, похвала, домашнее задание']
+    ],
+    speech: [
+      ['Организационный момент', 3, 'Приветствие, создание позитивного настроя'],
+      ['Артикуляционная гимнастика', 3, 'Упражнения для губ, языка, дыхания'],
+      ['Введение в тему', 5, `Знакомство с темой "${topic}"`],
+      ['Работа над связной речью', 12, 'Составление рассказа, пересказ, описание'],
+      ['Игра', 4, 'Дидактическая игра на развитие речи'],
+      ['Итог', 3, 'Рефлексия, похвала, домашнее задание']
+    ]
+  };
+
+  const s = stages[goal] || stages.sound;
+  let result = `📋 ПЛАН ЛОГОПЕДИЧЕСКОГО ЗАНЯТИЯ\n═══════════════════════════════════════\n👶 Возраст: ${age} лет\n🎯 Цель: ${goal}\n📚 Тема: ${topic}\n⏱️ Длительность: ${dur} мин\n\n`;
+  s.forEach(st => {
+    const pct = Math.round((st[1]/dur)*100);
+    result += `• ${st[0]} — ${st[1]} мин (${pct}%) — ${st[2]}\n`;
+  });
+  result += `\n📝 МАТЕРИАЛЫ:\n• Картинки по теме "${topic}"\n• Зеркало\n• Игровые материалы\n• Домашнее задание\n\n💡 РЕКОМЕНДАЦИИ:\n• Занятие в игровой форме\n• Частая смена деятельности\n• Похвала за успехи\n• Индивидуальный подход`;
+  out.textContent = result;
+  out.classList.add('visible');
+}
+
+// ==================== ГЕНЕРАТОР СКОРОГОВОРОК ====================
+function generateTwister(){
+  const sound = document.getElementById('twisterSound').value;
+  const out = document.getElementById('twisterOutput');
+  const twisters = {
+    s: ['Са-са-са — у Саши коса', 'Сы-сы-сы — у Сани усы', 'Соня и Саня в саду сажали сад', 'Лиса и сова в лесу', 'Сорок сорок в срок ссорились'],
+    sh: ['Ша-ша-ша — наша Маша хороша', 'Шу-шу-шу — я письмо пишу', 'Наша Маша у каши', 'Шесть мышат в камышах', 'Саша шишку сбил'],
+    r: ['Ра-ра-ра — высокая гора', 'Ру-ру-ру — мы гуляем во дворе', 'Тридцать три трубача трубили в трубы', 'Рыбу ловил рыболов', 'Раз, два, три — повтори'],
+    l: ['Ла-ла-ла — вкусная халва', 'Ло-ло-ло — на улице тепло', 'Лунный свет лился на лес', 'Мама мыла Милу мылом', 'Лена и Лёня лепили лебедя'],
+    z: ['За-за-за — на лугу коза', 'Зу-зу-зу — мы ведём козу', 'Зоя и Зина в зоопарке', 'Зелёный зонт у Зины', 'Заяц заблудился в лесу'],
+    zh: ['Жа-жа-жа — есть иголки у ежа', 'Жу-жу-жу — на цветке жук', 'Жук жужжит, уж не жужжит', 'Жёлтый жираф жевал жимолость', 'Ужата у ужа'],
+    ch: ['Ча-ча-ча — у нас чай', 'Чу-чу-чу — я поеду на мячу', 'Черепаха чай пила', 'Чайка чайник нагрела', 'Четыре чёрненьких чумазеньких чертёнка'],
+    shch: ['Ща-ща-ща — щука в реке', 'Щу-щу-щу — я щуку ищу', 'Щенок щипал щи', 'Щётка щиплет щеки', 'В роще щебечут птицы'],
+    k: ['Ка-ка-ка — белая река', 'Ко-ко-ко — идём далеко', 'Кукушка кукует на суку', 'Кошка Клава кормила котят', 'Коля колол колья'],
+    g: ['Га-га-га — зелёная гора', 'Гу-гу-гу — гуси на лугу', 'Грач в гнезде', 'Гога и Гена играли в горох', 'Гуси у гусыни'],
+    x: ['Ха-ха-ха — пушистая муха', 'Хо-хо-хо — солнце высоко', 'Хомяк ходил на охоту', 'Хитрый хорёк', 'Хлеб да хлебушка']
+  };
+  const list = twisters[sound] || twisters.s;
+  const selected = list[Math.floor(Math.random() * list.length)];
+  const result = `🗣️ СКОРОГОВОРКА\n═══════════════════════════════════════\n🔊 Звук: [${sound.toUpperCase()}]\n\n${selected}\n\n📝 Попробуй проговорить медленно, затем всё быстрее!`;
+  out.textContent = result;
+  out.classList.add('visible');
+}
+
+// ==================== ГЕНЕРАТОР РАССКАЗОВ ====================
+function generateStory(){
+  const theme = document.getElementById('storyTheme').value;
+  const level = document.getElementById('storyLevel').value;
+  const out = document.getElementById('storyOutput');
+
+  const stories = {
+    animals: {
+      easy: ['У кошки были котята. Они играли на ковре. Котята были пушистые и весёлые. Мама-кошка смотрела на них и мурлыкала.'],
+      medium: ['В лесу жила лиса. Она была рыжая и хитрая. Однажды лиса увидела ворону с сыром. Лиса решила обмануть ворону. Она стала хвалить ворону и говорить, что она красивая. Ворона поверила и запела. Сыр упал, и лиса его съела.'],
+      hard: ['Жил-был маленький зайчик. Он очень боялся всех в лесу. Однажды зайчик услышал, что волк идёт. Зайчик побежал к реке. Там он встретил бобра. Бобр сказал: "Не бойся, я помогу тебе." Бобр построил плот, и они переплыли на другой берег. Волк не смог их догнать. Зайчик поблагодарил бобра и больше не боялся.']
+    },
+    seasons: {
+      easy: ['Наступила весна. Солнце светит ярко. На деревьях появились листочки. Птицы поют песни.'],
+      medium: ['Наступила осень. Листья на деревьях стали жёлтыми и красными. Дети пошли в парк собирать красивые листья. Они делали гербарий. Ветер сдувал листья, и они кружились в воздухе.'],
+      hard: ['Зимой всё покрыто белым снегом. Дети вышли на улицу кататься на санках. Они лепили снеговика. У снеговика был нос из морковки. Дети играли в снежки и весело смеялись. Вечером они вернулись домой и пили горячий чай.']
+    },
+    family: {
+      easy: ['В семье живёт мама, папа и дочка. Дочка ходит в школу. Она учится хорошо.'],
+      medium: ['В семье Ивановых было три сына. Старший сын помогал папе на работе. Средний сын учился в школе. Младший сын играл с друзьями. Мама готовила вкусный ужин для всей семьи.'],
+      hard: ['Мама, папа и двое детей жили в большом доме. Старший сын мечтал стать врачом. Младшая дочь хотела быть учителем. Каждый день они завтракали вместе и обсуждали планы. Папа рассказывал интересные истории. Мама учила детей быть добрыми.']
+    },
+    school: {
+      easy: ['Дети идут в школу. У них есть книги и тетради. Учительница учит их считать.'],
+      medium: ['В школе начался урок русского языка. Учительница объясняла новое правило. Дети внимательно слушали. Они писали упражнения в тетрадях. После урока они играли на перемене.'],
+      hard: ['Первый учебный день в школе. Дети сидели за партами. Учительница сказала: "Доброе утро, ребята!" Дети ответили: "Здравствуйте!" Они получили новые учебники. На уроке они учили буквы. После уроков они пошли домой счастливые.']
+    },
+    friends: {
+      easy: ['У Миши есть друг Коля. Они играют вместе. Коля и Миша любят футбол.'],
+      medium: ['Таня и Оля — подруги. Они всегда вместе. Они ходят в одну школу. Вместе они делают уроки и играют. Они помогают друг другу в трудные моменты.'],
+      hard: ['Друзья Петя и Вася решили построить дом для птиц. Они взяли доски и молоток. Они работали весь день. Вечером дом был готов. Они повесили его на дерево. Птицы прилетели и запели. Друзья были очень рады.']
+    }
+  };
+
+  const themeStories = stories[theme] || stories.animals;
+  const levelStories = themeStories[level] || themeStories.medium;
+  const selected = levelStories[Math.floor(Math.random() * levelStories.length)];
+
+  const result = `📖 РАССКАЗ ДЛЯ ПЕРЕСКАЗА\n═══════════════════════════════════════\n📌 Тема: ${theme}\n📊 Сложность: ${level}\n\n${selected}\n\n📝 Задание: Прочитай рассказ, затем перескажи его своими словами. Ответь на вопросы: \n1. О ком (о чём) рассказ?\n2. Что произошло?\n3. Чем закончилась история?`;
+  out.textContent = result;
+  out.classList.add('visible');
+}
+
+// ==================== ТРЕКЕР ====================
+let trackData = JSON.parse(localStorage.getItem('logoTracker')) || [];
+
+function addTracking(){
+  const name=document.getElementById('childName').value.trim()||'Без имени';
+  const sound=document.getElementById('trackSound').value||'звук';
+  const stage=document.getElementById('trackStage').value;
+  const stageNames = {
+    setup:'Постановка',
+    'auto-syllable':'Автоматизация в слогах',
+    'auto-word':'Автоматизация в словах',
+    'auto-phrase':'Автоматизация в фразах',
+    free:'Свободная речь'
+  };
+  const now=new Date();
+  trackData.push({
+    name,
+    sound,
+    stage: stageNames[stage] || stage,
+    date: now.toLocaleDateString(),
+    time: now.toLocaleTimeString()
+  });
+  localStorage.setItem('logoTracker', JSON.stringify(trackData));
+  renderTrack();
+}
+
+function renderTrack(){
+  const list=document.getElementById('trackList');
+  if(trackData.length===0){list.innerHTML='<p style="color:var(--muted)">Нет записей.</p>';return}
+  list.innerHTML=trackData.map((t,i)=>`
+    <div style="display:grid;grid-template-columns:1fr auto;gap:.5rem;padding:.5rem;background:var(--bg);border-radius:8px;margin-bottom:.4rem">
+      <div><strong>${t.name}</strong> — звук [${t.sound}] — ${t.stage} <span style="font-size:.75rem;color:var(--muted)">${t.date} ${t.time}</span></div>
+      <button class="btn danger" style="font-size:.7rem;padding:.1rem .5rem" onclick="removeTrack(${i})">✕</button>
+    </div>
+  `).join('');
+}
+
+function removeTrack(i){trackData.splice(i,1);localStorage.setItem('logoTracker', JSON.stringify(trackData));renderTrack()}
+function clearTrack(){if(confirm('Удалить все записи?')){trackData=[];localStorage.setItem('logoTracker', JSON.stringify(trackData));renderTrack()}}
+
+renderTrack();
+
+// ==================== НИЖНЯЯ НАВИГАЦИЯ ====================
+document.querySelectorAll('.bottom-nav button').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// ==================== ЧЕК-ЛИСТЫ ====================
+document.querySelectorAll('.checklist li').forEach(el=>{
+  el.addEventListener('click',function(){this.classList.toggle('checked')});
+});
+</script>
+<span id="stuttering" class="anchor-target"></span>
+<span id="ffn" class="anchor-target"></span>
+<section class="tm-card"><h2>Основы коррекционного занятия</h2><p>Занятие строится от установления контакта к подготовке, целевому навыку, игре на перенос и фиксации результата. Нагрузка должна соответствовать возрасту и утомляемости ребёнка.</p><div class="tm-grid"><details open><summary>Что наблюдать</summary><p>Понимание инструкции, темп, дыхание, артикуляцию, звукопроизношение и самостоятельность.</p></details><details><summary>Когда направить к специалисту</summary><p>При стойких трудностях обращайтесь к квалифицированному логопеду и другим профильным специалистам.</p></details></div></section><script id="theme-tools-script">(()=>{const q=s=>document.querySelector(s), text=(s)=>String(s||'').trim(); const saveWord=(name,content)=>{const blob=new Blob(['\ufeff', '<html><head><meta charset="utf-8"></head><body><pre style="white-space:pre-wrap;font:15px Arial">'+content.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+'</pre></body></html>'],{type:'application/msword'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name+'.doc';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};document.title=document.title.replace(' · Генератор','');document.documentElement.dataset.themeNote='Странные универсальные элементы заменены на тематический справочный блок.';document.querySelectorAll('[data-home]').forEach(b=>b.onclick=()=>q('#home-output').textContent='Сценарий «'+b.dataset.home+'»: выберите 3 главных действия, назначьте время и оставьте один запасной шаг.');document.querySelectorAll('[data-build]').forEach(b=>b.onclick=()=>q('#build-output').textContent='Этап «'+b.dataset.build+'»: проверьте соответствие проекту, качество выполнения, безопасность и зафиксируйте замечания.');document.querySelectorAll('[data-mama]').forEach(b=>b.onclick=()=>q('#mama-output').textContent='Сценарий «'+b.dataset.mama+'»: подготовьте вещи заранее, выберите одно обязательное действие и один спокойный резерв.');document.querySelectorAll('[data-cook]').forEach(b=>b.onclick=()=>q('#cook-output').textContent='Раздел «'+b.dataset.cook+'»: запишите конкретные действия, время и нужные продукты.');})();</script>
+</body>
+</html>

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1020">
+<title>ПолиГлот — визуальный тренажёр · 8 языков</title>
+<style>
+:root{--bg:#0b1020;--surface:#141b33;--surface-raised:#1c2544;--surface-input:#0f1630;--tx:#f3f6ff;--mut:#aeb8d9;--ac:#7896ff;--ac2:#b07cff;--ok:#49dc92;--bad:#ff7184;--br:#2c3963;--art:#ffd475;--focus:#ffdb72;--shadow:0 14px 34px rgba(0,0,0,.2)}
+*{box-sizing:border-box}html{color-scheme:dark;scroll-behavior:smooth}body{min-width:320px;margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:radial-gradient(circle at top right,#1a1843 0,transparent 32rem),var(--bg);color:var(--tx);line-height:1.45}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:1px solid var(--br);background:var(--surface-raised);color:var(--tx);border-radius:10px;padding:8px 12px;font-size:14px;transition:transform .15s ease,border-color .15s ease,background .15s ease,box-shadow .15s ease}button:hover{border-color:var(--ac);background:#26315a}button:active{transform:translateY(1px)}button:disabled{cursor:not-allowed;opacity:.58}button.primary{background:linear-gradient(105deg,var(--ac),var(--ac2));border-color:transparent;font-weight:700;color:#fff;box-shadow:0 6px 18px rgba(108,140,255,.24)}button.primary:hover{background:linear-gradient(105deg,#8da6ff,#bb8eff)}button.mini{min-width:32px;padding:4px 8px;font-size:12px;border-radius:8px}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--focus);outline-offset:2px}input,select,textarea{background:var(--surface-input);color:var(--tx);border:1px solid var(--br);border-radius:10px;padding:8px 10px;font-size:14px;transition:border-color .15s ease,box-shadow .15s ease}input:hover,select:hover,textarea:hover{border-color:#50639b}input:focus,select:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 3px rgba(120,150,255,.16)}textarea{width:100%;min-height:140px;resize:vertical}
+header{padding:13px 20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:linear-gradient(90deg,#161b3a,#251449);border-bottom:1px solid var(--br);position:sticky;top:0;z-index:9;box-shadow:0 4px 18px rgba(0,0,0,.14)}h1{font-size:clamp(1.05rem,2.2vw,1.25rem);margin:0;background:linear-gradient(90deg,#a9bcff,var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}.spacer{flex:1}.mut{color:var(--mut);font-size:12px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.tabs{display:flex;gap:6px;padding:12px 20px 0;flex-wrap:wrap;background:rgba(11,16,32,.84)}.tabs button{border-radius:12px 12px 0 0}.tabs button.on{background:var(--surface);border-color:var(--ac);border-bottom-color:var(--surface);color:#fff;box-shadow:inset 0 2px 0 var(--ac)}#controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:11px 20px;background:var(--surface);border-bottom:1px solid var(--br)}.chip{padding:5px 10px;border-radius:999px;font-size:13px;white-space:nowrap}.chip.on{border-color:var(--ac);background:#263b73;color:#fff}.chip input{accent-color:var(--ac)}
+main{padding:20px 20px 64px;max-width:1250px;margin:0 auto}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}.wcard{background:linear-gradient(150deg,rgba(28,37,68,.96),var(--surface));border:1px solid var(--br);border-radius:15px;padding:13px;box-shadow:0 5px 18px rgba(0,0,0,.11)}.whead{display:flex;gap:10px;align-items:center;margin-bottom:8px}.em{font-size:42px;line-height:1}.em img{width:56px;height:56px;object-fit:cover;border-radius:10px}.ru{font-weight:750;font-size:16px}.cat{font-size:11px;color:var(--mut)}.trow{display:flex;gap:6px;align-items:center;padding:4px 0;font-size:14px;border-top:1px dashed #2a355d}.trow .f{width:22px;flex:0 0 22px}.tw{font-weight:650;overflow-wrap:anywhere}.tp{color:var(--mut);font-size:12px;overflow-wrap:anywhere}.art{color:var(--art);font-weight:750;font-size:12px;margin-right:2px}.say{border:none;background:transparent;font-size:15px;padding:2px 4px;line-height:1}.say:hover{background:#2b3a69}.badge{font-size:11px;padding:2px 7px;border-radius:99px;background:#20264a;color:var(--mut)}.badge.ok{background:#123a2a;color:var(--ok)}.badge.bad{background:#3a1220;color:var(--bad)}
+#flash{max-width:560px;margin:0 auto}.fcard{width:100%;background:linear-gradient(145deg,var(--surface-raised),var(--surface));border:1px solid var(--br);border-radius:18px;padding:28px;text-align:center;cursor:pointer;min-height:300px;display:flex;flex-direction:column;justify-content:center;gap:14px;box-shadow:var(--shadow);transition:border-color .2s ease,transform .2s ease}.fcard:hover{border-color:var(--ac);transform:translateY(-2px)}.fcard .big{font-size:86px}.fcard .big img{width:140px;height:140px;object-fit:cover;border-radius:16px}.fcard h2{margin:0;font-size:26px}.fbtns{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}.ok{background:#123a2a;border-color:var(--ok);color:var(--ok)}.no{background:#3a1220;border-color:var(--bad);color:var(--bad)}
+.quiz{max-width:640px;margin:0 auto;background:linear-gradient(145deg,var(--surface-raised),var(--surface));border:1px solid var(--br);border-radius:18px;padding:24px;box-shadow:var(--shadow)}.opts{display:grid;gap:10px;margin-top:16px}.opts button{padding:12px;font-size:16px;text-align:left}.opts button.good{border-color:var(--ok);background:#123a2a}.opts button.wrong{border-color:var(--bad);background:#3a1220}.pbar{height:8px;background:#20264a;border-radius:99px;overflow:hidden;margin:8px 0}.pbar i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width .2s ease}
+.modal{position:fixed;inset:0;background:#060916cc;display:none;align-items:flex-start;justify-content:center;overflow:auto;z-index:20;padding:20px}.modal.open{display:flex}.mbox{position:relative;background:var(--surface);border:1px solid var(--br);border-radius:16px;padding:22px;max-width:760px;width:100%;margin:20px 0;box-shadow:0 22px 70px rgba(0,0,0,.5)}.modal-close{position:absolute;top:10px;right:10px;width:36px;height:36px;padding:0;border-radius:50%;font-size:22px;line-height:1}.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mrow{display:grid;grid-template-columns:26px 70px 1fr 1fr;gap:7px;align-items:center;margin:5px 0}label{font-size:12px;color:var(--mut)}.hint{background:#10183a;border:1px dashed var(--br);border-radius:12px;padding:12px;font-size:13px;color:var(--mut);margin:0 0 12px}.hint code{color:#d7dfff;overflow-wrap:anywhere}
+@media(max-width:760px){header,.tabs,#controls,main{padding-left:14px;padding-right:14px}#controls{align-items:flex-start}.grid{grid-template-columns:1fr}.wcard{padding:12px}.mgrid{grid-template-columns:1fr}.mrow{grid-template-columns:26px 60px minmax(0,1fr) minmax(0,1fr)}.quiz{padding:18px}.fcard{padding:22px;min-height:270px}}@media(max-width:460px){header .spacer{display:none}header .primary{margin-left:auto}.tabs{gap:4px}.tabs button{padding:7px 8px;font-size:13px}.chip{padding:5px 8px}.mrow{grid-template-columns:26px 55px minmax(0,1fr)}.mrow input:last-child{grid-column:3}.fcard .big{font-size:70px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+ <h1>🌍 ПолиГлот · визуальный тренажёр</h1>
+ <span class="mut" id="stat"></span>
+ <div class="spacer"></div>
+ <button class="primary" onclick="openAdd()">＋ Слово</button>
+</header>
+<div class="tabs" id="tabs" role="tablist" aria-label="Режим обучения">
+ <button id="tabbtn-dict" type="button" data-tab="dict" class="on" role="tab" aria-controls="tab-dict" aria-selected="true">📖 Словарь</button>
+ <button id="tabbtn-cards" type="button" data-tab="cards" role="tab" aria-controls="tab-cards" aria-selected="false">🃏 Карточки</button>
+ <button id="tabbtn-quiz" type="button" data-tab="quiz" role="tab" aria-controls="tab-quiz" aria-selected="false">✅ Тест</button>
+ <button id="tabbtn-type" type="button" data-tab="type" role="tab" aria-controls="tab-type" aria-selected="false">⌨️ Ввод</button>
+ <button id="tabbtn-io" type="button" data-tab="io" role="tab" aria-controls="tab-io" aria-selected="false">📥 Импорт / данные</button>
+</div>
+<div id="controls">
+ <span class="mut">Языки:</span><span id="langchips" style="display:contents"></span>
+ <label class="sr-only" for="q">Поиск по словарю</label><input id="q" placeholder="🔎 Поиск…" aria-label="Поиск по словарю" style="width:150px">
+ <label class="sr-only" for="cat">Тема</label><select id="cat" aria-label="Тема"></select>
+ <label class="chip" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="weak" style="width:auto"> слабые</label>
+ <button id="clearFilters" type="button" class="mini" title="Сбросить поиск и фильтры">Сбросить</button>
+ <label class="mut" for="dir">Напр.:</label>
+ <select id="dir" aria-label="Направление упражнения"><option value="r2x">RU→язык</option><option value="x2r">язык→RU</option><option value="mix" selected>микс</option></select>
+ <label class="mut" for="rate">Темп:</label><input type="range" id="rate" min="0.5" max="1.3" step="0.05" aria-label="Скорость озвучивания" style="width:90px">
+</div>
+<main>
+ <section id="tab-dict" role="tabpanel" aria-labelledby="tabbtn-dict"><div class="grid" id="dictgrid"></div></section>
+ <section id="tab-cards" role="tabpanel" aria-labelledby="tabbtn-cards" hidden><div id="flash"></div></section>
+ <section id="tab-quiz" role="tabpanel" aria-labelledby="tabbtn-quiz" hidden><div id="quizbox" class="quiz"></div></section>
+ <section id="tab-type" role="tabpanel" aria-labelledby="tabbtn-type" hidden><div id="typebox" class="quiz"></div></section>
+  <section id="tab-io" role="tabpanel" aria-labelledby="tabbtn-io" hidden>
+   <div class="hint">📚 <b>Импорт:</b> вставьте список русских слов по одному в строку или добавьте JSON. Для расширенного формата используйте TSV (столбцы разделены табуляцией): <code>ru [tab] cat [tab] emoji [tab] en … ar</code>. В ячейке каждого перевода можно указать <code>слово|транскрипция|артикль</code>. CSV с запятыми и кавычками также поддерживается.</div>
+  <div class="mgrid">
+   <div>
+    <textarea id="imp" placeholder="русское слово&#10;ещё слово&#10;…"></textarea>
+    <div class="fbtns" style="justify-content:flex-start">
+     <label class="chip" style="display:flex;gap:6px"><input type="checkbox" id="impauto" checked> автоперевод (MyMemory)</label>
+     <button class="primary" onclick="doImportText()">Импортировать</button>
+    </div>
+   </div>
+   <div>
+      <p><b>Файл:</b> <input type="file" id="file" aria-label="Файл для импорта" accept=".json,.csv,.txt,.tsv"></p>
+      <p><b>Ссылка:</b> <input id="url" aria-label="Ссылка на файл импорта" style="width:70%" placeholder="https://…/слова.json|csv">
+      <label class="chip" style="display:flex;gap:6px"><input type="checkbox" id="proxy"> CORS‑прокси</label>
+      <button onclick="doImportURL()">⬇</button></p>
+    <p><button onclick="dlTemplate()">⬇ Шаблон CSV</button>
+       <button onclick="doExport()">💾 Экспорт JSON</button>
+       <button class="no" onclick="resetAll()">🗑 Сброс</button></p>
+    <div class="pbar" id="imppb" hidden><i style="width:0%"></i></div><div id="impmsg" class="mut"></div>
+   </div>
+  </div>
+ </section>
+</main>
+<div class="modal" id="modal" aria-hidden="true"><div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mtitle" tabindex="-1">
+ <button type="button" class="modal-close" aria-label="Закрыть окно" onclick="closeM()">×</button>
+ <h3 id="mtitle">Новое слово</h3>
+ <div class="mgrid">
+  <div><label for="f_ru">Русское название *</label><input id="f_ru" autocomplete="off" style="width:100%"></div>
+  <div><label for="f_cat">Категория</label><input id="f_cat" autocomplete="off" style="width:100%"></div>
+ </div>
+ <div class="mgrid" style="margin-top:8px">
+  <div><label for="f_em">Эмодзи или ссылка на картинку</label><input id="f_em" autocomplete="off" style="width:100%" placeholder="🐶 или https://…/dog.png"></div>
+  <div style="align-self:end"><button type="button" onclick="autofill()">⚡ Автоперевод</button></div>
+ </div>
+ <div id="f_langs" style="margin-top:10px"></div>
+ <div class="fbtns"><button class="primary" onclick="saveWord()">💾 Сохранить</button><button onclick="closeM()">Отмена</button></div>
+</div></div>
+<div id="notice" class="sr-only" role="status" aria-live="polite"></div>
+
+<script>
+const LANGS=[
+{c:'en',n:'Английский',f:'🇬🇧',tts:'en-US',mm:'en',hasArt:true},
+{c:'de',n:'Немецкий',f:'🇩🇪',tts:'de-DE',mm:'de',hasArt:true},
+{c:'fr',n:'Французский',f:'🇫🇷',tts:'fr-FR',mm:'fr',hasArt:true},
+{c:'it',n:'Итальянский',f:'🇮🇹',tts:'it-IT',mm:'it',hasArt:true},
+{c:'es',n:'Испанский',f:'🇪🇸',tts:'es-ES',mm:'es',hasArt:true},
+{c:'no',n:'Норвежский',f:'🇳🇴',tts:'nb-NO',mm:'no',hasArt:true},
+{c:'zh',n:'Китайский',f:'🇨🇳',tts:'zh-CN',mm:'zh-CN',hasArt:false},
+{c:'ar',n:'Арабский',f:'🇸🇦',tts:'ar-SA',mm:'ar',hasArt:false}];
+
+function W(ru,cat,em,...ts){const t={};LANGS.forEach((L,i)=>{const a=(ts[i]||'').split('|');t[L.c]={w:a[0]||'',p:a[1]||'',a:a[2]||''}});return{ru,cat,em,t}}
+const BASE=[
+W("Собака","Животные","🐶","dog|дог|a","Hund|хунт|der","chien|шьен|le","cane|кане|il","perro|перро|el","hund|хунн|en","gǒu|гоу","كلب|кальб"),
+W("Кошка","Животные","🐱","cat|кэт|a","Katze|катце|die","chat|ша|le","gatto|гатто|il","gato|гато|el","katt|катт|en","māo|мао","قطة|кытта"),
+W("Лошадь","Животные","🐴","horse|хос|a","Pferd|пфеат|das","cheval|шваль|le","cavallo|кавалло|il","caballo|кабайо|el","hest|хест|en","mǎ|ма","حصان|хисан"),
+W("Корова","Животные","🐮","cow|кау|a","Kuh|ку|die","vache|ваш|la","mucca|мукка|la","vaca|бака|la","ku|ку|ei","niú|ню","بقرة|бакара"),
+W("Свинья","Животные","🐷","pig|пиг|a","Schwein|швайн|das","cochon|кошон|le","maiale|майале|il","cerdo|сердо|el","gris|грис|en","zhū|чжу","خنزير|хинзир"),
+W("Овца","Животные","🐑","sheep|шип|a","Schaf|шаф|das","mouton|мутон|le","pecora|пекора|la","oveja|овеха|la","sau|со|ei","yáng|ян","خروف|харуф"),
+W("Птица","Животные","🐦","bird|бёд|a","Vogel|фогль|der","oiseau|уазо|l'","uccello|учелло|l'","pájaro|пахаро|el","fugl|фугль|en","niǎo|няо","طائر|таир"),
+W("Рыба","Животные","🐟","fish|фиш|a","Fisch|фиш|der","poisson|пуасон|le","pesce|пеше|il","pez|пес|el","fisk|фиск|en","yú|юй","سمكة|самака"),
+W("Медведь","Животные","🐻","bear|бэа|a","Bär|бэр|der","ours|урс|l'","orso|орсо|l'","oso|осо|el","bjørn|бьёрн|en","xióng|сюн","دب|дубб"),
+W("Волк","Животные","🐺","wolf|вулф|a","Wolf|вольф|der","loup|лу|le","lupo|лупо|il","lobo|лобо|el","ulv|ульв|en","láng|лан","ذئب|зиб"),
+W("Лиса","Животные","🦊","fox|фокс|a","Fuchs|фукс|der","renard|ренар|le","volpe|вольпе|la","zorro|сорро|el","rev|рев|en","húli|хули","ثعلب|саалаб"),
+W("Кролик","Животные","🐰","rabbit|рэбит|a","Kaninchen|канинхен|das","lapin|лапен|le","coniglio|конильо|il","conejo|конехо|el","kanin|канин|en","tùzi|туцзы","أرنب|арнаб"),
+W("Хлеб","Еда и напитки","🍞","bread|брэд|—","Brot|брот|das","pain|пен|le","pane|пане|il","pan|пан|el","brød|брёд|et","miànbāo|мяньбао","خبز|хубз"),
+W("Молоко","Еда и напитки","🥛","milk|милк|—","Milch|мильх|die","lait|ле|le","latte|латте|il","leche|лече|la","melk|мельк|ei","niúnǎi|нюнай","حليب|халиб"),
+W("Сыр","Еда и напитки","🧀","cheese|чиз|—","Käse|кэзе|der","fromage|фромаж|le","formaggio|формаджо|il","queso|кесо|el","ost|уст|en","nǎilào|найлао","جبن|джубн"),
+W("Яйцо","Еда и напитки","🥚","egg|эг|an","Ei|ай|das","œuf|ёф|l'","uovo|уово|l'","huevo|уэво|el","egg|эгг|et","jīdàn|цзидань","بيضة|байда"),
+W("Мясо","Еда и напитки","🥩","meat|мит|—","Fleisch|фляйш|das","viande|вьанд|la","carne|карне|la","carne|карне|la","kjøtt|шьёт|et","ròu|жоу","لحم|ляхм"),
+W("Яблоко","Еда и напитки","🍎","apple|эпл|an","Apfel|апфель|der","pomme|пом|la","mela|мела|la","manzana|мансана|la","eple|эпле|et","píngguǒ|пинго","تفاحة|туффаха"),
+W("Вода","Еда и напитки","💧","water|вотэ|—","Wasser|вассер|das","eau|о|l'","acqua|аккуа|l'","agua|агуа|el","vann|ванн|—","shuǐ|шуй","ماء|маа"),
+W("Чай","Еда и напитки","🍵","tea|ти|—","Tee|те|der","thé|те|le","tè|те|il","té|те|el","te|те|en","chá|ча","شاي|шай"),
+W("Кофе","Еда и напитки","☕","coffee|кофи|—","Kaffee|кафе|der","café|кафе|le","caffè|каффе|il","café|кафе|el","kaffe|каффе|en","kāfēi|кафэй","قهوة|кахва"),
+W("Сок","Еда и напитки","🧃","juice|джус|—","Saft|зафт|der","jus|жю|le","succo|сукко|il","zumo|сумо|el","jus|юс|en","guǒzhī|гоучжи","عصير|асыр"),
+W("Семья","Семья и люди","👪","family|фэмили|a","Familie|фамилие|die","famille|фамий|la","famiglia|фамилья|la","familia|фамилиа|la","familie|фамилие|ei","jiātíng|цзятин","عائلة|ааиля"),
+W("Мать","Семья и люди","👩","mother|мазэ|—","Mutter|муттер|die","mère|мер|la","madre|мадре|la","madre|мадре|la","mor|мур|ei","mǔqīn|муцинь","أم|умм"),
+W("Отец","Семья и люди","👨","father|фазэ|—","Vater|фатер|der","père|пер|le","padre|падре|il","padre|падре|el","far|фар|en","fùqīn|фуцинь","أب|аб"),
+W("Брат","Семья и люди","👦","brother|бразэ|a","Bruder|брудер|der","frère|фрер|le","fratello|фрателло|il","hermano|эрмано|el","bror|брур|en","xiōngdì|сюнди","أخ|ах"),
+W("Сестра","Семья и люди","👧","sister|систэ|a","Schwester|швестер|die","sœur|сёр|la","sorella|сорелла|la","hermana|эрмана|la","søster|шёстер|ei","jiěmèi|цземеи","أخت|ухт"),
+W("Сын","Семья и люди","👦","son|сан|a","Sohn|зон|der","fils|фис|le","figlio|фильо|il","hijo|ихо|el","sønn|сённ|en","érzi|эрцзы","ابن|ибн"),
+W("Дочь","Семья и люди","👧","daughter|дотэ|a","Tochter|тохтер|die","fille|фий|la","figlia|филья|la","hija|иха|la","datter|даттер|ei","nǚ'ér|нюйэр","ابنة|ибна"),
+W("Ребёнок","Семья и люди","🧒","child|чайлд|a","Kind|кинд|das","enfant|анфан|l'","bambino|бамбино|il","niño|ниньо|el","barn|барн|et","háizi|хайцзы","طفل|тифль"),
+W("Человек","Семья и люди","🧑","person|пёсн|a","Mensch|менш|der","personne|персон|la","persona|персона|la","persona|персона|la","menneske|меннеске|et","rén|жэнь","إنسان|инсан"),
+W("Друг","Семья и люди","🤝","friend|фрэнд|a","Freund|фройнд|der","ami|ами|l'","amico|амико|l'","amigo|амиго|el","venn|венн|en","péngyǒu|пэнъю","صديق|садык"),
+W("Голова","Тело","🗣️","head|хэд|the","Kopf|копф|der","tête|тет|la","testa|теста|la","cabeza|кабеса|la","hode|хуве|et","tóu|тоу","رأس|раас"),
+W("Глаз","Тело","👁️","eye|ай|an","Auge|ауге|das","œil|ёй|l'","occhio|оккьо|l'","ojo|охо|el","øye|ёйе|et","yǎnjing|яньцзин","عين|айн"),
+W("Ухо","Тело","👂","ear|иэ|an","Ohr|ор|das","oreille|орей|l'","orecchio|ореккьо|l'","oreja|ореха|la","øre|ёре|et","ěrduo|эрдо","أذن|узн"),
+W("Нос","Тело","👃","nose|ноуз|the","Nase|назе|die","nez|не|le","naso|назо|il","nariz|нарис|la","nese|несе|ei","bízi|бицзы","أنف|анф"),
+W("Рот","Тело","👄","mouth|маус|the","Mund|мунд|der","bouche|буш|la","bocca|бокка|la","boca|бока|la","munn|мунн|en","zuǐ|цзуй","فم|фам"),
+W("Зуб","Тело","🦷","tooth|тус|a","Zahn|цан|der","dent|дан|la","dente|денте|il","diente|дьенте|el","tann|танн|ei","yáchǐ|ячи","سن|синн"),
+W("Рука","Тело","✋","hand|хэнд|the","Hand|хант|die","main|мен|la","mano|мано|la","mano|мано|la","hånd|хонн|ei","shǒu|шоу","يد|яд"),
+W("Нога","Тело","🦶","foot|фут|the","Fuß|фус|der","pied|пье|le","piede|пьезде|il","pie|пье|el","fot|фут|en","jiǎo|цзяо","قدم|кадам"),
+W("Волосы","Тело","💇","hair|хэа|—","Haar|хаа|das","cheveux|шё|les","capelli|капелли|i","pelo|пело|el","hår|хор|—","tóufa|тоуфа","شعر|шаар"),
+W("Сердце","Тело","❤️","heart|хат|the","Herz|херц|das","cœur|кёр|le","cuore|куоре|il","corazón|корасон|el","hjerte|ъерте|et","xīnzàng|синьцзан","قلب|кальб"),
+W("Дом","Дом","🏠","house|хаус|a","Haus|хаус|das","maison|мезон|la","casa|каза|la","casa|каза|la","hus|хус|et","fángzi|фанцзы","بيت|байт"),
+W("Дверь","Дом","🚪","door|до|the","Tür|тюр|die","porte|порт|la","porta|порта|la","puerta|пуэрта|la","dør|дёр|ei","mén|мэнь","باب|баб"),
+W("Окно","Дом","🪟","window|виндоу|the","Fenster|фенстер|das","fenêtre|фенетр|la","finestra|финестра|la","ventana|вентана|la","vindu|винну|et","chuānghu|чуанху","نافذة|нафида"),
+W("Кровать","Дом","🛏️","bed|бэд|the","Bett|бет|das","lit|ли|le","letto|летто|il","cama|кама|la","seng|сенг|ei","chuáng|чуан","سرير|сарир"),
+W("Стул","Дом","🪑","chair|чэа|the","Stuhl|штуль|der","chaise|шез|la","sedia|седиа|la","silla|силья|la","stol|стуль|en","yǐzi|ицзы","كرسي|курсий"),
+W("Лампа","Дом","💡","lamp|лэмп|the","Lampe|лампе|die","lampe|лампе|la","lampada|лампада|la","lámpara|лампара|la","lampe|лампе|ei","dēng|дэн","مصباح|мисбах"),
+W("Ключ","Дом","🔑","key|ки|the","Schlüssel|шлюсель|der","clé|кле|la","chiave|кьяве|la","llave|ъяве|la","nøkkel|нёккель|en","yàoshi|яоши","مفتاح|мифтах"),
+W("Книга","Дом","📖","book|бук|a","Buch|бух|das","livre|ливр|le","libro|либро|il","libro|либро|el","bok|бук|ei","shū|шу","كتاب|китаб"),
+W("Ручка","Дом","🖊️","pen|пэн|the","Stift|штифт|der","stylo|стило|le","penna|пенна|la","bolígrafo|болиграфо|el","penn|пенн|en","bǐ|би","قلم|калам"),
+W("Часы","Дом","⏰","clock|клок|the","Uhr|ур|die","horloge|орлож|l'","orologio|оролоджо|l'","reloj|релох|el","klokke|клокке|ei","zhōng|чжун","ساعة|сааа"),
+W("Зеркало","Дом","🪞","mirror|мирэ|the","Spiegel|шпигель|der","miroir|мируар|le","specchio|спеккьо|lo","espejo|эспехо|el","speil|спейль|et","jìngzi|цзинцзы","مرآة|мираа"),
+W("Телефон","Дом","📱","phone|фоун|the","Telefon|телефон|das","téléphone|телефон|le","telefono|телефоно|il","teléfono|телефоно|el","telefon|телефун|en","diànhuà|дяньхуа","هاتف|хатиф"),
+W("Компьютер","Дом","💻","computer|кэмпьютэ|the","Computer|компьютер|der","ordinateur|ординатёр|l'","computer|компьютер|il","ordenador|орденадор|el","datamaskin|датамаскин|en","diànnǎo|дяньнао","حاسوب|хасуб"),
+W("Город","Город и транспорт","🏙️","city|сити|the","Stadt|штат|die","ville|виль|la","città|читта|la","ciudad|сьюдад|la","by|бю|en","chéngshì|чэнши","مدينة|мадина"),
+W("Улица","Город и транспорт","🛣️","street|стрит|the","Straße|штрассе|die","rue|рю|la","strada|страда|la","calle|кайе|la","gate|гате|ei","jiēdào|цзедао","شارع|шариа"),
+W("Машина","Город и транспорт","🚗","car|ка|the","Auto|ауто|das","voiture|вуатюр|la","macchina|маккина|la","coche|коче|el","bil|биль|en","qìchē|цичэ","سيارة|сайяра"),
+W("Автобус","Город и транспорт","🚌","bus|бас|the","Bus|бус|der","bus|бюс|le","autobus|аутобус|l'","autobús|аутобус|el","buss|бусс|en","gōnggòng qìchē|гунгун цичэ","حافلة|хафиля"),
+W("Поезд","Город и транспорт","🚆","train|трейн|the","Zug|цуг|der","train|трен|le","treno|трено|il","tren|трен|el","tog|тог|et","huǒchē|хочэ","قطار|китар"),
+W("Самолёт","Город и транспорт","✈️","plane|плейн|the","Flugzeug|флюкцойк|das","avion|авьон|l'","aereo|аэрео|l'","avión|авион|el","fly|флю|et","fēijī|фэйцзи","طائرة|таира"),
+W("Велосипед","Город и транспорт","🚲","bicycle|байсикл|the","Fahrrad|фарат|das","vélo|вело|le","bicicletta|бичиклетта|la","bicicleta|бисиклета|la","sykkel|сюккель|en","zìxíngchē|цзысинчэ","دراجة|дарраджа"),
+W("Корабль","Город и транспорт","🚢","ship|шип|the","Schiff|шиф|das","bateau|бато|le","nave|наве|la","barco|барко|el","skip|шип|et","chuán|чуань","سفينة|сафина"),
+W("Аэропорт","Город и транспорт","🛫","airport|эапот|the","Flughafen|флюкхафен|der","aéroport|аэропор|l'","aeroporto|аэропорто|l'","aeropuerto|аэропуэрто|el","flyplass|флюпласс|en","jīchǎng|цзичан","مطار|матар"),
+W("Вокзал","Город и транспорт","🚉","station|стейшн|the","Bahnhof|банхоф|der","gare|гар|la","stazione|стацьоне|la","estación|эстасьон|la","stasjon|сташун|en","chēzhàn|чэчжань","محطة|махатта"),
+W("Магазин","Город и транспорт","🏪","shop|шоп|the","Geschäft|гешефт|das","magasin|магазен|le","negozio|негоцьо|il","tienda|тьенда|la","butikk|бутик|en","shāngdiàn|шандянь","متجر|матаджар"),
+W("Больница","Город и транспорт","🏥","hospital|хоспитл|the","Krankenhaus|кранкенхаус|das","hôpital|опиталь|l'","ospedale|оспедале|l'","hospital|оспиталь|el","sykehus|сюкехус|et","yīyuàn|июань","مستشفى|мушташфа"),
+W("Солнце","Природа","☀️","sun|сан|the","Sonne|зонне|die","soleil|солей|le","sole|соле|il","sol|соль|el","sol|суль|ei","tàiyáng|тайян","شمس|шамс"),
+W("Луна","Природа","🌙","moon|мун|the","Mond|монд|der","lune|люн|la","luna|луна|la","luna|луна|la","måne|моне|ei","yuèliang|юэлян","قمر|камар"),
+W("Звезда","Природа","⭐","star|ста|a","Stern|шерн|der","étoile|этуаль|l'","stella|стелла|la","estrella|эстрелья|la","stjerne|шерне|ei","xīngxing|синсин","نجمة|наджма"),
+W("Небо","Природа","🌌","sky|скай|the","Himmel|химмель|der","ciel|сьель|le","cielo|чело|il","cielo|сьело|el","himmel|химмель|en","tiānkōng|тянькун","سماء|сама"),
+W("Дождь","Природа","🌧️","rain|рейн|the","Regen|регэн|der","pluie|плюи|la","pioggia|пиоджа|la","lluvia|ювия|la","regn|регн|et","yǔ|юй","مطر|матар"),
+W("Снег","Природа","❄️","snow|сноу|the","Schnee|шне|der","neige|неж|la","neve|неве|la","nieve|ньеве|la","snø|снё|en","xuě|сюэ","ثلج|сальдж"),
+W("Ветер","Природа","💨","wind|винд|the","Wind|винт|der","vent|ван|le","vento|венто|il","viento|вьенто|el","vind|винн|en","fēng|фэн","رياح|рийах"),
+W("Дерево","Природа","🌳","tree|три|the","Baum|баум|der","arbre|арбр|l'","albero|альберо|l'","árbol|арболь|el","tre|тре|et","shù|шу","شجرة|шаджара"),
+W("Цветок","Природа","🌸","flower|флауэ|the","Blume|блюме|die","fleur|флёр|la","fiore|фьоре|il","flor|флор|la","blomst|бломст|en","huā|хуа","زهرة|захра"),
+W("Гора","Природа","⛰️","mountain|маунтн|the","Berg|берг|der","montagne|монтань|la","montagna|монтанья|la","montaña|монтанья|la","fjell|фьель|et","shān|шань","جبل|джабаль"),
+W("Море","Природа","🌊","sea|си|the","Meer|мер|das","mer|мер|la","mare|маре|il","mar|мар|el","hav|хав|et","hǎi|хай","بحر|бахр"),
+W("Река","Природа","🏞️","river|ривэ|the","Fluss|флюс|der","rivière|ривьер|la","fiume|фьюме|il","río|рио|el","elv|эльв|ei","hé|хэ","نهر|нахр"),
+W("День","Время и числа","🌞","day|дей|the","Tag|так|der","jour|жур|le","giorno|джорно|il","día|диа|el","dag|даг|en","rì|жи","يوم|яум"),
+W("Ночь","Время и числа","🌃","night|найт|the","Nacht|нахт|die","nuit|нюи|la","notte|нотте|la","noche|ноче|la","natt|натт|ei","yè|е","ليلة|лейла"),
+W("Сегодня","Время и числа","📅","today|тудей|—","heute|хойте|—","aujourd'hui|ожурд'юи|—","oggi|оджи|—","hoy|ой|—","i dag|и даг|—","jīntiān|цзиньтянь","اليوم|аль-яум"),
+W("Время","Время и числа","⏳","time|тайм|the","Zeit|цайт|die","temps|тен|le","tempo|темпо|il","tiempo|тьемпо|el","tid|тид|ei","shíjiān|шицзянь","وقت|вакт"),
+W("Час","Время и числа","🕐","hour|ауэ|the","Stunde|штунде|die","heure|ёр|l'","ora|ора|l'","hora|ора|la","time|тиме|en","xiǎoshí|сяоши","ساعة|саа"),
+W("Неделя","Время и числа","📆","week|вик|the","Woche|вохе|die","semaine|семэн|la","settimana|сеттимана|la","semana|семана|la","uke|уке|ei","xīngqī|синци","أسبوع|усбу"),
+W("Один","Время и числа","1️⃣","one|уан|—","eins|айнс|—","un|эн|—","uno|уно|—","uno|уно|—","en|эн|—","yī|и","واحد|вахид"),
+W("Два","Время и числа","2️⃣","two|ту|—","zwei|цвай|—","deux|дё|—","due|дуэ|—","dos|дос|—","to|ту|—","èr|эр","اثنان|иснан"),
+W("Три","Время и числа","3️⃣","three|три|—","drei|драй|—","trois|труа|—","tre|тре|—","tres|трес|—","tre|тре|—","sān|сань","ثلاثة|саляса"),
+W("Четыре","Время и числа","4️⃣","four|фо|—","vier|фир|—","quatre|катр|—","quattro|куаттро|—","cuatro|куатро|—","fire|фире|—","sì|сы","أربعة|арбаа"),
+W("Пять","Время и числа","5️⃣","five|файв|—","fünf|фюнф|—","cinq|сенк|—","cinque|чинкуэ|—","cinco|синко|—","fem|фем|—","wǔ|у","خمسة|хамса"),
+W("Десять","Время и числа","🔟","ten|тэн|—","zehn|цейн|—","dix|дис|—","dieci|дьечи|—","diez|дьес|—","ti|ти|—","shí|ши","عشرة|ашара"),
+W("Красный","Цвета","🔴","red|рэд|—","rot|рот|—","rouge|руж|—","rosso|россо|—","rojo|рохо|—","rød|рёд|—","hóngsè|хунсэ","أحمر|ахмар"),
+W("Синий","Цвета","🔵","blue|блу|—","blau|блау|—","bleu|блё|—","blu|блу|—","azul|асуль|—","blå|бло|—","lán|лань","أزرق|азрак"),
+W("Зелёный","Цвета","🟢","green|грин|—","grün|грюн|—","vert|вер|—","verde|верде|—","verde|берде|—","grønn|грённ|—","lǜ|люй","أخضر|ахдар"),
+W("Жёлтый","Цвета","🟡","yellow|елоу|—","gelb|гельб|—","jaune|жон|—","giallo|джалло|—","amarillo|амарильо|—","gul|гуль|—","huáng|хуан","أصفر|асфар"),
+W("Чёрный","Цвета","⚫","black|блэк|—","schwarz|шварц|—","noir|нуар|—","nero|неро|—","negro|негро|—","svart|сварт|—","hēi|хэй","أسود|асвад"),
+W("Белый","Цвета","⚪","white|уайт|—","weiß|вайс|—","blanc|блан|—","bianco|бьянко|—","blanco|бланко|—","hvit|вит|—","bái|бай","أبيض|абьяд"),
+W("Быть","Глаголы","🧘","be|би|—","sein|зайн|—","être|этр|—","essere|эссере|—","ser|сер|—","være|вэре|—","shì|ши","يكون|якун"),
+W("Идти","Глаголы","🚶","go|гоу|—","gehen|гейен|—","aller|але|—","andare|андаре|—","ir|ир|—","gå|го|—","qù|цюй","يذهب|язхаб"),
+W("Есть","Глаголы","🍽️","eat|ит|—","essen|эссен|—","manger|манже|—","mangiare|манджаре|—","comer|комер|—","spise|списе|—","chī|чи","يأكل|яакуль"),
+W("Пить","Глаголы","🥤","drink|дринк|—","trinken|тринкен|—","boire|буар|—","bere|бере|—","beber|бебер|—","drikke|дрикке|—","hē|хэ","يشرب|яшраб"),
+W("Спать","Глаголы","😴","sleep|слип|—","schlafen|шлафен|—","dormir|дормир|—","dormire|дормире|—","dormir|дормир|—","sove|сове|—","shuìjiào|шуйцзяо","ينام|янам"),
+W("Говорить","Глаголы","🗨️","speak|спик|—","sprechen|шпрехен|—","parler|парле|—","parlare|парларе|—","hablar|аблар|—","snakke|снакке|—","shuō|шо","يتكلم|ятакаллям"),
+W("Читать","Глаголы","📚","read|рид|—","lesen|лезен|—","lire|лир|—","leggere|леджере|—","leer|леэр|—","lese|лесе|—","dú|ду","يقرأ|якрау"),
+W("Писать","Глаголы","✍️","write|райт|—","schreiben|шрайбен|—","écrire|экрир|—","scrivere|скривере|—","escribir|эскрибир|—","skrive|криве|—","xiě|се","يكتب|яктаб"),
+W("Видеть","Глаголы","👀","see|си|—","sehen|зеен|—","voir|вуар|—","vedere|ведере|—","ver|вер|—","se|се|—","kàn|кань","يرى|яра"),
+W("Слышать","Глаголы","👂","hear|хиэ|—","hören|хёрен|—","entendre|антендр|—","sentire|сентире|—","oír|оир|—","høre|хёре|—","tīng|тин","يسمع|ясмау"),
+W("Работать","Глаголы","💼","work|вёк|—","arbeiten|арбайтен|—","travailler|травайе|—","lavorare|лаворааре|—","trabajar|трабахар|—","jobbe|йоббе|—","gōngzuò|гунцзо","يعمل|яамаль"),
+W("Жить","Глаголы","🏡","live|лив|—","leben|лебен|—","vivre|вивр|—","vivere|вивере|—","vivir|вивир|—","bo|бу|—","zhù|чжу","يعيش|яиш"),
+W("Любить","Глаголы","💕","love|лав|—","lieben|либен|—","aimer|эме|—","amare|амаре|—","amar|амар|—","elske|эльске|—","ài|ай","يحب|юхиббу"),
+W("Делать","Глаголы","🔨","do|ду|—","machen|махен|—","faire|фэр|—","fare|фаре|—","hacer|асер|—","gjøre|йёре|—","zuò|цзо","يفعل|яфъаль"),
+W("Учиться","Глаголы","🎓","learn|лён|—","lernen|лернен|—","apprendre|апрендр|—","imparare|импараре|—","aprender|апрендер|—","lære|лэре|—","xuéxí|сюэси","يتعلم|ятааллям"),
+W("Играть","Глаголы","🎮","play|плей|—","spielen|шпилен|—","jouer|жуэ|—","giocare|джокаре|—","jugar|хугар|—","spille|спилле|—","wán|вань","يلعب|ялъаб"),
+W("Большой","Прилагательные","🐘","big|биг|—","groß|грос|—","grand|гран|—","grande|гранде|—","grande|гранде|—","stor|стур|—","dà|да","كبير|кабир"),
+W("Маленький","Прилагательные","🐜","small|смол|—","klein|кляйн|—","petit|п(ъ)ти|—","piccolo|пикколо|—","pequeño|пекеньо|—","liten|литен|—","xiǎo|сяо","صغير|сагир"),
+W("Хороший","Прилагательные","👍","good|гуд|—","gut|гут|—","bon|бон|—","buono|буоно|—","bueno|буэно|—","god|гуд|—","hǎo|хао","جيد|джайид"),
+W("Плохой","Прилагательные","👎","bad|бэд|—","schlecht|шлехт|—","mauvais|мовэ|—","cattivo|каттиво|—","malo|мало|—","dårlig|дорли|—","huài|хуай","سيئ|сайи"),
+W("Красивый","Прилагательные","🌺","beautiful|бьютифул|—","schön|шён|—","beau|бо|—","bello|белло|—","bonito|бонито|—","vakker|ваккер|—","měilì|мэйли","جميل|джамил"),
+W("Новый","Прилагательные","✨","new|нью|—","neu|ной|—","nouveau|нуво|—","nuovo|нуово|—","nuevo|нуэво|—","ny|ню|—","xīn|синь","جديد|джадид"),
+W("Старый","Прилагательные","🏚️","old|оулд|—","alt|альт|—","vieux|вьё|—","vecchio|веккьо|—","viejo|вьехо|—","gammel|гаммель|—","jiù|цзю","قديم|кадим"),
+W("Быстрый","Прилагательные","⚡","fast|фаст|—","schnell|шнель|—","rapide|рапид|—","veloce|велоче|—","rápido|рапидо|—","rask|раск|—","kuài|куай","سريع|сари"),
+W("Медленный","Прилагательные","🐢","slow|слоу|—","langsam|лангзам|—","lent|лен|—","lento|ленто|—","lento|ленто|—","treg|трег|—","màn|мань","بطيء|бати"),
+W("Горячий","Прилагательные","🔥","hot|хот|—","heiß|хайс|—","chaud|шо|—","caldo|кальдо|—","caliente|кальенте|—","varm|варм|—","rè|жэ","حار|харр"),
+W("Холодный","Прилагательные","🧊","cold|коулд|—","kalt|кальт|—","froid|фруа|—","freddo|фреддо|—","frío|фрио|—","kald|каль|—","lěng|лэн","بارد|барид"),
+W("Счастливый","Прилагательные","😊","happy|хэпи|—","glücklich|глюклих|—","heureux|ёрё|—","felice|феличе|—","feliz|фелис|—","glad|глад|—","gāoxìng|гаосин","سعيد|саид"),
+W("Врач","Профессии","🧑‍⚕️","doctor|доктэ|the","Arzt|арцт|der","médecin|медсэн|le","medico|медико|il","médico|медико|el","lege|леге|en","yīshēng|ишэн","طبيب|табиб"),
+W("Учитель","Профессии","🧑‍🏫","teacher|тичэ|the","Lehrer|лерер|der","professeur|профессёр|le","insegnante|инсеньянте|l'","profesor|професор|el","lærer|лэре|en","lǎoshī|лаоши","معلم|муаллим"),
+W("Инженер","Профессии","👷","engineer|энджиниэ|an","Ingenieur|инжениёр|der","ingénieur|энженъёр|l'","ingegnere|инженьере|l'","ingeniero|инхеньеро|el","ingeniør|ингениёр|en","gōngchéngshī|гунчэнши","مهندس|мухандис"),
+W("Повар","Профессии","👨‍🍳","cook|кук|the","Koch|кох|der","cuisinier|куизинье|le","cuoco|куоко|il","cocinero|косинеро|el","kokk|кокк|en","chúshī|чуши","طباخ|таббах"),
+W("Водитель","Профессии","🚕","driver|драйвэ|the","Fahrer|фарер|der","chauffeur|шофёр|le","autista|аутиста|l'","conductor|кондуктор|el","sjåfør|шофёр|en","sījī|сыцзи","سائق|саик"),
+W("Продавец","Профессии","🛒","seller|селэ|the","Verkäufer|феркёфер|der","vendeur|вандёр|le","venditore|вендиторе|il","vendedor|вендедор|el","selger|сельгер|en","shòuhuòyuán|шоухуюань","بائع|баи"),
+W("Полицейский","Профессии","👮","police officer|полис|the","Polizist|полицист|der","policier|полисье|le","poliziotto|полициотто|il","policía|полисиа|el","politi|полити|en","jǐngchá|цзинча","شرطي|шурти"),
+W("Студент","Профессии","🎒","student|студент|the","Student|штудент|der","étudiant|этьюдьен|l'","studente|студенте|lo","estudiante|эстудианте|el","student|студент|en","xuésheng|сюэшэн","طالب|талиб")
+];
+BASE.forEach((w,i)=>w.id='b'+i);
+const LS={w:'pg_words',s:'pg_stats',c:'pg_set'};
+const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){alert('⚠️ Хранилище переполнено!')}};
+let custom=load(LS.w,[]),stats=load(LS.s,{}),
+set=Object.assign({langs:LANGS.map(l=>l.c),rate:.95,dir:'mix'},load(LS.c,{}));
+if(!Array.isArray(set.langs)||!set.langs.some(c=>LANGS.some(l=>l.c===c)))set.langs=LANGS.map(l=>l.c);
+if(!Number.isFinite(+set.rate))set.rate=.95;
+let tab='dict',editId=null,lastFocusedElement=null;
+const $=id=>document.getElementById(id);
+const announce=message=>{const el=$('notice');if(el)el.textContent=message};
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>a.map(x=>[Math.random(),x]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+const norm=s=>String(s||'').toLowerCase().replace(/ё/g,'е').replace(/[^a-zа-я0-9\u00c0-\u024f\u0400-\u04ff\u4e00-\u9fff\u0600-\u06ff]+/gi,' ').trim();
+function wordsAll(){const ov={};custom.forEach(w=>ov[norm(w.ru)]=1);return BASE.filter(w=>!ov[norm(w.ru)]).concat(custom)}
+function activeLangs(){return LANGS.filter(l=>set.langs.includes(l.c))}
+function getPool(){let ws=wordsAll();const q=norm($('q').value),c=$('cat').value;
+if(c)ws=ws.filter(w=>w.cat===c);
+if(q)ws=ws.filter(w=>norm(w.ru).includes(q)||Object.values(w.t||{}).some(t=>norm(t?.w).includes(q)));
+if($('weak').checked)ws=ws.filter(w=>{const s=stats[w.id];return s&&s.w>s.c});
+return ws}
+function bump(id,good){const s=stats[id]||(stats[id]={c:0,w:0});good?s.c++:s.w++;save(LS.s,stats)}
+function speak(text,code){if(!text)return;if(!('speechSynthesis' in window)){announce('Озвучивание не поддерживается этим браузером.');return}const L=LANGS.find(l=>l.c===code);const u=new SpeechSynthesisUtterance(text);
+u.lang=L?L.tts:'ru-RU';u.rate=+$('rate').value;speechSynthesis.cancel();speechSynthesis.speak(u)}
+function artHTML(a){return a&&a!=='—'?`<span class="art">${esc(a)}</span>`:''}
+function sayBtn(text,code){return`<button type="button" class="say" title="Озвучить" aria-label="Озвучить: ${esc(text)}" data-say="${esc(text)}" data-lang="${esc(code)}">🔊</button>`}
+function statBadge(id){const s=stats[id];if(!s||(!s.c&&!s.w))return'';return s.c>=s.w?`<span class="badge ok">✓${s.c}</span>`:`<span class="badge bad">✗${s.w}</span>`}
+function renderHeader(){const ws=wordsAll(),learned=ws.filter(w=>stats[w.id]&&stats[w.id].c>0).length;
+$('stat').textContent=`слов: ${ws.length} · изучено: ${learned} (${Math.round(100*learned/Math.max(1,ws.length))}%)`}
+function renderChips(){$('langchips').innerHTML=LANGS.map(l=>`<button type="button" class="chip ${set.langs.includes(l.c)?'on':''}" aria-pressed="${set.langs.includes(l.c)}" onclick="tglLang('${l.c}')">${l.f} ${l.n}</button>`).join('')}
+function renderCats(){const cs=[...new Set(wordsAll().map(w=>w.cat))].sort();$('cat').innerHTML=`<option value="">все темы</option>`+cs.map(c=>`<option>${esc(c)}</option>`).join('')}
+function renderDict(){const ws=getPool();
+$('dictgrid').innerHTML=ws.map(w=>`<article class="wcard"><div class="whead">${emHTML(w,'em')}
+<div style="flex:1"><div class="ru">${esc(w.ru)} ${sayBtn(w.ru,'ru')}</div><div class="cat">${esc(w.cat||'')} ${statBadge(w.id)}</div></div>
+<button type="button" class="mini" title="Найти изображения: ${esc(w.ru)}" data-action="image-search" data-id="${esc(w.id)}">🔎</button>
+<button type="button" class="mini" title="Редактировать: ${esc(w.ru)}" data-action="edit-word" data-id="${esc(w.id)}">✏️</button></div>
+${activeLangs().map(l=>{const t=w.t[l.c]||{};return`<div class="trow"><span class="f">${l.f}</span>${artHTML(t.a)}<span class="tw">${esc(t.w)}</span><span class="tp">[${esc(t.p)}]</span><span class="spacer"></span>${sayBtn(t.w,l.c)}</div>`}).join('')}
+</article>`).join('')||'<p class="mut">Ничего не найдено. Сбросьте фильтры или измените поисковый запрос.</p>'}
+function emHTML(w,cls){return w.em&&/^https?:/.test(w.em)?`<span class="${cls}"><img src="${esc(w.em)}" alt="${esc(w.ru)}"></span>`:`<span class="${cls}" aria-hidden="true">${esc(w.em||'🔤')}</span>`}
+function imageSearch(id){const w=wordsAll().find(x=>x.id===id);if(!w)return;const win=window.open('https://www.google.com/search?tbm=isch&q='+encodeURIComponent(w.ru),'_blank','noopener');if(win)win.opener=null}
+let fq=[],fi=0,flipped=false;
+function startCards(){const langs=activeLangs();if(!langs.length){$('flash').innerHTML='<p class="mut">Выберите хотя бы один язык для карточек.</p>';return}fq=shuffle(getPool()).sort((a,b)=>((stats[b.id]?.w||0)-(stats[b.id]?.c||0))-((stats[a.id]?.w||0)-(stats[a.id]?.c||0))).slice(0,60);fi=0;flipped=false;drawCard()}
+function drawCard(){const w=fq[fi];if(!w){$('flash').innerHTML='<p>Нет слов по фильтру.</p>';return}
+$('flash').innerHTML=`<p class="mut">Карточка ${fi+1} из ${fq.length} · нажмите карточку</p>
+<div class="fcard" role="button" tabindex="0" aria-label="Показать перевод карточки" onclick="flipped=true;drawCard()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();flipped=true;drawCard()}">
+${flipped?`<div class="big">${emHTML(w,'big')}</div><h2>${esc(w.ru)} ${sayBtn(w.ru,'ru')}</h2>
+<div style="text-align:left;max-width:420px;margin:0 auto">${activeLangs().map(l=>{const t=w.t[l.c];return`<div class="trow"><span class="f">${l.f}</span>${artHTML(t.a)}<span class="tw">${esc(t.w)}</span><span class="tp">[${esc(t.p)}]</span><span class="spacer"></span>${sayBtn(t.w,l.c)}</div>`}).join('')}</div>`
+:`${emHTML(w,'big')}<h2>${esc(w.ru)}</h2><p class="mut">Как это на ${activeLangs().length} языках? →</p>`}
+</div>
+${flipped?`<div class="fbtns"><button class="no" onclick="bump('${w.id}',false);nextCard()">✗ Не знаю</button>
+<button class="ok" onclick="bump('${w.id}',true);nextCard()">✓ Знаю</button></div>`:''}`}
+function nextCard(){flipped=false;fi++;if(fi>=fq.length){fi=0;fq=shuffle(fq)}drawCard();renderHeader()}
+let qz=null;
+function newQuiz(){const pool=getPool();const langs=activeLangs();
+if(!langs.length){$('quizbox').innerHTML='<p class="mut">Выберите хотя бы один язык для теста.</p>';return}
+const lang=pick(langs);const cand=pool.filter(w=>w.t?.[lang.c]?.w);
+if(cand.length<4){$('quizbox').innerHTML=`<p class="mut">Для теста на ${esc(lang.n)} нужно минимум 4 слова с переводом по текущему фильтру.</p>`;return}
+const dir=set.dir==='mix'?(Math.random()<.5?'r2x':'x2r'):set.dir;
+const w=pick(cand);const others=shuffle(cand.filter(x=>x.id!==w.id&&x.t[lang.c].w!==w.t[lang.c].w)).slice(0,3);
+qz={w,lang,dir,opts:shuffle([w,...others]),done:false};drawQuiz()}
+function drawQuiz(){const{w,lang,dir,opts}=qz;
+const prompt=dir==='r2x'?`${emHTML(w,'big')}<h2>${esc(w.ru)} ${sayBtn(w.ru,'ru')}</h2><p class="mut">Выберите перевод: ${lang.n}</p>`
+:`${emHTML(w,'big')}<h2>${artHTML(w.t[lang.c].a)}${esc(w.t[lang.c].w)} ${sayBtn(w.t[lang.c].w,lang.c)}</h2><p class="mut">Что это по-русски?</p>`;
+$('quizbox').innerHTML=prompt+`<div class="opts">`+opts.map(o=>{
+const t=o.t[lang.c];
+const label=dir==='r2x'?`${t.a&&t.a!=='—'?t.a+' ':''}${t.w}`:o.ru;
+return`<button onclick="ansQuiz(this,'${o.id}')">${esc(label)}</button>`}).join('')+`</div><div id="qznext"></div>`}
+function ansQuiz(btn,id){if(qz.done)return;qz.done=true;const good=id===qz.w.id;bump(qz.w.id,good);
+btn.classList.add(good?'good':'wrong');
+if(!good)[...btn.parentNode.children].forEach(b=>{if(b.getAttribute('onclick').includes("'"+qz.w.id+"'"))b.classList.add('good')});
+$('qznext').innerHTML=`<div class="fbtns"><button class="primary" onclick="newQuiz()">Дальше →</button></div>`;renderHeader()}
+let ty=null;
+function newType(){const pool=getPool();const langs=activeLangs();if(!langs.length){$('typebox').innerHTML='<p class="mut">Выберите хотя бы один язык для упражнения.</p>';return}
+const lang=pick(langs);const cand=pool.filter(w=>w.t?.[lang.c]?.w);if(!cand.length){$('typebox').innerHTML=`<p class="mut">Нет слов с переводом на ${esc(lang.n)} по текущему фильтру.</p>`;return}const w=pick(cand);
+const dir=set.dir==='mix'?(Math.random()<.5?'r2x':'x2r'):set.dir;
+ty={w,lang,dir};
+const hint=dir==='r2x'&&lang.hasArt&&w.t[lang.c].a&&w.t[lang.c].a!=='—'?`<p class="mut">Не забудьте артикль: <b style="color:var(--art)">${w.t[lang.c].a}</b></p>`:'';
+$('typebox').innerHTML=(dir==='r2x'?`${emHTML(w,'big')}<h2>${esc(w.ru)} ${sayBtn(w.ru,'ru')}</h2><p class="mut">Введите: ${lang.n}</p>${hint}`
+:`${emHTML(w,'big')}<h2>${artHTML(w.t[lang.c].a)}${esc(w.t[lang.c].w)} ${sayBtn(w.t[lang.c].w,lang.c)}</h2><p class="mut">Введите по-русски</p>`)
++`<input id="tans" style="width:100%;font-size:17px" onkeydown="if(event.key==='Enter')checkType()">
+<div class="fbtns"><button class="primary" onclick="checkType()">Проверить</button><button onclick="newType()">Пропустить</button></div><div id="tyres"></div>`;
+setTimeout(()=>$('tans')&&$('tans').focus(),50)}
+function checkType(){if(!ty||!$('tans'))return;const v=$('tans').value;const t=ty.dir==='r2x'?ty.w.t[ty.lang.c].w:ty.w.ru;
+const art=ty.dir==='r2x'?ty.w.t[ty.lang.c].a:'';
+const fullWithArt=art&&art!=='—'?art+' '+t:t;
+const good=t.split('/').some(x=>norm(x)===norm(v))||norm(fullWithArt)===norm(v);
+bump(ty.w.id,good);const result=good?'✓ Верно!':`✗ Правильно: <b>${esc(fullWithArt)}</b>`;
+$('tyres').innerHTML=`<p style="color:${good?'var(--ok)':'var(--bad)'}">${result}</p>
+<div class="fbtns"><button type="button" class="primary" onclick="newType()">Дальше →</button></div>`;renderHeader()}
+function showModal(){lastFocusedElement=document.activeElement;$('modal').classList.add('open');$('modal').setAttribute('aria-hidden','false');setTimeout(()=>$('f_ru').focus(),0)}
+function openAdd(){editId=null;$('mtitle').textContent='Новое слово';$('f_ru').value='';$('f_cat').value='';$('f_em').value='';buildLangInputs({});showModal()}
+function openEdit(id){const w=wordsAll().find(x=>x.id===id);if(!w)return;editId=id;
+$('mtitle').textContent='Редактировать: '+w.ru;$('f_ru').value=w.ru;$('f_cat').value=w.cat||'';$('f_em').value=w.em||'';buildLangInputs(w.t||{});showModal()}
+function buildLangInputs(t){$('f_langs').innerHTML=LANGS.map(l=>`<div class="mrow"><span>${l.f}</span>
+${l.hasArt?`<input id="ta_${l.c}" placeholder="арт." value="${esc(t[l.c]?.a||'')}" style="width:60px">`:'<span></span>'}
+<input id="tw_${l.c}" placeholder="слово" value="${esc(t[l.c]?.w||'')}">
+<input id="tp_${l.c}" placeholder="транскрипция" value="${esc(t[l.c]?.p||'')}"></div>`).join('')}
+function closeM(){$('modal').classList.remove('open');$('modal').setAttribute('aria-hidden','true');if(lastFocusedElement?.focus)lastFocusedElement.focus()}
+function saveWord(){const ru=$('f_ru').value.trim();if(!ru)return alert('Нужно русское название');
+const t={};LANGS.forEach(l=>{t[l.c]={w:$('tw_'+l.c).value.trim(),p:$('tp_'+l.c).value.trim(),
+a:l.hasArt?($('ta_'+l.c)?.value.trim()||''):''}});
+const obj={id:editId||'c'+Date.now()+Math.floor(Math.random()*999),
+ru,cat:$('f_cat').value.trim()||'Мои слова',em:$('f_em').value.trim()||'🔤',t};
+const i=custom.findIndex(x=>x.id===obj.id);
+if(i>=0)custom[i]=obj;else{const j=custom.findIndex(x=>norm(x.ru)===norm(ru));if(j>=0)custom[j]=obj;else custom.push(obj)}
+save(LS.w,custom);closeM();renderAll()}
+async function autofill(){const ru=$('f_ru').value.trim();if(!ru)return alert('Сначала введите русское слово');
+for(const l of LANGS){try{const r=await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(ru)}&langpair=ru|${l.mm}`);
+const j=await r.json();const tr=j?.responseData?.translatedText||'';
+if(tr)$('tw_'+l.c).value=tr;
+await new Promise(r=>setTimeout(r,120))}catch(e){}}
+alert('⚡ Переводы заполнены! Артикли и транскрипции добавьте вручную.')}
+function parseDelimitedRow(line,delimiter){const cells=[];let value='',quoted=false;for(let i=0;i<line.length;i++){const ch=line[i];if(ch==='\"'){if(quoted&&line[i+1]==='\"'){value+='\"';i++}else quoted=!quoted}else if(ch===delimiter&&!quoted){cells.push(value.trim());value=''}else value+=ch}cells.push(value.trim());return cells}
+function parseText(text){let out=[];const t=String(text||'').replace(/^\uFEFF/,'').trim();if(!t)return out;
+try{const j=JSON.parse(t);if(Array.isArray(j)){j.forEach(o=>{if(o&&typeof o==='object'&&o.ru)out.push(normWord(o));else if(typeof o==='string'&&o.trim())out.push({ru:o.trim()})});return out}}catch(e){}
+const lines=t.split(/\r?\n/).filter(l=>l.trim());if(!lines.length)return out;const first=lines[0];const d=first.includes('\t')?'\t':first.includes(',')?',':first.includes(';')?';':first.includes('|')?'|':null;const start=d&&/^\s*ru\s*(?:\t|,|;|\|)/i.test(first)?1:0;
+for(let n=start;n<lines.length;n++){const line=lines[n];if(!d||!line.includes(d)){out.push({ru:line.trim()});continue}const p=parseDelimitedRow(line,d);
+if(d==='|'&&p.length>=27){out.push({ru:p[0],cat:p[1],em:p[2],tr:LANGS.map((_,i)=>[p[3+i*3]||'',p[4+i*3]||'',p[5+i*3]||''].join('|'))})}
+else if(p.length>=11)out.push({ru:p[0],cat:p[1],em:p[2],tr:p.slice(3,11)});
+else if(p.length>=9)out.push({ru:p[0],tr:p.slice(1,9)});
+else if(p.length>=2)out.push({ru:p[0],tr:[p[1]]});
+else out.push({ru:p[0]})}return out.filter(o=>o.ru&&String(o.ru).trim())}
+function normWord(o){const t={};LANGS.forEach((l,i)=>{let w='',p='',a='';const src=o?.t?.[l.c]??o?.tr?.[i]??'';
+if(typeof src==='object'&&src){w=src.w||'';p=src.p||'';a=src.a||''}else if(typeof src==='string'){const parts=String(src).split('|');w=parts[0]||'';p=parts[1]||'';a=parts[2]||''}t[l.c]={w,p,a}});
+return{id:o?.id||'c'+Date.now()+Math.floor(Math.random()*1e6),ru:String(o?.ru||'').trim(),cat:o?.cat||'Импорт',em:o?.em||o?.img||'🔤',t}}
+async function importWords(list){const auto=$('impauto').checked;const pb=$('imppb');pb.hidden=false;
+let done=0;for(const item of list){
+let w=item.t?item:normWord(item);
+if(auto&&(!w.t||!w.t.en?.w)){w.t=w.t||{};for(const l of LANGS){try{
+const r=await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(w.ru)}&langpair=ru|${l.mm}`);
+const j=await r.json();const tr=j?.responseData?.translatedText||'';
+w.t[l.c]={w:tr,p:'',a:''};
+await new Promise(r2=>setTimeout(r2,110))}catch(e){w.t[l.c]={w:'',p:'',a:''}}}}
+const j2=custom.findIndex(x=>norm(x.ru)===norm(w.ru));if(j2>=0)custom[j2]=w;else custom.push(w);
+done++;pb.firstElementChild.style.width=Math.round(100*done/list.length)+'%';
+$('impmsg').textContent=`обработано ${done}/${list.length}…`;
+if(done%5===0){save(LS.w,custom);renderAll()}}
+save(LS.w,custom);renderAll();$('impmsg').textContent=`✅ Добавлено: ${done}. Всего: ${wordsAll().length}`}
+function doImportText(){const list=parseText($('imp').value);if(!list.length)return alert('Пусто');importWords(list)}
+async function doImportURL(){let u=$('url').value.trim();if(!u)return;
+if($('proxy').checked)u='https://corsproxy.io/?url='+encodeURIComponent(u);
+try{const r=await fetch(u);importWords(parseText(await r.text()))}catch(e){alert('Ошибка: '+e.message)}}
+$('file')&&$('file').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
+r.onload=()=>importWords(parseText(r.result));r.readAsText(f)});
+function doExport(){const blob=new Blob([JSON.stringify(wordsAll(),null,1)],{type:'application/json'});
+const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='slovar.json';a.click()}
+function dlTemplate(){const rows=[['ru','cat','emoji','en','de','fr','it','es','no','zh','ar'],['Лиса','Животные','🦊','fox|фокс|a','Fuchs|фукс|der','renard|ренар|le','volpe|вольпе|la','zorro|сорро|el','rev|рев|en','húli|хули|','ثعلب|саалаб|'],['Стол','Дом','🪑','table|тейбл|the','Tisch|тиш|der','table|табль|la','tavolo|таволо|il','mesa|меса|la','bord|борд|et','zhuōzi|чжоцзы|','طاولة|таула|']];const t=rows.map(row=>row.join('\t')).join('\n');
+const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/tab-separated-values;charset=utf-8'}));a.download='shablon.tsv';a.click();URL.revokeObjectURL(a.href)}
+function resetAll(){if(confirm('Удалить ВСЕ свои слова и статистику?')){custom=[];stats={};save(LS.w,custom);save(LS.s,stats);renderAll()}}
+function tglLang(c){const i=set.langs.indexOf(c);if(i>=0&&set.langs.length===1){announce('Оставьте хотя бы один язык активным.');return}i>=0?set.langs.splice(i,1):set.langs.push(c);save(LS.c,set);renderAll()}
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;
+document.querySelectorAll('#tabs button').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-selected',String(x===b))});
+['dict','cards','quiz','type','io'].forEach(t=>$('tab-'+t).hidden=t!==tab);
+if(tab==='cards')startCards();if(tab==='quiz')newQuiz();if(tab==='type')newType();if(tab==='dict')renderDict()});
+function refreshCurrentMode(){if(tab==='dict')renderDict();if(tab==='cards')startCards();if(tab==='quiz')newQuiz();if(tab==='type')newType()}
+['q','cat','weak'].forEach(id=>{['input','change'].forEach(eventName=>$(id).addEventListener(eventName,refreshCurrentMode))});
+$('clearFilters').addEventListener('click',()=>{$('q').value='';$('cat').value='';$('weak').checked=false;refreshCurrentMode();announce('Фильтры сброшены.')});
+document.addEventListener('click',event=>{const say=event.target.closest('[data-say]');if(say){event.stopPropagation();speak(say.dataset.say,say.dataset.lang);return}const action=event.target.closest('[data-action]');if(!action)return;if(action.dataset.action==='image-search')imageSearch(action.dataset.id);if(action.dataset.action==='edit-word')openEdit(action.dataset.id)});
+$('modal').addEventListener('click',event=>{if(event.target===$('modal'))closeM()});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&$('modal').classList.contains('open'))closeM()});
+$('dir').onchange=e=>{set.dir=e.target.value;save(LS.c,set);if(tab==='quiz')newQuiz();if(tab==='type')newType()};
+$('rate').onchange=e=>{set.rate=+e.target.value;save(LS.c,set)};
+function renderAll(){renderHeader();renderChips();renderCats();renderDict()}
+$('rate').value=set.rate;$('dir').value=set.dir;
+renderAll();
+</script>
+
+<script>
+/* Расширение ПолиГлота: панель прогресса, грамматика и интерактивные режимы */
+const PGX={
+  dayKey(){return new Date().toISOString().slice(0,10)},
+  load(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
+  save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){console.warn('Не удалось сохранить настройки',e)}},
+  esc(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')},
+  pick(a){return a[Math.floor(Math.random()*a.length)]},
+  shuffle(a){return [...a].sort(()=>Math.random()-.5)},
+  norm(s){return String(s||'').toLowerCase().replace(/ё/g,'е').replace(/[^a-zа-я0-9\u00c0-\u024f\u0400-\u04ff\u4e00-\u9fff\u0600-\u06ff]+/gi,' ').trim()},
+  shortDate(iso){if(!iso)return 'сейчас';const d=new Date(iso);return d.toLocaleDateString('ru-RU',{day:'numeric',month:'short'})},
+  setTheme(theme){document.documentElement.dataset.theme=theme;PGX.settings.theme=theme;PGX.save('pgx_settings',PGX.settings);document.getElementById('themeToggle').textContent=theme==='light'?'☾ Тёмная':'☀ Светлая'},
+  settings:null,progress:null,grammarState:null,match:null,phrase:null,audio:null
+};
+PGX.settings=Object.assign({theme:'dark',motion:true,dailyGoal:12,lastStudy:'',streak:0},PGX.load('pgx_settings',{}));
+PGX.progress=Object.assign({total:0,days:{},byLang:{},byTopic:{},grammar:{}},PGX.load('pgx_progress',{}));
+
+const GRAMMAR={
+  en:{name:'Английский',flag:'🇬🇧',kind:'Флективный язык: спряжение ограничено, падежей почти нет.',topics:[
+    {id:'en-order',title:'1. Порядок слов: кто → что делает → что/кого',level:'Базовый',tags:['порядок слов'],theory:'В нейтральном предложении сначала ставят подлежащее, затем сказуемое, затем дополнение. Вопрос обычно требует вспомогательного do/does, а отрицание — don’t/doesn’t.',formula:'I / you / we / they + work.  He / she / it + works.',examples:['I drink tea. — Я пью чай.','She reads a book. — Она читает книгу.','Does he work here? — Он работает здесь?'],tips:['Маркер he/she/it = вспомните о -s у обычного глагола.','После does/doesn’t глагол возвращается в начальную форму: does not work, не works.']},
+    {id:'en-be',title:'2. Глагол to be: am / is / are',level:'Базовый',tags:['спряжение'],theory:'To be — особый глагол. В настоящем времени он меняется по лицам и не требует do/does для вопроса или отрицания.',formula:'I am; you/we/they are; he/she/it is.',examples:['I am a student.','She is happy.','Are they at home?'],tips:['В вопросе вынесите am/is/are перед подлежащим.','Не говорите I am agree: agree — обычный глагол, нужен I agree.']},
+    {id:'en-art',title:'3. Артикли a / an / the',level:'Средний',tags:['артикли'],theory:'A/an вводят один неопределённый предмет в единственном числе; the указывает на известный или конкретный предмет. Выбор a/an зависит от звука, а не от буквы.',formula:'a dog, an apple, the dog.',examples:['I have a book.','The book is on the table.','She is an engineer.'],tips:['Сначала спросите: предмет уже понятен собеседнику? Если да, часто нужен the.','an: an hour, потому что h не произносится.']}
+  ]},
+  de:{name:'Немецкий',flag:'🇩🇪',kind:'Язык с родом и четырьмя падежами; на старте особенно важны Nominativ и Akkusativ.',topics:[
+    {id:'de-gender',title:'1. Род и артикль: der / die / das',level:'Базовый',tags:['род','артикли'],theory:'Каждое существительное учат вместе с родом: der (мужской), die (женский), das (средний). Род не всегда совпадает с русским, поэтому артикль — часть словарной карточки.',formula:'der Hund, die Katze, das Haus.',examples:['Der Hund ist groß.','Die Katze schläft.','Das Haus ist neu.'],tips:['Не учите просто Hund — учите der Hund.','Множественное число всегда die: die Bücher.']},
+    {id:'de-present',title:'2. Настоящее время: личные окончания',level:'Базовый',tags:['спряжение'],theory:'У большинства глаголов убираем -en у инфинитива и добавляем личное окончание. Подлежащее в простом утверждении обычно стоит первым, глагол — вторым.',formula:'ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en.',examples:['Ich lerne Deutsch.','Du lernst schnell.','Wir lernen zusammen.'],tips:['Запомните «глагол на втором месте» как рельсы немецкого предложения.','В вопросе без вопросительного слова глагол часто выходит на первое место: Lernst du?']},
+    {id:'de-acc',title:'3. Akkusativ: прямое дополнение',level:'Средний',tags:['склонение','артикли'],theory:'Akkusativ показывает предмет, на который направлено действие. Для начинающего главное изменение — мужской род в единственном числе: der → den, ein → einen.',formula:'Ich sehe den Hund. / Ich habe einen Hund.',examples:['Der Mann sieht den Hund.','Ich kaufe einen Apfel.','Die Frau hat eine Katze.'],tips:['Ищите вопрос «кого? что?» после глагола.','Меняется именно мужской род: die/das в этих примерах сохраняют форму.']}
+  ]},
+  fr:{name:'Французский',flag:'🇫🇷',kind:'Язык с родом, артиклями и развитым спряжением.',topics:[
+    {id:'fr-articles',title:'1. Род и артикли: le / la / un / une',level:'Базовый',tags:['род','артикли'],theory:'Существительные имеют род. Le/la — определённые артикли, un/une — неопределённые. Перед гласным le/la часто сокращаются до l’.',formula:'le livre, la table, l’école; un livre, une table.',examples:['Le chat est petit.','La maison est grande.','J’ai un livre.'],tips:['Учите слово сразу с артиклем.','Перед гласным используйте l’: l’école, l’ami.']},
+    {id:'fr-present',title:'2. Présent: глаголы на -er и être/avoir',level:'Базовый',tags:['спряжение'],theory:'Во французском глагол меняется с каждым лицом. Для -er часто видны окончания -e, -es, -e, -ons, -ez, -ent; у être и avoir формы нужно выучить отдельно.',formula:'je parle, tu parles, il parle, nous parlons, vous parlez, ils parlent.',examples:['Je parle français.','Nous parlons russe.','Elle est à la maison.'],tips:['Местоимение почти всегда пишется: je, tu, il/elle, nous, vous, ils/elles.','Конечное -ent у ils parlent обычно не звучит.']},
+    {id:'fr-neg',title:'3. Отрицание ne ... pas',level:'Средний',tags:['отрицание'],theory:'В простом французском отрицании глагол «обнимают» две части: ne перед глаголом и pas после него. Перед гласным ne сокращается до n’.',formula:'Je ne parle pas. / Il n’aime pas le café.',examples:['Je ne comprends pas.','Elle n’est pas ici.','Nous ne travaillons pas.'],tips:['Поставьте ne и pas как две скобки вокруг глагола.','В разговоре ne иногда опускают, но в учебной речи лучше писать полностью.']}
+  ]},
+  it:{name:'Итальянский',flag:'🇮🇹',kind:'Язык с родом, числом, согласованием и личными окончаниями глагола.',topics:[
+    {id:'it-gender',title:'1. Род и число: -o/-a, -i/-e',level:'Базовый',tags:['род','согласование'],theory:'Часто существительные на -o мужского рода, на -a — женского. Во множественном числе -o обычно меняется на -i, а -a — на -e. Это полезная модель, но есть исключения.',formula:'ragazzo → ragazzi; ragazza → ragazze.',examples:['Il ragazzo è alto.','La ragazza è alta.','I ragazzi sono qui.'],tips:['Смотрите сразу на артикль и окончание.','Прилагательное должно согласоваться с существительным по роду и числу.']},
+    {id:'it-present',title:'2. Presente: -are / -ere / -ire',level:'Базовый',tags:['спряжение'],theory:'Регулярные итальянские глаголы делятся на три главные группы. Уберите -are/-ere/-ire и добавьте личное окончание.',formula:'parlare: parlo, parli, parla, parliamo, parlate, parlano.',examples:['Io parlo italiano.','Tu leggi un libro.','Noi viviamo qui.'],tips:['Местоимение часто опускают: parlo уже означает «я говорю».','Сначала запомните essere и avere — они нужны почти везде.']},
+    {id:'it-articles',title:'3. Артикли il / lo / la / l’',level:'Средний',tags:['артикли'],theory:'Определённый артикль выбирают по роду, числу и первому звуку следующего слова. Il — обычная мужская форма, lo — перед некоторыми сочетаниями, la — женская, l’ — перед гласной.',formula:'il libro; lo studente; la casa; l’amico.',examples:['Il cane dorme.','Lo studente studia.','L’amica arriva.'],tips:['Не переводите «the» автоматически: сначала найдите род и начальный звук слова.','Учите пару: il libro, lo studente, l’amico.']}
+  ]},
+  es:{name:'Испанский',flag:'🇪🇸',kind:'Язык с родом, согласованием и тремя основными типами глагольных окончаний.',topics:[
+    {id:'es-gender',title:'1. Род и согласование',level:'Базовый',tags:['род','согласование'],theory:'Многие существительные на -o мужского рода, а на -a — женского, но исключения нужно учить отдельно. Артикль и прилагательное согласуются с существительным.',formula:'el gato negro / la gata negra.',examples:['El libro es nuevo.','La casa es nueva.','Los perros son grandes.'],tips:['Учите существительное с el или la.','После существительного прилагательное часто тоже меняет окончание.']},
+    {id:'es-present',title:'2. Presente: -ar / -er / -ir',level:'Базовый',tags:['спряжение'],theory:'У регулярных глаголов инфинитив заканчивается на -ar, -er или -ir. В настоящем времени к основе добавляются личные окончания.',formula:'hablar: hablo, hablas, habla, hablamos, habláis, hablan.',examples:['Yo trabajo aquí.','Ella vive en Madrid.','Nosotros comemos juntos.'],tips:['Для базовой речи прежде всего освойте формы yo, tú, él/ella и nosotros.','Глаголы ser, estar, ir — нерегулярные, их учат отдельно.']},
+    {id:'es-ser-estar',title:'3. Ser и estar: два «быть»',level:'Средний',tags:['спряжение','значение'],theory:'Ser обычно описывает устойчивую характеристику, происхождение, профессию и время. Estar часто описывает состояние или местонахождение. Упрощённое правило помогает начать, но контекст всегда важен.',formula:'ser: soy/eres/es/somos/son; estar: estoy/estás/está/estamos/están.',examples:['Soy estudiante.','Madrid está en España.','Estoy cansado.'],tips:['SER — «что это такое», ESTAR — «где/в каком состоянии».','Не путайте профессию: Soy médico, не estoy médico.']}
+  ]},
+  no:{name:'Норвежский',flag:'🇳🇴',kind:'Язык с тремя родами, постпозитивной определённостью и сравнительно простой формой настоящего времени.',topics:[
+    {id:'no-gender',title:'1. Род: en / ei / et',level:'Базовый',tags:['род','артикли'],theory:'У существительных есть мужской, женский и средний род. Неопределённые артикли: en, ei, et. Лучший способ запоминать род — учить слово вместе с артиклем.',formula:'en bil, ei bok, et hus.',examples:['Jeg har en bok.','Hun har ei katt.','Vi har et hus.'],tips:['Записывайте новое слово как en bok, а не только bok.','В разговорной норме варианты рода могут различаться, но базовую форму учите последовательно.']},
+    {id:'no-definite',title:'2. Определённость: артикль-суффикс',level:'Базовый',tags:['склонение','артикли'],theory:'В простой форме «the» обычно присоединяется к концу существительного: bil → bilen, bok → boka, hus → huset. Это не русское склонение, а важное словоизменение.',formula:'en bil → bilen; ei bok → boka; et hus → huset.',examples:['Bilen er ny.','Boka er her.','Huset er stort.'],tips:['Думайте: «определённость живёт в конце слова».','С прилагательным появляются дополнительные формы — осваивайте их следующим шагом.']},
+    {id:'no-present',title:'3. Настоящее время: одна форма для лиц',level:'Базовый',tags:['спряжение'],theory:'В норвежском глагол обычно не меняется по лицам: jeg, du, han и vi используют одну форму. Это заметно проще, чем в романских языках.',formula:'jeg jobber; du jobber; vi jobber.',examples:['Jeg snakker norsk.','Du snakker norsk.','De snakker norsk.'],tips:['Сначала найдите инфинитив, затем часто добавьте -r: å snakke → snakker.','Не пытайтесь менять окончание для каждого местоимения.']}
+  ]},
+  zh:{name:'Китайский',flag:'🇨🇳',kind:'Аналитический язык: нет рода, артиклей, склонения и спряжения в европейском смысле.',topics:[
+    {id:'zh-order',title:'1. Порядок слов: подлежащее → время → место → действие',level:'Базовый',tags:['порядок слов'],theory:'Простая фраза часто строится как SVO: подлежащее + глагол + объект. Время обычно ставят после подлежащего, а место с 在 — перед глаголом.',formula:'我 今天 在 家 学习。 Wǒ jīntiān zài jiā xuéxí.',examples:['我喝水。Wǒ hē shuǐ. — Я пью воду.','我今天工作。— Я сегодня работаю.','她在学校学习。— Она учится в школе.'],tips:['Помните маршрут: сначала «когда», потом «где», потом «что делаю».','Не ищите окончания времени у глагола: время часто выражается отдельным словом.']},
+    {id:'zh-questions',title:'2. Вопросы: 吗 и вопросительное слово на месте ответа',level:'Базовый',tags:['вопросы'],theory:'Да/нет-вопрос часто получается добавлением 吗 (ma) в конец утверждения. Вопросительное слово не всегда уходит в начало: оно остаётся там, где был бы ответ.',formula:'你喜欢咖啡吗？ / 你叫什么？',examples:['你是老师吗？— Ты учитель?','你叫什么？— Как тебя зовут?','她在哪里工作？— Где она работает?'],tips:['Возьмите утверждение и добавьте 吗 — это самый быстрый старт.','Вопросительное слово занимает место неизвестной части фразы.']},
+    {id:'zh-measure',title:'3. Число + счётное слово + существительное',level:'Средний',tags:['счётные слова'],theory:'После числа перед существительным обычно ставят счётное слово. 个 (gè) — самый частый стартовый счётный классификатор, но для многих предметов есть свои.',formula:'三个人 sān ge rén — три человека.',examples:['一个苹果。yí ge píngguǒ. — одно яблоко.','两本书。liǎng běn shū. — две книги.','我有三个朋友。— У меня три друга.'],tips:['Не пропускайте счётное слово: число и существительное редко стоят рядом напрямую.','Если не знаете специальное слово на первых этапах, спросите, подходит ли 个.']}
+  ]},
+  ar:{name:'Арабский (фусха)',flag:'🇸🇦',kind:'Язык с родом, определённостью, согласованием и разветвлённой системой глагольных форм.',topics:[
+    {id:'ar-al',title:'1. Определённость: ال (al-)',level:'Базовый',tags:['артикли'],theory:'Определённый артикль ال (al-) ставится перед существительным или прилагательным. Отдельного неопределённого артикля нет: неопределённость обычно отмечена отсутствием ال.',formula:'بيت bayt — дом; البيت al-bayt — этот/тот самый дом.',examples:['كتاب kitāb — книга.','الكتاب al-kitāb — книга (конкретная).','البيت كبير al-bayt kabīr — дом большой.'],tips:['Пишите артикль вместе со словом — это облегчает чтение и согласование.','Перед «солнечными» буквами l в произношении сливается со следующим звуком: الشَّمس ash-shams.']},
+    {id:'ar-agreement',title:'2. Род и согласование',level:'Базовый',tags:['род','согласование'],theory:'В арабском важны род, число и определённость. Прилагательное обычно согласуется с существительным, поэтому полезно учить пары сразу в готовой фразе.',formula:'ولد صغير walad ṣaghīr — маленький мальчик; بنت صغيرة bint ṣaghīra — маленькая девочка.',examples:['طالب جديد ṭālib jadīd.','طالبة جديدة ṭāliba jadīda.','الطالبة الجديدة — новая студентка.'],tips:['Часто женский род виден по ة (та марбута), но не воспринимайте это как абсолютное правило.','Проверяйте не одно слово, а всю группу: артикль + существительное + прилагательное.']},
+    {id:'ar-verbs',title:'3. Личные формы глагола: почему нужно учить парадигмой',level:'Средний',tags:['спряжение'],theory:'В арабском глагол согласуется с лицом, числом и часто родом. На старте полезнее учить несколько высокочастотных форм целиком, чем пытаться угадывать все окончания.',formula:'أنا أكتب ana aktub — я пишу; هو يكتب huwa yaktub — он пишет; هي تكتب hiya taktub — она пишет.',examples:['أنا أدرس العربية.','هو يعمل هنا.','هي تكتب رسالة.'],tips:['Учите глагол вместе с «я / он / она».','Сначала добейтесь узнавания форм, затем переходите к самостоятельному образованию.']}
+  ]}
+};
+
+const DRILLS=[
+  {lang:'en',topic:'en-be',type:'conjugation',difficulty:'Базовый',prompt:'Выберите форму to be: “She ___ happy.”',answer:'is',choices:['am','is','are','be'],explain:'Для she используется is.'},
+  {lang:'en',topic:'en-order',type:'wordorder',difficulty:'Базовый',prompt:'Соберите предложение: «Я пью чай».',answer:'I drink tea',tokens:['I','drink','tea'],explain:'Нейтральный порядок: подлежащее + глагол + дополнение.'},
+  {lang:'en',topic:'en-art',type:'choice',difficulty:'Средний',prompt:'Выберите артикль: “___ apple is red.”',answer:'An',choices:['A','An','The','—'],explain:'Перед гласным звуком в единственном числе используют an.'},
+  {lang:'de',topic:'de-present',type:'conjugation',difficulty:'Базовый',prompt:'Дополните: “Wir ___ Deutsch.” (lernen)',answer:'lernen',choices:['lerne','lernst','lernt','lernen'],explain:'С wir используется окончание -en.'},
+  {lang:'de',topic:'de-acc',type:'declension',difficulty:'Средний',prompt:'Выберите форму: “Ich sehe ___ Hund.”',answer:'den',choices:['der','den','dem','des'],explain:'Hund — мужской род; прямое дополнение требует Akkusativ: den.'},
+  {lang:'fr',topic:'fr-present',type:'conjugation',difficulty:'Базовый',prompt:'Дополните: “Nous ___ français.” (parler)',answer:'parlons',choices:['parle','parles','parlons','parlez'],explain:'Для nous у регулярных -er глаголов окончание -ons.'},
+  {lang:'fr',topic:'fr-neg',type:'choice',difficulty:'Средний',prompt:'Выберите правильное отрицание: “Je ___ comprends ___.”',answer:'ne / pas',choices:['ne / pas','pas / ne','n’ / rien','ne / jamais'],explain:'В обычном отрицании ne ставится перед глаголом, pas — после.'},
+  {lang:'it',topic:'it-present',type:'conjugation',difficulty:'Базовый',prompt:'Дополните: “Io ___ italiano.” (parlare)',answer:'parlo',choices:['parla','parlo','parli','parlano'],explain:'Для io у -are глагола окончание -o.'},
+  {lang:'it',topic:'it-gender',type:'agreement',difficulty:'Средний',prompt:'Выберите согласованную пару: «высокая девочка».',answer:'la ragazza alta',choices:['il ragazza alto','la ragazza alta','la ragazzo alta','il ragazzo alta'],explain:'Ragazza — женский род; артикль la и прилагательное alta.'},
+  {lang:'es',topic:'es-present',type:'conjugation',difficulty:'Базовый',prompt:'Дополните: “Nosotros ___ aquí.” (vivir)',answer:'vivimos',choices:['vivo','vives','vivimos','viven'],explain:'Для nosotros у -ir глагола окончание -imos.'},
+  {lang:'es',topic:'es-ser-estar',type:'choice',difficulty:'Средний',prompt:'Выберите: “Madrid ___ en España.”',answer:'está',choices:['es','está','son','están'],explain:'Местонахождение обычно выражается estar.'},
+  {lang:'no',topic:'no-gender',type:'choice',difficulty:'Базовый',prompt:'Выберите артикль: “___ hus” (дом).',answer:'et',choices:['en','ei','et','den'],explain:'Hus — средний род, поэтому et hus.'},
+  {lang:'no',topic:'no-definite',type:'declension',difficulty:'Средний',prompt:'Сделайте форму «эта книга / книга конкретная»: “ei bok → ___”.',answer:'boka',choices:['boken','boka','boket','bokene'],explain:'Для женского рода в этой модели: ei bok → boka.'},
+  {lang:'zh',topic:'zh-order',type:'wordorder',difficulty:'Базовый',prompt:'Соберите: «Я сегодня работаю».',answer:'我 今天 工作',tokens:['我','今天','工作'],explain:'Время обычно идёт после подлежащего и перед действием.'},
+  {lang:'zh',topic:'zh-measure',type:'choice',difficulty:'Средний',prompt:'Выберите: “三 ___ 人” — три человека.',answer:'个',choices:['个','本','吗','的'],explain:'个 — базовое счётное слово для людей в этом примере.'},
+  {lang:'ar',topic:'ar-al',type:'choice',difficulty:'Базовый',prompt:'Какая форма означает «конкретная книга»?',answer:'الكتاب',choices:['كتاب','الكتاب','كتابة','كتابان'],explain:'ال делает существительное определённым.'},
+  {lang:'ar',topic:'ar-agreement',type:'agreement',difficulty:'Средний',prompt:'Выберите согласованную группу: «новая студентка».',answer:'طالبة جديدة',choices:['طالب جديد','طالبة جديدة','طالبة جديد','طالب جديدة'],explain:'Существительное и прилагательное согласуются по роду.'}
+];
+
+PGX.style=`
+:root[data-theme="light"]{--bg:#eef3ff;--surface:#ffffff;--surface-raised:#f5f7ff;--surface-input:#ffffff;--tx:#19213d;--mut:#596581;--br:#c7d3ef;--ac:#486ce8;--ac2:#7e57c2;--focus:#875f00} 
+#learningNav{display:flex;gap:6px;padding:10px 20px 0;flex-wrap:wrap;background:rgba(11,16,32,.84)}#learningNav button{border-radius:12px 12px 0 0}.study-toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:16px}.study-toolbar select{min-width:150px}.dash-grid{display:grid;grid-template-columns:repeat(4,minmax(145px,1fr));gap:12px}.metric{padding:16px;border:1px solid var(--br);border-radius:16px;background:linear-gradient(145deg,var(--surface-raised),var(--surface));box-shadow:var(--shadow)}.metric b{display:block;font-size:25px;margin-top:4px}.metric .mut{font-size:12px}.wide-card{grid-column:span 2}.progress-list{display:grid;gap:9px}.prog-row{display:grid;grid-template-columns:120px 1fr 42px;align-items:center;gap:8px;font-size:13px}.prog-row .pbar{margin:0}.due-pill{color:var(--art);font-weight:700}.mode-shell{max-width:760px;margin:0 auto}.mode-card{padding:22px;border:1px solid var(--br);border-radius:18px;background:linear-gradient(145deg,var(--surface-raised),var(--surface));box-shadow:var(--shadow)}.task-title{margin:0 0 6px;font-size:24px}.feedback{margin-top:15px;padding:12px;border-radius:12px;background:#10183a;border:1px solid var(--br)}.feedback.good{border-color:var(--ok);background:#123a2a}.feedback.bad{border-color:var(--bad);background:#3a1220}.hint-box{margin-top:10px;border-left:3px solid var(--art);padding:9px 11px;background:#281f0b;border-radius:0 10px 10px 0;color:#ffe7a7}.choice-grid{display:grid;gap:9px;margin-top:16px}.choice-grid button{text-align:left;padding:12px}.pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}.pair-list{display:grid;gap:8px}.pair-list button{min-height:46px;text-align:left}.pair-list button.selected{border-color:var(--ac);background:#263b73}.pair-list button.matched{border-color:var(--ok);background:#123a2a;color:var(--ok)}.tokens{display:flex;gap:8px;flex-wrap:wrap;min-height:56px;padding:10px;border:1px dashed var(--br);border-radius:12px;background:#0d1430}.token{padding:8px 11px;border:1px solid var(--br);border-radius:10px;background:var(--surface-raised);color:var(--tx);cursor:pointer}.token:hover{border-color:var(--ac)}.grammar-layout{display:grid;grid-template-columns:minmax(220px,.7fr) minmax(0,2fr);gap:14px}.topic-list{display:grid;gap:7px;align-content:start}.topic-list button{text-align:left}.topic-list button.active{border-color:var(--ac);background:#263b73}.theory h2{margin-top:0}.theory h3{font-size:15px;margin:17px 0 7px}.formula{padding:12px;border-radius:12px;background:#10183a;border:1px solid var(--br);font-weight:700;overflow:auto}.example-list{margin:0;padding-left:20px}.tip-list{display:grid;gap:8px}.tip{padding:9px 11px;border-radius:10px;background:#2b250f;border:1px solid #584a1b;color:#ffe5a4}.grammar-ref{font-size:12px;color:var(--mut);margin-top:16px}.settings-grid{display:grid;gap:10px;max-width:540px}.settings-grid label{display:flex;align-items:center;gap:8px;padding:10px;border:1px solid var(--br);border-radius:12px;background:var(--surface)}.settings-grid input[type="number"]{width:84px}.confetti{position:fixed;top:-20px;width:10px;height:14px;z-index:100;pointer-events:none;animation:fall 1200ms ease-in forwards}@keyframes fall{to{transform:translate(var(--x),105vh) rotate(540deg);opacity:0}}.pulse{animation:pulse 850ms ease-in-out infinite}@keyframes pulse{50%{transform:scale(1.12);filter:brightness(1.25)}}.sr-summary{margin-bottom:12px}.grammar-note{margin:0 0 15px}.hidden{display:none!important}@media(max-width:760px){#learningNav{padding-left:14px;padding-right:14px}.dash-grid{grid-template-columns:repeat(2,1fr)}.wide-card{grid-column:span 2}.grammar-layout{grid-template-columns:1fr}.pair-grid{grid-template-columns:1fr}.prog-row{grid-template-columns:95px 1fr 36px}}@media(max-width:420px){.dash-grid{grid-template-columns:1fr}.wide-card{grid-column:span 1}.mode-card{padding:16px}.study-toolbar select{width:100%}}
+`;
+
+PGX.html=`
+<div id="learningNav" role="tablist" aria-label="Расширенные учебные разделы">
+  <button type="button" class="on" data-pgx-tab="dashboard" role="tab" aria-selected="true">📈 Прогресс</button>
+  <button type="button" data-pgx-tab="match" role="tab" aria-selected="false">🧩 Сопоставление</button>
+  <button type="button" data-pgx-tab="phrase" role="tab" aria-selected="false">🧱 Фразы</button>
+  <button type="button" data-pgx-tab="audio" role="tab" aria-selected="false">🎧 Аудио</button>
+  <button type="button" data-pgx-tab="grammar" role="tab" aria-selected="false">📚 Грамматика</button>
+  <button type="button" data-pgx-tab="practice" role="tab" aria-selected="false">✍️ Упражнения</button>
+  <button type="button" data-pgx-tab="settings" role="tab" aria-selected="false">⚙️ Настройки</button>
+</div>
+<main id="learningMain">
+  <section id="pgx-dashboard" role="tabpanel"></section>
+  <section id="pgx-match" role="tabpanel" hidden></section>
+  <section id="pgx-phrase" role="tabpanel" hidden></section>
+  <section id="pgx-audio" role="tabpanel" hidden></section>
+  <section id="pgx-grammar" role="tabpanel" hidden></section>
+  <section id="pgx-practice" role="tabpanel" hidden></section>
+  <section id="pgx-settings" role="tabpanel" hidden></section>
+</main>
+`;
+
+PGX.init=()=>{
+  document.head.insertAdjacentHTML('beforeend',`<style id="pgxStyle">${PGX.style}</style>`);
+  document.body.insertAdjacentHTML('beforeend',PGX.html);
+  document.getElementById('themeToggle')?.remove();
+  const themeBtn=document.createElement('button');themeBtn.id='themeToggle';themeBtn.type='button';themeBtn.className='mini';themeBtn.onclick=()=>PGX.setTheme(PGX.settings.theme==='light'?'dark':'light');document.querySelector('header')?.append(themeBtn);PGX.setTheme(PGX.settings.theme);
+  PGX.bind();PGX.renderAll();
+};
+
+PGX.bind=()=>{
+  document.getElementById('learningNav').addEventListener('click',e=>{const b=e.target.closest('[data-pgx-tab]');if(!b)return;PGX.open(b.dataset.pgxTab)});
+  document.addEventListener('keydown',e=>{
+    const editable=/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName||'');if(editable)return;
+    if(e.key===' '&&!document.getElementById('tab-cards')?.hidden){e.preventDefault();document.querySelector('#flash .fcard')?.click()}
+    if(['1','2','3','4'].includes(e.key)&&!document.getElementById('tab-quiz')?.hidden){const btn=document.querySelectorAll('#quizbox .opts button')[+e.key-1];btn?.click()}
+    if(e.key.toLowerCase()==='h'&&PGX.currentTab==='practice')PGX.hintGrammar();
+  });
+  document.addEventListener('pgx-answer',()=>PGX.renderDashboard());
+};
+PGX.open=tab=>{PGX.currentTab=tab;document.querySelectorAll('#learningNav [data-pgx-tab]').forEach(b=>{const on=b.dataset.pgxTab===tab;b.classList.toggle('on',on);b.setAttribute('aria-selected',String(on))});document.querySelectorAll('#learningMain>section').forEach(s=>s.hidden=s.id!=='pgx-'+tab);if(tab==='dashboard')PGX.renderDashboard();if(tab==='match')PGX.startMatch();if(tab==='phrase')PGX.startPhrase();if(tab==='audio')PGX.startAudio();if(tab==='grammar')PGX.renderGrammar();if(tab==='practice')PGX.renderPractice();if(tab==='settings')PGX.renderSettings();window.scrollTo({top:document.getElementById('learningNav').offsetTop-8,behavior:PGX.settings.motion?'smooth':'auto'})};
+PGX.record=(kind,meta={})=>{const today=PGX.dayKey();const p=PGX.progress;p.total=(p.total||0)+1;p.days=p.days||{};p.days[today]=(p.days[today]||0)+1;if(meta.lang){p.byLang=p.byLang||{};p.byLang[meta.lang]=(p.byLang[meta.lang]||0)+1}if(meta.topic){p.byTopic=p.byTopic||{};p.byTopic[meta.topic]=(p.byTopic[meta.topic]||0)+1}if(kind==='grammar'&&meta.topic){p.grammar=p.grammar||{};p.grammar[meta.topic]=(p.grammar[meta.topic]||0)+1}if(PGX.settings.lastStudy!==today){const y=new Date();y.setDate(y.getDate()-1);const yesterday=y.toISOString().slice(0,10);PGX.settings.streak=PGX.settings.lastStudy===yesterday?(PGX.settings.streak||0)+1:1;PGX.settings.lastStudy=today;PGX.save('pgx_settings',PGX.settings)}PGX.save('pgx_progress',p);document.dispatchEvent(new CustomEvent('pgx-answer'))};
+PGX.getDue=()=>{const all=typeof wordsAll==='function'?wordsAll():[];return all.filter(w=>{const s=stats?.[w.id];return !s?.due||new Date(s.due)<=new Date()})};
+PGX.renderDashboard=()=>{const el=document.getElementById('pgx-dashboard');const today=PGX.dayKey(),done=PGX.progress.days?.[today]||0,goal=PGX.settings.dailyGoal||12,pct=Math.min(100,Math.round(done/goal*100)),due=PGX.getDue().length;const langs=(typeof LANGS!=='undefined'?LANGS:[]).map(l=>({l,count:PGX.progress.byLang?.[l.c]||0}));const themes=(typeof wordsAll==='function'?Array.from(new Set(wordsAll().map(w=>w.cat))).slice(0,8):[]).map(t=>({t,count:PGX.progress.byTopic?.[t]||0}));
+  const rows=a=>a.length?a.map(x=>`<div class="prog-row"><span>${x.l?x.l.f+' '+x.l.n:x.t}</span><div class="pbar"><i style="width:${Math.min(100,(x.count/Math.max(1,PGX.progress.total))*100)}%"></i></div><b>${x.count}</b></div>`).join(''):'<p class="mut">Начните выполнять задания — здесь появится статистика.</p>';
+  el.innerHTML=`<div class="study-toolbar"><span class="badge ok">Учебная панель</span><span class="mut">Цель, интервальные повторения и прогресс сохраняются в браузере.</span></div><div class="dash-grid"><article class="metric"><span class="mut">Сегодня</span><b>${done} / ${goal}</b><div class="pbar"><i style="width:${pct}%"></i></div></article><article class="metric"><span class="mut">Серия дней</span><b>🔥 ${PGX.settings.streak||0}</b><span class="mut">одна активность в день поддерживает серию</span></article><article class="metric"><span class="mut">К повторению</span><b class="due-pill">${due}</b><span class="mut">слабые и просроченные слова</span></article><article class="metric"><span class="mut">Всего действий</span><b>${PGX.progress.total||0}</b><span class="mut">слова и грамматика</span></article><article class="metric wide-card"><span class="mut">По языкам</span><div class="progress-list">${rows(langs)}</div></article><article class="metric wide-card"><span class="mut">По темам словаря</span><div class="progress-list">${rows(themes)}</div></article></div>`;
+};
+PGX.langOptions=()=>typeof LANGS==='undefined'?'':LANGS.map(l=>`<option value="${l.c}">${l.f} ${l.n}</option>`).join('');
+PGX.startMatch=()=>{const el=document.getElementById('pgx-match');const ws=PGX.shuffle(PGX.getDue().filter(w=>w.t?.en?.w)).slice(0,4);if(ws.length<4){el.innerHTML='<p class="mut">Для сопоставления нужно минимум четыре слова с переводом.</p>';return}PGX.match={ws,selected:null,found:new Set(),lang:'en'};PGX.renderMatch()};
+PGX.renderMatch=()=>{const el=document.getElementById('pgx-match'),m=PGX.match,L=(typeof LANGS!=='undefined'?LANGS:[]).find(x=>x.c===m.lang)||LANGS[0],right=PGX.shuffle(m.ws);el.innerHTML=`<div class="mode-shell"><div class="mode-card"><div class="study-toolbar"><div><h2 class="task-title">Сопоставление</h2><p class="mut">Выберите русское слово и его перевод. Найденные пары останутся на месте.</p></div><span class="spacer"></span><label>Язык <select id="matchLang">${PGX.langOptions()}</select></label></div><div class="pair-grid"><div class="pair-list">${m.ws.map(w=>`<button type="button" class="${m.selected===w.id?'selected':''} ${m.found.has(w.id)?'matched':''}" data-left="${PGX.esc(w.id)}" ${m.found.has(w.id)?'disabled':''}>${PGX.esc(w.ru)}</button>`).join('')}</div><div class="pair-list">${right.map(w=>`<button type="button" class="${m.found.has(w.id)?'matched':''}" data-right="${PGX.esc(w.id)}" ${m.found.has(w.id)?'disabled':''}>${PGX.esc(w.t[L.c]?.w||'—')}</button>`).join('')}</div></div><div id="matchFeed" class="feedback hidden"></div></div></div>`;document.getElementById('matchLang').value=m.lang;document.getElementById('matchLang').onchange=e=>{m.lang=e.target.value;PGX.renderMatch()};el.querySelectorAll('[data-left]').forEach(b=>b.onclick=()=>{m.selected=b.dataset.left;PGX.renderMatch()});el.querySelectorAll('[data-right]').forEach(b=>b.onclick=()=>{if(!m.selected)return PGX.matchFeed('Сначала выберите русское слово.',false);const good=m.selected===b.dataset.right;if(good){m.found.add(m.selected);PGX.record('match',{lang:m.lang,topic:'match'});if(m.found.size===m.ws.length){PGX.celebrate();PGX.matchFeed('Все пары найдены. Отлично!',true)}else{m.selected=null;PGX.renderMatch()}}else PGX.matchFeed('Пара не совпала. Попробуйте ещё раз.',false)})};
+PGX.matchFeed=(text,good)=>{const f=document.getElementById('matchFeed');if(!f)return;f.textContent=text;f.className='feedback '+(good?'good':'bad')};
+PGX.startPhrase=()=>{const samples=[{lang:'en',ru:'Я читаю книгу.',answer:'I read a book',tokens:['I','read','a','book'],note:'Английский: подлежащее → глагол → дополнение.'},{lang:'de',ru:'Я вижу собаку.',answer:'Ich sehe den Hund',tokens:['Ich','sehe','den','Hund'],note:'Немецкий: глагол в простом утверждении на втором месте.'},{lang:'zh',ru:'Я сегодня работаю.',answer:'我 今天 工作',tokens:['我','今天','工作'],note:'Китайский: время обычно перед действием.'},{lang:'es',ru:'Мы едим хлеб.',answer:'Nosotros comemos pan',tokens:['Nosotros','comemos','pan'],note:'Испанский: подлежащее можно опустить, но в упражнении оно помогает увидеть форму.'}];PGX.phrase={q:PGX.pick(samples),picked:[]};PGX.renderPhrase()};
+PGX.renderPhrase=()=>{const el=document.getElementById('pgx-phrase'),p=PGX.phrase,q=p.q;el.innerHTML=`<div class="mode-shell"><div class="mode-card"><h2 class="task-title">Соберите фразу</h2><p class="mut">${q.ru} <span class="badge">${q.lang.toUpperCase()}</span></p><div class="tokens" id="phraseAnswer">${p.picked.map((x,i)=>`<button type="button" class="token" data-answer="${i}">${PGX.esc(x)}</button>`).join('')||'<span class="mut">Нажимайте слова ниже — они появятся здесь.</span>'}</div><div class="tokens" style="margin-top:10px" id="phraseTokens">${PGX.shuffle(q.tokens.filter((x,i)=>!p.picked.includes(x)||i>=q.tokens.indexOf(x))).map((x,i)=>`<button type="button" class="token" data-token="${PGX.esc(x)}">${PGX.esc(x)}</button>`).join('')}</div><div class="fbtns"><button type="button" class="primary" id="checkPhrase">Проверить</button><button type="button" id="hintPhrase">Подсказка</button><button type="button" id="nextPhrase">Другая фраза</button></div><div id="phraseFeed"></div></div></div>`;el.querySelectorAll('[data-token]').forEach(b=>b.onclick=()=>{p.picked.push(b.dataset.token);PGX.renderPhrase()});el.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{p.picked.splice(+b.dataset.answer,1);PGX.renderPhrase()});document.getElementById('checkPhrase').onclick=()=>{const good=PGX.norm(p.picked.join(' '))===PGX.norm(q.answer);const f=document.getElementById('phraseFeed');f.className='feedback '+(good?'good':'bad');f.innerHTML=good?'✓ Верно! '+PGX.esc(q.note):`✗ Правильный порядок: <b>${PGX.esc(q.answer)}</b><br><span class="mut">${PGX.esc(q.note)}</span>`;if(good){PGX.record('phrase',{lang:q.lang,topic:'wordorder'});PGX.celebrate()}};document.getElementById('hintPhrase').onclick=()=>{document.getElementById('phraseFeed').innerHTML=`<div class="hint-box">${PGX.esc(q.note)} Первый элемент: <b>${PGX.esc(q.answer.split(' ')[0])}</b>.</div>`};document.getElementById('nextPhrase').onclick=PGX.startPhrase};
+PGX.startAudio=()=>{const active=typeof activeLangs==='function'?activeLangs():LANGS;const lang=PGX.pick(active),cand=(typeof wordsAll==='function'?wordsAll():[]).filter(w=>w.t?.[lang.c]?.w);if(cand.length<4){document.getElementById('pgx-audio').innerHTML='<p class="mut">Для аудио-режима требуется минимум четыре слова с переводом.</p>';return}const w=PGX.pick(cand),opts=PGX.shuffle([w,...PGX.shuffle(cand.filter(x=>x.id!==w.id)).slice(0,3)]);PGX.audio={lang,w,opts};PGX.renderAudio()};
+PGX.renderAudio=()=>{const el=document.getElementById('pgx-audio'),a=PGX.audio;el.innerHTML=`<div class="mode-shell"><div class="mode-card"><h2 class="task-title">Аудио-вопрос</h2><p class="mut">Прослушайте слово на ${PGX.esc(a.lang.n)} и выберите русский перевод.</p><div class="fbtns"><button type="button" id="playAudio" class="primary">🔊 Прослушать</button><button type="button" id="audioHint">Показать первую букву</button></div><div class="choice-grid">${a.opts.map(w=>`<button type="button" data-audio-choice="${PGX.esc(w.id)}">${PGX.esc(w.ru)}</button>`).join('')}</div><div id="audioFeed"></div></div></div>`;const play=()=>{const b=document.getElementById('playAudio');b.classList.add('pulse');if(typeof speak==='function')speak(a.w.t[a.lang.c].w,a.lang.c);setTimeout(()=>b.classList.remove('pulse'),900)};document.getElementById('playAudio').onclick=play;el.querySelectorAll('[data-audio-choice]').forEach(b=>b.onclick=()=>{const good=b.dataset.audioChoice===a.w.id;const f=document.getElementById('audioFeed');f.className='feedback '+(good?'good':'bad');f.innerHTML=good?'✓ Верно!':`✗ Правильный ответ: <b>${PGX.esc(a.w.ru)}</b>`;if(good){PGX.record('audio',{lang:a.lang.c,topic:'audio'});PGX.celebrate()}});document.getElementById('audioHint').onclick=()=>{document.getElementById('audioFeed').innerHTML=`<div class="hint-box">Первая буква русского слова: <b>${PGX.esc(a.w.ru[0])}</b>.</div>`};setTimeout(play,250)};
+PGX.renderGrammar=()=>{const el=document.getElementById('pgx-grammar');const selected=PGX.grammarState||{lang:'en',topic:'en-order'};PGX.grammarState=selected;const g=GRAMMAR[selected.lang],topic=g.topics.find(t=>t.id===selected.topic)||g.topics[0];selected.topic=topic.id;el.innerHTML=`<div class="study-toolbar"><label>Язык <select id="grammarLang">${Object.entries(GRAMMAR).map(([c,x])=>`<option value="${c}">${x.flag} ${x.name}</option>`).join('')}</select></label><span class="mut">A1–A2: теория написана для практического старта; ссылки на источники — внизу раздела.</span></div><div class="grammar-layout"><aside class="topic-list">${g.topics.map(t=>`<button type="button" class="${t.id===topic.id?'active':''}" data-topic="${t.id}"><span class="badge">${t.level}</span><br>${PGX.esc(t.title)}</button>`).join('')}</aside><article class="mode-card theory"><h2>${PGX.esc(topic.title)}</h2><p class="grammar-note">${PGX.esc(g.kind)}</p><h3>Простое объяснение</h3><p>${PGX.esc(topic.theory)}</p><h3>Схема</h3><div class="formula">${PGX.esc(topic.formula)}</div><h3>Примеры</h3><ul class="example-list">${topic.examples.map(x=>`<li>${PGX.esc(x)}</li>`).join('')}</ul><h3>Лайфхаки и частые ловушки</h3><div class="tip-list">${topic.tips.map(x=>`<div class="tip">${PGX.esc(x)}</div>`).join('')}</div><div class="fbtns" style="justify-content:flex-start"><button type="button" class="primary" id="practiceTopic">Практиковать тему</button></div><p class="grammar-ref">Материал для углубления: <a href="${PGX.ref(selected.lang)}" target="_blank" rel="noopener">проверенный учебный источник</a>. Теория в этом приложении сформулирована самостоятельно.</p></article></div>`;document.getElementById('grammarLang').value=selected.lang;document.getElementById('grammarLang').onchange=e=>{selected.lang=e.target.value;selected.topic=GRAMMAR[selected.lang].topics[0].id;PGX.renderGrammar()};el.querySelectorAll('[data-topic]').forEach(b=>b.onclick=()=>{selected.topic=b.dataset.topic;PGX.renderGrammar()});document.getElementById('practiceTopic').onclick=()=>{PGX.open('practice');setTimeout(()=>{const s=document.getElementById('practiceTopicFilter');if(s){s.value=topic.id;PGX.renderPractice()}},0)}};
+PGX.ref=lang=>({en:'https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2',de:'https://learngerman.dw.com/en/beginners/s-62078399',fr:'https://apprendre.tv5monde.com/en/aides/grammar',it:'https://onlineitalianclub.com/free-italian-exercises-and-resources/online-italian-course-beginner-level-a1/',es:'https://espanol.lingolia.com/en/grammar/tenses/presente',no:'https://www.ntnu.edu/now',zh:'https://resources.allsetlearning.com/chinese/grammar/Beginner_Guide_to_Chinese_Grammar',ar:'https://opentext.uoregon.edu/introarabic/chapter/the-definite-article-al/'})[lang];
+PGX.renderPractice=()=>{const el=document.getElementById('pgx-practice'),selected=PGX.grammarState||{lang:'en',topic:'en-order'};const topics=Object.values(GRAMMAR).flatMap(g=>g.topics);const filters=PGX.practiceFilters||{lang:'all',difficulty:'all',type:'all',topic:'all'};const options=(arr,chosen)=>arr.map(x=>`<option value="${PGX.esc(x.v)}" ${x.v===chosen?'selected':''}>${PGX.esc(x.n)}</option>`).join('');const filtered=DRILLS.filter(d=>(filters.lang==='all'||d.lang===filters.lang)&&(filters.difficulty==='all'||d.difficulty===filters.difficulty)&&(filters.type==='all'||d.type===filters.type)&&(filters.topic==='all'||d.topic===filters.topic));const q=PGX.practiceQ&&filtered.some(d=>d===PGX.practiceQ)?PGX.practiceQ:PGX.pick(filtered.length?filtered:DRILLS);PGX.practiceQ=q;el.innerHTML=`<div class="mode-shell"><div class="mode-card"><div class="study-toolbar"><h2 class="task-title">Генератор упражнений</h2><label>Язык <select id="practiceLang">${options([{v:'all',n:'Все языки'},...Object.entries(GRAMMAR).map(([v,g])=>({v,n:g.flag+' '+g.name}))],filters.lang)}</select></label><label>Сложность <select id="practiceDiff">${options([{v:'all',n:'Любая'},...['Базовый','Средний','Сложный'].map(v=>({v,n:v}))],filters.difficulty)}</select></label><label>Тип <select id="practiceType">${options([{v:'all',n:'Все типы'},{v:'choice',n:'Выбор ответа'},{v:'conjugation',n:'Спряжение'},{v:'declension',n:'Склонение / форма'},{v:'agreement',n:'Согласование'},{v:'wordorder',n:'Порядок слов'}],filters.type)}</select></label><label>Тема <select id="practiceTopicFilter">${options([{v:'all',n:'Все темы'},...topics.map(t=>({v:t.id,n:t.title}))],filters.topic)}</select></label></div><p class="mut">${GRAMMAR[q.lang].flag} ${GRAMMAR[q.lang].name} · <span class="badge">${q.difficulty}</span> · <span class="badge">${q.type}</span></p><h3 class="task-title" style="font-size:20px">${PGX.esc(q.prompt)}</h3><div id="grammarTask"></div><div class="fbtns" style="justify-content:flex-start"><button type="button" id="hintGrammar">Подсказка (H)</button><button type="button" id="newGrammar">Другое упражнение</button></div><div id="grammarFeed"></div></div></div>`;['practiceLang','practiceDiff','practiceType','practiceTopicFilter'].forEach(id=>document.getElementById(id).onchange=()=>{PGX.practiceFilters={lang:document.getElementById('practiceLang').value,difficulty:document.getElementById('practiceDiff').value,type:document.getElementById('practiceType').value,topic:document.getElementById('practiceTopicFilter').value};PGX.practiceQ=null;PGX.renderPractice()});PGX.drawGrammarTask(q);document.getElementById('hintGrammar').onclick=PGX.hintGrammar;document.getElementById('newGrammar').onclick=()=>{PGX.practiceQ=null;PGX.renderPractice()}};
+PGX.drawGrammarTask=q=>{const el=document.getElementById('grammarTask');if(q.type==='wordorder'){PGX.grammarOrder={q,picked:[]};PGX.drawOrderTask();return}el.innerHTML=`<div class="choice-grid">${q.choices.map(c=>`<button type="button" data-grammar-choice="${PGX.esc(c)}">${PGX.esc(c)}</button>`).join('')}</div>`;el.querySelectorAll('[data-grammar-choice]').forEach(b=>b.onclick=()=>PGX.answerGrammar(b.dataset.grammarChoice,q.answer,q))};
+PGX.drawOrderTask=()=>{const {q,picked}=PGX.grammarOrder,el=document.getElementById('grammarTask');el.innerHTML=`<div class="tokens">${picked.map((x,i)=>`<button type="button" class="token" data-remove-order="${i}">${PGX.esc(x)}</button>`).join('')||'<span class="mut">Собранная фраза появится здесь.</span>'}</div><div class="tokens" style="margin-top:10px">${q.tokens.filter((x,i)=>!picked.includes(x)||i>=q.tokens.indexOf(x)).map(x=>`<button type="button" class="token" data-add-order="${PGX.esc(x)}">${PGX.esc(x)}</button>`).join('')}</div><div class="fbtns" style="justify-content:flex-start"><button type="button" class="primary" id="checkOrder">Проверить</button></div>`;el.querySelectorAll('[data-add-order]').forEach(b=>b.onclick=()=>{picked.push(b.dataset.addOrder);PGX.drawOrderTask()});el.querySelectorAll('[data-remove-order]').forEach(b=>b.onclick=()=>{picked.splice(+b.dataset.removeOrder,1);PGX.drawOrderTask()});document.getElementById('checkOrder').onclick=()=>PGX.answerGrammar(picked.join(' '),q.answer,q)};
+PGX.answerGrammar=(value,answer,q)=>{const good=PGX.norm(value)===PGX.norm(answer),f=document.getElementById('grammarFeed');f.className='feedback '+(good?'good':'bad');f.innerHTML=good?`✓ Верно! <span class="mut">${PGX.esc(q.explain)}</span>`:`✗ Верный ответ: <b>${PGX.esc(answer)}</b><br><span class="mut">${PGX.esc(q.explain)}</span>`;if(good){PGX.record('grammar',{lang:q.lang,topic:q.topic});PGX.celebrate()}};
+PGX.hintGrammar=()=>{const q=PGX.practiceQ;if(!q)return;const f=document.getElementById('grammarFeed');f.className='hint-box';f.textContent=`Подсказка: правильный ответ начинается с «${q.answer[0]}». Тема: ${GRAMMAR[q.lang].topics.find(t=>t.id===q.topic)?.title||q.topic}.`};
+PGX.renderSettings=()=>{const el=document.getElementById('pgx-settings');el.innerHTML=`<div class="mode-shell"><div class="mode-card"><h2 class="task-title">Настройки обучения</h2><div class="settings-grid"><label>Ежедневная цель: <input id="dailyGoal" type="number" min="1" max="100" value="${PGX.settings.dailyGoal}"> заданий</label><label><input id="motionSetting" type="checkbox" ${PGX.settings.motion?'checked':''}> Включить короткие анимации и конфетти за серию</label><label><input id="lightSetting" type="checkbox" ${PGX.settings.theme==='light'?'checked':''}> Светлая тема</label></div><p class="mut">Горячие клавиши: пробел — перевернуть карточку; 1–4 — выбрать ответ в тесте; H — подсказка в генераторе упражнений. Все настройки и прогресс хранятся локально в браузере.</p></div></div>`;document.getElementById('dailyGoal').onchange=e=>{PGX.settings.dailyGoal=Math.max(1,Math.min(100,+e.target.value||12));PGX.save('pgx_settings',PGX.settings);PGX.renderDashboard()};document.getElementById('motionSetting').onchange=e=>{PGX.settings.motion=e.target.checked;PGX.save('pgx_settings',PGX.settings)};document.getElementById('lightSetting').onchange=e=>PGX.setTheme(e.target.checked?'light':'dark')};
+PGX.celebrate=()=>{if(!PGX.settings.motion)return;for(let i=0;i<18;i++){const c=document.createElement('i');c.className='confetti';c.style.left=(45+Math.random()*10)+'vw';c.style.background=['#7896ff','#ffd475','#49dc92','#ff7184'][i%4];c.style.setProperty('--x',(-160+Math.random()*320)+'px');c.style.animationDelay=(Math.random()*180)+'ms';document.body.append(c);setTimeout(()=>c.remove(),1500)}};
+PGX.installSRS=()=>{const original=window.bump;if(typeof original!=='function')return;window.bump=(id,good)=>{original(id,good);const s=stats?.[id];if(!s)return;const now=new Date();const prior=Number(s.interval)||0;if(good){s.streak=(Number(s.streak)||0)+1;s.interval=Math.min(30,prior?Math.max(1,prior*2):1)}else{s.streak=0;s.interval=1}now.setDate(now.getDate()+s.interval);s.due=now.toISOString();try{localStorage.setItem('pg_stats',JSON.stringify(stats))}catch(e){console.warn(e)}PGX.renderDashboard()}};
+PGX.renderAll=()=>{PGX.renderDashboard();PGX.renderGrammar();PGX.renderPractice();PGX.renderSettings()};
+PGX.init();
+PGX.installSRS();
+
+</script>
+</body>
+</html>

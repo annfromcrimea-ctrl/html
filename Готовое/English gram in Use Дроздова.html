@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Grammar Reference &amp; Practice — Expanded Course</title>
+<style>
+:root{
+--blue:#00247d;--red:#cf142b;--gold:#ffd700;--bg:#f8f9fa;--card:#fff;
+--dark:#1a1a2e;--shadow:0 4px 24px rgba(0,0,0,.08);--radius:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--dark);line-height:1.6}
+.app{display:flex;min-height:100vh}
+.sidebar{width:310px;background:linear-gradient(180deg,#001845 0%,#000c22 100%);color:#fff;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100;transition:transform .3s}
+.sidebar-header{padding:24px 20px 16px;border-bottom:1px solid rgba(255,255,255,.1)}
+.sidebar-header h1{font-size:1.1rem;font-weight:700;color:var(--gold)}
+.sidebar-header p{font-size:.75rem;opacity:.8;margin-top:4px}
+.flag-bar{display:flex;height:6px;margin-top:12px;border-radius:3px;overflow:hidden}
+.flag-bar .b{background:var(--blue)}.flag-bar .w{background:#fff;border-top:1px solid #ddd;border-bottom:1px solid #ddd}.flag-bar .r{background:var(--red)}
+.progress-wrap{padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.1)}
+.progress-label{font-size:.75rem;display:flex;justify-content:space-between;margin-bottom:6px;opacity:.8}
+.progress-bar{height:8px;background:rgba(255,255,255,.15);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:var(--gold);border-radius:4px;transition:width .5s;width:0}
+.nav-section{padding:8px 0}
+.nav-section-title{padding:12px 20px 4px;font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;opacity:.6;font-weight:700;color:var(--gold)}
+.nav-item{display:flex;align-items:center;padding:8px 20px;cursor:pointer;transition:background .2s;font-size:.82rem;gap:10px}
+.nav-item:hover{background:rgba(255,255,255,.08)}
+.nav-item.active{background:rgba(255,255,255,.14);border-right:3px solid var(--gold)}
+.nav-item .num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;flex-shrink:0}
+.nav-item.done .num{background:var(--gold);color:#001845}
+.nav-item .score-badge{margin-left:auto;background:var(--gold);color:#001845;font-size:.6rem;padding:1px 7px;border-radius:10px;font-weight:700}
+.main{margin-left:310px;flex:1;padding:32px 40px;max-width:920px}
+.lesson-header{margin-bottom:28px}
+.lesson-tag{display:inline-block;background:var(--red);color:#fff;font-size:.7rem;padding:3px 12px;border-radius:20px;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.lesson-header h2{font-size:1.6rem;font-weight:800;color:var(--dark)}
+.lesson-header .subtitle{color:#777;font-size:.9rem;margin-top:4px}
+.grammar-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;margin-bottom:24px;border-left:4px solid var(--blue)}
+.grammar-card h3{font-size:1.05rem;margin-bottom:14px;color:var(--blue);display:flex;align-items:center;gap:8px}
+.grammar-card h3::before{content:'📘'}
+.grammar-card p{margin-bottom:10px;font-size:.9rem}
+.grammar-card .en{color:var(--blue);font-weight:600}
+.grammar-card .ru{color:#888;font-style:italic;font-size:.85rem}
+table.gram{width:100%;border-collapse:collapse;margin:14px 0;font-size:.85rem}
+table.gram th{background:#e8eef7;padding:8px 12px;text-align:left;font-weight:600;border-bottom:2px solid var(--blue)}
+table.gram td{padding:8px 12px;border-bottom:1px solid #eee}
+table.gram tr:hover td{background:#f5f8fc}
+.tip{background:#fffde7;border-left:3px solid var(--gold);padding:12px 16px;border-radius:0 8px 8px 0;font-size:.83rem;margin:12px 0}
+.tip::before{content:'💡 ';font-size:.9rem}
+.example{background:#e8eef7;padding:10px 14px;border-radius:8px;margin:8px 0;font-size:.88rem}
+.example .en{font-weight:600;color:var(--blue)}
+.example .ru{display:block;font-size:.8rem;color:#777;margin-top:2px}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px;margin:12px 0}
+.vocab-item{background:#f5f8fc;padding:8px 12px;border-radius:8px;font-size:.83rem;display:flex;justify-content:space-between;align-items:center}
+.vocab-item .en{font-weight:600;color:var(--blue)}
+.vocab-item .ru{color:#555}
+.exercise-section{margin-bottom:28px}
+.exercise-section h3{font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.exercise-section h3::before{content:'✏️'}
+.ex-block{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:14px}
+.ex-block .q{font-size:.92rem;font-weight:600;margin-bottom:12px}
+.options{display:flex;flex-direction:column;gap:7px}
+.opt{padding:9px 14px;border:2px solid #e8e8e8;border-radius:10px;cursor:pointer;transition:all .2s;font-size:.87rem;display:flex;align-items:center;gap:10px}
+.opt:hover{border-color:var(--blue);background:#f5f8fc}
+.opt.selected{border-color:var(--blue);background:#e8eef7}
+.opt.correct{border-color:#009246;background:#d4edda;color:#155724}
+.opt.wrong{border-color:var(--red);background:#f8d7da;color:#721c24}
+.opt .letter{width:22px;height:22px;border-radius:50%;background:#eee;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0}
+.opt.correct .letter{background:#009246;color:#fff}
+.opt.wrong .letter{background:var(--red);color:#fff}
+.fill-input{border:2px solid #ddd;border-radius:8px;padding:8px 14px;font-size:.92rem;width:280px;outline:none;transition:border .2s;font-family:inherit}
+.fill-input:focus{border-color:var(--blue)}
+.fill-input.correct{border-color:#009246;background:#d4edda}
+.fill-input.wrong{border-color:var(--red);background:#f8d7da}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 24px;border:none;border-radius:10px;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:#001845;transform:translateY(-1px)}
+.btn-outline{background:transparent;border:2px solid var(--blue);color:var(--blue)}
+.btn-outline:hover{background:#f5f8fc}
+.feedback{margin-top:12px;padding:12px 16px;border-radius:8px;font-size:.85rem;display:none}
+.feedback.show{display:block}
+.feedback.ok{background:#d4edda;color:#155724;border:1px solid #c3e6cb}
+.feedback.err{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+.feedback.info{background:#e8f4fd;color:#0c5460;border:1px solid #bee5eb}
+.result-box{background:linear-gradient(135deg,#001845,#000c22);color:#fff;border-radius:var(--radius);padding:24px;margin-top:20px;text-align:center;display:none}
+.result-box.show{display:block}
+.result-box .score-big{font-size:2.5rem;font-weight:800;color:var(--gold)}
+.result-box p{opacity:.8;margin-top:6px}
+.welcome{text-align:center;padding:60px 20px}
+.welcome .flag-big{font-size:4rem;margin-bottom:16px}
+.welcome h2{font-size:2rem;font-weight:800;margin-bottom:10px}
+.welcome p{color:#777;max-width:600px;margin:0 auto 28px}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:28px;text-align:left}
+.feature{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.feature .icon{font-size:1.5rem;margin-bottom:8px}
+.feature h4{font-size:.9rem;margin-bottom:4px}
+.feature p{font-size:.78rem;color:#888}
+.menu-toggle{display:none;position:fixed;top:14px;left:14px;z-index:200;background:var(--blue);color:#fff;border:none;border-radius:10px;width:44px;height:44px;font-size:1.3rem;cursor:pointer}
+@media(max-width:768px){
+.sidebar{transform:translateX(-100%)}
+.sidebar.open{transform:translateX(0)}
+.main{margin-left:0;padding:20px 16px;padding-top:70px}
+.menu-toggle{display:block}
+.vocab-grid{grid-template-columns:1fr}
+}
+.hidden{display:none!important}
+
+/* Expanded course and unlimited practice laboratory */
+.course-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0 26px}
+.summary-stat{background:linear-gradient(135deg,#001845,#073b7a);color:#fff;border-radius:12px;padding:16px;box-shadow:var(--shadow)}
+.summary-stat strong{display:block;color:var(--gold);font-size:1.4rem;line-height:1.2}.summary-stat span{font-size:.76rem;opacity:.86}
+.practice-nav{margin:10px 12px 16px;padding:12px 10px;border:1px solid rgba(255,215,0,.45);border-radius:12px;background:rgba(255,255,255,.08);color:#fff;cursor:pointer;transition:all .2s;font-size:.82rem;font-weight:700;line-height:1.3}
+.practice-nav:hover,.practice-nav.active{background:rgba(255,215,0,.18);border-color:var(--gold)}
+.practice-nav small{display:block;margin-top:4px;font-size:.68rem;font-weight:400;opacity:.8}
+.practice-hero{background:linear-gradient(135deg,#001845 0%,#073b7a 62%,#0b5c8b 100%);border-radius:var(--radius);padding:28px;color:#fff;margin-bottom:24px;box-shadow:var(--shadow)}
+.practice-hero h2{font-size:1.6rem;color:#fff}.practice-hero p{opacity:.9;margin-top:8px;max-width:700px;font-size:.9rem}
+.practice-controls{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr auto;gap:14px;align-items:end;margin-bottom:20px}
+.control-group label{display:block;font-size:.78rem;font-weight:700;color:var(--blue);margin-bottom:6px}.practice-select{width:100%;border:2px solid #dfe7f3;border-radius:9px;padding:10px 12px;background:#fff;font:inherit;color:var(--dark);outline:none}.practice-select:focus{border-color:var(--blue)}
+.practice-actions{display:flex;gap:8px;flex-wrap:wrap}.btn-small{padding:8px 13px;font-size:.78rem}.practice-note{font-size:.78rem;color:#667085;margin:-8px 0 20px}.answer-key{background:#f5f8fc;border-left:3px solid var(--blue);padding:10px 13px;margin-top:10px;border-radius:0 8px 8px 0;font-size:.8rem;color:#344054}.diagnostic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:14px 0}.diagnostic-chip{padding:10px 12px;border-radius:9px;background:#f5f8fc;border:1px solid #dce6f4;font-size:.8rem}.diagnostic-chip b{color:var(--blue)}
+@media(max-width:640px){.practice-controls{grid-template-columns:1fr}.practice-actions{display:grid;grid-template-columns:repeat(3,1fr)}.practice-actions .btn{justify-content:center;padding:9px 6px}.course-summary{grid-template-columns:repeat(2,1fr)}}
+
+</style>
+</head>
+<body>
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+<div class="app">
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header">
+<h1>🇬🇧 English Grammar</h1>
+<p>Reference &amp; Practice — Expanded Course<br>41 lessons + unlimited local practice</p>
+<div class="flag-bar"><span class="b"></span><span class="w"></span><span class="r"></span></div>
+</div>
+<div class="progress-wrap">
+<div class="progress-label"><span>Прогресс</span><span id="progressPct">0%</span></div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+<div class="nav-section" id="navList"></div>
+</nav>
+<main class="main" id="mainContent"></main>
+</div>
+
+<script>
+const lessons=[
+{id:0,tag:"Урок 1",title:"The Verb TO BE",subtitle:"Present Simple &amp; Past Simple",
+grammar:`<h3>The Verb "to be" in the Present Simple</h3>
+<table class="gram"><tr><th>Positive</th><th>Negative</th><th>Questions</th></tr>
+<tr><td>I <b>am</b> (I'm)</td><td>I am <b>not</b> (I'm not)</td><td><b>Am</b> I?</td></tr>
+<tr><td>You <b>are</b> (you're)</td><td>You are <b>not</b> (you aren't)</td><td><b>Are</b> you?</td></tr>
+<tr><td>He/She/It <b>is</b> (he's)</td><td>He is <b>not</b> (he isn't)</td><td><b>Is</b> he?</td></tr>
+<tr><td>We <b>are</b> (we're)</td><td>We are <b>not</b> (we aren't)</td><td><b>Are</b> we?</td></tr>
+<tr><td>They <b>are</b> (they're)</td><td>They are <b>not</b> (they aren't)</td><td><b>Are</b> they?</td></tr></table>
+<h3>The Verb "to be" in the Past Simple</h3>
+<table class="gram"><tr><th>Positive</th><th>Negative</th><th>Questions</th></tr>
+<tr><td>I/He/She/It <b>was</b></td><td>was <b>not</b> (wasn't)</td><td><b>Was</b> I/he/she?</td></tr>
+<tr><td>We/You/They <b>were</b></td><td>were <b>not</b> (weren't)</td><td><b>Were</b> we/you/they?</td></tr></table>
+<div class="example"><span class="en">I am in Russia now.</span> — <span class="en">I <b>was</b> in Russia last summer.</span><span class="ru">Я в России сейчас. — Я был в России прошлым летом.</span></div>`,
+exercises:[
+{type:"choice",q:"The sky ___ very blue today.",opts:["is","are","am","was"],ans:0},
+{type:"choice",q:"I ___ not tired.",opts:["is","are","am","was"],ans:2},
+{type:"choice",q:"The children ___ asleep.",opts:["is","are","am","was"],ans:1},
+{type:"choice",q:"Look! This ___ Mabel.",opts:["is","are","am","were"],ans:0},
+{type:"choice",q:"I ___ cold. Can you shut the window, please?",opts:["is","are","am","was"],ans:2},
+{type:"choice",q:"The castle ___ one thousand years old.",opts:["is","are","am","were"],ans:0},
+{type:"choice",q:"My brother and I ___ good tennis players.",opts:["is","are","am","was"],ans:1},
+{type:"choice",q:"Amy ___ at home but her parents ___ in church.",opts:["is / are","are / is","am / are","is / is"],ans:0},
+{type:"fill",q:"My sister ___ a doctor. (am/is/are)",ans:"is"},
+{type:"choice",q:"Last year their son ___ 26 so he is 27 now.",opts:["is","was","were","are"],ans:1}
+]},
+{id:1,tag:"Урок 2",title:"The Verb TO HAVE (have got)",subtitle:"Possession, questions, negatives",
+grammar:`<h3>The Verb "to have" in the Present Simple</h3>
+<table class="gram"><tr><th>Positive</th><th>Negative</th><th>Questions</th></tr>
+<tr><td>I <b>have (got)</b> / I've got</td><td>I have <b>not</b> got</td><td><b>Have</b> I got?</td></tr>
+<tr><td>You <b>have (got)</b> / you've got</td><td>You have <b>not</b> got</td><td><b>Have</b> you got?</td></tr>
+<tr><td>He/She/It <b>has (got)</b> / he's got</td><td>He has <b>not</b> got</td><td><b>Has</b> he got?</td></tr>
+<tr><td>We <b>have (got)</b> / we've got</td><td>We have <b>not</b> got</td><td><b>Have</b> we got?</td></tr>
+<tr><td>They <b>have (got)</b> / they've got</td><td>They have <b>not</b> got</td><td><b>Have</b> they got?</td></tr></table>
+<div class="tip">Got-forms are most common in the <b>present tense</b>. We use the correct forms of <b>have</b> in other tenses to mean "possess": <span class="en">I <b>had</b> a bad cold last week. We <b>will have</b> a new apartment soon.</span></div>
+<h3>Expressions with "have"</h3>
+<div class="vocab-grid">
+<div class="vocab-item"><span class="en">to have dinner/breakfast</span><span class="ru">обедать/завтракать</span></div>
+<div class="vocab-item"><span class="en">to have tea/coffee</span><span class="ru">пить чай/кофе</span></div>
+<div class="vocab-item"><span class="en">to have a bath/a shower</span><span class="ru">принять ванну/душ</span></div>
+<div class="vocab-item"><span class="en">to have a shave/a wash</span><span class="ru">побриться/помыться</span></div>
+<div class="vocab-item"><span class="en">to have a rest/a sleep</span><span class="ru">отдохнуть/поспать</span></div>
+<div class="vocab-item"><span class="en">to have a holiday/a good time</span><span class="ru">отдохнуть/хорошо провести время</span></div>
+</div>`,
+exercises:[
+{type:"choice",q:"(you / a bicycle?) ___",opts:["Have you got a bicycle?","Do you have got a bicycle?","Are you got a bicycle?"],ans:0},
+{type:"choice",q:"(your father / a car?) ___",opts:["Has your father got a car?","Have your father got a car?","Does your father got a car?"],ans:0},
+{type:"choice",q:"(Carol / many friends?) ___",opts:["Has Carol got many friends?","Have Carol got many friends?","Does Carol got many friends?"],ans:0},
+{type:"choice",q:"(how much money / you?) ___",opts:["How much money have you got?","How much money do you have got?","How much money are you got?"],ans:0},
+{type:"choice",q:"(what kind of car / John?) ___",opts:["What kind of car has John got?","What kind of car have John got?","What kind of car does John got?"],ans:0},
+{type:"fill",q:"We have got → сокращённая форма:",ans:"we've got"},
+{type:"fill",q:"She has not got → сокращённая форма:",ans:"she hasn't got"},
+{type:"choice",q:"Does Ann have a car? = ___",opts:["Has Ann got a car?","Have Ann got a car?","Is Ann got a car?"],ans:0},
+{type:"choice",q:"В каком времени чаще всего используются got-формы?",opts:["Present","Past","Future"],ans:0},
+{type:"choice",q:"«У них есть дети?»",opts:["Have they got any children?","Has they got any children?","Do they got any children?"],ans:0}
+]},
+{id:2,tag:"Урок 3",title:"There is / There are",subtitle:"Конструкция наличия",
+grammar:`<h3>The Construction "There + be"</h3>
+<p>Используется для выражения наличия чего-либо в определённом месте:</p>
+<div class="example"><span class="en">There <b>is</b> a telephone in my room.</span> — В моей комнате есть телефон.<span class="ru"><span class="en">There <b>are</b> many apple-trees in the garden.</span> — В саду много яблонь.</span></div>
+<h3>Порядок слов</h3>
+<table class="gram"><tr><th></th><th>Порядок</th></tr>
+<tr><td>Утверждение</td><td>There + be + подлежащее + обстоятельство места/времени</td></tr>
+<tr><td>Отрицание</td><td>There + be + not + подлежащее</td></tr>
+<tr><td>Вопрос</td><td>Be + there + подлежащее?</td></tr></table>
+<div class="tip">Если подлежащих несколько и они разного числа, сказуемое согласуется с <b>первым</b> подлежащим: <span class="en">There <b>is</b> a table and six chairs in the room.</span></div>
+<h3>С модальными глаголами</h3>
+<div class="example"><span class="en">There <b>must be</b> a dictionary on the shelf.</span> — На полке должен быть словарь.<span class="ru"><span class="en">There <b>can be</b> no doubt about it.</span> — В этом не может быть сомнений.</span></div>`,
+exercises:[
+{type:"choice",q:"Look! ___ their telephone number in the letter.",opts:["There is","There are","There was"],ans:0},
+{type:"choice",q:"Chester is a very old town. ___ many old buildings there.",opts:["There is","There are","There was"],ans:1},
+{type:"choice",q:"Excuse me, ___ a restaurant near here?",opts:["is there","are there","there is"],ans:0},
+{type:"choice",q:"How many students ___ in your group?",opts:["is there","are there","there are"],ans:1},
+{type:"choice",q:"I was hungry but ___ anything to eat.",opts:["there wasn't","there weren't","there isn't"],ans:0},
+{type:"choice",q:"___ a football match on TV last night.",opts:["There is","There was","There were"],ans:1},
+{type:"choice",q:"___ many people at the meeting?",opts:["Were there","Was there","There were"],ans:0},
+{type:"choice",q:"Look! ___ an accident. Call the ambulance!",opts:["There is","There are","There was"],ans:0},
+{type:"choice",q:"___ 24 hours in a day.",opts:["There is","There are","There was"],ans:1},
+{type:"choice",q:"This box is empty. ___ nothing in it.",opts:["There is","There are","There were"],ans:0}
+]},
+{id:3,tag:"Урок 4",title:"Present Simple Tense",subtitle:"Обычные, повторяющиеся действия",
+grammar:`<h3>Formation</h3>
+<table class="gram"><tr><th>Affirmative</th><th>Negative</th><th>Interrogative</th></tr>
+<tr><td>I <b>work</b></td><td>I <b>do not</b> work (don't)</td><td><b>Do</b> I work?</td></tr>
+<tr><td>He/She/It <b>works</b></td><td>He <b>does not</b> work (doesn't)</td><td><b>Does</b> he work?</td></tr>
+<tr><td>We/You/They <b>work</b></td><td>We <b>do not</b> work (don't)</td><td><b>Do</b> we work?</td></tr></table>
+<h3>Use</h3>
+<p>1. Постоянное действие (факт): <span class="en">She speaks English. They live in France.</span><br>
+2. Общая истина: <span class="en">The Earth rotates round its axis.</span><br>
+3. Повторяющееся действие: <span class="en">The Browns go to the seaside every summer.</span><br>
+4. Будущее по расписанию: <span class="en">The train leaves at 10 tomorrow.</span></p>
+<h3>Adverbials of time</h3>
+<p><span class="en">usually, often, always, every day/week/month, in the morning/afternoon/evening, at night, on Mondays</span></p>
+<div class="tip">Глаголы, обозначающие чувства (see, hear), умственную деятельность (know, believe, think), желания (want, wish), чувства (love, like, hate) и абстрактные отношения (be, have, belong, consist of) <b>НЕ используются</b> в Continuous.</div>`,
+exercises:[
+{type:"choice",q:"What does a driver do?",opts:["He drives.","He is driving.","He drove."],ans:0},
+{type:"choice",q:"What does a singer do?",opts:["He sings.","He is singing.","He sang."],ans:0},
+{type:"choice",q:"What do students do?",opts:["They study.","They are studying.","They studied."],ans:0},
+{type:"choice",q:"She understands the rule. (negative)",opts:["She doesn't understand the rule.","She don't understand the rule.","She not understands the rule."],ans:0},
+{type:"choice",q:"He usually has breakfast at 8 o'clock. (question)",opts:["Does he usually have breakfast at 8 o'clock?","Do he usually has breakfast at 8 o'clock?","Has he usually breakfast at 8 o'clock?"],ans:0},
+{type:"choice",q:"The lecture starts at 10.15. (negative)",opts:["The lecture doesn't start at 10.15.","The lecture don't start at 10.15.","The lecture not starts at 10.15."],ans:0},
+{type:"choice",q:"They usually walk in the morning. (question)",opts:["Do they usually walk in the morning?","Does they usually walk in the morning?","Are they usually walk in the morning?"],ans:0},
+{type:"fill",q:"She ___ English. (speak, Present Simple)",ans:"speaks"},
+{type:"fill",q:"The Earth ___ round its axis. (rotate)",ans:"rotates"},
+{type:"choice",q:"The train ___ at 10 tomorrow. (timetable)",opts:["leaves","is leaving","will leave"],ans:0}
+]},
+{id:4,tag:"Урок 5",title:"Present Continuous Tense",subtitle:"Действие в момент речи",
+grammar:`<h3>Formation</h3>
+<table class="gram"><tr><th>Affirmative</th><th>Negative</th><th>Interrogative</th></tr>
+<tr><td>I <b>am reading</b></td><td>I am <b>not</b> reading</td><td><b>Am</b> I reading?</td></tr>
+<tr><td>He/She/It <b>is reading</b></td><td>He is <b>not</b> reading (isn't)</td><td><b>Is</b> he reading?</td></tr>
+<tr><td>We/You/They <b>are reading</b></td><td>We are <b>not</b> reading (aren't)</td><td><b>Are</b> we reading?</td></tr></table>
+<h3>Use</h3>
+<p>1. Действие в данный момент: <span class="en">Look! Listen! I <b>am reading</b> now.</span><br>
+2. Запланированное будущее: <span class="en">I <b>am meeting</b> a friend tonight.</span></p>
+<h3>Adverbials of time</h3>
+<p><span class="en">now, at present, at the moment, Look! Listen!</span></p>
+<div class="tip">Present Continuous <b>НЕ используется</b> с глаголами чувств (see, hear), умственной деятельности (know, believe), желания (want, wish), чувств (love, like, hate).</div>`,
+exercises:[
+{type:"choice",q:"Please be quiet. I ___ to sleep. (try)",opts:["try","am trying","tried"],ans:1},
+{type:"choice",q:"Look! It ___. (rain)",opts:["rains","is raining","rained"],ans:1},
+{type:"choice",q:"You ___ a lot of noise. Can you be a bit quieter? (make)",opts:["make","are making","made"],ans:1},
+{type:"choice",q:"Excuse me, I ___ for a phone box. Where can I find one? (look)",opts:["look","am looking","looked"],ans:1},
+{type:"choice",q:"(in the theatre) It's a good play, isn't it? ___ it? (you/enjoy)",opts:["Do you enjoy","Are you enjoying","Did you enjoy"],ans:1},
+{type:"choice",q:"Listen! Can you hear these children next door? They ___ again. (cry)",opts:["cry","are crying","cried"],ans:1},
+{type:"choice",q:"Why ___ your fur coat today? It's very warm. (you/wear)",opts:["do you wear","are you wearing","did you wear"],ans:1},
+{type:"choice",q:"I ___ to school this week. I'm on holiday. (not/go)",opts:["don't go","am not going","didn't go"],ans:1},
+{type:"fill",q:"I want to lose weight. I ___ sweets now. (not/eat)",ans:"am not eating"},
+{type:"choice",q:"Listen to those girls. What language ___? (they/speak)",opts:["do they speak","are they speaking","did they speak"],ans:1}
+]},
+{id:5,tag:"Урок 6",title:"Past Simple Tense",subtitle:"Действие в прошлом",
+grammar:`<h3>Formation</h3>
+<p>Regular verbs: stem + <b>-ed</b> (or <b>-d</b> if stem ends in -e)</p>
+<table class="gram"><tr><th>Affirmative</th><th>Negative</th><th>Interrogative</th></tr>
+<tr><td>I/he <b>worked/wrote</b></td><td>I/he <b>did not</b> work/write (didn't)</td><td><b>Did</b> I/he work/write?</td></tr></table>
+<h3>Pronunciation of -ed</h3>
+<table class="gram"><tr><th>After</th><th>Pronunciation</th><th>Example</th></tr>
+<tr><td>t, d</td><td>[id]</td><td>wanted ['wɒntɪd], landed ['lændɪd]</td></tr>
+<tr><td>voiced consonants, vowels</td><td>[d]</td><td>opened ['əʊpənd], played [pleɪd]</td></tr>
+<tr><td>voiceless consonants</td><td>[t]</td><td>worked [wɜːkt]</td></tr></table>
+<h3>Use</h3>
+<p>1. Действие в прошлом: <span class="en">We entered the house in silence.</span><br>
+2. Последовательность действий: <span class="en">He shut the window, switched off the light and went upstairs.</span><br>
+3. Повторяющееся действие в прошлом: <span class="en">He made an entry in his diary every night.</span></p>
+<h3>Adverbials of time</h3>
+<p><span class="en">yesterday, last night/week/month/year, two days/weeks ago, then, in 1993/1825</span></p>`,
+exercises:[
+{type:"choice",q:"Regular verbs form the Past Simple by adding:",opts:["-ing","-ed","-en"],ans:1},
+{type:"choice",q:"Pronunciation of -ed after voiceless consonants:",opts:["[id]","[d]","[t]"],ans:2},
+{type:"choice",q:"Pronunciation of -ed after t, d:",opts:["[id]","[d]","[t]"],ans:0},
+{type:"choice",q:"«Он закрыл окно, выключил свет и поднялся наверх» — это:",opts:["Одно действие","Последовательность действий","Повторяющееся действие"],ans:1},
+{type:"choice",q:"I ___ him yesterday.",opts:["see","saw","seen"],ans:1},
+{type:"choice",q:"Last week, he ___ from a business trip.",opts:["return","returned","returns"],ans:1},
+{type:"fill",q:"to want → Past Simple:",ans:"wanted"},
+{type:"fill",q:"to live → Past Simple:",ans:"lived"},
+{type:"choice",q:"«Вчера» по-английски:",opts:["today","yesterday","tomorrow"],ans:1},
+{type:"choice",q:"Past Simple используется с:",opts:["now, at present","yesterday, last week, ago","usually, always"],ans:1}
+]},
+{id:6,tag:"Урок 7",title:"Past Continuous Tense",subtitle:"Действие в процессе в определённый момент прошлого",
+grammar:`<h3>Formation</h3>
+<table class="gram"><tr><th>Affirmative</th><th>Negative</th><th>Interrogative</th></tr>
+<tr><td>I <b>was reading</b></td><td>I was <b>not</b> reading</td><td><b>Was</b> I reading?</td></tr>
+<tr><td>We/You/They <b>were reading</b></td><td>We were <b>not</b> reading</td><td><b>Were</b> we reading?</td></tr></table>
+<h3>Use</h3>
+<p>Временное действие, происходящее в определённый момент в прошлом:</p>
+<div class="example"><span class="en">I was writing a letter to my friend from 5 to 6 on Sunday.</span><span class="ru">Я писал письмо другу с 5 до 6 в воскресенье.</span></div>
+<h3>Past Simple + Past Continuous</h3>
+<p>Часто используются вместе: одно действие (Past Continuous) происходит в процессе другого (Past Simple):</p>
+<div class="example"><span class="en">I saw Irene in the park. She <b>was sitting</b> on the bench and <b>waiting</b> for somebody.</span><span class="ru">Я увидел Ирину в парке. Она сидела на скамейке и кого-то ждала.</span></div>
+<div class="example"><span class="en">Jensa broke her leg when she <b>was skiing</b> in Switzerland.</span><span class="ru">Дженса сломала ногу, когда каталась на лыжах в Швейцарии.</span></div>
+<h3>Adverbials of time</h3>
+<p><span class="en">at five (o'clock) yesterday, from five to/till six yesterday, for three days last week, all day long, the whole day</span></p>`,
+exercises:[
+{type:"choice",q:"When did she meet Helen? (walk along the street)",opts:["She met Helen when she walked along the street.","She met Helen when she was walking along the street."],ans:1},
+{type:"choice",q:"When did you catch that cold? (skate on a frosty day)",opts:["I caught that cold when I skated.","I caught that cold when I was skating on a frosty day."],ans:1},
+{type:"choice",q:"When did he write those nice poems? (have a holiday)",opts:["He wrote those poems when he had a holiday.","He wrote those poems when he was having a holiday."],ans:1},
+{type:"choice",q:"When did she learn the language? (live in England)",opts:["She learned the language when she lived in England.","She learned the language when she was living in England."],ans:1},
+{type:"choice",q:"Dan ___ off the tree while he ___ the cat. (fall / rescue)",opts:["fell / rescued","fell / was rescuing","was falling / rescued"],ans:1},
+{type:"choice",q:"Last night I ___ in the bed when suddenly I ___ a voice downstairs. (read / hear)",opts:["read / heard","was reading / heard","was reading / was hearing"],ans:1},
+{type:"choice",q:"___ you ___ a bath when I phoned you? (have)",opts:["Did you have / were you having","Were you having","Did you have"],ans:1},
+{type:"choice",q:"They ___ for a taxi when I ___. (wait / arrive)",opts:["waited / arrived","were waiting / arrived","were waiting / was arriving"],ans:1},
+{type:"fill",q:"I ___ very fast when I ___ her. (not/drive / see)",ans:"wasn't driving / saw"},
+{type:"choice",q:"Bob ___ a nap while I ___ the ceiling. (take / paint)",opts:["took / painted","was taking / was painting","took / was painting"],ans:1}
+]},
+{id:7,tag:"Урок 8",title:"Future Simple Tense",subtitle:"will + Infinitive",
+grammar:`<h3>Formation</h3>
+<table class="gram"><tr><th>Affirmative</th><th>Negative</th><th>Interrogative</th></tr>
+<tr><td>I/He/She/It/We/You/They <b>will</b> + Inf</td><td>will <b>not</b> (won't) + Inf</td><td><b>Will</b> + subject + Inf?</td></tr></table>
+<div class="tip"><b>Will</b> is used for all persons. In British English, <b>shall</b> can be used for I and we.</div>
+<h3>Important Rule: Future Simple is NOT used after conjunctions</h3>
+<table class="gram"><tr><th>Conjunctions</th></tr>
+<tr><td>when, as soon as, provided, till, as long as, in case, until, if, before, unless, after, on condition that</td></tr></table>
+<div class="example"><span class="en">I don't know <b>when</b> they <b>will arrive</b>.</span> (придаточное дополнительное — Future Simple)<span class="ru"><b>When</b> they <b>arrive</b>, I'll inform you. (придаточное времени — Present Simple!)</span></div>
+<div class="example"><span class="en">I don't know <b>if</b> he <b>will agree</b>.</span> (придаточное дополнительное)<span class="ru"><b>If</b> he <b>agrees</b>, I'll call you. (придаточное условия — Present Simple!)</span></div>`,
+exercises:[
+{type:"choice",q:"He ___ here soon. (be)",opts:["is","will be","was"],ans:1},
+{type:"choice",q:"The dress ___ ready tomorrow. (be)",opts:["is","will be","was"],ans:1},
+{type:"choice",q:"They ___ at the station in time for the 10.30 train. (be)",opts:["are","will be","were"],ans:1},
+{type:"choice",q:"I ___ the result in a day. (know)",opts:["know","will know","knew"],ans:1},
+{type:"choice",q:"I ___ twenty years old next year. (be)",opts:["am","will be","was"],ans:1},
+{type:"choice",q:"When he comes, I ___ to him. (apologize)",opts:["apologize","will apologize","apologized"],ans:1},
+{type:"choice",q:"I ___ this beautiful city again. (not/see)",opts:["don't see","won't see","didn't see"],ans:1},
+{type:"choice",q:"When he calls, I ___ him a piece of my mind. (give)",opts:["give","will give","gave"],ans:1},
+{type:"choice",q:"I am / will be at home if you need / will need anything.",opts:["am / need","will be / need","am / will need"],ans:0},
+{type:"fill",q:"If they want your advice, they ___ in touch with you. (get)",ans:"will get"}
+]},
+{id:8,tag:"Урок 9",title:"Future Continuous Tense",subtitle:"will be + -ing",
+grammar:`<h3>Formation</h3>
+<table class="gram"><tr><th>Affirmative</th><th>Negative</th><th>Interrogative</th></tr>
+<tr><td>I <b>will be reading</b></td><td>I will <b>not</b> be reading (won't)</td><td><b>Will</b> I <b>be reading</b>?</td></tr>
+<tr><td>He/She/It <b>will be reading</b></td><td>He will <b>not</b> be reading</td><td><b>Will</b> he <b>be reading</b>?</td></tr>
+<tr><td>We/You/They <b>will be reading</b></td><td>We will <b>not</b> be reading</td><td><b>Will</b> we <b>be reading</b>?</td></tr></table>
+<div class="tip"><b>Will</b> is used for all persons. In British English, <b>shall</b> can be used for I and we.</div>
+<h3>Use</h3>
+<p>Действие, которое будет происходить в определённый момент в будущем:</p>
+<div class="example"><span class="en">They <b>will be writing</b> a test from 10 till 11 tomorrow.</span><span class="ru">Они будут писать тест с 10 до 11 завтра.</span></div>
+<h3>Adverbials of time</h3>
+<p><span class="en">at five (o'clock) tomorrow, from five to/till six tomorrow, for three days next week</span></p>`,
+exercises:[
+{type:"choice",q:"At this time tomorrow we ___ a test. (write)",opts:["write","will write","will be writing"],ans:2},
+{type:"choice",q:"Don't ring her up at 12 o'clock. She ___ her music lesson. (have)",opts:["has","will have","will be having"],ans:2},
+{type:"choice",q:"At this time tomorrow the boys of our group ___ football. (play)",opts:["play","will play","will be playing"],ans:2},
+{type:"choice",q:"When we arrive in St. Petersburg, it probably ___. (rain)",opts:["rains","will rain","will be raining"],ans:2},
+{type:"choice",q:"It is the end of September, soon the leaves ___. (fall)",opts:["fall","will fall","will be falling"],ans:2},
+{type:"choice",q:"Let's wait here; the Palace Bridge ___ in a minute to let that ship through. (open)",opts:["opens","will open","will be opening"],ans:1},
+{type:"choice",q:"What will she be doing on Sunday? (make a dress)",opts:["She will make a dress.","She will be making a dress."],ans:1},
+{type:"choice",q:"What will you be doing at this time next week? (bathe in the Black Sea)",opts:["I will bathe in the Black Sea.","I will be bathing in the Black Sea."],ans:1},
+{type:"choice",q:"Don't call for me at six. (have a bath)",opts:["I will have a bath.","I will be having a bath."],ans:1},
+{type:"fill",q:"Don't send us any letters in June. (travel) → I ___ in June.",ans:"will be travelling"}
+]},
+{id:9,tag:"Урок 10",title:"Used to / Would",subtitle:"Привычные действия в прошлом",
+grammar:`<h3>Used to</h3>
+<p>Используется для описания привычных действий или состояний в прошлом, которые больше не происходят:</p>
+<div class="example"><span class="en">He doesn't play the piano any more but he <b>used to</b> play it every day.</span><span class="ru">Он больше не играет на пианино, но раньше играл каждый день.</span></div>
+<h3>Would</h3>
+<p><b>Would</b> может заменять <b>used to</b> для повторяющихся действий в прошлом, но <b>НЕ для состояний</b>:</p>
+<table class="gram"><tr><th>USED TO</th><th>WOULD</th></tr>
+<tr><td>Может описывать состояния</td><td>НЕ может описывать состояния</td></tr>
+<tr><td>I used to live in Scotland.</td><td>❌ I would live in Scotland.</td></tr>
+<tr><td>Отрицание: didn't use to</td><td>Отрицание: wouldn't = отказ</td></tr></table>
+<div class="tip"><b>We didn't use to drink coffee in the morning.</b> — Мы никогда не пили кофе по утрам.<br><b>We wouldn't drink coffee in the morning</b> = We <b>refused</b> to drink coffee. (Мы отказывались пить кофе.)</div>`,
+exercises:[
+{type:"choice",q:"He doesn't play the piano any more but he ___ play it every day.",opts:["used to","would","is used to"],ans:0},
+{type:"choice",q:"She doesn't eat sweets now but she ___ them every day.",opts:["used to eat","would eat","is used to eat"],ans:0},
+{type:"choice",q:"Miranda ___ my colleague but we don't work together any longer.",opts:["used to be","would be","is used to be"],ans:0},
+{type:"choice",q:"We live in Sussex now but we ___ in Scotland.",opts:["used to live","would live","are used to live"],ans:0},
+{type:"choice",q:"Now there is one cinema in our town but there ___ five.",opts:["used to be","would be","are used to be"],ans:0},
+{type:"choice",q:"Melly walks everywhere now. She ___ a horse.",opts:["used to ride","would ride","is used to ride"],ans:0},
+{type:"choice",q:"I ___ like to play chess when I lived with my father.",opts:["used to","would","both are possible"],ans:2},
+{type:"choice",q:"We didn't ___ go out much when we stayed at Granny's.",opts:["use to","used to","using to"],ans:0},
+{type:"choice",q:"«Would» в отрицании означает:",opts:["Привычку","Отказ","Состояние"],ans:1},
+{type:"choice",q:"«Used to» может описывать:",opts:["Только действия","Действия и состояния","Только состояния"],ans:1}
+]},
+{id:10,tag:"Урок 11",title:"The Noun. Countable / Uncountable. Plural",subtitle:"Правила образования множественного числа",
+grammar:`<h3>Countable and Uncountable Nouns</h3>
+<table class="gram"><tr><th>Countable</th><th>Uncountable</th></tr>
+<tr><td>a book – 5 books</td><td>meat, water, glass, beauty, help</td></tr>
+<tr><td>a boy – many boys</td><td>luggage, furniture, information, news</td></tr>
+<tr><td>Имеют мн. число</td><td>Не имеют мн. числа, не с a/an</td></tr></table>
+<h3>Rules for Forming the Plural</h3>
+<table class="gram"><tr><th>Rule</th><th>Examples</th><th>Notes</th></tr>
+<tr><td>General rule: + <b>-s</b></td><td>tables, books, paths</td><td>[z] after voiced; [s] after voiceless; [iz] after sibilants</td></tr>
+<tr><td>-s, -ss, -x, -z, -sh, -ch, -o → + <b>-es</b></td><td>buses, boxes, potatoes</td><td>BUT: pianos, photos, videos</td></tr>
+<tr><td>Change root vowel</td><td>man–men, foot–feet, goose–geese</td><td>7 nouns only</td></tr>
+<tr><td>+ <b>-en</b></td><td>ox–oxen, child–children</td><td>2 nouns only</td></tr>
+<tr><td>Singular = Plural</td><td>deer, sheep, fish, aircraft</td><td>BUT: dozens, scores of</td></tr>
+<tr><td>Latin/Greek plurals</td><td>phenomenon–phenomena, crisis–crises</td><td>Also: formulas, indexes in colloquial</td></tr>
+<tr><td>Compound nouns</td><td>editors-in-chief, brothers-in-law</td><td>Plural on head-word</td></tr></table>`,
+exercises:[
+{type:"choice",q:"Plural of <b>child</b>:",opts:["childs","childes","children"],ans:2},
+{type:"choice",q:"Plural of <b>phenomenon</b>:",opts:["phenomenons","phenomena","phenomenes"],ans:1},
+{type:"choice",q:"Plural of <b>sheep</b>:",opts:["sheeps","sheepes","sheep"],ans:2},
+{type:"choice",q:"Plural of <b>editor-in-chief</b>:",opts:["editor-in-chiefs","editors-in-chief","editor-in-chiefes"],ans:1},
+{type:"choice",q:"<b>News</b> is:",opts:["countable","uncountable","both"],ans:1},
+{type:"fill",q:"Plural of <b>crisis</b>:",ans:"crises"},
+{type:"fill",q:"Plural of <b>goose</b>:",ans:"geese"},
+{type:"choice",q:"Plural of <b>box</b>:",opts:["boxs","boxes","boxies"],ans:1},
+{type:"choice",q:"Plural of <b>ox</b>:",opts:["oxs","oxes","oxen"],ans:2},
+{type:"choice",q:"Plural of <b>potato</b>:",opts:["potatos","potatoes","potatoies"],ans:1}
+]},
+{id:11,tag:"Урок 12",title:"The Article",subtitle:"a/an, the, zero article",
+grammar:`<h3>The Indefinite Article (a / an)</h3>
+<p>Used with singular countable nouns when we mention something for the first time or don't specify which one:</p>
+<div class="example"><span class="en">I bought <b>a</b> new car.</span> (first mention)<span class="ru">Can I have <b>an</b> apple? (any apple)</span></div>
+<h3>The Definite Article (the)</h3>
+<table class="gram"><tr><th>Rule</th><th>Example</th></tr>
+<tr><td>Both speaker and listener know the object</td><td>Where is <b>the</b> key?</td></tr>
+<tr><td>An attribute points out the object</td><td>This is <b>the</b> house that Jack built.</td></tr>
+<tr><td>Unique things: Sun, Moon, Earth</td><td><b>The</b> Sun is the centre of our Galaxy.</td></tr>
+<tr><td>With superlatives, ordinals</td><td><b>The</b> first row, <b>the</b> best day</td></tr>
+<tr><td>With "same, all, very, next, last"</td><td>You're <b>the</b> very person I need.</td></tr></table>
+<h3>The Zero Article (no article)</h3>
+<table class="gram"><tr><th>Rule</th><th>Example</th></tr>
+<tr><td>Plural countable nouns in general statements</td><td>Dogs should eat meat.</td></tr>
+<tr><td>Uncountable nouns in general statements</td><td>Coffee is produced in Brazil.</td></tr>
+<tr><td>Abstract nouns in general sense</td><td>No news is good news.</td></tr>
+<tr><td>Languages, meals, sports</td><td>Chinese is difficult. I like tennis.</td></tr></table>`,
+exercises:[
+{type:"choice",q:"I bought ___ new house with ___ large garden.",opts:["a / a","a / the","the / a"],ans:0},
+{type:"choice",q:"___ Sun is the centre of our Galaxy.",opts:["A","An","The","(no article)"],ans:2},
+{type:"choice",q:"___ oranges are good for you.",opts:["The","A","An","(no article)"],ans:3},
+{type:"choice",q:"You're ___ very person I need.",opts:["a","an","the","(no article)"],ans:2},
+{type:"choice",q:"___ news is very depressing today.",opts:["The","A","An","(no article)"],ans:0},
+{type:"choice",q:"___ smoking is not allowed here.",opts:["The","A","An","(no article)"],ans:3},
+{type:"fill",q:"This is ___ house that Jack built.",ans:"the"},
+{type:"choice",q:"I usually buy ___ newspaper on my way to work.",opts:["the","a","(no article)","an"],ans:1},
+{type:"choice",q:"Could you pass ___ salt, please?",opts:["a","an","the","(no article)"],ans:2},
+{type:"choice",q:"___ dogs should eat meat.",opts:["The","A","An","(no article)"],ans:3}
+]},
+{id:12,tag:"Урок 13",title:"Comparative &amp; Superlative Adjectives",subtitle:"the same as, more...than, -er/-est",
+grammar:`<h3>Comparative Degree</h3>
+<table class="gram"><tr><th>Type</th><th>Formula</th><th>Example</th></tr>
+<tr><td>Short adjectives</td><td>adj + <b>-er</b> + than</td><td>taller than, thinner than</td></tr>
+<tr><td>Long adjectives</td><td><b>more</b> + adj + than</td><td>more severe than, more interesting than</td></tr>
+<tr><td>Irregular</td><td>good → better, bad → worse, far → farther/further</td><td></td></tr></table>
+<h3>Superlative Degree</h3>
+<table class="gram"><tr><th>Type</th><th>Formula</th><th>Example</th></tr>
+<tr><td>Short adjectives</td><td>the + adj + <b>-est</b></td><td>the tallest, the thinnest</td></tr>
+<tr><td>Long adjectives</td><td>the + <b>most</b> + adj</td><td>the most interesting, the most popular</td></tr></table>
+<h3>The same as</h3>
+<div class="example"><span class="en">Your hair is <b>the same colour as</b> mine.</span><span class="ru">У тебя волосы того же цвета, что и у меня.</span></div>`,
+exercises:[
+{type:"choice",q:"This is ___ (the most interesting) book I have ever read on this subject.",opts:["the most interesting","more interesting","the more interesting"],ans:0},
+{type:"choice",q:"Swimming is ___ (extremely popular) summer sport.",opts:["extremely popular","the most popular","more popular"],ans:1},
+{type:"choice",q:"Shakespeare is ___ (the most outstanding) English poet and playwright of all the ages.",opts:["the most outstanding","more outstanding","the more outstanding"],ans:0},
+{type:"choice",q:"My toothache is ___ it was yesterday. (severe)",opts:["more severe than","severer than","the most severe than"],ans:0},
+{type:"choice",q:"You look ___ you were last year. (thin)",opts:["thinner than","more thin than","the thinnest than"],ans:0},
+{type:"choice",q:"(this suit / the same size / that one)",opts:["This suit is the same size as that one.","This suit is the same size that that one.","This suit is the same size than that one."],ans:0},
+{type:"choice",q:"(I arrived here / the same time / you)",opts:["I arrived here at the same time as you.","I arrived here at the same time that you.","I arrived here at the same time than you."],ans:0},
+{type:"choice",q:"(we rented / the same house / your parents)",opts:["We rented the same house as your parents.","We rented the same house that your parents.","We rented the same house than your parents."],ans:0},
+{type:"choice",q:"The ___ animals have the ___ lifespan. (active / short)",opts:["most active / shortest","more active / shorter","most active / shorter"],ans:0},
+{type:"choice",q:"Animals which move slowly or live a ___ life usually grow a lot ___. (quiet / old)",opts:["quieter / older","more quiet / older","quietest / oldest"],ans:1}
+]},
+{id:13,tag:"Урок 14",title:"Conditional Sentences Type I",subtitle:"Real condition: If + Present Simple, will + Inf",
+grammar:`<h3>Type I — Real Condition (настоящее/будущее)</h3>
+<table class="gram"><tr><th>Condition clause</th><th>Main clause</th></tr>
+<tr><td>If + Present Simple/Continuous</td><td>will + Infinitive</td></tr>
+<tr><td>If it looks like rain,</td><td>we'll stay at home.</td></tr>
+<tr><td>If I have more time,</td><td>I'll come over.</td></tr></table>
+<div class="tip">NB! В придаточном условия после <b>if</b> НЕ используется <b>will</b>. Правильно: If it <b>rains</b>... НЕПРАВИЛЬНО: If it <b>will rain</b>...</div>`,
+exercises:[
+{type:"choice",q:"If I don't feel / won't feel well tomorrow, I stay / I'll stay at home.",opts:["don't feel / stay","won't feel / stay","don't feel / I'll stay"],ans:2},
+{type:"choice",q:"If the weather is / will be nice tomorrow, we can go to the beach.",opts:["is","will be"],ans:0},
+{type:"choice",q:"It will be hard to find a hotel if we arrive / will arrive late.",opts:["arrive","will arrive"],ans:0},
+{type:"choice",q:"The alarm will ring if there is / will be a fire.",opts:["is","will be"],ans:0},
+{type:"choice",q:"Do / Will you go to the party if they invite / will invite you?",opts:["Do / invite","Will / invite","Will / will invite"],ans:1},
+{type:"fill",q:"If you speak slowly, I ___ (be able) to understand you.",ans:"will be able"},
+{type:"choice",q:"If he doesn't practise his English, he will / would never speak fluently.",opts:["will","would"],ans:0},
+{type:"choice",q:"If their train arrives early, we'll / would be able to meet them.",opts:["we'll","we would"],ans:0},
+{type:"fill",q:"If it rains tomorrow, we ___ (stay) at home.",ans:"will stay"},
+{type:"choice",q:"You won't get in if you don't have / won't have a ticket.",opts:["don't have","won't have"],ans:0}
+]},
+{id:14,tag:"Урок 15",title:"Conditional Sentences Type II",subtitle:"Unreal condition: If + Past Simple, would + Inf",
+grammar:`<h3>Type II — Unreal Condition (настоящее/будущее)</h3>
+<table class="gram"><tr><th>Condition clause</th><th>Main clause</th></tr>
+<tr><td>If + Past Simple/Continuous</td><td>would/could/might + Infinitive</td></tr>
+<tr><td>If I were you,</td><td>I would go there myself.</td></tr>
+<tr><td>If I had more time,</td><td>I would come over.</td></tr></table>
+<div class="tip">В Type II для глагола <b>be</b> обычно используется <b>were</b> для всех лиц: If I <b>were</b> you... If she <b>were</b> here...</div>
+<h3>Inversion (без if)</h3>
+<div class="example"><span class="en">Were she in New York, she would certainly call you.</span><span class="ru">Если бы она была в Нью-Йорке, она бы обязательно позвонила.</span></div>`,
+exercises:[
+{type:"choice",q:"If I ___ you, I would go there myself.",opts:["am","was","were"],ans:2},
+{type:"choice",q:"If I had more time, I ___ come over.",opts:["will","would","can"],ans:1},
+{type:"choice",q:"If you knew him better, you ___ think so.",opts:["won't","wouldn't","don't"],ans:1},
+{type:"choice",q:"If it ___ not raining, I could go out.",opts:["is","was","were"],ans:2},
+{type:"fill",q:"If I ___ (know) his address, I would write to him.",ans:"knew"},
+{type:"choice",q:"If she ___ taller, she would be a model.",opts:["is","was","were"],ans:2},
+{type:"choice",q:"If I had books there, I ___ a lot in summer.",opts:["will read","would read","read"],ans:1},
+{type:"fill",q:"If I ___ (have) a dictionary, I would finish the translation today.",ans:"had"},
+{type:"choice",q:"Were she in New York, she ___ call you.",opts:["will","would","can"],ans:1},
+{type:"choice",q:"If he worked more slowly, he ___ make so many mistakes.",opts:["won't","wouldn't","doesn't"],ans:1}
+]},
+{id:15,tag:"Урок 16",title:"Conditional Sentences Type III. But for",subtitle:"Unreal past: If + Past Perfect, would have + Participle II",
+grammar:`<h3>Type III — Unreal Condition (прошедшее)</h3>
+<table class="gram"><tr><th>Condition clause</th><th>Main clause</th></tr>
+<tr><td>If + Past Perfect</td><td>would/could/might + have + Participle II</td></tr>
+<tr><td>If you had gone there,</td><td>you would have seen him.</td></tr>
+<tr><td>If it hadn't been so hot last summer,</td><td>we could have gone to the South.</td></tr></table>
+<h3>But for + noun/pronoun</h3>
+<p>Используется вместо придаточного условия в нереальных условиях:</p>
+<div class="example"><span class="en">But for my promise I wouldn't tell you this.</span><span class="ru">Если бы не моё обещание, я бы тебе этого не сказал.</span></div>
+<div class="example"><span class="en">But for the operation he would have died.</span><span class="ru">Если бы не операция, он бы умер.</span></div>
+<div class="tip">But for + существительное/местоимение = If it were not for / If it had not been for + noun</div>`,
+exercises:[
+{type:"choice",q:"If you had gone there, you ___ him.",opts:["would see","would have seen","will see"],ans:1},
+{type:"choice",q:"If it hadn't been so hot, we ___ to the South.",opts:["could go","could have gone","can go"],ans:1},
+{type:"choice",q:"But for my sister's help I ___ the article.",opts:["couldn't translate","couldn't have translated","can't translate"],ans:1},
+{type:"choice",q:"But for the neighbour's chickens I ___ the dog chained.",opts:["wouldn't hear","wouldn't have heard","won't hear"],ans:1},
+{type:"fill",q:"But for your explanation I ___ (not learn) to do it so well.",ans:"wouldn't have learned"},
+{type:"choice",q:"If the goal-keeper ___ hurt early in the game, the team would not have lost.",opts:["was not","had not been","is not"],ans:1},
+{type:"choice",q:"But for the heat I ___ working in this country.",opts:["would like","would have liked","will like"],ans:1},
+{type:"fill",q:"If it had not been for the rain, we ___ (go) for a walk.",ans:"would have gone"},
+{type:"choice",q:"But for her spelling she ___ an excellent mark.",opts:["would get","would have got","will get"],ans:1},
+{type:"choice",q:"But for the accident he ___ a record.",opts:["would set","would have set","will set"],ans:1}
+]},
+{id:16,tag:"Урок 17",title:"Wish Constructions",subtitle:"I wish + Past Simple / Past Perfect",
+grammar:`<h3>Wish about the Present</h3>
+<p>I wish + Past Simple/Continuous (сожаление о настоящем):</p>
+<div class="example"><span class="en">I wish I were/was beautiful.</span><span class="ru">Как бы мне хотелось быть красивой.</span></div>
+<div class="example"><span class="en">I wish it weren't raining.</span><span class="ru">Жаль, что идёт дождь.</span></div>
+<h3>Wish about the Past</h3>
+<p>I wish + Past Perfect (сожаление о прошлом):</p>
+<div class="example"><span class="en">I wish I had brought my camera.</span><span class="ru">Жаль, что я не взял с собой фотоаппарат.</span></div>
+<div class="example"><span class="en">I wish I could have gone to the theatre yesterday.</span><span class="ru">Жаль, что я не смог пойти в театр вчера.</span></div>
+<h3>Wish about the Future</h3>
+<p>I wish + could/would + Infinitive:</p>
+<div class="example"><span class="en">I wish they could come to see us tomorrow.</span><span class="ru">Жаль, что они не смогут зайти к нам завтра.</span></div>`,
+exercises:[
+{type:"choice",q:"I wish I ___ (know) how to drive a car. (present)",opts:["know","knew","had known"],ans:1},
+{type:"choice",q:"I wish I ___ (bring) my camera. (past regret)",opts:["brought","had brought","bring"],ans:1},
+{type:"choice",q:"I wish today ___ a holiday. (present)",opts:["is","was/were","had been"],ans:1},
+{type:"choice",q:"I wish I ___ (can) travel round the world.",opts:["can","could","could have"],ans:1},
+{type:"choice",q:"I wish I ___ (know) how to drive a car in 2005. (past)",opts:["knew","had known","know"],ans:1},
+{type:"fill",q:"I wish I ___ (not lose) my keys yesterday.",ans:"hadn't lost"},
+{type:"choice",q:"I wish you ___ (not work) so much. (present)",opts:["don't work","didn't work","hadn't worked"],ans:1},
+{type:"choice",q:"I wish they ___ (can) come to see us tomorrow.",opts:["can","could","could have"],ans:1},
+{type:"fill",q:"I wish it ___ (not rain) now.",ans:"wasn't raining"},
+{type:"choice",q:"I wish yesterday ___ a holiday. (past)",opts:["was","had been","is"],ans:1}
+]},
+{id:17,tag:"Урок 18",title:"Indirect Speech. Statements",subtitle:"Косвенная речь: утверждения",
+grammar:`<h3>Rule of the Sequence of Tenses</h3>
+<table class="gram"><tr><th>Direct Speech</th><th>Indirect Speech</th></tr>
+<tr><td>Present Simple</td><td>Past Simple</td></tr>
+<tr><td>Present Perfect</td><td>Past Perfect</td></tr>
+<tr><td>Past Simple</td><td>Past Perfect</td></tr>
+<tr><td>Future Simple (will)</td><td>Future-in-the-Past (would)</td></tr></table>
+<div class="example"><span class="en">Nick explained, "I know the man."</span> → <span class="en">Nick explained that he <b>knew</b> the man.</span><span class="ru">Ник объяснил, что он знает этого человека.</span></div>
+<div class="example"><span class="en">"I will be absent tomorrow." John remarked.</span> → <span class="en">John remarked that he <b>would</b> be absent the next day.</span><span class="ru">Джон заметил, что будет отсутствовать на следующий день.</span></div>
+<h3>Reporting Verbs</h3>
+<p>to tell, to say, to add, to notice, to remark, to explain, to inform, to remind, to mention, to confess, to guess, to repeat</p>
+<div class="tip">NB! to <b>say</b> smth (to smb) / to <b>tell</b> smb smth</div>`,
+exercises:[
+{type:"choice",q:"He said, \"I know the man.\" → He said that he ___ the man.",opts:["knows","knew","had known"],ans:1},
+{type:"choice",q:"\"I will be absent tomorrow.\" → John remarked that he ___ absent the next day.",opts:["will be","would be","would have been"],ans:1},
+{type:"choice",q:"\"I haven't read many books.\" → He said that he ___ many books.",opts:["hasn't read","hadn't read","didn't read"],ans:1},
+{type:"choice",q:"\"I made no mistakes.\" → Bob said that he ___ no mistakes.",opts:["made","had made","makes"],ans:1},
+{type:"choice",q:"She said, \"I'm listening.\" → She said that she ___ listening.",opts:["is","was","had been"],ans:1},
+{type:"fill",q:"He said that he ___ (see) the film the day before.",ans:"had seen"},
+{type:"choice",q:"\"I saw the thief.\" → He told the policeman that he ___ the thief.",opts:["saw","had seen","sees"],ans:1},
+{type:"choice",q:"She told the grocer that she ___ want any sugar.",opts:["doesn't","didn't","hadn't"],ans:1},
+{type:"fill",q:"They said that they ___ (come) the next day.",ans:"would come"},
+{type:"choice",q:"The secretary informed us, \"The delegation has just arrived.\" → The secretary informed us that the delegation ___ just arrived.",opts:["has","had","was having"],ans:1}
+]},
+{id:18,tag:"Урок 19",title:"Indirect Speech. Questions, Orders, Requests",subtitle:"Косвенные вопросы, приказы, просьбы",
+grammar:`<h3>Indirect Questions</h3>
+<p>Общий вопрос → <b>if / whether</b> + прямой порядок слов:</p>
+<div class="example"><span class="en">"Do you understand?"</span> → <span class="en">He asked <b>if</b> I understood.</span></div>
+<p>Специальный вопрос → вопросительное слово + прямой порядок слов:</p>
+<div class="example"><span class="en">"Where do Ron's parents live?"</span> → <span class="en">Ted wondered <b>where</b> Ron's parents lived.</span></div>
+<h3>Indirect Orders and Requests</h3>
+<p>Reporting verb + to-infinitive / not to-infinitive:</p>
+<table class="gram"><tr><th>Function</th><th>Reporting verbs</th></tr>
+<tr><td>Orders</td><td>to order, to command, to instruct</td></tr>
+<tr><td>Advice</td><td>to advise, to recommend</td></tr>
+<tr><td>Requests</td><td>to ask, to beg, to implore, to urge</td></tr>
+<tr><td>Warnings</td><td>to warn</td></tr>
+<tr><td>Permission</td><td>to allow, to permit, to forbid</td></tr></table>
+<div class="example"><span class="en">"Don't run across the street."</span> → <span class="en">The old man <b>warned</b> the girl <b>not to run</b> across the street.</span><span class="ru">Старик предупредил девочку не перебегать улицу.</span></div>`,
+exercises:[
+{type:"choice",q:"\"Have you got a match?\" → He asked me ___ I had got a match.",opts:["that","if","what"],ans:1},
+{type:"choice",q:"\"Where do Ron's parents live?\" → Ted wondered ___ Ron's parents lived.",opts:["that","if","where"],ans:2},
+{type:"choice",q:"\"Don't run across the street.\" → The old man ___ the girl not to run.",opts:["said","warned","asked"],ans:1},
+{type:"choice",q:"\"Open your books at page 60.\" → The teacher ___ the students to open their books.",opts:["asked","told","suggested"],ans:1},
+{type:"choice",q:"\"Why haven't you done the homework?\" → The teacher inquired ___ the pupils had not done the homework.",opts:["that","if","why"],ans:2},
+{type:"fill",q:"\"Don't go out without your coat.\" → Mary's mother told her ___ to go out.",ans:"not"},
+{type:"choice",q:"\"Tell me the time, please.\" → Jack ___ the policeman to tell him the time.",opts:["ordered","asked","commanded"],ans:1},
+{type:"choice",q:"\"Collect the exercise-books.\" → The teacher ___ Tom to collect the exercise-books.",opts:["asked","told","begged"],ans:1},
+{type:"fill",q:"\"Who did you meet at the theatre?\" → Nina's sister wanted to know ___ Nina had met at the theatre.",ans:"who"},
+{type:"choice",q:"\"Don't touch those plates. They are hot.\" → She ___ me not to touch the plates.",opts:["said","warned","told"],ans:1}
+]},
+{id:19,tag:"Урок 20",title:"The Participle. Forms",subtitle:"Participle I, Participle II, Perfect Participle",
+grammar:`<h3>Forms of the Participle</h3>
+<table class="gram"><tr><th></th><th>Active</th><th>Passive</th></tr>
+<tr><td><b>Present Participle (Participle I)</b></td><td>asking</td><td>being asked</td></tr>
+<tr><td><b>Past Participle (Participle II)</b></td><td>asked</td><td>—</td></tr>
+<tr><td><b>Perfect Participle</b></td><td>having asked</td><td>having been asked</td></tr></table>
+<h3>Present Participle (Participle I)</h3>
+<p>Показывает, что действие причастия происходит <b>одновременно</b> с действием сказуемого — в настоящем, прошлом или будущем:</p>
+<div class="example"><span class="en">Do you see the child <b>waving</b> the flag?</span> — Ты видишь ребёнка, машущего флагом?<span class="ru"><span class="en">That day we stayed at home <b>watching</b> TV.</span> — В тот день мы сидели дома и смотрели телевизор.</span></div>
+<h3>Perfect Participle</h3>
+<p>Показывает, что действие причастия <b>предшествует</b> действию сказуемого:</p>
+<div class="example"><span class="en"><b>Having explained</b> everything, I want to tell you how sorry I am.</span><span class="ru"><span class="en"><b>Having finished</b> the letter, he went to the post office.</span> — Закончив письмо, он пошёл на почту.</span></div>
+<div class="tip">Perfect Participle может относиться к настоящему, прошлому и будущему времени — всё зависит от времени сказуемого главного предложения.</div>`,
+exercises:[
+{type:"choice",q:"Present Participle Active от <b>ask</b>:",opts:["asked","asking","having asked","being asked"],ans:1},
+{type:"choice",q:"Present Participle Passive от <b>ask</b>:",opts:["asking","asked","being asked","having asked"],ans:2},
+{type:"choice",q:"Perfect Participle Active от <b>ask</b>:",opts:["asking","asked","being asked","having asked"],ans:3},
+{type:"choice",q:"Perfect Participle Passive от <b>ask</b>:",opts:["having asked","being asked","having been asked","asked"],ans:2},
+{type:"choice",q:"Present Participle показывает:",opts:["Предшествование","Одновременность","Следование"],ans:1},
+{type:"choice",q:"Perfect Participle показывает:",opts:["Одновременность","Предшествование","Следование"],ans:1},
+{type:"fill",q:"Having finished the letter, he ___ (go) to the post office.",ans:"went"},
+{type:"choice",q:"«Do you see the child ___ the flag?»",opts:["waved","waving","having waved","being waved"],ans:1},
+{type:"choice",q:"«___ everything, I want to tell you how sorry I am.»",opts:["Having explained","Explaining","Being explained","Explained"],ans:0},
+{type:"fill",q:"«___ the problem, you will find something new to worry about.» (settle)",ans:"having settled"}
+]},
+{id:20,tag:"Урок 21",title:"Participle as Attribute",subtitle:"interesting/interested, frying/fried",
+grammar:`<h3>Participle I как определение</h3>
+<p>Participle I (Active) переводится причастием настоящего времени или прилагательным:</p>
+<div class="vocab-grid">
+<div class="vocab-item"><span class="en">interesting films</span><span class="ru">интересные фильмы</span></div>
+<div class="vocab-item"><span class="en">exciting games</span><span class="ru">увлекательные игры</span></div>
+<div class="vocab-item"><span class="en">boring lessons</span><span class="ru">скучные уроки</span></div>
+<div class="vocab-item"><span class="en">burning fires</span><span class="ru">горящие костры</span></div>
+<div class="vocab-item"><span class="en">sinking ships</span><span class="ru">тонущие корабли</span></div>
+<div class="vocab-item"><span class="en">a frying pan</span><span class="ru">сковорода (для жарки)</span></div>
+<div class="vocab-item"><span class="en">a writing boy</span><span class="ru">пишущий мальчик</span></div>
+</div>
+<h3>Participle II как определение</h3>
+<div class="vocab-grid">
+<div class="vocab-item"><span class="en">interested spectators</span><span class="ru">заинтересованные зрители</span></div>
+<div class="vocab-item"><span class="en">excited children</span><span class="ru">взволнованные дети</span></div>
+<div class="vocab-item"><span class="en">bored students</span><span class="ru">скучающие студенты</span></div>
+<div class="vocab-item"><span class="en">burnt woods</span><span class="ru">сожжённые леса</span></div>
+<div class="vocab-item"><span class="en">sunk ships</span><span class="ru">затонувшие корабли</span></div>
+<div class="vocab-item"><span class="en">fried fish</span><span class="ru">жареная рыба</span></div>
+<div class="vocab-item"><span class="en">a written letter</span><span class="ru">написанное письмо</span></div>
+<div class="vocab-item"><span class="en">a baked potato</span><span class="ru">печёный картофель</span></div>
+</div>
+<div class="tip">Participle I (Active) = признак по действию (кипящий, горящий). Participle II (Passive) = признак по результату (сваренный, сожжённый).</div>
+<h3>Замена определительного придаточного причастием</h3>
+<div class="example"><span class="en">All the people <b>who live</b> in this house are students.</span><br>→ <span class="en">All the people <b>living</b> in this house are students.</span><span class="ru">Все люди, живущие в этом доме, — студенты.</span></div>`,
+exercises:[
+{type:"choice",q:"«Жареная рыба»:",opts:["frying fish","fried fish","having fried fish"],ans:1},
+{type:"choice",q:"«Написанное письмо»:",opts:["writing letter","written letter","having written letter"],ans:1},
+{type:"choice",q:"«Печёный картофель»:",opts:["baking potato","baked potato","having baked potato"],ans:1},
+{type:"choice",q:"«Тонущие корабли»:",opts:["sunk ships","sinking ships","having sunk ships"],ans:1},
+{type:"choice",q:"«Затонувшие корабли»:",opts:["sinking ships","sunk ships","having sunk ships"],ans:1},
+{type:"choice",q:"«Скучающие студенты»:",opts:["boring students","bored students","having bored students"],ans:1},
+{type:"choice",q:"«Скучные уроки»:",opts:["bored lessons","boring lessons","having bored lessons"],ans:1},
+{type:"choice",q:"«All the people who live in this house» → причастие:",opts:["lived","living","having lived"],ans:1},
+{type:"fill",q:"«Взволнованные дети» (excite):",ans:"excited children"},
+{type:"fill",q:"«Увлекательные игры» (excite):",ans:"exciting games"}
+]},
+{id:21,tag:"Урок 22",title:"Participle as Adverbial Modifier",subtitle:"Причастие как обстоятельство",
+grammar:`<h3>Participle как обстоятельство времени</h3>
+<div class="example"><span class="en"><b>When asked</b> about his plans, he smiled.</span> — Когда его спросили о планах, он улыбнулся.<span class="ru"><span class="en"><b>While reading</b> the letter, she kept smiling.</span> — Читая письмо, она продолжала улыбаться.</span></div>
+<h3>Participle как обстоятельство причины</h3>
+<div class="example"><span class="en"><b>Not knowing</b> what to do, I asked him for advice.</span> — Не зная, что делать, я попросил у него совета.</div>
+<h3>Participle как обстоятельство образа действия</h3>
+<div class="example"><span class="en">He sat in the armchair <b>reading</b> a newspaper.</span> — Он сидел в кресле, читая газету.<span class="ru"><span class="en">She left the room <b>without saying</b> a word.</span> — Она вышла из комнаты, не сказав ни слова.</span></div>
+<h3>The Absolute Participial Construction</h3>
+<p>Конструкция, в которой причастие имеет собственное «подлежащее», не являющееся подлежащим предложения:</p>
+<div class="example"><span class="en"><b>The letter having been written</b>, he went out to post it.</span><span class="ru">Письмо было написано, и он пошёл на почту отправить его.</span></div>
+<div class="example"><span class="en"><b>The room being dark</b>, I couldn't see him.</span><span class="ru">Так как в комнате было темно, я не видел его.</span></div>`,
+exercises:[
+{type:"choice",q:"«___ about his plans, he smiled.» (ask)",opts:["Asking","Asked","Having asked"],ans:1},
+{type:"choice",q:"«___ the letter, she kept smiling.» (read)",opts:["Read","Reading","Having read"],ans:1},
+{type:"choice",q:"«___ what to do, I asked him for advice.» (not/know)",opts:["Not knowing","Not known","Not having known"],ans:0},
+{type:"choice",q:"«He sat in the armchair ___ a newspaper.» (read)",opts:["read","reading","having read"],ans:1},
+{type:"choice",q:"«She left the room ___ a word.» (not/say)",opts:["not saying","without saying","not said"],ans:1},
+{type:"fill",q:"«___ everything, he went home.» (finish)",ans:"having finished"},
+{type:"choice",q:"«___ the door, she ran out.» (open)",opts:["Opened","Opening","Having opened"],ans:2},
+{type:"choice",q:"«___ by the noise, he woke up.» (disturb)",opts:["Disturbing","Disturbed","Having disturbed"],ans:1},
+{type:"fill",q:"«___ the letter, he went to the post office.» (finish)",ans:"having finished"},
+{type:"choice",q:"«___ from the window, I saw him cross the street.» (look)",opts:["Looked","Looking","Having looked"],ans:1}
+]},
+{id:22,tag:"Урок 23",title:"Complex Object",subtitle:"Objective-with-the-Infinitive Construction",
+grammar:`<h3>Complex Object (Объектный падеж с инфинитивом)</h3>
+<p>Состоит из существительного в общем падеже или местоимения в объектном падеже + инфинитив. Переводится придаточным дополнительным.</p>
+<div class="example"><span class="en">I want <b>you to stop</b> worrying.</span> — Я хочу, чтобы ты перестал волноваться.<span class="ru"><span class="en">I want Mother (her) <b>to help</b> me.</span> — Я хочу, чтобы мама (она) помогла мне.</span></div>
+<h3>Группы глаголов перед Complex Object</h3>
+<table class="gram"><tr><th>Группа</th><th>Глаголы</th><th>Пример</th></tr>
+<tr><td>Объявления</td><td>to pronounce, to declare, to report</td><td>The doctor pronounced the wound to be a slight one.</td></tr>
+<tr><td>Желания и намерения</td><td>to want, to wish, to desire, to mean, to urge, to intend, to choose</td><td>I want you to stop worrying.</td></tr>
+<tr><td>Чувства и эмоции</td><td>to like, to love, to dislike, to hate, cannot bear</td><td>Tell me what you would like me to do.</td></tr>
+<tr><td>Приказ и разрешение</td><td>to order, to allow, to let, to command, to encourage, to ask, to forbid</td><td>The colonel ordered his men to attack.</td></tr>
+<tr><td>Умственная деятельность</td><td>to know, to think, to consider, to believe, to find, to expect, to suppose</td><td>I knew them to be right. We expect them to arrive soon.</td></tr></table>
+<div class="tip">NB! После глаголов to think, to consider, to find глагол <b>to be</b> может опускаться: <span class="en">I find him (to be) a very clever man.</span></div>
+<h3>Глаголы let и make</h3>
+<p>После <b>let</b> и <b>make</b> инфинитив используется <b>без to</b>:</p>
+<div class="example"><span class="en">You can't <b>make</b> him <b>come</b> if he doesn't want to.</span><span class="ru"><span class="en">Let <b>me go</b>!</span> — Отпусти меня!</span></div>
+<div class="tip">NB! В пассивных конструкциях с make используется to-Infinitive: <span class="en">He was made <b>to apologise</b>.</span></div>`,
+exercises:[
+{type:"choice",q:"«Why don't you ___ her to wear high heels?»",opts:["allow","let","make"],ans:0},
+{type:"choice",q:"«The way she looks at me ___ me blush.»",opts:["wants","makes","expects"],ans:1},
+{type:"choice",q:"«Do you ___ me to show you the place on the map?»",opts:["want","let","make"],ans:0},
+{type:"choice",q:"«No one had ___ her to return so early.»",opts:["expected","let","made"],ans:0},
+{type:"choice",q:"«Who ___ you to miss lectures?»",opts:["made","allowed","let"],ans:1},
+{type:"choice",q:"«She ___ the children to be well behaved.»",opts:["expects","lets","makes"],ans:0},
+{type:"choice",q:"«You can't ___ him come if he doesn't want to.»",opts:["allow","make","expect"],ans:1},
+{type:"choice",q:"«The colonel ordered his men ___ attack.»",opts:["to","(без to)","for"],ans:0},
+{type:"fill",q:"«I want you ___ (stop) worrying.»",ans:"to stop"},
+{type:"choice",q:"Пассив с make: «He was made ___ .»",opts:["apologise","to apologise","apologising"],ans:1}
+]},
+{id:23,tag:"Урок 24",title:"Complex Object: Sense Perception",subtitle:"see, hear, watch, feel + bare Infinitive",
+grammar:`<h3>Complex Object после глаголов восприятия</h3>
+<p>После глаголов <b>to hear, to see, to watch, to feel, to observe</b> используется <b>bare Infinitive</b> (без to) — только Simple Infinitive Active.</p>
+<div class="example"><span class="en">I saw Brown <b>enter</b> the room.</span> — Я видел, как Браун вошёл в комнату.<span class="ru"><span class="en">I felt the blood <b>rush</b> into my cheeks.</span> — Я почувствовал, как кровь прилила к щекам.</span></div>
+<h3>Если значение пассивное — Participle II</h3>
+<div class="example"><span class="en">I saw the fire slowly <b>conquered</b>.</span> — Я видел, как пожар постепенно потушили.</div>
+<h3>Если выражен процесс — Participle I</h3>
+<div class="example"><span class="en">He saw Fleur <b>coming</b> to us.</span> — Он видел, как Флёр подходила к нам.<span class="ru"><span class="en">He watched his camera <b>being repaired</b>.</span> — Он наблюдал, как ремонтируют его фотоаппарат.</span></div>
+<h3>Сравнение: Infinitive vs Participle I</h3>
+<table class="gram"><tr><th>Verb + Infinitive</th><th>Verb + Participle I</th></tr>
+<tr><td>I saw him <b>enter</b> the shop.<br>(Я видел всё действие целиком — он открыл дверь, вошёл и исчез.)</td><td>I saw him <b>entering</b> the shop.<br>(Действие было в процессе, когда я его увидел.)</td></tr></table>
+<div class="tip">После глаголов восприятия используется ТОЛЬКО Simple Infinitive Active (без to). Для пассива — Participle II. Для процесса — Participle I.</div>`,
+exercises:[
+{type:"choice",q:"«I saw Brown ___ the room.» (целое действие)",opts:["enter","entering","to enter"],ans:0},
+{type:"choice",q:"«I saw him ___ the shop.» (действие в процессе)",opts:["enter","entering","to enter"],ans:1},
+{type:"choice",q:"«He watched his camera ___ .» (пассив, процесс)",opts:["repaired","being repaired","to be repaired"],ans:1},
+{type:"choice",q:"«I felt the blood ___ into my cheeks.»",opts:["rush","rushing","to rush"],ans:0},
+{type:"choice",q:"«I saw the fire slowly ___ .» (пассив)",opts:["conquer","conquered","conquering"],ans:1},
+{type:"choice",q:"«He saw Fleur ___ to us.» (процесс)",opts:["come","coming","to come"],ans:1},
+{type:"choice",q:"«We heard them ___ .» (процесс)",opts:["argue","arguing","to argue"],ans:1},
+{type:"choice",q:"«Nobody noticed me ___ the door and go out.»",opts:["open","opening","to open"],ans:0},
+{type:"fill",q:"«I heard someone ___ .» (laugh, целое действие)",ans:"laugh"},
+{type:"choice",q:"«The porter saw you ___ off the train.»",opts:["get","getting","to get"],ans:0}
+]},
+{id:24,tag:"Урок 25",title:"Complex Subject",subtitle:"Nominative-with-the-Infinitive Construction",
+grammar:`<h3>Complex Subject (Именительный падеж с инфинитивом)</h3>
+<p>Состоит из существительного/местоимения в именительном падеже + инфинитив. Переводится придаточным дополнительным или подлежащным.</p>
+<div class="example"><span class="en">Laser <b>is known to be used</b> in medicine.</span> — Известно, что лазер широко используется в медицине.</div>
+<h3>Группы глаголов в Passive перед Complex Subject</h3>
+<table class="gram"><tr><th>Группа</th><th>Глаголы</th><th>Пример</th></tr>
+<tr><td>Восприятие</td><td>to see, to hear, to notice, to observe, to watch</td><td>The car was seen to disappear in the distance.</td></tr>
+<tr><td>Умственная деятельность</td><td>to think, to consider, to believe, to expect, to suppose, to know, to understand</td><td>He was thought to be honest and kind.</td></tr>
+<tr><td>Сообщение</td><td>to say, to report, to order, to ask, to allow, to state, to announce</td><td>She is said to be working at the factory.</td></tr></table>
+<div class="tip">NB! После глаголов в Passive Complex Subject более характерен для литературного стиля, чем для разговорного, кроме глаголов to suppose, to expect, to make.</div>
+<h3>Формы инфинитива в Complex Subject</h3>
+<table class="gram"><tr><th>Значение</th><th>Форма</th><th>Пример</th></tr>
+<tr><td>Одновременное действие</td><td>Simple Infinitive</td><td>He is said to live in London.</td></tr>
+<tr><td>Действие в процессе</td><td>Continuous Infinitive</td><td>The water seems to be boiling.</td></tr>
+<tr><td>Предшествующее действие</td><td>Perfect Infinitive</td><td>They are reported to have finished the construction.</td></tr></table>
+<div class="tip">Инфинитив в Complex Subject НЕ может относиться к будущему времени, кроме случаев с глаголами to expect, to be sure/certain, to be likely: <span class="en">He is expected to give us an answer tomorrow.</span></div>`,
+exercises:[
+{type:"choice",q:"«The car was seen ___ in the distance.»",opts:["to disappear","disappearing","disappear"],ans:0},
+{type:"choice",q:"«He was thought ___ honest and kind.»",opts:["to be","being","be"],ans:0},
+{type:"choice",q:"«She is said ___ at the factory.» (сейчас работает)",opts:["to work","to be working","to have worked"],ans:1},
+{type:"choice",q:"«The delegation is reported ___ Moscow.» (уже покинула)",opts:["to leave","to have left","to be leaving"],ans:1},
+{type:"choice",q:"«He is expected ___ us an answer tomorrow.»",opts:["to give","to have given","to be giving"],ans:0},
+{type:"choice",q:"«The water seems ___ .» (кипит сейчас)",opts:["to boil","to be boiling","to have boiled"],ans:1},
+{type:"choice",q:"«They are reported ___ the construction.» (уже закончили)",opts:["to finish","to have finished","to be finishing"],ans:1},
+{type:"fill",q:"«He is known ___ an expert in this field.» (be)",ans:"to be"},
+{type:"fill",q:"«She was heard ___ heartily.» (laugh)",ans:"to laugh"},
+{type:"choice",q:"«He is considered ___ one of the most popular writers of his time.» (был)",opts:["to be","to have been","to be being"],ans:1}
+]},
+{id:25,tag:"Урок 26",title:"Complex Subject: Forms of the Infinitive",subtitle:"Практика раскрытия скобок",
+grammar:`<h3>Выбор формы инфинитива в Complex Subject</h3>
+<table class="gram"><tr><th>Ситуация</th><th>Форма инфинитива</th><th>Пример</th></tr>
+<tr><td>Действие одновременно со сказуемым</td><td>to + V</td><td>He appears <b>to know</b> French well.</td></tr>
+<tr><td>Действие в процессе</td><td>to be + V-ing</td><td>The water seems <b>to be boiling</b>.</td></tr>
+<tr><td>Действие предшествует сказуемому</td><td>to have + V3</td><td>He is said <b>to have spent</b> his youth in Paris.</td></tr>
+<tr><td>Пассив (одновременность)</td><td>to be + V3</td><td>She is expected <b>to be operated</b> on today.</td></tr>
+<tr><td>Пассив (предшествование)</td><td>to have been + V3</td><td>The book was thought <b>to have been lost</b>.</td></tr>
+<tr><td>Пассив + процесс</td><td>to have been + V-ing</td><td>The parties are reported <b>to have been considering</b> the agreement.</td></tr></table>
+<h3>Примеры из учебника</h3>
+<div class="example"><span class="en">He appears <b>to know</b> French well.</span> — Он, кажется, хорошо знает французский.<span class="ru"><span class="en">He is said <b>to have spent</b> his youth in Paris.</span> — Говорят, что он провёл юность в Париже.</span></div>
+<div class="example"><span class="en">They are supposed <b>to have been working</b> at the problem for the last two months.</span> — Предполагается, что они работают над этой проблемой уже два месяца.<span class="ru"><span class="en">This man was seen <b>to run</b> away from the scene of crime.</span> — Видели, как этот человек убегал с места преступления.</span></div>`,
+exercises:[
+{type:"fill",q:"He appears ___ (know) French well.",ans:"to know"},
+{type:"fill",q:"He is said ___ (spend) his youth in Paris.",ans:"to have spent"},
+{type:"fill",q:"They are supposed ___ (work) at the problem for the last two months.",ans:"to have been working"},
+{type:"fill",q:"His childhood is said ___ (be) very difficult.",ans:"to have been"},
+{type:"fill",q:"A young woman is supposed ___ (write) this book.",ans:"to have written"},
+{type:"fill",q:"He is believed ___ (teach) by his father. (пассив)",ans:"to have been taught"},
+{type:"fill",q:"She is expected ___ (operate) on today. (пассив)",ans:"to be operated"},
+{type:"fill",q:"The book was thought ___ (lose) until the librarian happened to find it.",ans:"to have been lost"},
+{type:"fill",q:"This man was seen ___ (run) away from the scene of crime.",ans:"to run"},
+{type:"fill",q:"The parties are reported ___ (consider) the agreement for six months.",ans:"to have been considering"}
+]},
+{id:26,tag:"Урок 27",title:"Subject Clauses",subtitle:"Подлежащные придаточные. Вводное it",
+grammar:`<h3>Subject Clauses (Подлежащные придаточные)</h3>
+<p>Выполняют функцию подлежащего к сказуемому главного предложения. Вводятся союзами:</p>
+<table class="gram"><tr><th>Союз</th><th>Перевод</th><th>Пример</th></tr>
+<tr><td>that</td><td>что</td><td>That he left is surprising.</td></tr>
+<tr><td>what</td><td>что; то, что</td><td>What he said was true.</td></tr>
+<tr><td>if / whether</td><td>ли</td><td>Whether he will come is unknown.</td></tr>
+<tr><td>who / whoever</td><td>кто; тот, кто</td><td>Whoever said that is wrong.</td></tr>
+<tr><td>whatever</td><td>всё, что; что бы ни</td><td>Whatever happens, I'll be there.</td></tr>
+<tr><td>where / when / why / how</td><td>где / когда / почему / как</td><td>How he did it is a mystery.</td></tr>
+<tr><td>how + adjective</td><td>насколько + прилагательное</td><td>How important it is...</td></tr></table>
+<div class="tip">Если подлежащное придаточное стоит в конце предложения, используется вводное <b>it</b>: <span class="en"><b>It</b> is surprising <b>how</b> your voice hasn't changed.</span></div>
+<div class="example"><span class="en">How important it is to start the work right away is clear to everybody.</span><span class="ru">Всем ясно, насколько важно начать работу немедленно.</span></div>
+<div class="example"><span class="en">It is a pity you are leaving.</span> — Жаль, что ты уезжаешь.</div>
+<h3>Различение предлогов, союзов и наречий</h3>
+<table class="gram"><tr><th>Часть речи</th><th>Функция</th><th>Пример</th></tr>
+<tr><td>Предлог</td><td>Соединяет словосочетания</td><td>After the presentation the guests will be able to buy products.</td></tr>
+<tr><td>Подчинительный союз</td><td>Соединяет придаточные</td><td>After the presentation is over, the guests will be able to buy products.</td></tr>
+<tr><td>Наречие</td><td>Обстоятельство в предложении</td><td>Once the towns were independent entities.</td></tr></table>`,
+exercises:[
+{type:"choice",q:"«___ important it is to start the work right away is clear to everybody.»",opts:["What","How","That","Whether"],ans:1},
+{type:"choice",q:"«It is surprising ___ your voice hasn't changed.»",opts:["that","what","how","whether"],ans:2},
+{type:"choice",q:"«It is a pity ___ you are leaving.»",opts:["what","that","how","whether"],ans:1},
+{type:"choice",q:"«___ he said was true.»",opts:["That","What","Whether","How"],ans:1},
+{type:"choice",q:"«___ he will come is unknown.»",opts:["What","Whether","That","How"],ans:1},
+{type:"choice",q:"«After the presentation ___ over, the guests will be able to buy products.»",opts:["is (союз)","(предлог, без глагола)"],ans:0},
+{type:"choice",q:"«After the presentation the guests will be able to buy products.» — «after» здесь:",opts:["Подчинительный союз","Предлог","Наречие"],ans:1},
+{type:"fill",q:"«It is known ___ he has a large collection of pictures.» (союз)",ans:"that"},
+{type:"choice",q:"«It may be said that the new theatre is the most beautiful building in town.» → Complex Subject:",opts:["The new theatre may be said to be the most beautiful building in town.","The new theatre may be said being the most beautiful building in town."],ans:0},
+{type:"choice",q:"«It was reported that the ship had arrived in Odessa.» → Complex Subject:",opts:["The ship was reported to have arrived in Odessa.","The ship was reported to arrive in Odessa.","The ship was reported arriving in Odessa."],ans:0}
+]},
+{id:27,tag:"Урок 28",title:"Revision. Mixed Grammar",subtitle:"Итоговый урок: все темы курса",
+grammar:`<h3>Краткое повторение всех тем</h3>
+<table class="gram"><tr><th>Тема</th><th>Ключевое правило</th></tr>
+<tr><td>to be</td><td>am/is/are (Present), was/were (Past)</td></tr>
+<tr><td>to have</td><td>have/has got, had, will have</td></tr>
+<tr><td>There is/are</td><td>Наличие чего-либо, согласование с первым подлежащим</td></tr>
+<tr><td>Present Simple</td><td>Обычные действия, расписание, истины</td></tr>
+<tr><td>Present Continuous</td><td>Действие сейчас, запланированное будущее</td></tr>
+<tr><td>Past Simple</td><td>Действие в прошлом, последовательность</td></tr>
+<tr><td>Past Continuous</td><td>Процесс в определённый момент прошлого</td></tr>
+<tr><td>Future Simple</td><td>will + Inf, НЕ после if/when</td></tr>
+<tr><td>Future Continuous</td><td>will be + -ing, процесс в будущем</td></tr>
+<tr><td>Used to / Would</td><td>Привычки в прошлом</td></tr>
+<tr><td>Nouns</td><td>Countable/Uncountable, 7 правил мн.ч.</td></tr>
+<tr><td>Articles</td><td>a/an, the, zero article</td></tr>
+<tr><td>Comparatives</td><td>-er/more, -est/most, the same as</td></tr>
+<tr><td>Conditional I</td><td>If + Present, will + Inf</td></tr>
+<tr><td>Conditional II</td><td>If + Past, would + Inf</td></tr>
+<tr><td>Conditional III</td><td>If + Past Perfect, would have + Part II</td></tr>
+<tr><td>But for</td><td>But for + noun = If it were not for</td></tr>
+<tr><td>Wish</td><td>I wish + Past Simple (present), Past Perfect (past)</td></tr>
+<tr><td>Indirect Speech</td><td>Sequence of Tenses, if/whether, to-inf</td></tr>
+<tr><td>Participle</td><td>Forms I/II/Perfect, Attribute, Adverbial Modifier</td></tr>
+<tr><td>Complex Object</td><td>Verb + noun/pronoun + Infinitive</td></tr>
+<tr><td>Complex Subject</td><td>Passive verb + Infinitive (Simple/Cont/Perfect)</td></tr>
+<tr><td>Subject Clauses</td><td>Connectives, introductory "it"</td></tr></table>
+<div class="tip">Этот урок содержит комплексные упражнения из всех разделов. Используйте его для самопроверки перед экзаменом!</div>`,
+exercises:[
+{type:"choice",q:"The sky ___ very blue today.",opts:["is","are","am","was"],ans:0},
+{type:"choice",q:"___ many old buildings in Chester.",opts:["There is","There are","There was"],ans:1},
+{type:"choice",q:"What does a singer do?",opts:["He sings.","He is singing.","He sang."],ans:0},
+{type:"choice",q:"Look! It ___. (rain)",opts:["rains","is raining","rained"],ans:1},
+{type:"choice",q:"I ___ him yesterday.",opts:["see","saw","seen"],ans:1},
+{type:"choice",q:"She ___ on the bench when I saw her. (sit)",opts:["sat","was sitting","sits"],ans:1},
+{type:"choice",q:"If it rains, we ___ at home. (Type I)",opts:["stay","will stay","would stay"],ans:1},
+{type:"choice",q:"If I ___ you, I would go there. (Type II)",opts:["am","was","were"],ans:2},
+{type:"choice",q:"If you had gone there, you ___ him. (Type III)",opts:["would see","would have seen","will see"],ans:1},
+{type:"choice",q:"I wish I ___ (know) how to drive. (present)",opts:["know","knew","had known"],ans:1},
+{type:"choice",q:"He said that he ___ the man. (Indirect Speech)",opts:["knows","knew","had known"],ans:1},
+{type:"choice",q:"Plural of <b>child</b>:",opts:["childs","children","childes"],ans:1},
+{type:"choice",q:"___ Sun is the centre of our Galaxy.",opts:["A","The","(no article)"],ans:1},
+{type:"choice",q:"This suit is the same size ___ that one.",opts:["as","that","than"],ans:0},
+{type:"choice",q:"He doesn't play piano any more but he ___ play it every day.",opts:["used to","would","is used to"],ans:0},
+{type:"choice",q:"«Жареная рыба»:",opts:["frying fish","fried fish","having fried fish"],ans:1},
+{type:"choice",q:"«I saw Brown ___ the room.» (целое действие)",opts:["enter","entering","to enter"],ans:0},
+{type:"choice",q:"«He is said ___ his youth in Paris.»",opts:["to spend","to have spent","to be spending"],ans:1},
+{type:"choice",q:"«___ important it is to start right away is clear to everybody.»",opts:["What","How","That"],ans:1},
+{type:"choice",q:"«The delegation is reported ___ London.» (уже покинула)",opts:["to leave","to have left","to be leaving"],ans:1}
+]}
+];
+
+
+const extraLessons=[
+{id:28,tag:"Урок 29",title:"Question Forms & Short Answers",subtitle:"Порядок слов, специальные вопросы и краткие ответы",
+grammar:`<h3>Как строить вопросы</h3><p>В общем вопросе вспомогательный глагол ставится перед подлежащим: <span class="en">Do you work? Is she ready? Have they arrived?</span> Если вопросительное слово является подлежащим, вспомогательный глагол не нужен: <span class="en">Who lives here?</span></p><table class="gram"><tr><th>Тип</th><th>Схема</th><th>Пример</th></tr><tr><td>Общий</td><td>Auxiliary + subject + verb?</td><td>Did you call?</td></tr><tr><td>Специальный</td><td>Wh-word + auxiliary + subject + verb?</td><td>Where did you go?</td></tr><tr><td>К подлежащему</td><td>Who/What + verb?</td><td>Who called you?</td></tr><tr><td>Разделительный</td><td>Statement, auxiliary + pronoun?</td><td>She is here, isn't she?</td></tr></table><div class="tip">После <b>do/does/did</b> используется начальная форма смыслового глагола: <span class="en">Where did he <b>go</b>?</span>, не <span class="en">did he went</span>.</div>`,
+exercises:[
+{type:"choice",q:"___ you like coffee?",opts:["Do","Does","Are","Did"],ans:0},{type:"choice",q:"Where ___ she work?",opts:["do","does","is","has"],ans:1},{type:"choice",q:"Who ___ in this house?",opts:["does live","lives","do live","is live"],ans:1},{type:"choice",q:"What time ___ the lesson start yesterday?",opts:["did","was","does","has"],ans:0},{type:"choice",q:"___ you ever been to Scotland?",opts:["Have","Did","Are","Do"],ans:0},{type:"choice",q:"He can swim, ___ he?",opts:["can","can't","doesn't","isn't"],ans:1},{type:"choice",q:"Your sister isn't at home, ___?",opts:["is she","isn't she","does she","doesn't she"],ans:0},{type:"choice",q:"How often ___ they visit their grandparents?",opts:["are","do","have","did"],ans:1},{type:"choice",q:"Which sentence is correct?",opts:["Where did you buy it?","Where you did buy it?","Where bought you it?","Where did you bought it?"],ans:0},{type:"choice",q:"Short answer: 'Did Anna call?' — 'Yes, ___.'",opts:["she did","she called","did she","she was"],ans:0},{type:"fill",q:"Complete: '___ you studying now?' (be)",ans:"are"},{type:"fill",q:"Complete: 'What ___ he say?' (Past Simple)",ans:"did"}
+]},
+{id:29,tag:"Урок 30",title:"Modal Verbs",subtitle:"Can, could, may, must, have to, should, needn't",
+grammar:`<h3>Значения модальных глаголов</h3><p>Модальные глаголы выражают способность, разрешение, обязанность, совет, вероятность и необходимость. После <b>can, could, may, might, must, should</b> употребляется инфинитив без <i>to</i>.</p><table class="gram"><tr><th>Форма</th><th>Основное значение</th><th>Пример</th></tr><tr><td>can / could</td><td>умение, возможность, просьба</td><td>She can drive. Could you help?</td></tr><tr><td>must</td><td>строгая обязанность, логический вывод</td><td>You must wear a helmet.</td></tr><tr><td>have to</td><td>внешняя необходимость</td><td>I have to leave early.</td></tr><tr><td>should</td><td>совет</td><td>You should rest.</td></tr><tr><td>may / might</td><td>возможность</td><td>It might rain.</td></tr></table><div class="tip"><b>Mustn't</b> означает «нельзя», а <b>don't have to</b> — «необязательно»: <span class="en">You mustn't park here. You don't have to come early.</span></div>`,
+exercises:[
+{type:"choice",q:"You ___ show your passport at the border.",opts:["must","might","can","would"],ans:0},{type:"choice",q:"You ___ smoke here; it is forbidden.",opts:["needn't","mustn't","don't have to","couldn't"],ans:1},{type:"choice",q:"I ___ get up early tomorrow; it is my day off.",opts:["mustn't","don't have to","shouldn't","can't"],ans:1},{type:"choice",q:"___ you please open the window?",opts:["Could","Must","Should","Have"],ans:0},{type:"choice",q:"When I was five, I ___ already read.",opts:["can","could","must","should"],ans:1},{type:"choice",q:"It is cloudy. It ___ rain later.",opts:["must to","might","has to","should to"],ans:1},{type:"choice",q:"You look tired. You ___ take a break.",opts:["should","have","can to","mustn't"],ans:0},{type:"choice",q:"Employees ___ wear an ID badge at work.",opts:["have to","might","needn't to","can"],ans:0},{type:"choice",q:"She ___ be at home; the lights are on.",opts:["must","must to","has","should to"],ans:0},{type:"choice",q:"Which form is correct?",opts:["He can speak English.","He can to speak English.","He cans speak English.","He can speaking English."],ans:0},{type:"fill",q:"Complete: 'You ___ not tell anyone.' (prohibition)",ans:"must"},{type:"fill",q:"Complete: '___ I borrow your pen?' (polite permission)",ans:"may"}
+]},
+{id:30,tag:"Урок 31",title:"Passive Voice",subtitle:"Пассивный залог во временах и с модальными глаголами",
+grammar:`<h3>Когда используется Passive Voice</h3><p>Пассивный залог нужен, когда важнее действие или его результат, а исполнитель неизвестен, неважен или очевиден. Формула: <b>be + Past Participle (V3)</b>.</p><table class="gram"><tr><th>Время</th><th>Форма</th><th>Пример</th></tr><tr><td>Present Simple</td><td>am/is/are + V3</td><td>English is spoken here.</td></tr><tr><td>Past Simple</td><td>was/were + V3</td><td>The bridge was built in 1890.</td></tr><tr><td>Present Perfect</td><td>has/have been + V3</td><td>The work has been finished.</td></tr><tr><td>Future</td><td>will be + V3</td><td>The results will be announced.</td></tr><tr><td>Modal</td><td>modal + be + V3</td><td>The form must be signed.</td></tr></table><div class="tip">Указывайте исполнителя с <b>by</b>, только если он действительно важен: <span class="en">The novel was written <b>by</b> Orwell.</span></div>`,
+exercises:[
+{type:"choice",q:"English ___ in many countries.",opts:["speaks","is spoken","is speaking","has spoken"],ans:1},{type:"choice",q:"The windows ___ yesterday.",opts:["cleaned","were cleaned","have cleaned","were cleaning"],ans:1},{type:"choice",q:"The report ___ yet.",opts:["hasn't finished","hasn't been finished","wasn't finishing","doesn't finish"],ans:1},{type:"choice",q:"The tickets ___ online tomorrow.",opts:["will sell","will be sold","are selling","will have sold"],ans:1},{type:"choice",q:"All mobile phones ___ off during the exam.",opts:["must switch","must be switched","must switched","are must switched"],ans:1},{type:"choice",q:"This painting was created ___ a local artist.",opts:["from","by","with","at"],ans:1},{type:"choice",q:"People grow coffee in Brazil. → Passive:",opts:["Coffee grows in Brazil.","Coffee is grown in Brazil.","Coffee was grown in Brazil.","Coffee has grown in Brazil."],ans:1},{type:"choice",q:"Someone has stolen my bike. → Passive:",opts:["My bike has been stolen.","My bike has stolen.","My bike was stealing.","My bike is stolen yesterday."],ans:0},{type:"choice",q:"Which sentence is passive?",opts:["The door was locked at six.","The door locked at six.","The door was locking at six.","The door has lock at six."],ans:0},{type:"choice",q:"The new library ___ next year.",opts:["will open","will be opened","opens by","will be opening by"],ans:1},{type:"fill",q:"Complete: 'The package ___ delivered this morning.' (Past Simple passive)",ans:"was"},{type:"fill",q:"Complete: 'The instructions must ___ read carefully.'",ans:"be"}
+]},
+{id:31,tag:"Урок 32",title:"Gerund & Infinitive",subtitle:"V-ing, to-infinitive и глаголы с изменением значения",
+grammar:`<h3>Две неличные формы</h3><p><b>Gerund</b> — форма на <i>-ing</i>, часто после предлогов и некоторых глаголов. <b>To-infinitive</b> часто выражает цель или следует за определёнными глаголами и прилагательными.</p><table class="gram"><tr><th>После V-ing</th><th>После to + infinitive</th><th>Пример</th></tr><tr><td>enjoy, avoid, suggest, finish, keep</td><td>want, decide, hope, plan, promise</td><td>She enjoys reading. We decided to stay.</td></tr><tr><td>после предлога</td><td>после too/enough</td><td>Before leaving; too tired to walk</td></tr></table><div class="tip">После <b>stop</b> значения различаются: <span class="en">stop smoking</span> — перестать курить; <span class="en">stop to smoke</span> — остановиться, чтобы покурить.</div>`,
+exercises:[
+{type:"choice",q:"I enjoy ___ detective stories.",opts:["read","to read","reading","to reading"],ans:2},{type:"choice",q:"They decided ___ by train.",opts:["go","going","to go","to going"],ans:2},{type:"choice",q:"Thank you for ___ me.",opts:["help","to help","helping","to helping"],ans:2},{type:"choice",q:"She hopes ___ abroad next year.",opts:["study","studying","to study","to studying"],ans:2},{type:"choice",q:"He avoided ___ about the problem.",opts:["talk","to talk","talking","to talking"],ans:2},{type:"choice",q:"We are looking forward to ___ you.",opts:["meet","to meet","meeting","to meeting"],ans:2},{type:"choice",q:"It is important ___ enough sleep.",opts:["get","getting","to get","to getting"],ans:2},{type:"choice",q:"I stopped ___ because it was unhealthy.",opts:["to smoke","smoking","smoke","to smoking"],ans:1},{type:"choice",q:"I stopped ___ a coffee on the way home.",opts:["to have","having","have","to having"],ans:0},{type:"choice",q:"She suggested ___ earlier.",opts:["leave","to leave","leaving","to leaving"],ans:2},{type:"fill",q:"Complete: 'Before ___, turn off the lights.' (leave)",ans:"leaving"},{type:"fill",q:"Complete: 'I want ___ a new language.' (learn)",ans:"to learn"}
+]},
+{id:32,tag:"Урок 33",title:"Relative Clauses",subtitle:"Who, which, that, whose, where и определительные придаточные",
+grammar:`<h3>Относительные местоимения</h3><p>Relative clauses добавляют информацию о существительном. В определительных придаточных <b>who</b> относится к людям, <b>which</b> — к предметам, <b>whose</b> выражает принадлежность, <b>where</b> — место. <b>That</b> может заменить who/which в определительных придаточных.</p><table class="gram"><tr><th>Слово</th><th>Функция</th><th>Пример</th></tr><tr><td>who / that</td><td>люди</td><td>The woman who called is my aunt.</td></tr><tr><td>which / that</td><td>вещи и животные</td><td>The book that I bought is useful.</td></tr><tr><td>whose</td><td>принадлежность</td><td>The student whose bag is missing...</td></tr><tr><td>where</td><td>место</td><td>The café where we met...</td></tr></table><div class="tip">Если местоимение — дополнение в определительном придаточном, его иногда можно опустить: <span class="en">The film (that) we watched was excellent.</span></div>`,
+exercises:[
+{type:"choice",q:"The man ___ lives next door is a doctor.",opts:["which","who","where","whose"],ans:1},{type:"choice",q:"This is the book ___ I told you about.",opts:["who","where","that","whose"],ans:2},{type:"choice",q:"The girl ___ brother is a pilot won the prize.",opts:["who","which","whose","where"],ans:2},{type:"choice",q:"That is the restaurant ___ we had dinner.",opts:["who","which","where","whose"],ans:2},{type:"choice",q:"The laptop ___ I bought last week is very fast.",opts:["who","that","whose","where"],ans:1},{type:"choice",q:"Which is correct?",opts:["The person who helped me was kind.","The person which helped me was kind.","The person where helped me was kind.","The person whose helped me was kind."],ans:0},{type:"choice",q:"The car ___ was parked outside has gone.",opts:["who","which","where","whose"],ans:1},{type:"choice",q:"The woman ___ you met is my teacher.",opts:["who","which","where","whose"],ans:0},{type:"choice",q:"The city ___ I was born is on the coast.",opts:["that","whose","where","who"],ans:2},{type:"choice",q:"A relative pronoun can be omitted in: ___",opts:["The woman who called.","The book that I bought.","The boy whose bike was stolen.","The café where we met."],ans:1},{type:"fill",q:"Complete: 'The people ___ work here are friendly.'",ans:"who"},{type:"fill",q:"Complete: 'The teacher ___ class I joined is helpful.'",ans:"whose"}
+]},
+{id:33,tag:"Урок 34",title:"Determiners & Quantifiers",subtitle:"Some, any, much, many, few, little, each, every",
+grammar:`<h3>Количество и определители</h3><p><b>Many/few/a few</b> употребляются с исчисляемыми существительными; <b>much/little/a little</b> — с неисчисляемыми. <b>Some</b> обычно в утверждениях, <b>any</b> в вопросах и отрицаниях, но <b>some</b> также встречается в предложениях-просьбах и предложениях чего-либо.</p><table class="gram"><tr><th>Исчисляемые</th><th>Неисчисляемые</th><th>Оттенок</th></tr><tr><td>many books, few books, a few books</td><td>much water, little water, a little water</td><td>few/little = почти нет; a few/a little = немного, достаточно</td></tr><tr><td>each/every student</td><td>all the information</td><td>each — по отдельности; every — все в целом</td></tr></table><div class="tip"><b>Less</b> обычно с неисчисляемыми, <b>fewer</b> — с исчисляемыми: <span class="en">less traffic, fewer cars.</span></div>`,
+exercises:[
+{type:"choice",q:"There aren't ___ chairs in the room.",opts:["much","many","little","a little"],ans:1},{type:"choice",q:"How ___ water do you drink every day?",opts:["many","much","few","a few"],ans:1},{type:"choice",q:"We have ___ time, so let's hurry.",opts:["few","a few","little","a little"],ans:2},{type:"choice",q:"I have ___ close friends I can rely on.",opts:["little","a little","a few","much"],ans:2},{type:"choice",q:"Would you like ___ tea?",opts:["any","some","many","few"],ans:1},{type:"choice",q:"Do you have ___ questions?",opts:["some","any","much","little"],ans:1},{type:"choice",q:"___ student must submit the form.",opts:["Every","Many","Much","Any"],ans:0},{type:"choice",q:"There were ___ people at the beach this year than last year.",opts:["less","fewer","little","few"],ans:1},{type:"choice",q:"I need ___ information before I decide.",opts:["a few","a little","many","few"],ans:1},{type:"choice",q:"Which word suits 'advice'?",opts:["many","few","a little","a few"],ans:2},{type:"fill",q:"Complete: 'There isn't ___ milk left.'",ans:"much"},{type:"fill",q:"Complete: '___ of the answers is correct.'",ans:"each"}
+]},
+{id:34,tag:"Урок 35",title:"Pronouns & Determiners",subtitle:"Personal, possessive, reflexive, indefinite pronouns",
+grammar:`<h3>Местоимения в контексте</h3><p>Личные местоимения меняются по функции: <span class="en">I → me, she → her, they → them.</span> После предлога используйте объектную форму. Притяжательные прилагательные стоят перед существительным (<span class="en">my book</span>), а самостоятельные притяжательные местоимения заменяют существительное (<span class="en">mine</span>).</p><table class="gram"><tr><th>Функция</th><th>Пример</th><th>Форма</th></tr><tr><td>Объект</td><td>Give it to Anna and me.</td><td>me, him, her, us, them</td></tr><tr><td>Притяжательное определение</td><td>This is our room.</td><td>my, your, his, her, its, our, their</td></tr><tr><td>Самостоятельное притяжательное</td><td>This room is ours.</td><td>mine, yours, his, hers, ours, theirs</td></tr><tr><td>Возвратное</td><td>She taught herself.</td><td>myself, yourself, himself...</td></tr></table><div class="tip">После <b>everyone, somebody, nobody</b> традиционно возможен <b>they/their</b> в нейтральной речи: <span class="en">Everyone should bring their ID.</span></div>`,
+exercises:[
+{type:"choice",q:"Could you help Anna and ___?",opts:["I","me","my","mine"],ans:1},{type:"choice",q:"This coat is ___.",opts:["my","mine","me","I"],ans:1},{type:"choice",q:"We painted the room ___.",opts:["us","our","ourselves","ourself"],ans:2},{type:"choice",q:"Tom has lost ___ keys.",opts:["he","him","his","himself"],ans:2},{type:"choice",q:"I spoke to Julia and ___.",opts:["she","her","hers","herself"],ans:1},{type:"choice",q:"The decision is ___, not theirs.",opts:["our","ours","us","we"],ans:1},{type:"choice",q:"Nobody brought ___ passport.",opts:["they","their","them","theirs"],ans:1},{type:"choice",q:"The cat cleaned ___.",opts:["it","its","itself","itself's"],ans:2},{type:"choice",q:"Is this your bag? — No, ___ is blue.",opts:["my","mine","me","I"],ans:1},{type:"choice",q:"Which sentence is correct?",opts:["Between you and me, it is difficult.","Between you and I, it is difficult.","Between your and me, it is difficult.","Between you and mine, it is difficult."],ans:0},{type:"fill",q:"Complete: 'They invited my sister and ___.'",ans:"me"},{type:"fill",q:"Complete: 'She made the dress ___.'",ans:"herself"}
+]},
+{id:35,tag:"Урок 36",title:"Prepositions",subtitle:"Время, место, движение и устойчивые сочетания",
+grammar:`<h3>Предлоги в системах</h3><p>Предлоги нельзя всегда переводить буквально, поэтому полезно учить их в сочетаниях. Для времени: <b>at</b> — точка, <b>on</b> — день/дата, <b>in</b> — период. Для места: <b>at</b> — точка/место деятельности, <b>on</b> — поверхность, <b>in</b> — внутри.</p><table class="gram"><tr><th>Предлог</th><th>Время</th><th>Место/движение</th></tr><tr><td>at</td><td>at 7, at night</td><td>at the station</td></tr><tr><td>on</td><td>on Monday, on 5 May</td><td>on the wall</td></tr><tr><td>in</td><td>in July, in 2026</td><td>in a box</td></tr><tr><td>to / into</td><td>—</td><td>to a destination / movement inside</td></tr></table><div class="tip">После <b>arrive</b>: <span class="en">arrive <b>at</b> a station</span>, но <span class="en">arrive <b>in</b> a city/country</span>.</div>`,
+exercises:[
+{type:"choice",q:"The meeting starts ___ 9:30.",opts:["in","on","at","by"],ans:2},{type:"choice",q:"We moved here ___ 2023.",opts:["at","on","in","to"],ans:2},{type:"choice",q:"Her birthday is ___ Friday.",opts:["at","on","in","by"],ans:1},{type:"choice",q:"The keys are ___ the table.",opts:["in","at","on","to"],ans:2},{type:"choice",q:"They arrived ___ London late at night.",opts:["at","in","on","to"],ans:1},{type:"choice",q:"She walked ___ the room and sat down.",opts:["into","on","at","by"],ans:0},{type:"choice",q:"I am interested ___ modern art.",opts:["on","at","in","for"],ans:2},{type:"choice",q:"He is good ___ mathematics.",opts:["in","on","at","to"],ans:2},{type:"choice",q:"We have lived here ___ five years.",opts:["since","for","during","from"],ans:1},{type:"choice",q:"I have known her ___ 2019.",opts:["for","during","since","at"],ans:2},{type:"fill",q:"Complete: 'Please listen ___ the teacher.'",ans:"to"},{type:"fill",q:"Complete: 'The bus stopped ___ the corner.'",ans:"at"}
+]},
+{id:36,tag:"Урок 37",title:"Phrasal Verbs",subtitle:"Глагол + частица: значение, отделяемость и контекст",
+grammar:`<h3>Что такое phrasal verb</h3><p>Фразовый глагол состоит из глагола и частицы/предлога; вместе они часто получают новое значение. Учите фразовый глагол вместе с примером. У отделяемых глаголов местоимение ставится между глаголом и частицей: <span class="en">turn it off</span>, не <span class="en">turn off it</span>.</p><table class="gram"><tr><th>Глагол</th><th>Значение</th><th>Пример</th></tr><tr><td>find out</td><td>выяснить</td><td>Find out the answer.</td></tr><tr><td>look after</td><td>заботиться о</td><td>She looks after her nephew.</td></tr><tr><td>give up</td><td>бросить, отказаться</td><td>He gave up smoking.</td></tr><tr><td>turn on/off</td><td>включить/выключить</td><td>Turn the light off.</td></tr><tr><td>run out of</td><td>израсходовать</td><td>We ran out of milk.</td></tr></table><div class="tip">Некоторые фразовые глаголы неразделяемы: <span class="en">look after the child</span>, не <span class="en">look the child after</span>.</div>`,
+exercises:[
+{type:"choice",q:"Please ___ the light; it is dark here.",opts:["turn on","give up","find out","look after"],ans:0},{type:"choice",q:"Who will ___ the children this evening?",opts:["look after","run out","turn off","give up"],ans:0},{type:"choice",q:"I need to ___ why the train is late.",opts:["find out","turn on","look after","run out"],ans:0},{type:"choice",q:"She ___ smoking two years ago.",opts:["gave up","gave on","gave after","gave out of"],ans:0},{type:"choice",q:"We have ___ coffee.",opts:["run out of","run after","run into","run off"],ans:0},{type:"choice",q:"Turn ___ your phone during the film.",opts:["off","after","out of","up"],ans:0},{type:"choice",q:"Correct order with a pronoun:",opts:["Turn it off.","Turn off it.","Turn off it up.","Turn it after."],ans:0},{type:"choice",q:"The plane ___ at 7:15.",opts:["takes off","looks after","gives up","runs out"],ans:0},{type:"choice",q:"I came ___ an old photo yesterday.",opts:["across","after","off","up"],ans:0},{type:"choice",q:"Please fill ___ this form.",opts:["in","after","out of","across"],ans:0},{type:"fill",q:"Complete: 'Don't ___ up; keep practising!'",ans:"give"},{type:"fill",q:"Complete: 'Can you pick ___ the children at five?'",ans:"up"}
+]},
+{id:37,tag:"Урок 38",title:"Word Formation",subtitle:"Суффиксы, приставки и части речи",
+grammar:`<h3>Как расширять словарный запас</h3><p>Word formation помогает распознавать незнакомые слова. Суффиксы часто показывают часть речи: <b>-ment, -tion, -ness</b> образуют существительные, <b>-ful, -less, -able</b> — прилагательные, <b>-ly</b> — наречия. Приставки <b>un-, im-, dis-, re-</b> меняют значение.</p><table class="gram"><tr><th>Основа</th><th>Производное</th><th>Значение</th></tr><tr><td>develop</td><td>development</td><td>развитие</td></tr><tr><td>care</td><td>careful / careless</td><td>осторожный / небрежный</td></tr><tr><td>possible</td><td>impossible</td><td>невозможный</td></tr><tr><td>happy</td><td>happiness / happily</td><td>счастье / счастливо</td></tr></table><div class="tip">Сначала определите, какая часть речи нужна после артикля, перед существительным или после глагола; затем выберите подходящий суффикс.</div>`,
+exercises:[
+{type:"choice",q:"The ___ of the project took six months. (develop)",opts:["development","developing","developed","developerly"],ans:0},{type:"choice",q:"She answered the question ___. (polite)",opts:["politeness","politely","impolite","politeful"],ans:1},{type:"choice",q:"It was a very ___ decision. (care)",opts:["careful","carefully","careless","care"],ans:0},{type:"choice",q:"The weather made travel ___. (possible)",opts:["impossible","possibility","possibly","unpossible"],ans:0},{type:"choice",q:"His ___ was obvious to everyone. (kind)",opts:["kindness","kindly","unkind","kindful"],ans:0},{type:"choice",q:"Please ___ the file before sending it. (check)",opts:["recheck","uncheckful","checkness","checking"],ans:0},{type:"choice",q:"The instructions were clear and ___. (use)",opts:["useful","usefully","uselessly","usage"],ans:0},{type:"choice",q:"She spoke with great ___. (confident)",opts:["confidence","confidently","confident","unconfident"],ans:0},{type:"choice",q:"The room was ___ clean. (surprise)",opts:["surprisingly","surprise","surprised","surprisingness"],ans:0},{type:"choice",q:"Which word means 'without hope'?",opts:["hopeless","hopeful","hopefully","hope"],ans:0},{type:"fill",q:"Complete: 'Their ___ made everyone smile.' (happy)",ans:"happiness"},{type:"fill",q:"Complete: 'The device is ___.' (use)",ans:"useful"}
+]},
+{id:38,tag:"Урок 39",title:"Punctuation & Capitalization",subtitle:"Точность письменной английской речи",
+grammar:`<h3>Пунктуация делает смысл ясным</h3><p>В английском предложение начинается с прописной буквы и заканчивается точкой, вопросительным или восклицательным знаком. Апостроф показывает сокращение или принадлежность. Запятая не ставится между подлежащим и сказуемым.</p><table class="gram"><tr><th>Знак / правило</th><th>Применение</th><th>Пример</th></tr><tr><td>apostrophe</td><td>сокращение и принадлежность</td><td>it's; Maria's book; the students' room</td></tr><tr><td>comma</td><td>после вводной части</td><td>After dinner, we went home.</td></tr><tr><td>capital letter</td><td>имена, дни, месяцы, страны, I</td><td>Monday, Russia, I</td></tr><tr><td>semicolon</td><td>связанные самостоятельные части</td><td>It was late; we left.</td></tr></table><div class="tip">Не путайте <b>it's</b> (= it is) и <b>its</b> (его/её для предмета): <span class="en">It's cold. The company changed its policy.</span></div>`,
+exercises:[
+{type:"choice",q:"Choose the correct sentence.",opts:["My sister's car is new.","My sisters car is new.","My sister car is new.","My sister's' car is new."],ans:0},{type:"choice",q:"Choose the correct word: '___ a beautiful day.'",opts:["Its","It's","Its'","It"],ans:1},{type:"choice",q:"Which sentence uses capitals correctly?",opts:["We met on Monday in London.","We met on monday in london.","We met on Monday in london.","We met on monday in London."],ans:0},{type:"choice",q:"Correct punctuation after an introductory clause:",opts:["When I arrived, the lesson had started.","When I arrived the lesson had started.","When, I arrived the lesson had started.","When I, arrived the lesson had started."],ans:0},{type:"choice",q:"The plural possessive of 'students' is:",opts:["students'","student's","students's","student"],ans:0},{type:"choice",q:"Which is a complete sentence?",opts:["Because the weather was cold.","The weather was cold.","Although very cold.","When arriving at home."],ans:1},{type:"choice",q:"Choose correct direct speech punctuation.",opts:["She said, 'I am ready.'","She said 'I am ready'.","She said, I am ready.","She said 'I am ready."],ans:0},{type:"choice",q:"Which word is always capitalized?",opts:["i","I","me","my"],ans:1},{type:"choice",q:"Correct: 'the children's toys' means:",opts:["toys belonging to several children","toys belonging to one child","children that are toys","toys for one child only"],ans:0},{type:"choice",q:"Which sentence is punctuated correctly?",opts:["However, we decided to stay.","However we, decided to stay.","However we decided, to stay.","However; we decided, to stay."],ans:0},{type:"fill",q:"Complete: 'The dog wagged ___ tail.' (its / it's)",ans:"its"},{type:"fill",q:"Write the contracted form of 'do not'.",ans:"don't"}
+]},
+{id:39,tag:"Урок 40",title:"Academic Editing & Common Errors",subtitle:"Саморедактирование, согласование и типичные ошибки",
+grammar:`<h3>Алгоритм самопроверки</h3><p>После черновика проверьте согласование подлежащего и глагола, времена, артикли, предлоги, форму после вспомогательных и модальных глаголов, а также орфографию. Отдельно ищите типичные ошибки русскоязычных учащихся: <span class="en">I am agree</span>, <span class="en">discuss about</span>, <span class="en">depend from</span>.</p><table class="gram"><tr><th>Ошибка</th><th>Правильно</th><th>Пояснение</th></tr><tr><td>I am agree.</td><td>I agree.</td><td>agree — глагол</td></tr><tr><td>discuss about it</td><td>discuss it</td><td>discuss без about</td></tr><tr><td>depend from</td><td>depend on</td><td>устойчивое сочетание</td></tr><tr><td>more better</td><td>better</td><td>двойная сравнительная форма</td></tr><tr><td>He said me</td><td>He told me / He said to me</td><td>разные модели управления</td></tr></table><div class="tip">При сомнении сформулируйте короткое ясное предложение. Точность важнее чрезмерно сложной конструкции.</div>`,
+exercises:[
+{type:"choice",q:"Choose the correct sentence.",opts:["I agree with you.","I am agree with you.","I am agreeing with you always.","I agree to you."],ans:0},{type:"choice",q:"We need to ___ this issue today.",opts:["discuss","discuss about","discussing about","to discuss about"],ans:0},{type:"choice",q:"Success depends ___ careful planning.",opts:["from","of","on","at"],ans:2},{type:"choice",q:"This solution is ___ than the previous one.",opts:["more better","better","best","the better"],ans:1},{type:"choice",q:"He ___ me that he was busy.",opts:["said","told","spoke","talked"],ans:1},{type:"choice",q:"The information ___ useful.",opts:["are","is","were","have"],ans:1},{type:"choice",q:"Neither the manager nor the employees ___ ready.",opts:["was","were","is","has"],ans:1},{type:"choice",q:"There ___ a mistake in these calculations.",opts:["seem","seems","are seeming","have seemed"],ans:1},{type:"choice",q:"She suggested that he ___ earlier.",opts:["leave","leaves","left","to leave"],ans:0},{type:"choice",q:"I am used to ___ early.",opts:["get up","getting up","to get up","got up"],ans:1},{type:"fill",q:"Complete: 'The results ___ reliable.' (be)",ans:"are"},{type:"fill",q:"Complete: 'Could you explain it ___ me?'",ans:"to"}
+]},
+{id:40,tag:"Урок 41",title:"Final Diagnostic Test",subtitle:"Итоговая диагностика по всей программе",
+grammar:`<h3>Как работать с диагностикой</h3><p>Выполните задание без справочника, затем проверьте результат. Ошибки группируйте по теме: время, структура вопроса, артикль/определитель, неличная форма, предлог или лексико-грамматическая сочетаемость. После этого повторите соответствующий урок и пройдите новый вариант в Практической лаборатории.</p><div class="diagnostic-grid"><div class="diagnostic-chip"><b>1–5</b><br>Базовые формы</div><div class="diagnostic-chip"><b>6–10</b><br>Времена и модальные</div><div class="diagnostic-chip"><b>11–15</b><br>Пассив и неличные формы</div><div class="diagnostic-chip"><b>16–20</b><br>Точность и редактура</div></div><div class="tip">Результат 17–20 означает уверенное владение рассмотренными темами. При меньшем результате начните с тех вопросов, где допущены ошибки, а не повторяйте весь курс без разбора.</div>`,
+exercises:[
+{type:"choice",q:"There ___ any milk in the fridge.",opts:["isn't","aren't","don't have","hasn't"],ans:0},{type:"choice",q:"My father ___ to work by bus every day.",opts:["go","goes","is go","going"],ans:1},{type:"choice",q:"Look! The children ___.",opts:["play","are playing","played","have play"],ans:1},{type:"choice",q:"I ___ this film last weekend.",opts:["see","saw","have seen","was seeing"],ans:1},{type:"choice",q:"We ___ dinner when the lights went out.",opts:["had","were having","have","are having"],ans:1},{type:"choice",q:"You ___ wear a seatbelt in a car.",opts:["must","might","could to","must to"],ans:0},{type:"choice",q:"If it ___ tomorrow, we will stay at home.",opts:["rains","will rain","rained","would rain"],ans:0},{type:"choice",q:"I wish I ___ more free time.",opts:["have","had","will have","have had"],ans:1},{type:"choice",q:"She asked me where I ___.",opts:["live","lived","will live","am living"],ans:1},{type:"choice",q:"He said that he ___ the report already.",opts:["finishes","had finished","is finishing","will finish"],ans:1},{type:"choice",q:"The museum ___ every Monday.",opts:["closes","is closed","has closed","was closing"],ans:1},{type:"choice",q:"The documents must ___ before Friday.",opts:["submit","be submitted","submitted","be submitting"],ans:1},{type:"choice",q:"I suggest ___ a taxi.",opts:["take","to take","taking","to taking"],ans:2},{type:"choice",q:"The woman ___ called you is my colleague.",opts:["which","who","where","whose"],ans:1},{type:"choice",q:"There are ___ apples left, so buy some more.",opts:["little","a little","few","much"],ans:2},{type:"choice",q:"We arrived ___ the airport at 6 a.m.",opts:["in","at","on","to"],ans:1},{type:"choice",q:"Please turn ___ the radio; I am working.",opts:["off","after","up to","out of"],ans:0},{type:"choice",q:"Her explanation was very ___.",opts:["clear","clearly","clearness","unclearfully"],ans:0},{type:"choice",q:"Choose the correct sentence.",opts:["The company's policy has changed.","The companys policy has changed.","The companies policy has changed.","The company's' policy has changed."],ans:0},{type:"choice",q:"He is interested ___ learning languages.",opts:["on","in","at","for"],ans:1}
+]}
+];
+lessons.push(...extraLessons);
+
+const navList=document.getElementById('navList');
+const sections=[
+{title:'📗 Basics: to be, to have, there is/are',start:0,end:3},
+{title:'📕 Tenses: Present, Past, Future',start:3,end:10},
+{title:'📘 Nouns, Articles, Comparatives',start:10,end:13},
+{title:'📙 Conditionals, Wish, Indirect Speech',start:13,end:19},
+{title:'📖 Participles',start:19,end:22},
+{title:'🔷 Complex Object & Subject',start:22,end:27},
+{title:'🏆 Revision',start:27,end:28}
+];
+
+sections.push(
+{title:'📒 Extended Grammar',start:28,end:34},
+{title:'🧭 Accuracy & Vocabulary',start:34,end:40},
+{title:'🎯 Final Diagnostic',start:40,end:41}
+);
+const practiceHeading=document.createElement('div');
+practiceHeading.className='nav-section-title';
+practiceHeading.textContent='Unlimited practice';
+navList.appendChild(practiceHeading);
+const practiceNav=document.createElement('div');
+practiceNav.className='practice-nav';
+practiceNav.innerHTML='Practice Laboratory<small>New randomized exercises</small>';
+practiceNav.onclick=showPracticeLab;
+navList.appendChild(practiceNav);
+
+sections.forEach(sec=>{
+const t=document.createElement('div');t.className='nav-section-title';t.textContent=sec.title;navList.appendChild(t);
+for(let i=sec.start;i<sec.end;i++){
+const l=lessons[i];
+const d=document.createElement('div');
+d.className='nav-item';d.dataset.lesson=i;
+d.innerHTML=`<span class="num">${i+1}</span>${l.title}<span class="score-badge hidden"></span>`;
+d.onclick=()=>loadLesson(i);
+navList.appendChild(d);
+}
+});
+
+let scores={},currentLesson=null;
+function saveState(){try{localStorage.setItem('en_grammar_full',JSON.stringify(scores))}catch(e){}}
+function loadState(){try{const s=localStorage.getItem('en_grammar_full');if(s)scores=JSON.parse(s)}catch(e){}}
+loadState();
+
+function updateProgress(){
+const total=lessons.length;let done=0;
+for(let i=0;i<total;i++){if(scores[i]&&scores[i].answered===scores[i].total&&scores[i].total>0)done++;}
+const pct=Math.round(done/total*100);
+document.getElementById('progressPct').textContent=pct+'%';
+document.getElementById('progressFill').style.width=pct+'%';
+document.querySelectorAll('.nav-item').forEach(el=>{
+const id=+el.dataset.lesson;
+if(scores[id]&&scores[id].answered===scores[id].total&&scores[id].total>0){
+el.classList.add('done');
+const badge=el.querySelector('.score-badge');
+if(badge){badge.classList.remove('hidden');badge.textContent=scores[id].correct+'/'+scores[id].total;}
+}
+});
+}
+
+function loadLesson(id){
+currentLesson=id;
+const l=lessons[id];
+if(!l)return;
+document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('active',+el.dataset.lesson===id));
+document.querySelector('.sidebar').classList.remove('open');
+const main=document.getElementById('mainContent');
+let html=`<div class="lesson-header"><span class="lesson-tag">${l.tag}</span><h2>${l.title}</h2><p class="subtitle">${l.subtitle}</p></div>`;
+html+=`<div class="grammar-card">${l.grammar}</div>`;
+html+=`<div class="exercise-section"><h3>Exercises — test yourself!</h3>`;
+l.exercises.forEach((ex,idx)=>{html+=renderExercise(ex,idx);});
+html+=`<div style="text-align:center;margin-top:20px"><button class="btn btn-primary" onclick="checkAll()">✅ Check Answers</button> <button class="btn btn-outline" onclick="resetEx()">🔄 Reset</button></div>`;
+html+=`<div class="result-box" id="resultBox"><div class="score-big" id="scoreBig"></div><p id="scoreMsg"></p></div></div>`;
+main.innerHTML=html;
+window.scrollTo(0,0);
+}
+
+function renderExercise(ex,idx){
+let h=`<div class="ex-block" data-idx="${idx}" data-ans="${ex.ans}" data-type="${ex.type}">`;
+h+=`<div class="q">${idx+1}. ${ex.q}</div>`;
+if(ex.type==='choice'){
+h+=`<div class="options">`;
+const letters=['A','B','C','D','E'];
+ex.opts.forEach((o,i)=>{
+h+=`<div class="opt" data-val="${i}" onclick="selectOpt(this)"><span class="letter">${letters[i]}</span>${o}</div>`;
+});
+h+=`</div>`;
+}else if(ex.type==='fill'){
+h+=`<input type="text" class="fill-input" placeholder="Type your answer..." autocomplete="off">`;
+}
+h+=`<div class="feedback"></div></div>`;
+return h;
+}
+
+function selectOpt(el){
+const block=el.closest('.ex-block');
+block.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));
+el.classList.add('selected');
+}
+
+function checkAll(){
+const l=lessons[currentLesson];
+let correct=0,total=l.exercises.length;
+document.querySelectorAll('.ex-block').forEach(block=>{
+const idx=+block.dataset.idx;
+const ex=l.exercises[idx];
+const fb=block.querySelector('.feedback');
+if(ex.type==='choice'){
+const sel=block.querySelector('.opt.selected');
+const opts=block.querySelectorAll('.opt');
+opts.forEach(o=>{o.classList.remove('correct','wrong')});
+if(!sel){fb.className='feedback show info';fb.textContent='⚠️ Please choose an answer.';return;}
+const val=+sel.dataset.val;
+if(val===ex.ans){
+sel.classList.add('correct');correct++;
+fb.className='feedback show ok';fb.textContent='✅ Correct! Well done!';
+}else{
+sel.classList.add('wrong');
+opts[ex.ans].classList.add('correct');
+fb.className='feedback show err';fb.textContent='❌ Wrong. Correct answer: '+ex.opts[ex.ans];
+}
+}else if(ex.type==='fill'){
+const inp=block.querySelector('.fill-input');
+const val=inp.value.trim().toLowerCase();
+const ans=ex.ans.toLowerCase();
+inp.classList.remove('correct','wrong');
+if(!val){fb.className='feedback show info';fb.textContent='⚠️ Please type your answer.';return;}
+if(val===ans){inp.classList.add('correct');correct++;fb.className='feedback show ok';fb.textContent='✅ Correct! Excellent!';}
+else{inp.classList.add('wrong');fb.className='feedback show err';fb.textContent='❌ Wrong. Correct answer: '+ex.ans;}
+}
+});
+scores[currentLesson]={correct,total,answered:total};
+saveState();updateProgress();
+const box=document.getElementById('resultBox');
+box.classList.add('show');
+document.getElementById('scoreBig').textContent=correct+' / '+total;
+const pct=Math.round(correct/total*100);
+let msg='';
+if(pct===100)msg='🏆 Perfect! Outstanding result!';
+else if(pct>=80)msg='🌟 Very good! Excellent work!';
+else if(pct>=60)msg='👍 Good! But review the grammar rules.';
+else msg='📖 Please review the lesson material. Keep trying!';
+document.getElementById('scoreMsg').textContent=msg;
+box.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function resetEx(){
+document.querySelectorAll('.ex-block').forEach(block=>{
+block.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected','correct','wrong'));
+const inp=block.querySelector('.fill-input');
+if(inp){inp.value='';inp.classList.remove('correct','wrong');}
+block.querySelector('.feedback').className='feedback';
+});
+document.getElementById('resultBox').classList.remove('show');
+}
+
+
+let generatedExercises=[];
+let practiceCorrect=0;
+const practiceSubjects=[
+{name:'I',be:'am',pastBe:'was',do:'do',have:'have'},
+{name:'you',be:'are',pastBe:'were',do:'do',have:'have'},
+{name:'he',be:'is',pastBe:'was',do:'does',have:'has'},
+{name:'she',be:'is',pastBe:'was',do:'does',have:'has'},
+{name:'we',be:'are',pastBe:'were',do:'do',have:'have'},
+{name:'they',be:'are',pastBe:'were',do:'do',have:'have'}
+];
+const practiceNames=['Alex','Maya','Daniel','Olivia','Sam','Nina','Leo','Emma'];
+const practiceVerbs=[
+{base:'work',third:'works',past:'worked',ing:'working'},
+{base:'study',third:'studies',past:'studied',ing:'studying'},
+{base:'travel',third:'travels',past:'travelled',ing:'travelling'},
+{base:'cook',third:'cooks',past:'cooked',ing:'cooking'},
+{base:'read',third:'reads',past:'read',ing:'reading'},
+{base:'write',third:'writes',past:'wrote',ing:'writing'}
+];
+const practiceNouns=['report','email','application','ticket','project','room','essay','message'];
+const practicePlaces=['at the office','at home','in the library','at the station','in the classroom','at the airport'];
+function pPick(a){return a[Math.floor(Math.random()*a.length)]}
+function pShuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function pChoice(q,correct,wrong){const opts=pShuffle([...new Set([correct,...wrong])]);return {type:'choice',q,opts,ans:opts.indexOf(correct)}}
+function pFill(q,ans){return {type:'fill',q,ans}}
+function pBe(){const s=pPick(practiceSubjects), adjective=pPick(['ready','late','busy','careful','happy','hungry']);return pChoice(`Complete: ${s.name[0].toUpperCase()+s.name.slice(1)} ___ ${adjective}.`,s.be,['is','are','am'].filter(x=>x!==s.be))}
+function pPresent(){const s=pPick(practiceSubjects),v=pPick(practiceVerbs),place=pPick(practicePlaces);const form=(s.name==='he'||s.name==='she')?v.third:v.base;return pChoice(`Usually, ${s.name} ___ ${place}.`,form,[v.base,v.third,'is '+v.ing].filter(x=>x!==form))}
+function pContinuous(){const s=pPick(practiceSubjects),v=pPick(practiceVerbs),now=pPick(['right now','at the moment','today']);return pChoice(`Look! ${s.name[0].toUpperCase()+s.name.slice(1)} ___ ${now}.`,s.be+' '+v.ing,[v.base,v.third,s.pastBe+' '+v.ing])}
+function pPast(){const n=pPick(practiceNames),v=pPick(practiceVerbs),time=pPick(['yesterday','last weekend','two days ago']);return pChoice(`${n} ___ the report ${time}.`,v.past,[v.base,v.third,'has '+v.past])}
+function pFuture(){const s=pPick(practiceSubjects),v=pPick(practiceVerbs),time=pPick(['tomorrow','next week','soon']);return pChoice(`${s.name[0].toUpperCase()+s.name.slice(1)} ___ ${time}.`, 'will '+v.base,['will '+v.third,'is '+v.ing,'would '+v.base])}
+function pArticle(){const word=pPick([{w:'umbrella',a:'an'},{w:'useful idea',a:'a'},{w:'honest answer',a:'an'},{w:'university',a:'a'}]);return pChoice(`Choose the article: It is ___ ${word.w}.`,word.a,word.a==='a'?['an','the','—']:['a','the','—'])}
+function pQuantifier(){const item=pPick([{q:'How ___ books have you read?',a:'many',w:['much','little','a little']},{q:'How ___ time do we have?',a:'much',w:['many','few','a few']},{q:'There are very ___ students today.',a:'few',w:['little','much','a little']},{q:'We have ___ information, but we need more.',a:'a little',w:['a few','many','few']}]);return pChoice(item.q,item.a,item.w)}
+function pModal(){const item=pPick([{q:'You ___ show your ID to enter the building.',a:'must',w:['must to','might','can to']},{q:'___ you help me with this bag?',a:'Could',w:['Must','Have','Did']},{q:'It ___ snow tonight; the forecast is uncertain.',a:'might',w:['must to','has to','should to']},{q:'You ___ bring food; we have plenty.',a:"don't have to",w:["mustn't","can't","shouldn't"]}]);return pChoice(item.q,item.a,item.w)}
+function pPassive(){const n=pPick(practiceNouns),verb=pPick([{base:'send',v3:'sent'},{base:'finish',v3:'finished'},{base:'check',v3:'checked'},{base:'deliver',v3:'delivered'}]);return pChoice(`The ${n} ___ yesterday.`, 'was '+verb.v3,[verb.base,'is '+verb.v3,'has '+verb.v3])}
+function pConditional(){const item=pPick([{q:'If it rains, we ___ at home.',a:'will stay',w:['stay','would stay','stayed']},{q:'If I were you, I ___ earlier.',a:'would leave',w:['will leave','left','leave']},{q:'If they had known, they ___ us.',a:'would have told',w:['will tell','would tell','told']}]);return pChoice(item.q,item.a,item.w)}
+function pPreposition(){const item=pPick([{q:'The train arrives ___ 8:15.',a:'at',w:['in','on','for']},{q:'We met ___ Tuesday.',a:'on',w:['at','in','by']},{q:'She is interested ___ science.',a:'in',w:['on','at','for']},{q:'The keys are ___ the desk.',a:'on',w:['in','at','to']}]);return pChoice(item.q,item.a,item.w)}
+function pVerbPattern(){const item=pPick([{q:'They decided ___ a new course.',a:'to start',w:['start','starting','to starting']},{q:'I enjoy ___ new words.',a:'learning',w:['learn','to learn','to learning']},{q:'Thank you for ___ so quickly.',a:'replying',w:['reply','to reply','to replying']},{q:'It is difficult ___ this rule.',a:'to remember',w:['remember','remembering','to remembering']}]);return pChoice(item.q,item.a,item.w)}
+const practiceGenerators={
+'all':[pBe,pPresent,pContinuous,pPast,pFuture,pArticle,pQuantifier,pModal,pPassive,pConditional,pPreposition,pVerbPattern],
+'basics':[pBe,pPresent,pContinuous,pPast,pFuture],
+'articles':[pArticle,pQuantifier],
+'modals':[pModal],
+'passive':[pPassive],
+'conditionals':[pConditional],
+'prepositions':[pPreposition],
+'verbPatterns':[pVerbPattern]
+};
+function practiceStats(){try{return JSON.parse(localStorage.getItem('en_grammar_practice_stats')||'{"generated":0,"correct":0,"attempts":0}')}catch(e){return {generated:0,correct:0,attempts:0}}}
+function practiceStatsSave(s){try{localStorage.setItem('en_grammar_practice_stats',JSON.stringify(s))}catch(e){}}
+function showPracticeLab(){
+currentLesson=null;
+document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+document.querySelector('.sidebar').classList.remove('open');
+document.querySelector('.practice-nav').classList.add('active');
+const st=practiceStats();
+const main=document.getElementById('mainContent');
+main.innerHTML=`<section class="practice-hero"><span class="lesson-tag">Practice Laboratory</span><h2>Unlimited new grammar exercises</h2><p>Choose a topic and generate a fresh practice set. The local generator combines changing subjects, verbs, nouns, times and contexts, so you can revise the same rule repeatedly without seeing one static list.</p></section><div class="course-summary"><div class="summary-stat"><strong>${lessons.length}</strong><span>grammar lessons</span></div><div class="summary-stat"><strong>454+</strong><span>fixed exercises</span></div><div class="summary-stat"><strong>${st.generated}</strong><span>generated for you</span></div><div class="summary-stat"><strong>${st.attempts?Math.round(st.correct/st.attempts*100):0}%</strong><span>laboratory accuracy</span></div></div><div class="practice-controls"><div class="control-group"><label for="practiceTopic">Topic for a new exercise set</label><select id="practiceTopic" class="practice-select"><option value="all">Mixed grammar: all topics</option><option value="basics">Tenses and basic forms</option><option value="articles">Articles and quantifiers</option><option value="modals">Modal verbs</option><option value="passive">Passive voice</option><option value="conditionals">Conditionals</option><option value="prepositions">Prepositions</option><option value="verbPatterns">Gerund and infinitive</option></select></div><div class="practice-actions"><button class="btn btn-outline btn-small" onclick="generatePractice(10)">10 tasks</button><button class="btn btn-outline btn-small" onclick="generatePractice(20)">20 tasks</button><button class="btn btn-primary btn-small" onclick="generatePractice(30)">30 tasks</button></div></div><p class="practice-note">Every generation creates a different selection and order. You can produce new sets as many times as you wish while working offline.</p><div id="generatedExerciseList"></div><div id="generatedActions" style="text-align:center;margin:20px 0"></div><div class="result-box" id="generatedResult"><div class="score-big" id="generatedScore"></div><p id="generatedMsg"></p></div>`;
+generatePractice(10);
+window.scrollTo(0,0);
+}
+function generatePractice(amount){
+const topicEl=document.getElementById('practiceTopic');
+if(!topicEl)return;
+const gens=practiceGenerators[topicEl.value]||practiceGenerators.all;
+generatedExercises=[];
+for(let i=0;i<amount;i++)generatedExercises.push(pPick(gens)());
+const list=document.getElementById('generatedExerciseList');
+list.innerHTML=`<div class="exercise-section"><h3>Fresh practice set — ${amount} exercises</h3>${generatedExercises.map((ex,i)=>renderExercise(ex,i)).join('')}</div>`;
+document.getElementById('generatedActions').innerHTML=`<button class="btn btn-primary" onclick="checkGenerated()">Check this set</button> <button class="btn btn-outline" onclick="generatePractice(${amount})">Generate another set</button>`;
+document.getElementById('generatedResult').classList.remove('show');
+const s=practiceStats();s.generated+=amount;practiceStatsSave(s);
+}
+function checkGenerated(){
+let correct=0;
+document.querySelectorAll('#generatedExerciseList .ex-block').forEach(block=>{
+const idx=+block.dataset.idx,ex=generatedExercises[idx],fb=block.querySelector('.feedback');
+if(ex.type==='choice'){
+const sel=block.querySelector('.opt.selected'),opts=block.querySelectorAll('.opt');opts.forEach(o=>o.classList.remove('correct','wrong'));
+if(!sel){fb.className='feedback show info';fb.textContent='Choose an answer before checking.';return}
+if(+sel.dataset.val===ex.ans){sel.classList.add('correct');correct++;fb.className='feedback show ok';fb.textContent='Correct.'}
+else{sel.classList.add('wrong');opts[ex.ans].classList.add('correct');fb.className='feedback show err';fb.textContent='Correct answer: '+ex.opts[ex.ans]}
+}else{
+const inp=block.querySelector('.fill-input'),val=inp.value.trim().toLowerCase(),ans=ex.ans.toLowerCase();inp.classList.remove('correct','wrong');
+if(!val){fb.className='feedback show info';fb.textContent='Type an answer before checking.';return}
+if(val===ans){inp.classList.add('correct');correct++;fb.className='feedback show ok';fb.textContent='Correct.'}
+else{inp.classList.add('wrong');fb.className='feedback show err';fb.textContent='Correct answer: '+ex.ans}
+}
+});
+const total=generatedExercises.length,pct=Math.round(correct/total*100),result=document.getElementById('generatedResult');
+document.getElementById('generatedScore').textContent=correct+' / '+total;
+document.getElementById('generatedMsg').textContent=pct>=85?'Strong result. Generate a new mixed set to consolidate it.':pct>=60?'A useful attempt. Review the incorrect items and try a fresh set.':'Review the matching lesson, then create another focused practice set.';
+result.classList.add('show');result.scrollIntoView({behavior:'smooth',block:'center'});
+const s=practiceStats();s.correct+=correct;s.attempts+=total;practiceStatsSave(s);
+}
+
+function showWelcome(){
+const main=document.getElementById('mainContent');
+main.innerHTML=`<div class="welcome">
+<div class="flag-big">🇬🇧</div>
+<h2>English Grammar Reference &amp; Practice</h2>
+<p>Полный интерактивный курс по учебнику Дроздовой, Маиловой, Берестовой. 41 урок: от глагола "to be" до академического редактирования. Более 454 фиксированных упражнений, итоговая диагностика и лаборатория, которая создаёт новые варианты практики прямо в браузере. Базовая грамматика, продвинутые конструкции и точность письменной речи в одном автономном файле.</p>
+<button class="btn btn-primary" onclick="loadLesson(0)" style="font-size:1.05rem;padding:14px 36px">Start Learning</button> <button class="btn btn-outline" onclick="showPracticeLab()" style="font-size:1.05rem;padding:12px 24px;margin-left:8px">Practice Laboratory</button>
+<div class="feature-grid">
+<div class="feature"><div class="icon">📗</div><h4>Basics</h4><p>to be, to have (have got), There is/are</p></div>
+<div class="feature"><div class="icon">📕</div><h4>Tenses</h4><p>Present Simple/Continuous, Past Simple/Continuous, Future Simple/Continuous, Used to</p></div>
+<div class="feature"><div class="icon">📘</div><h4>Nouns &amp; Articles</h4><p>Countable/Uncountable, Plural, Articles, Comparatives</p></div>
+<div class="feature"><div class="icon">📙</div><h4>Conditionals &amp; Wish</h4><p>Type I/II/III, But for, Wish constructions, Indirect Speech</p></div>
+<div class="feature"><div class="icon">📖</div><h4>Participles</h4><p>Forms I/II/Perfect, Attribute, Adverbial Modifier, Absolute Construction</p></div>
+<div class="feature"><div class="icon">🔷</div><h4>Extended Grammar</h4><p>Questions, modals, passive, gerund, relative clauses</p></div><div class="feature"><div class="icon">🧪</div><h4>Practice Laboratory</h4><p>Fresh randomized exercise sets, available offline</p></div>
+</div></div>`;
+document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+}
+
+updateProgress();
+showWelcome();
+</script>
+</body>
+</html>

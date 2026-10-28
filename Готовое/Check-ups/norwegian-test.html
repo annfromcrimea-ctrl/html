@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Norsk Check-Up · A1 → C2 · 5 навыков</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --board1:#16455a; --board2:#0b2836;
+  --chalk:#f5f1e6; --chalk-dim:rgba(245,241,230,.55);
+  --yellow:#ffd35c; --pink:#ff9d9d; --mint:#8fe3c0; --sky:#9fd8ff;
+  --paper:#fdfcf5; --ink:#25333e; --line:#cfdff0; --marginline:#ff9d9d;
+  --card:#0e2f3d; --card-edge:rgba(245,241,230,.17); --btn-ink:#3a2b00;
+  --ok:#3fae72; --bad:#e4574d; --radius:14px;
+}
+body.mode-kids{
+  --board1:#6fb7f0; --board2:#d6ecfd;
+  --chalk:#1a3f6e; --chalk-dim:rgba(26,63,110,.55);
+  --yellow:#ffb520; --pink:#ff6f91; --mint:#22c993; --sky:#4d96ff;
+  --card:#ffffff; --card-edge:#b9dcf3; --ok:#2ec474; --bad:#ff5d55; --radius:22px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;color:var(--chalk);background:linear-gradient(160deg,var(--board1),var(--board2)) fixed;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1.6px),radial-gradient(rgba(255,255,255,.06) 1px,transparent 1.4px);
+  background-size:90px 90px,140px 140px;background-position:0 0,45px 60px}
+::selection{background:var(--yellow);color:#3a2b00}
+
+.doodles{position:fixed;inset:0;z-index:0;pointer-events:none}
+.doodle{position:absolute;font-family:'Caveat',cursive;color:var(--chalk);opacity:.16;transform:rotate(var(--r,0deg));font-size:var(--fs,2rem);animation:floaty var(--t,7s) ease-in-out infinite alternate;white-space:nowrap}
+.doodle.emoji{font-family:'Nunito',sans-serif;opacity:.85}
+@keyframes floaty{from{transform:translateY(-8px) rotate(var(--r,0deg))}to{transform:translateY(10px) rotate(calc(var(--r,0deg) + 3deg))}}
+body.mode-class .d-kids{display:none}
+body.mode-kids .d-class{display:none}
+
+main{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:clamp(16px,4vw,44px)}
+.screen{animation:screenIn .55s cubic-bezier(.2,.9,.3,1) both}
+@keyframes screenIn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+[hidden]{display:none!important}
+
+.start-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(22px,4vw,48px);align-items:center;min-height:86vh}
+.board-frame{position:relative;border:10px solid transparent;border-image:linear-gradient(140deg,#a06b35,#7c4d20 45%,#b07a40) 1;
+  padding:clamp(22px,4vw,44px);background:radial-gradient(120% 90% at 20% 10%,rgba(255,255,255,.05),transparent 60%),linear-gradient(155deg,#1a5066,#0b2836);
+  box-shadow:0 24px 60px rgba(0,0,0,.45),inset 0 0 60px rgba(0,0,0,.35)}
+body.mode-kids .board-frame{border:6px solid #fff;border-radius:26px;border-image:none;background:linear-gradient(160deg,#eaf7ff,#fff);box-shadow:0 20px 50px rgba(38,110,170,.25)}
+.chalk-tag{font-family:'Caveat',cursive;font-size:clamp(1.2rem,2.4vw,1.6rem);color:var(--yellow);letter-spacing:.04em}
+body.mode-kids .chalk-tag{color:var(--pink)}
+h1.hand{font-family:'Caveat',cursive;font-weight:700;color:var(--chalk);font-size:clamp(2.6rem,6.5vw,4.9rem);line-height:1.02;margin:.35rem 0 .2rem}
+h1.hand em{font-style:normal;color:var(--yellow)}
+body.mode-kids h1.hand{color:var(--ink)}
+body.mode-kids h1.hand em{color:var(--sky)}
+.sub{max-width:48ch;font-size:clamp(.96rem,1.6vw,1.08rem);line-height:1.55;color:var(--chalk-dim);margin-top:12px}
+body.mode-kids .sub{color:#40607c}
+.tiles{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.tile{width:58px;height:58px;display:grid;place-items:center;background:var(--paper);color:var(--ink);border-radius:10px;font-weight:900;font-size:1.2rem;box-shadow:0 6px 0 rgba(0,0,0,.28);transform:rotate(var(--r));transition:transform .25s;cursor:default}
+.tile:hover{transform:rotate(0deg) translateY(-8px) scale(1.06)}
+.tile.y{background:var(--yellow)} .tile.p{background:var(--pink);color:#fff}
+.tile.m{background:var(--mint);color:#0c3b2a} .tile.s{background:var(--sky);color:#fff} .tile.g2{background:#c9b2ff;color:#3a2b6e}
+.tile.wide{width:auto;padding:0 14px;display:flex;gap:8px;align-items:center;font-size:.92rem}
+.tray{position:absolute;left:8%;right:8%;bottom:-9px;height:16px;background:linear-gradient(#a06b35,#6d4119);border-radius:3px;box-shadow:0 6px 14px rgba(0,0,0,.4)}
+.tray i{position:absolute;top:-9px;width:52px;height:9px;border-radius:4px;background:#fbf7ea;box-shadow:0 2px 4px rgba(0,0,0,.35)}
+.tray i.c2{left:80px;background:var(--yellow);transform:rotate(-2deg)}
+.tray i.c1{left:14px;transform:rotate(1deg)}
+body.mode-kids .tray{display:none}
+
+.note-card{background:linear-gradient(90deg,transparent 0 40px,var(--marginline) 40px 42px,transparent 42px),repeating-linear-gradient(var(--paper) 0 30px,var(--line) 30px 31px);
+  color:var(--ink);border-radius:var(--radius);padding:26px 24px 26px 54px;box-shadow:0 18px 44px rgba(0,0,0,.35);transform:rotate(.6deg)}
+.note-card h2{font-size:1.35rem;font-weight:900;margin-bottom:10px}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
+.pick.three{grid-template-columns:repeat(3,1fr)}
+.pick.flex{display:flex;flex-wrap:wrap}
+.pick.flex .mode-btn{flex:1;min-width:86px}
+.pick-label{font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#68819a;margin:10px 0 4px}
+.mode-btn{font-family:inherit;font-weight:800;font-size:.85rem;cursor:pointer;border:2px dashed #9db6c9;background:rgba(255,255,255,.65);color:#33506b;border-radius:12px;padding:10px 4px;transition:all .2s}
+.mode-btn:hover{transform:translateY(-2px)}
+.mode-btn.on{border-style:solid;border-color:var(--sky);background:#e3f1ff;box-shadow:0 4px 12px rgba(77,150,255,.3)}
+body.mode-kids .mode-btn.on{background:#fff3d6;border-color:var(--yellow)}
+.mode-note{font-size:.82rem;color:#5a768e;min-height:2em;margin:8px 0 12px}
+.btn-big{width:100%;font-family:inherit;font-weight:900;font-size:1.12rem;padding:15px;border:none;border-radius:14px;cursor:pointer;background:var(--yellow);color:var(--btn-ink);box-shadow:0 6px 0 #c99a1e,0 14px 26px rgba(0,0,0,.22);transition:transform .15s,box-shadow .15s}
+.btn-big:hover{transform:translateY(-3px);box-shadow:0 9px 0 #c99a1e,0 20px 32px rgba(0,0,0,.26)}
+.btn-big:active{transform:translateY(2px);box-shadow:0 3px 0 #c99a1e}
+.tiny{font-size:.78rem;color:#68819a;text-align:center;margin-top:10px}
+
+.quiz-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+.logo{font-family:'Caveat',cursive;font-size:1.6rem;color:var(--yellow);white-space:nowrap}
+body.mode-kids .logo{color:#134a76}
+.progress{flex:1;min-width:130px;height:12px;border-radius:99px;background:rgba(255,255,255,.14);overflow:hidden}
+body.mode-kids .progress{background:rgba(255,255,255,.75)}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--yellow),var(--pink));transition:width .5s cubic-bezier(.3,.9,.3,1)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-size:.8rem;font-weight:800;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid var(--card-edge)}
+body.mode-kids .chip{background:#fff;color:#134a76;border-color:#bfe2f8}
+.chip.est{background:var(--yellow);color:var(--btn-ink);border-color:transparent}
+.chip.streak{background:var(--pink);color:#fff;border-color:transparent}
+.qcount{font-weight:800;font-size:.9rem;color:var(--chalk-dim)}
+body.mode-kids .qcount{color:#3e6c93}
+
+.secnav{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.snav{font-size:.82rem;font-weight:900;padding:6px 14px;border-radius:99px;background:rgba(255,255,255,.09);color:var(--chalk-dim);border:1px solid var(--card-edge);transition:all .3s}
+body.mode-kids .snav{background:rgba(255,255,255,.6);color:#5a7ea0}
+.snav.now{background:var(--sky);color:#fff;border-color:transparent;transform:translateY(-2px)}
+.snav.done{opacity:.65;text-decoration:line-through}
+
+.ruler{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:4px 0 20px}
+.ruler b{text-align:center;font-size:.75rem;font-weight:800;letter-spacing:.05em;padding:7px 0;border-radius:8px;background:rgba(255,255,255,.09);color:var(--chalk-dim);transition:all .35s}
+body.mode-kids .ruler b{background:rgba(255,255,255,.65);color:#5a7ea0}
+.ruler b.hot{background:var(--yellow);color:var(--btn-ink);transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.25)}
+.pin{position:absolute;top:-15px;left:0;width:0;height:0;transition:left .55s cubic-bezier(.3,1.1,.4,1);border-left:8px solid transparent;border-right:8px solid transparent;border-top:10px solid var(--pink);transform:translateX(-50%);filter:drop-shadow(0 3px 3px rgba(0,0,0,.3))}
+
+.qcard{position:relative;border-radius:var(--radius);color:var(--ink);
+  background:linear-gradient(90deg,transparent 0 46px,var(--marginline) 46px 48px,transparent 48px),repeating-linear-gradient(var(--paper) 0 33px,var(--line) 33px 34px);
+  box-shadow:0 22px 50px rgba(0,0,0,.4);padding:28px 30px 26px 66px;animation:cardIn .45s cubic-bezier(.2,.9,.3,1) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(18px) rotate(-.6deg)}to{opacity:1;transform:rotate(-.35deg)}}
+.qmeta{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tag{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:6px}
+.tag.l{background:#fff3d0;color:#8a6400}.tag.sk{background:#e6f7ef;color:#146c4a}
+.qtext{font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:800;line-height:34px;margin-bottom:18px}
+
+.passage{background:#fff;border-left:5px solid var(--sky);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:18px;line-height:33px;font-size:1.02rem}
+.passage.saybox{font-size:1.18rem;font-weight:800;border-left-color:var(--pink)}
+
+.audiobox{display:flex;align-items:center;gap:16px;background:#fff;border:2px dashed var(--sky);border-radius:12px;padding:14px 18px;margin-bottom:18px;flex-wrap:wrap}
+.playbtn{font-family:inherit;font-weight:900;font-size:1rem;cursor:pointer;border:none;border-radius:12px;padding:12px 22px;background:var(--sky);color:#fff;box-shadow:0 4px 0 #2f6db3;transition:transform .15s}
+.playbtn:hover{transform:translateY(-2px)}
+.playbtn:active{transform:translateY(1px)}
+.playcnt{font-size:.85rem;font-weight:700;color:#5a768e}
+.script-fallback{font-style:italic;color:#41586c;font-size:.92rem}
+
+.opts{display:grid;gap:12px}
+.opt{display:flex;align-items:center;gap:14px;text-align:left;width:100%;font-family:inherit;font-size:1.03rem;font-weight:700;color:var(--ink);cursor:pointer;background:#fff;border:2px solid #d7e3ee;border-radius:12px;padding:12px 16px;transition:transform .15s,box-shadow .15s,border-color .15s,background .2s}
+.opt:hover:not(:disabled){transform:translateX(6px);border-color:var(--sky);box-shadow:0 8px 18px rgba(31,90,150,.16)}
+.opt .key{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:9px;background:#eef4fa;color:#33506b;font-weight:900;transition:all .2s}
+.opt:hover:not(:disabled) .key{background:var(--sky);color:#fff}
+.opt:disabled{cursor:default;opacity:.55}
+.opt.correct{background:#e5f8ec;border-color:var(--ok);opacity:1}
+.opt.correct .key{background:var(--ok);color:#fff}
+.opt.wrong{background:#fde8e6;border-color:var(--bad);opacity:1;animation:shake .4s}
+.opt.wrong .key{background:var(--bad);color:#fff}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}55%{transform:translateX(6px)}80%{transform:translateX(-3px)}}
+.listen-hint{font-size:.85rem;font-weight:800;color:#c2881f;margin-top:10px}
+
+.write .wrow{display:flex;gap:10px;flex-wrap:wrap}
+.write input{flex:1;min-width:220px;font-family:inherit;font-size:1.1rem;font-weight:700;color:var(--ink);padding:12px 16px;border:2px solid #d7e3ee;border-radius:12px;outline:none;transition:border-color .2s}
+.write input:focus{border-color:var(--sky);box-shadow:0 0 0 4px rgba(77,150,255,.15)}
+.write input.ok{border-color:var(--ok);background:#e5f8ec}
+.write input.bad{border-color:var(--bad);background:#fde8e6}
+
+.speak{text-align:center}
+.micbtn{width:96px;height:96px;border-radius:50%;border:none;cursor:pointer;font-size:2.2rem;background:var(--pink);color:#fff;box-shadow:0 8px 0 rgba(0,0,0,.18),0 16px 30px rgba(0,0,0,.25);transition:transform .15s}
+.micbtn:hover{transform:scale(1.06)}
+.micbtn.rec{background:var(--bad);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(228,87,77,.55)}50%{box-shadow:0 0 0 20px rgba(228,87,77,0)}}
+.micstat{font-weight:800;color:#5a768e;margin-top:12px;min-height:1.4em}
+.eval-q{font-weight:800;color:#41586c;margin-bottom:8px}
+.eval-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.eval-btns button{font-family:inherit;font-weight:800;font-size:.95rem;padding:12px 16px;border-radius:12px;border:2px solid #d7e3ee;background:#fff;color:var(--ink);cursor:pointer;transition:all .2s}
+.eval-btns button:hover{border-color:var(--sky);transform:translateY(-2px)}
+.heard{background:#fff;border-left:5px solid var(--mint);padding:10px 14px;border-radius:0 10px 10px 0;margin-bottom:10px;font-size:.95rem}
+.wordchip{display:inline-block;padding:2px 8px;border-radius:6px;font-weight:800;margin:2px}
+.wordchip.hit{background:#e5f8ec;color:#1d7a4c}
+.wordchip.miss{background:#fde8e6;color:#b23a31;text-decoration:line-through}
+
+.feedback{margin-top:20px;border-top:2px dashed #cfdff0;padding-top:18px;animation:screenIn .4s both}
+.fb-head{display:flex;align-items:center;gap:10px;font-size:1.15rem;font-weight:900;margin-bottom:8px;flex-wrap:wrap}
+.fb-head .pts{margin-left:auto;font-size:.95rem;color:#8a6400;background:#fff3d0;padding:4px 10px;border-radius:8px}
+.fb-head.good{color:var(--ok)}.fb-head.badh{color:var(--bad)}
+.fb-expl{font-size:.96rem;line-height:1.5;color:#41586c;max-width:62ch}
+.fb-trans{font-style:italic;color:#7d93a6;font-size:.85rem;margin-top:8px}
+.btn-next{margin-top:16px;font-family:inherit;font-weight:900;font-size:1rem;cursor:pointer;border:none;border-radius:12px;padding:13px 30px;background:var(--sky);color:#fff;box-shadow:0 5px 0 #2f6db3;transition:transform .15s,box-shadow .15s}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 7px 0 #2f6db3}
+.btn-next:active{transform:translateY(2px);box-shadow:0 2px 0 #2f6db3}
+
+.intro{text-align:center;padding:44px 34px}
+.intro .big{font-size:3.4rem;line-height:1}
+.intro .step{font-size:.8rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#8a6400;background:#fff3d0;display:inline-block;padding:5px 14px;border-radius:99px;margin:14px 0 8px}
+.intro h2{font-size:1.9rem;font-weight:900;margin-bottom:10px}
+.intro p{color:#41586c;line-height:1.55;max-width:46ch;margin:0 auto 22px}
+.intro .btn-big{max-width:320px;margin:0 auto}
+
+.result-head{text-align:center;margin:10px 0 24px}
+.stamp{display:inline-block;padding:14px 38px;border:5px solid var(--pink);border-radius:14px;color:var(--pink);transform:rotate(-5deg);font-family:'Caveat',cursive;font-size:clamp(3rem,8vw,5.2rem);line-height:1;font-weight:700;animation:stampIn .5s cubic-bezier(.2,1.6,.4,1) both .2s}
+@keyframes stampIn{from{opacity:0;transform:rotate(-14deg) scale(2.2)}to{opacity:1;transform:rotate(-5deg) scale(1)}}
+.stamp small{display:block;font-family:'Nunito';font-size:.92rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;margin-top:6px}
+.result-title{font-weight:800;color:var(--chalk-dim);margin-top:16px;font-size:1.05rem}
+body.mode-kids .result-title{color:#2e5d84}
+
+.gauge{position:relative;height:26px;border-radius:99px;margin:26px 0 6px;display:flex}
+.gauge span{flex:1}
+.gauge span:nth-child(1){background:#5aa9e6;border-radius:99px 0 0 99px}
+.gauge span:nth-child(2){background:#57c7a3}.gauge span:nth-child(3){background:#ffd35c}
+.gauge span:nth-child(4){background:#ffab4a}.gauge span:nth-child(5){background:#ff8f6b}
+.gauge span:nth-child(6){background:#ff6f91;border-radius:0 99px 99px 0}
+.gauge .mark{position:absolute;top:-9px;width:4px;height:44px;background:#fff;border-radius:4px;box-shadow:0 0 0 2px rgba(0,0,0,.35);transform:translateX(-50%);transition:left 1s cubic-bezier(.3,1,.4,1)}
+.gauge-labels{display:flex;justify-content:space-between;font-size:.78rem;font-weight:800;color:var(--chalk-dim)}
+body.mode-kids .gauge-labels{color:#3e6c93}
+
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:26px 0}
+.stat{background:var(--card);border:1px solid var(--card-edge);border-radius:var(--radius);padding:18px;text-align:center}
+.stat b{display:block;font-size:2rem;font-weight:900;color:var(--yellow)}
+.stat:nth-child(2) b{color:var(--mint)}.stat:nth-child(3) b{color:var(--pink)}.stat:nth-child(4) b{color:var(--sky)}
+.stat span{font-size:.8rem;font-weight:700;color:var(--chalk-dim);letter-spacing:.04em;text-transform:uppercase}
+
+.skillcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:8px}
+.scard{background:var(--card);border:1px solid var(--card-edge);border-radius:var(--radius);padding:18px;text-align:center}
+.scard .ic{font-size:1.8rem}
+.scard h4{font-size:.82rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--chalk-dim);margin:6px 0 8px}
+.scard .lvl{font-family:'Caveat',cursive;font-size:2.6rem;font-weight:700;line-height:1;color:var(--yellow)}
+.scard .acc{font-size:.82rem;font-weight:800;color:var(--chalk-dim);margin-top:6px}
+.scard .bar{height:8px;border-radius:99px;background:rgba(255,255,255,.13);overflow:hidden;margin-top:8px}
+body.mode-kids .scard .bar{background:#e4f1fb}
+.scard .bar i{display:block;height:100%;width:0;border-radius:99px;background:var(--mint);transition:width 1s .3s cubic-bezier(.3,.9,.3,1)}
+
+.mistakes{margin-top:22px}
+.mistakes h3{font-size:1.05rem;font-weight:900;margin-bottom:12px}
+.m-group{font-size:.9rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:var(--yellow);margin:16px 0 8px}
+.m-item{background:var(--card);border-left:5px solid var(--bad);border-radius:10px;padding:14px 16px;margin-bottom:10px;font-size:.93rem;line-height:1.5}
+.m-item .mq{font-weight:800;margin-bottom:4px}
+.m-item .fix{color:var(--mint);font-weight:800}
+.m-item .why{color:var(--chalk-dim);font-size:.86rem}
+.all-good{background:var(--card);border-left:5px solid var(--ok);border-radius:10px;padding:16px;font-weight:800}
+
+.end-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:30px 0 40px}
+.btn-ghost{font-family:inherit;font-weight:800;font-size:.95rem;cursor:pointer;background:transparent;color:var(--chalk);border:2px solid var(--card-edge);border-radius:12px;padding:14px 24px;transition:all .2s}
+.btn-ghost:hover{border-color:var(--yellow);color:var(--yellow);transform:translateY(-2px)}
+body.mode-kids .btn-ghost{color:#134a76;border-color:#a8d5f2}
+body.mode-kids .btn-ghost:hover{color:#0c62b8;border-color:#0c62b8}
+
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.confetti i{position:absolute;top:-20px;width:10px;height:14px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+
+@media (max-width:900px){.start-grid{grid-template-columns:1fr;min-height:auto;gap:26px;padding-top:8px}.note-card{transform:none}}
+@media (max-width:560px){.qcard{padding-left:22px;background:repeating-linear-gradient(var(--paper) 0 33px,var(--line) 33px 34px)}.ruler b{font-size:.62rem}.pick.three{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body class="mode-class">
+
+<div class="doodles" aria-hidden="true">
+  <span class="doodle d-class" style="top:8%;left:4%;--fs:2.4rem;--r:-8deg;--t:6s">A1 · B2 · C2</span>
+  <span class="doodle d-class" style="top:22%;right:6%;--fs:2rem;--r:6deg;--t:8s">å være eller ikke være?</span>
+  <span class="doodle d-class" style="bottom:16%;left:6%;--fs:2.2rem;--r:4deg;--t:7s">★ Lykke til! ★</span>
+  <span class="doodle d-class" style="bottom:30%;right:4%;--fs:2.2rem;--r:-5deg;--t:9s">V2-regelen… 🎧</span>
+  <span class="doodle d-class" style="top:55%;left:2%;--fs:1.8rem;--r:2deg;--t:6.5s">bestemt form ✎</span>
+  <span class="doodle d-kids emoji" style="top:7%;left:5%;--fs:2.6rem;--t:6s">☁️</span>
+  <span class="doodle d-kids emoji" style="top:12%;right:8%;--fs:2.8rem;--t:8s">⭐</span>
+  <span class="doodle d-kids emoji" style="bottom:14%;left:6%;--fs:2.8rem;--t:7s">🧀</span>
+  <span class="doodle d-kids emoji" style="bottom:28%;right:5%;--fs:2.5rem;--t:9s">🎈</span>
+  <span class="doodle d-kids emoji" style="top:50%;left:2%;--fs:2.2rem;--t:6.5s">⛵</span>
+</div>
+
+<main>
+<!-- ============ СТАРТ ============ -->
+<section id="scr-start" class="screen">
+  <div class="start-grid">
+    <div class="board-frame">
+      <div class="chalk-tag">мини-экзамен · норвежский · 5 навыков · A1 → C2</div>
+      <h1 class="hand">Проверь свой <em>Norsk</em>!</h1>
+      <p class="sub">Полная диагностика: <b>грамматика и лексика 📚, аудирование 🎧, чтение 📖, письмо ✍️ и говорение 🎤</b>. Каждая секция подстраивается под вас, а в конце — уровень по шкале CEFR для каждого навыка и разбор ошибок.</p>
+      <div class="tiles" aria-hidden="true">
+        <div class="tile m wide" style="--r:-5deg">📚 Grammatikk</div>
+        <div class="tile s wide" style="--r:4deg">🎧 Lytting</div>
+        <div class="tile y wide" style="--r:-3deg">📖 Lesing</div>
+        <div class="tile p wide" style="--r:5deg">✍️ Skriving</div>
+        <div class="tile g2 wide" style="--r:-4deg">🎤 Snakking</div>
+      </div>
+      <div class="tray" aria-hidden="true"><i class="c1"></i><i class="c2"></i></div>
+    </div>
+
+    <div class="note-card">
+      <h2>Настройки ✏️</h2>
+
+      <p class="pick-label">Для кого</p>
+      <div class="pick" role="group">
+        <button type="button" class="mode-btn" data-mode="kids" onclick="setMode('kids')">🧒 Дети</button>
+        <button type="button" class="mode-btn on" data-mode="class" onclick="setMode('class')">🎓 Взрослые</button>
+      </div>
+
+      <p class="pick-label">Навыки (лишние можно отключить)</p>
+      <div class="pick flex" role="group">
+        <button type="button" class="mode-btn sk on" data-sk="g" onclick="toggleSkill('g')">📚 Грамм.</button>
+        <button type="button" class="mode-btn sk on" data-sk="l" onclick="toggleSkill('l')">🎧 Аудир.</button>
+        <button type="button" class="mode-btn sk on" data-sk="r" onclick="toggleSkill('r')">📖 Чтение</button>
+        <button type="button" class="mode-btn sk on" data-sk="w" onclick="toggleSkill('w')">✍️ Письмо</button>
+        <button type="button" class="mode-btn sk on" data-sk="s" onclick="toggleSkill('s')">🎤 Говор.</button>
+      </div>
+
+      <p class="pick-label">Заданий на навык</p>
+      <div class="pick three" role="group">
+        <button type="button" class="mode-btn len" data-n="3" onclick="setLen(3)">3 · экспресс</button>
+        <button type="button" class="mode-btn len on" data-n="4" onclick="setLen(4)">4 · стандарт</button>
+        <button type="button" class="mode-btn len" data-n="5" onclick="setLen(5)">5 · подробно</button>
+      </div>
+
+      <p class="mode-note" id="mode-note">Классический режим: полный банк заданий, включая «взрослые» темы.</p>
+      <button type="button" class="btn-big" onclick="startQuiz()">Начать тест →</button>
+      <p class="tiny">Подсказка: варианты — клавиши 1–4, дальше — Enter. Для говорения нужен микрофон 🎤</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ТЕСТ ============ -->
+<section id="scr-quiz" class="screen" hidden>
+  <div class="quiz-top">
+    <span class="logo">✎ Norsk Check-Up</span>
+    <div class="progress"><i id="pbar"></i></div>
+    <span class="qcount" id="qcount">1 / 20</span>
+    <div class="chips">
+      <span class="chip est" id="est">—</span>
+      <span class="chip" id="score">Очки: 0</span>
+      <span class="chip streak" id="streak" hidden>🔥 серия 0</span>
+    </div>
+  </div>
+
+  <div class="secnav" id="secnav"></div>
+
+  <div class="ruler" aria-hidden="true">
+    <div class="pin" id="pin" style="left:8.33%"></div>
+    <b data-l="1">A1</b><b data-l="2">A2</b><b data-l="3">B1</b>
+    <b data-l="4">B2</b><b data-l="5">C1</b><b data-l="6">C2</b>
+  </div>
+
+  <article class="qcard intro" id="intro" hidden>
+    <div class="big" id="in-icon">🎧</div>
+    <div class="step" id="in-step">Часть 1 из 5</div>
+    <h2 id="in-title">Аудирование</h2>
+    <p id="in-desc">…</p>
+    <button type="button" class="btn-big" onclick="beginSection()">Начать часть →</button>
+  </article>
+
+  <article class="qcard" id="qcard" hidden>
+    <div class="qmeta">
+      <span class="tag sk" id="tag-skill">Секция</span>
+      <span class="tag l" id="tag-lvl">Уровень B1</span>
+    </div>
+    <div id="q-extra"></div>
+    <p class="qtext" id="qtext">…</p>
+    <div id="q-answer"></div>
+    <div class="feedback" id="feedback" hidden>
+      <div class="fb-head" id="fb-head"><span id="fb-icon"></span><b id="fb-title"></b><span class="pts" id="fb-pts" hidden></span></div>
+      <div id="fb-extra"></div>
+      <p class="fb-expl" id="fb-expl"></p>
+      <div class="fb-trans" id="fb-trans" hidden></div>
+      <button type="button" class="btn-next" id="btn-next" onclick="next()">Дальше →</button>
+    </div>
+  </article>
+</section>
+
+<!-- ============ РЕЗУЛЬТАТ ============ -->
+<section id="scr-result" class="screen" hidden>
+  <div class="result-head">
+    <div class="stamp" id="stamp">B1<small id="stamp-name">Intermediate</small></div>
+    <p class="result-title" id="verdict">—</p>
+  </div>
+
+  <div class="gauge" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <div class="mark" id="mark" style="left:50%"></div>
+  </div>
+  <div class="gauge-labels"><i>A1</i><i>A2</i><i>B1</i><i>B2</i><i>C1</i><i>C2</i></div>
+
+  <div class="stat-grid">
+    <div class="stat"><b id="st-correct">0</b><span>верных</span></div>
+    <div class="stat"><b id="st-acc">0%</b><span>точность</span></div>
+    <div class="stat"><b id="st-streak">0</b><span>лучшая серия</span></div>
+    <div class="stat"><b id="st-score">0</b><span>очков</span></div>
+  </div>
+
+  <div class="skillcards" id="skillcards"></div>
+
+  <div class="mistakes">
+    <h3>📝 Работа над ошибками</h3>
+    <div id="mistakes"></div>
+  </div>
+
+  <div class="end-actions">
+    <button type="button" class="btn-big" style="width:auto;padding:14px 34px" onclick="startQuiz()">Пройти ещё раз ↻</button>
+    <button type="button" class="btn-ghost" onclick="goStart()">⚙ Изменить настройки</button>
+  </div>
+</section>
+</main>
+
+<script>
+/* ======================= НАВЫКИ ======================= */
+const SK={
+  g:{icon:'📚',title:'Грамматика и лексика',short:'Грамматика',
+     desc:'Выбирайте правильный вариант. Верный ответ делает задание сложнее, ошибка — проще.'},
+  l:{icon:'🎧',title:'Аудирование',short:'Аудирование',
+     desc:'Нажмите ▶ и прослушайте запись на норвежском — повторять можно сколько угодно. Варианты откроются после первого прослушивания.'},
+  r:{icon:'📖',title:'Чтение',short:'Чтение',
+     desc:'Прочитайте текст и ответьте на вопрос по его содержанию.'},
+  w:{icon:'✍️',title:'Письмо',short:'Письмо',
+     desc:'Впишите ответ на норвежском — слово или короткую фразу. Буквы æ/ø/å проверяются мягко (можно писать ae/oe/a).'},
+  s:{icon:'🎤',title:'Говорение',short:'Говорение',
+     desc:'Нажмите на микрофон и выполните задание вслух на норвежском. Разрешите доступ к микрофону. Если распознавание речи недоступно — оцените себя сами.'}
+};
+const ORDER=['g','l','r','w','s'];
+const LVLNAME={1:'A1',2:'A2',3:'B1',4:'B2',5:'C1',6:'C2'};
+const LVLFULL={A1:'Beginner · Начальный',A2:'Elementary · Базовый',B1:'Intermediate · Средний',
+  B2:'Upper-Intermediate · Выше среднего',C1:'Advanced · Продвинутый',C2:'Proficiency · В совершенстве'};
+const $=id=>document.getElementById(id);
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition||null;
+
+/* ======================= БАНК: ГРАММАТИКА И ЛЕКСИКА (90) ======================= */
+const BANK=[
+/* A1 */
+{lvl:1,skill:'g',q:'Jeg ___ student.',o:['er','har','heter','kan'],a:0,e:'Глагол være с jeg: er.'},
+{lvl:1,skill:'g',q:'Hun ___ to katter.',o:['har','er','heter','kan'],a:0,e:'Глагол å ha с hun: har.'},
+{lvl:1,skill:'v',q:'Hva er det motsatte av « stor »?',o:['liten','lang','høy','bred'],a:0,e:'Stor — «большой», антоним — liten.'},
+{lvl:1,skill:'g',q:'Jeg har ___ eple.',o:['et','en','ei','den'],a:0,e:'Eple — средний род → et eple.'},
+{lvl:1,skill:'g',q:'Vi ___ på TV hver kveld.',o:['ser','hører','gjør','tar'],a:0,e:'Se på TV — «смотреть телевизор»: ser.'},
+{lvl:1,skill:'v',q:'Ett barn — mange ___.',o:['barn','barner','barns','barna'],a:0,e:'Средний род на согласную часто без изменения: et barn – barn.'},
+{lvl:1,skill:'g',q:'Han ___ ikke broccoli.',o:['liker','spiller','er','har'],a:0,e:'Like — «любить/нравится»: han liker.'},
+{lvl:1,skill:'v',q:'Bananer er ___.',o:['gule','blå','grønne','rosa'],a:0,e:'Бананы жёлтые — gule (мн.ч.).'},
+{lvl:1,skill:'g',q:'Det ___ en bok på bordet.',o:['er','har','skjer','blir'],a:0,e:'Det er — «есть, имеется».'},
+{lvl:1,skill:'v',q:'I dag er det mandag. I morgen er det ___.',o:['tirsdag','søndag','onsdag','fredag'],a:0,e:'После mandag идёт tirsdag.'},
+{lvl:1,skill:'g',q:'De ___ vennene mine.',o:['er','har','heter','blir'],a:0,e:'С de форма er.'},
+{lvl:1,skill:'g',q:'Jeg ___ svømme veldig bra.',o:['kan','må','vil','skal'],a:0,e:'Kan — «уметь, мочь».'},
+{lvl:1,skill:'g',q:'Katten er ___ bordet. (под столом)',o:['under','på','i','ved'],a:0,e:'Under — «под».'},
+{lvl:1,skill:'v',q:'En mann — mange ___.',o:['menn','manner','mann','mennesker'],a:0,e:'Исключение: mann → menn.'},
+{lvl:1,skill:'v',q:'Hvor ___ er du? — Jeg er ti år.',o:['gammel','mange','lang','mye'],a:0,e:'Вопрос о возрасте: Hvor gammel er du?'},
+/* A2 */
+{lvl:2,skill:'g',q:'I går ___ jeg til parken.',o:['gikk','går','gå','har'],a:0,e:'Preteritum от gå: gikk.'},
+{lvl:2,skill:'g',q:'Det er ingen egg ___ kjøleskapet.',o:['i','på','til','fra'],a:0,e:'«В холодильнике» — i kjøleskapet.'},
+{lvl:2,skill:'g',q:'En elefant er ___ enn en mus.',o:['større','stor','størst','mer stor'],a:0,e:'Сравнение: stor → større enn.'},
+{lvl:2,skill:'g',q:'Jeg er god ___ å tegne.',o:['til','på','i','med'],a:0,e:'God/flink til å gjøre noe — «хорош в чём-то».'},
+{lvl:2,skill:'v',q:'Man bruker en ___ for å åpne døra.',o:['nøkkel','kniv','gaffel','kost'],a:0,e:'Nøkkel — «ключ».'},
+{lvl:2,skill:'g',q:'Har du ___ vært i Oslo?',o:['noen gang','alltid','aldri','ofte'],a:0,e:'Presens perfektum: Har du noen gang vært…?'},
+{lvl:2,skill:'g',q:'Når ___ filmen?',o:['begynner','begynne','begynte','har begynt'],a:0,e:'Presens: filmen begynner.'},
+{lvl:2,skill:'v',q:'Om vinteren ___ det ofte.',o:['snør','regner','blomstrer','skinner'],a:0,e:'Зимой идёт снег — det snør.'},
+{lvl:2,skill:'g',q:'Jeg vil gjerne ha ___ appelsinjuice, takk.',o:['en','et','noe','noen'],a:0,e:'Juice — мужской род: en juice.'},
+{lvl:2,skill:'v',q:'Datteren til søstera mi er ___.',o:['niesen min','kusinen min','tanta mi','bestemoren min'],a:0,e:'Niese — «племянница».'},
+{lvl:2,skill:'g',q:'Hun ___ en ny sykkel i forrige uke.',o:['kjøpte','kjøper','har kjøpt','kjøpe'],a:0,e:'Konкретное завершённое действие — preteritum: kjøpte.'},
+{lvl:2,skill:'g',q:'Dette er den ___ boka jeg har lest.',o:['mest interessante','mer interessante','mest interessant','mest interesserte'],a:0,e:'Определённая превосходная степень: den mest interessante boka.'},
+{lvl:2,skill:'v',q:'Hvor ___ vann drikker du om dagen?',o:['mye','mange','ofte','lite'],a:0,e:'Vann неисчисляемое — mye.'},
+{lvl:2,skill:'g',q:'Jeg har bursdag ___ mai.',o:['i','på','om','til'],a:0,e:'С месяцами: i mai.'},
+{lvl:2,skill:'v',q:'Det motsatte av « dyr » er ___.',o:['billig','liten','sakte','stille'],a:0,e:'Billig — «дешёвый».'},
+/* B1 */
+{lvl:3,skill:'g',q:'Hvis det regner i morgen, ___ vi hjemme.',o:['blir','bli','ble','blitt'],a:0,e:'Первый тип: hvis + presens, presens/futurum в главной части.'},
+{lvl:3,skill:'g',q:'Jeg har bodd i denne byen ___ 2015.',o:['siden','i','for','fra'],a:0,e:'Siden — «с какого-то момента».'},
+{lvl:3,skill:'g',q:'I bilen ___ du bruke sikkerhetsbelte — det er loven.',o:['må','kan','vil','skal'],a:0,e:'Må — обязанность.'},
+{lvl:3,skill:'v',q:'Han ___ glipp av bussen i morges og måtte gå.',o:['gikk','tok','fikk','kom'],a:0,e:'Gå glipp av — «пропустить, опоздать».'},
+{lvl:3,skill:'g',q:'Denne boka ___ av millioner av mennesker.',o:['leses','leser','ble lese','les'],a:0,e:'S-пассив: boka leses — «книгу читают».'},
+{lvl:3,skill:'g',q:'Hun spurte meg hvor jeg ___.',o:['bodde','bor','bo','bodd'],a:0,e:'Косвенная речь в прошлом: сдвиг в preteritum.'},
+{lvl:3,skill:'v',q:'Kan du gjøre meg en ___?',o:['tjeneste','gave','hjelp','ærend'],a:0,e:'Gjøre noen en tjeneste — «оказать услугу».'},
+{lvl:3,skill:'g',q:'Før ___ jeg fotball hver dag.',o:['spilte','spiller','spille','har spilt'],a:0,e:'Preteritum для привычек в прошлом.'},
+{lvl:3,skill:'g',q:'___ trettheten fullførte han arbeidet.',o:['Tross','Fordi','Mens','Ettersom'],a:0,e:'Tross + существительное — «несмотря на».'},
+{lvl:3,skill:'v',q:'Vi har ikke ___ melk igjen — la oss kjøpe noe.',o:['mer','mindre','mest','mye'],a:0,e:'Ikke … igjen — «больше не осталось».'},
+{lvl:3,skill:'g',q:'Hvis jeg ___ rik, ville jeg reise jorda rundt.',o:['var','er','hadde vært','ville være'],a:0,e:'Второй тип: hvis + preteritum, ville + инфинитив.'},
+{lvl:3,skill:'g',q:'Læreren ba oss ___ leksene.',o:['gjøre','gjør','gjorde','gjort'],a:0,e:'Be noen gjøre noe.'},
+{lvl:3,skill:'v',q:'Kan du passe ___ hunden min i helga?',o:['på','til','med','om'],a:0,e:'Passe på — «присматривать за».'},
+{lvl:3,skill:'g',q:'Denne kaffen er ___ varm for meg.',o:['for','ganske','veldig','så'],a:0,e:'For + прилагательное — «слишком».'},
+{lvl:3,skill:'v',q:'Kan jeg ___ pennen din et øyeblikk?',o:['låne','låne ut','gi','ta'],a:0,e:'Låne — взять взаймы; låne ut — дать взаймы.'},
+/* B2 */
+{lvl:4,skill:'g',q:'Da vi kom, ___ filmen allerede begynt.',o:['hadde','har','ble','var'],a:0,e:'Pluskvamperfektum: hadde begynt — действие раньше другого в прошлом.'},
+{lvl:4,skill:'g',q:'Jeg skulle ønske jeg ___ snakke fransk flytende.',o:['kunne','kan','ville','skulle'],a:0,e:'Skulle ønske + preteritum: kunne.'},
+{lvl:4,skill:'v',q:'Møtet ble ___ fordi sjefen var syk.',o:['avlyst','avbestilt','stengt','mistet'],a:0,e:'Avlyse — «отменить».'},
+{lvl:4,skill:'g',q:'Du ___ heller oppsøke en lege for den hosten.',o:['burde','måtte','ville','skal'],a:0,e:'Burde heller — «тебе стоило бы».'},
+{lvl:4,skill:'g',q:'Knapt ___ hun sagt unnskyld, før han snakket til henne igjen.',o:['hadde','har','var','ble'],a:0,e:'Инверсия после knapt: knapt hadde hun … før.'},
+{lvl:4,skill:'v',q:'Teorien hans holder simpelthen ikke ___.',o:['mål','vann','sted','tak'],a:0,e:'Ikke holde mål — «не выдерживать критики».'},
+{lvl:4,skill:'g',q:'Han nektet for å ___ pengene.',o:['ha stjålet','stjålet','stjele','har stjålet'],a:0,e:'Nekte for å + перфектный инфинитив: ha stjålet.'},
+{lvl:4,skill:'g',q:'___ mye han prøvde, klarte han ikke å åpne døra.',o:['Hvor','Hva','Når','Om'],a:0,e:'Hvor + наречие — «как бы ни».'},
+{lvl:4,skill:'g',adult:true,q:'Jeg ville helst at du ikke ___ her.',o:['røykte','røyker','røyke','har røykt'],a:0,e:'Ville helst at + preteritum — аналог would rather.'},
+{lvl:4,skill:'g',q:'Resultatene ___ på solide bevis.',o:['bygger','baserer','lager','tar'],a:0,e:'Bygge på — «основываться на».'},
+{lvl:4,skill:'g',q:'Hvis jeg hadde studert mer, ___ jeg bestått eksamen.',o:['hadde','har','ville','ble'],a:0,e:'Третий тип: hvis + hadde + partisipp, hadde + partisipp в главной.'},
+{lvl:4,skill:'g',q:'Jeg skal ___ bilen reparert i morgen.',o:['få','gjøre','la','ta'],a:0,e:'Få noe gjort — каузатив: «отдать в ремонт».'},
+{lvl:4,skill:'g',q:'___ regnet dro de på tur.',o:['Tross','På grunn av','Fordi','Etter'],a:0,e:'Tross + существительное.'},
+{lvl:4,skill:'v',q:'Hun ___ jobbtilbudet fordi lønnen var lav.',o:['avslo','godtok','fikk','ga'],a:0,e:'Avslå — «отклонить».'},
+{lvl:4,skill:'g',q:'Ingen av svarene ___ riktig.',o:['er','ble','har','skal'],a:0,e:'Ingen — единственное число: er riktig.'},
+/* C1 */
+{lvl:5,skill:'g',q:'___ var jeg kommet inn i rommet da telefonen ringte.',o:['Knapt','Så snart','Etter at','Siden'],a:0,e:'Инверсия после knapt: knapt var jeg kommet … da.'},
+{lvl:5,skill:'v',adult:true,q:'Regjeringen har bestemt seg for å ___ skattene.',o:['heve','stige','øke','reise'],a:0,e:'Heve — «повышать» (переходный); stige — «расти» самому.'},
+{lvl:5,skill:'g',q:'Under ingen omstendigheter ___ du bruke telefonen her.',o:['kan','har','er','blir'],a:0,e:'Инверсия после вынесенного наречия; kan — разрешение/запрет.'},
+{lvl:5,skill:'v',q:'Vitnets forklaring hadde lite med fakta å ___.',o:['gjøre','si','se','ta'],a:0,e:'Ha (lite) med noe å gjøre — «иметь (мало) общего».'},
+{lvl:5,skill:'g',adult:true,q:'___ for å ha stjålet pengene, flyktet han fra landet.',o:['Mistenkt','Mistanken','Mistenke','Mistenkte'],a:0,e:'Причастный оборот: mistenkt for — «подозреваемый в».'},
+{lvl:5,skill:'v',q:'De to partene har havnet i en ___ — ingen vil gi seg.',o:['fastlåst situasjon','mållinje','etappe','nedgang'],a:0,e:'Fastlåst situasjon — «тупик, патовая ситуация».'},
+{lvl:5,skill:'g',adult:true,q:'Det er på tide at du ___ noe.',o:['gjør','gjorde','skal gjøre','har gjort'],a:0,e:'Det er på tide at + presens.'},
+{lvl:5,skill:'g',q:'Sjelden ___ jeg en så vakker solnedgang.',o:['har','er','ble','får'],a:0,e:'Инверсия: Sjelden har jeg sett.'},
+{lvl:5,skill:'v',adult:true,q:'Han ble ___ for tyveri.',o:['anklaget','belastet','skjelt','hevet'],a:0,e:'Anklage noen for noe — «обвинить в».'},
+{lvl:5,skill:'v',q:'Dette legemidlet har ingen ___.',o:['bivirkninger','dobbelvirkninger','andrevirkninger','etervirkninger'],a:0,e:'Bivirkninger — «побочные эффекты».'},
+{lvl:5,skill:'g',q:'Hvis jeg hadde vært deg, ___ jeg tatt den jobben.',o:['hadde','har','ville','ble'],a:0,e:'Условное прошедшее: hadde + partisipp (hadde tatt).'},
+{lvl:5,skill:'g',q:'Først da ___ han sannheten.',o:['forsto','forstår','har forstått','vil forstå'],a:0,e:'Инверсия: Først da forsto han…'},
+{lvl:5,skill:'g',q:'Direktøren insisterte på at rapporten ___ i tide.',o:['ble levert','blir levert','var levert','skal leveres'],a:0,e:'Insistere på at + пассив: ble levert.'},
+{lvl:5,skill:'v',q:'De to rapportene om ulykken ___ betydelig fra hverandre.',o:['avvek','samsvarte','samarbeidet','gjentok'],a:0,e:'Avvike fra — «отличаться, расходиться».'},
+{lvl:5,skill:'v',adult:true,q:'Disse funnene har viktige ___ for fremtidig forskning.',o:['implikasjoner','implementeringer','pålegg','tilbøyeligheter'],a:0,e:'Implikasjoner — «последствия, выводы».'},
+/* C2 */
+{lvl:6,skill:'g',q:'Maleriet, ___ ekthet eksperter hadde stilt spørsmål ved, ble solgt for en rekordsum.',o:['hvis','som','der','hvilken'],a:0,e:'Hvis — относительное «чьё»: hvis ekthet.'},
+{lvl:6,skill:'v',q:'Stemmen hennes var så ___ at hele salen ble stille.',o:['gripende','stikkende','punktlig','oppblåst'],a:0,e:'Gripende — «пронзительный, щемящий».'},
+{lvl:6,skill:'g',q:'___ det dårlige været tok flyet av i rute.',o:['Til tross for','Selv om','Imidlertid','Dog'],a:0,e:'Til tross for + существительное; selv om требует придаточного.'},
+{lvl:6,skill:'v',q:'Hun har en ___ hukommelse — hun husker bilder i minste detalj.',o:['eidetisk','eklektisk','epidemisk','ergonomisk'],a:0,e:'Eidetisk hukommelse — эйдетическая память.'},
+{lvl:6,skill:'g',q:'Han snakket lenge; ___ var det ingen som ble overbevist.',o:['likevel','heretter','deri','ettersom'],a:0,e:'Likevel — «тем не менее».'},
+{lvl:6,skill:'v',adult:true,q:'Komiteen kastet bare et ___ blikk på forslaget før de avslo det.',o:['flyktig','nysgjerrig','aktuelt','vant'],a:0,e:'Et flyktig blikk — беглый, поверхностный взгляд.'},
+{lvl:6,skill:'g',q:'Lite ___ han at denne beslutningen skulle endre livet hans.',o:['ante','aner','har ant','ville ane'],a:0,e:'Инверсия после lite; å ane — «подозревать, предчувствовать».'},
+{lvl:6,skill:'v',q:'Handlingen i romanen er så innfløkt at den nesten virker ___.',o:['labyrintisk','lineær','klar','søvnig'],a:0,e:'Labyrintisk — «запутанный, как лабиринт».'},
+{lvl:6,skill:'g',q:'___ Maries åndsnærværelse ville utfallet ha vært mye verre.',o:['Uten','Med','Til tross for','Takket være'],a:0,e:'Uten + существительное заменяет нереальное условие.'},
+{lvl:6,skill:'v',q:'Unnskyldningen hans hørtes i beste fall ___ ut.',o:['skjør','flamboyant','flegmatisk','sprudlende'],a:0,e:'Skjør — «хлипкая, неубедительная».'},
+{lvl:6,skill:'g',q:'Så ___ var skadene at bygningen måtte rives.',o:['store','mye','stort','mange'],a:0,e:'Книжная инверсия: så + прилагательное … at.'},
+{lvl:6,skill:'v',q:'Talerens forsøk på å ___ saken irriterte bare publikum.',o:['fordunkle','forplikte','avskaffe','obstruere'],a:0,e:'Fordunkle — «затуманить, затемнить».'},
+{lvl:6,skill:'v',q:'Dømmekraften hennes er så sikker at kollegene nesten regner henne som ___.',o:['skarpsynt','skadelig','overflatisk','lat'],a:0,e:'Skarpsynt — «проницательная».'},
+{lvl:6,skill:'v',q:'Han er den engelske gentlemannen ___ : tweed, te og tilbakeholdenhet.',o:['par excellence','i tillegg','i det minste','uten tvil'],a:0,e:'Par excellence — «в самом полном смысле».'},
+{lvl:6,skill:'v',q:'___ som ærlighet og flid går aldri av moten.',o:['Dyder','Sannheter','Levninger','Omskiftelser'],a:0,e:'Dyder — «добродетели».'}
+];
+
+/* ======================= БАНК: ЧТЕНИЕ (12) ======================= */
+const READING=[
+{lvl:1,text:'Tom har en hund. Hunden er stor og svart. Tom leker med hunden i parken hver dag.',
+ q:'Hvor leker Tom med hunden?',o:['I parken','Hjemme','På skolen','I skogen'],a:0,e:'В тексте прямо сказано: «Tom leker med hunden i parken.»'},
+{lvl:1,text:'Anna liker epler og bananer. Hun liker ikke appelsiner.',
+ q:'Hvilken frukt liker Anna ikke?',o:['Appelsiner','Epler','Bananer','Pærer'],a:0,e:'Ключевая фраза: «Hun liker ikke appelsiner.»'},
+{lvl:2,text:'I fjor sommer dro Mia til Italia med familien sin. De besøkte Roma og spiste mye pizza. Været var varmt hver dag.',
+ q:'Hvordan var været i Italia?',o:['Det var varmt','Det var kaldt','Det regnet','Det blåste'],a:0,e:'Последнее предложение: «Været var varmt hver dag.»'},
+{lvl:2,text:'Ben pleier å sykle til skolen, men i går regnet det, så han tok bussen.',
+ q:'Hvordan kom Ben seg til skolen i går?',o:['Med bussen','Med sykkelen','Med bilen','Til fots'],a:0,e:'Из-за дождя он поехал на автобусе: «han tok bussen».'},
+{lvl:3,text:'Da Sarah begynte i den nye jobben, var hun nervøs fordi hun ikke kjente noen. Men kollegene var vennlige, og etter en uke følte hun seg hjemme.',
+ q:'Hvorfor følte Sarah seg hjemme etter en uke?',o:['Kollegene var vennlige','Hun kjente alle','Hun likte kontoret','Hun fikk en forfremmelse'],a:0,e:'Причина названа после men: доброжелательные коллеги.'},
+{lvl:3,text:'Resirkulering bidrar til å redusere avfall, men mange kaster fortsatt plasten i stedet for å resirkulere den.',
+ q:'Hva er hovedideen i teksten?',o:['Resirkulering er nyttig, men ikke alle gjør det','Plast er farlig','Alle resirkulerer','Resirkulering er meningsløst'],a:0,e:'Структура «bidrar til…, men mange…» передаёт контраст.'},
+{lvl:4,text:'Selv om hjemmekontor gir fleksibilitet, føler mange ansatte seg isolert. Bedrifter prøver nå hybride modeller for å kombinere fordelene ved begge.',
+ q:'Hvorfor prøver bedrifter hybride modeller?',o:['For å kombinere fleksibilitet og sosial kontakt','For å spare penger','For å få folk til å jobbe mer','For å stenge kontorene'],a:0,e:'«Kombinere fordelene ved begge» — объединить плюсы обоих форматов.'},
+{lvl:4,text:'Anmeldelsen var nådeløs; likevel ble boka en bestselger — et bevis på at kritikere og lesere ikke alltid er enige.',
+ q:'Hva antyder teksten?',o:['Boka lyktes til tross for den nådeløse anmeldelsen','Kritikerne elsket boka','Leserne ga kritikeren rett','Boka solgte dårlig'],a:0,e:'Likevel — «тем не менее»: разгромная рецензия не помешала успеху.'},
+{lvl:5,text:'Funnene, om enn foreløpige, styrker hypotesen om at søvnmangel skader beslutningsevnen mer enn tidligere antatt.',
+ q:'Hva antyder funnene?',o:['Søvnmangel skader beslutningsevnen mer enn man trodde','Søvn forbedrer hukommelsen','Hypotesen ble avvist','Studien var endelig'],a:0,e:'«Mer enn tidligere antatt» — сильнее, чем считалось.'},
+{lvl:5,text:'Hadde byrådet forutsett protestene, ville de utvilsomt ha rådført seg med innbyggerne før de gjorde hovedgata til gågate.',
+ q:'Hva kan man slutte av teksten?',o:['Byrådet forventet ikke den negative reaksjonen','Innbyggerne støttet prosjektet','Byrådet rådførte seg med innbyggerne','Det var ingen reaksjon'],a:0,e:'Нереальное условие: консультаций не было, потому что протестов не ожидали.'},
+{lvl:6,text:'Forfatterens prosa er labyrintisk og samtidig presis; den unngår sentimentalitet til fordel for en nesten klinisk granskning av menneskelige motiver.',
+ q:'Forfatterens stil er nærmest…',o:['kompleks og følelsesmessig distansert','enkel og sentimental','vag og kaotisk','humoristisk og lett'],a:0,e:'Unngår sentimentalitet + klinisk granskning — холодный, бесстрастный анализ.'},
+{lvl:6,text:'Merkevaren er så allestedsnærværende at logoen i visse kretser er blitt en synekdoke for selve forbrukskulturen.',
+ q:'Hva representerer logoen ifølge teksten?',o:['Et symbol på hele forbrukskulturen','En reklame for et nytt produkt','Et tegn på dårlig kvalitet','Navnet på bedriften'],a:0,e:'Synekdoke — часть вместо целого; allestedsnærværende — повсеместный.'}
+];
+
+/* ======================= БАНК: АУДИРОВАНИЕ (12) ======================= */
+const LISTEN=[
+{lvl:1,audio:['Hei! Jeg heter Emma. Jeg er åtte år gammel. Jeg har en katt. Den heter Milo.'],
+ q:'Hvor gammel er Emma?',o:['Åtte år','Ti år','Sju år','Ni år'],a:0,e:'В записи: «Jeg er åtte år gammel.»'},
+{lvl:1,audio:['I dag er det mandag. Vi har norsk og matte på skolen.'],
+ q:'Hvilken dag er det i dag?',o:['Mandag','Tirsdag','Søndag','Fredag'],a:0,e:'Первая фраза: «I dag er det mandag.»'},
+{lvl:2,audio:['I går var jeg og handlet med moren min. Jeg kjøpte en blå T-skjorte og en lue. T-skjorta kostet hundre kroner.'],
+ q:'Hvor mye kostet T-skjorta?',o:['Hundre kroner','Femti kroner','To hundre kroner','Tjue kroner'],a:0,e:'«T-skjorta kostet hundre kroner.»'},
+{lvl:2,audio:['Toget til Bergen går halv ti fra spor to.'],
+ q:'Fra hvilket spor går toget?',o:['Spor to','Spor én','Spor tre','Buss holdeplass'],a:0,e:'«…fra spor to». Merk: halv ti = 09:30!'},
+{lvl:3,audio:['Hei, Jack! Filmen begynner klokka sju, så la oss møtes utenfor kinoen halv sju. Jeg kjøper billettene.'],
+ q:'Hvor skal de møtes?',o:['Utenfor kinoen','Hjemme hos Jack','Inne i kinosalen','På kaféen'],a:0,e:'«La oss møtes utenfor kinoen halv sju.»'},
+{lvl:3,audio:['Jeg har lært spansk i to år, men lytteforståelse er fortsatt det vanskeligste for meg.'],
+ q:'Hva er vanskeligst for personen?',o:['Lytteforståelse','Muntlig produksjon','Lesing','Skriving'],a:0,e:'«Lytteforståelse er fortsatt det vanskeligste.»'},
+{lvl:4,audio:['Vær oppmerksom. Toget klokka fjorten tretti til Trondheim er forsinket på grunn av signalproblemer. Vi beklager ulempen.'],
+ q:'Hvorfor er toget forsinket?',o:['På grunn av signalproblemer','På grunn av dårlig vær','På grunn av en streik','På grunn av for mange passasjerer'],a:0,e:'Причина в объявлении: «på grunn av signalproblemer».'},
+{lvl:4,adult:true,audio:['Hvis jeg hadde visst at intervjuet var så formelt, ville jeg ha gått med dress.'],
+ q:'Hva mener mannen?',o:['Han var ikke formelt nok kledd','Han fikk ikke jobben','Intervjuet ble avlyst','Han hadde på seg dress'],a:0,e:'Условное прошедшее: он не знал о формате и не надел костюм.'},
+{lvl:5,audio:['Studien, om enn begrenset i omfang, styrker tidligere funn som tyder på en sterk sammenheng mellom kosthold og konsentrasjon.'],
+ q:'Hva sies om studien?',o:['Den styrker tidligere funn til tross for begrenset omfang','Den motsier tidligere studier','Den var svært omfattende','Den fant ingen sammenheng'],a:0,e:'Styrker tidligere funn — подкрепляет прежние выводы.'},
+{lvl:5,audio:['Det var først da dataene ble analysert på nytt at det virkelige mønsteret viste seg.'],
+ q:'Når viste det virkelige mønsteret seg?',o:['Etter at dataene ble analysert på nytt','Før analysen','Under datainnsamlingen','Det viste seg aldri'],a:0,e:'«Det var først da…» — «только когда…»'},
+{lvl:6,audio:['Forslaget er prisverdig i sin hensikt, men er like fullt av uforutsette komplikasjoner.'],
+ q:'Hva er holdningen til den som snakker?',o:['Støtter ideen, men advarer om problemer','Er helt imot','Er begeistret','Er likegyldig'],a:0,e:'Prisverdig — похвальное; like fullt — но тем не менее полно осложнений.'},
+{lvl:6,audio:['Bemerkningene hennes, så måteholdne de enn var, rommet en tilslørt bebreidelse.'],
+ q:'Hva rommet bemerkningene?',o:['En tilslørt bebreidelse','Et åpent kompliment','En spøk','En unnskyldning'],a:0,e:'En tilslørt bebreidelse — завуалированный упрёк.'}
+];
+
+/* ======================= БАНК: ПИСЬМО (12) ======================= */
+const WRITING=[
+{lvl:1,q:'Skriv flertallet: <b>et barn</b>',show:'barn',accept:['barn','mange barn'],
+ e:'Средний род на согласную часто без изменения: barn – barn.'},
+{lvl:1,q:'Bøy verbet i parentes:<br>« Hun ___ (gå) på skolen hver dag. »',show:'går',accept:['gar','går'],
+ e:'Gå med hun: går (presens på -r).'},
+{lvl:2,q:'Skriv preteritum: <b>kjøpe</b>',show:'kjøpte',accept:['kjopte','kjøpte'],
+ e:'Preteritum: kjøpte.'},
+{lvl:2,q:'Skriv intetkjønnsformen av adjektivet: <b>stor</b> (et ___ hus)',show:'stort',accept:['stort'],
+ e:'Согласование с et-родом: et stort hus.'},
+{lvl:3,q:'Fyll inn ett ord:<br>« Jeg har bodd her ___ 2015. »',show:'siden',accept:['siden'],
+ e:'Siden — «с какого-то момента до сих пор».'},
+{lvl:3,q:'Fyll inn ett ord:<br>« Kan jeg ___ pennen din et øyeblikk? » (взять)',show:'låne',accept:['lane','låne'],
+ e:'Låne — взять взаймы; låne ut — дать взаймы.'},
+{lvl:4,q:'Fyll inn ett ord:<br>« Hvis jeg hadde studert mer, ___ jeg bestått eksamen. »',show:'hadde',accept:['hadde'],
+ e:'Третий тип: hadde + partisipp (hadde bestått).'},
+{lvl:4,q:'Fyll inn rett form:<br>« Jeg skulle ønske jeg ___ snakke fransk. » (kunne)',show:'kunne',accept:['kunne'],
+ e:'Etter skulle ønske — preteritum: kunne.'},
+{lvl:5,q:'Fyll inn ett ord:<br>« Sjelden ___ jeg sett en så vakker solnedgang. »',show:'har',accept:['har'],
+ e:'Инверсия: Sjelden har jeg sett.'},
+{lvl:5,q:'Fyll inn pluskvamperfektum:<br>« Da jeg kom, ___ filmen allerede begynt. »',show:'hadde',accept:['hadde'],
+ e:'Pluskvamperfektum: hadde + partisipp.'},
+{lvl:6,q:'Skriv setningen om med <b>Aldri</b> først:<br>« Hun hadde aldri hørt slik musikk. »',show:'Aldri hadde hun hørt slik musikk',
+ accept:['aldri hadde hun hort slik musikk','aldri hadde hun hørt slik musikk','aldri hadde hun hort en slik musikk'],
+ e:'Aldri в начале предложения вызывает инверсию: Aldri hadde hun…'},
+{lvl:6,q:'Fyll inn rett form:<br>« Direktøren insisterte på at rapporten ___ (bli) levert i tide. »',show:'ble',accept:['ble'],
+ e:'Insistere på at + preteritum passiv: ble levert.'}
+];
+
+/* ======================= БАНК: ГОВОРЕНИЕ (12) ======================= */
+const SPEAKING=[
+{lvl:1,type:'read',text:'Jeg liker epler og bananer.',expect:'jeg liker epler og bananer',
+ e:'Следите за двойным p в epler и чётким -er на конце.'},
+{lvl:1,type:'say',text:'Hva heter du?',min:2,kw:['jeg','heter','mitt','navn','er'],
+ sample:'Jeg heter Anna.',
+ e:'Достаточно короткого полного ответа: Jeg heter… / Jeg er…'},
+{lvl:2,type:'read',text:'I går dro vi til parken og spilte fotball.',
+ expect:'i gar dro vi til parken og spilte fotball',
+ e:'Preteritum: dro / spilte — ударение на корне.'},
+{lvl:2,type:'say',text:'Hva gjorde du i går?',min:3,kw:['i','gar','jeg','spilte','dro','var','sa'],
+ sample:'I går spilte jeg med vennene mine.',
+ e:'Используйте preteritum: spilte / dro / var…'},
+{lvl:3,type:'read',text:'Hvis jeg hadde mer fritid, ville jeg reise jorda rundt.',
+ expect:'hvis jeg hadde mer fritid ville jeg reise jorda rundt',
+ e:'Условное: preteritum (hadde) + ville + инфинитив; глагол på andre plass.'},
+{lvl:3,type:'say',text:'Beskriv din beste venn eller venninne med to setninger.',min:8,
+ kw:['han','hun','er','har','snill','hyggelig','morsom','venn','venninne'],
+ sample:'Min beste venn er snill og morsom. Vi spiller ofte sammen.',
+ e:'Назовите человека и 2–3 качества: snill, morsom, hyggelig…'},
+{lvl:4,type:'read',text:'Knapt hadde hun sagt unnskyld, før han snakket til henne igjen.',
+ expect:'knapt hadde hun sagt unnskyld for han snakket til henne igjen',
+ e:'Инверсия после knapt: Knapt hadde hun… før…'},
+{lvl:4,type:'say',text:'Hva er fordelene og ulempene ved sosiale medier?',min:10,
+ kw:['fordel','ulempe','sosiale','medier','folk','fordi','tror','men','synes'],
+ sample:'Sosiale medier hjelper oss å holde kontakten, men de tar også mye tid.',
+ e:'Структурируйте: På den ene siden… På den andre siden…'},
+{lvl:5,type:'read',text:'Uten Maries åndsnærværelse ville utfallet ha vært mye verre.',
+ expect:'uten maries andsnaervaerelse ville utfallet ha vaert mye verre',
+ e:'Ville ha vært произносится слитно — это естественно.'},
+{lvl:5,type:'say',text:'Bør kunstig intelligens brukes i skolen? Si din mening.',min:12,
+ kw:['tror','mener','fordi','kunstig','intelligens','skole','bor','men','min','mening'],
+ sample:'Jeg mener den bør brukes fordi den tilpasser læringen, men lærerne må beholde kontrollen.',
+ e:'Начните с Jeg mener at… / Etter min mening… и дайте аргумент с fordi.'},
+{lvl:6,type:'read',text:'Forfatterens prosa er labyrintisk, men presis, og unngår sentimentalitet til fordel for en klinisk granskning av menneskelige motiver.',
+ expect:'forfatterens prosa er labyrintisk men presis og unngar sentimentalitet til fordel for en klinisk granskning av menneskelige motiver',
+ e:'Ключевые слова: labyrintisk, unngår, til fordel for.'},
+{lvl:6,type:'say',text:'I hvilken grad former språket måten vi tenker på?',min:12,
+ kw:['sprak','tanke','tenke','former','pavirker','fordi','tror','ord'],
+ sample:'Språket rammer inn hva vi legger merke til; grammatiske strukturer kan påvirke hvordan vi oppfatter tid.',
+ e:'Используйте продвинутые связки: i stor grad, man kan hevde at…'}
+];
+
+/* ======================= СОСТОЯНИЕ ======================= */
+let S=null, LEN=4;
+const selSkills={g:true,l:true,r:true,w:true,s:true};
+
+function setMode(m){
+  document.body.classList.toggle('mode-kids',m==='kids');
+  document.body.classList.toggle('mode-class',m!=='kids');
+  document.querySelectorAll('.mode-btn[data-mode]').forEach(b=>b.classList.toggle('on',b.dataset.mode===m));
+  $('mode-note').textContent=m==='kids'
+    ?'Дружелюбный режим: весёлые подсказки, никаких «взрослых» сюжетов.'
+    :'Классический режим: полный банк заданий, включая «взрослые» темы.';
+}
+function setLen(n){LEN=n;document.querySelectorAll('.mode-btn.len').forEach(b=>b.classList.toggle('on',+b.dataset.n===n));}
+function toggleSkill(k){
+  const on=Object.values(selSkills).filter(Boolean).length;
+  if(selSkills[k]&&on===1)return;
+  selSkills[k]=!selSkills[k];
+  document.querySelector(`.mode-btn[data-sk="${k}"]`).classList.toggle('on',selSkills[k]);
+}
+
+function byLevel(arr,kids){
+  const by={1:[],2:[],3:[],4:[],5:[],6:[]};
+  arr.forEach(q=>{if(!(kids&&q.adult))by[q.lvl].push(q);});
+  return by;
+}
+function buildPools(kids){
+  return {g:byLevel(BANK,kids),r:byLevel(READING,kids),l:byLevel(LISTEN,kids),
+          w:byLevel(WRITING,kids),s:byLevel(SPEAKING,kids)};
+}
+
+/* ---------- TTS (nb-NO) ---------- */
+let nbVoice=null;
+const TTS='speechSynthesis' in window;
+function pickVoice(){
+  const vs=speechSynthesis.getVoices();
+  nbVoice=vs.find(v=>/^(nb|no)/i.test(v.lang)&&/google|henrik|ida|liv|kari|norsk/i.test(v.name))||vs.find(v=>/^(nb|no)/i.test(v.lang))||null;
+}
+if(TTS){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;}
+function speak(parts,rate){
+  if(!TTS)return;
+  speechSynthesis.cancel();
+  parts.forEach((t,i)=>{
+    const u=new SpeechSynthesisUtterance(t);
+    u.lang='nb-NO';u.rate=rate;u.pitch=i%2?0.9:1.05;
+    if(nbVoice)u.voice=nbVoice;
+    speechSynthesis.speak(u);
+  });
+}
+
+/* ---------- распознавание речи ---------- */
+let recog=null,recogBusy=false;
+function stopRecog(){try{recog&&recog.stop();}catch(e){}recogBusy=false;}
+
+/* ---------- нормализация норвежского (æ/ø/å) ---------- */
+const baseNorm=s=>String(s).toLowerCase()
+  .replace(/æ/g,'ae').replace(/ø/g,'oe').replace(/å/g,'a')
+  .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+  .replace(/['’']/g,'');
+const norm=s=>baseNorm(s).replace(/[^a-z0-9]+/g,'');
+const normWords=s=>baseNorm(s).replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim().split(' ').filter(Boolean);
+
+/* ---------- запуск ---------- */
+function startQuiz(){
+  const kids=document.body.classList.contains('mode-kids');
+  const skills=ORDER.filter(k=>selSkills[k]);
+  S={skills,secIdx:0,per:LEN,pools:buildPools(kids),
+     asked:{g:new Set(),l:new Set(),r:new Set(),w:new Set(),s:new Set()},
+     cur:{g:3,l:3,r:3,w:3,s:3},rating:{g:620,l:620,r:620,w:620,s:620},
+     sk2:{g:{c:0,t:0},l:{c:0,t:0},r:{c:0,t:0},w:{c:0,t:0},s:{c:0,t:0}},
+     ans:[],score:0,streak:0,best:0,qIdx:0,secDone:0,
+     skill:skills[0],current:null,order:null,answered:false,played:false,plays:0,
+     speakAttempts:0,bestSpeak:0,
+     totalQ:skills.length*LEN};
+  $('secnav').innerHTML=skills.map(k=>`<span class="snav" data-k="${k}">${SK[k].icon} ${SK[k].short}</span>`).join('');
+  show('scr-quiz');
+  showIntro();
+}
+
+function showIntro(){
+  stopRecog();
+  const k=S.skill,m=SK[k];
+  if(TTS)speechSynthesis.cancel();
+  $('qcard').hidden=true;$('intro').hidden=false;
+  $('in-icon').textContent=m.icon;
+  $('in-step').textContent=`Часть ${S.secIdx+1} из ${S.skills.length} · ${S.per} задания(ий)`;
+  $('in-title').textContent=m.title;
+  let extra='';
+  if(k==='l'&&!TTS)extra=' ⚠ Ваш браузер не поддерживает озвучку — вместо аудио будет показан текст.';
+  if(k==='s'&&!SR)extra=' ⚠ Браузер не поддерживает распознавание речи — включится режим самооценки.';
+  $('in-desc').textContent=m.desc+extra;
+  const card=$('intro');card.style.animation='none';void card.offsetWidth;card.style.animation='';
+  updateHUD();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function beginSection(){
+  $('intro').hidden=true;$('qcard').hidden=false;
+  S.secDone=0;renderQuestion();
+}
+
+function pickQuestion(k){
+  const tryOrder=[S.cur[k]];
+  for(let d=1;d<=5;d++){if(S.cur[k]-d>=1)tryOrder.push(S.cur[k]-d);if(S.cur[k]+d<=6)tryOrder.push(S.cur[k]+d);}
+  for(const l of tryOrder){
+    const avail=S.pools[k][l].filter(q=>!S.asked[k].has(q));
+    if(avail.length)return avail[Math.floor(Math.random()*avail.length)];
+  }
+  return null;
+}
+
+const KEYS=['A','B','C','D'];
+function optsHTML(){
+  return `<div class="opts">${S.order.map((o,i)=>
+    `<button type="button" class="opt" onclick="answer(${i})"><span class="key">${KEYS[i]}</span><span>${o.t}</span></button>`).join('')}</div>`;
+}
+function toggleOptsLock(){
+  document.querySelectorAll('#q-answer .opt').forEach(b=>b.disabled=!S.played);
+}
+
+function renderQuestion(){
+  const k=S.skill,q=pickQuestion(k);
+  S.answered=false;S.played=false;S.plays=0;S.current=q;S.order=null;
+  S.asked[k].add(q);S.speakAttempts=0;S.bestSpeak=0;
+  $('feedback').hidden=true;
+  $('tag-skill').textContent=SK[k].icon+' '+SK[k].short;
+  $('tag-lvl').textContent='Уровень '+LVLNAME[q.lvl];
+  const ex=$('q-extra'),qa=$('q-answer');
+  ex.innerHTML='';$('qtext').textContent='';qa.innerHTML='';
+
+  if(k==='g'){
+    $('qtext').textContent=q.q;
+    S.order=q.o.map((t,i)=>({t,ok:i===q.a})).sort(()=>Math.random()-.5);
+    qa.innerHTML=optsHTML();
+  }else if(k==='r'){
+    ex.innerHTML=`<div class="passage">${q.text}</div>`;
+    $('qtext').textContent=q.q;
+    S.order=q.o.map((t,i)=>({t,ok:i===q.a})).sort(()=>Math.random()-.5);
+    qa.innerHTML=optsHTML();
+  }else if(k==='l'){
+    S.order=q.o.map((t,i)=>({t,ok:i===q.a})).sort(()=>Math.random()-.5);
+    if(TTS){
+      ex.innerHTML=`<div class="audiobox">
+        <button type="button" class="playbtn" id="playbtn" onclick="playAudio()">▶ Spill av</button>
+        <span class="playcnt" id="playcnt">Сначала прослушайте запись 🎧</span></div>`;
+    }else{
+      ex.innerHTML=`<div class="audiobox"><span class="script-fallback">📜 Текст (аудио недоступно): «${q.audio.join(' ')}»</span></div>`;
+      S.played=true;
+    }
+    $('qtext').textContent=q.q;
+    qa.innerHTML=optsHTML()+(TTS?'<p class="listen-hint" id="lh">🔒 Варианты откроются после прослушивания</p>':'');
+    if(TTS)toggleOptsLock();
+  }else if(k==='w'){
+    $('qtext').innerHTML=q.q;
+    qa.innerHTML=`<div class="write"><div class="wrow">
+      <input id="winput" autocomplete="off" spellcheck="false" placeholder="Ваш ответ на норвежском…">
+      <button type="button" class="btn-next" onclick="submitWrite()">Проверить</button></div></div>`;
+    $('winput').addEventListener('keydown',e=>{if(e.key==='Enter')submitWrite();});
+  }else if(k==='s'){
+    $('qtext').textContent=q.type==='read'
+      ?'Прочитайте предложение вслух:'
+      :`Ответьте вслух на вопрос (минимум ${q.min} слов):`;
+    ex.innerHTML=`<div class="passage saybox">${q.text}</div>`;
+    qa.innerHTML=`<div class="speak">
+      <button type="button" class="micbtn" id="micbtn" onclick="startMic()">🎤</button>
+      <p class="micstat" id="micstat">Нажмите на микрофон и говорите по-норвежски</p>
+      <div id="speak-fallback"></div></div>`;
+    if(!SR)showSelfEval('Браузер не распознаёт речь — оцените себя сами честно:');
+  }
+  $('qcount').textContent=(S.qIdx+1)+' / '+S.totalQ;
+  $('pin').style.left=((q.lvl-0.5)/6*100)+'%';
+  document.querySelectorAll('.ruler b').forEach(b=>b.classList.toggle('hot',+b.dataset.l===q.lvl));
+  updateHUD();
+  const card=$('qcard');card.style.animation='none';void card.offsetWidth;card.style.animation='';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function playAudio(){
+  if(!TTS)return;
+  const rate=S.current.lvl<=2?0.85:S.current.lvl<=4?0.95:1.0;
+  speak(S.current.audio,rate);
+  S.plays++;S.played=true;
+  $('playcnt').textContent=`Прослушиваний: ${S.plays} · можно повторить ещё`;
+  $('playbtn').textContent='▶ Spill av igjen';
+  const lh=$('lh');if(lh)lh.remove();
+  toggleOptsLock();
+}
+
+/* ---------- ответ: варианты ---------- */
+function answer(i){
+  if(!S||S.answered)return;
+  if(S.skill==='l'&&!S.played)return;
+  const ok=S.order[i].ok,given=S.order[i].t;
+  document.querySelectorAll('#q-answer .opt').forEach((b,j)=>{
+    b.disabled=true;
+    if(S.order[j].ok)b.classList.add('correct');
+    else if(j===i)b.classList.add('wrong');
+  });
+  applyResult(ok?1:0,S.current.o[S.current.a],given);
+}
+
+/* ---------- ответ: письмо ---------- */
+function submitWrite(){
+  if(!S||S.answered)return;
+  const inp=$('winput'),val=inp.value.trim();
+  if(!val){inp.style.borderColor='var(--bad)';return;}
+  const ok=S.current.accept.some(a=>norm(a)===norm(val));
+  inp.disabled=true;inp.classList.add(ok?'ok':'bad');
+  applyResult(ok?1:0,S.current.show,val);
+}
+
+/* ---------- говорение ---------- */
+function startMic(){
+  if(!S||S.answered||recogBusy)return;
+  if(!SR){showSelfEval('Браузер не распознаёт речь — оцените себя сами честно:');return;}
+  try{recog=new SR();}catch(e){showSelfEval('Не удалось запустить микрофон — оцените себя сами:');return;}
+  recog.lang='nb-NO';recog.interimResults=false;recog.continuous=false;recog.maxAlternatives=1;
+  const btn=$('micbtn');btn.classList.add('rec');btn.textContent='🔴';
+  $('micstat').textContent='Jeg lytter… говорите!';
+  recog.onresult=ev=>{const t=ev.results[0][0].transcript;resetMicUI();handleTranscript(t);};
+  recog.onerror=ev=>{
+    resetMicUI();
+    if(ev.error==='no-speech'){$('micstat').textContent='Не расслышал 🙉 Нажмите на микрофон ещё раз';}
+    else if(ev.error==='not-allowed'||ev.error==='service-not-allowed'){
+      showSelfEval('Доступ к микрофону запрещён — оцените себя сами:');
+    }else{
+      $('micstat').textContent='Ошибка распознавания. Попробуйте ещё раз или оцените себя:';
+      showSelfEvalButtons();
+    }
+  };
+  recog.onend=()=>{recogBusy=false;};
+  try{recog.start();recogBusy=true;}catch(e){resetMicUI();showSelfEval('Микрофон занят или недоступен — оцените себя сами:');}
+}
+function resetMicUI(){
+  recogBusy=false;
+  const btn=$('micbtn');
+  if(btn){btn.classList.remove('rec');btn.textContent='🎤';}
+}
+function compareWords(target,said){
+  const counts={};said.forEach(w=>counts[w]=(counts[w]||0)+1);
+  return target.map(w=>{const hit=counts[w]>0;if(hit)counts[w]--;return{w,hit};});
+}
+function handleTranscript(t){
+  const q=S.current,said=normWords(t);
+  let score;
+  if(q.type==='read'){
+    const target=normWords(q.expect);
+    const cmp=compareWords(target,said);
+    score=cmp.filter(c=>c.hit).length/target.length;
+  }else{
+    if(said.length===0)score=0;
+    else{
+      const kwOk=q.kw.some(k=>said.includes(k));
+      score=said.length>=q.min?(kwOk?1:0.8):(said.length>=Math.ceil(q.min/2)?0.5:0.3);
+    }
+  }
+  if(score<0.6&&S.speakAttempts===0){
+    S.speakAttempts=1;S.bestSpeak=score;
+    $('micstat').innerHTML=`Пока ${Math.round(score*100)}%. 🔁 Попробуйте ещё раз — осталось 1 попытка!`;
+    return;
+  }
+  finalizeSpeaking(Math.max(score,S.bestSpeak),t);
+}
+function finalizeSpeaking(score,transcript){
+  const q=S.current;
+  const correct=q.type==='read'?q.text:q.sample;
+  applyResult(score,correct,transcript);
+  let extra='';
+  if(transcript)extra+=`<div class="heard">🎙 Распознано: «${transcript}»</div>`;
+  if(q.type==='read'&&transcript){
+    extra+=`<div style="margin-bottom:8px">`+compareWords(normWords(q.expect),normWords(transcript))
+      .map(c=>`<span class="wordchip ${c.hit?'hit':'miss'}">${c.w}</span>`).join('')+`</div>`;
+  }
+  if(q.type==='say'&&transcript)extra+=`<div class="heard" style="border-left-color:var(--sky)">💬 Пример ответа: «${q.sample}»</div>`;
+  $('fb-extra').innerHTML=extra;
+}
+function showSelfEval(reason){
+  const btn=$('micbtn');if(btn)btn.hidden=true;
+  $('micstat').textContent=reason;
+  showSelfEvalButtons();
+}
+function showSelfEvalButtons(){
+  const fb=$('speak-fallback');if(!fb)return;
+  fb.innerHTML=`<p class="eval-q" style="margin-top:14px">Как вы справились?</p>
+    <div class="eval-btns">
+      <button type="button" onclick="selfEval(0.2)">😕 Не получилось</button>
+      <button type="button" onclick="selfEval(0.7)">🙂 Неплохо</button>
+      <button type="button" onclick="selfEval(1)">😎 Отлично</button>
+    </div>`;
+}
+function selfEval(v){
+  if(!S||S.answered)return;
+  finalizeSpeaking(v,null);
+}
+
+/* ---------- общая обработка ---------- */
+function applyResult(score,correctText,given){
+  S.answered=true;
+  const k=S.skill,q=S.current,kids=document.body.classList.contains('mode-kids');
+  const ok=score>=0.6;
+  const dQ=150+(q.lvl-1)*200;
+  const exp=1/(1+Math.pow(10,(dQ-S.rating[k])/400));
+  S.rating[k]+=120*(score-exp);
+  S.cur[k]=Math.max(1,Math.min(6,S.cur[k]+(ok?1:-1)));
+  S.sk2[k].t++;
+  let pts=0;
+  if(ok){S.streak++;S.best=Math.max(S.best,S.streak);pts=Math.round(q.lvl*10*score)+(S.streak>=3?5:0);S.score+=pts;S.sk2[k].c++;}
+  else S.streak=0;
+  S.qIdx++;S.secDone++;
+  S.ans.push({skill:k,q,ok,given});
+  const good=kids?['Ура, верно! 🎉','Точно! ⭐','Молодец! 🚀','Супер! 🌟']:['Верно!','Точно в цель.','Отлично.','Правильно.'];
+  const bad=kids?['Ой, почти! 🙈','Ничего страшного! 💙','Бывает! Идём дальше 🐾']:['Не совсем.','Неверно.','Мимо.'];
+  const head=$('fb-head');
+  head.className='fb-head '+(ok?'good':'badh');
+  $('fb-icon').textContent=ok?'✅':'❌';
+  $('fb-title').textContent=ok?good[Math.floor(Math.random()*good.length)]
+    :bad[Math.floor(Math.random()*bad.length)]+' Образец: '+correctText;
+  const p=$('fb-pts');p.hidden=!ok;if(ok)p.textContent='+'+pts+' очков';
+  $('fb-extra').innerHTML='';
+  $('fb-expl').textContent=(kids?'💡 ':'')+q.e;
+  const tr=$('fb-trans');
+  if(k==='l'){tr.hidden=false;tr.textContent='🎙 '+q.audio.join(' ');}else tr.hidden=true;
+  const lastInSec=S.secDone>=S.per,lastSection=S.secIdx>=S.skills.length-1;
+  $('btn-next').textContent=(lastInSec&&lastSection)?'К результатам 🏁':(lastInSec?'Следующая часть →':'Дальше →');
+  $('feedback').hidden=false;
+  $('pbar').style.width=(S.qIdx/S.totalQ*100)+'%';
+  updateHUD();
+  $('feedback').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function next(){
+  stopRecog();
+  if(S.secDone<S.per){renderQuestion();return;}
+  S.secIdx++;
+  if(S.secIdx<S.skills.length){S.skill=S.skills[S.secIdx];showIntro();}
+  else finish();
+}
+
+function updateHUD(){
+  $('est').textContent=SK[S.skill].short+': '+ratingToLevel(S.rating[S.skill]);
+  $('score').textContent='Очки: '+S.score;
+  const st=$('streak');st.hidden=S.streak<2;if(!st.hidden)st.textContent='🔥 серия '+S.streak;
+  document.querySelectorAll('.snav').forEach(el=>{
+    const k=el.dataset.k,idx=S.skills.indexOf(k);
+    el.classList.toggle('now',idx===S.secIdx);
+    el.classList.toggle('done',idx<S.secIdx);
+  });
+}
+
+function ratingToLevel(r){return r<240?'A1':r<450?'A2':r<650?'B1':r<850?'B2':r<1030?'C1':'C2';}
+
+function finish(){
+  stopRecog();
+  if(TTS)speechSynthesis.cancel();
+  show('scr-result');
+  const kids=document.body.classList.contains('mode-kids');
+  const correct=S.ans.filter(a=>a.ok).length,acc=Math.round(correct/S.totalQ*100);
+  const avg=S.skills.reduce((s,k)=>s+S.rating[k],0)/S.skills.length;
+  const lvl=ratingToLevel(avg);
+  $('stamp').firstChild.textContent=lvl;
+  $('stamp-name').textContent=LVLFULL[lvl];
+  $('verdict').textContent=kids
+    ?(acc>=80?'Ты суперзвезда норвежского! 🌟':acc>=50?'Отличная работа! Ты большой молодец 💪':'Хорошая попытка! Практика — и ты чемпион 🚀')
+    :(acc>=80?'Впечатляющий результат — норвежский у вас в отличной форме.'
+      :acc>=50?'Крепкий результат: база есть, осталось отточить детали.'
+      :'Хорошее начало: регулярная практика быстро поднимет ваш уровень.');
+  $('st-correct').textContent=correct+' / '+S.totalQ;
+  $('st-acc').textContent=acc+'%';
+  $('st-streak').textContent=S.best;
+  $('st-score').textContent=S.score;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    $('mark').style.left=Math.max(2,Math.min(98,(avg-100)/1050*100))+'%';
+    document.querySelectorAll('.scard .bar i').forEach(b=>b.style.width=b.dataset.w+'%');
+  }));
+  $('skillcards').innerHTML=S.skills.map(k=>{
+    const sc=S.sk2[k],l=ratingToLevel(S.rating[k]);
+    const pct=sc.t?Math.round(sc.c/sc.t*100):0;
+    return `<div class="scard"><div class="ic">${SK[k].icon}</div><h4>${SK[k].title}</h4>
+      <div class="lvl">${l}</div><div class="acc">${sc.c}/${sc.t} верно · ${pct}%</div>
+      <div class="bar"><i data-w="${pct}"></i></div></div>`;
+  }).join('');
+  const wrong=S.ans.filter(a=>!a.ok);
+  if(!wrong.length){
+    $('mistakes').innerHTML='<div class="all-good">🏆 Ни одной ошибки — безупречно!</div>';
+  }else{
+    let html='';
+    S.skills.forEach(k=>{
+      const ws=wrong.filter(a=>a.skill===k);
+      if(!ws.length)return;
+      html+=`<div class="m-group">${SK[k].icon} ${SK[k].title}</div>`;
+      ws.forEach(a=>{
+        const q=a.q;let text='',right='';
+        if(k==='w'){text=q.q.replace(/<br>/g,' ').replace(/<[^>]+>/g,'');right=q.show;}
+        else if(k==='s'){text=(q.type==='read'?'Прочитайте: ':'Ответьте вслух: ')+q.text;right=q.type==='read'?q.text:'Пример: '+q.sample;}
+        else{text=q.q;right=q.o[q.a];}
+        html+=`<div class="m-item"><div class="mq">${text}</div>
+          <div>Ваш ответ: <s>${a.given||'—'}</s> &nbsp;→&nbsp; <span class="fix">✔ ${right}</span></div>
+          <div class="why">${q.e}</div></div>`;
+      });
+    });
+    $('mistakes').innerHTML=html;
+  }
+  if(acc>=60)confetti(kids?130:80);
+}
+
+function confetti(n){
+  const box=document.createElement('div');box.className='confetti';document.body.appendChild(box);
+  const colors=['#ffd35c','#ff9d9d','#8fe3c0','#9fd8ff','#ffffff','#ff8f6b'];
+  for(let i=0;i<n;i++){
+    const p=document.createElement('i');
+    p.style.left=Math.random()*100+'vw';p.style.background=colors[i%colors.length];
+    p.style.animationDuration=(2.4+Math.random()*2.4)+'s';
+    p.style.animationDelay=(Math.random()*1.2)+'s';
+    p.style.transform='rotate('+Math.random()*360+'deg)';
+    box.appendChild(p);
+  }
+  setTimeout(()=>box.remove(),6000);
+}
+
+function goStart(){stopRecog();if(TTS)speechSynthesis.cancel();show('scr-start');}
+function show(id){
+  ['scr-start','scr-quiz','scr-result'].forEach(s=>$(s).hidden=(s!==id));
+  const el=$(id);el.style.animation='none';void el.offsetWidth;el.style.animation='';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.addEventListener('keydown',e=>{
+  if($('scr-quiz').hidden||!S)return;
+  if(!$('intro').hidden&&e.key==='Enter'){beginSection();return;}
+  if(S.skill==='w'){
+    if(!S.answered&&e.key==='Enter')submitWrite();
+    else if(S.answered&&e.key==='Enter'&&document.activeElement.id!=='winput')next();
+    return;
+  }
+  if(S.skill==='s'){if(S.answered&&e.key==='Enter')next();return;}
+  const map={'1':0,'2':1,'3':2,'4':3,'a':0,'b':1,'c':2,'d':3};
+  const key=e.key.toLowerCase();
+  if(!S.answered&&map[key]!==undefined&&S.order)answer(map[key]);
+  else if(S.answered&&e.key==='Enter')next();
+});
+</script>
+</body>
+</html>
