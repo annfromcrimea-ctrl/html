@@ -1,0 +1,2290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>🧠 Энциклопедия практик психолога — Полный справочник</title>
+<style>
+:root{
+  --primary:#2c3e50; --secondary:#6c5ce7; --accent:#fdcb6e;
+  --bg:#f8f9fa; --card:#ffffff; --text:#2d3436; --muted:#636e72;
+  --border:#dfe6e9; --shadow:0 8px 32px rgba(108,92,231,.12);
+  --radius:20px; --success:#00b894; --danger:#e17055; --warning:#fdcb6e;
+  --blue:#0984e3; --pink:#e84393; --orange:#e17055;
+}
+[data-theme="dark"]{
+  --bg:#0a0a1a; --card:#1a1a2e; --text:#f0f0f0; --muted:#b2bec3;
+  --border:#2d2d44; --shadow:0 8px 32px rgba(108,92,231,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.9;
+  transition:.4s;padding-bottom:80px;
+  background-image:radial-gradient(circle at 10% 20%, rgba(108,92,231,.04) 0%, transparent 50%),
+                   radial-gradient(circle at 90% 80%, rgba(253,203,110,.04) 0%, transparent 50%);
+}
+
+/* ===== ШАПКА ===== */
+header{
+  background:linear-gradient(135deg, #6c5ce7, #e84393);
+  color:#fff;padding:.8rem 1rem;position:sticky;top:0;z-index:100;
+  box-shadow:0 4px 24px rgba(108,92,231,.3)
+}
+header .top-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+header h1{font-size:1.1rem;font-weight:800;display:flex;align-items:center;gap:.5rem}
+header .controls{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap}
+header .controls input{padding:.4rem .8rem;border-radius:30px;border:none;background:rgba(255,255,255,.2);color:#fff;font-size:.85rem;min-width:120px}
+header .controls input::placeholder{color:rgba(255,255,255,.7)}
+header .controls button{background:rgba(255,255,255,.2);border:none;color:#fff;padding:.3rem .8rem;border-radius:30px;cursor:pointer;font-weight:600;font-size:.8rem;transition:.2s}
+header .controls button:hover{background:rgba(255,255,255,.3)}
+.progress-bar{height:4px;background:rgba(255,255,255,.2);margin-top:.5rem;border-radius:4px}
+.progress-fill{height:100%;background:#fdcb6e;width:0%;transition:width .2s;border-radius:4px}
+.nav-toggle{display:none;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;padding:0 .3rem}
+
+/* ===== МОБИЛЬНОЕ МЕНЮ ===== */
+.nav-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:99}
+.nav-overlay.open{display:block}
+.mobile-nav{
+  position:fixed;top:0;left:-300px;width:280px;height:100%;
+  background:var(--card);z-index:100;overflow-y:auto;
+  transition:left .3s;padding:1.2rem;box-shadow:4px 0 30px rgba(0,0,0,.2)
+}
+.mobile-nav.open{left:0}
+.mobile-nav .close-nav{float:right;background:none;border:none;font-size:1.5rem;color:var(--text);cursor:pointer}
+.mobile-nav h3{font-size:.7rem;text-transform:uppercase;color:var(--muted);margin:1rem 0 .3rem;letter-spacing:1px}
+.mobile-nav ul{list-style:none}
+.mobile-nav li{margin-bottom:.2rem}
+.mobile-nav a{text-decoration:none;color:var(--text);padding:.4rem .6rem;display:block;border-radius:8px;font-size:.85rem;transition:.2s;border-left:3px solid transparent}
+.mobile-nav a:hover{background:rgba(108,92,231,.1);border-left-color:#6c5ce7}
+
+/* ===== КОНТЕЙНЕР ===== */
+.container{padding:.8rem 1rem;max-width:1200px;margin:0 auto}
+section{margin-bottom:3.5rem;scroll-margin-top:80px}
+
+/* ===== ЗАГОЛОВКИ ===== */
+h2{
+  font-size:1.7rem;font-weight:800;color:#6c5ce7;
+  display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem;
+  padding-bottom:.5rem;border-bottom:4px solid #fdcb6e
+}
+h2 .emoji-big{font-size:2.2rem}
+h3{font-size:1.3rem;font-weight:700;color:var(--text);margin:1.5rem 0 .8rem}
+h4{font-size:1.05rem;font-weight:600;color:#6c5ce7;margin:.8rem 0 .4rem}
+
+/* ===== КАРТОЧКИ ===== */
+.card{
+  background:var(--card);padding:1.5rem;border-radius:var(--radius);
+  box-shadow:var(--shadow);margin-bottom:1.2rem;
+  border:1px solid rgba(108,92,231,.08);
+  transition:transform .3s, box-shadow .3s
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(108,92,231,.15)}
+.card .card-icon{font-size:2.5rem;display:block;margin-bottom:.5rem}
+.card.accent{border-left:6px solid #fdcb6e}
+.card.success{border-left:6px solid #00b894}
+.card.danger{border-left:6px solid #e17055}
+.card.warning{border-left:6px solid #fdcb6e}
+.card.purple{border-left:6px solid #6c5ce7}
+.card.blue{border-left:6px solid #0984e3}
+.card.pink{border-left:6px solid #e84393}
+.card.orange{border-left:6px solid #e17055}
+.card.gold{border-left:6px solid #fdcb6e}
+
+/* ===== ТАБЛИЦЫ ===== */
+.table-wrap{overflow-x:auto;margin:.8rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th,td{border:1px solid rgba(108,92,231,.15);padding:.6rem .8rem;text-align:left;vertical-align:top}
+th{background:#6c5ce7;color:#fff;font-weight:700}
+tr:nth-child(even){background:rgba(108,92,231,.04)}
+
+/* ===== ТЭГИ ===== */
+.tag{
+  display:inline-block;padding:.1rem .6rem;border-radius:20px;
+  font-size:.65rem;font-weight:700;margin-right:.2rem
+}
+.tag.purple{background:#6c5ce7;color:#fff}
+.tag.gold{background:#fdcb6e;color:#2d3436}
+.tag.green{background:#00b894;color:#fff}
+.tag.red{background:#e17055;color:#fff}
+.tag.blue{background:#0984e3;color:#fff}
+.tag.pink{background:#e84393;color:#fff}
+
+/* ===== КНОПКИ ===== */
+.btn{
+  background:#6c5ce7;color:#fff;border:none;padding:.6rem 1.2rem;
+  border-radius:30px;cursor:pointer;font-weight:700;font-size:.9rem;
+  transition:.3s;display:inline-block;text-align:center
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(108,92,231,.3)}
+.btn.accent{background:#fdcb6e;color:#2d3436}
+.btn.success{background:#00b894}
+.btn.danger{background:#e17055}
+.btn.pink{background:#e84393}
+.btn-block{display:block;width:100%}
+.btn-group{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0}
+.btn-group .btn{flex:1;min-width:60px;font-size:.8rem;padding:.4rem .8rem}
+
+/* ===== СЕТКИ ===== */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+
+/* ===== АККОРДЕОН ===== */
+.accordion{background:var(--card);border-radius:var(--radius);margin-bottom:.8rem;border:1px solid rgba(108,92,231,.1);overflow:hidden}
+.accordion-header{padding:.8rem 1rem;cursor:pointer;font-weight:700;display:flex;justify-content:space-between;align-items:center;background:rgba(108,92,231,.04);transition:.2s;font-size:1rem}
+.accordion-header:hover{background:rgba(108,92,231,.08)}
+.accordion-body{padding:0 1rem;max-height:0;overflow:hidden;transition:max-height .5s ease}
+.accordion-body.open{max-height:8000px;padding:1rem}
+.accordion-header .arrow{transition:transform .3s}
+.accordion-header .arrow.open{transform:rotate(180deg)}
+
+/* ===== ВЫВОД ===== */
+.output{
+  margin-top:1rem;padding:1rem;background:var(--bg);
+  border-radius:var(--radius);border:2px solid rgba(108,92,231,.15);
+  display:none;white-space:pre-wrap;font-family:monospace;
+  font-size:.85rem;max-height:450px;overflow-y:auto
+}
+.output.visible{display:block}
+
+/* ===== НИЖНЯЯ НАВИГАЦИЯ ===== */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;background:var(--card);
+  border-top:2px solid rgba(108,92,231,.08);padding:.3rem .5rem;z-index:98;
+  display:flex;justify-content:space-around;align-items:center;height:60px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)
+}
+.bottom-nav button{
+  background:none;border:none;color:var(--muted);font-size:.6rem;
+  cursor:pointer;display:flex;flex-direction:column;align-items:center;
+  gap:1px;padding:.2rem .4rem;border-radius:10px;min-width:40px
+}
+.bottom-nav button span{font-size:1.2rem}
+.bottom-nav button.active{color:#6c5ce7;background:rgba(108,92,231,.08)}
+.bottom-nav .nav-label{font-size:.45rem;font-weight:600}
+
+/* ===== КНОПКА ВВЕРХ ===== */
+.scroll-top-btn{
+  position:fixed;bottom:75px;right:12px;width:44px;height:44px;
+  border-radius:50%;background:#6c5ce7;color:#fff;border:none;
+  font-size:22px;cursor:pointer;box-shadow:0 4px 16px rgba(108,92,231,.3);
+  transition:all .3s;z-index:97;opacity:0;transform:scale(.8);pointer-events:none
+}
+.scroll-top-btn.visible{opacity:1;transform:scale(1);pointer-events:auto}
+
+/* ===== ДОПОЛНИТЕЛЬНО ===== */
+.quote-block{
+  background:linear-gradient(135deg, rgba(108,92,231,.05), rgba(253,203,110,.05));
+  padding:1.2rem;border-radius:var(--radius);border-left:5px solid #6c5ce7;
+  font-style:italic;margin:.8rem 0
+}
+.checklist{list-style:none;padding:0}
+.checklist li{padding:.5rem 0;padding-left:1.8rem;position:relative;cursor:pointer;font-size:.95rem}
+.checklist li::before{content:'✨';position:absolute;left:0;color:#fdcb6e}
+.checklist li.checked::before{content:'✅'}
+
+.step-box{
+  background:var(--bg);padding:1rem 1.2rem;border-radius:var(--radius);
+  border-left:4px solid #6c5ce7;margin:.8rem 0
+}
+.step-box .step-num{
+  display:inline-block;background:#6c5ce7;color:#fff;
+  border-radius:50%;width:28px;height:28px;text-align:center;
+  line-height:28px;font-weight:700;font-size:.85rem;margin-right:.5rem
+}
+
+.definition-box{
+  background:rgba(108,92,231,.05);padding:1rem 1.2rem;
+  border-radius:var(--radius);margin:.8rem 0;border:1px dashed rgba(108,92,231,.2)
+}
+.definition-box strong{color:#6c5ce7}
+
+/* ===== АДАПТИВ ===== */
+@media(max-width:768px){
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  header h1{font-size:1rem}
+  .controls input{width:100px;font-size:.75rem}
+  .bottom-nav button{min-width:32px}
+  .scroll-top-btn{bottom:70px;right:10px;width:36px;height:36px;font-size:18px}
+  h2{font-size:1.3rem}
+  .card{padding:.8rem}
+  .bottom-nav button span{font-size:1rem}
+  .bottom-nav .nav-label{font-size:.4rem}
+}
+@media(max-width:480px){
+  header .top-row{flex-direction:column;align-items:stretch;gap:.3rem}
+  header .controls{justify-content:center}
+  header .controls input{width:100%}
+  .bottom-nav button{min-width:28px}
+}
+@media(min-width:769px){
+  .mobile-nav,.nav-overlay,.nav-toggle{display:none!important}
+  .bottom-nav{display:none!important}
+}
+</style>
+
+<style id="theme-tools-style-4634013327982893670">.tm-card{margin:0;max-width:1100px;padding:22px;border:1px solid color-mix(in srgb,currentColor 14%,transparent);border-radius:20px;background:color-mix(in srgb,white 88%,transparent);box-shadow:0 8px 24px rgba(20,30,40,.07)}.tm-card h2{margin-top:0}.tm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.tm-grid details,.tm-grid label{padding:14px;border-radius:14px;background:rgba(255,255,255,.7)}.tm-form{display:flex;flex-wrap:wrap;gap:10px}.tm-form input,.tm-form select,.tm-form textarea,.tm-card>textarea{flex:1 1 220px;padding:12px;border:1px solid #b8c5cc;border-radius:10px;font:inherit}.tm-form button,.tm-actions button,.tm-buttons button,.tm-section-nav a{border:0;border-radius:10px;padding:12px 15px;background:#315d73;color:#fff;font:600 14px inherit;cursor:pointer;text-decoration:none}.tm-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}.tm-output, .tm-card pre{white-space:pre-wrap;line-height:1.6;padding:14px;background:rgba(0,0,0,.04);border-radius:12px}.tm-section-nav{display:flex;flex-wrap:wrap;gap:10px}.tm-note{opacity:.75;font-size:.92em}@media(max-width:600px){.tm-card{margin:0 10px;padding:16px;border-radius:16px}.tm-form{display:grid}.tm-form>*{width:100%;box-sizing:border-box}.tm-section-nav a,.tm-buttons button{min-height:46px;display:flex;align-items:center;justify-content:center}.tm-grid{grid-template-columns:1fr}}</style></head>
+<body>
+
+<header>
+  <div class="top-row">
+    <h1>🧠 Энциклопедия практик психолога</h1>
+    <div class="controls">
+      <input type="text" id="search" placeholder="🔍 Поиск...">
+      <button onclick="toggleTheme()">🌓</button>
+      <button onclick="window.print()">🖨️</button>
+      <button class="nav-toggle" onclick="toggleMobileNav()" style="display:block;background:none;border:none;color:#fff;font-size:1.4rem;padding:0 .3rem">☰</button>
+    </div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+</header>
+
+<!-- ===== МОБИЛЬНОЕ МЕНЮ ===== -->
+<div class="nav-overlay" id="navOverlay" onclick="toggleMobileNav()"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <button class="close-nav" onclick="toggleMobileNav()">✕</button>
+  <h3>📚 ОСНОВЫ</h3>
+  <ul>
+    <li><a href="#intro" onclick="toggleMobileNav()">Введение</a></li>
+    <li><a href="#ethics" onclick="toggleMobileNav()">Этика</a></li>
+    <li><a href="#first-session" onclick="toggleMobileNav()">Первая сессия</a></li>
+    <li><a href="#theories" onclick="toggleMobileNav()">Теории</a></li>
+  </ul>
+  <h3>🧸 ДЕТСКИЙ</h3>
+  <ul>
+    <li><a href="#child-diagnostics" onclick="toggleMobileNav()">Диагностика</a></li>
+    <li><a href="#child-therapy" onclick="toggleMobileNav()">Терапия</a></li>
+    <li><a href="#child-protocol" onclick="toggleMobileNav()">Протоколы</a></li>
+  </ul>
+  <h3>🧑‍🎓 ПОДРОСТКОВЫЙ</h3>
+  <ul>
+    <li><a href="#teen-diagnostics" onclick="toggleMobileNav()">Диагностика</a></li>
+    <li><a href="#teen-therapy" onclick="toggleMobileNav()">Терапия</a></li>
+    <li><a href="#teen-crisis" onclick="toggleMobileNav()">Кризисы</a></li>
+  </ul>
+  <h3>👨‍💼 ВЗРОСЛЫЙ</h3>
+  <ul>
+    <li><a href="#adult-diagnostics" onclick="toggleMobileNav()">Диагностика</a></li>
+    <li><a href="#adult-therapy" onclick="toggleMobileNav()">Терапия</a></li>
+  </ul>
+  <h3>🏫 ШКОЛЬНЫЙ</h3>
+  <ul>
+    <li><a href="#school-diagnostics" onclick="toggleMobileNav()">Диагностика</a></li>
+    <li><a href="#school-work" onclick="toggleMobileNav()">Работа</a></li>
+    <li><a href="#school-prevention" onclick="toggleMobileNav()">Профилактика</a></li>
+  </ul>
+  <h3>👨‍👩‍👧‍👦 СЕМЕЙНЫЙ</h3>
+  <ul>
+    <li><a href="#family-diagnostics" onclick="toggleMobileNav()">Диагностика</a></li>
+    <li><a href="#family-therapy" onclick="toggleMobileNav()">Терапия</a></li>
+  </ul>
+  <h3>🛠️ УНИВЕРСАЛЬНЫЕ</h3>
+  <ul>
+    <li><a href="#universal" onclick="toggleMobileNav()">Методы</a></li>
+    <li><a href="#crisis" onclick="toggleMobileNav()">Кризисная помощь</a></li>
+    <li><a href="#resources" onclick="toggleMobileNav()">Ресурсы</a></li>
+  </ul>
+</nav>
+
+<button class="scroll-top-btn" id="scrollTopBtn" onclick="scrollToTop()" title="Наверх">⬆</button>
+
+<!-- ===== НИЖНЯЯ НАВИГАЦИЯ ===== -->
+<nav class="bottom-nav" id="bottomNav">
+  <button onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'})" class="active">
+    <span>🏠</span><span class="nav-label">Главная</span>
+  </button>
+  <button onclick="document.getElementById('child-diagnostics').scrollIntoView({behavior:'smooth'})">
+    <span>🧸</span><span class="nav-label">Дети</span>
+  </button>
+  <button onclick="document.getElementById('teen-diagnostics').scrollIntoView({behavior:'smooth'})">
+    <span>🧑‍🎓</span><span class="nav-label">Подростки</span>
+  </button>
+  <button onclick="document.getElementById('adult-diagnostics').scrollIntoView({behavior:'smooth'})">
+    <span>👨‍💼</span><span class="nav-label">Взрослые</span>
+  </button>
+  <button onclick="document.getElementById('family-diagnostics').scrollIntoView({behavior:'smooth'})">
+    <span>👨‍👩‍👧‍👦</span><span class="nav-label">Семья</span>
+  </button>
+  <button onclick="document.getElementById('school-diagnostics').scrollIntoView({behavior:'smooth'})">
+    <span>🏫</span><span class="nav-label">Школа</span>
+  </button>
+</nav>
+
+<div class="container">
+
+  <!-- ============================================================ -->
+  <!-- ===== ВВЕДЕНИЕ ===== -->
+  <!-- ============================================================ -->
+  <section id="intro">
+    <h2><span class="emoji-big">🧠</span> Полная энциклопедия практик психолога</h2>
+    <p><strong>Исчерпывающий справочник для практикующего психолога.</strong> Здесь собраны все методы, техники, диагностики, терапевтические подходы, пошаговые инструкции и практические инструменты для работы с детьми, подростками, взрослыми, семьями и в школе.</p>
+
+    <div class="quote-block">
+      "Психология — это не только наука, но и искусство. Каждый клиент уникален, и каждый метод требует творческого применения." — Карл Роджерс
+    </div>
+
+    <div class="card purple">
+      <div class="card-icon">📖</div>
+      <h3>Структура справочника</h3>
+      <p>Справочник разделён на <strong>7 основных блоков</strong>, каждый из которых содержит теорию, диагностику, терапевтические методы и практические протоколы:</p>
+      <div class="grid-4">
+        <div><strong>🧸 Детский</strong><br>Диагностика, игровая терапия, арт-терапия, протоколы</div>
+        <div><strong>🧑‍🎓 Подростковый</strong><br>Диагностика, кризисная помощь, профориентация</div>
+        <div><strong>👨‍💼 Взрослый</strong><br>Диагностика, КПТ, гештальт, психоанализ</div>
+        <div><strong>🏫 Школьный</strong><br>Диагностика, профилактика, работа с классом</div>
+        <div><strong>👨‍👩‍👧‍👦 Семейный</strong><br>Диагностика, системная терапия, работа с парой</div>
+        <div><strong>🛠️ Универсальные</strong><br>Кризисная помощь, дыхание, релаксация</div>
+        <div><strong>⚖️ Этика</strong><br>Принципы, сложные ситуации, информированное согласие</div>
+        <div><strong>📚 Ресурсы</strong><br>Книги, инструменты, исследования</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ЭТИКА ===== -->
+  <!-- ============================================================ -->
+  <section id="ethics">
+    <h2><span class="emoji-big">⚖️</span> Этический кодекс психолога</h2>
+
+    <div class="card purple">
+      <h3>Основные принципы — полный разбор</h3>
+
+      <div class="definition-box">
+        <strong>🔒 Конфиденциальность</strong>
+        <p>Всё, что обсуждается на сессии, остаётся в кабинете. <span class="tag red">Исключения: угроза жизни клиента или других, насилие над детьми, судебное предписание.</span> Психолог обязан объяснить эти исключения на первой сессии.</p>
+        <p><strong>Практический совет:</strong> Храните записи в защищённом месте. Используйте шифрование для электронных записей.</p>
+      </div>
+
+      <div class="definition-box">
+        <strong>📄 Информированное согласие</strong>
+        <p>Клиент должен знать цели, методы, длительность, стоимость и возможные риски терапии. <span class="tag gold">Обязательно подписание договора.</span></p>
+        <p><strong>Что должно быть в договоре:</strong> цели терапии, методы, конфиденциальность, оплата, отмена встреч, контакты для экстренных случаев.</p>
+      </div>
+
+      <div class="definition-box">
+        <strong>🎓 Профессиональная компетентность</strong>
+        <p>Работа только в рамках своей квалификации. <span class="tag blue">Регулярное повышение квалификации (не менее 40 часов в год).</span></p>
+        <p><strong>Рекомендация:</strong> Ведите портфолио случаев и проходите супервизию не реже 1 раза в месяц.</p>
+      </div>
+
+      <div class="definition-box">
+        <strong>🚫 Отказ от двойных отношений</strong>
+        <p>Нельзя совмещать терапевтические и личные отношения. <span class="tag red">Запрещены романтические, деловые, дружеские отношения с клиентами.</span></p>
+        <p><strong>Исключения:</strong> В сельской местности возможны пересечения — в таком случае важно обсуждать их открыто.</p>
+      </div>
+
+      <div class="definition-box">
+        <strong>👥 Супервизия</strong>
+        <p>Регулярное обсуждение сложных случаев с коллегами. <span class="tag green">Не реже 1 раза в месяц для начинающих, 1 раз в квартал для опытных.</span></p>
+        <p><strong>Форматы:</strong> индивидуальная, групповая, онлайн-супервизия.</p>
+      </div>
+    </div>
+
+    <div class="card success">
+      <h3>Сложные этические ситуации — инструкция</h3>
+
+      <div class="step-box">
+        <span class="step-num">1</span> <strong>Разглашение информации:</strong> Если клиент угрожает себе или другим — нарушение конфиденциальности допустимо.
+        <p><strong>Алгоритм:</strong></p>
+        <ul>
+          <li>Оценить риск (немедленная опасность? есть ли план? есть ли средства?)</li>
+          <li>Обеспечить безопасность (не оставлять клиента одного, убрать опасные предметы)</li>
+          <li>При необходимости связаться с экстренными службами (112, психиатрическая бригада)</li>
+          <li>Обсудить с клиентом после стабилизации</li>
+        </ul>
+      </div>
+
+      <div class="step-box">
+        <span class="step-num">2</span> <strong>Подарки от клиентов:</strong> Принимать можно только символические подарки (открытки, рисунки, цветы, сувениры до 500 руб.). От дорогих подарков следует вежливо отказываться.
+        <p><strong>Формулировка отказа:</strong> «Я очень ценю ваш жест, но по этическим причинам я не могу принять дорогие подарки».</p>
+      </div>
+
+      <div class="step-box">
+        <span class="step-num">3</span> <strong>Социальные сети:</strong> Не рекомендуется добавлять клиентов в друзья. В случае запроса — объяснить этические причины.
+        <p><strong>Рекомендация:</strong> Создайте профессиональную страницу (для публикаций) и личную (закрытую).</p>
+      </div>
+
+      <div class="step-box">
+        <span class="step-num">4</span> <strong>Завершение терапии:</strong> Нельзя бросать клиента без предупреждения.
+        <p><strong>Алгоритм завершения:</strong></p>
+        <ul>
+          <li>Минимум 2-3 сессии для завершения</li>
+          <li>Обсуждение причин завершения</li>
+          <li>Предоставление рекомендаций и плана поддержки</li>
+          <li>Обсуждение возможности возврата при необходимости</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ПЕРВАЯ СЕССИЯ ===== -->
+  <!-- ============================================================ -->
+  <section id="first-session">
+    <h2><span class="emoji-big">🤝</span> Первая сессия: пошаговая инструкция</h2>
+
+    <div class="card purple">
+      <h3>Этапы первой встречи — подробно</h3>
+
+      <div class="step-box">
+        <span class="step-num">1</span> <strong>Знакомство и установление контакта (5-10 мин)</strong>
+        <p>Представьтесь, создайте комфортную атмосферу. <span class="tag green">Важно:</span> улыбка, открытая поза, зрительный контакт. Спросите, как клиент предпочитает, чтобы к нему обращались.</p>
+        <p><strong>Фразы для начала:</strong> «Рад(а) с Вами познакомиться», «Как Вам удобно, чтобы я к Вам обращался?», «Расскажите, что привело Вас сегодня».</p>
+      </div>
+
+      <div class="step-box">
+        <span class="step-num">2</span> <strong>Информированное согласие (5-7 мин)</strong>
+        <p>Объясните правила работы: конфиденциальность, длительность сессии, частота встреч, оплата, отмена встреч. <span class="tag gold">Обязательно подпишите договор.</span></p>
+        <p><strong>Ключевые пункты:</strong> конфиденциальность (и исключения), длительность (50-60 мин), стоимость, порядок отмены (за 24 часа), контакты.</p>
+      </div>
+
+      <div class="step-box">
+        <span class="step-num">3</span> <strong>Сбор анамнеза (15-20 мин)</strong>
+        <p>Задайте вопросы о текущей ситуации, истории жизни, семье, здоровье. <span class="tag blue">Используйте открытые вопросы.</span></p>
+        <p><strong>Вопросы:</strong> «Расскажите о своей жизни в последнее время», «Как бы Вы описали свои отношения с близкими?», «Были ли у Вас обращения к психологам раньше?».</p>
+      </div>
+
+      <div class="step-box">
+        <span class="step-num">4</span> <strong>Формулировка запроса (10 мин)</strong>
+        <p>Что привело клиента? Как он видит результат терапии? <span class="tag gold">Запишите запрос в формулировке клиента.</span></p>
+        <p><strong>Вопросы для запроса:</strong> «В чём именно заключается Ваш запрос?», «Какой результат Вы хотите получить?», «Как Вы поймёте, что мы на правильном пути?».</p>
+      </div>
+
+      <div class="step-box">
+        <span class="step-num">5</span> <strong>Планирование работы (5-10 мин)</strong>
+        <p>Обсудите частоту встреч, методы работы, ожидания. Договоритесь о следующей встрече.</p>
+      </div>
+
+      <div class="step-box">
+        <span class="step-num">6</span> <strong>Завершение (5 мин)</strong>
+        <p>Подведите итоги, спросите о чувствах клиента, дайте домашнее задание (если уместно).</p>
+        <p><strong>Вопросы на завершение:</strong> «Что Вы чувствуете сейчас?», «Есть ли у Вас вопросы?».</p>
+      </div>
+    </div>
+
+    <div class="card success">
+      <h3>📝 Шаблон первой сессии</h3>
+      <div class="output visible" style="white-space:pre-wrap;font-family:monospace;font-size:.85rem;background:var(--bg)">
+═══════════════════════════════════════════════
+📋 ПЕРВАЯ СЕССИЯ — ШАБЛОН
+═══════════════════════════════════════════════
+ДАТА: _________________
+КЛИЕНТ: _________________
+ВОЗРАСТ: _________________
+
+1. ЗНАКОМСТВО (5-10 мин)
+   - Как Вам удобно, чтобы я к Вам обращался?
+   - Что привело Вас сегодня?
+   - Какие ожидания от терапии?
+
+2. ИНФОРМИРОВАННОЕ СОГЛАСИЕ (5-7 мин)
+   - Объяснены правила конфиденциальности
+   - Объяснены исключения (суицид, насилие)
+   - Объяснена длительность и стоимость
+   - Подписан договор
+
+3. АНАМНЕЗ (15-20 мин)
+   - Текущая ситуация: ________________________________
+   - История проблемы: ________________________________
+   - Семья (состав, отношения): _______________________
+   - Образование/работа: _______________________________
+   - Здоровье (физическое, психическое): ______________
+   - Предыдущий опыт терапии: _________________________
+
+4. ЗАПРОС (10 мин)
+   - В чём заключается Ваш запрос? ____________________
+   - Какой результат Вы хотите получить? ______________
+   - Как Вы поймёте, что цель достигнута? _____________
+
+5. ПЛАН РАБОТЫ (5-10 мин)
+   - Частота встреч: _________
+   - Методы: _________
+   - Домашнее задание: _________
+   - Следующая встреча: _________
+
+6. ЗАВЕРШЕНИЕ (5 мин)
+   - Чувства клиента: _________
+   - Вопросы клиента: _________
+   - Договорённость о следующей встрече: _________
+
+═══════════════════════════════════════════════
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ТЕОРИИ ===== -->
+  <!-- ============================================================ -->
+  <section id="theories">
+    <h2><span class="emoji-big">📖</span> Теории — основа практики</h2>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🧬 Психоаналитическая теория (Фрейд) — подробный разбор</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Зигмунд Фрейд</strong> (1856-1939) — основатель психоанализа. Его теория объясняет поведение через бессознательные процессы. Это первая комплексная теория психического развития, которая оказала огромное влияние на всю психологию.</p>
+
+        <h4>🔑 Ключевые понятия</h4>
+
+        <div class="definition-box">
+          <strong>Бессознательное</strong>
+          <p>Основная часть психики, недоступная сознанию. Содержит вытесненные желания, травмы, инстинкты. По Фрейду, бессознательное составляет около 90% психики.</p>
+          <p><strong>Как проявляется:</strong> в оговорках, сновидениях, симптомах, переносе в терапии.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Структура личности</strong>
+          <ul>
+            <li><strong>Ид (Id)</strong> — инстинкты, желания, работает по принципу удовольствия. «Хочу сейчас!»</li>
+            <li><strong>Эго (Ego)</strong> — реальность, рациональная часть, работает по принципу реальности. «Давай подумаем, как получить желаемое безопасно».</li>
+            <li><strong>Супер-Эго (Superego)</strong> — мораль, нормы, совесть, идеалы. «Это неправильно, так нельзя!»</li>
+          </ul>
+          <p>Конфликт между Ид и Супер-Эго вызывает тревогу, которую Эго пытается разрешить с помощью защитных механизмов.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Защитные механизмы</strong>
+          <ul>
+            <li><strong>Вытеснение</strong> — удаление из сознания неприемлемых мыслей и желаний.</li>
+            <li><strong>Проекция</strong> — приписывание своих качеств другому («Он меня ненавидит» вместо «Я его ненавижу»).</li>
+            <li><strong>Рационализация</strong> — поиск логичного оправдания иррациональным действиям.</li>
+            <li><strong>Сублимация</strong> — преобразование социально неприемлемых импульсов в социально одобряемые (агрессия → спорт, творчество).</li>
+            <li><strong>Регрессия</strong> — возврат к более ранним формам поведения (обиженный взрослый начинает плакать как ребёнок).</li>
+            <li><strong>Реактивное образование</strong> — превращение неприемлемого чувства в противоположное (ненависть → гипертрофированная любовь).</li>
+          </ul>
+        </div>
+
+        <div class="definition-box">
+          <strong>Психосексуальные стадии</strong>
+          <table>
+            <tr><th>Стадия</th><th>Возраст</th><th>Эрогенная зона</th><th>Ключевая задача</th></tr>
+            <tr><td>Оральная</td><td>0-1.5</td><td>Рот</td><td>Удовлетворение через сосание, питание. Фиксация → курение, обжорство.</td></tr>
+            <tr><td>Анальная</td><td>1.5-3</td><td>Анус</td><td>Контроль над дефекацией. Фиксация → перфекционизм или хаос.</td></tr>
+            <tr><td>Фаллическая</td><td>3-6</td><td>Гениталии</td><td>Эдипов комплекс, идентификация с родителем.</td></tr>
+            <tr><td>Латентная</td><td>6-12</td><td>—</td><td>Социализация, учёба, подавление сексуальности.</td></tr>
+            <tr><td>Генитальная</td><td>12+</td><td>Гениталии</td><td>Зрелая сексуальность, интимные отношения.</td></tr>
+          </table>
+        </div>
+
+        <h4>💡 Практическое применение</h4>
+        <ul>
+          <li><strong>Техника свободных ассоциаций:</strong> Клиент говорит всё, что приходит в голову, без цензуры. Это позволяет выйти на бессознательные конфликты.</li>
+          <li><strong>Анализ сновидений:</strong> Сны — "королевская дорога к бессознательному". Скрытое содержание снов раскрывает вытесненные желания.</li>
+          <li><strong>Интерпретация переноса:</strong> Анализ отношений клиента с терапевтом. Клиент проецирует на терапевта свои чувства к значимым фигурам.</li>
+          <li><strong>Работа с сопротивлением:</strong> Исследование того, что клиент избегает. Сопротивление указывает на болезненный материал.</li>
+        </ul>
+        <p><span class="tag gold">Показания:</span> Неврозы, тревога, депрессия, личностные проблемы, психосоматика.</p>
+        <p><span class="tag blue">Длительность:</span> Долгосрочная терапия (1-5 лет, 2-3 раза в неделю).</p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🔮 Психосоциальная теория (Эриксон) — 8 стадий</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Эрик Эриксон</strong> (1902-1994) расширил теорию Фрейда, добавив социальный аспект. Он выделил <strong>8 стадий</strong>, каждая из которых связана с психосоциальным кризисом. Успешное прохождение каждой стадии даёт определённую добродетель.</p>
+
+        <table>
+          <tr><th>Возраст</th><th>Кризис</th><th>Позитивный исход</th><th>Негативный исход</th><th>Добродетель</th></tr>
+          <tr><td>0-1.5</td><td>Доверие vs Недоверие</td><td>Базовое доверие к миру</td><td>Тревога, подозрительность</td><td>Надежда</td></tr>
+          <tr><td>1.5-3</td><td>Автономия vs Стыд</td><td>Самостоятельность, воля</td><td>Стыд, неуверенность</td><td>Воля</td></tr>
+          <tr><td>3-6</td><td>Инициатива vs Вина</td><td>Инициативность, цель</td><td>Вина, пассивность</td><td>Цель</td></tr>
+          <tr><td>6-12</td><td>Усердие vs Неполноценность</td><td>Компетентность, уверенность</td><td>Чувство неполноценности</td><td>Компетентность</td></tr>
+          <tr><td>12-18</td><td>Идентичность vs Ролевой конфликт</td><td>Целостность личности</td><td>Кризис идентичности</td><td>Верность</td></tr>
+          <tr><td>18-35</td><td>Интимность vs Изоляция</td><td>Близкие отношения</td><td>Одиночество, изоляция</td><td>Любовь</td></tr>
+          <tr><td>35-65</td><td>Творчество vs Застой</td><td>Продуктивность, забота</td><td>Застой, бессмысленность</td><td>Забота</td></tr>
+          <tr><td>65+</td><td>Целостность vs Отчаяние</td><td>Принятие жизни, мудрость</td><td>Отчаяние, страх смерти</td><td>Мудрость</td></tr>
+        </table>
+
+        <h4>💡 Практическое применение</h4>
+        <ul>
+          <li><strong>Для детского психолога:</strong> Понимание кризисов помогает диагностировать задержки развития.</li>
+          <li><strong>Для взрослого психолога:</strong> Кризисы среднего и пожилого возраста — ключ к экзистенциальным запросам.</li>
+          <li><strong>Для семейного консультирования:</strong> Конфликты поколений часто связаны с разными стадиями развития.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🧩 Когнитивная теория (Пиаже) — стадии мышления</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Жан Пиаже</strong> (1896-1980) изучал развитие мышления. Он показал, что мышление ребёнка качественно отличается от мышления взрослого. Он выделил <strong>4 стадии</strong> когнитивного развития.</p>
+
+        <h4>Четыре стадии</h4>
+
+        <div class="definition-box">
+          <strong>1. Сенсомоторная стадия (0-2 года)</strong>
+          <p>Познание через ощущения и движение. Ребёнок познаёт мир, трогая, пробуя на вкус, двигаясь.</p>
+          <p><strong>Ключевое достижение:</strong> <span class="tag green">Объектная постоянность</span> — понимание, что предмет существует, даже когда его не видно (появляется около 8-10 месяцев).</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>2. Дооперациональная стадия (2-7 лет)</strong>
+          <p>Появление символического мышления (язык, игра). Но мышление ещё не логическое.</p>
+          <p><strong>Ключевые особенности:</strong></p>
+          <ul>
+            <li><strong>Эгоцентризм:</strong> Неспособность встать на точку зрения другого («Все думают так же, как я»).</li>
+            <li><strong>Анимизм:</strong> Одушевление неживых предметов («Солнце улыбается», «Туча злится»).</li>
+            <li><strong>Трансдуктивное мышление:</strong> От частного к частному («Если я съел печенье, то все дети едят печенье»).</li>
+            <li><strong>Непонимание сохранения:</strong> Не понимает, что количество не меняется при изменении формы.</li>
+          </ul>
+        </div>
+
+        <div class="definition-box">
+          <strong>3. Конкретно-операциональная стадия (7-12 лет)</strong>
+          <p>Появление логического мышления, но только на конкретных объектах.</p>
+          <p><strong>Ключевые достижения:</strong></p>
+          <ul>
+            <li><strong>Понимание сохранения:</strong> Количество, объём, вес не меняются при изменении формы.</li>
+            <li><strong>Классификация:</strong> Умение группировать предметы по общим признакам.</li>
+            <li><strong>Сериация:</strong> Упорядочивание по размеру, весу, возрасту.</li>
+            <li><strong>Транзитивность:</strong> Если A > B и B > C, то A > C.</li>
+          </ul>
+        </div>
+
+        <div class="definition-box">
+          <strong>4. Формально-операциональная стадия (12+ лет)</strong>
+          <p>Абстрактное мышление, гипотетические рассуждения. Подросток может мыслить о возможном, а не только о реальном.</p>
+          <p><strong>Ключевые достижения:</strong></p>
+          <ul>
+            <li>Абстрактное мышление (понятия свобода, справедливость).</li>
+            <li>Гипотетико-дедуктивное рассуждение (если... то...).</li>
+            <li>Научное мышление (планирование экспериментов).</li>
+            <li>Рефлексия о собственном мышлении.</li>
+          </ul>
+        </div>
+
+        <h4>🔑 Ключевые понятия Пиаже</h4>
+        <ul>
+          <li><strong>Схема:</strong> Структура действия, которая изменяется с опытом (например, схема хватания).</li>
+          <li><strong>Ассимиляция:</strong> Включение новой информации в существующие схемы (ребёнок называет всех мужчин «папа»).</li>
+          <li><strong>Аккомодация:</strong> Изменение схем для адаптации к новой информации (ребёнок понимает, что не все мужчины — папа).</li>
+          <li><strong>Эгоцентризм:</strong> Неспособность встать на точку зрения другого.</li>
+          <li><strong>Сохранение:</strong> Понимание, что количество не меняется при изменении формы.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>📚 Культурно-историческая теория (Выготский)</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Лев Выготский</strong> (1896-1934) — основатель культурно-исторической психологии. Он утверждал, что развитие происходит через <strong>социальное взаимодействие</strong> и опосредовано культурными инструментами (язык, письмо, счёт).</p>
+
+        <h4>🔑 Ключевые понятия</h4>
+
+        <div class="definition-box">
+          <strong>Зона ближайшего развития (ЗБР)</strong>
+          <p>Разница между тем, что ребёнок может сделать сам, и тем, что с помощью взрослого.</p>
+          <p><strong>Пример:</strong> Ребёнок сам собирает пазл из 4 частей, но с помощью — из 8. Зона ближайшего развития = разница.</p>
+          <p><strong>Практика:</strong> Обучение должно быть направлено на ЗБР, а не на актуальный уровень.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Скаффолдинг (поддержка)</strong>
+          <p>Взрослый постепенно убирает поддержку, позволяя ребёнку стать самостоятельным.</p>
+          <p><strong>Пример:</strong> Сначала взрослый собирает пазл, затем показывает, затем ребёнок пробует сам с подсказками, затем полностью сам.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Интериоризация</strong>
+          <p>Внешние действия становятся внутренними мыслительными процессами. Сначала действие выполняется с помощью взрослого, затем самостоятельно, затем становится внутренним навыком.</p>
+          <p><strong>Пример:</strong> Сначала ребёнок считает на пальцах, затем в уме.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Речь и мышление</strong>
+          <p>Речь — главный инструмент психического развития. Речь сначала выполняет коммуникативную функцию, затем становится средством мышления.</p>
+          <ul>
+            <li><strong>Внешняя речь:</strong> Для общения.</li>
+            <li><strong>Эгоцентрическая речь:</strong> Речь «для себя» (3-7 лет).</li>
+            <li><strong>Внутренняя речь:</strong> Мысленная речь (с 7 лет).</li>
+          </ul>
+        </div>
+
+        <h4>💡 Практическое применение</h4>
+        <ul>
+          <li><strong>Обучение:</strong> Работа в зоне ближайшего развития, индивидуальный подход.</li>
+          <li><strong>Диагностика:</strong> Оценка не только актуального уровня, но и потенциала.</li>
+          <li><strong>Работа с родителями:</strong> Обучение эффективной поддержке ребёнка.</li>
+          <li><strong>Коррекция:</strong> Создание ситуаций успеха через постепенное усложнение.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🤱 Теория привязанности (Боулби) — типы привязанности</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Джон Боулби</strong> (1907-1990) показал, что ранняя привязанность к матери/опекуну формирует модель отношений на всю жизнь. Это одна из самых влиятельных теорий в современной психологии.</p>
+
+        <h4>🔑 Что такое привязанность?</h4>
+        <p>Привязанность — это глубокая эмоциональная связь с другим человеком, которая формируется в раннем детстве и влияет на все последующие отношения.</p>
+
+        <h4>Четыре типа привязанности</h4>
+
+        <div class="definition-box">
+          <strong>🟢 Безопасная привязанность (60-70%)</strong>
+          <p>Ребёнок чувствует себя в безопасности, родитель — надёжная база. Родитель последователен, отзывчив, эмоционально доступен.</p>
+          <p><strong>Как проявляется во взрослости:</strong> Способность к близким отношениям, доверие, здоровая самооценка.</p>
+          <p><strong>Что делать, если это не ваш тип?</strong> Терапия привязанности, работа с внутренними моделями, новые безопасные отношения.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>🟡 Тревожная привязанность (15-20%)</strong>
+          <p>Ребёнок тревожен, родитель непоследователен (то доступен, то нет). Ребёнок не уверен, что родитель будет рядом.</p>
+          <p><strong>Как проявляется во взрослости:</strong> Страх быть покинутым, ревность, потребность в постоянных подтверждениях любви.</p>
+          <p><strong>Что делать:</strong> Работа с самооценкой, развитие чувства безопасности, осознавание триггеров.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>🟠 Избегающая привязанность (15-20%)</strong>
+          <p>Ребёнок игнорирует родителя, родитель холоден и отвергает. Ребёнок учится не показывать потребности.</p>
+          <p><strong>Как проявляется во взрослости:</strong> Избегание близости, независимость как защита, трудности с выражением чувств.</p>
+          <p><strong>Что делать:</strong> Развитие эмоционального интеллекта, постепенное открытие в безопасной среде.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>🔴 Дезорганизованная привязанность (5-10%)</strong>
+          <p>Противоречивое поведение, часто при травме. Ребёнок одновременно ищет и избегает родителя.</p>
+          <p><strong>Как проявляется во взрослости:</strong> Трудности в отношениях, диссоциация, сложности с регуляцией эмоций.</p>
+          <p><strong>Что делать:</strong> Терапия травмы, EMDR, создание безопасной среды, работа с телесными ощущениями.</p>
+        </div>
+
+        <h4>💡 Практическое применение</h4>
+        <ul>
+          <li><strong>Диагностика:</strong> Тест «Незнакомая ситуация» (для детей), опросники привязанности (ECR, IPPA) для взрослых.</li>
+          <li><strong>Коррекция:</strong> Терапия привязанности, работа с родителями, создание безопасной среды.</li>
+          <li><strong>Профилактика:</strong> Психообразование родителей о важности эмоциональной доступности.</li>
+          <li><strong>Взрослая терапия:</strong> Исследование паттернов привязанности в отношениях.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ДЕТСКИЙ ПСИХОЛОГ ===== -->
+  <!-- ============================================================ -->
+  <section id="child-diagnostics">
+    <h2><span class="emoji-big">🧸</span> Детский психолог: диагностика</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>📋 Методики диагностики детей</h3>
+        <ul>
+          <li><strong>Тест Векслера детский (WISC)</strong> — интеллект детей 6-16 лет. <span class="tag blue">Стандарт, занимает 60-90 мин</span></li>
+          <li><strong>Тест Равена</strong> — невербальный интеллект. <span class="tag green">Быстрый (20-30 мин), с 5 лет</span></li>
+          <li><strong>Рисунок семьи</strong> — проективная диагностика отношений. <span class="tag gold">Информативный, 15-20 мин</span></li>
+          <li><strong>Тест «Дом-Дерево-Человек»</strong> — проективная диагностика. <span class="tag gold">Универсальный, 20-30 мин</span></li>
+          <li><strong>Методика «Несуществующее животное»</strong> — проективная. <span class="tag gold">Для детей 5-12 лет, 15-20 мин</span></li>
+          <li><strong>Тест школьной тревожности (Филлипса)</strong> — уровень тревожности. <span class="tag blue">Для школы, 20-30 мин</span></li>
+        </ul>
+      </div>
+
+      <div class="card accent">
+        <h3>📋 Диагностика эмоциональной сферы</h3>
+        <ul>
+          <li><strong>Шкала тревожности (Спилберг-Ханин)</strong> — ситуативная/личностная тревожность, с 6 лет</li>
+          <li><strong>Тест детской депрессии (CDI)</strong> — уровень депрессии. <span class="tag red">Скрининг, 7-17 лет</span></li>
+          <li><strong>Шкала страхов (Филлипса)</strong> — школьные страхи, 8-11 лет</li>
+          <li><strong>Методика «Кактус»</strong> — агрессивность, тревожность. <span class="tag gold">Для младших школьников</span></li>
+          <li><strong>Цветовой тест отношений</strong> — эмоциональное отношение к людям</li>
+        </ul>
+      </div>
+
+      <div class="card success">
+        <h3>📋 Диагностика развития</h3>
+        <ul>
+          <li><strong>Шкала развития Гезелла</strong> — оценка психомоторного развития, 0-5 лет</li>
+          <li><strong>Тест школьной зрелости Керна-Йирасека</strong> — готовность к школе. <span class="tag blue">Для первоклассников, 15-20 мин</span></li>
+          <li><strong>Методика «Графический диктант»</strong> — развитие произвольности, 5-7 лет</li>
+          <li><strong>Тест Тулуз-Пьерона</strong> — внимание и работоспособность, 6-12 лет</li>
+          <li><strong>Методика «Запоминание 10 слов»</strong> — память, с 5 лет</li>
+        </ul>
+      </div>
+
+      <div class="card warning">
+        <h3>📋 Диагностика родительских отношений</h3>
+        <ul>
+          <li><strong>Тест семейных отношений (ТСО)</strong> — детско-родительские отношения</li>
+          <li><strong>Методика «Кинетический рисунок семьи»</strong> — отношения в семье. <span class="tag gold">Информативная</span></li>
+          <li><strong>PARI (опросник родительских установок)</strong> — стили воспитания</li>
+          <li><strong>Шкала привязанности (IPPA)</strong> — качество привязанности, 12-20 лет</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ДЕТСКАЯ ТЕРАПИЯ ===== -->
+  <!-- ============================================================ -->
+  <section id="child-therapy">
+    <h2><span class="emoji-big">🧸</span> Детская терапия: методы и техники</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>🎮 Игровая терапия — подробно</h3>
+        <p><strong>Игровая терапия</strong> — основной метод работы с детьми 3-12 лет. Игра — естественный язык ребёнка, через который он выражает переживания, которые не может выразить словами.</p>
+
+        <h4>Виды игровой терапии</h4>
+
+        <div class="definition-box">
+          <strong>Недирективная (Акселайн)</strong>
+          <p>Ребёнок ведёт, психолог принимает и отражает чувства. <span class="tag green">Для детей с тревогой, застенчивостью, низкой самооценкой.</span></p>
+          <p><strong>Принципы:</strong> принятие, эмпатия, конгруэнтность. Психолог не интерпретирует, а отражает чувства ребёнка.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Директивная</strong>
+          <p>Психолог направляет игру, интерпретирует поведение. <span class="tag blue">Для работы с агрессией, страхами, школьными трудностями.</span></p>
+          <p><strong>Пример:</strong> «Давай построим дом для твоей семьи», «Нарисуй, что ты чувствуешь».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Песочная терапия</strong>
+          <p>Ребёнок строит миры в песке — проекция внутреннего мира. <span class="tag gold">Универсальный метод, эффективен при травме.</span></p>
+          <p><strong>Материалы:</strong> поднос с песком, миниатюрные фигурки (люди, животные, дома, транспорт).</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Кукольная терапия</strong>
+          <p>Использование кукол для проигрывания ситуаций. Эффективна при страхах, семейных конфликтах, травме.</p>
+        </div>
+
+        <h4>📋 Протокол игровой терапии</h4>
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Установление контакта</strong> — свободная игра (10-15 мин). Ребёнок осваивается в кабинете.
+        </div>
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Наблюдение и отражение чувств</strong> — «Я вижу, что ты злишься...» (5-10 мин). Валидация эмоций.
+        </div>
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Тематическая игра</strong> — введение проблемы (15-20 мин). «Давай построим что-то для твоей семьи».
+        </div>
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Обсуждение</strong> — что было в игре? (5-10 мин). «Кто живёт в этом доме?», «Что здесь происходит?».
+        </div>
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Завершение</strong> — возвращение к реальности (5 мин). «Наше время подходит к концу. Что ты запомнил(а) из нашей игры?».
+        </div>
+      </div>
+
+      <div class="card pink">
+        <h3>🎨 Арт-терапия — техники с инструкциями</h3>
+
+        <div class="definition-box">
+          <strong>Рисунок чувства</strong>
+          <p><strong>Инструкция:</strong> «Нарисуй, что ты чувствуешь прямо сейчас. Используй любые цвета и формы». <span class="tag green">Выражение эмоций через цвет и форму.</span></p>
+          <p><strong>Обсуждение:</strong> «Что ты нарисовал?», «Какие чувства здесь есть?», «Что тебе хочется изменить в этом рисунке?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Мандалы</strong>
+          <p><strong>Инструкция:</strong> «Раскрась этот круг, как тебе хочется. Не думай о правильности». <span class="tag gold">Успокаивает, структурирует.</span></p>
+          <p><strong>Эффект:</strong> Снижение тревоги, улучшение концентрации, развитие самовыражения.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Коллаж «Мой мир»</strong>
+          <p><strong>Инструкция:</strong> «Вырежи картинки, которые тебе нравятся, и создай коллаж о том, что для тебя важно». <span class="tag blue">Проекция ценностей и желаний.</span></p>
+          <p><strong>Обсуждение:</strong> «Почему ты выбрал(а) эти картинки?», «Что здесь самое важное?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Лепка из глины</strong>
+          <p><strong>Инструкция:</strong> «Слепи то, что ты чувствуешь. Это может быть что угодно». <span class="tag orange">Работа с агрессией, страхами, напряжением.</span></p>
+          <p><strong>Обсуждение:</strong> «Что это?», «Какие чувства у тебя возникают, когда ты смотришь на это?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Совместное рисование</strong>
+          <p><strong>Инструкция:</strong> «Давай нарисуем что-то вместе. Рисуем по очереди». <span class="tag gold">Диагностика отношений.</span></p>
+          <p><strong>Анализ:</strong> Кто начинает? Кто доминирует? Какое взаимодействие?</p>
+        </div>
+      </div>
+
+      <div class="card success">
+        <h3>📖 Сказкотерапия — инструкция</h3>
+        <p><strong>Сказкотерапия</strong> — метод, использующий сказки для решения психологических проблем детей 3-10 лет. Сказка работает на метафорическом уровне, обходя защитные механизмы.</p>
+
+        <h4>Этапы работы со сказкой</h4>
+
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Диагностика:</strong> Выбор сказки, соответствующей проблеме (страх, агрессия, одиночество, ревность).
+        </div>
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Чтение/рассказывание:</strong> С эмоциональным включением, с паузами для обсуждения. Используйте разные голоса для персонажей.
+        </div>
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Обсуждение:</strong> «Что чувствовал герой?», «Что бы ты сделал на его месте?», «Как бы ты поступил?».
+        </div>
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Сочинение своей сказки:</strong> Ребёнок придумывает историю — проекция переживаний. «Придумай свою историю про...».
+        </div>
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Драматизация:</strong> Разыгрывание сказки — развитие эмпатии и социальных навыков. «Давай разыграем эту историю».
+        </div>
+      </div>
+
+      <div class="card orange">
+        <h3>🧠 Песочная терапия (Sandplay) — алгоритм</h3>
+        <p><strong>Песочная терапия</strong> — один из самых эффективных методов для работы с детьми. Позволяет выразить то, что невозможно сказать словами. Особенно эффективна при травме, страхах, трудностях с вербализацией.</p>
+
+        <h4>Инструкция</h4>
+
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Подготовка:</strong> Поднос с песком (голубое дно символизирует воду/небо), миниатюрные фигурки (люди, животные, дома, деревья, транспорт, сказочные персонажи).
+        </div>
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Инструкция:</strong> «Построй мир, который ты хочешь. Можешь использовать любые фигурки. У тебя есть 15-30 минут».
+        </div>
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Создание:</strong> Ребёнок строит мир. Психолог наблюдает, не вмешиваясь, отмечает последовательность, выбор фигур, эмоции.
+        </div>
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Обсуждение:</strong> «Расскажи, что ты построил?», «Что здесь происходит?», «Кто здесь живёт?», «Что это место значит для тебя?».
+        </div>
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Интерпретация:</strong> Анализ сюжетов, расположения фигур (центр, края), взаимодействий, ключевых фигур.
+        </div>
+        <p><span class="tag gold">Показания:</span> Тревожность, страхи, агрессия, трудности в общении, травма, аутизм, ЗПР.</p>
+        <p><span class="tag blue">Длительность:</span> 6-12 сессий по 30-45 мин.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ПРОТОКОЛЫ ДЕТСКОГО ПСИХОЛОГА ===== -->
+  <!-- ============================================================ -->
+  <section id="child-protocol">
+    <h2><span class="emoji-big">📋</span> Протоколы работы с детьми</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>📋 Протокол работы с тревожностью у детей</h3>
+        <p><span class="tag gold">Цель:</span> Снижение уровня тревожности у детей 6-12 лет.</p>
+
+        <h4>Этапы</h4>
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Диагностика (1-2 сессии):</strong> Шкала тревожности Филлипса, проективные методики (рисунок семьи, «Несуществующее животное»).
+        </div>
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Психообразование (1 сессия):</strong> Объяснение ребёнку и родителям природы тревоги. Тревога — это сигнал, а не враг.
+        </div>
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Дыхательные техники (1-2 сессии):</strong> Диафрагмальное дыхание, дыхание 4-7-8, квадратное дыхание. Тренировка дома.
+        </div>
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Мышечная релаксация (1-2 сессии):</strong> Техника Джекобсона (напряжение-расслабление). Прогрессивная мышечная релаксация.
+        </div>
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Визуализация (1 сессия):</strong> Представление безопасного места. «Закрой глаза и представь место, где ты чувствуешь себя в безопасности».
+        </div>
+        <div class="step-box">
+          <span class="step-num">6</span> <strong>Арт-терапия (1-2 сессии):</strong> Рисование страха и его трансформация. «Нарисуй свой страх, а затем сделай его смешным».
+        </div>
+        <div class="step-box">
+          <span class="step-num">7</span> <strong>Игровая терапия (1-2 сессии):</strong> Проигрывание пугающих ситуаций. «Давай разыграем, как ты идёшь к доске».
+        </div>
+        <div class="step-box">
+          <span class="step-num">8</span> <strong>Работа с родителями:</strong> Рекомендации по снижению тревожности дома (совместное чтение, спокойный режим).
+        </div>
+        <p><span class="tag blue">Длительность:</span> 8-12 сессий по 45-50 мин.</p>
+      </div>
+
+      <div class="card pink">
+        <h3>📋 Протокол работы с агрессией у детей</h3>
+        <p><span class="tag gold">Цель:</span> Снижение агрессивного поведения у детей 5-12 лет.</p>
+
+        <h4>Этапы</h4>
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Диагностика (1-2 сессии):</strong> Тест Басса-Дарки, проективные методики (рисунок семьи, «Кактус»).
+        </div>
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Установление контакта (1 сессия):</strong> Игровая терапия, безопасная среда. Ребёнок должен чувствовать принятие.
+        </div>
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Обучение выражению гнева (1-2 сессии):</strong> «Можно злиться, но нельзя бить». Альтернативные способы: крик в подушку, рвать бумагу, бить грушу.
+        </div>
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Арт-терапия (1-2 сессии):</strong> Рисование гнева, лепка агрессивных фигур, затем их трансформация в безопасные.
+        </div>
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Песочная терапия (1-2 сессии):</strong> Выражение агрессии в безопасной среде. Ребёнок может «разрушать» и «строить заново».
+        </div>
+        <div class="step-box">
+          <span class="step-num">6</span> <strong>Ролевые игры (1-2 сессии):</strong> Проигрывание конфликтных ситуаций. «Давай разыграем, как ты решаешь спор».
+        </div>
+        <div class="step-box">
+          <span class="step-num">7</span> <strong>Развитие эмпатии (1-2 сессии):</strong> Обучение пониманию чувств других. «Как чувствует себя тот, кого ты ударил?».
+        </div>
+        <div class="step-box">
+          <span class="step-num">8</span> <strong>Работа с родителями:</strong> Консультации, обучение эффективным стратегиям воспитания (последовательность, без насилия).
+        </div>
+        <p><span class="tag blue">Длительность:</span> 10-15 сессий по 45-50 мин.</p>
+      </div>
+
+      <div class="card success">
+        <h3>📋 Протокол работы с детскими страхами</h3>
+        <p><span class="tag gold">Цель:</span> Коррекция страхов у детей 4-10 лет.</p>
+
+        <h4>Этапы</h4>
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Диагностика (1 сессия):</strong> Шкала страхов Филлипса, проективные методики (рисунок страха, «Несуществующее животное»).
+        </div>
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Создание безопасной среды (1 сессия):</strong> Принятие и валидация чувств ребёнка. «Ты имеешь право бояться».
+        </div>
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Арт-терапия (1-2 сессии):</strong> «Нарисуй свой страх» — затем трансформация (дорисовать, сделать смешным, маленьким).
+        </div>
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Сказкотерапия (1-2 сессии):</strong> Чтение терапевтических сказок о страхах (например, «Сказка про страшного зверя»).
+        </div>
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Песочная терапия (1-2 сессии):</strong> Построение мира, где страх побеждён. «Построй мир, в котором нет страха».
+        </div>
+        <div class="step-box">
+          <span class="step-num">6</span> <strong>Десенсибилизация (1-2 сессии):</strong> Постепенное знакомство с пугающим объектом. Начинаем с изображения, затем картинка, затем видео, затем реальный объект.
+        </div>
+        <div class="step-box">
+          <span class="step-num">7</span> <strong>Работа с родителями:</strong> Рекомендации по поддержке дома (не стыдить, не высмеивать, давать безопасность).
+        </div>
+        <p><span class="tag blue">Длительность:</span> 8-12 сессий по 40-45 мин.</p>
+      </div>
+
+      <div class="card orange">
+        <h3>📋 Протокол работы с трудностями адаптации</h3>
+        <p><span class="tag gold">Цель:</span> Помощь в адаптации к школе/детскому саду (детям 5-8 лет).</p>
+
+        <h4>Этапы</h4>
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Диагностика (1-2 сессии):</strong> Оценка уровня тревожности, школьной зрелости, мотивации. Тест Керна-Йирасека, шкала тревожности.
+        </div>
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Индивидуальная работа с ребёнком (3-5 сессий):</strong> Игровая терапия, арт-терапия, психообразование. Объяснение правил школы/сада.
+        </div>
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Групповая работа (2-3 сессии):</strong> Тренинги социальных навыков. «Как знакомиться?», «Как просить о помощи?».
+        </div>
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Работа с родителями (2-3 консультации):</strong> Обучение поддержке ребёнка, создание домашнего режима, снижение собственной тревоги.
+        </div>
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Работа с учителями (по необходимости):</strong> Рекомендации по адаптации образовательного процесса (индивидуальный подход, поощрение).
+        </div>
+        <p><span class="tag blue">Длительность:</span> 6-10 сессий по 40-50 мин.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ПОДРОСТКОВЫЙ ПСИХОЛОГ ===== -->
+  <!-- ============================================================ -->
+  <section id="teen-diagnostics">
+    <h2><span class="emoji-big">🧑‍🎓</span> Подростковый психолог: диагностика</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>📋 Диагностика личности подростка</h3>
+        <ul>
+          <li><strong>MMPI (подростковый вариант)</strong> — личностная диагностика. <span class="tag blue">Стандарт, 45-60 мин</span></li>
+          <li><strong>16 PF Кеттелла</strong> — факторная модель личности, с 12 лет</li>
+          <li><strong>Тест Айзенка (EPQ)</strong> — экстраверсия-интроверсия, нейротизм, с 12 лет</li>
+          <li><strong>Пятифакторный опросник (Big Five)</strong> — открытость, добросовестность, экстраверсия, доброжелательность, нейротизм</li>
+          <li><strong>Тест Леонгарда-Шмишека</strong> — акцентуации характера, с 12 лет</li>
+        </ul>
+      </div>
+
+      <div class="card accent">
+        <h3>📋 Диагностика эмоциональной сферы</h3>
+        <ul>
+          <li><strong>Шкала тревожности (Спилберг-Ханин)</strong> — ситуативная и личностная тревожность</li>
+          <li><strong>Шкала депрессии Бека (BDI)</strong> — уровень депрессии. <span class="tag red">Скрининг, 13+ лет</span></li>
+          <li><strong>Шкала Гамильтона (HAM-D)</strong> — клиническая оценка депрессии (для специалистов)</li>
+          <li><strong>Тест школьной тревожности (Филлипса)</strong> — школьные страхи, 8-11 лет</li>
+          <li><strong>Шкала суицидального риска</strong> — оценка суицидального поведения. <span class="tag red">Обязательно при подозрении</span></li>
+          <li><strong>Опросник агрессивности Басса-Дарки</strong> — виды агрессии, с 12 лет</li>
+        </ul>
+      </div>
+
+      <div class="card success">
+        <h3>📋 Диагностика идентичности</h3>
+        <ul>
+          <li><strong>Тест Эриксона (опросник идентичности)</strong> — уровень сформированности идентичности</li>
+          <li><strong>Методика «Кто я?»</strong> — самоописание, самовосприятие. <span class="tag gold">Проективная, 20-30 мин</span></li>
+          <li><strong>Тест «Незаконченные предложения»</strong> — проективная диагностика, с 12 лет</li>
+          <li><strong>Методика ценностных ориентаций (Рокич)</strong> — система ценностей, с 14 лет</li>
+          <li><strong>Тест профессиональных склонностей</strong> — профориентация, 13-17 лет</li>
+        </ul>
+      </div>
+
+      <div class="card warning">
+        <h3>📋 Диагностика социальной сферы</h3>
+        <ul>
+          <li><strong>Тест социального интеллекта</strong> — способность понимать социальные ситуации</li>
+          <li><strong>Методика «Социометрия»</strong> — межличностные отношения в группе</li>
+          <li><strong>Тест коммуникативных навыков</strong> — уровень общения</li>
+          <li><strong>Опросник буллинга</strong> — выявление буллинга в школе. <span class="tag red">Скрининг</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ПОДРОСТКОВАЯ ТЕРАПИЯ ===== -->
+  <!-- ============================================================ -->
+  <section id="teen-therapy">
+    <h2><span class="emoji-big">🧑‍🎓</span> Подростковая терапия: методы</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>🔑 Ключевые подходы</h3>
+
+        <div class="definition-box">
+          <strong>Когнитивно-поведенческая терапия (КПТ)</strong>
+          <p>Работа с мыслями и поведением. <span class="tag green">Эффективна при тревоге, депрессии, ОКР, социальной фобии.</span></p>
+          <p><strong>Инструменты:</strong> дневник мыслей, когнитивное переструктурирование, экспозиция, поведенческие эксперименты.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Диалектическая поведенческая терапия (ДПТ)</strong>
+          <p>Навыки регуляции эмоций, переносимости стресса, эффективности в отношениях. <span class="tag red">Для подростков с самоповреждениями, суицидальным поведением.</span></p>
+          <p><strong>Модули:</strong> осознанность, регуляция эмоций, межличностная эффективность, переносимость стресса.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Мотивационное интервью</strong>
+          <p>Повышение мотивации к изменениям через разрешение амбивалентности. <span class="tag blue">Для работы с зависимостями, немотивированными клиентами.</span></p>
+          <p><strong>Принципы:</strong> эмпатия, избегание спора, работа с сопротивлением, поддержка самоэффективности.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Терапия принятия и ответственности (ACT)</strong>
+          <p>Принятие трудных чувств, действие в соответствии с ценностями. Эффективна при тревоге, депрессии, хронической боли.</p>
+          <p><strong>Ключевые процессы:</strong> принятие, когнитивная диффузия, контакт с настоящим, ценности, действие.</p>
+        </div>
+      </div>
+
+      <div class="card pink">
+        <h3>🛠️ Техники работы с подростками</h3>
+
+        <div class="definition-box">
+          <strong>Техника «Пустой стул»</strong>
+          <p>Подросток представляет на пустом стуле человека (или часть себя) и вступает в диалог. <span class="tag gold">Эффективно при внутренних конфликтах, травме.</span></p>
+          <p><strong>Инструкция:</strong> «Представь, что на этом стуле сидит [человек]. Что бы ты сказал(а) ему?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Письма (неотправленные)</strong>
+          <p>Подросток пишет письмо тому, кому не может сказать что-то в лицо. <span class="tag blue">Эффективно при травме, утрате, конфликтах.</span></p>
+          <p><strong>Инструкция:</strong> «Напиши письмо [человеку], в котором скажешь всё, что не можешь сказать».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Дневник чувств</strong>
+          <p>Отслеживание эмоций и мыслей. <span class="tag blue">Для развития эмоционального интеллекта, самонаблюдения.</span></p>
+          <p><strong>Инструкция:</strong> «Каждый день записывай ситуацию, эмоцию, мысль и действие».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Ролевые игры</strong>
+          <p>Проигрывание сложных ситуаций. <span class="tag gold">Эффективно при социальной тревоге, конфликтах.</span></p>
+          <p><strong>Инструкция:</strong> «Давай разыграем ситуацию, которая вызывает у тебя страх».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Метафорические карты</strong>
+          <p>Использование карт с изображениями для исследования внутреннего мира. <span class="tag gold">Универсальный метод.</span></p>
+          <p><strong>Инструкция:</strong> «Выбери карту, которая отражает твоё состояние», «Что ты видишь на этой карте?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Коллаж идентичности</strong>
+          <p>Визуализация «Кто я?». <span class="tag blue">Для работы с идентичностью, самооценкой.</span></p>
+          <p><strong>Инструкция:</strong> «Создай коллаж, который отражает твою личность, твои ценности, твои мечты».</p>
+        </div>
+      </div>
+
+      <div class="card success">
+        <h3>🎯 Групповая работа с подростками</h3>
+
+        <div class="definition-box">
+          <strong>Тренинги личностного роста</strong>
+          <p>Развитие уверенности, коммуникации, навыков решения проблем. <span class="tag blue">Для подростков 14-17 лет, 8-12 встреч.</span></p>
+          <p><strong>Темы:</strong> самооценка, общение, конфликты, стресс, будущее.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Группы поддержки</strong>
+          <p>Для подростков с общими проблемами (тревога, депрессия, переживание утраты). <span class="tag green">Снижает изоляцию.</span></p>
+          <p><strong>Формат:</strong> 8-10 встреч, 1 раз в неделю.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Профилактические программы</strong>
+          <p>Буллинг, зависимости, суицид, здоровый образ жизни. <span class="tag red">Для школ, 5-10 встреч.</span></p>
+          <p><strong>Формат:</strong> информационные блоки + тренинги + обсуждения.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Школьные группы</strong>
+          <p>Работа с классом, конфликты, сплочение. <span class="tag gold">Для классных руководителей и психологов.</span></p>
+          <p><strong>Формат:</strong> 3-5 встреч, 2 академических часа.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Арт-группы</strong>
+          <p>Творческое самовыражение в группе. <span class="tag gold">Снижает тревогу, развивает самооценку.</span></p>
+          <p><strong>Формат:</strong> 6-8 встреч, рисование, лепка, коллаж.</p>
+        </div>
+      </div>
+
+      <div class="card orange">
+        <h3>📋 Протокол работы с подростковой тревожностью</h3>
+        <p><span class="tag gold">Цель:</span> Снижение уровня тревожности у подростков 12-17 лет.</p>
+
+        <h4>Этапы</h4>
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Диагностика (1-2 сессии):</strong> Шкала тревожности Спилберга-Ханина, опросник тревожности, КПТ-интервью.
+        </div>
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Психообразование (1 сессия):</strong> Объяснение природы тревоги, «тревога — это сигнал, а не враг». Связь мыслей-чувств-поведения.
+        </div>
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Дыхательные техники (1 сессия):</strong> Диафрагмальное дыхание, дыхание 4-7-8, квадратное дыхание. Тренировка на сессии и дома.
+        </div>
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Когнитивное переструктурирование (2-3 сессии):</strong> Работа с автоматическими мыслями, дневник мыслей. «Какая мысль вызывает тревогу?», «Какое есть альтернативное объяснение?».
+        </div>
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Экспозиция (2-3 сессии):</strong> Постепенное столкновение с пугающими ситуациями. Составление иерархии страхов, шаг за шагом.
+        </div>
+        <div class="step-box">
+          <span class="step-num">6</span> <strong>Релаксация (1 сессия):</strong> Мышечная релаксация по Джекобсону, визуализация безопасного места.
+        </div>
+        <div class="step-box">
+          <span class="step-num">7</span> <strong>Работа с родителями (1-2 консультации):</strong> Обучение поддержке дома, снижение родительской тревоги.
+        </div>
+        <div class="step-box">
+          <span class="step-num">8</span> <strong>Профилактика рецидивов (1 сессия):</strong> Закрепление навыков, план действий при возврате тревоги.
+        </div>
+        <p><span class="tag blue">Длительность:</span> 10-15 сессий по 50 мин.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ПОДРОСТКОВЫЕ КРИЗИСЫ ===== -->
+  <!-- ============================================================ -->
+  <section id="teen-crisis">
+    <h2><span class="emoji-big">🚨</span> Кризисная помощь подросткам</h2>
+
+    <div class="card danger">
+      <h3>🚨 Алгоритм действий при суицидальном риске у подростка</h3>
+      <p><span class="tag red">Важно!</span> При суицидальном риске — экстренное вмешательство обязательно. Не оставляйте подростка одного.</p>
+
+      <div class="step-box">
+        <span class="step-num">1</span> <strong>Оценка риска (немедленно):</strong> Есть ли план? Есть ли средства? Есть ли намерение? Используйте шкалу суицидального риска.
+        <p><strong>Вопросы:</strong> «У тебя есть мысли о суициде?», «Ты думал о том, как это сделать?», «У тебя есть доступ к средствам?».</p>
+      </div>
+
+      <div class="step-box">
+        <span class="step-num">2</span> <strong>Обеспечение безопасности (немедленно):</strong> Убрать опасные предметы, не оставлять одного, связаться с родителями или экстренными службами.
+      </div>
+
+      <div class="step-box">
+        <span class="step-num">3</span> <strong>Установление контакта:</strong> Слушать без осуждения, проявлять эмпатию, не спорить. Валидация чувств: «Я слышу, как тебе больно».
+      </div>
+
+      <div class="step-box">
+        <span class="step-num">4</span> <strong>Снятие остроты:</strong> Помочь снизить эмоциональное напряжение (дыхание, переключение внимания, валидация).
+      </div>
+
+      <div class="step-box">
+        <span class="step-num">5</span> <strong>Направление к специалистам:</strong> К психиатру, в кризисный центр, в стационар. При высоком риске — госпитализация.
+      </div>
+
+      <div class="step-box">
+        <span class="step-num">6</span> <strong>План безопасности:</strong> Создать план действий при появлении мыслей о суициде.
+        <p><strong>Включить:</strong> номера телефонов (телефон доверия, родственники), занятия, которые отвлекают, людей, к которым можно обратиться.</p>
+      </div>
+
+      <div class="step-box">
+        <span class="step-num">7</span> <strong>Последующее наблюдение:</strong> Регулярные контакты, мониторинг состояния, поддержка семьи.
+      </div>
+
+      <p><strong>Телефоны доверия:</strong> 8-800-2000-122 (круглосуточно, анонимно).</p>
+    </div>
+
+    <div class="card warning">
+      <h3 id="school-prevention">🛡️ Профилактика суицида среди подростков</h3>
+      <ul>
+        <li><strong>Психообразование родителей и учителей:</strong> Распознавание признаков суицидального риска (изменение поведения, уход от общения, разговоры о смерти).</li>
+        <li><strong>Скрининг:</strong> Регулярное анкетирование учащихся на выявление группы риска (2 раза в год).</li>
+        <li><strong>Групповая работа:</strong> Тренинги жизнестойкости, развития социальной поддержки, управления стрессом.</li>
+        <li><strong>Индивидуальная работа:</strong> С подростками с депрессией, тревогой, травмой, трудностями в семье.</li>
+        <li><strong>Телефоны доверия:</strong> Информирование о службах помощи (плакаты в школе, классные часы).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ВЗРОСЛЫЙ ПСИХОЛОГ ===== -->
+  <!-- ============================================================ -->
+  <section id="adult-diagnostics">
+    <h2><span class="emoji-big">👨‍💼</span> Взрослый психолог: диагностика</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>📋 Личностная диагностика</h3>
+        <ul>
+          <li><strong>MMPI (Миннесотский опросник)</strong> — многомерная личностная диагностика. <span class="tag blue">Стандарт, 60-90 мин</span></li>
+          <li><strong>16 PF Кеттелла</strong> — факторная модель личности, 16 факторов</li>
+          <li><strong>Тест Айзенка (EPQ)</strong> — экстраверсия-интроверсия, нейротизм</li>
+          <li><strong>Пятифакторный опросник (Big Five)</strong> — открытость, добросовестность, экстраверсия, доброжелательность, нейротизм</li>
+          <li><strong>Тест Леонгарда-Шмишека</strong> — акцентуации характера</li>
+          <li><strong>Тест Роршаха</strong> — проективная диагностика (требует специального обучения)</li>
+        </ul>
+      </div>
+
+      <div class="card accent">
+        <h3>📋 Диагностика эмоциональной сферы</h3>
+        <ul>
+          <li><strong>Шкала тревожности (Спилберг-Ханин)</strong> — ситуативная/личностная тревожность</li>
+          <li><strong>Шкала депрессии Бека (BDI)</strong> — уровень депрессии. <span class="tag red">Скрининг</span></li>
+          <li><strong>Шкала Гамильтона (HAM-D)</strong> — клиническая оценка депрессии (для специалистов)</li>
+          <li><strong>Шкала оценки тревоги Гамильтона (HAM-A)</strong> — тревожность</li>
+          <li><strong>Тест диссоциативного опыта (DES)</strong> — диссоциативные симптомы</li>
+          <li><strong>Шкала суицидального риска</strong> — суицидальное поведение</li>
+        </ul>
+      </div>
+
+      <div class="card success">
+        <h3>📋 Диагностика стресса и выгорания</h3>
+        <ul>
+          <li><strong>Шкала профессионального выгорания (Маслач)</strong> — эмоциональное истощение, деперсонализация, редукция. <span class="tag blue">Для работающих</span></li>
+          <li><strong>Шкала стресса (Холмс-Рее)</strong> — уровень жизненного стресса (оценка событий за год)</li>
+          <li><strong>Тест стрессоустойчивости</strong> — способность справляться со стрессом</li>
+          <li><strong>Опросник копинг-стратегий</strong> — способы совладания со стрессом</li>
+          <li><strong>Шкала посттравматического роста</strong> — позитивные изменения после травмы</li>
+        </ul>
+      </div>
+
+      <div class="card warning">
+        <h3>📋 Диагностика отношений</h3>
+        <ul>
+          <li><strong>Тест супружеской удовлетворённости</strong> — качество брака</li>
+          <li><strong>Тест Розенцвейга</strong> — реакции на фрустрацию</li>
+          <li><strong>Опросник межличностных отношений (Leary)</strong> — стиль общения</li>
+          <li><strong>Тест социального интеллекта</strong> — понимание социальных ситуаций</li>
+          <li><strong>Шкала привязанности (ECR)</strong> — тип привязанности во взрослых отношениях</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ВЗРОСЛАЯ ТЕРАПИЯ ===== -->
+  <!-- ============================================================ -->
+  <section id="adult-therapy">
+    <h2><span class="emoji-big">👨‍💼</span> Взрослая терапия: методы</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>🔑 Когнитивно-поведенческая терапия (КПТ)</h3>
+        <p><strong>КПТ</strong> — один из самых эффективных методов психотерапии с доказательной базой. Работа с мыслями и поведением.</p>
+
+        <h4>📋 Протокол КПТ при депрессии</h4>
+
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Психообразование (1-2 сессии):</strong> Связь мыслей, чувств и поведения. Объяснение депрессии как цикла. «Депрессия — это не слабость, а состояние, которое можно изменить».
+        </div>
+
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Дневник мыслей (каждая сессия):</strong> Отслеживание автоматических мыслей, эмоций и ситуаций. Заполняется дома.
+        </div>
+
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Когнитивное переструктурирование (3-5 сессий):</strong> Замена иррациональных мыслей на рациональные. «Какие есть доказательства?», «Какое есть альтернативное объяснение?», «Что бы я сказал(а) другу в такой ситуации?».
+        </div>
+
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Планирование активности (2-3 сессии):</strong> Повышение уровня активности (поведенческая активация). Ежедневное планирование приятных и обязательных дел.
+        </div>
+
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Поведенческие эксперименты (2-3 сессии):</strong> Проверка убеждений через действие. «А что, если я попробую сделать это и посмотрю, что произойдёт?».
+        </div>
+
+        <div class="step-box">
+          <span class="step-num">6</span> <strong>Профилактика рецидивов (1-2 сессии):</strong> План предотвращения возврата депрессии. Распознавание ранних признаков, план действий.
+        </div>
+
+        <p><span class="tag blue">Длительность:</span> 12-20 сессий по 50 мин. <span class="tag green">Доказанная эффективность (эффект > 0.8).</span></p>
+      </div>
+
+      <div class="card pink">
+        <h3>🔑 Гештальт-терапия</h3>
+        <p><strong>Гештальт-терапия</strong> — работа с «здесь и сейчас», внимание к процессу и осознаванию. Фокус на том, ЧТО и КАК происходит, а не ПОЧЕМУ.</p>
+
+        <h4>Ключевые техники</h4>
+
+        <div class="definition-box">
+          <strong>Техника «Пустой стул»</strong>
+          <p>Клиент представляет на пустом стуле другого человека (или часть себя) и вступает в диалог. <span class="tag gold">Эффективна при незавершённых отношениях, внутренних конфликтах.</span></p>
+          <p><strong>Инструкция:</strong> «Представь, что на этом стуле сидит [человек]. Что бы ты сказал(а) ему?», «А теперь поменяйся местами и ответь».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Работа с незавершёнными ситуациями</strong>
+          <p>Завершение гештальта — ситуаций, которые не имеют эмоционального завершения. <span class="tag gold">Эффективно при травме, утрате.</span></p>
+          <p><strong>Инструкция:</strong> «Вспомни ситуацию, которая осталась незавершённой. Что бы ты сказал(а) тогда?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Осознавание (awareness)</strong>
+          <p>Фокус на текущих ощущениях и чувствах. «Что ты чувствуешь сейчас?», «Где в теле ты это чувствуешь?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Техника «Я-сообщения»</strong>
+          <p>Выражение чувств через «Я чувствую...», а не «Ты...». «Я чувствую обиду, когда...» вместо «Ты меня обижаешь».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Работа с противоположностями</strong>
+          <p>Интеграция полярностей (сильный/слабый, любящий/ненавидящий). <span class="tag gold">Для работы с внутренними конфликтами.</span></p>
+          <p><strong>Инструкция:</strong> «Представь свою сильную часть. А теперь слабую. Что они говорят друг другу?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Телесные техники</strong>
+          <p>Осознавание телесных ощущений как ключа к эмоциям. «Опиши, что происходит в твоём теле прямо сейчас».</p>
+        </div>
+
+        <h4>📋 Протокол гештальт-сессии</h4>
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Установление контакта</strong> — «Что здесь и сейчас?», «Что привело тебя сегодня?».
+        </div>
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Фокусировка на проблеме</strong> — выбор темы для работы, формирование фигуры.
+        </div>
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Эксперимент</strong> — использование техник (стул, диалог, работа с телом).
+        </div>
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Интеграция</strong> — связь с повседневной жизнью, «Что ты выносишь из этого опыта?».
+        </div>
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Завершение</strong> — ассимиляция опыта, завершение гештальта.
+        </div>
+        <p><span class="tag gold">Показания:</span> Тревога, депрессия, кризис отношений, экзистенциальные проблемы.</p>
+      </div>
+
+      <div class="card success">
+        <h3>🔑 Психоанализ — глубинная терапия</h3>
+        <p><strong>Психоанализ</strong> — глубинная работа с бессознательным, ранними травмами и вытесненными желаниями. Долгосрочный метод.</p>
+
+        <h4>Ключевые техники</h4>
+
+        <div class="definition-box">
+          <strong>Свободные ассоциации</strong>
+          <p>Клиент говорит всё, что приходит в голову, без цензуры. <span class="tag blue">Основа метода.</span></p>
+          <p><strong>Инструкция:</strong> «Говори всё, что приходит в голову, даже если это кажется странным или неважным».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Анализ сновидений</strong>
+          <p>Работа с символикой снов — «королевская дорога к бессознательному». Скрытое содержание раскрывает вытесненные желания.</p>
+          <p><strong>Инструкция:</strong> «Расскажи свой сон. Какие ассоциации у тебя возникают?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Интерпретация переноса</strong>
+          <p>Анализ отношений клиента с терапевтом. Клиент проецирует на терапевта свои чувства к значимым фигурам.</p>
+          <p><strong>Интерпретация:</strong> «Похоже, что ты видишь во мне своего отца. Что бы ты хотел(а) ему сказать?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Интерпретация сопротивления</strong>
+          <p>Работа с тем, что клиент избегает. Сопротивление указывает на болезненный материал.</p>
+          <p><strong>Интерпретация:</strong> «Я замечаю, что когда мы касаемся этой темы, ты меняешь тему. Что с этим связано?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Работа с защитными механизмами</strong>
+          <p>Исследование вытеснения, проекции, рационализации и других защит.</p>
+        </div>
+
+        <p><span class="tag gold">Показания:</span> Неврозы, личностные расстройства, психосоматика, глубинная терапия.</p>
+        <p><span class="tag blue">Длительность:</span> Долгосрочная терапия (1-5 лет, 2-3 раза в неделю).</p>
+      </div>
+
+      <div class="card orange">
+        <h3>🔑 Экзистенциальная терапия</h3>
+        <p><strong>Экзистенциальная терапия</strong> — работа с фундаментальными вопросами: смысл, свобода, ответственность, смерть, одиночество.</p>
+
+        <h4>Ключевые техники</h4>
+
+        <div class="definition-box">
+          <strong>Техника «Взгляд на жизнь с высоты»</strong>
+          <p>Расширение перспективы. «Представь, что ты смотришь на свою жизнь с высоты птичьего полёта. Что ты видишь?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Техника «Что бы ты сказал на своём надгробии?»</strong>
+          <p>Работа со смыслом жизни. «Представь, что ты умер. Что бы было написано на твоём надгробии?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Техника «Письмо себе в будущее»</strong>
+          <p>Проекция целей и ценностей. «Напиши письмо себе через 10 лет. Что ты хочешь сказать?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Техника «Последний день жизни»</strong>
+          <p>Переоценка приоритетов. «Если бы это был твой последний день, что бы ты сделал(а)?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Медитация «Присутствие»</strong>
+          <p>Работа с тревогой перед смертью. Принятие конечности жизни.</p>
+        </div>
+
+        <p><span class="tag gold">Показания:</span> Экзистенциальный кризис, потеря смысла, страх смерти, одиночество, кризис середины жизни.</p>
+        <p><span class="tag blue">Длительность:</span> Среднесрочная/долгосрочная (от 10 сессий).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ШКОЛЬНЫЙ ПСИХОЛОГ ===== -->
+  <!-- ============================================================ -->
+  <section id="school-diagnostics">
+    <h2><span class="emoji-big">🏫</span> Школьный психолог: диагностика</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>📋 Диагностика готовности к школе</h3>
+        <ul>
+          <li><strong>Тест школьной зрелости Керна-Йирасека</strong> — готовность к школе. <span class="tag blue">Для первоклассников, 15-20 мин</span></li>
+          <li><strong>Методика «Графический диктант»</strong> — произвольность, 5-7 лет</li>
+          <li><strong>Тест Тулуз-Пьерона</strong> — внимание и работоспособность, 6-12 лет</li>
+          <li><strong>Методика «Домик»</strong> — мелкая моторика, пространственное мышление</li>
+          <li><strong>Тест «10 слов»</strong> — память, с 5 лет</li>
+        </ul>
+      </div>
+
+      <div class="card accent">
+        <h3>📋 Диагностика школьной адаптации</h3>
+        <ul>
+          <li><strong>Шкала школьной тревожности (Филлипса)</strong> — уровень тревожности, 8-11 лет</li>
+          <li><strong>Методика «Социометрия»</strong> — межличностные отношения в классе</li>
+          <li><strong>Тест школьной дезадаптации</strong> — оценка адаптации</li>
+          <li><strong>Методика «Незаконченные предложения»</strong> — отношение к школе</li>
+          <li><strong>Тест «Кактус»</strong> — агрессивность, тревожность</li>
+        </ul>
+      </div>
+
+      <div class="card success">
+        <h3>📋 Диагностика проблем</h3>
+        <ul>
+          <li><strong>Опросник буллинга</strong> — выявление буллинга. <span class="tag red">Скрининг в классе</span></li>
+          <li><strong>Тест агрессивности Басса-Дарки</strong> — виды агрессии, с 12 лет</li>
+          <li><strong>Шкала тревожности (Спилберг-Ханин)</strong> — ситуативная/личностная тревожность, с 6 лет</li>
+          <li><strong>Шкала депрессии (CDI/BDI)</strong> — уровень депрессии, с 7/13 лет</li>
+        </ul>
+      </div>
+
+      <div class="card warning">
+        <h3>📋 Диагностика познавательной сферы</h3>
+        <ul>
+          <li><strong>Тест Векслера (WISC)</strong> — детский интеллект, 6-16 лет</li>
+          <li><strong>Тест Равена</strong> — невербальный интеллект, с 5 лет</li>
+          <li><strong>Корректурная проба Бурдона</strong> — внимание, с 6 лет</li>
+          <li><strong>Тест запоминания 10 слов</strong> — память, с 5 лет</li>
+          <li><strong>Методика «Пиктограмма»</strong> — ассоциативная память, с 7 лет</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== РАБОТА В ШКОЛЕ ===== -->
+  <!-- ============================================================ -->
+  <section id="school-work">
+    <h2><span class="emoji-big">🏫</span> Работа школьного психолога</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>📋 Профилактическая работа</h3>
+        <ul>
+          <li><strong>Психопрофилактика:</strong> Предупреждение проблем в развитии. <span class="tag blue">Основа работы</span></li>
+          <li><strong>Психогигиена:</strong> Создание благоприятной образовательной среды, снижение стресса</li>
+          <li><strong>Просвещение:</strong> Обучение учителей и родителей психологическим основам (лекции, семинары)</li>
+          <li><strong>Ранняя диагностика:</strong> Выявление детей группы риска (1 раз в полугодие)</li>
+          <li><strong>Профилактика буллинга:</strong> Работа с классом, тренинги, создание безопасной среды</li>
+        </ul>
+      </div>
+
+      <div class="card pink">
+        <h3>📋 Коррекционно-развивающая работа</h3>
+        <ul>
+          <li><strong>Коррекционные занятия:</strong> Индивидуальные и групповые (6-10 занятий)</li>
+          <li><strong>Развивающие занятия:</strong> Развитие познавательных процессов (внимание, память, мышление)</li>
+          <li><strong>Тренинги:</strong> Коммуникативные, личностного роста, профориентационные (8-12 занятий)</li>
+          <li><strong>Арт-терапия:</strong> Выражение эмоций через творчество</li>
+          <li><strong>Игровая терапия:</strong> Для младших школьников</li>
+        </ul>
+      </div>
+
+      <div class="card success">
+        <h3>📋 Консультативная работа</h3>
+        <ul>
+          <li><strong>Консультирование учащихся:</strong> Индивидуальное по запросу (40-50 мин)</li>
+          <li><strong>Консультирование родителей:</strong> По вопросам воспитания, развития, школьных проблем</li>
+          <li><strong>Консультирование учителей:</strong> По вопросам взаимодействия с учениками, трудных случаев</li>
+          <li><strong>Семейное консультирование:</strong> При необходимости</li>
+          <li><strong>Кризисное консультирование:</strong> При экстренных ситуациях</li>
+        </ul>
+      </div>
+
+      <div class="card accent">
+        <h3>📋 Организационно-методическая работа</h3>
+        <ul>
+          <li><strong>Планирование работы:</strong> Годовой и месячный план, согласованный с администрацией</li>
+          <li><strong>Отчётность:</strong> Анализ и отчёты по работе (ежемесячно, ежегодно)</li>
+          <li><strong>Методическая работа:</strong> Разработка программ, подбор методик, создание базы</li>
+          <li><strong>Супервизия:</strong> Обсуждение сложных случаев с коллегами (1 раз в месяц)</li>
+          <li><strong>Повышение квалификации:</strong> Обучение и самообразование (не менее 40 часов в год)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== СЕМЕЙНЫЙ ПСИХОЛОГ ===== -->
+  <!-- ============================================================ -->
+  <section id="family-diagnostics">
+    <h2><span class="emoji-big">👨‍👩‍👧‍👦</span> Семейный психолог: диагностика</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>📋 Диагностика семейной системы</h3>
+        <ul>
+          <li><strong>Тест семейных отношений (ТСО)</strong> — детско-родительские отношения, 3-10 лет</li>
+          <li><strong>Методика «Кинетический рисунок семьи»</strong> — проективная диагностика. <span class="tag gold">Информативная</span></li>
+          <li><strong>Тест «Семейная скульптура»</strong> — проективная диагностика отношений</li>
+          <li><strong>Опросник родительских установок (PARI)</strong> — стили воспитания</li>
+          <li><strong>Шкала супружеской удовлетворённости</strong> — качество брака</li>
+          <li><strong>Тест Розенцвейга</strong> — реакции на фрустрацию</li>
+        </ul>
+      </div>
+
+      <div class="card accent">
+        <h3>📋 Диагностика детско-родительских отношений</h3>
+        <ul>
+          <li><strong>Тест «Взрослый-Ребёнок»</strong> — взаимодействие родителя и ребёнка</li>
+          <li><strong>Шкала привязанности (IPPA)</strong> — качество привязанности, 12-20 лет</li>
+          <li><strong>Тест «Рисунок семьи»</strong> — проективная диагностика</li>
+          <li><strong>Методика «Два дома»</strong> — выявление предпочтений ребёнка</li>
+          <li><strong>Шкала родительского контроля</strong> — уровень контроля и поддержки</li>
+        </ul>
+      </div>
+
+      <div class="card success">
+        <h3>📋 Диагностика супружеских отношений</h3>
+        <ul>
+          <li><strong>Тест супружеской удовлетворённости</strong> — качество брака</li>
+          <li><strong>Тест Розенцвейга</strong> — реакции на фрустрацию</li>
+          <li><strong>Опросник супружеских конфликтов</strong> — зоны конфликтов</li>
+          <li><strong>Тест любви и одобрения (Чепмен)</strong> — языки любви</li>
+          <li><strong>Шкала супружеской адаптации</strong> — уровень адаптации в браке</li>
+        </ul>
+      </div>
+
+      <div class="card warning">
+        <h3>📋 Диагностика семейных кризисов</h3>
+        <ul>
+          <li><strong>Шкала семейного стресса</strong> — уровень семейного стресса</li>
+          <li><strong>Тест на семейное выгорание</strong> — эмоциональное истощение</li>
+          <li><strong>Опросник семейных ценностей</strong> — ценности в семье</li>
+          <li><strong>Тест на семейную сплочённость</strong> — уровень близости</li>
+          <li><strong>Шкала семейной гибкости</strong> — адаптивность к изменениям</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== СЕМЕЙНАЯ ТЕРАПИЯ ===== -->
+  <!-- ============================================================ -->
+  <section id="family-therapy">
+    <h2><span class="emoji-big">👨‍👩‍👧‍👦</span> Семейная терапия: методы</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>🔑 Системная семейная терапия (ССТ)</h3>
+        <p><strong>Системная семейная терапия</strong> — работа с семьёй как системой. Изменения в одном члене семьи влияют на всех.</p>
+
+        <h4>Ключевые понятия</h4>
+
+        <div class="definition-box">
+          <strong>Гомеостаз</strong> — Семья стремится к балансу, сопротивление изменениям. Даже дисфункциональный паттерн поддерживается.
+        </div>
+
+        <div class="definition-box">
+          <strong>Границы</strong> — Внешние (семья-мир) и внутренние (между членами семьи). Здоровые границы — гибкие и проницаемые.
+        </div>
+
+        <div class="definition-box">
+          <strong>Правила</strong> — Негласные правила семейной системы (явные и скрытые). Например, «не говори о проблемах».
+        </div>
+
+        <div class="definition-box">
+          <strong>Треугольники</strong> — Вовлечение третьего в конфликт двоих. Например, ребёнок становится «миротворцем» между родителями.
+        </div>
+
+        <h4>📋 Протокол ССТ</h4>
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Диагностика (1-2 сессии):</strong> Генограмма (карта семьи), семейная скульптура, интервью с семьёй.
+        </div>
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Вхождение в систему (1 сессия):</strong> Установление контакта со всеми членами семьи, присоединение.
+        </div>
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Исследование структуры (2-3 сессии):</strong> Выявление границ, правил, паттернов взаимодействия.
+        </div>
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Интервенция (3-5 сессий):</strong> Внесение изменений в семейную систему (рефрейминг, новые правила).
+        </div>
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Закрепление (2-3 сессии):</strong> Поддержка новых паттернов, предотвращение рецидивов.
+        </div>
+        <p><span class="tag blue">Длительность:</span> 8-15 сессий по 60-90 мин.</p>
+      </div>
+
+      <div class="card pink">
+        <h3>🛠️ Техники семейной терапии</h3>
+
+        <div class="definition-box">
+          <strong>Семейная скульптура</strong>
+          <p>Проекция семейных отношений через фигуры. <span class="tag gold">Наглядная техника, вызывает сильные эмоции.</span></p>
+          <p><strong>Инструкция:</strong> «Представь, что семья — это скульптура. Расположи членов семьи так, как ты видишь их отношения».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Генограмма</strong>
+          <p>Карта семьи с историей и взаимоотношениями (минимум 3 поколения). <span class="tag blue">Диагностическая техника.</span></p>
+          <p><strong>Инструкция:</strong> «Давайте нарисуем ваше семейное дерево. Отметим важные события и отношения».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Круговое интервью</strong>
+          <p>Опрос всех членов семьи о взглядах друг на друга. <span class="tag blue">Создаёт циркулярность.</span></p>
+          <p><strong>Вопросы:</strong> «Как, по-твоему, муж чувствует себя в этой ситуации?», «Что бы сказала жена?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Парадоксальная интервенция</strong>
+          <p>Предложение сделать наоборот (для изменения поведения). <span class="tag gold">Эффективно при сопротивлении.</span></p>
+          <p><strong>Пример:</strong> «Если ты хочешь продолжать ссориться, делай это по расписанию — 15 минут в день».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Рефрейминг</strong>
+          <p>Переформулирование проблемы в позитивном ключе. <span class="tag gold">Изменяет восприятие.</span></p>
+          <p><strong>Пример:</strong> Вместо «Ребёнок слишком требовательный» → «Ребёнок умеет просить о помощи».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Домашнее задание</strong>
+          <p>Упражнения для семьи между сессиями. <span class="tag blue">Закрепляет изменения.</span></p>
+          <p><strong>Пример:</strong> «Каждый день говорите друг другу по три комплимента», «Проведите 20 минут без телефонов».</p>
+        </div>
+      </div>
+
+      <div class="card success">
+        <h3>🛠️ Работа с парой — подробно</h3>
+        <p><strong>Терапия пар</strong> — работа с супружескими отношениями. Эффективна при конфликтах, отдалении, изменах.</p>
+
+        <h4>Ключевые техники</h4>
+
+        <div class="definition-box">
+          <strong>Активное слушание</strong>
+          <p>Умение слышать друг друга без перебивания. <span class="tag gold">Основа коммуникации.</span></p>
+          <p><strong>Инструкция:</strong> «Один говорит, другой слушает и пересказывает услышанное, затем меняются».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Я-сообщения</strong>
+          <p>Выражение чувств без обвинений. «Я чувствую...», а не «Ты всегда...». <span class="tag gold">Снижает конфликтность.</span></p>
+          <p><strong>Формула:</strong> «Когда ты [поведение], я чувствую [эмоция], потому что [причина]».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Время для разговора</strong>
+          <p>Регулярные разговоры о чувствах (без отвлечений). <span class="tag blue">Еженедельно 20-30 минут.</span></p>
+          <p><strong>Правила:</strong> Без телефонов, без критики, слушать без перебивания.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Благодарность</strong>
+          <p>Ежедневное выражение благодарности партнёру. <span class="tag green">Повышает удовлетворённость.</span></p>
+          <p><strong>Инструкция:</strong> «Каждый день находи хотя бы одну вещь, за которую ты благодарен(на) партнёру».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Давай договоримся</strong>
+          <p>Поиск компромисса, совместное решение. <span class="tag gold">Вместо борьбы — диалог.</span></p>
+          <p><strong>Инструкция:</strong> «Давай найдём решение, которое устроит нас обоих. Что ты предлагаешь?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Личные границы</strong>
+          <p>Установление и защита границ в отношениях. <span class="tag blue">Здоровые отношения = здоровые границы.</span></p>
+          <p><strong>Инструкция:</strong> «Что для тебя приемлемо, а что нет? Как мы можем уважать границы друг друга?».</p>
+        </div>
+
+        <h4>📋 Протокол работы с парой</h4>
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Диагностика отношений</strong> — выявление проблемных зон, опросники, наблюдение.
+        </div>
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Обучение коммуникации</strong> — техники активного слушания, Я-сообщения (2-3 сессии).
+        </div>
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Работа с конфликтами</strong> — поиск компромиссов, переговоры (2-3 сессии).
+        </div>
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Восстановление близости</strong> — качественное время, физическая близость (1-2 сессии).
+        </div>
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Закрепление навыков</strong> — домашние задания, планирование будущего (1-2 сессии).
+        </div>
+        <p><span class="tag blue">Длительность:</span> 8-15 сессий по 60-90 мин.</p>
+      </div>
+
+      <div class="card orange">
+        <h3>🛠️ Работа с родителями — консультирование</h3>
+
+        <div class="definition-box">
+          <strong>Родительские тренинги</strong>
+          <p>Обучение эффективному воспитанию. <span class="tag blue">Групповой формат, 6-10 встреч.</span></p>
+          <p><strong>Темы:</strong> возрастные особенности, эффективная коммуникация, установление границ, поощрение и наказание.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Консультирование родителей</strong>
+          <p>Индивидуальное и семейное. Работа с конкретными проблемами (трудное поведение, школьные проблемы, тревога).</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Совместные сессии</strong>
+          <p>Родитель + ребёнок. <span class="tag gold">Эффективно при конфликтах, трудностях в общении.</span></p>
+          <p><strong>Инструкция:</strong> «Давайте разыграем ситуацию, которая вызывает трудности дома».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Психообразование</strong>
+          <p>Объяснение возрастных особенностей детей. «В 3 года ребёнок проходит кризис — это нормально».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Работа с чувством вины</strong>
+          <p>Поддержка родителей, принятие. «Вы делаете всё, что можете. Важно не быть идеальным, а быть достаточным».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Семейные ритуалы</strong>
+          <p>Восстановление традиций и совместных активностей. <span class="tag green">Укрепляет семью.</span></p>
+          <p><strong>Пример:</strong> «Еженедельный ужин вместе, совместные прогулки, чтение перед сном».</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== УНИВЕРСАЛЬНЫЕ МЕТОДЫ ===== -->
+  <!-- ============================================================ -->
+  <section id="universal">
+    <h2><span class="emoji-big">🛠️</span> Универсальные методы и техники</h2>
+
+    <div class="grid-3">
+      <div class="card purple">
+        <h3>🧠 Дыхательные техники</h3>
+        <p><strong>Дыхание</strong> — самый быстрый способ повлиять на нервную систему. Используется при тревоге, стрессе, панических атаках.</p>
+
+        <div class="definition-box">
+          <strong>Диафрагмальное дыхание</strong>
+          <p>Дыхание животом — успокаивает нервную систему. <span class="tag green">Для тревоги, стресса.</span></p>
+          <p><strong>Инструкция:</strong> Положите руку на живот. Вдохните медленно через нос, надувая живот (рука поднимается). Выдохните медленно через рот, втягивая живот.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Дыхание 4-7-8</strong>
+          <p>Вдох 4 сек, задержка 7 сек, выдох 8 сек — для сна и тревоги. <span class="tag gold">Эффективно.</span></p>
+          <p><strong>Инструкция:</strong> Вдох 4 сек → задержка 7 сек → выдох 8 сек. Повторить 3-5 раз.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Квадратное дыхание</strong>
+          <p>Вдох-задержка-выдох-задержка по 4 сек — для концентрации.</p>
+          <p><strong>Инструкция:</strong> Вдох 4 сек → задержка 4 сек → выдох 4 сек → задержка 4 сек. Повторить 5-10 раз.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Дыхание через одну ноздрю</strong>
+          <p>Балансирует полушария, успокаивает.</p>
+          <p><strong>Инструкция:</strong> Закройте правую ноздрю, вдохните через левую. Закройте левую, выдохните через правую. Повторите 5-10 раз.</p>
+        </div>
+      </div>
+
+      <div class="card pink">
+        <h3>🧘 Медитативные техники</h3>
+
+        <div class="definition-box">
+          <strong>Медитация осознанности (Mindfulness)</strong>
+          <p>Наблюдение за мыслями и чувствами без оценки. <span class="tag green">Для тревоги, стресса, депрессии.</span></p>
+          <p><strong>Инструкция:</strong> Сядьте удобно. Сосредоточьтесь на дыхании. Замечайте мысли, чувства, ощущения, возвращаясь к дыханию.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Медитация сканирования тела</strong>
+          <p>Последовательное осознавание частей тела. Снимает напряжение.</p>
+          <p><strong>Инструкция:</strong> Сосредоточьтесь на пальцах ног, затем на ступнях, голенях, коленях... до макушки.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Визуализация</strong>
+          <p>Создание успокаивающих образов в воображении.</p>
+          <p><strong>Инструкция:</strong> «Закрой глаза и представь место, где ты чувствуешь себя в безопасности. Какие звуки? Запахи? Ощущения?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Медитация любящей доброты (Метта)</strong>
+          <p>Пожелание добра себе и другим. <span class="tag gold">Развивает эмпатию.</span></p>
+          <p><strong>Инструкция:</strong> «Пусть я буду счастлив(а), здоров(а), в безопасности». Затем распространите на других.</p>
+        </div>
+      </div>
+
+      <div class="card success">
+        <h3>📝 Когнитивные техники</h3>
+
+        <div class="definition-box">
+          <strong>Дневник мыслей</strong>
+          <p>Отслеживание автоматических мыслей. <span class="tag blue">КПТ.</span></p>
+          <p><strong>Инструкция:</strong> Записывайте ситуацию, мысль, эмоцию, поведение. Затем анализируйте мысль.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Когнитивное переструктурирование</strong>
+          <p>Замена иррациональных мыслей на рациональные.</p>
+          <p><strong>Инструкция:</strong> «Какие доказательства за эту мысль? Против? Какое альтернативное объяснение?».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Дневник благодарности</strong>
+          <p>Ежедневная запись благодарностей — повышает счастье.</p>
+          <p><strong>Инструкция:</strong> «Каждый день записывай 3 вещи, за которые ты благодарен(на)».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Техника «5 почему»</strong>
+          <p>Докопаться до причины проблемы.</p>
+          <p><strong>Инструкция:</strong> Задайте «почему?» 5 раз, чтобы найти корень проблемы.</p>
+        </div>
+      </div>
+
+      <div class="card accent">
+        <h3>🎨 Арт-техники</h3>
+
+        <div class="definition-box">
+          <strong>Рисование мандал</strong>
+          <p>Успокаивает, структурирует. <span class="tag green">Для тревоги.</span></p>
+          <p><strong>Инструкция:</strong> «Раскрась этот круг, как тебе хочется. Не думай о правильности».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Коллаж «Мои ценности»</strong>
+          <p>Исследование ценностей.</p>
+          <p><strong>Инструкция:</strong> «Вырежи картинки, которые отражают твои ценности, и создай коллаж».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Рисунок чувства</strong>
+          <p>Выражение эмоций через цвет и форму.</p>
+          <p><strong>Инструкция:</strong> «Нарисуй, что ты чувствуешь. Используй любые цвета и формы».</p>
+        </div>
+      </div>
+
+      <div class="card orange">
+        <h3>📖 Работа с текстом</h3>
+
+        <div class="definition-box">
+          <strong>Письмо себе (прошлому/будущему)</strong>
+          <p>Работа с опытом и целями.</p>
+          <p><strong>Инструкция:</strong> «Напиши письмо своему прошлому «Я» или будущему «Я» через 5 лет».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Неотправленное письмо</strong>
+          <p>Выражение чувств адресату. <span class="tag gold">Эффективно при травме, утрате.</span></p>
+          <p><strong>Инструкция:</strong> «Напиши письмо [человеку], которое ты никогда не отправишь. Скажи всё, что хочешь».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Автобиография</strong>
+          <p>Исследование своей истории.</p>
+          <p><strong>Инструкция:</strong> «Напиши свою историю. Какие события были ключевыми?».</p>
+        </div>
+      </div>
+
+      <div class="card blue">
+        <h3>🧩 Техники релаксации</h3>
+
+        <div class="definition-box">
+          <strong>Прогрессивная мышечная релаксация (Джекобсон)</strong>
+          <p>Напряжение и расслабление мышц. <span class="tag green">Для тревоги.</span></p>
+          <p><strong>Инструкция:</strong> Напрягите мышцы рук на 5 сек, затем расслабьте. Перейдите к ногам, туловищу, лицу.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Аутогенная тренировка</strong>
+          <p>Самовнушение тепла и тяжести.</p>
+          <p><strong>Инструкция:</strong> «Моя правая рука тяжёлая и тёплая... Моя левая рука тяжёлая и тёплая...».</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Йога-нидра</strong>
+          <p>Глубокая релаксация в положении лёжа.</p>
+          <p><strong>Инструкция:</strong> Лягте на спину, следуйте голосу ведущего, сканируя тело.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== КРИЗИСНАЯ ПОМОЩЬ ===== -->
+  <!-- ============================================================ -->
+  <section id="crisis">
+    <h2><span class="emoji-big">🚨</span> Кризисная помощь</h2>
+
+    <div class="grid-2">
+      <div class="card danger">
+        <h3>🚨 Экстренная помощь в кризисной ситуации</h3>
+
+        <div class="step-box">
+          <span class="step-num">1</span> <strong>Оценка риска:</strong> Оценка уровня опасности (суицид, насилие, угроза жизни). Используйте шкалы риска.
+        </div>
+
+        <div class="step-box">
+          <span class="step-num">2</span> <strong>Обеспечение безопасности:</strong> Создание безопасной среды, убрать опасные предметы, не оставлять одного.
+        </div>
+
+        <div class="step-box">
+          <span class="step-num">3</span> <strong>Кризисное вмешательство:</strong> Немедленная психологическая помощь — валидация, поддержка, снижение напряжения.
+        </div>
+
+        <div class="step-box">
+          <span class="step-num">4</span> <strong>Стабилизация:</strong> Помощь в восстановлении эмоционального равновесия (дыхание, заземление).
+        </div>
+
+        <div class="step-box">
+          <span class="step-num">5</span> <strong>Направление к специалистам:</strong> При необходимости (психиатр, врач, стационар).
+        </div>
+
+        <p><strong>Телефоны доверия:</strong> 8-800-2000-122 (круглосуточно, анонимно).</p>
+      </div>
+
+      <div class="card warning">
+        <h3>🧠 Посткризисная работа</h3>
+
+        <div class="definition-box">
+          <strong>Терапия травмы</strong>
+          <p>Работа с посттравматическими реакциями. EMDR, соматическое переживание, КПТ-травма.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Поддержка</strong>
+          <p>Индивидуальная и групповая. Группы поддержки для переживших травму.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Развитие резильентности</strong>
+          <p>Укрепление способности справляться с трудностями. Поиск ресурсов, развитие копинг-навыков.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Работа с утратой</strong>
+          <p>Помощь в проживании горя. Этапы: отрицание → гнев → торг → депрессия → принятие.</p>
+        </div>
+
+        <div class="definition-box">
+          <strong>Реабилитация</strong>
+          <p>Восстановление после кризиса. Возвращение к привычной жизни, интеграция опыта.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== РЕСУРСЫ ===== -->
+  <!-- ============================================================ -->
+  <section id="resources">
+    <h2><span class="emoji-big">📚</span> Ресурсы для психолога</h2>
+
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>📖 Книги по практической психологии</h3>
+        <ul>
+          <li><strong>Ирвин Ялом</strong> — «Дар психотерапии», «Лжец на кушетке»</li>
+          <li><strong>Карл Роджерс</strong> — «Становление личности»</li>
+          <li><strong>Аарон Бек</strong> — «Когнитивная терапия депрессии»</li>
+          <li><strong>Маршалл Розенберг</strong> — «Ненасильственное общение»</li>
+          <li><strong>Джон Готтман</strong> — «Пять языков любви»</li>
+          <li><strong>Вирджиния Сатир</strong> — «Семейная терапия»</li>
+        </ul>
+      </div>
+
+      <div class="card pink">
+        <h3>📖 Книги по детской и подростковой психологии</h3>
+        <ul>
+          <li><strong>Гордон Ньюфелд</strong> — «Не упускайте своих детей»</li>
+          <li><strong>Юлия Гиппенрейтер</strong> — «Общаться с ребёнком. Как?»</li>
+          <li><strong>Людмила Петрановская</strong> — «Тайная опора», «Если с ребёнком трудно»</li>
+          <li><strong>Джон Боулби</strong> — «Привязанность»</li>
+          <li><strong>Вайолет Оклендер</strong> — «Окна в мир ребёнка»</li>
+        </ul>
+      </div>
+
+      <div class="card success">
+        <h3>🛠️ Онлайн-инструменты</h3>
+        <ul>
+          <li><strong>Mentimeter</strong> — интерактивные опросы</li>
+          <li><strong>Miro</strong> — онлайн-доска для работы</li>
+          <li><strong>Zoom / Skype</strong> — видеоконсультирование</li>
+          <li><strong>Google Forms</strong> — создание опросников</li>
+          <li><strong>Notion</strong> — ведение заметок и базы знаний</li>
+          <li><strong>SimplePractice</strong> — платформа для ведения частной практики</li>
+        </ul>
+      </div>
+
+      <div class="card accent">
+        <h3>🧠 Подкасты и видео</h3>
+        <ul>
+          <li><strong>«Психология — это просто»</strong> — YouTube-канал</li>
+          <li><strong>«Человек внутри»</strong> — подкаст о психологии</li>
+          <li><strong>«Лекции по психологии развития»</strong> — Курс лекций</li>
+          <li><strong>TED Talks по психологии</strong> — мотивационные и обучающие выступления</li>
+        </ul>
+      </div>
+
+      <div class="card orange">
+        <h3>📂 Профессиональные ресурсы</h3>
+        <ul>
+          <li><strong>Ассоциация практикующих психологов</strong> — профессиональное сообщество</li>
+          <li><strong>Общероссийский профессиональный психологический союз</strong> — сертификация</li>
+          <li><strong>Московский институт психоанализа</strong> — повышение квалификации</li>
+          <li><strong>Psychology Today</strong> — международный портал для психологов</li>
+        </ul>
+      </div>
+
+      <div class="card blue">
+        <h3>🧪 Исследования и доказательная база</h3>
+        <ul>
+          <li><strong>APA (Американская психологическая ассоциация)</strong> — исследования и стандарты</li>
+          <li><strong>Google Scholar</strong> — поиск научных публикаций</li>
+          <li><strong>ResearchGate</strong> — социальная сеть для учёных</li>
+          <li><strong>PubMed</strong> — база медицинских и психологических исследований</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ==================== ТЕМА ====================
+function toggleTheme(){
+  const b=document.body;
+  if(b.getAttribute('data-theme')==='dark'){b.removeAttribute('data-theme');localStorage.setItem('theme','light')}
+  else{b.setAttribute('data-theme','dark');localStorage.setItem('theme','dark')}
+}
+if(localStorage.getItem('theme')==='dark')document.body.setAttribute('data-theme','dark');
+
+// ==================== ПРОГРЕСС ====================
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('progress').style.width=p+'%';
+  const btn=document.getElementById('scrollTopBtn');
+  if(window.scrollY>400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+function scrollToTop(){
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ==================== МОБИЛЬНАЯ НАВИГАЦИЯ ====================
+function toggleMobileNav(){
+  document.getElementById('mobileNav').classList.toggle('open');
+  document.getElementById('navOverlay').classList.toggle('open');
+}
+document.addEventListener('click',function(e){
+  const nav=document.getElementById('mobileNav');
+  const overlay=document.getElementById('navOverlay');
+  if(nav.classList.contains('open') && !nav.contains(e.target) && e.target.id!=='navOverlay'){
+    nav.classList.remove('open');
+    overlay.classList.remove('open');
+  }
+});
+
+// ==================== АККОРДЕОН ====================
+function toggleAccordion(el){
+  const body=el.nextElementSibling;
+  const arrow=el.querySelector('.arrow');
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+// ==================== ПОИСК ====================
+document.getElementById('search').addEventListener('input',function(e){
+  const q=e.target.value.toLowerCase().trim();
+  document.querySelectorAll('.container section').forEach(s=>{
+    const t=s.textContent.toLowerCase();
+    s.style.display=!q||t.includes(q)?'':'none';
+  });
+});
+
+// ==================== НИЖНЯЯ НАВИГАЦИЯ ====================
+document.querySelectorAll('.bottom-nav button').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// ==================== ЧЕК-ЛИСТЫ ====================
+document.querySelectorAll('.checklist li').forEach(el=>{
+  el.addEventListener('click',function(){this.classList.toggle('checked')});
+});
+</script>
+<section class="tm-card"><h2>Теория и выбор практики</h2><p>Начинайте с запроса, контекста и ожидаемого наблюдаемого результата. Метод выбирается по возрасту, состоянию, цели и уровню безопасности, а не по популярности техники.</p><div class="tm-grid"><details open><summary>Перед началом</summary><p>Уточните цель, противопоказания, формат обратной связи и критерий завершения.</p></details><details><summary>После практики</summary><p>Зафиксируйте наблюдения, реакцию участника и следующий мягкий шаг. Не подменяйте практикой диагностику или лечение.</p></details></div></section><script id="theme-tools-script">(()=>{const q=s=>document.querySelector(s), text=(s)=>String(s||'').trim(); const saveWord=(name,content)=>{const blob=new Blob(['\ufeff', '<html><head><meta charset="utf-8"></head><body><pre style="white-space:pre-wrap;font:15px Arial">'+content.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+'</pre></body></html>'],{type:'application/msword'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name+'.doc';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};document.title=document.title.replace(' · Генератор','');document.documentElement.dataset.themeNote='Добавлены видимые разделы теории, выбора метода и этической проверки.';document.querySelectorAll('[data-home]').forEach(b=>b.onclick=()=>q('#home-output').textContent='Сценарий «'+b.dataset.home+'»: выберите 3 главных действия, назначьте время и оставьте один запасной шаг.');document.querySelectorAll('[data-build]').forEach(b=>b.onclick=()=>q('#build-output').textContent='Этап «'+b.dataset.build+'»: проверьте соответствие проекту, качество выполнения, безопасность и зафиксируйте замечания.');document.querySelectorAll('[data-mama]').forEach(b=>b.onclick=()=>q('#mama-output').textContent='Сценарий «'+b.dataset.mama+'»: подготовьте вещи заранее, выберите одно обязательное действие и один спокойный резерв.');document.querySelectorAll('[data-cook]').forEach(b=>b.onclick=()=>q('#cook-output').textContent='Раздел «'+b.dataset.cook+'»: запишите конкретные действия, время и нужные продукты.');})();</script>
+</body>
+</html>

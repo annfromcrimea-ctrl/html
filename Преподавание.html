@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>Master TEFL/DELTA/TESOL/ФГОС — Полное пособие</title>
+<style>
+:root{
+  --primary:#2c3e50;--secondary:#2980b9;--accent:#e67e22;
+  --bg:#f4f7f6;--card:#ffffff;--text:#2c3e50;--muted:#6b7280;
+  --border:#e5e7eb;--success:#16a34a;--danger:#dc2626;--warning:#f59e0b;
+  --shadow:0 2px 8px rgba(0,0,0,.08);--radius:10px;
+}
+[data-theme="dark"]{
+  --primary:#e2e8f0;--secondary:#60a5fa;--accent:#fbbf24;
+  --bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--muted:#94a3b8;
+  --border:#334155;--shadow:0 2px 8px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;transition:.3s;padding-bottom:80px;overflow-x:hidden}
+header{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:0.8rem 1rem;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
+header .top-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem}
+header h1{font-size:1.1rem;font-weight:700;flex:1;min-width:140px}
+header .controls{display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap}
+header .controls input{padding:0.4rem 0.7rem;border-radius:20px;border:none;background:rgba(255,255,255,.2);color:#fff;font-size:0.85rem;min-width:120px;width:140px}
+header .controls input::placeholder{color:rgba(255,255,255,.7)}
+header .controls button{background:rgba(255,255,255,.2);border:none;color:#fff;padding:0.3rem 0.7rem;border-radius:20px;cursor:pointer;font-weight:600;font-size:0.8rem;transition:.2s;white-space:nowrap}
+header .controls button:hover,header .controls button:active{background:rgba(255,255,255,.3)}
+header .progress-bar{height:3px;background:rgba(255,255,255,.2);margin-top:0.5rem;border-radius:2px}
+header .progress-fill{height:100%;background:var(--accent);width:0%;transition:width .2s;border-radius:2px}
+
+.nav-toggle{display:none;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;padding:0.2rem 0.5rem}
+.nav-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:99}
+.nav-overlay.open{display:block}
+.mobile-nav{position:fixed;top:0;left:-300px;width:280px;height:100%;background:var(--card);z-index:100;overflow-y:auto;transition:left .3s ease;padding:1rem;box-shadow:2px 0 20px rgba(0,0,0,.2)}
+.mobile-nav.open{left:0}
+.mobile-nav .close-nav{float:right;background:none;border:none;font-size:1.5rem;color:var(--text);cursor:pointer;padding:0 0.3rem}
+.mobile-nav h3{font-size:.8rem;text-transform:uppercase;color:var(--muted);margin:1rem 0 .3rem;letter-spacing:.5px}
+.mobile-nav ul{list-style:none}
+.mobile-nav li{margin-bottom:.2rem}
+.mobile-nav a{text-decoration:none;color:var(--text);padding:.4rem .6rem;display:block;border-radius:6px;font-size:.9rem;transition:.2s;border-left:3px solid transparent}
+.mobile-nav a:hover,.mobile-nav a:active{background:rgba(41,128,185,.1);border-left-color:var(--secondary)}
+
+.container{padding:0.8rem 1rem;max-width:1100px;margin:0 auto}
+section{margin-bottom:2.5rem;scroll-margin-top:70px}
+h2{color:var(--secondary);border-bottom:3px solid var(--accent);padding-bottom:.4rem;margin-bottom:1rem;font-size:1.5rem}
+h3{color:var(--primary);margin:1.2rem 0 .8rem;font-size:1.2rem}
+h4{color:var(--accent);margin:.8rem 0 .4rem;font-size:1.05rem}
+p,li{margin-bottom:.6rem;color:var(--text);font-size:.95rem}
+ul,ol{padding-left:1.2rem}
+
+.card{background:var(--card);padding:1rem;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1rem;border-left:4px solid var(--secondary)}
+.card.accent{border-left-color:var(--accent)}
+.card.success{border-left-color:var(--success)}
+.card.danger{border-left-color:var(--danger)}
+.card.warning{border-left-color:var(--warning)}
+
+details{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.8rem;overflow:hidden}
+summary{padding:.7rem 1rem;cursor:pointer;font-weight:600;background:rgba(41,128,185,.05);display:flex;justify-content:space-between;align-items:center;font-size:.95rem}
+summary:hover{background:rgba(41,128,185,.12)}
+details[open] summary{border-bottom:1px solid var(--border);background:rgba(41,128,185,.1)}
+.details-content{padding:1rem}
+
+.tool{background:var(--card);border:2px dashed var(--accent);padding:1.2rem;border-radius:10px;margin:1.2rem 0}
+.form-group{margin-bottom:.8rem}
+label{display:block;font-weight:600;margin-bottom:.3rem;font-size:.9rem}
+select,input[type="text"],input[type="number"],textarea{width:100%;padding:.6rem;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:.95rem;font-family:inherit}
+textarea{min-height:80px;resize:vertical}
+
+.btn{background:var(--secondary);color:#fff;border:none;padding:.6rem 1.1rem;border-radius:6px;cursor:pointer;font-weight:600;font-size:.9rem;transition:.2s;display:inline-block;text-align:center}
+.btn:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.15)}
+.btn:active{transform:scale(.97)}
+.btn.accent{background:var(--accent)}
+.btn.success{background:var(--success)}
+.btn.danger{background:var(--danger)}
+.btn.warning{background:var(--warning)}
+.btn-block{display:block;width:100%}
+
+.output{margin-top:1rem;padding:1rem;background:var(--bg);border-radius:6px;border:1px solid var(--border);display:none;white-space:pre-wrap;font-family:ui-monospace,monospace;font-size:.85rem;max-height:400px;overflow-y:auto}
+.output.visible{display:block}
+
+table{width:100%;border-collapse:collapse;margin:.8rem 0;font-size:.85rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--border);padding:.5rem;text-align:left}
+th{background:var(--primary);color:#fff}
+tr:nth-child(even){background:rgba(0,0,0,.02)}
+[data-theme="dark"] tr:nth-child(even){background:rgba(255,255,255,.03)}
+
+.tag{display:inline-block;background:var(--secondary);color:#fff;padding:.1rem .5rem;border-radius:12px;font-size:.7rem;margin-right:.2rem}
+.tag.a1{background:#94a3b8}.tag.a2{background:#64748b}.tag.b1{background:#3b82f6}.tag.b2{background:#8b5cf6}.tag.c1{background:#ec4899}.tag.c2{background:#dc2626}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+
+.game-card{background:var(--card);padding:.8rem;border-radius:8px;border:1px solid var(--border);transition:.2s}
+.game-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--secondary)}
+.game-card h4{margin:0 0 .3rem;font-size:.95rem}
+
+.quiz-q{background:var(--card);padding:1rem;border-radius:var(--radius);margin-bottom:.8rem;border:2px solid var(--border)}
+.quiz-q.correct{border-color:var(--success);background:rgba(22,163,74,.05)}
+.quiz-q.wrong{border-color:var(--danger);background:rgba(220,38,38,.05)}
+.quiz-opt{display:block;padding:.5rem .8rem;margin:.3rem 0;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:.2s;font-size:.9rem}
+.quiz-opt:hover{background:rgba(41,128,185,.1);border-color:var(--secondary)}
+.quiz-opt.selected{background:var(--secondary);color:#fff;border-color:var(--secondary)}
+.quiz-opt.correct-answer{background:var(--success);color:#fff;border-color:var(--success)}
+.quiz-opt.wrong-answer{background:var(--danger);color:#fff;border-color:var(--danger)}
+
+.ipa-char{display:inline-block;background:var(--card);border:1px solid var(--border);padding:.2rem .5rem;border-radius:4px;margin:.15rem;cursor:pointer;font-family:serif;font-size:1rem;transition:.2s}
+.ipa-char:hover{background:var(--secondary);color:#fff}
+
+.timer-display{font-size:2.5rem;font-weight:bold;text-align:center;color:var(--secondary);font-family:monospace}
+
+.student-entry{display:grid;grid-template-columns:1fr auto auto;gap:.4rem;align-items:center;padding:.4rem;background:var(--bg);border-radius:6px;margin-bottom:.4rem}
+.student-entry .btn{font-size:.75rem;padding:.2rem .6rem}
+
+.random-activity{background:var(--card);padding:1rem;border-radius:var(--radius);border:2px solid var(--accent);margin:.8rem 0;text-align:center}
+.random-activity h3{color:var(--accent);margin:0 0 .3rem}
+
+.scheduler-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.3rem;margin:.8rem 0;overflow-x:auto}
+.scheduler-day{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.4rem;min-height:80px;font-size:.75rem}
+.scheduler-day h4{font-size:.7rem;margin:0 0 .2rem;color:var(--muted)}
+.scheduler-day .slot{padding:.15rem .3rem;background:var(--secondary);color:#fff;border-radius:3px;font-size:.65rem;margin:.15rem 0;cursor:grab}
+.scheduler-day .slot.done{background:var(--success)}
+.scheduler-day .slot.cancelled{background:var(--danger);text-decoration:line-through}
+
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;background:var(--card);
+  border-top:1px solid var(--border);padding:0.4rem 0.5rem;z-index:98;
+  display:flex;justify-content:space-around;align-items:center;
+  box-shadow:0 -2px 10px rgba(0,0,0,.08);height:60px;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)
+}
+.bottom-nav button{
+  background:none;border:none;color:var(--muted);font-size:0.7rem;
+  cursor:pointer;display:flex;flex-direction:column;align-items:center;
+  gap:2px;padding:0.2rem 0.5rem;transition:.2s;border-radius:8px;min-width:50px
+}
+.bottom-nav button span{font-size:1.3rem;line-height:1}
+.bottom-nav button.active{color:var(--secondary)}
+.bottom-nav button:hover,.bottom-nav button:active{color:var(--secondary);background:rgba(41,128,185,.05)}
+.bottom-nav .nav-label{font-size:0.55rem;font-weight:500;letter-spacing:0.3px}
+
+.scroll-top-btn{
+  position:fixed;bottom:75px;right:12px;width:44px;height:44px;
+  border-radius:50%;background:var(--secondary);color:#fff;
+  border:none;font-size:22px;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.25);
+  transition:all .3s;z-index:97;opacity:0;transform:scale(.8);pointer-events:none;
+  display:flex;align-items:center;justify-content:center
+}
+.scroll-top-btn.visible{opacity:1;transform:scale(1);pointer-events:auto}
+.scroll-top-btn:active{transform:scale(.9)}
+
+.btn-group{display:flex;gap:0.5rem;flex-wrap:wrap;margin:.5rem 0}
+.btn-group .btn{flex:1;min-width:60px;font-size:.8rem;padding:.4rem .8rem}
+
+@media(max-width:768px){
+  .container{padding:0.5rem 0.7rem}
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .scheduler-grid{grid-template-columns:repeat(4,1fr)}
+  header h1{font-size:.95rem}
+  .controls input{width:100px;font-size:.75rem}
+  .controls button{font-size:.7rem;padding:.2rem .5rem}
+  .bottom-nav button{min-width:40px}
+  .bottom-nav .nav-label{font-size:.5rem}
+  .scroll-top-btn{bottom:70px;right:10px;width:38px;height:38px;font-size:18px}
+  .btn-group .btn{font-size:.75rem;padding:.3rem .6rem}
+  table{font-size:.75rem}
+  .card{padding:.8rem}
+  .tool{padding:.8rem}
+  .mobile-nav{width:260px}
+}
+
+@media(max-width:480px){
+  header .top-row{flex-direction:column;align-items:stretch;gap:0.3rem}
+  header .controls{justify-content:center}
+  header .controls input{width:100%}
+  .scheduler-grid{grid-template-columns:repeat(3,1fr)}
+  .bottom-nav button{min-width:32px;font-size:.6rem}
+  .bottom-nav button span{font-size:1.1rem}
+  h2{font-size:1.2rem}
+  h3{font-size:1rem}
+}
+
+@media(min-width:769px){
+  .mobile-nav,.nav-overlay,.nav-toggle{display:none!important}
+  .bottom-nav{display:none!important}
+}
+
+@media print{
+  header,.bottom-nav,.scroll-top-btn,.controls,.progress-bar,.tool,summary{display:none!important}
+  details[open] summary{display:block}
+  .container{padding:0}
+  body{background:#fff;color:#000}
+  .card{box-shadow:none;border:1px solid #ccc}
+}
+
+.quote-block{background:var(--bg);padding:1rem;border-radius:8px;border-left:4px solid var(--accent);font-style:italic;margin:.8rem 0}
+.checklist{list-style:none;padding:0}
+.checklist li{padding:.3rem 0;padding-left:1.6rem;position:relative;font-size:.9rem}
+.checklist li::before{content:'✓';position:absolute;left:0;color:var(--success);font-weight:bold}
+.formula{background:var(--bg);padding:.8rem;border-radius:6px;border-left:4px solid var(--accent);margin:.8rem 0;font-family:monospace;font-size:.95rem}
+.example{background:rgba(41,128,185,.05);padding:.8rem;border-radius:6px;margin:.8rem 0;border-left:4px solid var(--secondary)}
+.tip{background:rgba(230,126,34,.1);padding:.8rem;border-radius:6px;margin:.8rem 0;border-left:4px solid var(--accent)}
+.timeline{position:relative;padding-left:1.5rem;margin:1rem 0}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--secondary)}
+.timeline-item{position:relative;margin-bottom:1rem;padding-left:1rem}
+.timeline-item::before{content:'';position:absolute;left:-1.8rem;top:.4rem;width:10px;height:10px;border-radius:50%;background:var(--accent);border:3px solid var(--card)}
+.timeline-item h4{margin-top:0}
+</style>
+
+<style id="theme-tools-style-4874204861422063511">.tm-card{margin:0;max-width:1100px;padding:22px;border:1px solid color-mix(in srgb,currentColor 14%,transparent);border-radius:20px;background:color-mix(in srgb,white 88%,transparent);box-shadow:0 8px 24px rgba(20,30,40,.07)}.tm-card h2{margin-top:0}.tm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.tm-grid details,.tm-grid label{padding:14px;border-radius:14px;background:rgba(255,255,255,.7)}.tm-form{display:flex;flex-wrap:wrap;gap:10px}.tm-form input,.tm-form select,.tm-form textarea,.tm-card>textarea{flex:1 1 220px;padding:12px;border:1px solid #b8c5cc;border-radius:10px;font:inherit}.tm-form button,.tm-actions button,.tm-buttons button,.tm-section-nav a{border:0;border-radius:10px;padding:12px 15px;background:#315d73;color:#fff;font:600 14px inherit;cursor:pointer;text-decoration:none}.tm-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}.tm-output, .tm-card pre{white-space:pre-wrap;line-height:1.6;padding:14px;background:rgba(0,0,0,.04);border-radius:12px}.tm-section-nav{display:flex;flex-wrap:wrap;gap:10px}.tm-note{opacity:.75;font-size:.92em}@media(max-width:600px){.tm-card{margin:0 10px;padding:16px;border-radius:16px}.tm-form{display:grid}.tm-form>*{width:100%;box-sizing:border-box}.tm-section-nav a,.tm-buttons button{min-height:46px;display:flex;align-items:center;justify-content:center}.tm-grid{grid-template-columns:1fr}}</style></head>
+<body>
+
+<header>
+  <div class="top-row">
+    <h1>📘 Master TEFL</h1>
+    <div class="controls">
+      <input type="text" id="search" placeholder="🔍 Поиск...">
+      <button onclick="toggleTheme()">🌓</button>
+      <button onclick="window.print()">🖨️</button>
+      <button class="nav-toggle" onclick="toggleMobileNav()" style="display:block;background:none;border:none;color:#fff;font-size:1.4rem;padding:0 0.3rem">☰</button>
+    </div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+</header>
+
+<!-- Мобильная навигация -->
+<div class="nav-overlay" id="navOverlay" onclick="toggleMobileNav()"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <button class="close-nav" onclick="toggleMobileNav()">✕</button>
+  <h3>📚 Основы</h3>
+  <ul>
+    <li><a href="#intro" onclick="toggleMobileNav()">Введение</a></li>
+    <li><a href="#cefr" onclick="toggleMobileNav()">Уровни CEFR</a></li>
+    <li><a href="#methodology" onclick="toggleMobileNav()">Методология</a></li>
+    <li><a href="#fgos" onclick="toggleMobileNav()">ФГОС и УУД</a></li>
+    <li><a href="#lesson-structure" onclick="toggleMobileNav()">Структура урока</a></li>
+  </ul>
+  <h3>👥 Возраст</h3>
+  <ul>
+    <li><a href="#kids" onclick="toggleMobileNav()">Дети 4-10</a></li>
+    <li><a href="#teens" onclick="toggleMobileNav()">Подростки</a></li>
+    <li><a href="#adults" onclick="toggleMobileNav()">Взрослые</a></li>
+    <li><a href="#seniors" onclick="toggleMobileNav()">60+ лет</a></li>
+    <li><a href="#mixed" onclick="toggleMobileNav()">Mixed Ability</a></li>
+  </ul>
+  <h3>🎯 Практика</h3>
+  <ul>
+    <li><a href="#planning" onclick="toggleMobileNav()">Планирование</a></li>
+    <li><a href="#grammar" onclick="toggleMobileNav()">Грамматика</a></li>
+    <li><a href="#vocab" onclick="toggleMobileNav()">Лексика</a></li>
+    <li><a href="#skills" onclick="toggleMobileNav()">4 навыка</a></li>
+    <li><a href="#pronunciation" onclick="toggleMobileNav()">Произношение</a></li>
+    <li><a href="#games" onclick="toggleMobileNav()">Игры</a></li>
+    <li><a href="#classroom" onclick="toggleMobileNav()">Classroom Management</a></li>
+    <li><a href="#assessment" onclick="toggleMobileNav()">Оценивание</a></li>
+    <li><a href="#exams" onclick="toggleMobileNav()">Экзамены</a></li>
+  </ul>
+  <h3>🛠️ Инструменты</h3>
+  <ul>
+    <li><a href="#gen-lesson" onclick="toggleMobileNav()">Генератор урока</a></li>
+    <li><a href="#gen-exercise" onclick="toggleMobileNav()">Генератор упражнений</a></li>
+    <li><a href="#gen-exam" onclick="toggleMobileNav()">Генератор ЕГЭ/ОГЭ</a></li>
+    <li><a href="#ccq-trainer" onclick="toggleMobileNav()">CCQ-тренажёр</a></li>
+    <li><a href="#timer" onclick="toggleMobileNav()">Таймер</a></li>
+    <li><a href="#ipa" onclick="toggleMobileNav()">IPA</a></li>
+    <li><a href="#quiz" onclick="toggleMobileNav()">Квиз</a></li>
+    <li><a href="#tracker" onclick="toggleMobileNav()">Трекер</a></li>
+    <li><a href="#rubric" onclick="toggleMobileNav()">Рубрики</a></li>
+    <li><a href="#randomizer" onclick="toggleMobileNav()">Randomizer</a></li>
+    <li><a href="#scheduler" onclick="toggleMobileNav()">Планировщик</a></li>
+    <li><a href="#resources" onclick="toggleMobileNav()">Ресурсы</a></li>
+  </ul>
+</nav>
+
+<button class="scroll-top-btn" id="scrollTopBtn" onclick="scrollToTop()" title="Наверх">⬆</button>
+
+<nav class="bottom-nav" id="bottomNav">
+  <button onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'})" class="active">
+    <span>🏠</span><span class="nav-label">Главная</span>
+  </button>
+  <button onclick="document.getElementById('methodology').scrollIntoView({behavior:'smooth'})">
+    <span>📖</span><span class="nav-label">Методика</span>
+  </button>
+  <button onclick="document.getElementById('adults').scrollIntoView({behavior:'smooth'})">
+    <span>👥</span><span class="nav-label">Возраст</span>
+  </button>
+  <button onclick="document.getElementById('gen-lesson').scrollIntoView({behavior:'smooth'})">
+    <span>🛠️</span><span class="nav-label">Инструменты</span>
+  </button>
+  <button onclick="document.getElementById('resources').scrollIntoView({behavior:'smooth'})">
+    <span>📚</span><span class="nav-label">Ресурсы</span>
+  </button>
+</nav>
+
+<div class="container">
+
+  <!-- ============================================================ -->
+  <!-- ===== ВВЕДЕНИЕ ===== -->
+  <!-- ============================================================ -->
+  <section id="intro">
+    <h2>📚 Введение в преподавание</h2>
+    <p>Данное пособие — синтез лучших мировых практик преподавания иностранных языков (<strong>TEFL/TESOL/DELTA</strong>) и российских государственных стандартов (<strong>ФГОС</strong>). Оно охватывает обучение от абсолютного нуля (<strong>A0</strong>) до продвинутого уровня (<strong>C2</strong>) и все возрастные группы — от 4 лет до глубокой старости.</p>
+
+    <div class="quote-block">
+      "Учитель — не тот, кто передаёт знания, а тот, кто создаёт условия, в которых ученик может их открыть сам." — Карл Роджерс
+    </div>
+
+    <div class="card">
+      <h3>🎯 10 ключевых принципов современного преподавателя</h3>
+      <ol>
+        <li><strong>Student-centered approach</strong> — ученик в центре, учитель — фасилитатор. Исследования показывают, что студенты усваивают на 60% больше материала, когда активно участвуют в процессе.</li>
+        <li><strong>Communicative Language Teaching (CLT)</strong> — цель — коммуникация, а не просто знание правил. Язык — это инструмент общения, а не набор грамматических конструкций.</li>
+        <li><strong>Scaffolding</strong> — пошаговая поддержка в зоне ближайшего развития (Выготский). Ученик должен чувствовать, что может сделать следующий шаг с небольшой помощью.</li>
+        <li><strong>Integration of skills</strong> — R/W/L/S (чтение/письмо/аудирование/говорение) работают в связке. В реальной жизни мы редко используем только один навык.</li>
+        <li><strong>Contextualization</strong> — язык подаётся в контексте, не изолированно. Новая лексика запоминается на 40% лучше, если представлена в истории или ситуации.</li>
+        <li><strong>Grading the language</strong> — учитель адаптирует свою речь под уровень учеников. Используйте простые структуры и повторения для низких уровней.</li>
+        <li><strong>Reducing TTT, increasing STT</strong> — меньше времени говорит учитель, больше — ученики. Идеальное соотношение: 30% TTT, 70% STT.</li>
+        <li><strong>Personalization</strong> — связь материала с опытом и интересами учеников. Личностно значимый материал запоминается в 2 раза лучше.</li>
+        <li><strong>Differentiation</strong> — адаптация под разные уровни и стили обучения в классе. Один размер не подходит всем.</li>
+        <li><strong>Reflective practice</strong> — постоянный анализ и улучшение своей практики. Ведите дневник урока и отмечайте, что сработало, а что нет.</li>
+      </ol>
+    </div>
+
+    <div class="card accent">
+      <h3>📜 Эволюция методов преподавания</h3>
+      <table>
+        <tr><th>Метод</th><th>Период</th><th>Суть</th><th>Ключевая идея</th></tr>
+        <tr><td>Grammar-Translation</td><td>XIX в.</td><td>Перевод текстов, зубрёжка правил</td><td>Язык через анализ</td></tr>
+        <tr><td>Direct Method</td><td>нач. XX в.</td><td>Только на ЦЯ, без перевода</td><td>Естественное усвоение</td></tr>
+        <tr><td>Audio-Lingual</td><td>1940-60-е</td><td>Дриллы, habit formation</td><td>Повторение — мать учения</td></tr>
+        <tr><td>Communicative (CLT)</td><td>1970-е —</td><td>Реальная коммуникация</td><td>Язык для общения</td></tr>
+        <tr><td>Task-Based (TBLT)</td><td>1980-е —</td><td>Урок вокруг задачи</td><td>Учимся через действие</td></tr>
+        <tr><td>Lexical Approach</td><td>1990-е —</td><td>Фокус на chunks/collocations</td><td>Язык — это фразы</td></tr>
+        <tr><td>Post-Method / Dogme</td><td>2000-е —</td><td>Emergent language, без учебника</td><td>Язык рождается в классе</td></tr>
+        <tr><td>Eclectic / Principled</td><td>совр.</td><td>Комбинация методов под контекст</td><td>Гибкость — ключ к успеху</td></tr>
+      </table>
+    </div>
+
+    <div class="card success">
+      <h3>🧠 Ключевые теории второго языка</h3>
+      <div class="grid-2">
+        <div>
+          <h4>Краткий обзор:</h4>
+          <ul>
+            <li><strong>Krashen's Input Hypothesis:</strong> i+1 — понятный вход чуть выше уровня</li>
+            <li><strong>Affective Filter:</strong> стресс и тревога блокируют усвоение языка</li>
+            <li><strong>Output Hypothesis (Swain):</strong> говорение/письмо помогают заметить пробелы</li>
+            <li><strong>Interaction Hypothesis (Long):</strong> negotiation of meaning помогает усвоению</li>
+            <li><strong>Skill-building theory:</strong> declarative → procedural → automatic</li>
+            <li><strong>Noticing Hypothesis (Schmidt):</strong> ученик должен заметить форму, чтобы её выучить</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Практические следствия:</h4>
+          <ul>
+            <li>Обеспечить понятный вход (grading, visual support, gestures)</li>
+            <li>Снизить аффективный фильтр (safe environment, юмор, поддержка)</li>
+            <li>Давать возможности для output (speaking/writing tasks)</li>
+            <li>Организовать interaction (pair/group work, information gap)</li>
+            <li>Повторение и практика для автоматизации (spaced repetition)</li>
+            <li>Создавать ситуации, где ученики "замечают" новые структуры</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Бонус: Чек-лист -->
+    <div class="card warning">
+      <h3>✅ Чек-лист начинающего преподавателя</h3>
+      <ul class="checklist">
+        <li>Изучил уровень учеников (placement test)</li>
+        <li>Подготовил план первого урока</li>
+        <li>Подготовил запасные активности (backup activities)</li>
+        <li>Настроил технику (звук, проектор, доска)</li>
+        <li>Записал правила класса (classroom rules)</li>
+        <li>Подготовил материалы (handouts, flashcards, worksheets)</li>
+        <li>Запланировал время на проверку понимания (CCQs/ICQs)</li>
+        <li>Подготовил варианты для разных уровней (differentiation)</li>
+        <li>Продумал систему оценивания и обратной связи</li>
+        <li>Записал личные цели на первый месяц</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== CEFR ===== -->
+  <!-- ============================================================ -->
+  <section id="cefr">
+    <h2>📊 Уровни CEFR</h2>
+    <p>CEFR (Common European Framework of Reference) — общеевропейская шкала, на которую опираются ФГОС, Cambridge, IELTS, TOEFL. Понимание уровней — основа планирования любого курса.</p>
+
+    <table>
+      <thead><tr><th>Уровень</th><th>Название</th><th>Что может</th><th>Словарный запас</th><th>Часы обучения</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag a1">A1</span></td><td>Beginner</td><td>Представиться, купить, спросить дорогу</td><td>500–700</td><td>70–100</td></tr>
+        <tr><td><span class="tag a2">A2</span></td><td>Elementary</td><td>Простые бытовые темы, прошлое/будущее</td><td>1000–1500</td><td>180–200</td></tr>
+        <tr><td><span class="tag b1">B1</span></td><td>Intermediate</td><td>Путешествия, мнения, простые статьи</td><td>2000–2500</td><td>350–400</td></tr>
+        <tr><td><span class="tag b2">B2</span></td><td>Upper-Int.</td><td>Спонтанно общаться, аргументировать</td><td>3000–4000</td><td>500–600</td></tr>
+        <tr><td><span class="tag c1">C1</span></td><td>Advanced</td><td>Академический язык, нюансы, стили</td><td>5000–7000</td><td>700–800</td></tr>
+        <tr><td><span class="tag c2">C2</span></td><td>Mastery</td><td>Как образованный носитель</td><td>8000+</td><td>1000+</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card success">
+      <h3>🇷🇺 CEFR и российские экзамены</h3>
+      <table>
+        <tr><th>CEFR</th><th>ФГОС</th><th>ОГЭ/ЕГЭ</th><th>Cambridge</th><th>IELTS</th></tr>
+        <tr><td><span class="tag a1">A1</span></td><td>НОО (нач. школа)</td><td>—</td><td>YLE Starters</td><td>—</td></tr>
+        <tr><td><span class="tag a2">A2</span></td><td>ООО (5-9 кл.)</td><td>ОГЭ (базовый)</td><td>A2 Key (KET)</td><td>3.5-4.5</td></tr>
+        <tr><td><span class="tag b1">B1</span></td><td>ООО (9 кл.)</td><td>ОГЭ (высокий)</td><td>B1 Preliminary (PET)</td><td>4.5-5.5</td></tr>
+        <tr><td><span class="tag b2">B2</span></td><td>СОО (10-11 кл.)</td><td>ЕГЭ</td><td>B2 First (FCE)</td><td>5.5-6.5</td></tr>
+        <tr><td><span class="tag c1">C1</span></td><td>ВУЗ</td><td>—</td><td>C1 Advanced (CAE)</td><td>7.0-8.0</td></tr>
+        <tr><td><span class="tag c2">C2</span></td><td>Магистратура</td><td>—</td><td>C2 Proficiency (CPE)</td><td>8.5-9.0</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== МЕТОДОЛОГИЯ ===== -->
+  <!-- ============================================================ -->
+  <section id="methodology">
+    <h2>📖 Методология DELTA / TESOL / TEFL</h2>
+
+    <details open>
+      <summary>📌 CCQ и ICQ — основа проверки понимания</summary>
+      <div class="details-content">
+        <p>По DELTA, вопрос «Do you understand?» запрещён. Вместо него — <strong>Concept Checking Questions (CCQ)</strong> и <strong>Instruction Checking Questions (ICQ)</strong>.</p>
+
+        <h4>Правила CCQ:</h4>
+        <ul class="checklist">
+          <li>Не использовать целевое слово в вопросе</li>
+          <li>Простая грамматика (Present/Past Simple)</li>
+          <li>2–4 вопроса: от общего к частному</li>
+          <li>Ответы однозначные: Yes/No или выбор</li>
+          <li>Проверять именно значение, не форму</li>
+        </ul>
+
+        <h4>Примеры CCQ:</h4>
+        <table>
+          <tr><th>Target</th><th>CCQs</th></tr>
+          <tr><td>I <strong>used to</strong> smoke</td><td>Do I smoke now? (No) · Did I smoke in the past? (Yes) · Was it once or many times? (Many times)</td></tr>
+          <tr><td>She <strong>must</strong> be tired</td><td>Am I sure? (No) · Am I guessing? (Yes) · Is it 100% fact? (No)</td></tr>
+          <tr><td>I wish I <strong>had studied</strong></td><td>Did I study? (No) · Is it past or present? (Past) · Am I happy? (No)</td></tr>
+          <tr><td>It's <strong>reluctantly</strong></td><td>Does he want to do it? (No) · Is he happy? (No) · Will he do it? (Probably yes)</td></tr>
+          <tr><td>I <strong>look forward to</strong> meeting you</td><td>Am I happy? (Yes) · Is it future? (Yes) · Negative? (No)</td></tr>
+        </table>
+
+        <h4>ICQ (Instruction Checking Questions):</h4>
+        <div class="example">
+          <p><strong>Задание:</strong> «Read the text and answer the questions in pairs»</p>
+          <p><strong>ICQs:</strong></p>
+          <ul>
+            <li>Are you writing answers? (No, just reading and thinking)</li>
+            <li>Are you working alone? (No, in pairs)</li>
+            <li>Are you reading carefully or skimming? (Carefully, for detail)</li>
+            <li>How much time do you have? (5 minutes)</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>📌 Грамматические фреймворки</summary>
+      <div class="details-content">
+        <table>
+          <tr><th>Фреймворк</th><th>Этапы</th><th>Когда использовать</th><th>Плюсы</th></tr>
+          <tr><td><strong>PPP</strong></td><td>Presentation → Practice → Production</td><td>Новая грамматика, низкие уровни</td><td>Структурирован, предсказуем</td></tr>
+          <tr><td><strong>TBLT</strong></td><td>Pre-task → Task → Planning → Report → Language Focus</td><td>Развитие беглости, B1+</td><td>Аутентичность, мотивация</td></tr>
+          <tr><td><strong>ESA</strong></td><td>Engage → Study → Activate (гибко)</td><td>Универсальный, можно менять порядок</td><td>Гибкость, адаптивность</td></tr>
+          <tr><td><strong>Test-Teach-Test</strong></td><td>Test → Teach → Test</td><td>Ревью, диагностика</td><td>Экономит время, фокус на проблемах</td></tr>
+          <tr><td><strong>Guided Discovery</strong></td><td>Context → Notice → Rule → Practice</td><td>Взрослые, индуктивный подход</td><td>Глубокое понимание, автономия</td></tr>
+        </table>
+      </div>
+    </details>
+
+    <details>
+      <summary>📌 Исправление ошибок</summary>
+      <div class="details-content">
+        <h4>Когда исправлять:</h4>
+        <table>
+          <tr><th>Тип активности</th><th>Фокус</th><th>Когда исправлять</th><th>Как</th></tr>
+          <tr><td>Drills, gap-fill</td><td>Accuracy</td><td>Немедленно</td><td>Self-correction → peer → teacher</td></tr>
+          <tr><td>Role-play, discussion</td><td>Fluency</td><td>НЕ прерывать</td><td>Delayed correction в конце</td></tr>
+          <tr><td>Письмо (draft)</td><td>Accuracy + Fluency</td><td>После завершения</td><td>Written feedback, correction code</td></tr>
+        </table>
+
+        <h4>Иерархия исправления:</h4>
+        <ol>
+          <li><strong>Non-verbal:</strong> поднять бровь, пауза, жест</li>
+          <li><strong>Repetition:</strong> повторить с вопросительной интонацией</li>
+          <li><strong>Echo:</strong> "You said 'I go yesterday'..."</li>
+          <li><strong>Hint:</strong> "Think about past tense..."</li>
+          <li><strong>Peer correction:</strong> "Can anyone help?"</li>
+          <li><strong>Teacher correction:</strong> дать правильный вариант</li>
+        </ol>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ФГОС ===== -->
+  <!-- ============================================================ -->
+  <section id="fgos">
+    <h2>🎯 ФГОС и универсальные учебные действия (УУД)</h2>
+    <p>ФГОС требует перехода от знаниевой парадигмы к <strong>системно-деятельностному подходу</strong>: ученик не пассивный получатель, а активный конструктор знаний.</p>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>🧠 Личностные УУД</h3>
+        <ul>
+          <li><strong>Самоопределение:</strong> мотивация, интерес к языку</li>
+          <li><strong>Смыслообразование:</strong> «зачем мне это»</li>
+          <li><strong>Нравственно-этическая ориентация:</strong> толерантность, уважение</li>
+          <li><strong>Культурная идентичность:</strong> сравнение культур</li>
+          <li><strong>Самопознание:</strong> рефлексия своих успехов</li>
+        </ul>
+      </div>
+      <div class="card accent">
+        <h3>🔧 Метапредметные УУД</h3>
+        <ul>
+          <li><strong>Познавательные:</strong> поиск, анализ, логика</li>
+          <li><strong>Регулятивные:</strong> целеполагание, планирование, контроль</li>
+          <li><strong>Коммуникативные:</strong> сотрудничество, постановка вопросов</li>
+        </ul>
+      </div>
+      <div class="card success">
+        <h3>📚 Предметные результаты</h3>
+        <ul>
+          <li>Коммуникативные умения (4 вида РД)</li>
+          <li>Языковые средства (лексика, грамматика, фонетика)</li>
+          <li>Социокультурные знания</li>
+          <li>Компенсаторные умения (догадка, переспрос)</li>
+          <li>Учебно-познавательные умения (работа со словарём)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== СТРУКТУРА УРОКА ===== -->
+  <!-- ============================================================ -->
+  <section id="lesson-structure">
+    <h2>📋 Структура урока по ФГОС</h2>
+    <p>Системно-деятельностный подход предполагает чёткую структуру, которая помогает ученикам осознанно усваивать материал.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4>1. Мотивация — 3-5 мин</h4>
+        <p>Создать потребность в изучении темы. «Зачем нам это?», «Где это пригодится?».</p>
+      </div>
+      <div class="timeline-item">
+        <h4>2. Актуализация знаний — 5-7 мин</h4>
+        <p>Связь с прошлым опытом, повторение изученного.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>3. Постановка учебной задачи — 2-3 мин</h4>
+        <p>Формулирование цели урока (учениками или с помощью учителя).</p>
+      </div>
+      <div class="timeline-item">
+        <h4>4. Открытие нового знания — 10-15 мин</h4>
+        <p>Через проблему, контекст, guided discovery.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>5. Первичное закрепление — 5-7 мин</h4>
+        <p>С проговариванием во внешней речи.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>6. Самостоятельная работа — 7-10 мин</h4>
+        <p>С самопроверкой по эталону.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>7. Включение в систему знаний — 5-7 мин</h4>
+        <p>Связь с другими темами, применение в новой ситуации.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>8. Рефлексия — 3-5 мин</h4>
+        <p>Что узнал? Что было трудно? Самооценка.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ВОЗРАСТНЫЕ ГРУППЫ ===== -->
+  <!-- ============================================================ -->
+  <section id="kids">
+    <h2>🧒 Дети 4–10 лет</h2>
+    <div class="card">
+      <h3>Психологические особенности</h3>
+      <ul>
+        <li>Внимание: 5–10 минут на один тип деятельности</li>
+        <li>Наглядно-образное мышление, кинестетика</li>
+        <li>Не способны к абстрактному анализу грамматики</li>
+        <li>Учатся через игру, движение, подражание</li>
+        <li>Высокая потребность в похвале и одобрении</li>
+      </ul>
+    </div>
+    <div class="card accent">
+      <h3>🎯 Ключевые методики</h3>
+      <ul>
+        <li><strong>TPR</strong> — связь движения и языка</li>
+        <li><strong>Routine songs</strong> — Hello, Clean-up, Goodbye</li>
+        <li><strong>Storytelling</strong> — через сказки, кукольный театр</li>
+        <li><strong>Flashcards + Realia</strong> — визуальная опора</li>
+        <li>Смена деятельности каждые 7–10 минут</li>
+        <li><strong>Phonics</strong> — обучение чтению через звуки</li>
+        <li><strong>Gamification</strong> — баллы, стикеры, соревнования</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="teens">
+    <h2>🧑‍🎓 Подростки 11–17 лет</h2>
+    <div class="card">
+      <h3>Психологические особенности</h3>
+      <ul>
+        <li>Критическое мышление, скептицизм</li>
+        <li>Чувствительность к оценке сверстников</li>
+        <li>Снижение внутренней мотивации</li>
+        <li>Способны к абстрактному анализу</li>
+        <li>Клиповое мышление — нужна динамика</li>
+      </ul>
+    </div>
+    <div class="card accent">
+      <h3>🎯 Ключевые методики</h3>
+      <ul>
+        <li><strong>Relatability</strong> — поп-культура, TikTok, YouTube, мемы</li>
+        <li><strong>Project-Based Learning</strong> — подкасты, блоги, фильмы</li>
+        <li><strong>Safe environment</strong> — pair/group work снижает страх</li>
+        <li><strong>Choice</strong> — давать выбор тем/заданий</li>
+        <li><strong>Геймификация</strong> — Kahoot, Quizlet, баллы</li>
+        <li><strong>Debate & Discussion</strong> — спорные темы</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="adults">
+    <h2>👨‍💼 Взрослые 18–60 лет</h2>
+    <div class="card">
+      <h3>Андрагогика (по Малкольму Ноулзу)</h3>
+      <ul>
+        <li><strong>Self-concept:</strong> хотят быть автономными</li>
+        <li><strong>Experience:</strong> опираются на жизненный опыт</li>
+        <li><strong>Readiness to learn:</strong> связано с социальными ролями</li>
+        <li><strong>Orientation:</strong> problem-centered, не subject-centered</li>
+        <li><strong>Motivation:</strong> внутренняя (карьера, переезд, хобби)</li>
+        <li><strong>Need to know:</strong> хотят понимать, ЗАЧЕМ они это учат</li>
+      </ul>
+    </div>
+    <div class="card accent">
+      <h3>Типы взрослых учеников</h3>
+      <table>
+        <tr><th>Тип</th><th>Мотивация</th><th>Подход</th></tr>
+        <tr><td>Карьерист</td><td>Повышение, новая работа</td><td>Business English, interview skills</td></tr>
+        <tr><td>Эмигрант</td><td>Переезд, интеграция</td><td>Survival English, daily life</td></tr>
+        <tr><td>Путешественник</td><td>Туризм</td><td>Travel English, small talk</td></tr>
+        <tr><td>Родитель</td><td>Помощь детям</td><td>School vocabulary, parenting</td></tr>
+        <tr><td>Для души</td><td>Хобби, саморазвитие</td><td>Authentic content, literature</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="seniors">
+    <h2>🧓 Пожилые 60+ лет</h2>
+    <div class="card">
+      <h3>Особенности</h3>
+      <ul>
+        <li>Снижение скорости обработки информации — медленный темп</li>
+        <li>Ухудшение кратковременной памяти</li>
+        <li>Возможные проблемы со зрением/слухом — адаптация материалов</li>
+        <li>Мотивация: когнитивный фитнес, социализация</li>
+        <li>Высокая потребность в уважении</li>
+        <li>Богатый жизненный опыт — использовать как ресурс</li>
+      </ul>
+    </div>
+    <div class="card accent">
+      <h3>🎯 Методики</h3>
+      <ul>
+        <li><strong>Spaced Repetition</strong> — многократное возвращение</li>
+        <li><strong>Крупный шрифт (14pt+), высокий контраст</strong></li>
+        <li><strong>Медленный темп</strong>, без стрессовых таймеров</li>
+        <li><strong>Социальный аспект</strong> — урок как клуб</li>
+        <li><strong>Life review</strong> — обсуждение воспоминаний</li>
+        <li><strong>Связь с их опытом:</strong> "Расскажите, как это было в ваше время"</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="mixed">
+    <h2>📊 Mixed Ability классы</h2>
+    <div class="card">
+      <h3>🎯 Стратегии дифференциации</h3>
+      <ul>
+        <li><strong>Differentiation by task:</strong> одно задание, разные уровни сложности</li>
+        <li><strong>Differentiation by support:</strong> разная степень помощи (scaffolding)</li>
+        <li><strong>Differentiation by outcome:</strong> open-ended tasks</li>
+        <li><strong>Flexible grouping:</strong> менять состав групп</li>
+        <li><strong>Tiered activities:</strong> 3 версии задания (basic, standard, challenge)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ГРАММАТИКА ===== -->
+  <!-- ============================================================ -->
+  <section id="grammar">
+    <h2>📐 Грамматика</h2>
+    <div class="card">
+      <h3>🎯 MFP-подход (Meaning, Form, Pronunciation)</h3>
+      <ul>
+        <li><strong>M — Meaning</strong> → контекст + CCQs + timeline</li>
+        <li><strong>F — Form</strong> → формула, affirmative/negative/question</li>
+        <li><strong>P — Pronunciation</strong> → drill, ударение, weak forms</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ЛЕКСИКА ===== -->
+  <!-- ============================================================ -->
+  <section id="vocab">
+    <h2>📚 Лексика</h2>
+    <div class="card">
+      <h3>📚 Что входит в знание слова (по Paul Nation)</h3>
+      <ol>
+        <li><strong>Form:</strong> произношение, написание, части слова</li>
+        <li><strong>Meaning:</strong> значение, ассоциации, коллокации</li>
+        <li><strong>Use:</strong> часть речи, сочетаемость, регистр</li>
+      </ol>
+    </div>
+    <div class="card accent">
+      <h3>🔗 Collocations — ключ к свободной речи</h3>
+      <table>
+        <tr><th>Правильно ✓</th><th>Неправильно ✗</th></tr>
+        <tr><td>make a decision</td><td>do a decision</td></tr>
+        <tr><td>heavy rain</td><td>strong rain</td></tr>
+        <tr><td>fast food</td><td>quick food</td></tr>
+        <tr><td>do homework</td><td>make homework</td></tr>
+        <tr><td>take a photo</td><td>make a photo</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== 4 НАВЫКА ===== -->
+  <!-- ============================================================ -->
+  <section id="skills">
+    <h2>🎯 4 навыка: R / W / L / S</h2>
+    <div class="grid-2">
+      <div class="card"><h3>👂 Listening</h3><p>Под-навыки: gist, specific info, detail, inference</p></div>
+      <div class="card"><h3>📖 Reading</h3><p>Под-навыки: skimming, scanning, intensive</p></div>
+      <div class="card"><h3>🗣️ Speaking</h3><p>Под-навыки: fluency, accuracy, interaction</p></div>
+      <div class="card"><h3>✍️ Writing</h3><p>Подходы: product, process, genre</p></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ПРОИЗНОШЕНИЕ ===== -->
+  <!-- ============================================================ -->
+  <section id="pronunciation">
+    <h2>🎤 Произношение</h2>
+    <div class="card">
+      <h3>Что входит</h3>
+      <ul>
+        <li>Phonemes — отдельные звуки</li>
+        <li>Word stress — ударение в слове</li>
+        <li>Sentence stress — ударные слова</li>
+        <li>Intonation — rising/falling</li>
+        <li>Connected speech — linking, elision, assimilation</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ИГРЫ ===== -->
+  <!-- ============================================================ -->
+  <section id="games">
+    <h2>🎲 База игр и активностей</h2>
+    <div class="grid-3">
+      <div class="game-card"><h4>Simon Says</h4><span class="tag a1">A1</span><p>TPR-игра</p></div>
+      <div class="game-card"><h4>Hot Seat</h4><span class="tag a2">A2-B1</span><p>Угадывание слова</p></div>
+      <div class="game-card"><h4>Taboo</h4><span class="tag b1">B1+</span><p>Объяснить без запрещённых слов</p></div>
+      <div class="game-card"><h4>Debate</h4><span class="tag b2">B2+</span><p>Спорные темы</p></div>
+      <div class="game-card"><h4>Story Chain</h4><span class="tag a2">A2+</span><p>Коллективное рассказывание</p></div>
+      <div class="game-card"><h4>Kahoot</h4><span class="tag a2">A2+</span><p>Цифровая викторина</p></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== CLASSROOM MANAGEMENT ===== -->
+  <!-- ============================================================ -->
+  <section id="classroom">
+    <h2>🎓 Classroom Management</h2>
+    <div class="card">
+      <h3>📋 Правила</h3>
+      <ul class="checklist">
+        <li>Установить правила с первого урока</li>
+        <li>Быть последовательным и справедливым</li>
+        <li>Позитивное подкрепление</li>
+        <li>Минимизировать TTT, максимизировать STT</li>
+        <li>Чёткие инструкции с ICQ</li>
+        <li>Иметь backup-план</li>
+        <li>Строить rapport с учениками</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ОЦЕНИВАНИЕ ===== -->
+  <!-- ============================================================ -->
+  <section id="assessment">
+    <h2>📊 Оценивание</h2>
+    <div class="card">
+      <h3>🎯 Принципы</h3>
+      <ul>
+        <li><strong>Validity</strong> — тест измеряет то, что должен</li>
+        <li><strong>Reliability</strong> — стабильность результатов</li>
+        <li><strong>Practicality</strong> — реалистично по времени</li>
+        <li><strong>Washback</strong> — положительное влияние на обучение</li>
+        <li><strong>Authenticity</strong> — задания близки к реальной жизни</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ЭКЗАМЕНЫ ===== -->
+  <!-- ============================================================ -->
+  <section id="exams">
+    <h2>🎓 Экзамены</h2>
+    <div class="card">
+      <h3>🇷🇺 ОГЭ (9 класс)</h3>
+      <ul>
+        <li>Аудирование (30 мин) — 9 баллов</li>
+        <li>Чтение (30 мин) — 8 баллов</li>
+        <li>Грамматика и лексика (30 мин) — 21 балл</li>
+        <li>Письмо (30 мин) — 10 баллов</li>
+        <li>Говорение (15 мин) — 20 баллов</li>
+      </ul>
+    </div>
+    <div class="card accent">
+      <h3>🇷🇺 ЕГЭ (11 класс)</h3>
+      <ul>
+        <li>Аудирование (30 мин) — 9 баллов</li>
+        <li>Чтение (30 мин) — 7 баллов</li>
+        <li>Грамматика и лексика (40 мин) — 22 балла</li>
+        <li>Письмо (60 мин) — 20 + 20 баллов</li>
+        <li>Говорение (17 мин) — 20 баллов</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== ИНСТРУМЕНТЫ ===== -->
+  <!-- ============================================================ -->
+
+  <!-- ГЕНЕРАТОР УРОКА -->
+  <section id="gen-lesson">
+    <h2>🛠️ Генератор плана урока</h2>
+    <div class="tool">
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Возраст:</label>
+          <select id="ageGroup">
+            <option value="kids">Дети 4-10</option>
+            <option value="teens">Подростки</option>
+            <option value="adults" selected>Взрослые</option>
+            <option value="seniors">60+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Уровень:</label>
+          <select id="level">
+            <option>A1</option><option selected>A2</option><option>B1</option><option>B2</option><option>C1</option><option>C2</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Тип урока:</label>
+          <select id="lessonType">
+            <option value="grammar">Грамматика</option>
+            <option value="vocab">Лексика</option>
+            <option value="speaking">Speaking</option>
+            <option value="listening">Listening</option>
+            <option value="reading">Reading</option>
+            <option value="writing">Writing</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Длительность (мин):</label>
+          <input type="number" id="duration" value="60" min="15" max="180">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Тема / Target language:</label>
+        <input type="text" id="topic" placeholder="Например: Past Simple, Travel, Food...">
+      </div>
+      <button class="btn btn-block" onclick="generateLesson()">🚀 Сгенерировать план</button>
+      <div id="lessonOutput" class="output"></div>
+    </div>
+  </section>
+
+  <!-- ГЕНЕРАТОР УПРАЖНЕНИЙ -->
+  <section id="gen-exercise">
+    <h2>🛠️ Генератор упражнений</h2>
+    <div class="tool">
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Тип упражнения:</label>
+          <select id="exType">
+            <option value="gap">Fill in the gaps</option>
+            <option value="mcq">Multiple choice</option>
+            <option value="transform">Transformation</option>
+            <option value="correct">Error correction</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Уровень:</label>
+          <select id="exLevel">
+            <option>A1</option><option selected>A2</option><option>B1</option><option>B2</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Грамматика / Тема:</label>
+        <input type="text" id="exTopic" placeholder="Например: Present Perfect, Conditionals...">
+      </div>
+      <button class="btn btn-block accent" onclick="generateExercise()">✨ Сгенерировать</button>
+      <div id="exerciseOutput" class="output"></div>
+    </div>
+  </section>
+
+  <!-- ГЕНЕРАТОР ЕГЭ/ОГЭ -->
+  <section id="gen-exam">
+    <h2>📝 Генератор ЕГЭ/ОГЭ</h2>
+    <div class="tool">
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Экзамен:</label>
+          <select id="examType">
+            <option value="oge">ОГЭ (9 класс)</option>
+            <option value="ege">ЕГЭ (11 класс)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Тип задания:</label>
+          <select id="examTaskType">
+            <option value="email">Письмо (email)</option>
+            <option value="essay">Эссе / проект</option>
+            <option value="monologue">Монолог</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Тема:</label>
+        <input type="text" id="examTopic" placeholder="Например: My Hobby, Education, Travel...">
+      </div>
+      <button class="btn btn-block accent" onclick="generateExamTask()">📝 Сгенерировать</button>
+      <div id="examOutput" class="output"></div>
+    </div>
+  </section>
+
+  <!-- CCQ ТРЕНАЖЁР -->
+  <section id="ccq-trainer">
+    <h2>🧠 CCQ-тренажёр</h2>
+    <div class="tool">
+      <div class="form-group">
+        <label>Target Language:</label>
+        <input type="text" id="targetLang" placeholder="used to, reluctant, must have...">
+      </div>
+      <button class="btn btn-block success" onclick="showCCQ()">💡 Показать CCQ</button>
+      <div id="ccqOutput" class="output"></div>
+    </div>
+  </section>
+
+  <!-- ТАЙМЕР -->
+  <section id="timer">
+    <h2>⏱️ Таймер урока</h2>
+    <div class="tool">
+      <div class="timer-display" id="timerDisplay">00:00</div>
+      <div class="btn-group">
+        <button class="btn success" onclick="startTimer(5*60)">5</button>
+        <button class="btn" onclick="startTimer(10*60)">10</button>
+        <button class="btn accent" onclick="startTimer(15*60)">15</button>
+        <button class="btn" onclick="startTimer(20*60)">20</button>
+        <button class="btn warning" onclick="startCustomTimer()">⚙️</button>
+        <button class="btn danger" onclick="resetTimer()">Сброс</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- IPA -->
+  <section id="ipa">
+    <h2>🔤 IPA-справочник</h2>
+    <div class="card">
+      <h4>Гласные</h4>
+      <div>
+        <span class="ipa-char" title="sit">ɪ</span>
+        <span class="ipa-char" title="see">iː</span>
+        <span class="ipa-char" title="bed">e</span>
+        <span class="ipa-char" title="cat">æ</span>
+        <span class="ipa-char" title="cup">ʌ</span>
+        <span class="ipa-char" title="car">ɑː</span>
+        <span class="ipa-char" title="dog">ɒ</span>
+        <span class="ipa-char" title="door">ɔː</span>
+        <span class="ipa-char" title="put">ʊ</span>
+        <span class="ipa-char" title="moon">uː</span>
+        <span class="ipa-char" title="about">ə</span>
+        <span class="ipa-char" title="bird">ɜː</span>
+      </div>
+      <h4>Дифтонги</h4>
+      <div>
+        <span class="ipa-char" title="say">eɪ</span>
+        <span class="ipa-char" title="my">aɪ</span>
+        <span class="ipa-char" title="boy">ɔɪ</span>
+        <span class="ipa-char" title="now">aʊ</span>
+        <span class="ipa-char" title="go">əʊ</span>
+        <span class="ipa-char" title="here">ɪə</span>
+        <span class="ipa-char" title="there">eə</span>
+      </div>
+      <h4>Согласные</h4>
+      <div>
+        <span class="ipa-char" title="this">ð</span>
+        <span class="ipa-char" title="think">θ</span>
+        <span class="ipa-char" title="she">ʃ</span>
+        <span class="ipa-char" title="vision">ʒ</span>
+        <span class="ipa-char" title="church">tʃ</span>
+        <span class="ipa-char" title="judge">dʒ</span>
+        <span class="ipa-char" title="sing">ŋ</span>
+        <span class="ipa-char" title="red">r</span>
+        <span class="ipa-char" title="let">l</span>
+        <span class="ipa-char" title="yes">j</span>
+        <span class="ipa-char" title="we">w</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- КВИЗ -->
+  <section id="quiz">
+    <h2>📝 Квиз методиста</h2>
+    <p>Проверьте свои знания по методике DELTA/TESOL/ФГОС.</p>
+    <div id="quizContainer"></div>
+    <div class="btn-group">
+      <button class="btn" onclick="checkQuiz()">✅ Проверить</button>
+      <button class="btn accent" onclick="resetQuiz()">🔄 Сбросить</button>
+    </div>
+    <div id="quizResult" class="output"></div>
+  </section>
+
+  <!-- ТРЕКЕР -->
+  <section id="tracker">
+    <h2>📊 Трекер прогресса ученика</h2>
+    <div class="tool">
+      <div class="form-group">
+        <label>Имя ученика:</label>
+        <div style="display:flex;gap:.5rem">
+          <input type="text" id="studentName" placeholder="Введите имя...">
+          <button class="btn success" onclick="addStudent()">➕ Добавить</button>
+        </div>
+      </div>
+      <div id="studentList"></div>
+      <div id="trackerStats" style="margin-top:.8rem"></div>
+      <button class="btn danger" onclick="clearTracker()">🗑️ Очистить всё</button>
+    </div>
+  </section>
+
+  <!-- РУБРИКИ -->
+  <section id="rubric">
+    <h2>📋 Генератор рубрик</h2>
+    <div class="tool">
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Навык:</label>
+          <select id="rubricSkill">
+            <option value="speaking">Speaking</option>
+            <option value="writing">Writing</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Уровень:</label>
+          <select id="rubricLevel">
+            <option>A2</option><option selected>B1</option><option>B2</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-block accent" onclick="generateRubric()">📋 Сгенерировать рубрику</button>
+      <div id="rubricOutput" class="output"></div>
+    </div>
+  </section>
+
+  <!-- RANDOMIZER -->
+  <section id="randomizer">
+    <h2>🎲 Randomizer</h2>
+    <div class="tool">
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Тип активности:</label>
+          <select id="randomType">
+            <option value="any">Любой</option>
+            <option value="warmup">Warm-up</option>
+            <option value="pair">Pair work</option>
+            <option value="group">Group work</option>
+            <option value="whole">Whole class</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Возраст:</label>
+          <select id="randomAge">
+            <option value="any">Любой</option>
+            <option value="kids">Дети</option>
+            <option value="teens">Подростки</option>
+            <option value="adults">Взрослые</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-block success" onclick="getRandomActivity()">🎲 Случайная активность</button>
+      <div id="randomOutput" class="random-activity" style="display:none">
+        <h3 id="randomTitle">🏆 Название</h3>
+        <p id="randomDesc">Описание...</p>
+        <span id="randomTags"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПЛАНИРОВЩИК -->
+  <section id="scheduler">
+    <h2 id="planning">📅 Планировщик уроков</h2>
+    <div class="tool">
+      <div class="form-group">
+        <label>Название урока:</label>
+        <div style="display:flex;gap:.5rem">
+          <input type="text" id="lessonName" placeholder="Например: Past Simple, Unit 5...">
+          <button class="btn success" onclick="addLesson()">➕ Добавить</button>
+        </div>
+      </div>
+      <div class="scheduler-grid" id="schedulerGrid"></div>
+      <div class="btn-group">
+        <button class="btn danger" onclick="clearScheduler()">🗑️ Очистить</button>
+        <button class="btn" onclick="exportScheduler()">📤 Экспорт в .txt</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== РЕСУРСЫ ===== -->
+  <!-- ============================================================ -->
+  <section id="resources">
+    <h2>📚 Ресурсы и ссылки</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>🌍 Методические базы</h3>
+        <ul>
+          <li><a href="https://www.teachingenglish.org.uk/" target="_blank">British Council Teaching English</a></li>
+          <li><a href="https://www.onestopenglish.com/" target="_blank">Onestopenglish</a></li>
+          <li><a href="https://www.cambridgeenglish.org/teaching-english/" target="_blank">Cambridge English Teaching</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🇷🇺 Российский контекст</h3>
+        <ul>
+          <li><a href="http://fgos.ru/" target="_blank">fgos.ru</a></li>
+          <li><a href="https://fioco.ru/" target="_blank">ФИОКО / ФИПИ</a></li>
+          <li><a href="https://resh.edu.ru/" target="_blank">РЭШ</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🎲 Интерактив</h3>
+        <ul>
+          <li><a href="https://wordwall.net/" target="_blank">Wordwall</a></li>
+          <li><a href="https://learningapps.org/" target="_blank">LearningApps</a></li>
+          <li><a href="https://kahoot.com/" target="_blank">Kahoot</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>📖 Адаптированное чтение</h3>
+        <ul>
+          <li><a href="https://learnenglish.britishcouncil.org/" target="_blank">British Council LearnEnglish</a></li>
+          <li><a href="https://elllo.org/" target="_blank">ELLLO</a></li>
+          <li><a href="https://www.newsinlevels.com/" target="_blank">News in Levels</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ==================== ТЕМА ====================
+function toggleTheme(){
+  const b=document.body;
+  if(b.getAttribute('data-theme')==='dark'){b.removeAttribute('data-theme');localStorage.setItem('theme','light')}
+  else{b.setAttribute('data-theme','dark');localStorage.setItem('theme','dark')}
+}
+if(localStorage.getItem('theme')==='dark')document.body.setAttribute('data-theme','dark');
+
+// ==================== ПРОГРЕСС ====================
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('progress').style.width=p+'%';
+  const btn=document.getElementById('scrollTopBtn');
+  if(window.scrollY>400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+function scrollToTop(){
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ==================== МОБИЛЬНАЯ НАВИГАЦИЯ ====================
+function toggleMobileNav(){
+  document.getElementById('mobileNav').classList.toggle('open');
+  document.getElementById('navOverlay').classList.toggle('open');
+}
+document.addEventListener('click',function(e){
+  const nav=document.getElementById('mobileNav');
+  const overlay=document.getElementById('navOverlay');
+  if(nav.classList.contains('open') && !nav.contains(e.target) && e.target.id!=='navOverlay'){
+    nav.classList.remove('open');
+    overlay.classList.remove('open');
+  }
+});
+
+// ==================== ПОИСК ====================
+document.getElementById('search').addEventListener('input',function(e){
+  const q=e.target.value.toLowerCase().trim();
+  document.querySelectorAll('.container section').forEach(s=>{
+    const t=s.textContent.toLowerCase();
+    s.style.display=!q||t.includes(q)?'':'none';
+  });
+});
+
+// ==================== ГЕНЕРАТОР УРОКА ====================
+function generateLesson(){
+  const age=document.getElementById('ageGroup').value;
+  const lvl=document.getElementById('level').value;
+  const type=document.getElementById('lessonType').value;
+  const dur=parseInt(document.getElementById('duration').value)||60;
+  const topic=document.getElementById('topic').value||'General Topic';
+  const out=document.getElementById('lessonOutput');
+
+  const ageMap={kids:'Дети 4-10',teens:'Подростки 11-17',adults:'Взрослые 18-60',seniors:'Пожилые 60+'};
+  const typeMap={grammar:'Грамматика',vocab:'Лексика',speaking:'Speaking',listening:'Listening',reading:'Reading',writing:'Writing'};
+
+  const stages={
+    grammar:[['Lead-in',0.08,'Вовлечь, активировать тему'],['Presentation',0.17,'MFP: Meaning, Form, Pronunciation'],['Practice',0.4,'Controlled + semi-controlled'],['Production',0.25,'Free practice'],['Feedback',0.1,'Delayed error correction']],
+    vocab:[['Lead-in',0.08,'Вовлечь, тема'],['Presentation',0.2,'Ввести 8-12 слов, CCQs, drill'],['Practice',0.4,'Controlled + semi-controlled'],['Production',0.22,'Discussion / story'],['Feedback',0.1,'Recap']],
+    speaking:[['Lead-in',0.1,'Activate topic'],['Pre-task',0.15,'Input, useful phrases'],['Task',0.3,'Pair/group task'],['Report',0.2,'Present'],['Feedback',0.15,'Emergent language']],
+    listening:[['Pre-listening',0.15,'Predict, vocab'],['1st Listen',0.15,'Gist'],['2nd Listen',0.25,'Detail'],['Post-listening',0.3,'Reaction, follow-up'],['Feedback',0.15,'Recap']],
+    reading:[['Pre-reading',0.15,'Predict, vocab'],['While-reading 1',0.15,'Skimming'],['While-reading 2',0.25,'Intensive'],['Post-reading',0.3,'Discussion'],['Feedback',0.15,'Recap']],
+    writing:[['Lead-in',0.1,'Topic activation'],['Model Analysis',0.2,'Read model, notice structure'],['Planning',0.15,'Brainstorm, outline'],['Drafting',0.25,'Write first draft'],['Feedback',0.3,'Peer review + teacher feedback']]
+  };
+
+  const s=stages[type]||stages.grammar;
+  let stagesHtml=s.map(st=>{
+    const t=Math.round(dur*st[1]);
+    return `  • ${st[0]} — ${t} мин — ${st[2]}`;
+  }).join('\n');
+
+  const html=`═══════════════════════════════════════
+📋 ПЛАН УРОКА
+═══════════════════════════════════════
+👥 Аудитория: ${ageMap[age]}
+📊 Уровень: ${lvl}
+🎯 Тип: ${typeMap[type]}
+⏱️ Длительность: ${dur} мин
+📚 Тема: ${topic}
+
+═══════════════════════════════════════
+🎯 ЦЕЛИ УРОКА (SMART)
+═══════════════════════════════════════
+Main aim: By the end of the lesson, students will be able to use ${topic} in spoken/written context.
+Subsidiary aim: develop ${type==='speaking'||type==='mixed'?'fluency':'accuracy'}.
+
+═══════════════════════════════════════
+⏰ ЭТАПЫ УРОКА (${dur} мин)
+═══════════════════════════════════════
+${stagesHtml}
+
+═══════════════════════════════════════
+⚠️ ANTICIPATED PROBLEMS & SOLUTIONS
+═══════════════════════════════════════
+• Students may not understand → use CCQs, visual support
+• Fast finishers → extension tasks
+• Mixed levels → tiered tasks
+• Tech issues → printed backup
+• Shy students → pair work before whole-class
+
+═══════════════════════════════════════
+📝 MATERIALS NEEDED
+═══════════════════════════════════════
+• Handouts (worksheet, flashcards)
+• Board + markers
+• Audio/video player
+• Timer
+• Realia / pictures
+`;
+  out.textContent=html;
+  out.classList.add('visible');
+}
+
+// ==================== ГЕНЕРАТОР УПРАЖНЕНИЙ ====================
+const exBank={
+  gap:{
+    'present perfect':['I ___ (live) here for 5 years.','She ___ (not/see) him since Monday.','___ you ever ___ (be) to Paris?','They ___ (know) each other since childhood.'],
+    'past simple':['Yesterday I ___ (go) to the cinema.','She ___ (not/call) me last night.','___ you ___ (watch) the game?','They ___ (buy) a new car last week.'],
+    'conditionals':['If I ___ (have) time, I would travel.','If it ___ (rain) tomorrow, we will stay.','If I ___ (be) you, I would apologize.','If he ___ (study) harder, he would pass.'],
+    'default':['She ___ (go) to school every day.','They ___ (play) football now.','I ___ (not/like) coffee.','___ you ___ (watch) TV yesterday?']
+  },
+  mcq:{
+    'present perfect':[
+      {q:'I ___ to Paris three times.',o:['have been','was','am','will be'],a:0},
+      {q:'She ___ her homework yet.',o:['hasn\'t done','didn\'t do','isn\'t doing','doesn\'t do'],a:0}
+    ],
+    'past simple':[
+      {q:'She ___ to work yesterday.',o:['went','goes','has gone','is going'],a:0},
+      {q:'They ___ TV last night.',o:['watched','watch','have watched','are watching'],a:0}
+    ],
+    'default':[
+      {q:'She ___ to work every day.',o:['goes','go','is going','gone'],a:0},
+      {q:'They ___ TV right now.',o:['are watching','watch','watched','watches'],a:0}
+    ]
+  }
+};
+
+function generateExercise(){
+  const type=document.getElementById('exType').value;
+  const topic=document.getElementById('exTopic').value.toLowerCase();
+  const level=document.getElementById('exLevel').value;
+  const out=document.getElementById('exerciseOutput');
+
+  let key=Object.keys(exBank.gap).find(k=>topic.includes(k))||'default';
+  let html='';
+
+  if(type==='gap'){
+    const items=exBank.gap[key];
+    html='📝 FILL IN THE GAPS\nLevel: '+level+' | Topic: '+topic+'\n\n';
+    html+=items.map((s,i)=>`${i+1}. ${s}`).join('\n\n');
+    html+='\n\n🔑 ANSWER KEY:\n';
+    html+=items.map((s,i)=>`${i+1}. [check target grammar]`).join('\n');
+  } else if(type==='mcq'){
+    const items=exBank.mcq[key]||exBank.mcq.default;
+    html='📝 MULTIPLE CHOICE\nLevel: '+level+' | Topic: '+topic+'\n\n';
+    html+=items.map((it,i)=>`${i+1}. ${it.q}\n${it.o.map((o,j)=>`   ${String.fromCharCode(97+j)}) ${o}`).join('\n')}`).join('\n\n');
+    html+='\n\n🔑 ANSWER KEY:\n';
+    html+=items.map((it,i)=>`${i+1}. ${String.fromCharCode(97+it.a)}) ${it.o[it.a]}`).join('\n');
+  } else if(type==='transform'){
+    html='📝 SENTENCE TRANSFORMATION\nLevel: '+level+' | Topic: '+topic+'\n\n';
+    html+='1. "I started learning English 5 years ago." (FOR)\n   → I\'ve been learning English ___________.\n\n';
+    html+='2. "It\'s possible that she\'s at home." (MIGHT)\n   → She ___________ at home.\n\n';
+    html+='3. "People say he\'s very rich." (SAID)\n   → He ___________ very rich.\n\n';
+    html+='🔑 KEY:\n1. for 5 years\n2. might be\n3. is said to be';
+  } else if(type==='correct'){
+    html='📝 ERROR CORRECTION\nLevel: '+level+' | Topic: '+topic+'\n\n';
+    html+='1. She don\'t like coffee.\n';
+    html+='2. I have seen him yesterday.\n';
+    html+='3. If I would have money, I would buy a car.\n';
+    html+='4. He is living here since 2010.\n';
+    html+='🔑 KEY:\n1. doesn\'t like\n2. saw him\n3. If I had money\n4. has been living';
+  }
+
+  out.textContent=html;
+  out.classList.add('visible');
+}
+
+// ==================== ГЕНЕРАТОР ЕГЭ/ОГЭ ====================
+function generateExamTask(){
+  const exam=(document.getElementById('examType')||{value:'oge'}).value;
+  const type=(document.getElementById('examTaskType')||{value:'email'}).value;
+  const topic=(document.getElementById('examTopic')||{value:'my favourite hobby'}).value||'my favourite hobby';
+  const level=(document.getElementById('examLevel')||{value:'B1'}).value;
+  const out=document.getElementById('examOutput');
+
+  const templates={
+    oge:{
+      email:`📧 ЗАДАНИЕ (ОГЭ, письмо)\nУровень: ${level}\nТема: ${topic}\n\nYou have received an email from your English-speaking friend.\n\n"... I'm really into ${topic} now. What do you like about ${topic}? How often do you do it?"\n\nWrite an email and answer his questions.\n\nWrite 100–120 words.\n\n💡 КЛИШЕ:\n• Thank you for your email.\n• In your email you asked me about...\n• Best wishes, [Your name]`,
+      monologue:`🎤 ЗАДАНИЕ (ОГЭ, монолог)\nУровень: ${level}\nТема: ${topic}\n\nYou are going to give a talk about ${topic}.\n\nRemember to say:\n• why people are interested in ${topic}\n• what you like most about ${topic}\n• what advice you would give`
+    },
+    ege:{
+      email:`📧 ЗАДАНИЕ (ЕГЭ, письмо)\nУровень: ${level}\nТема: ${topic}\n\nYou have received an email from your friend.\n\n"... I've been thinking about ${topic}. What do you think about it? Is it important for young people?"\n\nWrite an email and answer her questions.\n\nWrite 100–140 words.\n\n💡 КЛИШЕ:\n• Thanks for your email.\n• In your email you asked me about...\n• Best wishes, [Your name]`,
+      essay:`📝 ЗАДАНИЕ (ЕГЭ, проект)\nУровень: ${level}\nТема: ${topic}\n\nYou are preparing a project on "${topic}".\n\nWrite 200–250 words.\n\nUse the plan:\n• Introduction\n• Data analysis\n• Opinion\n• Conclusion`
+    }
+  };
+
+  let content=templates[exam]?.[type] || '❌ Неизвестный тип.';
+  if(type==='monologue' && exam==='ege') content=templates.ege.essay;
+  out.textContent=content;
+  out.classList.add('visible');
+}
+
+// ==================== CCQ ====================
+const ccqBank={
+  'used to':{sent:'I used to play tennis.',ccqs:[
+    {q:'Do I play now?',a:'No'},{q:'Did I play in the past?',a:'Yes'},{q:'Was it a habit?',a:'Yes'}
+  ]},
+  'reluctant':{sent:'He was reluctant to help.',ccqs:[
+    {q:'Did he want to help?',a:'No'},{q:'Was he happy?',a:'No'}
+  ]},
+  'must have':{sent:'She must have left.',ccqs:[
+    {q:'Am I sure?',a:'No, deduction'},{q:'Is it past?',a:'Yes'}
+  ]},
+  'look forward to':{sent:'I look forward to meeting you.',ccqs:[
+    {q:'Am I happy?',a:'Yes'},{q:'Is it future?',a:'Yes'}
+  ]}
+};
+
+function showCCQ(){
+  const t=document.getElementById('targetLang').value.toLowerCase().trim();
+  const out=document.getElementById('ccqOutput');
+  const match=Object.keys(ccqBank).find(k=>t.includes(k));
+  if(match){
+    const item=ccqBank[match];
+    let html=`🎯 "${item.sent}"\n\n💡 CCQs:\n`;
+    item.ccqs.forEach(c=>{html+=`  • ${c.q} → ${c.a}\n`});
+    out.textContent=html;
+  } else {
+    out.textContent=`🎯 "${t}"\n\n⚠️ Универсальный шаблон:\n1. [Вопрос о значении] → [Yes/No]\n2. [Вопрос о времени] → [Yes/No]\n3. [Вопрос о нюансе] → [Yes/No]`;
+  }
+  out.classList.add('visible');
+}
+
+// ==================== ТАЙМЕР ====================
+let timerInt=null,timerSec=0;
+function startTimer(s){
+  resetTimer();
+  timerSec=s;
+  updateTimer();
+  timerInt=setInterval(()=>{
+    timerSec--;
+    updateTimer();
+    if(timerSec<=0){clearInterval(timerInt);alert('⏰ Время вышло!')}
+  },1000);
+}
+function startCustomTimer(){
+  const m=prompt('Минут:','15');
+  if(m&&!isNaN(m))startTimer(parseInt(m)*60);
+}
+function updateTimer(){
+  const m=Math.floor(timerSec/60),s=timerSec%60;
+  document.getElementById('timerDisplay').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+function resetTimer(){clearInterval(timerInt);timerSec=0;updateTimer()}
+
+// ==================== КВИЗ ====================
+const quizData=[
+  {q:'Что такое CCQ?',o:['Conversation Checking','Concept Checking','Classroom Control'],a:1},
+  {q:'Что такое TTT?',o:['Test-Teach-Test','Teacher Talking Time','Total Teaching Time'],a:1},
+  {q:'Что такое TPR?',o:['Test-Practice-Review','Total Physical Response','Teacher-Pupil'],a:1},
+  {q:'Какой уровень CEFR соответствует ОГЭ?',o:['A1','A2/B1','B2'],a:1},
+  {q:'Что такое scaffolding?',o:['Метод тестирования','Поддержка в зоне развития','Тип упражнения'],a:1},
+  {q:'Что такое realia?',o:['Реальные предметы','Тип теста','Вид чтения'],a:0},
+  {q:'Что такое ICQ?',o:['Instruction Checking','Intonation Checking','Individual Correction'],a:0},
+  {q:'Что такое MFP?',o:['Method-Form-Practice','Meaning-Form-Pronunciation','Main-Focus-Production'],a:1},
+  {q:'Какой экзамен бессрочный?',o:['IELTS','TOEFL','Cambridge'],a:2},
+  {q:'Что такое lexical chunk?',o:['Отдельное слово','Устойчивая фраза','Тип грамматики'],a:1}
+];
+
+const qc=document.getElementById('quizContainer');
+quizData.forEach((q,i)=>{
+  const d=document.createElement('div');
+  d.className='quiz-q';
+  d.dataset.idx=i;
+  d.innerHTML=`<strong>Вопрос ${i+1}:</strong> ${q.q}<br>`+
+    q.o.map((o,j)=>`<div class="quiz-opt" data-q="${i}" data-o="${j}" onclick="selectOpt(this)">${String.fromCharCode(97+j)}) ${o}</div>`).join('');
+  qc.appendChild(d);
+});
+
+function selectOpt(el){
+  const q=el.dataset.q;
+  document.querySelectorAll(`.quiz-opt[data-q="${q}"]`).forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function checkQuiz(){
+  let score=0,wrong=[];
+  quizData.forEach((q,i)=>{
+    const sel=document.querySelector(`.quiz-opt[data-q="${i}"].selected`);
+    const block=document.querySelector(`.quiz-q[data-idx="${i}"]`);
+    block.classList.remove('correct','wrong');
+    if(sel){
+      if(parseInt(sel.dataset.o)===q.a){score++;block.classList.add('correct')}
+      else{block.classList.add('wrong');wrong.push(i+1)}
+    } else {block.classList.add('wrong');wrong.push(i+1)}
+  });
+  const r=document.getElementById('quizResult');
+  r.textContent=`✅ Правильных: ${score} из ${quizData.length}\n❌ Ошибки: ${wrong.length>0?wrong.join(', '):'нет'}`;
+  r.classList.add('visible');
+}
+
+function resetQuiz(){
+  document.querySelectorAll('.quiz-opt').forEach(o=>o.classList.remove('selected'));
+  document.querySelectorAll('.quiz-q').forEach(q=>q.classList.remove('correct','wrong'));
+  document.getElementById('quizResult').classList.remove('visible');
+}
+
+// ==================== ТРЕКЕР ====================
+let students=JSON.parse(localStorage.getItem('students'))||[];
+
+function renderStudents(){
+  const list=document.getElementById('studentList');
+  if(students.length===0){list.innerHTML='<p style="color:var(--muted)">Нет учеников.</p>';document.getElementById('trackerStats').textContent='';return}
+  list.innerHTML=students.map((s,i)=>`
+    <div class="student-entry">
+      <strong>${s.name}</strong>
+      <span>Уроков: ${s.lessons||0} | Баллов: ${s.score||0}</span>
+      <div>
+        <button class="btn success" onclick="addLessonToStudent(${i})">➕</button>
+        <button class="btn warning" onclick="addScore(${i},1)">+1</button>
+        <button class="btn danger" onclick="removeStudent(${i})">✕</button>
+      </div>
+    </div>
+  `).join('');
+  const total=students.reduce((a,s)=>a+(s.lessons||0),0);
+  const avg=students.length?(students.reduce((a,s)=>a+(s.score||0),0)/students.length).toFixed(1):0;
+  document.getElementById('trackerStats').textContent=`📊 Учеников: ${students.length} | Уроков: ${total} | Средний балл: ${avg}`;
+  localStorage.setItem('students',JSON.stringify(students));
+}
+
+function addStudent(){
+  const name=document.getElementById('studentName').value.trim();
+  if(!name) return alert('Введите имя!');
+  students.push({name,lessons:0,score:0});
+  document.getElementById('studentName').value='';
+  renderStudents();
+}
+function removeStudent(i){if(confirm('Удалить?')){students.splice(i,1);renderStudents()}}
+function addLessonToStudent(i){students[i].lessons=(students[i].lessons||0)+1;renderStudents()}
+function addScore(i,p){students[i].score=(students[i].score||0)+p;renderStudents()}
+function clearTracker(){if(confirm('Удалить всё?')){students=[];renderStudents()}}
+
+// ==================== РУБРИКИ ====================
+function generateRubric(){
+  const skill=document.getElementById('rubricSkill').value;
+  const level=document.getElementById('rubricLevel').value;
+  const out=document.getElementById('rubricOutput');
+  const rubric=`📋 РУБРИКА ДЛЯ ${skill.toUpperCase()} (${level})\n\nКритерий | Описание | Баллы (0-5)\n─────────|──────────|──────────\nGrammar  | ${level==='A2'?'Простые структуры, частые ошибки':level==='B1'?'Достаточный контроль, ошибки не мешают':'Хороший контроль, редкие ошибки'} | ___\nVocabulary | ${level==='A2'?'Базовый запас, повторения':level==='B1'?'Достаточный для знакомых тем':'Гибкий, точный, разные темы'} | ___\nFluency   | ${level==='A2'?'Паузы, медленный темп':level==='B1'?'Поддерживает речь, иногда ищет слова':'Спонтанно, без пауз'} | ___\n\nИтого: ___ / 15`;
+  out.textContent=rubric;
+  out.classList.add('visible');
+}
+
+// ==================== RANDOMIZER ====================
+const activityBank=[
+  {name:'Two Truths and a Lie',desc:'3 утверждения, класс угадывает ложь.',type:'warmup',age:'any'},
+  {name:'Think-Pair-Share',desc:'Сначала думают, затем в парах, затем с классом.',type:'pair',age:'any'},
+  {name:'Hot Seat',desc:'Один ученик отвечает на вопросы класса.',type:'whole',age:'teens'},
+  {name:'Simon Says',desc:'TPR-игра для детей.',type:'warmup',age:'kids'},
+  {name:'Role-play: Restaurant',desc:'В парах разыгрывают ресторан.',type:'pair',age:'adults'},
+  {name:'Debate',desc:'Класс делится на 2 команды.',type:'whole',age:'teens'},
+  {name:'Running Dictation',desc:'Текст на стене, диктуют в парах.',type:'pair',age:'kids'},
+  {name:'Story Chain',desc:'Один начинает, следующий продолжает.',type:'group',age:'any'},
+  {name:'Information Gap',desc:'Обмен информацией через вопросы.',type:'pair',age:'any'}
+];
+
+function getRandomActivity(){
+  const type=document.getElementById('randomType').value;
+  const age=document.getElementById('randomAge').value;
+  const out=document.getElementById('randomOutput');
+  let filtered=activityBank;
+  if(type!=='any') filtered=filtered.filter(a=>a.type===type);
+  if(age!=='any') filtered=filtered.filter(a=>a.age===age||a.age==='any');
+  if(filtered.length===0){out.style.display='block';document.getElementById('randomTitle').textContent='😕 Нет активностей';return}
+  const a=filtered[Math.floor(Math.random()*filtered.length)];
+  out.style.display='block';
+  document.getElementById('randomTitle').textContent=`🎯 ${a.name}`;
+  document.getElementById('randomDesc').textContent=a.desc;
+  document.getElementById('randomTags').textContent=`#${a.type} #${a.age}`;
+}
+
+// ==================== ПЛАНИРОВЩИК ====================
+const days=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+let schedule=JSON.parse(localStorage.getItem('schedule'))||{};
+
+function renderScheduler(){
+  const grid=document.getElementById('schedulerGrid');
+  let html='';
+  days.forEach(day=>{
+    const items=schedule[day]||[];
+    html+=`<div class="scheduler-day"><h4>${day}</h4>`;
+    items.forEach((item,idx)=>html+=`<div class="slot" data-day="${day}" data-idx="${idx}" onclick="toggleSlotStatus('${day}',${idx})">${item}</div>`);
+    html+=`<div style="font-size:.6rem;color:var(--muted);cursor:pointer" onclick="removeSlot('${day}',${items.length-1})">✕</div></div>`;
+  });
+  grid.innerHTML=html;
+}
+
+function addLesson(){
+  const name=document.getElementById('lessonName').value.trim();
+  if(!name) return alert('Введите название!');
+  const day=prompt('День (Пн,Вт,Ср,Чт,Пт,Сб,Вс):','Пн');
+  if(!day) return;
+  if(!days.includes(day)) return alert('Некорректный день!');
+  if(!schedule[day]) schedule[day]=[];
+  schedule[day].push(name);
+  localStorage.setItem('schedule',JSON.stringify(schedule));
+  document.getElementById('lessonName').value='';
+  renderScheduler();
+}
+function removeSlot(day,idx){if(idx<0)return;schedule[day].splice(idx,1);if(schedule[day].length===0)delete schedule[day];localStorage.setItem('schedule',JSON.stringify(schedule));renderScheduler()}
+function toggleSlotStatus(day,idx){const el=document.querySelector(`.slot[data-day="${day}"][data-idx="${idx}"]`);if(el)el.classList.toggle('done')}
+function clearScheduler(){if(confirm('Очистить?')){schedule={};localStorage.setItem('schedule',JSON.stringify(schedule));renderScheduler()}}
+function exportScheduler(){
+  let text='📅 РАСПИСАНИЕ\n';
+  days.forEach(day=>{
+    const items=schedule[day]||[];
+    text+=`${day}: ${items.length?items.join(', '):'(нет)'}\n`;
+  });
+  const blob=new Blob([text],{type:'text/plain'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='schedule.txt';a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ==================== ИНИЦИАЛИЗАЦИЯ ====================
+renderStudents();
+renderScheduler();
+
+document.querySelectorAll('.bottom-nav button').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+<section class="tm-card"><h2>Методические опоры</h2><div class="tm-grid"><details open><summary>Цель</summary><p>Формулируйте результат через действие ученика: назвать, сравнить, применить, объяснить.</p></details><details><summary>Практика</summary><p>Чередуйте понятный пример, самостоятельную попытку и короткую обратную связь.</p></details><details><summary>Проверка понимания</summary><p>Просите ученика показать ход мысли, а не только назвать ответ.</p></details></div></section><script id="theme-tools-script">(()=>{const q=s=>document.querySelector(s), text=(s)=>String(s||'').trim(); const saveWord=(name,content)=>{const blob=new Blob(['\ufeff', '<html><head><meta charset="utf-8"></head><body><pre style="white-space:pre-wrap;font:15px Arial">'+content.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+'</pre></body></html>'],{type:'application/msword'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name+'.doc';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};document.title=document.title.replace(' · Генератор','');document.documentElement.dataset.themeNote='Добавлены методические опоры по целям, практике и проверке понимания.';document.querySelectorAll('[data-home]').forEach(b=>b.onclick=()=>q('#home-output').textContent='Сценарий «'+b.dataset.home+'»: выберите 3 главных действия, назначьте время и оставьте один запасной шаг.');document.querySelectorAll('[data-build]').forEach(b=>b.onclick=()=>q('#build-output').textContent='Этап «'+b.dataset.build+'»: проверьте соответствие проекту, качество выполнения, безопасность и зафиксируйте замечания.');document.querySelectorAll('[data-mama]').forEach(b=>b.onclick=()=>q('#mama-output').textContent='Сценарий «'+b.dataset.mama+'»: подготовьте вещи заранее, выберите одно обязательное действие и один спокойный резерв.');document.querySelectorAll('[data-cook]').forEach(b=>b.onclick=()=>q('#cook-output').textContent='Раздел «'+b.dataset.cook+'»: запишите конкретные действия, время и нужные продукты.');})();</script>
+</body>
+</html>

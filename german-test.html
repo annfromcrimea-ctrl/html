@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deutsch Check-Up · A1 → C2 · 5 навыков</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --board1:#33383f; --board2:#1d2126;
+  --chalk:#f5f1e6; --chalk-dim:rgba(245,241,230,.55);
+  --yellow:#ffd35c; --pink:#ff9d9d; --mint:#8fe3c0; --sky:#9fd8ff;
+  --paper:#fdfcf5; --ink:#25333e; --line:#cfdff0; --marginline:#ff9d9d;
+  --card:#23272d; --card-edge:rgba(245,241,230,.17); --btn-ink:#3a2b00;
+  --ok:#3fae72; --bad:#e4574d; --radius:14px;
+}
+body.mode-kids{
+  --board1:#6fb7f0; --board2:#d6ecfd;
+  --chalk:#1a3f6e; --chalk-dim:rgba(26,63,110,.55);
+  --yellow:#ffb520; --pink:#ff6f91; --mint:#22c993; --sky:#4d96ff;
+  --card:#ffffff; --card-edge:#b9dcf3; --ok:#2ec474; --bad:#ff5d55; --radius:22px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;color:var(--chalk);background:linear-gradient(160deg,var(--board1),var(--board2)) fixed;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1.6px),radial-gradient(rgba(255,255,255,.06) 1px,transparent 1.4px);
+  background-size:90px 90px,140px 140px;background-position:0 0,45px 60px}
+::selection{background:var(--yellow);color:#3a2b00}
+
+.doodles{position:fixed;inset:0;z-index:0;pointer-events:none}
+.doodle{position:absolute;font-family:'Caveat',cursive;color:var(--chalk);opacity:.16;transform:rotate(var(--r,0deg));font-size:var(--fs,2rem);animation:floaty var(--t,7s) ease-in-out infinite alternate;white-space:nowrap}
+.doodle.emoji{font-family:'Nunito',sans-serif;opacity:.85}
+@keyframes floaty{from{transform:translateY(-8px) rotate(var(--r,0deg))}to{transform:translateY(10px) rotate(calc(var(--r,0deg) + 3deg))}}
+body.mode-class .d-kids{display:none}
+body.mode-kids .d-class{display:none}
+
+main{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:clamp(16px,4vw,44px)}
+.screen{animation:screenIn .55s cubic-bezier(.2,.9,.3,1) both}
+@keyframes screenIn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+[hidden]{display:none!important}
+
+.start-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(22px,4vw,48px);align-items:center;min-height:86vh}
+.board-frame{position:relative;border:10px solid transparent;border-image:linear-gradient(140deg,#a06b35,#7c4d20 45%,#b07a40) 1;
+  padding:clamp(22px,4vw,44px);background:radial-gradient(120% 90% at 20% 10%,rgba(255,255,255,.05),transparent 60%),linear-gradient(155deg,#3a4048,#1d2126);
+  box-shadow:0 24px 60px rgba(0,0,0,.45),inset 0 0 60px rgba(0,0,0,.35)}
+body.mode-kids .board-frame{border:6px solid #fff;border-radius:26px;border-image:none;background:linear-gradient(160deg,#eaf7ff,#fff);box-shadow:0 20px 50px rgba(38,110,170,.25)}
+.chalk-tag{font-family:'Caveat',cursive;font-size:clamp(1.2rem,2.4vw,1.6rem);color:var(--yellow);letter-spacing:.04em}
+body.mode-kids .chalk-tag{color:var(--pink)}
+h1.hand{font-family:'Caveat',cursive;font-weight:700;color:var(--chalk);font-size:clamp(2.6rem,6.5vw,4.9rem);line-height:1.02;margin:.35rem 0 .2rem}
+h1.hand em{font-style:normal;color:var(--yellow)}
+body.mode-kids h1.hand{color:var(--ink)}
+body.mode-kids h1.hand em{color:var(--sky)}
+.sub{max-width:48ch;font-size:clamp(.96rem,1.6vw,1.08rem);line-height:1.55;color:var(--chalk-dim);margin-top:12px}
+body.mode-kids .sub{color:#40607c}
+.tiles{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.tile{width:58px;height:58px;display:grid;place-items:center;background:var(--paper);color:var(--ink);border-radius:10px;font-weight:900;font-size:1.2rem;box-shadow:0 6px 0 rgba(0,0,0,.28);transform:rotate(var(--r));transition:transform .25s;cursor:default}
+.tile:hover{transform:rotate(0deg) translateY(-8px) scale(1.06)}
+.tile.y{background:var(--yellow)} .tile.p{background:var(--pink);color:#fff}
+.tile.m{background:var(--mint);color:#0c3b2a} .tile.s{background:var(--sky);color:#fff} .tile.g2{background:#c9b2ff;color:#3a2b6e}
+.tile.wide{width:auto;padding:0 14px;display:flex;gap:8px;align-items:center;font-size:.92rem}
+.tray{position:absolute;left:8%;right:8%;bottom:-9px;height:16px;background:linear-gradient(#a06b35,#6d4119);border-radius:3px;box-shadow:0 6px 14px rgba(0,0,0,.4)}
+.tray i{position:absolute;top:-9px;width:52px;height:9px;border-radius:4px;background:#fbf7ea;box-shadow:0 2px 4px rgba(0,0,0,.35)}
+.tray i.c2{left:80px;background:var(--yellow);transform:rotate(-2deg)}
+.tray i.c1{left:14px;transform:rotate(1deg)}
+body.mode-kids .tray{display:none}
+
+.note-card{background:linear-gradient(90deg,transparent 0 40px,var(--marginline) 40px 42px,transparent 42px),repeating-linear-gradient(var(--paper) 0 30px,var(--line) 30px 31px);
+  color:var(--ink);border-radius:var(--radius);padding:26px 24px 26px 54px;box-shadow:0 18px 44px rgba(0,0,0,.35);transform:rotate(.6deg)}
+.note-card h2{font-size:1.35rem;font-weight:900;margin-bottom:10px}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
+.pick.three{grid-template-columns:repeat(3,1fr)}
+.pick.flex{display:flex;flex-wrap:wrap}
+.pick.flex .mode-btn{flex:1;min-width:86px}
+.pick-label{font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#68819a;margin:10px 0 4px}
+.mode-btn{font-family:inherit;font-weight:800;font-size:.85rem;cursor:pointer;border:2px dashed #9db6c9;background:rgba(255,255,255,.65);color:#33506b;border-radius:12px;padding:10px 4px;transition:all .2s}
+.mode-btn:hover{transform:translateY(-2px)}
+.mode-btn.on{border-style:solid;border-color:var(--sky);background:#e3f1ff;box-shadow:0 4px 12px rgba(77,150,255,.3)}
+body.mode-kids .mode-btn.on{background:#fff3d6;border-color:var(--yellow)}
+.mode-note{font-size:.82rem;color:#5a768e;min-height:2em;margin:8px 0 12px}
+.btn-big{width:100%;font-family:inherit;font-weight:900;font-size:1.12rem;padding:15px;border:none;border-radius:14px;cursor:pointer;background:var(--yellow);color:var(--btn-ink);box-shadow:0 6px 0 #c99a1e,0 14px 26px rgba(0,0,0,.22);transition:transform .15s,box-shadow .15s}
+.btn-big:hover{transform:translateY(-3px);box-shadow:0 9px 0 #c99a1e,0 20px 32px rgba(0,0,0,.26)}
+.btn-big:active{transform:translateY(2px);box-shadow:0 3px 0 #c99a1e}
+.tiny{font-size:.78rem;color:#68819a;text-align:center;margin-top:10px}
+
+.quiz-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+.logo{font-family:'Caveat',cursive;font-size:1.6rem;color:var(--yellow);white-space:nowrap}
+body.mode-kids .logo{color:#134a76}
+.progress{flex:1;min-width:130px;height:12px;border-radius:99px;background:rgba(255,255,255,.14);overflow:hidden}
+body.mode-kids .progress{background:rgba(255,255,255,.75)}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--yellow),var(--pink));transition:width .5s cubic-bezier(.3,.9,.3,1)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-size:.8rem;font-weight:800;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid var(--card-edge)}
+body.mode-kids .chip{background:#fff;color:#134a76;border-color:#bfe2f8}
+.chip.est{background:var(--yellow);color:var(--btn-ink);border-color:transparent}
+.chip.streak{background:var(--pink);color:#fff;border-color:transparent}
+.qcount{font-weight:800;font-size:.9rem;color:var(--chalk-dim)}
+body.mode-kids .qcount{color:#3e6c93}
+
+.secnav{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.snav{font-size:.82rem;font-weight:900;padding:6px 14px;border-radius:99px;background:rgba(255,255,255,.09);color:var(--chalk-dim);border:1px solid var(--card-edge);transition:all .3s}
+body.mode-kids .snav{background:rgba(255,255,255,.6);color:#5a7ea0}
+.snav.now{background:var(--sky);color:#fff;border-color:transparent;transform:translateY(-2px)}
+.snav.done{opacity:.65;text-decoration:line-through}
+
+.ruler{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:4px 0 20px}
+.ruler b{text-align:center;font-size:.75rem;font-weight:800;letter-spacing:.05em;padding:7px 0;border-radius:8px;background:rgba(255,255,255,.09);color:var(--chalk-dim);transition:all .35s}
+body.mode-kids .ruler b{background:rgba(255,255,255,.65);color:#5a7ea0}
+.ruler b.hot{background:var(--yellow);color:var(--btn-ink);transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.25)}
+.pin{position:absolute;top:-15px;left:0;width:0;height:0;transition:left .55s cubic-bezier(.3,1.1,.4,1);border-left:8px solid transparent;border-right:8px solid transparent;border-top:10px solid var(--pink);transform:translateX(-50%);filter:drop-shadow(0 3px 3px rgba(0,0,0,.3))}
+
+.qcard{position:relative;border-radius:var(--radius);color:var(--ink);
+  background:linear-gradient(90deg,transparent 0 46px,var(--marginline) 46px 48px,transparent 48px),repeating-linear-gradient(var(--paper) 0 33px,var(--line) 33px 34px);
+  box-shadow:0 22px 50px rgba(0,0,0,.4);padding:28px 30px 26px 66px;animation:cardIn .45s cubic-bezier(.2,.9,.3,1) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(18px) rotate(-.6deg)}to{opacity:1;transform:rotate(-.35deg)}}
+.qmeta{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tag{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:6px}
+.tag.l{background:#fff3d0;color:#8a6400}.tag.sk{background:#e6f7ef;color:#146c4a}
+.qtext{font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:800;line-height:34px;margin-bottom:18px}
+
+.passage{background:#fff;border-left:5px solid var(--sky);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:18px;line-height:33px;font-size:1.02rem}
+.passage.saybox{font-size:1.18rem;font-weight:800;border-left-color:var(--pink)}
+
+.audiobox{display:flex;align-items:center;gap:16px;background:#fff;border:2px dashed var(--sky);border-radius:12px;padding:14px 18px;margin-bottom:18px;flex-wrap:wrap}
+.playbtn{font-family:inherit;font-weight:900;font-size:1rem;cursor:pointer;border:none;border-radius:12px;padding:12px 22px;background:var(--sky);color:#fff;box-shadow:0 4px 0 #2f6db3;transition:transform .15s}
+.playbtn:hover{transform:translateY(-2px)}
+.playbtn:active{transform:translateY(1px)}
+.playcnt{font-size:.85rem;font-weight:700;color:#5a768e}
+.script-fallback{font-style:italic;color:#41586c;font-size:.92rem}
+
+.opts{display:grid;gap:12px}
+.opt{display:flex;align-items:center;gap:14px;text-align:left;width:100%;font-family:inherit;font-size:1.03rem;font-weight:700;color:var(--ink);cursor:pointer;background:#fff;border:2px solid #d7e3ee;border-radius:12px;padding:12px 16px;transition:transform .15s,box-shadow .15s,border-color .15s,background .2s}
+.opt:hover:not(:disabled){transform:translateX(6px);border-color:var(--sky);box-shadow:0 8px 18px rgba(31,90,150,.16)}
+.opt .key{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:9px;background:#eef4fa;color:#33506b;font-weight:900;transition:all .2s}
+.opt:hover:not(:disabled) .key{background:var(--sky);color:#fff}
+.opt:disabled{cursor:default;opacity:.55}
+.opt.correct{background:#e5f8ec;border-color:var(--ok);opacity:1}
+.opt.correct .key{background:var(--ok);color:#fff}
+.opt.wrong{background:#fde8e6;border-color:var(--bad);opacity:1;animation:shake .4s}
+.opt.wrong .key{background:var(--bad);color:#fff}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}55%{transform:translateX(6px)}80%{transform:translateX(-3px)}}
+.listen-hint{font-size:.85rem;font-weight:800;color:#c2881f;margin-top:10px}
+
+.write .wrow{display:flex;gap:10px;flex-wrap:wrap}
+.write input{flex:1;min-width:220px;font-family:inherit;font-size:1.1rem;font-weight:700;color:var(--ink);padding:12px 16px;border:2px solid #d7e3ee;border-radius:12px;outline:none;transition:border-color .2s}
+.write input:focus{border-color:var(--sky);box-shadow:0 0 0 4px rgba(77,150,255,.15)}
+.write input.ok{border-color:var(--ok);background:#e5f8ec}
+.write input.bad{border-color:var(--bad);background:#fde8e6}
+
+.speak{text-align:center}
+.micbtn{width:96px;height:96px;border-radius:50%;border:none;cursor:pointer;font-size:2.2rem;background:var(--pink);color:#fff;box-shadow:0 8px 0 rgba(0,0,0,.18),0 16px 30px rgba(0,0,0,.25);transition:transform .15s}
+.micbtn:hover{transform:scale(1.06)}
+.micbtn.rec{background:var(--bad);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(228,87,77,.55)}50%{box-shadow:0 0 0 20px rgba(228,87,77,0)}}
+.micstat{font-weight:800;color:#5a768e;margin-top:12px;min-height:1.4em}
+.eval-q{font-weight:800;color:#41586c;margin-bottom:8px}
+.eval-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.eval-btns button{font-family:inherit;font-weight:800;font-size:.95rem;padding:12px 16px;border-radius:12px;border:2px solid #d7e3ee;background:#fff;color:var(--ink);cursor:pointer;transition:all .2s}
+.eval-btns button:hover{border-color:var(--sky);transform:translateY(-2px)}
+.heard{background:#fff;border-left:5px solid var(--mint);padding:10px 14px;border-radius:0 10px 10px 0;margin-bottom:10px;font-size:.95rem}
+.wordchip{display:inline-block;padding:2px 8px;border-radius:6px;font-weight:800;margin:2px}
+.wordchip.hit{background:#e5f8ec;color:#1d7a4c}
+.wordchip.miss{background:#fde8e6;color:#b23a31;text-decoration:line-through}
+
+.feedback{margin-top:20px;border-top:2px dashed #cfdff0;padding-top:18px;animation:screenIn .4s both}
+.fb-head{display:flex;align-items:center;gap:10px;font-size:1.15rem;font-weight:900;margin-bottom:8px;flex-wrap:wrap}
+.fb-head .pts{margin-left:auto;font-size:.95rem;color:#8a6400;background:#fff3d0;padding:4px 10px;border-radius:8px}
+.fb-head.good{color:var(--ok)}.fb-head.badh{color:var(--bad)}
+.fb-expl{font-size:.96rem;line-height:1.5;color:#41586c;max-width:62ch}
+.fb-trans{font-style:italic;color:#7d93a6;font-size:.85rem;margin-top:8px}
+.btn-next{margin-top:16px;font-family:inherit;font-weight:900;font-size:1rem;cursor:pointer;border:none;border-radius:12px;padding:13px 30px;background:var(--sky);color:#fff;box-shadow:0 5px 0 #2f6db3;transition:transform .15s,box-shadow .15s}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 7px 0 #2f6db3}
+.btn-next:active{transform:translateY(2px);box-shadow:0 2px 0 #2f6db3}
+
+.intro{text-align:center;padding:44px 34px}
+.intro .big{font-size:3.4rem;line-height:1}
+.intro .step{font-size:.8rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#8a6400;background:#fff3d0;display:inline-block;padding:5px 14px;border-radius:99px;margin:14px 0 8px}
+.intro h2{font-size:1.9rem;font-weight:900;margin-bottom:10px}
+.intro p{color:#41586c;line-height:1.55;max-width:46ch;margin:0 auto 22px}
+.intro .btn-big{max-width:320px;margin:0 auto}
+
+.result-head{text-align:center;margin:10px 0 24px}
+.stamp{display:inline-block;padding:14px 38px;border:5px solid var(--pink);border-radius:14px;color:var(--pink);transform:rotate(-5deg);font-family:'Caveat',cursive;font-size:clamp(3rem,8vw,5.2rem);line-height:1;font-weight:700;animation:stampIn .5s cubic-bezier(.2,1.6,.4,1) both .2s}
+@keyframes stampIn{from{opacity:0;transform:rotate(-14deg) scale(2.2)}to{opacity:1;transform:rotate(-5deg) scale(1)}}
+.stamp small{display:block;font-family:'Nunito';font-size:.92rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;margin-top:6px}
+.result-title{font-weight:800;color:var(--chalk-dim);margin-top:16px;font-size:1.05rem}
+body.mode-kids .result-title{color:#2e5d84}
+
+.gauge{position:relative;height:26px;border-radius:99px;margin:26px 0 6px;display:flex}
+.gauge span{flex:1}
+.gauge span:nth-child(1){background:#5aa9e6;border-radius:99px 0 0 99px}
+.gauge span:nth-child(2){background:#57c7a3}.gauge span:nth-child(3){background:#ffd35c}
+.gauge span:nth-child(4){background:#ffab4a}.gauge span:nth-child(5){background:#ff8f6b}
+.gauge span:nth-child(6){background:#ff6f91;border-radius:0 99px 99px 0}
+.gauge .mark{position:absolute;top:-9px;width:4px;height:44px;background:#fff;border-radius:4px;box-shadow:0 0 0 2px rgba(0,0,0,.35);transform:translateX(-50%);transition:left 1s cubic-bezier(.3,1,.4,1)}
+.gauge-labels{display:flex;justify-content:space-between;font-size:.78rem;font-weight:800;color:var(--chalk-dim)}
+body.mode-kids .gauge-labels{color:#3e6c93}
+
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:26px 0}
+.stat{background:var(--card);border:1px solid var(--card-edge);border-radius:var(--radius);padding:18px;text-align:center}
+.stat b{display:block;font-size:2rem;font-weight:900;color:var(--yellow)}
+.stat:nth-child(2) b{color:var(--mint)}.stat:nth-child(3) b{color:var(--pink)}.stat:nth-child(4) b{color:var(--sky)}
+.stat span{font-size:.8rem;font-weight:700;color:var(--chalk-dim);letter-spacing:.04em;text-transform:uppercase}
+
+.skillcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:8px}
+.scard{background:var(--card);border:1px solid var(--card-edge);border-radius:var(--radius);padding:18px;text-align:center}
+.scard .ic{font-size:1.8rem}
+.scard h4{font-size:.82rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--chalk-dim);margin:6px 0 8px}
+.scard .lvl{font-family:'Caveat',cursive;font-size:2.6rem;font-weight:700;line-height:1;color:var(--yellow)}
+.scard .acc{font-size:.82rem;font-weight:800;color:var(--chalk-dim);margin-top:6px}
+.scard .bar{height:8px;border-radius:99px;background:rgba(255,255,255,.13);overflow:hidden;margin-top:8px}
+body.mode-kids .scard .bar{background:#e4f1fb}
+.scard .bar i{display:block;height:100%;width:0;border-radius:99px;background:var(--mint);transition:width 1s .3s cubic-bezier(.3,.9,.3,1)}
+
+.mistakes{margin-top:22px}
+.mistakes h3{font-size:1.05rem;font-weight:900;margin-bottom:12px}
+.m-group{font-size:.9rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:var(--yellow);margin:16px 0 8px}
+.m-item{background:var(--card);border-left:5px solid var(--bad);border-radius:10px;padding:14px 16px;margin-bottom:10px;font-size:.93rem;line-height:1.5}
+.m-item .mq{font-weight:800;margin-bottom:4px}
+.m-item .fix{color:var(--mint);font-weight:800}
+.m-item .why{color:var(--chalk-dim);font-size:.86rem}
+.all-good{background:var(--card);border-left:5px solid var(--ok);border-radius:10px;padding:16px;font-weight:800}
+
+.end-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:30px 0 40px}
+.btn-ghost{font-family:inherit;font-weight:800;font-size:.95rem;cursor:pointer;background:transparent;color:var(--chalk);border:2px solid var(--card-edge);border-radius:12px;padding:14px 24px;transition:all .2s}
+.btn-ghost:hover{border-color:var(--yellow);color:var(--yellow);transform:translateY(-2px)}
+body.mode-kids .btn-ghost{color:#134a76;border-color:#a8d5f2}
+body.mode-kids .btn-ghost:hover{color:#0c62b8;border-color:#0c62b8}
+
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.confetti i{position:absolute;top:-20px;width:10px;height:14px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+
+@media (max-width:900px){.start-grid{grid-template-columns:1fr;min-height:auto;gap:26px;padding-top:8px}.note-card{transform:none}}
+@media (max-width:560px){.qcard{padding-left:22px;background:repeating-linear-gradient(var(--paper) 0 33px,var(--line) 33px 34px)}.ruler b{font-size:.62rem}.pick.three{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body class="mode-class">
+
+<div class="doodles" aria-hidden="true">
+  <span class="doodle d-class" style="top:8%;left:4%;--fs:2.4rem;--r:-8deg;--t:6s">A1 · B2 · C2</span>
+  <span class="doodle d-class" style="top:22%;right:6%;--fs:2rem;--r:6deg;--t:8s">sein oder nicht sein?</span>
+  <span class="doodle d-class" style="bottom:16%;left:6%;--fs:2.2rem;--r:4deg;--t:7s">★ Viel Erfolg! ★</span>
+  <span class="doodle d-class" style="bottom:30%;right:4%;--fs:2.2rem;--r:-5deg;--t:9s">die vier Fälle… 🎧</span>
+  <span class="doodle d-class" style="top:55%;left:2%;--fs:1.8rem;--r:2deg;--t:6.5s">Konjunktiv II ✎</span>
+  <span class="doodle d-kids emoji" style="top:7%;left:5%;--fs:2.6rem;--t:6s">☁️</span>
+  <span class="doodle d-kids emoji" style="top:12%;right:8%;--fs:2.8rem;--t:8s">⭐</span>
+  <span class="doodle d-kids emoji" style="bottom:14%;left:6%;--fs:2.8rem;--t:7s">🥨</span>
+  <span class="doodle d-kids emoji" style="bottom:28%;right:5%;--fs:2.5rem;--t:9s">🎈</span>
+  <span class="doodle d-kids emoji" style="top:50%;left:2%;--fs:2.2rem;--t:6.5s">🏰</span>
+</div>
+
+<main>
+<!-- ============ СТАРТ ============ -->
+<section id="scr-start" class="screen">
+  <div class="start-grid">
+    <div class="board-frame">
+      <div class="chalk-tag">мини-экзамен · немецкий · 5 навыков · A1 → C2</div>
+      <h1 class="hand">Проверь свой <em>Deutsch</em>!</h1>
+      <p class="sub">Полная диагностика: <b>грамматика и лексика 📚, аудирование 🎧, чтение 📖, письмо ✍️ и говорение 🎤</b>. Каждая секция подстраивается под вас, а в конце — уровень по шкале CEFR для каждого навыка и разбор ошибок.</p>
+      <div class="tiles" aria-hidden="true">
+        <div class="tile m wide" style="--r:-5deg">📚 Grammatik</div>
+        <div class="tile s wide" style="--r:4deg">🎧 Hören</div>
+        <div class="tile y wide" style="--r:-3deg">📖 Lesen</div>
+        <div class="tile p wide" style="--r:5deg">✍️ Schreiben</div>
+        <div class="tile g2 wide" style="--r:-4deg">🎤 Sprechen</div>
+      </div>
+      <div class="tray" aria-hidden="true"><i class="c1"></i><i class="c2"></i></div>
+    </div>
+
+    <div class="note-card">
+      <h2>Настройки ✏️</h2>
+
+      <p class="pick-label">Для кого</p>
+      <div class="pick" role="group">
+        <button type="button" class="mode-btn" data-mode="kids" onclick="setMode('kids')">🧒 Дети</button>
+        <button type="button" class="mode-btn on" data-mode="class" onclick="setMode('class')">🎓 Взрослые</button>
+      </div>
+
+      <p class="pick-label">Навыки (лишние можно отключить)</p>
+      <div class="pick flex" role="group">
+        <button type="button" class="mode-btn sk on" data-sk="g" onclick="toggleSkill('g')">📚 Грамм.</button>
+        <button type="button" class="mode-btn sk on" data-sk="l" onclick="toggleSkill('l')">🎧 Аудир.</button>
+        <button type="button" class="mode-btn sk on" data-sk="r" onclick="toggleSkill('r')">📖 Чтение</button>
+        <button type="button" class="mode-btn sk on" data-sk="w" onclick="toggleSkill('w')">✍️ Письмо</button>
+        <button type="button" class="mode-btn sk on" data-sk="s" onclick="toggleSkill('s')">🎤 Говор.</button>
+      </div>
+
+      <p class="pick-label">Заданий на навык</p>
+      <div class="pick three" role="group">
+        <button type="button" class="mode-btn len" data-n="3" onclick="setLen(3)">3 · экспресс</button>
+        <button type="button" class="mode-btn len on" data-n="4" onclick="setLen(4)">4 · стандарт</button>
+        <button type="button" class="mode-btn len" data-n="5" onclick="setLen(5)">5 · подробно</button>
+      </div>
+
+      <p class="mode-note" id="mode-note">Классический режим: полный банк заданий, включая «взрослые» темы.</p>
+      <button type="button" class="btn-big" onclick="startQuiz()">Начать тест →</button>
+      <p class="tiny">Подсказка: варианты — клавиши 1–4, дальше — Enter. Для говорения нужен микрофон 🎤</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ТЕСТ ============ -->
+<section id="scr-quiz" class="screen" hidden>
+  <div class="quiz-top">
+    <span class="logo">✎ Deutsch Check-Up</span>
+    <div class="progress"><i id="pbar"></i></div>
+    <span class="qcount" id="qcount">1 / 20</span>
+    <div class="chips">
+      <span class="chip est" id="est">—</span>
+      <span class="chip" id="score">Очки: 0</span>
+      <span class="chip streak" id="streak" hidden>🔥 серия 0</span>
+    </div>
+  </div>
+
+  <div class="secnav" id="secnav"></div>
+
+  <div class="ruler" aria-hidden="true">
+    <div class="pin" id="pin" style="left:8.33%"></div>
+    <b data-l="1">A1</b><b data-l="2">A2</b><b data-l="3">B1</b>
+    <b data-l="4">B2</b><b data-l="5">C1</b><b data-l="6">C2</b>
+  </div>
+
+  <article class="qcard intro" id="intro" hidden>
+    <div class="big" id="in-icon">🎧</div>
+    <div class="step" id="in-step">Часть 1 из 5</div>
+    <h2 id="in-title">Аудирование</h2>
+    <p id="in-desc">…</p>
+    <button type="button" class="btn-big" onclick="beginSection()">Начать часть →</button>
+  </article>
+
+  <article class="qcard" id="qcard" hidden>
+    <div class="qmeta">
+      <span class="tag sk" id="tag-skill">Секция</span>
+      <span class="tag l" id="tag-lvl">Уровень B1</span>
+    </div>
+    <div id="q-extra"></div>
+    <p class="qtext" id="qtext">…</p>
+    <div id="q-answer"></div>
+    <div class="feedback" id="feedback" hidden>
+      <div class="fb-head" id="fb-head"><span id="fb-icon"></span><b id="fb-title"></b><span class="pts" id="fb-pts" hidden></span></div>
+      <div id="fb-extra"></div>
+      <p class="fb-expl" id="fb-expl"></p>
+      <div class="fb-trans" id="fb-trans" hidden></div>
+      <button type="button" class="btn-next" id="btn-next" onclick="next()">Дальше →</button>
+    </div>
+  </article>
+</section>
+
+<!-- ============ РЕЗУЛЬТАТ ============ -->
+<section id="scr-result" class="screen" hidden>
+  <div class="result-head">
+    <div class="stamp" id="stamp">B1<small id="stamp-name">Intermediate</small></div>
+    <p class="result-title" id="verdict">—</p>
+  </div>
+
+  <div class="gauge" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <div class="mark" id="mark" style="left:50%"></div>
+  </div>
+  <div class="gauge-labels"><i>A1</i><i>A2</i><i>B1</i><i>B2</i><i>C1</i><i>C2</i></div>
+
+  <div class="stat-grid">
+    <div class="stat"><b id="st-correct">0</b><span>верных</span></div>
+    <div class="stat"><b id="st-acc">0%</b><span>точность</span></div>
+    <div class="stat"><b id="st-streak">0</b><span>лучшая серия</span></div>
+    <div class="stat"><b id="st-score">0</b><span>очков</span></div>
+  </div>
+
+  <div class="skillcards" id="skillcards"></div>
+
+  <div class="mistakes">
+    <h3>📝 Работа над ошибками</h3>
+    <div id="mistakes"></div>
+  </div>
+
+  <div class="end-actions">
+    <button type="button" class="btn-big" style="width:auto;padding:14px 34px" onclick="startQuiz()">Пройти ещё раз ↻</button>
+    <button type="button" class="btn-ghost" onclick="goStart()">⚙ Изменить настройки</button>
+  </div>
+</section>
+</main>
+
+<script>
+/* ======================= НАВЫКИ ======================= */
+const SK={
+  g:{icon:'📚',title:'Грамматика и лексика',short:'Грамматика',
+     desc:'Выбирайте правильный вариант. Верный ответ делает задание сложнее, ошибка — проще.'},
+  l:{icon:'🎧',title:'Аудирование',short:'Аудирование',
+     desc:'Нажмите ▶ и прослушайте запись на немецком — повторять можно сколько угодно. Варианты откроются после первого прослушивания.'},
+  r:{icon:'📖',title:'Чтение',short:'Чтение',
+     desc:'Прочитайте текст и ответьте на вопрос по его содержанию.'},
+  w:{icon:'✍️',title:'Письмо',short:'Письмо',
+     desc:'Впишите ответ на немецком — слово или короткую фразу. Нет немецкой раскладки? Пишите ae/oe/ue вместо ä/ö/ü — проверка это понимает.'},
+  s:{icon:'🎤',title:'Говорение',short:'Говорение',
+     desc:'Нажмите на микрофон и выполните задание вслух на немецком. Разрешите доступ к микрофону. Если распознавание речи недоступно — оцените себя сами.'}
+};
+const ORDER=['g','l','r','w','s'];
+const LVLNAME={1:'A1',2:'A2',3:'B1',4:'B2',5:'C1',6:'C2'};
+const LVLFULL={A1:'Beginner · Начальный',A2:'Elementary · Базовый',B1:'Intermediate · Средний',
+  B2:'Upper-Intermediate · Выше среднего',C1:'Advanced · Продвинутый',C2:'Proficiency · В совершенстве'};
+const $=id=>document.getElementById(id);
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition||null;
+
+/* ======================= БАНК: ГРАММАТИКА И ЛЕКСИКА (90) ======================= */
+const BANK=[
+/* A1 */
+{lvl:1,skill:'g',q:'Ich ___ Student.',o:['bin','bist','ist','sind'],a:0,e:'С ich глагол sein имеет форму bin.'},
+{lvl:1,skill:'g',q:'Sie ___ zwei Katzen.',o:['hat','hast','haben','habe'],a:0,e:'С sie (она) глагол haben имеет форму hat.'},
+{lvl:1,skill:'v',q:'Was ist das Gegenteil von „groß“?',o:['klein','lang','laut','dick'],a:0,e:'Groß — «большой», антоним — klein «маленький».'},
+{lvl:1,skill:'g',q:'Ich habe ___ Apfel.',o:['einen','ein','eine','einem'],a:0,e:'Apfel — мужской род, Akkusativ → einen.'},
+{lvl:1,skill:'g',q:'Wir ___ jeden Abend fern.',o:['sehen','seht','sieht','gesehen'],a:0,e:'С wir у fernsehen форма sehen … fern.'},
+{lvl:1,skill:'v',q:'Das Kind — die ___.',o:['Kinder','Kinds','Kinden','Kinde'],a:0,e:'Множественное число от Kind — Kinder.'},
+{lvl:1,skill:'g',q:'Er ___ keinen Brokkoli.',o:['mag','magst','mögen','mag nicht'],a:0,e:'С er глагол mögen имеет форму mag.'},
+{lvl:1,skill:'v',q:'Bananen sind ___.',o:['gelb','blau','grün','rosa'],a:0,e:'Бананы жёлтые — gelb.'},
+{lvl:1,skill:'g',q:'Auf dem Tisch ___ ein Buch.',o:['liegt','liegen','legst','legen'],a:0,e:'Liegen (лежать) в 3-м лице ед.ч. — liegt.'},
+{lvl:1,skill:'v',q:'Heute ist Montag. Morgen ist ___.',o:['Dienstag','Sonntag','Mittwoch','Freitag'],a:0,e:'После Montag идёт Dienstag.'},
+{lvl:1,skill:'g',q:'Sie ___ meine Freunde. (они)',o:['sind','ist','bist','bin'],a:0,e:'С sie (они) форма sind.'},
+{lvl:1,skill:'g',q:'Ich ___ sehr gut schwimmen.',o:['kann','kannst','können','muss'],a:0,e:'Können с ich — kann.'},
+{lvl:1,skill:'g',q:'Die Katze ist ___ dem Tisch. (под столом)',o:['unter','auf','in','bei'],a:0,e:'Unter + Dativ — «под».'},
+{lvl:1,skill:'v',q:'Der Mann — die ___.',o:['Männer','Manns','Mannen','Manner'],a:0,e:'Исключение с умлаутом: Mann → Männer.'},
+{lvl:1,skill:'v',q:'Wie ___ bist du? — Ich bin zehn.',o:['alt','viel','lang','oft'],a:0,e:'Вопрос о возрасте: Wie alt bist du?'},
+/* A2 */
+{lvl:2,skill:'g',q:'Gestern ___ ich in den Park gegangen.',o:['bin','habe','war','ist'],a:0,e:'Perfekt глаголов движения строится с sein: ich bin gegangen.'},
+{lvl:2,skill:'g',q:'Es gibt keine Eier ___ Kühlschrank.',o:['im','in','auf','am'],a:0,e:'Im = in dem (Dativ): «в холодильнике».'},
+{lvl:2,skill:'g',q:'Ein Elefant ist ___ als eine Maus.',o:['größer','groß','am größten','mehr groß'],a:0,e:'Сравнение: прилагательное + умлаут + -er + als.'},
+{lvl:2,skill:'g',q:'Ich bin gut ___ Zeichnen.',o:['im','in','an','auf'],a:0,e:'Устойчивое сочетание: gut im + существительное (Dativ).'},
+{lvl:2,skill:'v',q:'Man benutzt einen ___, um die Tür zu öffnen.',o:['Schlüssel','Messer','Löffel','Pinsel'],a:0,e:'Schlüssel — «ключ».'},
+{lvl:2,skill:'g',q:'___ du schon einmal in Berlin gewesen?',o:['Bist','Hast','War','Sind'],a:0,e:'Perfekt с sein: Bist du … gewesen?'},
+{lvl:2,skill:'g',q:'Um wie viel Uhr ___ der Film?',o:['beginnt','beginnst','beginnen','begonnen'],a:0,e:'Der Film = er → beginnt.'},
+{lvl:2,skill:'v',q:'Im Winter ___ es oft.',o:['schneit','regnet','blüht','scheint'],a:0,e:'Зимой идёт снег — es schneit.'},
+{lvl:2,skill:'g',q:'Ich möchte ___ Orangensaft, bitte.',o:['einen','ein','eine','einem'],a:0,e:'Orangensaft — м.р., Akkusativ → einen.'},
+{lvl:2,skill:'v',q:'Die Tochter meiner Schwester ist meine ___.',o:['Nichte','Cousine','Tante','Oma'],a:0,e:'Nichte — «племянница».'},
+{lvl:2,skill:'g',q:'Sie ___ letzte Woche ein neues Fahrrad gekauft.',o:['hat','ist','haben','wird'],a:0,e:'Kaufen строит Perfekt с haben: hat gekauft.'},
+{lvl:2,skill:'g',q:'Das ist ___ Buch, das ich je gelesen habe.',o:['das interessanteste','ein interessantes','interessant','mehr interessant'],a:0,e:'Превосходная степень: das interessanteste.'},
+{lvl:2,skill:'g',q:'Wie ___ Wasser trinkst du pro Tag?',o:['viel','viele','oft','wenige'],a:0,e:'Wasser неисчисляемое — viel.'},
+{lvl:2,skill:'g',q:'Mein Geburtstag ist ___ Mai.',o:['im','am','um','in'],a:0,e:'С месяцами: im Mai.'},
+{lvl:2,skill:'v',q:'Das Gegenteil von „teuer“ ist ___.',o:['billig','klein','langsam','leise'],a:0,e:'Billig — «дешёвый».'},
+/* B1 */
+{lvl:3,skill:'g',q:'Wenn es morgen regnet, ___ wir zu Hause.',o:['bleiben','bleibt','geblieben','würden bleiben'],a:0,e:'Первый тип: Wenn + Präsens, главное предложение в Präsens/Futur.'},
+{lvl:3,skill:'g',q:'Ich wohne ___ 2015 in dieser Stadt.',o:['seit','für','ab','während'],a:0,e:'Seit — «с какого-то момента и до сих пор».'},
+{lvl:3,skill:'g',q:'Du ___ im Auto den Sicherheitsgurt tragen — das ist Gesetz.',o:['musst','kannst','willst','magst'],a:0,e:'Müssen — обязанность: du musst.'},
+{lvl:3,skill:'v',q:'Er hat heute Morgen den Bus ___ und musste zu Fuß gehen.',o:['verpasst','verloren','vergessen','gelassen'],a:0,e:'Den Bus verpassen — «опоздать на автобус».'},
+{lvl:3,skill:'g',q:'Dieses Buch ___ von Millionen Menschen gelesen.',o:['wird','ist','hat','werden'],a:0,e:'Пассив: wird + Partizip II.'},
+{lvl:3,skill:'g',q:'Sie fragte mich, wo ich ___.',o:['wohnte','wohne','wohnen','gewohnt'],a:0,e:'Косвенная речь в прошлом: сдвиг в Präteritum.'},
+{lvl:3,skill:'v',q:'Kannst du mir einen Gefallen ___?',o:['tun','machen','geben','nehmen'],a:0,e:'Jemandem einen Gefallen tun — «оказать услугу».'},
+{lvl:3,skill:'g',q:'Früher ___ ich jeden Tag Fußball gespielt.',o:['habe','bin','hatte','wurde'],a:0,e:'Perfekt от spielen строится с haben.'},
+{lvl:3,skill:'g',q:'___ der Müdigkeit hat er die Arbeit beendet.',o:['Trotz','Weil','Obwohl','Während'],a:0,e:'Trotz + Genitiv — «несмотря на».'},
+{lvl:3,skill:'v',q:'Wir haben keine Milch ___ — lass uns welche kaufen.',o:['mehr','noch','schon','viel'],a:0,e:'Keine … mehr — «больше нет».'},
+{lvl:3,skill:'g',q:'Wenn ich reich ___, würde ich um die Welt reisen.',o:['wäre','bin','war','würde'],a:0,e:'Konjunktiv II от sein: wäre.'},
+{lvl:3,skill:'g',q:'Der Lehrer hat uns gesagt, die Hausaufgaben ___ machen.',o:['zu','für','um','damit'],a:0,e:'Конструкция zu + Infinitiv после sagen.'},
+{lvl:3,skill:'v',q:'Kannst du dieses Wochenende auf meinen Hund ___?',o:['aufpassen','anpassen','verpassen','einpassen'],a:0,e:'Aufpassen auf — «присматривать за».'},
+{lvl:3,skill:'g',q:'Dieser Kaffee ist ___ heiß für mich.',o:['zu','genug','sehr','so'],a:0,e:'Zu + прилагательное — «слишком».'},
+{lvl:3,skill:'v',q:'Kann ich deinen Stift für eine Minute ___?',o:['leihen','verleihen','geben','nehmen'],a:0,e:'Leihen — взять взаймы; verleihen — дать взаймы.'},
+/* B2 */
+{lvl:4,skill:'g',q:'Als wir ankamen, ___ der Film schon begonnen.',o:['hatte','hat','war','wurde'],a:0,e:'Plusquamperfekt — действие раньше другого в прошлом.'},
+{lvl:4,skill:'g',q:'Ich wünschte, ich ___ fließend Französisch sprechen.',o:['könnte','kann','konnte','werde'],a:0,e:'Nach ich wünschte — Konjunktiv II: könnte.'},
+{lvl:4,skill:'v',q:'Das Meeting wurde ___, weil der Chef krank war.',o:['abgesagt','aufgegeben','abgegeben','ausgesagt'],a:0,e:'Absagen — «отменить».'},
+{lvl:4,skill:'g',q:'Du ___ lieber einen Arzt aufsuchen.',o:['solltest','musst','wirst','willst'],a:0,e:'Du solltest lieber — «тебе стоило бы».'},
+{lvl:4,skill:'g',q:'Kaum ___ sie sich entschuldigt, sprach er wieder mit ihr.',o:['hatte','hat','war','wird'],a:0,e:'Kaum + Plusquamperfekt: едва она извинилась…'},
+{lvl:4,skill:'v',q:'Seine Theorie hält einfach nicht ___.',o:['stand','Stich','fest','aus'],a:0,e:'Standhalten — «выдерживать критику»: hält nicht stand.'},
+{lvl:4,skill:'g',q:'Er hat bestritten, das Geld ___.',o:['gestohlen zu haben','zu stehlen','gestohlen hat','stehlen'],a:0,e:'Bestreiten + Infinitiv Perfekt: gestohlen zu haben.'},
+{lvl:4,skill:'g',q:'___ sehr er es auch versuchte, er konnte die Tür nicht öffnen.',o:['Wie','Was','Dass','Ob'],a:0,e:'Wie sehr … auch — «как бы ни».'},
+{lvl:4,skill:'g',adult:true,q:'Ich hätte lieber, dass du hier nicht ___.',o:['rauchst','rauchen','geraucht hast','rauchen würdest'],a:0,e:'После ich hätte lieber, dass — Präsens.'},
+{lvl:4,skill:'g',q:'Die Ergebnisse ___ auf soliden Beweisen.',o:['basieren','basieren sich','sind basiert','haben basiert'],a:0,e:'Basieren auf + Dativ — «основываться на».'},
+{lvl:4,skill:'g',q:'Wenn ich mehr gelernt hätte, ___ ich die Prüfung bestanden.',o:['hätte','habe','wäre','würde'],a:0,e:'Третий тип: hätte + Partizip II.'},
+{lvl:4,skill:'g',q:'Ich lasse mein Auto morgen ___.',o:['reparieren','repariert','zu reparieren','reparierte'],a:0,e:'Lassen + Infinitiv — каузатив.'},
+{lvl:4,skill:'g',q:'___ des Regens sind sie wandern gegangen.',o:['Trotz','Wegen','Dank','Statt'],a:0,e:'Trotz + Genitiv — «несмотря на».'},
+{lvl:4,skill:'v',q:'Sie hat das Jobangebot ___, weil das Gehalt niedrig war.',o:['abgelehnt','angenommen','bekommen','gegeben'],a:0,e:'Ablehnen — «отклонить».'},
+{lvl:4,skill:'g',q:'Keine der Antworten ___ richtig.',o:['ist','sind','haben','werden'],a:0,e:'Keine — единственное число: ist.'},
+/* C1 */
+{lvl:5,skill:'g',q:'___ hatte ich das Zimmer betreten, als das Telefon klingelte.',o:['Kaum','Sobald','Als','Seitdem'],a:0,e:'Kaum … als — «едва… как», с инверсией.'},
+{lvl:5,skill:'v',adult:true,q:'Die Regierung hat beschlossen, die Steuern zu ___.',o:['erhöhen','steigen','ansteigen','aufsteigen'],a:0,e:'Erhöhen — «повышать» (переходный), steigen — «расти» самому.'},
+{lvl:5,skill:'g',q:'Unter keinen Umständen ___ Sie hier Ihr Handy benutzen.',o:['dürfen','können','werden','müssen'],a:0,e:'Инверсия после Unter keinen Umständen: dürfen Sie.'},
+{lvl:5,skill:'v',q:'Die Aussage des Zeugen hatte wenig mit den Tatsachen ___.',o:['zu tun','zu machen','zu haben','zu sagen'],a:0,e:'Wenig mit etwas zu tun haben — «иметь мало общего».'},
+{lvl:5,skill:'g',adult:true,q:'Des Diebstahls ___, floh er aus dem Land.',o:['verdächtigt','verdächtig','verdächtigend','verdächtigen'],a:0,e:'Genitivobjekt + Partizip II: des Diebstahls verdächtigt.'},
+{lvl:5,skill:'v',q:'Die beiden Seiten sind in eine ___ geraten — niemand will nachgeben.',o:['Sackgasse','Frist','Etappe','Flaute'],a:0,e:'In eine Sackgasse geraten — «зайти в тупик».'},
+{lvl:5,skill:'g',adult:true,q:'Es ist höchste Zeit, dass du etwas ___.',o:['unternimmst','unternehmen','unternahm','unternommen'],a:0,e:'После dass глагол уходит в конец: unternimmst.'},
+{lvl:5,skill:'g',q:'Selten ___ ich einen so schönen Sonnenuntergang gesehen.',o:['habe','hat','bin','hatte'],a:0,e:'Инверсия после selten: Selten habe ich…'},
+{lvl:5,skill:'v',adult:true,q:'Er wurde des Diebstahls ___.',o:['beschuldigt','geklagt','gescholten','gemahnt'],a:0,e:'Jemanden des Diebstahls beschuldigen — Genitivobjekt.'},
+{lvl:5,skill:'v',q:'Dieses Medikament hat keine Neben___.',o:['wirkungen','effekte','folgen','ausgaben'],a:0,e:'Nebenwirkungen — «побочные эффекты».'},
+{lvl:5,skill:'g',q:'Wenn ich du gewesen wäre, ___ ich den Job angenommen.',o:['hätte','habe','wäre','würde'],a:0,e:'Смешанный/третий тип: hätte angenommen.'},
+{lvl:5,skill:'g',q:'Erst dann ___ er die Wahrheit verstanden.',o:['hat','habe','hatte','ist'],a:0,e:'Инверсия после erst dann: hat er …'},
+{lvl:5,skill:'g',q:'Der Chef bestand darauf, dass der Bericht pünktlich ___ wird.',o:['abgegeben','abgeben','abgibt','abgab'],a:0,e:'Bestehen darauf, dass … gemacht wird (пассив).'},
+{lvl:5,skill:'v',q:'Die beiden Berichte über den Unfall wichen auffällig voneinander ___.',o:['ab','aus','vor','weg'],a:0,e:'Abweichen von — «отличаться, расходиться».'},
+{lvl:5,skill:'v',adult:true,q:'Diese Erkenntnisse haben wichtige ___ für zukünftige Forschung.',o:['Implikationen','Implementierungen','Auflagen','Neigungen'],a:0,e:'Implikationen — «последствия, выводы».'},
+/* C2 */
+{lvl:6,skill:'g',q:'Das Gemälde, ___ Echtheit Experten angezweifelt hatten, wurde für eine Rekordsumme verkauft.',o:['dessen','das','welches','dem'],a:0,e:'Dessen — относительное местоимение в Genitiv.'},
+{lvl:6,skill:'v',q:'Ihre Stimme war so ___, dass der ganze Saal verstummte.',o:['ergreifend','stechend','pünktlich','aufgeblasen'],a:0,e:'Ergreifend — «пронзительный, щемящий».'},
+{lvl:6,skill:'g',q:'___ des schlechten Wetters startete der Flug pünktlich.',o:['Ungeachtet','Obwohl','Trotzdem','Jedoch'],a:0,e:'Ungeachtet + Genitiv — книжный синоним trotz.'},
+{lvl:6,skill:'v',q:'Sie hat ein ___ Gedächtnis — sie erinnert sich an Bilder in allen Details.',o:['eidetisches','eklektisches','epidemisches','ergonomisches'],a:0,e:'Eidetisches Gedächtnis — эйдетическая память.'},
+{lvl:6,skill:'g',q:'Er sprach ausführlich; ___ war niemand überzeugt.',o:['dennoch','fortan','darin','sofern'],a:0,e:'Dennoch — «тем не менее».'},
+{lvl:6,skill:'v',adult:true,q:'Der Ausschuss warf nur einen ___ Blick auf den Vorschlag, bevor er ihn ablehnte.',o:['flüchtigen','neugierigen','aktuellen','gewohnheitsmäßigen'],a:0,e:'Ein flüchtiger Blick — беглый, поверхностный взгляд.'},
+{lvl:6,skill:'g',q:'Wenig ___ er, dass diese Entscheidung sein Leben verändern würde.',o:['ahnte','ahnt','hatte geahnt','würde ahnen'],a:0,e:'Инверсия после wenig в начале: Wenig ahnte er…'},
+{lvl:6,skill:'v',q:'Die Handlung des Romans ist so komplex, dass sie fast ___ wirkt.',o:['labyrinthhaft','linear','klar','träge'],a:0,e:'Labyrinthhaft — «запутанный, как лабиринт».'},
+{lvl:6,skill:'g',q:'___ ihre Geistesgegenwart wäre der Ausgang weit schlimmer gewesen.',o:['Ohne','Mit','Trotz','Dank'],a:0,e:'Ohne + Akkusativ заменяет нереальное условие: «не будь…»'},
+{lvl:6,skill:'v',q:'Seine Ausrede klang bestenfalls ___.',o:['fadenscheinig','farbenfroh','fahrlässig','frenetisch'],a:0,e:'Fadenscheinig — «хлипкий, неубедительный».'},
+{lvl:6,skill:'g',q:'So ___ waren die Schäden, dass das Gebäude abgerissen werden musste.',o:['erheblich','erhebliche','erheblichen','erheblicher'],a:0,e:'Книжная инверсия: So + прилагательное + глагол…'},
+{lvl:6,skill:'v',q:'Der Versuch des Redners, das Thema zu ___, verärgerte das Publikum nur.',o:['verschleiern','verpflichten','vernichten','verwalten'],a:0,e:'Verschleiern — «завуалировать, затемнить».'},
+{lvl:6,skill:'v',q:'Ihr Urteilsvermögen ist so sicher, dass Kollegen sie fast für ___ halten.',o:['scharfsinnig','schadenfroh','schüchtern','schläfrig'],a:0,e:'Scharfsinnig — «проницательный».'},
+{lvl:6,skill:'v',q:'Er ist der englische Gentleman ___ : Tweed, Tee und Zurückhaltung.',o:['schlechthin','obendrein','zumindest','zweifellos'],a:0,e:'Schlechthin — «в самом полном смысле, хрестоматийный».'},
+{lvl:6,skill:'v',q:'___ wie Ehrlichkeit und Fleiß kommen nie aus der Mode.',o:['Tugenden','Wahrheiten','Überreste','Wechselfälle'],a:0,e:'Tugenden — «добродетели».'}
+];
+
+/* ======================= БАНК: ЧТЕНИЕ (12) ======================= */
+const READING=[
+{lvl:1,text:'Tom hat einen Hund. Der Hund ist groß und schwarz. Tom spielt jeden Tag mit dem Hund im Park.',
+ q:'Wo spielt Tom mit seinem Hund?',o:['Im Park','Zu Hause','In der Schule','Im Wald'],a:0,e:'В тексте прямо сказано: «Tom spielt … im Park.»'},
+{lvl:1,text:'Anna mag Äpfel und Bananen. Sie mag keine Orangen.',
+ q:'Welche Frucht mag Anna nicht?',o:['Orangen','Äpfel','Bananen','Birnen'],a:0,e:'Ключевая фраза: «Sie mag keine Orangen.»'},
+{lvl:2,text:'Letzten Sommer ist Mia mit ihrer Familie nach Italien gefahren. Sie haben Rom besucht und viel Pizza gegessen. Das Wetter war jeden Tag heiß.',
+ q:'Wie war das Wetter in Italien?',o:['Heiß','Kalt','Regnerisch','Windig'],a:0,e:'Последнее предложение: «Das Wetter war jeden Tag heiß.»'},
+{lvl:2,text:'Ben fährt normalerweise mit dem Fahrrad zur Schule, aber gestern hat es geregnet, deshalb ist er mit dem Bus gefahren.',
+ q:'Wie ist Ben gestern zur Schule gekommen?',o:['Mit dem Bus','Mit dem Fahrrad','Mit dem Auto','Zu Fuß'],a:0,e:'Из-за дождя он поехал на автобусе: «ist er mit dem Bus gefahren».'},
+{lvl:3,text:'Als Sarah ihre neue Stelle antrat, war sie nervös, weil sie niemanden kannte. Doch ihre Kollegen waren freundlich, und nach einer Woche fühlte sie sich wie zu Hause.',
+ q:'Warum fühlte sich Sarah nach einer Woche wie zu Hause?',o:['Ihre Kollegen waren freundlich','Sie kannte alle','Das Büro gefiel ihr','Sie bekam eine Beförderung'],a:0,e:'Причина названа после doch: доброжелательные коллеги.'},
+{lvl:3,text:'Recycling hilft, Müll zu reduzieren, aber viele Menschen werfen Plastik trotzdem weg, statt es zu recyceln.',
+ q:'Was ist die Hauptidee des Textes?',o:['Recycling ist nützlich, aber nicht alle machen es','Plastik ist gefährlich','Alle recyceln','Recycling ist sinnlos'],a:0,e:'Структура «hilft …, aber viele…» передаёт контраст.'},
+{lvl:4,text:'Obwohl Homeoffice Flexibilität bietet, fühlen sich viele Beschäftigte isoliert. Unternehmen testen jetzt hybride Modelle, um die Vorteile beider Welten zu verbinden.',
+ q:'Warum testen Unternehmen hybride Modelle?',o:['Um Flexibilität und soziale Kontakte zu verbinden','Um Geld zu sparen','Um die Leute länger arbeiten zu lassen','Um Büros zu schließen'],a:0,e:'«Die Vorteile beider Welten verbinden» — объединить плюсы обоих форматов.'},
+{lvl:4,text:'Die Kritik war vernichtend; dennoch wurde das Buch ein Bestseller — ein Beweis dafür, dass Kritiker und Leser nicht immer einer Meinung sind.',
+ q:'Was legt der Text nahe?',o:['Das Buch war trotz der schlechten Kritik erfolgreich','Die Kritiker liebten das Buch','Die Leser stimmten dem Kritiker zu','Das Buch verkaufte sich schlecht'],a:0,e:'Dennoch — «тем не менее»: разгромная рецензия не помешала успеху.'},
+{lvl:5,text:'Die Ergebnisse sind zwar vorläufig, stützen jedoch die Hypothese, dass Schlafmangel die Entscheidungsfähigkeit stärker beeinträchtigt als bisher angenommen.',
+ q:'Was legen die Ergebnisse nahe?',o:['Schlafmangel schadet der Entscheidungsfähigkeit stärker als gedacht','Schlaf verbessert das Gedächtnis','Die Hypothese wurde widerlegt','Die Studie war abschließend'],a:0,e:'«Stärker als bisher angenommen» — сильнее, чем считалось.'},
+{lvl:5,text:'Hätte der Stadtrat den Protest vorhergesehen, hätte er die Anwohner sicher konsultiert, bevor er die Einkaufsstraße zur Fußgängerzone machte.',
+ q:'Was lässt sich daraus schließen?',o:['Der Rat hat die negative Reaktion nicht erwartet','Die Anwohner unterstützten das Projekt','Der Rat hat die Anwohner konsultiert','Es gab keine Reaktion'],a:0,e:'Нереальное условие: консультаций не было, потому что протеста не ожидали.'},
+{lvl:6,text:'Die Prosa des Autors ist labyrinthisch und zugleich präzise; sie meidet alles Sentimentale zugunsten einer geradezu klinischen Prüfung menschlicher Motive.',
+ q:'Der Stil des Autors ist am ehesten…',o:['komplex und emotional distanziert','einfach und sentimental','vage und chaotisch','humorvoll und leicht'],a:0,e:'«Meidet das Sentimentale» + «klinische Prüfung» — холодный, бесстрастный анализ.'},
+{lvl:6,text:'Die Marke ist derart allgegenwärtig, dass ihr Logo manchen geradezu als Synekdoche der gesamten Konsumkultur gilt.',
+ q:'Wofür steht das Logo laut Text?',o:['Als Symbol für die gesamte Konsumkultur','Als Werbung für ein neues Produkt','Als Zeichen schlechter Qualität','Als Name der Firma'],a:0,e:'Synekdoche — часть вместо целого; allgegenwärtig — повсеместный.'}
+];
+
+/* ======================= БАНК: АУДИРОВАНИЕ (12) ======================= */
+const LISTEN=[
+{lvl:1,audio:['Hallo! Ich heiße Emma. Ich bin acht Jahre alt. Ich habe eine Katze. Sie heißt Milo.'],
+ q:'Wie alt ist Emma?',o:['Acht Jahre','Zehn Jahre','Sieben Jahre','Neun Jahre'],a:0,e:'В записи: «Ich bin acht Jahre alt.»'},
+{lvl:1,audio:['Heute ist Montag. Wir haben Deutsch und Mathe in der Schule.'],
+ q:'Welcher Tag ist heute?',o:['Montag','Dienstag','Sonntag','Freitag'],a:0,e:'Первая фраза: «Heute ist Montag.»'},
+{lvl:2,audio:['Gestern war ich mit meiner Mutter einkaufen. Ich habe ein blaues T-Shirt und eine Mütze gekauft. Das T-Shirt hat zehn Euro gekostet.'],
+ q:'Wie viel hat das T-Shirt gekostet?',o:['Zehn Euro','Fünf Euro','Zwanzig Euro','Zwei Euro'],a:0,e:'«Das T-Shirt hat zehn Euro gekostet.»'},
+{lvl:2,audio:['Der Zug nach München fährt um halb zehn von Gleis zwei ab.'],
+ q:'Von welchem Gleis fährt der Zug ab?',o:['Gleis zwei','Gleis eins','Gleis drei','Vom Busbahnhof'],a:0,e:'«…von Gleis zwei». Achtung: halb zehn = 9:30!'},
+{lvl:3,audio:['Hallo Jack! Der Film beginnt um sieben, also treffen wir uns um halb sieben vor dem Kino. Ich kaufe die Karten.'],
+ q:'Wo treffen sie sich?',o:['Vor dem Kino','Bei Jack zu Hause','Im Kino','Im Café'],a:0,e:'«Treffen wir uns um halb sieben vor dem Kino.»'},
+{lvl:3,audio:['Ich lerne seit zwei Jahren Spanisch, aber das Verstehen ist für mich immer noch am schwierigsten.'],
+ q:'Was ist für die Person am schwierigsten?',o:['Das Verstehen','Das Sprechen','Das Lesen','Das Schreiben'],a:0,e:'«Das Verstehen ist … am schwierigsten.»'},
+{lvl:4,audio:['Achtung, bitte. Der Zug um vierzehn Uhr dreißig nach Hamburg verspätet sich wegen einer Signalstörung. Wir bitten um Entschuldigung.'],
+ q:'Warum hat der Zug Verspätung?',o:['Wegen einer Signalstörung','Wegen schlechten Wetters','Wegen eines Streiks','Wegen zu vieler Fahrgäste'],a:0,e:'Причина в объявлении: «wegen einer Signalstörung».'},
+{lvl:4,adult:true,audio:['Wenn ich gewusst hätte, dass das Vorstellungsgespräch so förmlich ist, hätte ich einen Anzug getragen.'],
+ q:'Was meint der Sprecher?',o:['Er war nicht förmlich genug gekleidet','Er hat die Stelle nicht bekommen','Das Gespräch wurde abgesagt','Er trug einen Anzug'],a:0,e:'Irrealer Bedingungssatz: он не знал о формате и не надел костюм.'},
+{lvl:5,audio:['Die Studie ist zwar begrenzt, bestätigt aber frühere Befunde, die auf einen starken Zusammenhang zwischen Ernährung und Konzentration hindeuten.'],
+ q:'Was sagt die Person über die Studie?',o:['Sie bestätigt frühere Befunde trotz ihres geringen Umfangs','Sie widerlegt frühere Studien','Sie war sehr umfangreich','Sie fand keinen Zusammenhang'],a:0,e:'«Bestätigt frühere Befunde» — подкрепляет прежние выводы.'},
+{lvl:5,audio:['Erst als die Daten erneut analysiert wurden, zeigte sich das wahre Muster.'],
+ q:'Wann zeigte sich das wahre Muster?',o:['Nach der erneuten Analyse der Daten','Vor der Analyse','Während der Datenerhebung','Es zeigte sich nie'],a:0,e:'«Erst als…» — «только когда…»'},
+{lvl:6,audio:['Der Vorschlag ist in seiner Absicht lobenswert, aber dennoch voller unvorhergesehener Komplikationen.'],
+ q:'Wie steht die Person zum Vorschlag?',o:['Sie unterstützt die Idee, warnt aber vor Problemen','Sie ist völlig dagegen','Sie ist begeistert','Sie ist gleichgültig'],a:0,e:'Lobenswert — похвальный; dennoch voller Komplikationen — но полно проблем.'},
+{lvl:6,audio:['Ihre Bemerkungen, so maßvoll sie auch waren, enthielten einen versteckten Vorwurf.'],
+ q:'Was enthielten ihre Bemerkungen?',o:['Einen versteckten Vorwurf','Ein offenes Kompliment','Einen Witz','Eine Entschuldigung'],a:0,e:'Ein versteckter Vorwurf — завуалированный упрёк.'}
+];
+
+/* ======================= БАНК: ПИСЬМО (12) ======================= */
+const WRITING=[
+{lvl:1,q:'Schreiben Sie den Plural: <b>das Kind</b>',show:'Kinder',accept:['Kinder','die Kinder'],
+ e:'Kind → Kinder — одно из базовых исключений.'},
+{lvl:1,q:'Konjugieren Sie das Verb in Klammern:<br>« Er ___ (gehen) jeden Tag zur Schule. »',show:'geht',accept:['geht'],
+ e:'Gehen с er: er geht.'},
+{lvl:2,q:'Schreiben Sie das Partizip II: <b>kaufen</b>',show:'gekauft',accept:['gekauft'],
+ e:'Perfekt: hat gekauft — правильный глагол с ge-…-t.'},
+{lvl:2,q:'Schreiben Sie den Komparativ: <b>gut</b>',show:'besser',accept:['besser'],
+ e:'Gut → besser → am besten — исключение.'},
+{lvl:3,q:'Ergänzen Sie ein Wort:<br>« Ich wohne ___ 2015 hier. »',show:'seit',accept:['seit'],
+ e:'Seit — «с какого-то момента до сих пор».'},
+{lvl:3,q:'Ergänzen Sie ein Wort:<br>« Kann ich deinen Stift eine Minute ___? » (взять взаймы)',show:'leihen',accept:['leihen','ausleihen'],
+ e:'Leihen/ausleihen — взять взаймы; verleihen — дать взаймы.'},
+{lvl:4,q:'Ergänzen Sie ein Wort:<br>« Wenn ich mehr gelernt hätte, ___ ich die Prüfung bestanden. »',show:'hätte',accept:['haette','hätte'],
+ e:'Третий тип: hätte + Partizip II (hätte bestanden).'},
+{lvl:4,q:'Ergänzen Sie den Konjunktiv II:<br>« Ich wünschte, ich ___ Französisch sprechen. » (können)',show:'könnte',accept:['könnte','koennte'],
+ e:'Konjunktiv II от können: könnte.'},
+{lvl:5,q:'Ergänzen Sie ein Wort:<br>« Selten ___ ich einen so schönen Sonnenuntergang gesehen. »',show:'habe',accept:['habe'],
+ e:'Инверсия: Selten habe ich … gesehen.'},
+{lvl:5,q:'Ergänzen Sie die richtige Form:<br>« Das ist das Auto ___ (mein) Vaters. »',show:'meines',accept:['meines'],
+ e:'Genitiv мужского рода: meines Vaters.'},
+{lvl:6,q:'Schreiben Sie den Satz mit <b>Nie</b> am Anfang:<br>« Sie hatte noch nie solche Musik gehört. »',show:'Nie hatte sie solche Musik gehört',
+ accept:['nie hatte sie solche musik gehört','nie hatte sie solche musik gehoert','nie hatte sie eine solche musik gehört'],
+ e:'Наречие в начале предложения вызывает инверсию: Nie hatte sie…'},
+{lvl:6,q:'Ergänzen Sie den Konjunktiv I (indirekte Rede):<br>« Er sagte, er ___ keine Zeit. » (haben)',show:'habe',accept:['habe'],
+ e:'Konjunktiv I в косвенной речи: er habe.'}
+];
+
+/* ======================= БАНК: ГОВОРЕНИЕ (12) ======================= */
+const SPEAKING=[
+{lvl:1,type:'read',text:'Ich mag Äpfel und Bananen.',expect:'ich mag äpfel und bananen',
+ e:'Ä произносится как [ɛ]; не глотайте -n на конце Äpfel/Bananen.'},
+{lvl:1,type:'say',text:'Wie heißt du?',min:2,kw:['ich','heisse','mein','name','bin'],
+ sample:'Ich heiße Anna.',
+ e:'Достаточно короткого полного ответа: Ich heiße… / Ich bin…'},
+{lvl:2,type:'read',text:'Gestern sind wir in den Park gegangen und haben Fußball gespielt.',
+ expect:'gestern sind wir in den park gegangen und haben fußball gespielt',
+ e:'Perfekt: sind/haben на втором месте, Partizip II — в конце.'},
+{lvl:2,type:'say',text:'Was hast du gestern gemacht?',min:3,kw:['gestern','ich','habe','bin','gespielt','gegangen','war','gesehen'],
+ sample:'Gestern habe ich mit meinen Freunden gespielt.',
+ e:'Используйте Perfekt: ich habe gespielt / ich bin gegangen…'},
+{lvl:3,type:'read',text:'Wenn ich mehr Freizeit hätte, würde ich eine Weltreise machen.',
+ expect:'wenn ich mehr freizeit hätte würde ich eine weltreise machen',
+ e:'После придаточного с wenn главное предложение начинается с würde.'},
+{lvl:3,type:'say',text:'Beschreibe deinen besten Freund oder deine beste Freundin in zwei Sätzen.',min:8,
+ kw:['er','sie','ist','hat','nett','freundlich','lustig','freund','freundin'],
+ sample:'Mein bester Freund ist nett und lustig. Wir spielen oft zusammen.',
+ e:'Назовите человека и 2–3 качества: nett, lustig, freundlich…'},
+{lvl:4,type:'read',text:'Erst nachdem sie sich entschuldigt hatte, sprach er wieder mit ihr.',
+ expect:'erst nachdem sie sich entschuldigt hatte sprach er wieder mit ihr',
+ e:'Придаточное времени впереди → главное начинается с глагола sprach.'},
+{lvl:4,type:'say',text:'Was sind die Vor- und Nachteile von sozialen Medien?',min:10,
+ kw:['vorteil','nachteil','soziale','medien','menschen','weil','denke','aber','finde'],
+ sample:'Soziale Medien helfen, in Kontakt zu bleiben, aber sie kosten auch viel Zeit.',
+ e:'Структурируйте: Einerseits… Andererseits…'},
+{lvl:5,type:'read',text:'Ohne die Geistesgegenwart von Marie wäre der Ausgang viel schlimmer gewesen.',
+ expect:'ohne die geistesgegenwart von marie wäre der ausgang viel schlimmer gewesen',
+ e:'wäre … gewesen произносится единым блоком — это естественно.'},
+{lvl:5,type:'say',text:'Sollte künstliche Intelligenz in Schulen eingesetzt werden? Geben Sie Ihre Meinung.',min:12,
+ kw:['denke','glaube','weil','intelligenz','ki','schule','sollte','aber','meine','meinung'],
+ sample:'Ich denke, sie sollte eingesetzt werden, weil sie das Lernen individualisiert, aber die Lehrkräfte müssen die Kontrolle behalten.',
+ e:'Начните с Ich denke, dass… / Meiner Meinung nach… и дайте аргумент с weil.'},
+{lvl:6,type:'read',text:'Die Prosa des Autors ist labyrinthisch, aber präzise und meidet alles Sentimentale zugunsten einer klinischen Prüfung menschlicher Motive.',
+ expect:'die prosa des autors ist labyrinthisch aber präzise und meidet alles sentimentale zugunsten einer klinischen prüfung menschlicher motive',
+ e:'Ключевые слова: labyrinthisch, zugunsten, präzise.'},
+{lvl:6,type:'say',text:'Inwiefern prägt die Sprache unser Denken?',min:12,
+ kw:['sprache','denken','gedanken','prägt','beeinflusst','weil','glaube','wörter'],
+ sample:'Sprache rahmt, was wir bemerken; grammatische Strukturen können beeinflussen, wie wir Zeit und Ereignisse wahrnehmen.',
+ e:'Используйте продвинутые связки: in hohem Maße, man könnte argumentieren, dass…'}
+];
+
+/* ======================= СОСТОЯНИЕ ======================= */
+let S=null, LEN=4;
+const selSkills={g:true,l:true,r:true,w:true,s:true};
+
+function setMode(m){
+  document.body.classList.toggle('mode-kids',m==='kids');
+  document.body.classList.toggle('mode-class',m!=='kids');
+  document.querySelectorAll('.mode-btn[data-mode]').forEach(b=>b.classList.toggle('on',b.dataset.mode===m));
+  $('mode-note').textContent=m==='kids'
+    ?'Дружелюбный режим: весёлые подсказки, никаких «взрослых» сюжетов.'
+    :'Классический режим: полный банк заданий, включая «взрослые» темы.';
+}
+function setLen(n){LEN=n;document.querySelectorAll('.mode-btn.len').forEach(b=>b.classList.toggle('on',+b.dataset.n===n));}
+function toggleSkill(k){
+  const on=Object.values(selSkills).filter(Boolean).length;
+  if(selSkills[k]&&on===1)return;
+  selSkills[k]=!selSkills[k];
+  document.querySelector(`.mode-btn[data-sk="${k}"]`).classList.toggle('on',selSkills[k]);
+}
+
+function byLevel(arr,kids){
+  const by={1:[],2:[],3:[],4:[],5:[],6:[]};
+  arr.forEach(q=>{if(!(kids&&q.adult))by[q.lvl].push(q);});
+  return by;
+}
+function buildPools(kids){
+  return {g:byLevel(BANK,kids),r:byLevel(READING,kids),l:byLevel(LISTEN,kids),
+          w:byLevel(WRITING,kids),s:byLevel(SPEAKING,kids)};
+}
+
+/* ---------- TTS (de-DE) ---------- */
+let deVoice=null;
+const TTS='speechSynthesis' in window;
+function pickVoice(){
+  const vs=speechSynthesis.getVoices();
+  deVoice=vs.find(v=>/^de/i.test(v.lang)&&/google|anna|petra|markus|katja|female/i.test(v.name))||vs.find(v=>/^de/i.test(v.lang))||null;
+}
+if(TTS){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;}
+function speak(parts,rate){
+  if(!TTS)return;
+  speechSynthesis.cancel();
+  parts.forEach((t,i)=>{
+    const u=new SpeechSynthesisUtterance(t);
+    u.lang='de-DE';u.rate=rate;u.pitch=i%2?0.9:1.05;
+    if(deVoice)u.voice=deVoice;
+    speechSynthesis.speak(u);
+  });
+}
+
+/* ---------- распознавание речи ---------- */
+let recog=null,recogBusy=false;
+function stopRecog(){try{recog&&recog.stop();}catch(e){}recogBusy=false;}
+
+/* ---------- нормализация немецкого (умлауты/эсцет) ---------- */
+const baseNorm=s=>String(s).toLowerCase()
+  .replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss')
+  .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+  .replace(/['’']/g,'');
+const norm=s=>baseNorm(s).replace(/[^a-z0-9]+/g,'');
+const normWords=s=>baseNorm(s).replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim().split(' ').filter(Boolean);
+
+/* ---------- запуск ---------- */
+function startQuiz(){
+  const kids=document.body.classList.contains('mode-kids');
+  const skills=ORDER.filter(k=>selSkills[k]);
+  S={skills,secIdx:0,per:LEN,pools:buildPools(kids),
+     asked:{g:new Set(),l:new Set(),r:new Set(),w:new Set(),s:new Set()},
+     cur:{g:3,l:3,r:3,w:3,s:3},rating:{g:620,l:620,r:620,w:620,s:620},
+     sk2:{g:{c:0,t:0},l:{c:0,t:0},r:{c:0,t:0},w:{c:0,t:0},s:{c:0,t:0}},
+     ans:[],score:0,streak:0,best:0,qIdx:0,secDone:0,
+     skill:skills[0],current:null,order:null,answered:false,played:false,plays:0,
+     speakAttempts:0,bestSpeak:0,
+     totalQ:skills.length*LEN};
+  $('secnav').innerHTML=skills.map(k=>`<span class="snav" data-k="${k}">${SK[k].icon} ${SK[k].short}</span>`).join('');
+  show('scr-quiz');
+  showIntro();
+}
+
+function showIntro(){
+  stopRecog();
+  const k=S.skill,m=SK[k];
+  if(TTS)speechSynthesis.cancel();
+  $('qcard').hidden=true;$('intro').hidden=false;
+  $('in-icon').textContent=m.icon;
+  $('in-step').textContent=`Часть ${S.secIdx+1} из ${S.skills.length} · ${S.per} задания(ий)`;
+  $('in-title').textContent=m.title;
+  let extra='';
+  if(k==='l'&&!TTS)extra=' ⚠ Ваш браузер не поддерживает озвучку — вместо аудио будет показан текст.';
+  if(k==='s'&&!SR)extra=' ⚠ Браузер не поддерживает распознавание речи — включится режим самооценки.';
+  $('in-desc').textContent=m.desc+extra;
+  const card=$('intro');card.style.animation='none';void card.offsetWidth;card.style.animation='';
+  updateHUD();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function beginSection(){
+  $('intro').hidden=true;$('qcard').hidden=false;
+  S.secDone=0;renderQuestion();
+}
+
+function pickQuestion(k){
+  const tryOrder=[S.cur[k]];
+  for(let d=1;d<=5;d++){if(S.cur[k]-d>=1)tryOrder.push(S.cur[k]-d);if(S.cur[k]+d<=6)tryOrder.push(S.cur[k]+d);}
+  for(const l of tryOrder){
+    const avail=S.pools[k][l].filter(q=>!S.asked[k].has(q));
+    if(avail.length)return avail[Math.floor(Math.random()*avail.length)];
+  }
+  return null;
+}
+
+const KEYS=['A','B','C','D'];
+function optsHTML(){
+  return `<div class="opts">${S.order.map((o,i)=>
+    `<button type="button" class="opt" onclick="answer(${i})"><span class="key">${KEYS[i]}</span><span>${o.t}</span></button>`).join('')}</div>`;
+}
+function toggleOptsLock(){
+  document.querySelectorAll('#q-answer .opt').forEach(b=>b.disabled=!S.played);
+}
+
+function renderQuestion(){
+  const k=S.skill,q=pickQuestion(k);
+  S.answered=false;S.played=false;S.plays=0;S.current=q;S.order=null;
+  S.asked[k].add(q);S.speakAttempts=0;S.bestSpeak=0;
+  $('feedback').hidden=true;
+  $('tag-skill').textContent=SK[k].icon+' '+SK[k].short;
+  $('tag-lvl').textContent='Уровень '+LVLNAME[q.lvl];
+  const ex=$('q-extra'),qa=$('q-answer');
+  ex.innerHTML='';$('qtext').textContent='';qa.innerHTML='';
+
+  if(k==='g'){
+    $('qtext').textContent=q.q;
+    S.order=q.o.map((t,i)=>({t,ok:i===q.a})).sort(()=>Math.random()-.5);
+    qa.innerHTML=optsHTML();
+  }else if(k==='r'){
+    ex.innerHTML=`<div class="passage">${q.text}</div>`;
+    $('qtext').textContent=q.q;
+    S.order=q.o.map((t,i)=>({t,ok:i===q.a})).sort(()=>Math.random()-.5);
+    qa.innerHTML=optsHTML();
+  }else if(k==='l'){
+    S.order=q.o.map((t,i)=>({t,ok:i===q.a})).sort(()=>Math.random()-.5);
+    if(TTS){
+      ex.innerHTML=`<div class="audiobox">
+        <button type="button" class="playbtn" id="playbtn" onclick="playAudio()">▶ Anhören</button>
+        <span class="playcnt" id="playcnt">Сначала прослушайте запись 🎧</span></div>`;
+    }else{
+      ex.innerHTML=`<div class="audiobox"><span class="script-fallback">📜 Текст (аудио недоступно): «${q.audio.join(' ')}»</span></div>`;
+      S.played=true;
+    }
+    $('qtext').textContent=q.q;
+    qa.innerHTML=optsHTML()+(TTS?'<p class="listen-hint" id="lh">🔒 Варианты откроются после прослушивания</p>':'');
+    if(TTS)toggleOptsLock();
+  }else if(k==='w'){
+    $('qtext').innerHTML=q.q;
+    qa.innerHTML=`<div class="write"><div class="wrow">
+      <input id="winput" autocomplete="off" spellcheck="false" placeholder="Ваш ответ на немецком…">
+      <button type="button" class="btn-next" onclick="submitWrite()">Проверить</button></div></div>`;
+    $('winput').addEventListener('keydown',e=>{if(e.key==='Enter')submitWrite();});
+  }else if(k==='s'){
+    $('qtext').textContent=q.type==='read'
+      ?'Прочитайте предложение вслух:'
+      :`Ответьте вслух на вопрос (минимум ${q.min} слов):`;
+    ex.innerHTML=`<div class="passage saybox">${q.text}</div>`;
+    qa.innerHTML=`<div class="speak">
+      <button type="button" class="micbtn" id="micbtn" onclick="startMic()">🎤</button>
+      <p class="micstat" id="micstat">Нажмите на микрофон и говорите по-немецки</p>
+      <div id="speak-fallback"></div></div>`;
+    if(!SR)showSelfEval('Браузер не распознаёт речь — оцените себя сами честно:');
+  }
+  $('qcount').textContent=(S.qIdx+1)+' / '+S.totalQ;
+  $('pin').style.left=((q.lvl-0.5)/6*100)+'%';
+  document.querySelectorAll('.ruler b').forEach(b=>b.classList.toggle('hot',+b.dataset.l===q.lvl));
+  updateHUD();
+  const card=$('qcard');card.style.animation='none';void card.offsetWidth;card.style.animation='';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function playAudio(){
+  if(!TTS)return;
+  const rate=S.current.lvl<=2?0.85:S.current.lvl<=4?0.95:1.0;
+  speak(S.current.audio,rate);
+  S.plays++;S.played=true;
+  $('playcnt').textContent=`Прослушиваний: ${S.plays} · можно повторить ещё`;
+  $('playbtn').textContent='▶ Nochmal anhören';
+  const lh=$('lh');if(lh)lh.remove();
+  toggleOptsLock();
+}
+
+/* ---------- ответ: варианты ---------- */
+function answer(i){
+  if(!S||S.answered)return;
+  if(S.skill==='l'&&!S.played)return;
+  const ok=S.order[i].ok,given=S.order[i].t;
+  document.querySelectorAll('#q-answer .opt').forEach((b,j)=>{
+    b.disabled=true;
+    if(S.order[j].ok)b.classList.add('correct');
+    else if(j===i)b.classList.add('wrong');
+  });
+  applyResult(ok?1:0,S.current.o[S.current.a],given);
+}
+
+/* ---------- ответ: письмо ---------- */
+function submitWrite(){
+  if(!S||S.answered)return;
+  const inp=$('winput'),val=inp.value.trim();
+  if(!val){inp.style.borderColor='var(--bad)';return;}
+  const ok=S.current.accept.some(a=>norm(a)===norm(val));
+  inp.disabled=true;inp.classList.add(ok?'ok':'bad');
+  applyResult(ok?1:0,S.current.show,val);
+}
+
+/* ---------- говорение ---------- */
+function startMic(){
+  if(!S||S.answered||recogBusy)return;
+  if(!SR){showSelfEval('Браузер не распознаёт речь — оцените себя сами честно:');return;}
+  try{recog=new SR();}catch(e){showSelfEval('Не удалось запустить микрофон — оцените себя сами:');return;}
+  recog.lang='de-DE';recog.interimResults=false;recog.continuous=false;recog.maxAlternatives=1;
+  const btn=$('micbtn');btn.classList.add('rec');btn.textContent='🔴';
+  $('micstat').textContent='Ich höre zu… говорите!';
+  recog.onresult=ev=>{const t=ev.results[0][0].transcript;resetMicUI();handleTranscript(t);};
+  recog.onerror=ev=>{
+    resetMicUI();
+    if(ev.error==='no-speech'){$('micstat').textContent='Не расслышал 🙉 Нажмите на микрофон ещё раз';}
+    else if(ev.error==='not-allowed'||ev.error==='service-not-allowed'){
+      showSelfEval('Доступ к микрофону запрещён — оцените себя сами:');
+    }else{
+      $('micstat').textContent='Ошибка распознавания. Попробуйте ещё раз или оцените себя:';
+      showSelfEvalButtons();
+    }
+  };
+  recog.onend=()=>{recogBusy=false;};
+  try{recog.start();recogBusy=true;}catch(e){resetMicUI();showSelfEval('Микрофон занят или недоступен — оцените себя сами:');}
+}
+function resetMicUI(){
+  recogBusy=false;
+  const btn=$('micbtn');
+  if(btn){btn.classList.remove('rec');btn.textContent='🎤';}
+}
+function compareWords(target,said){
+  const counts={};said.forEach(w=>counts[w]=(counts[w]||0)+1);
+  return target.map(w=>{const hit=counts[w]>0;if(hit)counts[w]--;return{w,hit};});
+}
+function handleTranscript(t){
+  const q=S.current,said=normWords(t);
+  let score;
+  if(q.type==='read'){
+    const target=normWords(q.expect);
+    const cmp=compareWords(target,said);
+    score=cmp.filter(c=>c.hit).length/target.length;
+  }else{
+    if(said.length===0)score=0;
+    else{
+      const kwOk=q.kw.some(k=>said.includes(k));
+      score=said.length>=q.min?(kwOk?1:0.8):(said.length>=Math.ceil(q.min/2)?0.5:0.3);
+    }
+  }
+  if(score<0.6&&S.speakAttempts===0){
+    S.speakAttempts=1;S.bestSpeak=score;
+    $('micstat').innerHTML=`Пока ${Math.round(score*100)}%. 🔁 Попробуйте ещё раз — осталось 1 попытка!`;
+    return;
+  }
+  finalizeSpeaking(Math.max(score,S.bestSpeak),t);
+}
+function finalizeSpeaking(score,transcript){
+  const q=S.current;
+  const correct=q.type==='read'?q.text:q.sample;
+  applyResult(score,correct,transcript);
+  let extra='';
+  if(transcript)extra+=`<div class="heard">🎙 Распознано: «${transcript}»</div>`;
+  if(q.type==='read'&&transcript){
+    extra+=`<div style="margin-bottom:8px">`+compareWords(normWords(q.expect),normWords(transcript))
+      .map(c=>`<span class="wordchip ${c.hit?'hit':'miss'}">${c.w}</span>`).join('')+`</div>`;
+  }
+  if(q.type==='say'&&transcript)extra+=`<div class="heard" style="border-left-color:var(--sky)">💬 Пример ответа: «${q.sample}»</div>`;
+  $('fb-extra').innerHTML=extra;
+}
+function showSelfEval(reason){
+  const btn=$('micbtn');if(btn)btn.hidden=true;
+  $('micstat').textContent=reason;
+  showSelfEvalButtons();
+}
+function showSelfEvalButtons(){
+  const fb=$('speak-fallback');if(!fb)return;
+  fb.innerHTML=`<p class="eval-q" style="margin-top:14px">Как вы справились?</p>
+    <div class="eval-btns">
+      <button type="button" onclick="selfEval(0.2)">😕 Не получилось</button>
+      <button type="button" onclick="selfEval(0.7)">🙂 Неплохо</button>
+      <button type="button" onclick="selfEval(1)">😎 Отлично</button>
+    </div>`;
+}
+function selfEval(v){
+  if(!S||S.answered)return;
+  finalizeSpeaking(v,null);
+}
+
+/* ---------- общая обработка ---------- */
+function applyResult(score,correctText,given){
+  S.answered=true;
+  const k=S.skill,q=S.current,kids=document.body.classList.contains('mode-kids');
+  const ok=score>=0.6;
+  const dQ=150+(q.lvl-1)*200;
+  const exp=1/(1+Math.pow(10,(dQ-S.rating[k])/400));
+  S.rating[k]+=120*(score-exp);
+  S.cur[k]=Math.max(1,Math.min(6,S.cur[k]+(ok?1:-1)));
+  S.sk2[k].t++;
+  let pts=0;
+  if(ok){S.streak++;S.best=Math.max(S.best,S.streak);pts=Math.round(q.lvl*10*score)+(S.streak>=3?5:0);S.score+=pts;S.sk2[k].c++;}
+  else S.streak=0;
+  S.qIdx++;S.secDone++;
+  S.ans.push({skill:k,q,ok,given});
+  const good=kids?['Ура, верно! 🎉','Точно! ⭐','Молодец! 🚀','Супер! 🌟']:['Верно!','Точно в цель.','Отлично.','Правильно.'];
+  const bad=kids?['Ой, почти! 🙈','Ничего страшного! 💙','Бывает! Идём дальше 🐾']:['Не совсем.','Неверно.','Мимо.'];
+  const head=$('fb-head');
+  head.className='fb-head '+(ok?'good':'badh');
+  $('fb-icon').textContent=ok?'✅':'❌';
+  $('fb-title').textContent=ok?good[Math.floor(Math.random()*good.length)]
+    :bad[Math.floor(Math.random()*bad.length)]+' Образец: '+correctText;
+  const p=$('fb-pts');p.hidden=!ok;if(ok)p.textContent='+'+pts+' очков';
+  $('fb-extra').innerHTML='';
+  $('fb-expl').textContent=(kids?'💡 ':'')+q.e;
+  const tr=$('fb-trans');
+  if(k==='l'){tr.hidden=false;tr.textContent='🎙 '+q.audio.join(' ');}else tr.hidden=true;
+  const lastInSec=S.secDone>=S.per,lastSection=S.secIdx>=S.skills.length-1;
+  $('btn-next').textContent=(lastInSec&&lastSection)?'К результатам 🏁':(lastInSec?'Следующая часть →':'Дальше →');
+  $('feedback').hidden=false;
+  $('pbar').style.width=(S.qIdx/S.totalQ*100)+'%';
+  updateHUD();
+  $('feedback').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function next(){
+  stopRecog();
+  if(S.secDone<S.per){renderQuestion();return;}
+  S.secIdx++;
+  if(S.secIdx<S.skills.length){S.skill=S.skills[S.secIdx];showIntro();}
+  else finish();
+}
+
+function updateHUD(){
+  $('est').textContent=SK[S.skill].short+': '+ratingToLevel(S.rating[S.skill]);
+  $('score').textContent='Очки: '+S.score;
+  const st=$('streak');st.hidden=S.streak<2;if(!st.hidden)st.textContent='🔥 серия '+S.streak;
+  document.querySelectorAll('.snav').forEach(el=>{
+    const k=el.dataset.k,idx=S.skills.indexOf(k);
+    el.classList.toggle('now',idx===S.secIdx);
+    el.classList.toggle('done',idx<S.secIdx);
+  });
+}
+
+function ratingToLevel(r){return r<240?'A1':r<450?'A2':r<650?'B1':r<850?'B2':r<1030?'C1':'C2';}
+
+function finish(){
+  stopRecog();
+  if(TTS)speechSynthesis.cancel();
+  show('scr-result');
+  const kids=document.body.classList.contains('mode-kids');
+  const correct=S.ans.filter(a=>a.ok).length,acc=Math.round(correct/S.totalQ*100);
+  const avg=S.skills.reduce((s,k)=>s+S.rating[k],0)/S.skills.length;
+  const lvl=ratingToLevel(avg);
+  $('stamp').firstChild.textContent=lvl;
+  $('stamp-name').textContent=LVLFULL[lvl];
+  $('verdict').textContent=kids
+    ?(acc>=80?'Ты суперзвезда немецкого! 🌟':acc>=50?'Отличная работа! Ты большой молодец 💪':'Хорошая попытка! Практика — и ты чемпион 🚀')
+    :(acc>=80?'Впечатляющий результат — немецкий у вас в отличной форме.'
+      :acc>=50?'Крепкий результат: база есть, осталось отточить детали.'
+      :'Хорошее начало: регулярная практика быстро поднимет ваш уровень.');
+  $('st-correct').textContent=correct+' / '+S.totalQ;
+  $('st-acc').textContent=acc+'%';
+  $('st-streak').textContent=S.best;
+  $('st-score').textContent=S.score;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    $('mark').style.left=Math.max(2,Math.min(98,(avg-100)/1050*100))+'%';
+    document.querySelectorAll('.scard .bar i').forEach(b=>b.style.width=b.dataset.w+'%');
+  }));
+  $('skillcards').innerHTML=S.skills.map(k=>{
+    const sc=S.sk2[k],l=ratingToLevel(S.rating[k]);
+    const pct=sc.t?Math.round(sc.c/sc.t*100):0;
+    return `<div class="scard"><div class="ic">${SK[k].icon}</div><h4>${SK[k].title}</h4>
+      <div class="lvl">${l}</div><div class="acc">${sc.c}/${sc.t} верно · ${pct}%</div>
+      <div class="bar"><i data-w="${pct}"></i></div></div>`;
+  }).join('');
+  const wrong=S.ans.filter(a=>!a.ok);
+  if(!wrong.length){
+    $('mistakes').innerHTML='<div class="all-good">🏆 Ни одной ошибки — безупречно!</div>';
+  }else{
+    let html='';
+    S.skills.forEach(k=>{
+      const ws=wrong.filter(a=>a.skill===k);
+      if(!ws.length)return;
+      html+=`<div class="m-group">${SK[k].icon} ${SK[k].title}</div>`;
+      ws.forEach(a=>{
+        const q=a.q;let text='',right='';
+        if(k==='w'){text=q.q.replace(/<br>/g,' ').replace(/<[^>]+>/g,'');right=q.show;}
+        else if(k==='s'){text=(q.type==='read'?'Прочитайте: ':'Ответьте вслух: ')+q.text;right=q.type==='read'?q.text:'Пример: '+q.sample;}
+        else{text=q.q;right=q.o[q.a];}
+        html+=`<div class="m-item"><div class="mq">${text}</div>
+          <div>Ваш ответ: <s>${a.given||'—'}</s> &nbsp;→&nbsp; <span class="fix">✔ ${right}</span></div>
+          <div class="why">${q.e}</div></div>`;
+      });
+    });
+    $('mistakes').innerHTML=html;
+  }
+  if(acc>=60)confetti(kids?130:80);
+}
+
+function confetti(n){
+  const box=document.createElement('div');box.className='confetti';document.body.appendChild(box);
+  const colors=['#ffd35c','#ff9d9d','#8fe3c0','#9fd8ff','#ffffff','#ff8f6b'];
+  for(let i=0;i<n;i++){
+    const p=document.createElement('i');
+    p.style.left=Math.random()*100+'vw';p.style.background=colors[i%colors.length];
+    p.style.animationDuration=(2.4+Math.random()*2.4)+'s';
+    p.style.animationDelay=(Math.random()*1.2)+'s';
+    p.style.transform='rotate('+Math.random()*360+'deg)';
+    box.appendChild(p);
+  }
+  setTimeout(()=>box.remove(),6000);
+}
+
+function goStart(){stopRecog();if(TTS)speechSynthesis.cancel();show('scr-start');}
+function show(id){
+  ['scr-start','scr-quiz','scr-result'].forEach(s=>$(s).hidden=(s!==id));
+  const el=$(id);el.style.animation='none';void el.offsetWidth;el.style.animation='';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.addEventListener('keydown',e=>{
+  if($('scr-quiz').hidden||!S)return;
+  if(!$('intro').hidden&&e.key==='Enter'){beginSection();return;}
+  if(S.skill==='w'){
+    if(!S.answered&&e.key==='Enter')submitWrite();
+    else if(S.answered&&e.key==='Enter'&&document.activeElement.id!=='winput')next();
+    return;
+  }
+  if(S.skill==='s'){if(S.answered&&e.key==='Enter')next();return;}
+  const map={'1':0,'2':1,'3':2,'4':3,'a':0,'b':1,'c':2,'d':3};
+  const key=e.key.toLowerCase();
+  if(!S.answered&&map[key]!==undefined&&S.order)answer(map[key]);
+  else if(S.answered&&e.key==='Enter')next();
+});
+</script>
+</body>
+</html>

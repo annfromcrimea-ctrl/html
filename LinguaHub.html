@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinguaHub · Адаптивные тесты по языкам · A1–C2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#0b1020; --bg2:#141b33;
+  --ink:#eef1fa; --dim:rgba(238,241,250,.55);
+  --gold:#ffd35c; --mint:#7fe3c0; --sky:#9fd8ff; --rose:#ff9d9d;
+  --card:#161d38; --card-edge:rgba(255,255,255,.08);
+  --radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Nunito',sans-serif;color:var(--ink);
+  background:radial-gradient(1200px 800px at 80% -10%,#1c2a52 0%,transparent 55%),
+             radial-gradient(1000px 700px at -10% 110%,#241a3e 0%,transparent 55%),
+             linear-gradient(160deg,var(--bg1),var(--bg2)) fixed;
+  min-height:100vh;overflow-x:hidden;
+}
+::selection{background:var(--gold);color:#3a2b00}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.glyphs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.glyph{position:absolute;font-weight:800;opacity:.05;color:#fff;
+  animation:drift var(--t,26s) ease-in-out infinite alternate;
+  transform:rotate(var(--r,0deg));font-size:var(--fs,3rem);user-select:none}
+@keyframes drift{from{transform:translateY(-14px) rotate(var(--r,0deg))}
+  to{transform:translateY(18px) rotate(calc(var(--r,0deg) + 6deg))}}
+
+.wrap{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:clamp(20px,4vw,48px)}
+
+/* ===== шапка ===== */
+header{text-align:center;padding:clamp(24px,5vw,56px) 16px 8px;position:relative}
+.how-link{
+  position:absolute;top:0;right:0;text-decoration:none;color:var(--ink);
+  background:rgba(255,255,255,.06);border:1px solid var(--card-edge);
+  padding:10px 18px;border-radius:99px;font-weight:800;font-size:.9rem;transition:.25s;
+}
+.how-link:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.globe{width:92px;height:92px;margin:0 auto 18px;display:grid;place-items:center;font-size:3.4rem;
+  border-radius:50%;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.22),transparent 55%),
+  linear-gradient(145deg,#233058,#131a30);border:1px solid var(--card-edge);
+  box-shadow:0 12px 40px rgba(0,0,0,.45),inset 0 0 0 6px rgba(255,255,255,.03);
+  animation:bob 5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:900;letter-spacing:-.02em;line-height:1.05}
+h1 .grad{background:linear-gradient(90deg,var(--gold),var(--rose),var(--sky),var(--mint),var(--gold));
+  background-size:250% auto;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;animation:shine 7s linear infinite}
+@keyframes shine{to{background-position:250% center}}
+.tagline{color:var(--dim);font-weight:700;margin-top:12px;font-size:clamp(.95rem,2vw,1.15rem)}
+.tagline b{color:var(--gold);font-weight:800}
+
+/* ===== статистика ===== */
+.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:30px auto 6px}
+.stat{display:flex;align-items:center;gap:9px;padding:10px 18px;border-radius:99px;
+  background:rgba(255,255,255,.05);border:1px solid var(--card-edge);font-weight:800;font-size:.92rem}
+.stat .ico{font-size:1.15rem}
+.stat b{color:var(--gold)}
+
+/* ===== поиск ===== */
+.controls{max-width:560px;margin:26px auto 8px;padding:0 8px}
+.search{position:relative;display:flex;align-items:center}
+.search input{width:100%;font-family:inherit;font-size:1.02rem;font-weight:600;color:var(--ink);
+  background:rgba(255,255,255,.06);border:1px solid var(--card-edge);border-radius:14px;
+  padding:15px 48px;outline:none;transition:.25s}
+.search input::placeholder{color:rgba(238,241,250,.35)}
+.search input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(255,211,92,.14)}
+.search .ic{position:absolute;left:16px;font-size:1.15rem;opacity:.6;pointer-events:none}
+.count{text-align:center;color:var(--dim);font-weight:700;font-size:.88rem;margin-top:12px}
+
+/* ===== сетка языков ===== */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:20px;margin:26px 0 40px}
+.lang-card{--c:#5a7;position:relative;display:flex;flex-direction:column;text-decoration:none;color:var(--ink);
+  background:linear-gradient(165deg,var(--card),#10162b);border:1px solid var(--card-edge);
+  border-radius:var(--radius);padding:26px 22px 22px;overflow:hidden;
+  transition:transform .28s cubic-bezier(.2,.9,.3,1.2),box-shadow .28s,border-color .28s;
+  opacity:0;transform:translateY(26px);animation:rise .6s cubic-bezier(.2,.9,.3,1) forwards}
+@keyframes rise{to{opacity:1;transform:translateY(0)}}
+.lang-card::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;
+  background:linear-gradient(90deg,var(--c),transparent 85%)}
+.lang-card::after{content:"";position:absolute;right:-40px;top:-40px;width:130px;height:130px;border-radius:50%;
+  background:radial-gradient(circle,var(--c) 0%,transparent 70%);opacity:.14;transition:.3s}
+.lang-card:hover{transform:translateY(-7px);border-color:var(--c);
+  box-shadow:0 18px 44px -14px var(--c),0 6px 20px rgba(0,0,0,.4)}
+.lang-card:hover::after{opacity:.32;transform:scale(1.15)}
+.top{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.flag{font-size:2.6rem;line-height:1;filter:drop-shadow(0 4px 10px rgba(0,0,0,.4));transition:transform .3s}
+.lang-card:hover .flag{transform:scale(1.16) rotate(-4deg)}
+.names h3{font-size:1.28rem;font-weight:900;line-height:1.15}
+.names .native{color:var(--c);font-weight:800;font-size:.98rem;filter:brightness(1.25)}
+.hello{font-family:'Caveat',cursive;font-size:1.5rem;color:var(--dim);margin:16px 0 4px;position:relative;z-index:1}
+.meta{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 18px;position:relative;z-index:1}
+.chip{font-size:.72rem;font-weight:800;letter-spacing:.03em;padding:5px 10px;border-radius:8px;
+  background:rgba(255,255,255,.06);border:1px solid var(--card-edge);color:var(--dim)}
+.chip.hl{background:color-mix(in srgb,var(--c) 22%,transparent);
+  border-color:color-mix(in srgb,var(--c) 55%,transparent);color:#fff}
+.go{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:16px;
+  border-top:1px solid var(--card-edge);position:relative;z-index:1}
+.go .label{font-weight:800;font-size:.95rem}
+.go .arrow{width:38px;height:38px;display:grid;place-items:center;border-radius:50%;
+  background:var(--c);color:#0a0f1e;font-weight:900;font-size:1.1rem;transition:transform .28s;
+  box-shadow:0 6px 16px -4px var(--c)}
+.lang-card:hover .arrow{transform:translateX(6px)}
+.lang-card:hover .label{color:var(--c);filter:brightness(1.2)}
+.empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--dim);font-weight:700;font-size:1.05rem}
+
+/* ===== ИНСТРУКЦИЯ ===== */
+.how{margin:70px 0 30px;scroll-margin-top:30px}
+.how-head{text-align:center;margin-bottom:34px}
+.how-head h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900}
+.how-head p{color:var(--dim);font-weight:700;margin-top:10px}
+.how-block{margin-bottom:38px}
+.how-block h3{display:flex;align-items:center;gap:12px;font-size:1.25rem;font-weight:900;margin-bottom:18px}
+.how-block h3 .n{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;
+  background:var(--gold);color:#3a2b00;font-size:1.05rem;flex:none}
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.step{background:linear-gradient(165deg,var(--card),#10162b);border:1px solid var(--card-edge);
+  border-radius:var(--radius);padding:22px;position:relative}
+.step .num{font-family:'Caveat',cursive;font-size:2.4rem;color:var(--gold);line-height:1}
+.step p{margin-top:8px;color:var(--dim);font-weight:600;line-height:1.55;font-size:.95rem}
+.step b{color:var(--ink)}
+
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.skill{background:linear-gradient(165deg,var(--card),#10162b);border:1px solid var(--card-edge);
+  border-radius:var(--radius);padding:20px;display:flex;gap:14px;align-items:flex-start}
+.skill .ic{font-size:2rem;flex:none}
+.skill .t{font-weight:900;font-size:1.02rem}
+.skill .d{color:var(--dim);font-weight:600;font-size:.88rem;line-height:1.5;margin-top:4px}
+
+.note-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.note{background:linear-gradient(165deg,var(--card),#10162b);border:1px solid var(--card-edge);
+  border-radius:var(--radius);padding:22px}
+.note .t{font-weight:900;font-size:1.05rem;display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.note ul{list-style:none}
+.note li{position:relative;padding-left:26px;color:var(--dim);font-weight:600;line-height:1.6;font-size:.93rem;margin-bottom:7px}
+.note li::before{content:"✔";position:absolute;left:0;color:var(--mint);font-weight:900}
+.note li.tip::before{content:"💡";font-size:.85rem}
+
+/* шкала CEFR */
+.cefr{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.lvl{flex:1;min-width:130px;padding:14px 12px;border-radius:12px;text-align:center;border:1px solid var(--card-edge)}
+.lvl .code{font-weight:900;font-size:1.25rem}
+.lvl .name{font-size:.76rem;font-weight:700;opacity:.85;margin-top:3px}
+.l1{background:#5aa9e6;color:#06263c}.l2{background:#57c7a3;color:#06331f}
+.l3{background:#ffd35c;color:#3a2b00}.l4{background:#ffab4a;color:#3a2405}
+.l5{background:#ff8f6b;color:#3a1606}.l6{background:#ff6f91;color:#3a0815}
+
+.top-btn{display:inline-flex;align-items:center;gap:8px;margin-top:34px;text-decoration:none;
+  color:var(--ink);background:rgba(255,255,255,.06);border:1px solid var(--card-edge);
+  padding:12px 22px;border-radius:99px;font-weight:800;transition:.25s}
+.top-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+footer{text-align:center;color:var(--dim);font-size:.86rem;font-weight:600;
+  padding:26px 16px 40px;border-top:1px solid var(--card-edge)}
+footer b{color:var(--gold)}
+
+@media (max-width:560px){
+  .grid{grid-template-columns:1fr}
+  .how-link{position:static;display:inline-block;margin-bottom:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .lang-card{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+<div class="glyphs" id="glyphs" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header>
+    <a href="#how" class="how-link">📖 Инструкция</a>
+    <div class="globe">🌍</div>
+    <h1>Lingua<span class="grad">Hub</span></h1>
+    <p class="tagline">Адаптивные языковые тесты · <b>A1–C2</b> · <b>5 навыков</b> · умная подстройка сложности</p>
+  </header>
+
+  <section class="stats" id="stats"></section>
+
+  <section class="controls">
+    <div class="search">
+      <span class="ic">🔎</span>
+      <input id="q" type="text" placeholder="Поиск языка… (например: французский, 中文)" autocomplete="off">
+    </div>
+    <div class="count" id="count"></div>
+  </section>
+
+  <main class="grid" id="grid"></main>
+
+  <!-- ================= ИНСТРУКЦИЯ ================= -->
+  <section class="how" id="how">
+    <div class="how-head">
+      <h2>📖 Как это работает</h2>
+      <p>Короткое руководство перед стартом — займёт меньше минуты</p>
+    </div>
+
+    <!-- Шаги -->
+    <div class="how-block">
+      <h3><span class="n">1</span>Как проходить тест</h3>
+      <div class="steps">
+        <div class="step"><div class="num">1.</div><p><b>Выберите язык</b> на карточке выше и нажмите «Начать тест».</p></div>
+        <div class="step"><div class="num">2.</div><p><b>Настройте старт:</b> режим «дети / взрослые», нужные навыки и число заданий на навык.</p></div>
+        <div class="step"><div class="num">3.</div><p><b>Отвечайте.</b> Сложность подстраивается: верный ответ — задание сложнее, ошибка — проще.</p></div>
+        <div class="step"><div class="num">4.</div><p><b>Для говорения</b> разрешите доступ к микрофону и говорите вслух в паузах.</p></div>
+        <div class="step"><div class="num">5.</div><p><b>Получите результат:</b> уровень A1–C2 по каждому навыку + разбор ошибок.</p></div>
+      </div>
+    </div>
+
+    <!-- Навыки -->
+    <div class="how-block">
+      <h3><span class="n">2</span>Что проверяется — 5 навыков</h3>
+      <div class="skills">
+        <div class="skill"><span class="ic">📚</span><div><div class="t">Грамматика и лексика</div><div class="d">Выбор правильного варианта из четырёх. Охватывает морфологию, синтаксис и словарный запас.</div></div></div>
+        <div class="skill"><span class="ic">🎧</span><div><div class="t">Аудирование</div><div class="d">Прослушайте запись и ответьте на вопрос. Аудио можно повторять сколько угодно раз.</div></div></div>
+        <div class="skill"><span class="ic">📖</span><div><div class="t">Чтение</div><div class="d">Прочитайте короткий текст и ответьте на вопрос по его содержанию.</div></div></div>
+        <div class="skill"><span class="ic">✍️</span><div><div class="t">Письмо</div><div class="d">Впишите ответ с клавиатуры. Для китайского — пиньинь, для арабского — транслитерация.</div></div></div>
+        <div class="skill"><span class="ic">🎤</span><div><div class="t">Говорение</div><div class="d">Говорите в микрофон. Распознавание речи сверяет ваш ответ с эталоном.</div></div></div>
+      </div>
+    </div>
+
+    <!-- Примечания -->
+    <div class="how-block">
+      <h3><span class="n">3</span>Важно знать</h3>
+      <div class="note-grid">
+        <div class="note">
+          <div class="t">🖥️ Технические требования</div>
+          <ul>
+            <li>Современный браузер: <b>Chrome</b> или <b>Edge</b> — лучший выбор.</li>
+            <li>Для говорения нужен <b>микрофон</b> и разрешение на него.</li>
+            <li>Для аудирования — <b>включённый звук</b>.</li>
+            <li class="tip">Всё работает локально в браузере, файлы не отправляются в интернет.</li>
+          </ul>
+        </div>
+        <div class="note">
+          <div class="t">⚡ Как устроена адаптивность</div>
+          <ul>
+            <li>Старт — со среднего уровня (около B1).</li>
+            <li>Алгоритм оценивает каждое задание и <b>быстро «нащупывает»</b> ваш реальный уровень.</li>
+            <li>Чем больше заданий на навык вы выбрали, тем точнее итоговая оценка.</li>
+            <li class="tip">Режим «5 заданий · подробно» даёт самый надёжный результат.</li>
+          </ul>
+        </div>
+        <div class="note">
+          <div class="t">🗂️ Как устроена серия</div>
+          <ul>
+            <li>Каждый язык — <b>отдельный HTML-файл</b> в этой же папке.</li>
+            <li><b>index.html</b> (эта страница) — меню для быстрого запуска.</li>
+            <li class="tip">Чтобы добавить язык, скопируйте любой файл и замените банк заданий.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Шкала CEFR -->
+    <div class="how-block">
+      <h3><span class="n">4</span>Шкала уровней CEFR</h3>
+      <div class="cefr">
+        <div class="lvl l1"><div class="code">A1</div><div class="name">Начальный</div></div>
+        <div class="lvl l2"><div class="code">A2</div><div class="name">Базовый</div></div>
+        <div class="lvl l3"><div class="code">B1</div><div class="name">Средний</div></div>
+        <div class="lvl l4"><div class="code">B2</div><div class="name">Выше среднего</div></div>
+        <div class="lvl l5"><div class="code">C1</div><div class="name">Продвинутый</div></div>
+        <div class="lvl l6"><div class="code">C2</div><div class="name">В совершенстве</div></div>
+      </div>
+      <a href="#top" class="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">⬆ Наверх</a>
+    </div>
+  </section>
+
+  <footer>
+    Все тесты работают локально в браузере · аудио и распознавание речи через Web Speech API ·
+    файлы лежат рядом с этим хабом<br>
+    <b>LinguaHub</b> — серия адаптивных мини-экзаменов CEFR
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   СПИСОК ЯЗЫКОВ. Чтобы добавить новый язык — допишите объект.
+   ============================================================ */
+const LANGS=[
+  {emoji:'🇬🇧',ru:'Английский',native:'English',hello:'Hello!',file:'english-test.html',
+   color:'#2f8f6f',script:'Латиница',family:'Германская'},
+  {emoji:'🇫🇷',ru:'Французский',native:'Français',hello:'Bonjour !',file:'french-test.html',
+   color:'#4a6fd0',script:'Латиница',family:'Романская'},
+  {emoji:'🇩🇪',ru:'Немецкий',native:'Deutsch',hello:'Hallo!',file:'german-test.html',
+   color:'#7a8494',script:'Латиница',family:'Германская'},
+  {emoji:'🇮🇹',ru:'Итальянский',native:'Italiano',hello:'Ciao!',file:'italian-test.html',
+   color:'#c04a68',script:'Латиница',family:'Романская'},
+  {emoji:'🇪🇸',ru:'Испанский',native:'Español',hello:'¡Hola!',file:'spanish-test.html',
+   color:'#d0703a',script:'Латиница',family:'Романская'},
+  {emoji:'🇳🇴',ru:'Норвежский',native:'Norsk',hello:'Hallo!',file:'norwegian-test.html',
+   color:'#3592b0',script:'Латиница',family:'Германская'},
+  {emoji:'🇨🇳',ru:'Китайский',native:'中文',hello:'你好！',file:'chinese-test.html',
+   color:'#e05a4a',script:'Иероглифы',family:'Сино-тибетская'},
+  {emoji:'🇸🇦',ru:'Арабский',native:'العربية',hello:'مرحباً!',file:'arabic-test.html',
+   color:'#9a5ac0',script:'Арабское письмо',family:'Семитская'},
+];
+
+const grid=document.getElementById('grid');
+function render(list){
+  grid.innerHTML='';
+  if(!list.length){
+    grid.innerHTML='<div class="empty">Ничего не нашлось 🤷 Попробуйте другой запрос.</div>';
+  }
+  list.forEach((L,i)=>{
+    const a=document.createElement('a');
+    a.className='lang-card';a.href=L.file;
+    a.style.setProperty('--c',L.color);
+    a.style.animationDelay=(i*0.07)+'s';
+    a.innerHTML=`
+      <div class="top"><span class="flag">${L.emoji}</span>
+        <div class="names"><h3>${L.ru}</h3><div class="native">${L.native}</div></div></div>
+      <div class="hello">${L.hello}</div>
+      <div class="meta">
+        <span class="chip hl">A1–C2</span><span class="chip hl">5 навыков</span>
+        <span class="chip">${L.script}</span><span class="chip">${L.family}</span></div>
+      <div class="go"><span class="label">Начать тест</span><span class="arrow">→</span></div>`;
+    grid.appendChild(a);
+  });
+  document.getElementById('count').textContent=
+    list.length?`Показано языков: ${list.length} из ${LANGS.length}`:'';
+}
+const q=document.getElementById('q');
+q.addEventListener('input',()=>{
+  const s=q.value.trim().toLowerCase();
+  render(LANGS.filter(L=>
+    L.ru.toLowerCase().includes(s)||L.native.toLowerCase().includes(s)||
+    L.script.toLowerCase().includes(s)||L.family.toLowerCase().includes(s)));
+});
+document.getElementById('stats').innerHTML=`
+  <span class="stat"><span class="ico">🌐</span><b>${LANGS.length}</b>&nbsp;языков</span>
+  <span class="stat"><span class="ico">📈</span>уровни&nbsp;<b>A1–C2</b></span>
+  <span class="stat"><span class="ico">🧠</span><b>5</b>&nbsp;навыков</span>
+  <span class="stat"><span class="ico">⚡</span>адаптивная&nbsp;сложность</span>`;
+
+const glyphChars=['A','Б','Ç','ñ','ø','ß','λ','汉','字','ا','ب','한','あ','é','å','Ж'];
+const gWrap=document.getElementById('glyphs');
+for(let i=0;i<16;i++){
+  const s=document.createElement('span');s.className='glyph';
+  s.textContent=glyphChars[Math.floor(Math.random()*glyphChars.length)];
+  s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';
+  s.style.fontSize=(1.8+Math.random()*3.2)+'rem';
+  s.style.setProperty('--r',(Math.random()*40-20)+'deg');
+  s.style.setProperty('--t',(18+Math.random()*20)+'s');
+  gWrap.appendChild(s);
+}
+
+const cv=document.getElementById('stars'),ctx=cv.getContext('2d');
+let W,H,stars=[];
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;
+  stars=Array.from({length:Math.min(140,Math.floor(W*H/12000))},()=>({
+    x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+0.3,
+    p:Math.random()*Math.PI*2,sp:0.4+Math.random()*0.8}));}
+function tick(t){ctx.clearRect(0,0,W,H);
+  for(const s of stars){const a=0.25+0.55*Math.abs(Math.sin(t*0.001*s.sp+s.p));
+    ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,7);
+    ctx.fillStyle=`rgba(255,255,255,${a})`;ctx.fill();}
+  requestAnimationFrame(tick);}
+resize();addEventListener('resize',resize);requestAnimationFrame(tick);
+render(LANGS);
+</script>
+</body>
+</html>

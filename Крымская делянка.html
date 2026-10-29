@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Крымская делянка — конструктор огорода · 92 культуры</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f2ecd6; --card:#fffdf3; --ink:#2e3524; --ink2:#6b6f57;
+  --green:#3f7d3a; --green-d:#2c5a29; --green-l:#eef6e6;
+  --terra:#c65d3b; --sun:#e9b44c; --soil:#7a5236; --line:#e3dabc; --sky:#cfe8f5;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Nunito',sans-serif;color:var(--ink);background:var(--paper)
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cpath d='M10 36c9-16 25-18 34-25-2 14-12 27-34 25z' fill='%233f7d3a' fill-opacity='.05'/%3E%3Cpath d='M40 50c-6-9-16-10-21-14 1 8 8 15 21 14z' fill='%23c65d3b' fill-opacity='.04'/%3E%3C/svg%3E");}
+h1,h2,h3{font-family:'Comfortaa',cursive;margin:0}
+.hand{font-family:'Caveat',cursive}
+.wrap{max-width:1240px;margin:0 auto;padding:0 18px}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;height:236px;overflow:hidden;
+  background:linear-gradient(#ffe7ba 0%,#f6e6bd 34%,#cfe3bd 68%,#a9c98d 100%)}
+.sun{position:absolute;right:11%;top:24px;width:76px;height:76px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#fff3b8,#f6c945 70%);
+  box-shadow:0 0 0 16px rgba(246,201,69,.22),0 0 70px rgba(246,201,69,.65);
+  animation:sunPulse 6s ease-in-out infinite}
+.sun::before{content:'';position:absolute;inset:-18px;border-radius:50%;
+  border:3px dashed rgba(233,180,76,.85);animation:spin 46s linear infinite}
+.hill{position:absolute;border-radius:50%}
+.h1{width:920px;height:360px;background:#8fb573;left:-200px;top:120px}
+.h2{width:760px;height:320px;background:#79a35e;right:-180px;top:152px}
+.h3{width:560px;height:260px;background:#9dc184;left:34%;top:170px}
+.vine{position:absolute;left:6%;top:118px;font-size:20px;letter-spacing:22px;opacity:.85}
+.fence{position:absolute;bottom:0;left:0;right:0;height:46px;
+  background:repeating-linear-gradient(90deg,#a9743f 0 26px,#8a5a36 26px 31px);
+  border-top:7px solid #8a5a36;box-shadow:inset 0 -10px 18px rgba(0,0,0,.18)}
+.board{position:absolute;left:50%;top:48px;transform:translateX(-50%) rotate(-1.3deg);
+  background:linear-gradient(#8a5a36,#6e4426);border:3px solid #4e2f18;border-radius:12px;
+  padding:14px 30px 12px;text-align:center;
+  box-shadow:inset 0 2px 0 rgba(255,235,200,.25),0 14px 26px rgba(60,40,10,.35)}
+.board::before,.board::after{content:'';position:absolute;top:10px;width:9px;height:9px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#e9d6b0,#5c3a1c);box-shadow:0 1px 2px rgba(0,0,0,.5)}
+.board::before{left:14px}.board::after{right:14px}
+.board h1{color:#fff6e0;font-size:clamp(24px,4vw,40px);letter-spacing:1px;text-shadow:0 2px 0 rgba(0,0,0,.25)}
+.board .hand{color:#ffe9b8;font-size:clamp(15px,2.2vw,21px);display:block;margin-top:2px}
+.flower{position:absolute;font-size:58px;transform-origin:50% 100%;animation:sway 4.5s ease-in-out infinite}
+.butterfly{position:absolute;font-size:26px;animation:fly 15s ease-in-out infinite}
+.petals span{position:absolute;top:-30px;font-size:15px;opacity:.85;animation:fall linear infinite}
+@keyframes sunPulse{50%{box-shadow:0 0 0 26px rgba(246,201,69,.14),0 0 90px rgba(246,201,69,.7)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(6deg)}}
+@keyframes fly{0%{transform:translate(0,0)}20%{transform:translate(90px,-30px) rotate(10deg)}
+  45%{transform:translate(210px,10px) rotate(-8deg)}70%{transform:translate(110px,-46px) rotate(6deg)}100%{transform:translate(0,0)}}
+@keyframes fall{to{transform:translateY(290px) rotate(200deg);opacity:0}}
+
+/* ---------- Карточки ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;
+  box-shadow:0 6px 18px rgba(90,75,40,.08)}
+.card h3{font-size:15px;color:var(--green-d);display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.reveal{opacity:0;transform:translateY(16px)}
+.reveal.in{opacity:1;transform:none;transition:all .6s ease}
+
+/* ---------- Мастерская ---------- */
+.workshop{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px;margin-top:18px}
+.plotBar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;margin-bottom:10px}
+.pChip{font-family:'Comfortaa';font-weight:600;font-size:12.5px;border:2px solid #d6ccab;background:#fff;
+  border-radius:20px;padding:6px 14px;cursor:pointer;transition:all .15s}
+.pChip:hover{transform:translateY(-2px)}
+.pChip.on{background:var(--terra);border-color:var(--terra);color:#fff}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px}
+.btn{font-family:'Comfortaa';font-weight:600;font-size:12.5px;border:0;cursor:pointer;border-radius:10px;
+  padding:8px 13px;background:#efe9d2;color:var(--ink);transition:transform .15s,box-shadow .15s,background .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(90,70,30,.18)}
+.btn.active{background:var(--green);color:#fff;box-shadow:0 0 0 3px rgba(63,125,58,.25)}
+.btn-green{background:var(--green);color:#fff}.btn-terra{background:var(--terra);color:#fff}
+.btn-line{background:transparent;border:2px solid #cfc5a2}
+.toolHint{width:100%;font-size:12px;color:var(--ink2);margin-top:2px}
+.palette{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px;margin-top:8px;min-height:56px;max-height:250px;overflow-y:auto}
+#palSearch{width:100%;margin-bottom:6px;padding:7px 10px;border:2px solid #d8cfae;border-radius:9px;font-family:'Nunito'}
+.palCat{width:100%;font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--terra);margin:4px 0 0}
+.chip{display:inline-flex;flex-direction:column;align-items:center;gap:2px;min-width:62px;padding:6px 6px 5px;
+  border-radius:11px;background:#fff;border:2px solid #e7debf;cursor:pointer;font-size:23px;line-height:1.15;
+  transition:transform .15s,border-color .15s,background .15s}
+.chip small{font-size:10px;color:var(--ink2);font-family:'Nunito';text-align:center}
+.chip:hover{transform:translateY(-3px);border-color:#cbbf94}
+.chip.sel{border-color:var(--green);background:var(--green-l);transform:translateY(-2px)}
+.noemo{font-style:normal;color:#fff;border-radius:50%;width:26px;height:26px;display:inline-flex;align-items:center;
+  justify-content:center;font-weight:800;font-size:13px;box-shadow:inset 0 -3px rgba(0,0,0,.18);flex:none}
+.frame{position:relative;margin-top:10px;padding:12px;border-radius:16px;
+  background:linear-gradient(#a9743f,#8a5a36);box-shadow:0 14px 32px rgba(70,50,20,.28),inset 0 0 0 2px #6e4426}
+#cv{display:block;border-radius:8px;touch-action:none;cursor:crosshair;width:100%}
+#pops{position:absolute;inset:0;pointer-events:none;overflow:visible}
+.pop{position:absolute;font-size:26px;animation:popUp .9s ease-out forwards}
+@keyframes popUp{to{transform:translateY(-48px) scale(1.3);opacity:0}}
+.stageFoot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px;font-size:12.5px;color:var(--ink2)}
+.stageFoot input[type=number]{width:58px;padding:5px 6px;border:2px solid #d8cfae;border-radius:8px;font-family:'Nunito';font-weight:700;background:#fff}
+
+/* ---------- Сайдбар ---------- */
+.sideCol{display:flex;flex-direction:column;gap:14px}
+.wx{background:linear-gradient(160deg,#dff0fa,#fffdf3 62%)}
+.wxTop{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+select,input[type=number],input[type=time],input[type=date]{padding:6px 8px;border:2px solid #d8cfae;border-radius:9px;font-family:'Nunito';font-weight:600;background:#fff;color:var(--ink)}
+.wxNow{display:flex;align-items:baseline;gap:10px}
+.wxEmoji{font-size:40px}
+.wxNow b{font-family:'Comfortaa';font-size:44px;color:var(--ink)}
+.wxF{font-size:12.5px;color:var(--ink2);max-width:150px}
+.wxMeta{font-size:12px;color:var(--ink2);margin:6px 0 4px}
+.wxFacts{font-size:11.5px;color:var(--green-d);background:var(--green-l);border-radius:9px;padding:7px 9px;margin:8px 0}
+#wxFrost{font-size:11.5px;color:#a3401f;background:#fdf0e6;border-radius:9px;padding:6px 9px;margin-bottom:8px;font-weight:700}
+.wxFc{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.fcTile{min-width:64px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px 4px;font-size:11px}
+.fcTile .big{font-size:21px}
+.fcTile b{display:block;font-size:12px}
+.fcTile small{color:var(--ink2)}
+.wxAdvice{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.wxAdvice li{font-size:12px;background:#fff;border-left:4px solid var(--sun);border-radius:8px;padding:6px 9px;box-shadow:0 2px 6px rgba(90,70,30,.07)}
+#inspector .empty{font-size:13px;color:var(--ink2);line-height:1.55}
+.insHead{display:flex;gap:10px;align-items:center}
+.insHead .bigE{font-size:42px}
+.insHead b{font-family:'Comfortaa';font-size:17px}
+.insTag{font-size:11px;color:#fff;background:var(--green);border-radius:20px;padding:2px 9px}
+.insRow{font-size:12.5px;margin-top:7px}
+.bedEdit{display:flex;align-items:center;gap:5px;flex-wrap:wrap}.bedEdit input{width:62px}.insTip{font-family:'Caveat';font-size:17px;color:var(--green-d);background:var(--green-l);border-radius:9px;padding:6px 10px;margin-top:8px;line-height:1.25}
+.nb{display:inline-block;font-size:11.5px;border-radius:16px;padding:2px 9px;margin:3px 3px 0 0;font-weight:700}
+.nb.good{background:#e2f0d8;color:var(--green-d)}.nb.bad{background:#fbe4dc;color:#a3401f}
+.statRow{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px dashed var(--line)}
+.statRow:last-child{border:0}
+.statRow b{font-family:'Comfortaa'}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.badge{font-size:11px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:3px 9px;opacity:.4;filter:grayscale(1)}
+.badge.on{opacity:1;filter:none;border-color:var(--sun);background:#fff8e4}
+
+/* ---------- Вкладки ---------- */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 14px}
+.tab{font-family:'Comfortaa';font-weight:600;font-size:13px;border:2px solid #d6ccab;background:#fff;
+  border-radius:22px;padding:8px 16px;cursor:pointer;transition:all .2s}
+.tab:hover{transform:translateY(-2px)}
+.tab.on{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 6px 14px rgba(63,125,58,.3)}
+.panel{display:none}
+.panel.on{display:block;animation:fadeUp .45s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}}
+
+/* ---------- Совместимость ---------- */
+.compatRow{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.verdict{margin-top:14px;border-radius:12px;padding:14px 16px;display:flex;gap:14px;align-items:center;background:var(--green-l)}
+.verdict .ve{font-size:44px}
+.verdict b{font-family:'Comfortaa';font-size:16px;display:block}
+.verdict p{margin:4px 0 0;font-size:13px;color:var(--ink2)}
+.classics{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.classic{cursor:pointer;font-size:13px;background:#fff;border:2px solid var(--line);border-radius:20px;padding:5px 12px;transition:all .15s}
+.classic:hover{border-color:var(--terra);transform:translateY(-2px)}
+#scanOut{margin-top:12px;background:#f7f3e2;border-radius:11px;padding:12px 14px}
+
+/* ---------- Энциклопедия ---------- */
+#encSearch{width:100%;max-width:340px;padding:8px 12px;border:2px solid #d8cfae;border-radius:10px;font-family:'Nunito'}
+.encGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:12px;margin-top:14px}
+.encCard{background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px 13px;transition:transform .18s,box-shadow .18s}
+.encCard:hover{transform:translateY(-3px);box-shadow:0 10px 18px rgba(90,70,30,.13)}
+.encHead{display:flex;gap:9px;align-items:center;margin-bottom:6px}
+.encE{font-size:30px;display:flex}
+.encE .noemo{width:34px;height:34px;font-size:16px}
+.encHead b{font-family:'Comfortaa';font-size:14px;display:block}
+.encHead small{color:var(--ink2);font-size:11px}
+.encMeta{font-size:12px;color:var(--ink2);margin-bottom:4px}
+.encTip{font-family:'Caveat';font-size:15.5px;color:var(--green-d);margin-top:7px;line-height:1.2}
+
+/* ---------- Вредители ---------- */
+.pest{border:1px solid var(--line);border-radius:12px;margin-bottom:8px;overflow:hidden;background:#fff}
+.pestH{width:100%;display:flex;align-items:center;gap:8px;padding:12px 14px;background:#fff;border:0;
+  font-family:'Nunito';font-weight:700;font-size:13.5px;cursor:pointer;text-align:left;color:var(--ink)}
+.pestH small{color:var(--ink2);font-weight:400}
+.pestA{margin-left:auto;transition:.2s;color:var(--terra)}
+.pest.open .pestA{transform:rotate(180deg)}
+.pestB{display:none;padding:0 14px 13px;font-size:13px;color:var(--ink2);line-height:1.6}
+.pest.open .pestB{display:block}
+.pestWho{color:var(--terra);font-weight:700;margin-bottom:4px}
+.pestPl{margin-top:6px;color:var(--green-d);font-weight:700}
+
+/* ---------- Калькуляторы ---------- */
+.calcGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.calc label{display:block;font-size:12px;font-weight:700;color:var(--ink2);margin:8px 0 3px}
+.calc input,.calc select{width:100%}
+.calcOut{margin-top:12px;background:var(--green-l);border-radius:10px;padding:10px 12px;font-size:13.5px}
+.calcOut b{font-family:'Comfortaa';font-size:19px;color:var(--green-d)}
+
+/* ---------- Календарь ---------- */
+.calHeadRow,.calRow{display:grid;grid-template-columns:160px 1fr;gap:12px;align-items:center}
+.calName{font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.calTrack{position:relative;height:27px;border-radius:7px;background:#f7f3e2;
+  background-image:linear-gradient(90deg,rgba(94,82,50,.14) 1px,transparent 1px);background-size:calc(100%/12) 100%}
+.bar{position:absolute;height:7px;border-radius:5px}
+.bSeed{background:#7cc25e;top:2px}.bPlant{background:var(--terra);top:10px}
+.bPlant2{background:#e09a7e;top:10px;border:1px dashed #fff}.bHarv{background:var(--sun);top:18px}
+#calBody{position:relative}
+#calToday{position:absolute;top:-8px;bottom:-8px;border-left:2px dashed var(--terra);z-index:2}
+#calToday::after{content:'сегодня';font-family:'Caveat';font-size:14px;color:var(--terra);position:absolute;top:-18px;left:-14px}
+.calMonths span{position:absolute;top:4px;font-size:10.5px;color:var(--ink2);transform:translateX(-50%)}
+.calLegend{display:flex;gap:14px;font-size:12px;margin:8px 0 4px;flex-wrap:wrap}
+.dot{display:inline-block;width:12px;height:8px;border-radius:4px;margin-right:5px}
+
+/* ---------- Урожай ---------- */
+.hSum{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.hChip{background:var(--green-l);border-radius:12px;padding:10px 14px;font-size:13px}
+.hChip b{font-family:'Comfortaa';font-size:22px;color:var(--green-d);display:block}
+.hBed{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.hBedHead{display:flex;justify-content:space-between;gap:10px;font-weight:700;flex-wrap:wrap}
+.hBedHead b{font-family:'Comfortaa'}
+.hBedMix{margin-top:6px}
+.hCropTbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+.hCropTbl td{padding:6px 4px;border-bottom:1px dashed var(--line)}
+.hCropTbl tr:last-child td{border:0}
+.hCropTbl td:last-child{text-align:right;font-family:'Comfortaa';font-weight:700}
+.hSeason{color:var(--ink2);font-size:11.5px}
+
+/* ---------- Дневник ---------- */
+.jForm{display:grid;grid-template-columns:150px 1fr auto;gap:8px;align-items:start}
+.jForm textarea{width:100%;border:2px solid #d8cfae;border-radius:10px;padding:8px 10px;font-family:'Nunito';font-size:13.5px;resize:vertical}
+.jTpl{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
+.jt{font-size:12px;background:#fff;border:2px solid var(--line);border-radius:18px;padding:4px 11px;cursor:pointer;transition:all .15s;font-family:'Nunito'}
+.jt:hover{border-color:var(--green);transform:translateY(-2px)}
+.jEntry{display:flex;gap:12px;align-items:flex-start;padding:10px 4px;border-bottom:1px dashed var(--line)}
+.jDate{min-width:118px;font-weight:800;color:var(--terra);font-size:12px;padding-top:2px}
+.jText{flex:1;font-size:13.5px;line-height:1.5;white-space:pre-wrap}
+.jDel{padding:4px 9px;font-size:11px}
+
+/* ---------- Севооборот ---------- */
+.chain{font-size:12.5px;background:#f7f3e2;border-radius:10px;padding:9px 12px;overflow-x:auto;white-space:nowrap;color:var(--ink2)}
+.rotRow{display:grid;grid-template-columns:minmax(170px,1.1fr) 220px 1fr;gap:12px;align-items:center;
+  padding:9px 4px;border-bottom:1px dashed var(--line);font-size:13px}
+.rotRow small{color:var(--ink2);display:block;font-weight:400}
+.rotSel{width:100%}
+.stOk{color:var(--green-d);font-weight:700}.stWarn{color:#b0791f;font-weight:700}.stBad{color:#a3401f;font-weight:700}
+
+/* ---------- Полив ---------- */
+.watRow{display:grid;grid-template-columns:minmax(150px,1fr) 175px 118px minmax(150px,1fr) auto;gap:12px;align-items:center;
+  padding:9px 4px;border-bottom:1px dashed var(--line);font-size:13px}
+.watRow small{color:var(--ink2)}
+.watCd{font-family:'Comfortaa';font-weight:700;font-size:13px;border-radius:9px;padding:6px 10px;background:#f4f0dd}
+.watCd.overdue{background:#fbe4dc;color:#a3401f;animation:pulse 1.3s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(198,93,59,.18)}}
+.watIn{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.watIn input{width:60px}
+
+/* ---------- Луна ---------- */
+.moonWrap{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+.moonBig{font-size:84px;filter:drop-shadow(0 6px 14px rgba(60,60,120,.25))}
+.moonStrip{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.mDay{background:#fff;border:1px solid var(--line);border-radius:11px;padding:8px 10px;text-align:center;font-size:11.5px;min-width:74px}
+.mDay .big{font-size:24px}
+
+/* ---------- Задачи ---------- */
+.mChips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.mChip{font-size:12px;font-weight:700;border:2px solid var(--line);background:#fff;border-radius:18px;padding:4px 11px;cursor:pointer}
+.mChip.on{background:var(--terra);border-color:var(--terra);color:#fff}
+.task{display:flex;gap:10px;align-items:flex-start;padding:9px 6px;border-bottom:1px dashed var(--line);font-size:14px}
+.task input{accent-color:var(--green);width:18px;height:18px;margin-top:2px}
+.task.done span{text-decoration:line-through;opacity:.5}
+.progBar{height:9px;background:#eee6c9;border-radius:6px;overflow:hidden;margin:10px 0 4px}
+.progBar i{display:block;height:100%;background:linear-gradient(90deg,var(--green),#7cc25e);transition:width .4s}
+
+/* ---------- Пермакультура ---------- */
+.tipOfDay{background:linear-gradient(120deg,#2c5a29,#3f7d3a);color:#f3f7e8;border-radius:14px;padding:16px 18px;margin-bottom:14px}
+.tipOfDay .hand{font-size:22px;color:#ffe9b8}
+.permGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:13px}
+.permCard{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--green);border-radius:12px;padding:13px 14px;transition:transform .2s,box-shadow .2s}
+.permCard:nth-child(3n){border-left-color:var(--terra)}
+.permCard:nth-child(3n+2){border-left-color:var(--sun)}
+.permCard:hover{transform:translateY(-4px) rotate(-.3deg);box-shadow:0 10px 20px rgba(90,70,30,.14)}
+.permCard b{font-family:'Comfortaa';font-size:13.5px;display:block;margin-bottom:5px}
+.permCard p{margin:0;font-size:12.5px;color:var(--ink2);line-height:1.5}
+.comboBox{margin-top:16px;background:#fff8e4;border:2px dashed var(--sun);border-radius:14px;padding:16px}
+#comboOut{margin-top:10px;font-size:20px;letter-spacing:3px;min-height:30px}
+#comboOut p{font-family:'Nunito';font-size:13px;letter-spacing:0;color:var(--ink2);margin:6px 0 0}
+
+/* ---------- Модалка помощи ---------- */
+.modal{position:fixed;inset:0;background:rgba(30,35,20,.55);display:none;align-items:center;justify-content:center;z-index:120;padding:20px}
+.modal.on{display:flex}
+.modalCard{background:var(--card);border-radius:16px;max-width:600px;width:100%;max-height:82vh;overflow-y:auto;
+  padding:22px 24px;box-shadow:0 24px 60px rgba(0,0,0,.35);animation:fadeUp .3s ease}
+.modalCard h4{font-family:'Comfortaa';color:var(--green-d);margin:14px 0 5px;font-size:14px}
+.modalCard p{margin:0 0 8px;font-size:13.5px;color:var(--ink2);line-height:1.55}
+
+/* ---------- Печать ---------- */
+#printSheet{display:none}
+@media print{
+  body{background:#fff}
+  body>*{display:none!important}
+  #printSheet{display:block!important;color:#000;font-family:Georgia,'Times New Roman',serif;padding:8mm}
+  #printSheet h1{font-size:22px;margin:0 0 4px}
+  #printSheet h2{font-size:14px;margin:14px 0 6px}
+  #printSheet .pMeta{font-size:12px;color:#333;margin:0 0 10px}
+  #printSheet img{max-width:100%;border:1px solid #999;margin:6px 0}
+  #printSheet table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+  #printSheet td,#printSheet th{border:1px solid #999;padding:4px 6px;text-align:left}
+  #printSheet ul{font-size:12px;margin:4px 0}
+  #printSheet .pFoot{margin-top:18px;font-size:11px;color:#555;border-top:1px solid #999;padding-top:8px}
+}
+
+/* ---------- Тосты, футер ---------- */
+#toasts{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:8px;z-index:99;max-width:340px}
+.toast{background:#2e3524;color:#f5f2e2;font-size:13px;border-radius:11px;padding:10px 14px;
+  border-left:5px solid var(--sun);box-shadow:0 10px 24px rgba(0,0,0,.25);animation:tIn .3s ease}
+.toast.good{border-color:#7cc25e}.toast.bad{border-color:#e2694a}
+.toast.out{animation:tOut .3s forwards}
+@keyframes tIn{from{transform:translateX(40px);opacity:0}}
+@keyframes tOut{to{transform:translateX(40px);opacity:0}}
+footer{margin:34px 0 22px;text-align:center;font-size:12.5px;color:var(--ink2)}
+footer .hand{font-size:20px;color:var(--green-d)}
+
+@media(max-width:1060px){.workshop{grid-template-columns:1fr}.sideCol{flex-direction:row;flex-wrap:wrap}.sideCol>.card{flex:1 1 280px}}
+@media(max-width:760px){.rotRow{grid-template-columns:1fr}.watRow{grid-template-columns:1fr 1fr}.watCd{grid-column:1/-1}.jForm{grid-template-columns:1fr}}
+@media(max-width:640px){.board{padding:10px 16px}.flower{display:none}.calHeadRow,.calRow{grid-template-columns:104px 1fr;gap:8px}
+  .wrap{padding:0 10px}.hero{height:205px}.board{top:42px;max-width:92%;padding:12px 20px}.board h1{font-size:25px}.board .hand{font-size:15px}
+  .workshop{display:block}.sideCol{display:flex;flex-direction:column}.toolbar{position:sticky;top:0;z-index:20;background:rgba(255,253,243,.96);backdrop-filter:blur(8px);border:1px solid var(--line);box-shadow:0 5px 15px rgba(60,50,20,.12)}
+  .toolbar .btn{min-height:42px;padding:9px 11px;font-size:12px}.toolHint{font-size:11px}.palette{max-height:210px;padding:8px}.chip{min-width:68px;min-height:58px}.stageFoot{font-size:11.5px}.stageFoot input[type=number]{width:54px}
+  .wxTop{align-items:flex-start;flex-direction:column}.wxNow b{font-size:36px}.card{padding:13px}.watRow{grid-template-columns:1fr 1fr}.watCd{grid-column:1/-1}
+}
+@media(max-width:420px){.toolbar{gap:5px}.toolbar .btn{flex:1 1 calc(33.333% - 5px);font-size:11px;padding:8px 5px}.toolbar .btn-line{flex:0 0 auto}.pChip{padding:6px 10px}.palette{gap:4px}.chip{min-width:62px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="sun"></div>
+  <div class="hill h1"></div><div class="hill h3"></div><div class="hill h2"></div>
+  <div class="vine">🍇🍇🍇</div>
+  <div class="petals">
+    <span style="left:8%;animation-duration:13s">🌼</span><span style="left:22%;animation-duration:17s;animation-delay:3s">🌿</span>
+    <span style="left:41%;animation-duration:15s;animation-delay:6s">🌸</span><span style="left:58%;animation-duration:19s;animation-delay:1s">🍃</span>
+    <span style="left:76%;animation-duration:14s;animation-delay:8s">🌼</span><span style="left:90%;animation-duration:18s;animation-delay:5s">🌿</span>
+  </div>
+  <div class="board"><h1>Крымская делянка</h1><span class="hand">92 культуры · соседи · севооборот · пермакультура</span></div>
+  <div class="flower" style="left:4%;bottom:34px">🌻</div>
+  <div class="flower" style="left:12%;bottom:38px;font-size:44px;animation-delay:1.2s">🌷</div>
+  <div class="flower" style="right:4%;bottom:36px;font-size:48px;animation-delay:.6s">🌹</div>
+  <div class="butterfly" style="left:30%;top:70px">🦋</div>
+  <div class="fence"></div>
+</header>
+
+<div class="wrap">
+
+  <section class="workshop">
+    <div class="stageCol">
+      <div class="card plotBar" id="plotBar"></div>
+      <div class="card toolbar" id="toolbar">
+        <button class="btn active" data-tool="bed" title="Протяните мышью по полю">▭ Грядка</button>
+        <button class="btn" data-tool="plant">🌱 Растения</button>
+        <button class="btn" data-tool="object">🏗 Объекты</button>
+        <button class="btn" data-tool="path">🪨 Дорожка</button>
+        <button class="btn" data-tool="erase">🧽 Ластик</button>
+        <button class="btn" data-tool="select">👆 Выбор</button>
+        <span style="width:1px;height:22px;background:var(--line)"></span>
+        <button class="btn btn-line" id="undo" title="Отменить">↩</button>
+        <button class="btn btn-line" id="sample" title="Пример участка">✨ Пример</button>
+        <button class="btn btn-line" id="png" title="Скачать картинку">🖼 PNG</button>
+        <button class="btn btn-line" id="helpBtn" title="Как пользоваться">❓</button>
+        <button class="btn btn-terra" id="clear">🗑 Очистить</button>
+        <div class="toolHint" id="toolHint"></div>
+      </div>
+      <div class="card palette" id="palette"></div>
+      <div class="frame"><canvas id="cv"></canvas><div id="pops"></div></div>
+      <div class="stageFoot">
+        <span>1 клетка = 0,5 м</span> · участок
+        <input type="number" id="pw" value="12" min="2" max="24" step="1"> ×
+        <input type="number" id="ph" value="7" min="2" max="16" step="1"> м
+        <span style="width:1px;height:20px;background:var(--line)"></span>
+        <button class="btn btn-line" id="exp" title="Скачать план файлом">📤 Экспорт</button>
+        <button class="btn btn-line" id="imp" title="Загрузить план из файла">📥 Импорт</button>
+        <input type="file" id="impFile" accept="application/json" hidden>
+        <button class="btn btn-line" id="print" title="Печатный лист: план, показатели, состав грядок">🖨 Печать</button>
+        <span class="hand" style="font-size:17px;color:var(--terra)">деревьям нужно 4 клетки — крона ☀️</span>
+      </div>
+    </div>
+
+    <aside class="sideCol">
+      <div class="card wx">
+        <div class="wxTop"><h3 style="margin:0">⛅ Погода в Крыму</h3>
+          <select id="wxRegion"></select></div>
+        <div id="wxNow" class="wxNow"><span class="wxEmoji">🌤</span><b>…°</b><span class="wxF">загружаем небо…</span></div>
+        <div class="wxMeta" id="wxMeta"></div>
+        <div class="wxFacts" id="wxFacts"></div>
+        <div id="wxFrost"></div>
+        <div class="wxFc" id="wxFc"></div>
+        <ul class="wxAdvice" id="wxAdvice"></ul>
+      </div>
+      <div class="card" id="inspector">
+        <h3>🔍 Инспектор</h3>
+        <div class="empty">Кликните «👆 Выбор» и нажмите на растение — расскажу про него всё: полив, сроки, с кем дружит.</div>
+      </div>
+      <div class="card" id="statsCard">
+        <h3>📊 Моя делянка</h3>
+        <div id="stats"></div>
+        <div class="badges" id="badges"></div>
+      </div>
+    </aside>
+  </section>
+
+  <nav class="tabs">
+    <button class="tab on" data-t="compat">🤝 Соседи</button>
+    <button class="tab" data-t="enc">📖 Энциклопедия</button>
+    <button class="tab" data-t="pest">🐛 Вредители</button>
+    <button class="tab" data-t="cal">📅 Календарь</button>
+    <button class="tab" data-t="calc">🧮 Калькуляторы</button>
+    <button class="tab" data-t="water">💧 Автополив</button>
+    <button class="tab" data-t="harv">🧺 Урожай</button>
+    <button class="tab" data-t="rot">🔄 Севооборот</button>
+    <button class="tab" data-t="journal">📒 Дневник</button>
+    <button class="tab" data-t="moon">🌙 Луна</button>
+    <button class="tab" data-t="tasks">✅ Дела</button>
+    <button class="tab" data-t="perm">🌿 Пермакультура</button>
+  </nav>
+
+  <section class="panel on" id="pn-compat">
+    <div class="card">
+      <h3>🤝 Проверка совместимости посадок</h3>
+      <div class="compatRow">
+        <select id="cSelA"></select><button class="btn btn-line" id="cSwap">⇄</button><select id="cSelB"></select>
+      </div>
+      <div class="verdict" id="cVerdict"></div>
+      <h3 style="margin-top:16px">Проверьте весь план сразу:</h3>
+      <button class="btn btn-green" id="scanBtn">🔍 Сканировать план на конфликты</button>
+      <div id="scanOut" style="display:none"></div>
+      <h3 style="margin-top:16px">Классика крымских грядок — нажмите, чтобы проверить:</h3>
+      <div class="classics" id="classics"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="pn-enc">
+    <div class="card">
+      <h3>📖 Энциклопедия растений <span class="hand" style="font-size:18px;color:var(--terra)" id="encCount"></span></h3>
+      <input id="encSearch" placeholder="🔎 Поиск: томат, лаванда, зизифус…">
+      <div class="mChips" id="encCats" style="margin-top:10px"></div>
+      <div class="encGrid" id="encGrid"></div>
+      <h3 style="margin-top:22px">🌾 Сидераты — бесплатное удобрение</h3>
+      <div class="permGrid" id="siderGrid"></div>
+      <h3 style="margin-top:22px">🪨 Крымская почва: что делать</h3>
+      <div class="permGrid" id="soilGrid"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="pn-pest">
+    <div class="card">
+      <h3>🐛 Вредители и болезни — органические методы</h3>
+      <p class="empty" style="margin-bottom:12px">Нажмите на проблему — расскажу, как справиться без тяжёлой химии. Лучшая защита — профилактика: смешанные посадки, мульча и здоровая почва.</p>
+      <div id="pestList"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="pn-cal">
+    <div class="card">
+      <h3>📅 Посевной календарь Крыма <select id="calShift" style="margin-left:auto"></select></h3>
+      <div class="calLegend">
+        <span><i class="dot" style="background:#7cc25e"></i>рассада</span>
+        <span><i class="dot" style="background:var(--terra)"></i>в грунт / посадка</span>
+        <span><i class="dot" style="background:var(--sun)"></i>урожай</span>
+        <span class="hand" style="font-size:16px;color:var(--terra)">пунктир — сегодня</span>
+      </div>
+      <div class="calHeadRow"><div></div><div class="calTrack calMonths" id="calMonths" style="height:22px"></div></div>
+      <div id="calBody"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="pn-calc">
+    <div class="calcGrid">
+      <div class="card calc">
+        <h3>💧 Норма полива</h3>
+        <label>Культура</label><select id="w-crop"></select>
+        <label>Площадь, м²</label><input type="number" id="w-area" value="3" min="0.5" step="0.5">
+        <label>Почва</label><select id="w-soil">
+          <option value="1">Суглинок (стандарт)</option><option value="1.25">Песчаная — вода уходит</option>
+          <option value="0.85">Чернозём / плотная</option></select>
+        <div class="calcOut" id="w-out"></div>
+      </div>
+      <div class="card calc">
+        <h3>🌱 Сколько растений влезет</h3>
+        <label>Культура</label><select id="p-crop"></select>
+        <label>Длина грядки, м</label><input type="number" id="p-len" value="3" min="0.5" step="0.5">
+        <label>Ширина грядки, м</label><input type="number" id="p-wid" value="1" min="0.3" step="0.1">
+        <div class="calcOut" id="p-out"></div>
+      </div>
+      <div class="card calc">
+        <h3>💦 Капельный полив</h3>
+        <label>Число грядок</label><input type="number" id="d-n" value="4" min="1">
+        <label>Длина грядки, м</label><input type="number" id="d-len" value="3" min="0.5" step="0.5">
+        <label>Шаг капельниц</label><select id="d-step"><option value="20">20 см</option><option value="30" selected>30 см</option><option value="40">40 см</option></select>
+        <div class="calcOut" id="d-out"></div>
+      </div>
+      <div class="card calc">
+        <h3>🪵 Грядка-короб</h3>
+        <label>Длина, м</label><input type="number" id="b-len" value="3" min="0.5" step="0.5">
+        <label>Ширина, м</label><input type="number" id="b-wid" value="1" min="0.3" step="0.1">
+        <label>Высота борта, см</label><input type="number" id="b-h" value="25" min="10" step="5">
+        <div class="calcOut" id="b-out"></div>
+      </div>
+      <div class="card calc">
+        <h3>🍂 Сколько нужно мульчи</h3>
+        <label>Площадь, м²</label><input type="number" id="m-area" value="6" min="0.5" step="0.5">
+        <label>Слой, см</label><input type="number" id="m-layer" value="8" min="2" step="1">
+        <div class="calcOut" id="m-out"></div>
+      </div>
+      <div class="card calc">
+        <h3>🪱 Рецепт компоста</h3>
+        <label>Зелёное сырьё (трава, ботва), кг</label><input type="number" id="c-green" value="10" min="1">
+        <div class="calcOut" id="c-out"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="pn-water">
+    <div class="card">
+      <h3>💧 Автополив и напоминалки <span class="hand" style="font-size:16px;color:var(--terra)">в Крыму вода — главный урожай</span></h3>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+        <button class="btn btn-green" id="watSuggest">⛅ Интервалы по погоде</button>
+        <button class="btn btn-line" id="watBell">🔔 Разрешить уведомления</button>
+      </div>
+      <div id="watBody"></div>
+      <p class="empty" style="font-size:12px;margin-top:12px">💡 Страница должна быть открыта, чтобы сработали напоминалки. Нажали «💧 Полил» — таймер начнёт отсчёт заново. Быстрая отметка полива есть и в инспекторе.</p>
+    </div>
+  </section>
+
+  <!-- 🧺 Урожай -->
+  <section class="panel" id="pn-harv">
+    <div class="card">
+      <h3>🧺 Планировщик урожая <span class="hand" style="font-size:16px;color:var(--terra)">средние крымские цифры — у вас будет не хуже 😉</span></h3>
+      <div class="hSum" id="harvSum"></div>
+      <div id="harvBeds"></div>
+      <h3 style="margin-top:18px">Итог по культурам</h3>
+      <table class="hCropTbl" id="harvCrops"></table>
+    </div>
+  </section>
+
+  <section class="panel" id="pn-rot">
+    <div class="card">
+      <h3>🔄 Севооборот по годам <span class="hand" style="font-size:16px;color:var(--terra)">не возвращайте семью на место раньше 3–4 лет</span></h3>
+      <div class="chain" id="chain"></div>
+      <div class="mChips" id="rotYears" style="margin-top:12px"></div>
+      <div id="rotBody"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+        <button class="btn btn-green" id="rotAuto">✨ Заполнить по цепочке</button>
+      </div>
+      <div id="rotSum" style="margin-top:10px;font-size:13px;font-weight:700"></div>
+    </div>
+  </section>
+
+  <!-- 📒 Дневник -->
+  <section class="panel" id="pn-journal">
+    <div class="card">
+      <h3>📒 Дневник делянки <span class="hand" style="font-size:16px;color:var(--terra)">память для следующего сезона</span></h3>
+      <div class="jForm">
+        <input type="date" id="jDate">
+        <textarea id="jText" rows="2" placeholder="Что сегодня на делянке? Например: посадила чеснок на грядке №3, замульчировала соломой…"></textarea>
+        <button class="btn btn-green" id="jAdd">Записать ✍️</button>
+      </div>
+      <div class="jTpl" id="jTpl"></div>
+      <div id="jList"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="pn-moon">
+    <div class="card">
+      <h3>🌙 Лунный ритм — по фазам</h3>
+      <div class="moonWrap"><div class="moonBig" id="moonEmoji">🌕</div>
+        <div><b id="moonName" style="font-family:Comfortaa;font-size:20px"></b>
+        <p id="moonAdv" style="margin:6px 0 0;font-size:13.5px;color:var(--ink2);max-width:420px"></p>
+        <p id="moonLit" style="margin:6px 0 0;font-size:12px;color:var(--ink2)"></p></div></div>
+      <div class="moonStrip" id="moonStrip"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="pn-tasks">
+    <div class="card">
+      <h3>✅ Дела сезона по-крымски</h3>
+      <div class="mChips" id="mChips"></div>
+      <div class="progBar"><i id="taskProg"></i></div>
+      <div id="taskList"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="pn-perm">
+    <div class="tipOfDay reveal"><span class="hand">Совет дня ✳</span><div id="tipOfDay" style="font-size:15px;margin-top:4px"></div></div>
+    <div class="permGrid" id="permGrid"></div>
+    <div class="comboBox">
+      <h3 style="margin-bottom:6px">🎲 Генератор дружной грядки</h3>
+      <div style="font-size:13px;color:var(--ink2)">Не знаете, что посадить вместе? Делянка предложит проверенное сочетание.</div>
+      <button class="btn btn-green" id="comboBtn" style="margin-top:10px">Собрать грядку 🎲</button>
+      <div id="comboOut"></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="modal" id="helpModal">
+  <div class="modalCard">
+    <h3 style="font-family:Comfortaa;color:var(--green-d)">❓ Как пользоваться делянкой</h3>
+    <h4>🖌 Инструменты</h4>
+    <p><b>▭ Грядка</b> — протяните мышью по траве. <b>🌱 Растения</b> — выберите культуру и кликайте (есть поиск!). <b>🏗 Объекты</b> — компост, бочка, теплица, пруд. <b>🪨 Дорожка</b> — ведите линию. <b>👆 Выбор</b> — подробности о любом объекте.</p>
+    <h4>🤝 Подсказки соседей</h4>
+    <p>При каждой посадке я проверяю соседей вокруг и говорю, кто с кем дружит. Во вкладке «Соседи» можно просканировать весь план на конфликты.</p>
+    <h4>💾 Сохранение и печать</h4>
+    <p>Всё хранится автоматически в браузере. Несколько участков — панель сверху. 📤/📥 — файл плана, 🖨 — печатный лист с планом и показателями.</p>
+    <h4>💧 Полив и погода</h4>
+    <p>«Автополив» напоминает о поливе каждой грядки (страница должна быть открыта). Погода живая по вашему городу Крыма — советы и интервалы подстраиваются под неё.</p>
+    <h4>🌱 Помощь по культурам</h4>
+    <p>«Энциклопедия» — всё про 92 культуры. «Вредители» — органическая защита. «Севооборот» — планы на годы. «Урожай» — прогноз в кг. «Дневник» — записи о том, что делали.</p>
+    <button class="btn btn-green" id="helpClose" style="margin-top:10px">Понятно, творить! 🌱</button>
+  </div>
+</div>
+
+<div id="printSheet"></div>
+
+<footer><span class="hand">Сделано с 🌱 для крымской земли — солнца тут на всех хватит.</span><br>Погодные данные: Open‑Meteo · план хранится у вас в браузере</footer>
+<div id="toasts"></div>
+
+<script>
+/* ══════════════════ ДАННЫЕ: 92 КУЛЬТУРЫ ══════════════════ */
+const PLANTS={
+ tomato:{n:'Томат',e:'🍅',cat:'veg',sp:40,wl:6,good:['basil','garlic','onion','carrot','lettuce','marigold','calendula'],bad:['potato','dill','corn'],rg:'аромат отпугивает вредителей',rb:'общие болезни и конкуренция за свет',tip:'Полив под корень 1–2 раза в неделю, обильно. Мульча 8–10 см — спасение от крымского зноя.'},
+ cherry:{n:'Томат черри',c:'#e2574a',cat:'veg',sp:35,wl:5,good:['basil','marigold','calendula'],bad:['potato'],rb:'общие болезни с картофелем',tip:'Ровный полив без скачков — и плоды не трескаются. В Крыму отлично вялятся на солнце.'},
+ cucumber:{n:'Огурец',e:'🥒',cat:'veg',sp:35,wl:7,good:['corn','bean','pea','dill','lettuce','cabbage','borage'],bad:['potato','tomato'],rb:'конкуренция и риск общих болячек в жару',tip:'Любит влажный воздух: в суховей опрыскивайте дорожки. Огуречная трава зовёт пчёл.'},
+ pepper:{n:'Перец сладкий',e:'🫑',cat:'veg',sp:35,wl:4.5,good:['basil','carrot','onion','marigold'],bad:['bean','chili'],rb:'забирает свет и питание',tip:'Не рыхлите глубоко — корни близко. Притеняйте в полудень.'},
+ chili:{n:'Перец острый',e:'🌶️',cat:'veg',sp:30,wl:4,good:['basil','tomato','carrot'],bad:['pepper'],rb:'переопыление — сладкий перец станет жгучим!',tip:'Сажайте подальше от сладкого собрата, иначе сюрприз в салате.'},
+ eggplant:{n:'Баклажан',e:'🍆',cat:'veg',sp:40,wl:5,good:['bean','lettuce','marigold','thyme'],bad:['potato'],rb:'общий враг — колорадский жук',tip:'Теплолюбив даже по-крымски: южная стена или укрытие добавят урожая.'},
+ potato:{n:'Картофель',e:'🥔',cat:'veg',sp:35,wl:3.5,good:['bean','corn','cabbage','marigold','calendula'],bad:['tomato','cucumber','pumpkin','sunflower'],rb:'конкурент за питание, общие болезни',tip:'В Крыму сажают рано — уже в марте.'},
+ carrot:{n:'Морковь',e:'🥕',cat:'veg',sp:20,wl:2,good:['onion','garlic','leek','lettuce','pea','tomato','radish'],bad:['dill'],rb:'родственник — общие вредители и угнетение',tip:'Рядом с луком: они отпугивают мух друг друга.'},
+ beet:{n:'Свёкла',c:'#9e2b52',cat:'veg',sp:22,wl:2.5,good:['onion','cabbage','lettuce','garlic'],bad:['bean','spinach'],rb:'конкуренция и общие болезни',tip:'Прореживайте без жалости: лишние ростки пересадите — приживутся.'},
+ turnip:{n:'Репа',c:'#c99bd4',cat:'veg',sp:20,wl:2.5,good:['pea','lettuce','spinach'],bad:['cabbage'],rb:'одна семья — общие вредители',tip:'Сейте в июле вторым оборотом — к осени сладкая, хранится всю зиму.'},
+ radish:{n:'Редис',c:'#e0596e',cat:'veg',sp:8,wl:2,good:['pea','lettuce','carrot'],bad:['cabbage'],rb:'общая крестоцветная блошка',tip:'Крымский конвейер: с февраля по май и в сентябре. От блошки — зола по листу.'},
+ daikon:{n:'Дайкон',c:'#e6e1d0',cat:'veg',sp:25,wl:3,good:['lettuce','onion'],bad:['cabbage'],rb:'одна семья — общие вредители',tip:'Сейте в августе, когда день короткий — не уйдёт в стрелку.'},
+ onion:{n:'Лук',e:'🧅',cat:'veg',sp:15,wl:1.5,good:['carrot','strawberry','lettuce','beet'],bad:['bean','pea','chickpea'],rb:'угнетает бобовые',tip:'Классическая пара с морковью — две грядки рядом.'},
+ garlic:{n:'Чеснок',e:'🧄',cat:'veg',sp:15,wl:1.2,good:['strawberry','tomato','carrot','beet','rose'],bad:['bean','pea'],rb:'фитонциды тормозят бобовые',rg:'фитонциды против грибков и тли',tip:'Подзимняя посадка в октябре — крымский стандарт.'},
+ leek:{n:'Лук-порей',c:'#9db86a',cat:'veg',sp:20,wl:2.5,good:['carrot','lettuce'],bad:['bean','pea'],rb:'угнетает бобовые',tip:'Окучивайте несколько раз за сезон — белая ножка будет длиннее.'},
+ cabbage:{n:'Капуста белокочанная',e:'🥬',cat:'veg',sp:45,wl:6,good:['dill','marigold','lettuce','potato'],bad:['strawberry','tomato','grape'],rb:'выносит всё питание, угнетает',tip:'От бабочек — лёгкий агроткань-колпак, укроп по краю зовёт наездников.'},
+ redcab:{n:'Капуста краснокочанная',c:'#6a3d7a',cat:'veg',sp:45,wl:5.5,good:['dill','marigold','lettuce'],bad:['strawberry','tomato'],rb:'выносит всё питание, угнетает',tip:'Любит кальций — крымская известковая почва ей в радость.'},
+ broccoli:{n:'Брокколи',e:'🥦',cat:'veg',sp:40,wl:5.5,good:['dill','marigold','lettuce'],bad:['tomato','strawberry'],rb:'плотная тень и аппетит',tip:'После основной головки даст боковые — не выдёргивайте.'},
+ cauli:{n:'Капуста цветная',c:'#efe4c4',cat:'veg',sp:40,wl:5.5,good:['dill','marigold','bean'],bad:['tomato','strawberry'],rb:'плотная тень и аппетит',tip:'Прикройте головку собственными листьями — будет белой и нежной.'},
+ kohlrabi:{n:'Кольраби',c:'#b5cf8e',cat:'veg',sp:30,wl:4,good:['lettuce','onion','dill'],bad:['tomato','strawberry'],rb:'конкуренция за питание',tip:'Скороспелка: уплотняйте ею края любых грядок.'},
+ lettuce:{n:'Салат',e:'🥗',cat:'veg',sp:20,wl:2.5,good:['carrot','onion','strawberry','cucumber','tomato','radish'],bad:[],rg:'живая мульча, быстро освобождает место',tip:'Летом сейте в полутени деревьев — не уйдёт в стрелку.'},
+ spinach:{n:'Шпинат',c:'#3f6d3a',cat:'veg',sp:15,wl:2.5,good:['strawberry','bean','radish'],bad:['beet','chard'],rb:'одна семья — общие болезни',tip:'Сейте в феврале и сентябре: жару шпинат не любит.'},
+ arugula:{n:'Руккола',c:'#5c8a4e',cat:'veg',sp:15,wl:2,good:['lettuce','cucumber'],bad:['cabbage'],rb:'одна семья — общие вредители',tip:'Готова за 3 недели. Сейте конвейером весь сезон.'},
+ chard:{n:'Мангольд',c:'#d1495b',cat:'veg',sp:30,wl:3.5,good:['onion','cabbage','lettuce'],bad:['spinach','beet'],rb:'одна семья — общие болезни',tip:'Срезайте листья по краю — куст растёт всё лето, до заморозков.'},
+ sorrel:{n:'Щавель',c:'#6aa84f',cat:'veg',sp:20,wl:2,good:['radish','lettuce'],bad:[],rg:'ранняя зелень уже в марте',tip:'Многолетник в полутени. На известковой почве добавьте компоста.'},
+ bean:{n:'Фасоль',e:'🫘',cat:'veg',sp:25,wl:2.5,good:['cucumber','potato','corn','strawberry','eggplant'],bad:['onion','garlic','leek'],rb:'лук и чеснок тормозят рост',rg:'кормит землю азотом',tip:'Кустовая — для бордюров, вьющаяся — на кукурузу или сетку.'},
+ pea:{n:'Горох',e:'🫛',cat:'veg',sp:15,wl:2,good:['carrot','cucumber','corn','bean','radish'],bad:['onion','garlic'],rb:'лук и чеснок тормозят рост',rg:'азот + ранний урожай',tip:'Сейте в марте — успеет до жары.'},
+ chickpea:{n:'Нут',c:'#d9b872',cat:'veg',sp:20,wl:1.5,good:['corn','cucumber'],bad:['onion','garlic'],rb:'лук угнетает',rg:'азот и засухоустойчивость',tip:'Южная крымская культура: жару терпит, перелива не прощает.'},
+ corn:{n:'Кукуруза',e:'🌽',cat:'veg',sp:40,wl:4,good:['bean','pumpkin','cucumber','potato'],bad:['tomato'],rb:'общий враг — совка',tip:'Сажайте «стенкой» 3×3 и больше — ветер опылит лучше.'},
+ pumpkin:{n:'Тыква',e:'🎃',cat:'veg',sp:100,wl:5,good:['corn','bean','nasturtium'],bad:['potato'],rb:'конкуренция и угнетение',tip:'Пусть гуляет по компостной куче — там ей и питание, и место.'},
+ zucchini:{n:'Кабачок',c:'#b7c95d',cat:'veg',sp:70,wl:5,good:['corn','bean','nasturtium','borage'],bad:['potato'],rb:'конкуренция',tip:'Один-два куста прокормят всю семью. Снимайте молодыми.'},
+ pattypan:{n:'Патиссон',c:'#f0d26a',cat:'veg',sp:60,wl:4.5,good:['corn','bean'],bad:['potato'],rb:'конкуренция',tip:'Снимайте на 5–7 см — самые вкусные, и куст плодоносит дольше.'},
+ melon:{n:'Дыня',e:'🍈',cat:'veg',sp:70,wl:4.5,good:['corn','sunflower'],bad:['potato','cucumber'],rb:'перепыление и конкуренция',tip:'Крымская бахча: южный склон, песок, минимум воды после завязи.'},
+ watermelon:{n:'Арбуз',e:'🍉',cat:'veg',sp:100,wl:4,good:['corn'],bad:['potato','cucumber'],rb:'перепыление и конкуренция',tip:'Формируйте 2–3 плети, остальное прищипните — так слаще.'},
+ artichoke:{n:'Артишок',c:'#7fa05a',cat:'veg',sp:90,wl:3.5,good:['bean','tarragon'],bad:[],rg:'многолетний деликатес юга',tip:'В Крыму — многолетник: солнце, известняк и немного места. Красив, как цветок.'},
+ asparagus:{n:'Спаржа',c:'#9ab973',cat:'veg',sp:40,wl:2.5,good:['tomato','parsley'],bad:[],rg:'отгоняет вредителей томатов',tip:'Урожай с третьего года, зато 15 лет на одном месте.'},
+ okra:{n:'Бамия',c:'#7ba05b',cat:'veg',sp:35,wl:3.5,good:['pepper','eggplant'],bad:[],rg:'южный жаростойкий овощ',tip:'Жаростойкая звезда юга. Стручки снимайте каждые 3 дня.'},
+ sweetpotato:{n:'Батат',c:'#c96f3a',cat:'veg',sp:40,wl:3,good:['bean'],bad:[],rg:'закрывает землю от солнца',tip:'Не нуждается в окучивании, любит мульчу. Убирайте до холодов.'},
+ topinambur:{n:'Топинамбур',c:'#c9973a',cat:'veg',sp:50,wl:2,good:[],bad:[],rg:'клубни зимуют в земле сами',tip:'Звезда пермакультуры: посадил и забыл. Сажайте вдоль забора — вырастает стеной.'},
+ basil:{n:'Базилик',e:'🌿',cat:'herb',sp:25,wl:1.5,good:['tomato','pepper','chili'],rg:'отпугивает тлю и белокрылку, улучшает вкус плодов',bad:[],tip:'Щедро цветёт — оставляйте пару кустов для пчёл.'},
+ dill:{n:'Укроп',e:'🌾',cat:'herb',sp:15,wl:1,good:['cabbage','cucumber','zucchini'],bad:['carrot','tomato'],rb:'родственник моркови — конкуренция и общие вредители',rg:'кормит божьих коровок и хищных ос',tip:'Сейте конвейером каждые 2 недели.'},
+ parsley:{n:'Петрушка',c:'#4a7c43',cat:'herb',sp:15,wl:1,good:['tomato','asparagus','rose'],bad:['carrot'],rb:'одна семья — конкуренция',rg:'сосед, улучшающий вкус и здоровье грядки',tip:'Сейте под зиму — весной будет самой первой.'},
+ cilantro:{n:'Кинза',c:'#7fb069',cat:'herb',sp:15,wl:1,good:['bean','potato'],bad:[],rg:'отгоняет вредителей картофеля',tip:'В жару быстро стрелкуется — сейте в полутени каждые 2 недели.'},
+ mint:{n:'Мята',e:'🍃',cat:'herb',sp:30,wl:1.5,good:['cabbage'],rg:'запах прячет капусту от вредителей',bad:[],tip:'Только в вкопанном ведре — иначе захватит весь огород.'},
+ melissa:{n:'Мелисса',c:'#8fbf8f',cat:'herb',sp:30,wl:1.2,good:['tomato'],rg:'медонос и сосед с мягким нравом',bad:[],tip:'Пахнет лимоном, цветёт всё лето. Срезайте до полного цветения.'},
+ thyme:{n:'Чабрец',c:'#9a8fb8',cat:'herb',sp:25,wl:0.6,good:['cabbage','eggplant'],rg:'аромат сбивает вредителей с толку',bad:[],tip:'Любит бедную известковую почву — чисто крымская история.'},
+ oregano:{n:'Душица',c:'#a68ab5',cat:'herb',sp:30,wl:0.7,good:['grape','apple'],rg:'почвопокровник и медонос',bad:[],tip:'Живой ковёр под деревьями: цветёт, пахнет, кормит пчёл.'},
+ rosemary:{n:'Розмарин',c:'#6f8fae',cat:'herb',sp:50,wl:0.5,good:['cabbage','grape','rose'],rg:'отгоняет капустных вредителей',bad:[],tip:'Не выносит мокрых ног — ему каменистый склон и солнце.'},
+ sage:{n:'Шалфей',c:'#8fa3b8',cat:'herb',sp:35,wl:0.7,good:['cabbage','carrot','grape'],bad:['cucumber'],rb:'угнетает огурцы',rg:'ароматный страж капустных грядок',tip:'Крымский лекарь: сушите лист на зиму.'},
+ savory:{n:'Чабер',c:'#7d9b6a',cat:'herb',sp:20,wl:0.8,good:['bean','onion'],rg:'перечный аромат и защита фасоли',bad:[],tip:'Крымская пряность древних тавров. К фасоли и мясу.'},
+ tarragon:{n:'Эстрагон',c:'#77a06a',cat:'herb',sp:40,wl:1,good:['peach'],rg:'многолетний пряный сосед',bad:[],tip:'Многолетник на 8–10 лет. Для лимонадов и солений.'},
+ lavender:{n:'Лаванда',e:'🪻',cat:'herb',sp:40,wl:0.8,good:['grape','rose'],rg:'аромат дезориентирует вредителей',bad:[],tip:'Крымский сухолюб: бедная известковая почва и солнце — её стихия.'},
+ bay:{n:'Лавр',c:'#4e6e3f',cat:'herb',sp:100,wl:1.5,good:[],rg:'вечнозелёный страж южного сада',bad:[],tip:'На ЮБК — в грунт, в степи — в кадке с зимовкой в доме.'},
+ marigold:{n:'Бархатцы',e:'🌼',cat:'flower',sp:20,wl:1,good:['tomato','potato','cabbage','strawberry','carrot','rose'],rg:'санитар грядки: нематода, тля и белокрылка обходят стороной',bad:[],tip:'Сажайте по углам каждой грядки — пермакультурная классика.'},
+ sunflower:{n:'Подсолнух',e:'🌻',cat:'flower',sp:50,wl:3,good:['corn','zucchini','melon'],bad:['potato','bean'],rb:'аллелопатия: тормозит рост соседей',tip:'Подвяжите к колу — крымский ветер валит великанов.'},
+ rose:{n:'Роза',e:'🌹',cat:'flower',sp:60,wl:2,good:['garlic','lavender'],rg:'чеснок лечит от чёрной пятнистости',bad:[],tip:'Крымская классика: роза + лаванда + чеснок.'},
+ calendula:{n:'Календула',c:'#f2a93b',cat:'flower',sp:25,wl:1,good:['tomato','potato','strawberry'],rg:'обеззараживает почву и отгоняет вредителей',bad:[],tip:'Аптека и помощник. Сеется сама — только успевай раздавать.'},
+ nasturtium:{n:'Настурция',c:'#e8863a',cat:'flower',sp:30,wl:1.2,good:['apple','zucchini','grape'],rg:'отвлекает тлю на себя',bad:[],tip:'Жертвенный цветок: тля выбирает её, а не овощи. Съедобны и цветы, и семена.'},
+ phacelia:{n:'Фацелия',c:'#8f7fd4',cat:'flower',sp:15,wl:1,good:[],rg:'медонос №1 и зелёное удобрение',bad:[],tip:'Сейте после уборки урожая: за месяц даёт ковёр зелени и корм пчёлам.'},
+ borage:{n:'Огуречная трава',c:'#5a8fd4',cat:'flower',sp:30,wl:1.5,good:['cucumber','strawberry','zucchini'],rg:'привлекает пчёл и шмелей',bad:[],tip:'Пахнет огурцом, цветёт синими звёздами. Пчёлы в восторге.'},
+ echinacea:{n:'Эхинацея',c:'#c76b9e',cat:'flower',sp:35,wl:1,good:['apple'],rg:'кормит полезных насекомых',bad:[],tip:'Аптечная ромашка прерий. Засуху не замечает.'},
+ cosmos:{n:'Космея',c:'#d87ab5',cat:'flower',sp:30,wl:1,good:[],rg:'воздушный дом для энтомофагов',bad:[],tip:'Лёгкое облако цветов. Кормит полезных насекомых до заморозков.'},
+ strawberry:{n:'Клубника',e:'🍓',cat:'berry',sp:30,wl:2.5,good:['garlic','onion','lettuce','bean','borage','marigold'],bad:['cabbage','grape'],rb:'капуста забирает всё питание',tip:'В Крыму сажают в августе–сентябре, не весной!'},
+ grape:{n:'Виноград',e:'🍇',cat:'berry',sp:150,wl:7,good:['strawberry','lavender','rosemary'],bad:['cabbage','onion'],rb:'лук и капуста угнетают лозу',tip:'Шпалера на южной стене — стена греет лозу ночью.'},
+ raspberry:{n:'Малина',c:'#c94f6d',cat:'berry',sp:50,wl:4,good:['marigold','garlic'],bad:['blackberry'],rb:'конкуренция и общие болезни',tip:'Ремонтантные сорта в Крыму плодоносят до ноября.'},
+ blackberry:{n:'Ежевика',c:'#4a3550',cat:'berry',sp:60,wl:3.5,good:[],bad:['raspberry'],rb:'одна семья — общие болезни',tip:'Бесшипные сорта на шпалере. Зреет в самый зной.'},
+ currant:{n:'Смородина',c:'#3f4f8e',cat:'berry',sp:80,wl:3.5,good:['onion'],bad:['gooseberry'],rb:'общие вредители: пилильщик и огнёвка',tip:'Чёрной в степной жаре туго — полутень и толстая мульча.'},
+ gooseberry:{n:'Крыжовник',c:'#7ba23f',cat:'berry',sp:80,wl:3,good:[],bad:['currant'],rb:'общие вредители: пилильщик и огнёвка',tip:'Выбирайте сорта, стойкие к мучнистой росе.'},
+ blueberry:{n:'Голубика',c:'#4f6fae',cat:'berry',sp:80,wl:3,good:[],bad:[],rg:'любит кислую почву в отдельной яме',tip:'В известковый Крым ей нужна отдельная яма с кислым торфом или кадка.'},
+ seabuck:{n:'Облепиха',c:'#e89b3a',cat:'berry',sp:150,wl:2.5,good:[],bad:[],rg:'азотфиксатор и витаминная бомба',tip:'Нужны «муж» и «жена». Корни гуляют далеко — сажайте у забора.'},
+ mulberry:{n:'Шелковица',c:'#5d3a5e',cat:'berry',sp:400,wl:2,good:[],bad:[],rg:'кормилица южных дворов',tip:'Крымская классика. Ягода падает — не сажайте над дорожкой.'},
+ honeysuckle:{n:'Жимолость',c:'#5f7fbf',cat:'berry',sp:80,wl:2.5,good:[],bad:[],rg:'первая ягода уже в мае',tip:'Два куста разных сортов для переопыления. Самая ранняя ягода — май.'},
+ feijoa:{n:'Фейхоа',c:'#6a8f5a',cat:'berry',sp:150,wl:3,good:[],bad:[],rg:'субтропический друг ЮБК',tip:'На ЮБК живёт в грунте, цветёт съедобными цветами. Ищите самоплодные сорта.'},
+ apple:{n:'Яблоня',e:'🍎',cat:'tree',sp:400,wl:40,good:['dill','marigold','nasturtium'],bad:[],tip:'Выбирайте районированные сорта — Симиренко, Кандиль.'},
+ pear:{n:'Груша',e:'🍐',cat:'tree',sp:400,wl:38,good:[],bad:[],tip:'Не сажайте рядом с можжевельником — он разносит ржавчину.'},
+ 'sweet cherry':{n:'Черешня',e:'🍒',cat:'tree',sp:400,wl:35,good:[],bad:[],tip:'Нужна пара другого сорта для опыления.'},
+ cherryS:{n:'Вишня',c:'#a03040',cat:'tree',sp:350,wl:30,good:[],bad:[],tip:'Зимостойче черешни — надёжнее для степного Крыма.'},
+ plum:{n:'Слива',c:'#6a4a8a',cat:'tree',sp:350,wl:32,good:[],bad:[],tip:'Алыча и её гибриды надёжнее сливы в крымском климате.'},
+ apricot:{n:'Абрикос',c:'#e8a04a',cat:'tree',sp:400,wl:30,good:[],bad:[],tip:'Цветёт рано и рискует под возвратными заморозками — выбирайте поздноцветущие сорта.'},
+ peach:{n:'Персик',e:'🍑',cat:'tree',sp:350,wl:35,good:['garlic'],rg:'чеснок защищает от курчавости',tip:'Идеален у южной стены: тепло днём, защита ночью.'},
+ fig:{n:'Инжир',c:'#7b6f9e',cat:'tree',sp:350,wl:25,good:[],rg:'сухолюб и щедрый друг южных участков',tip:'Выдерживает крымские засухи почти без полива.'},
+ walnut:{n:'Орех грецкий',e:'🌰',cat:'tree',sp:800,wl:30,good:[],bad:[],rb:'выделяет юглон — рядом почти ничего не растёт',tip:'Держите в «дикой» 5-й зоне: под кроной лучше газон или скамейка.'},
+ persimmon:{n:'Хурма',e:'🍊',cat:'tree',sp:400,wl:28,good:[],bad:[],tip:'На ЮБК плодоносит без укрытия, в степи — укрывайте саженцы первые зимы.'},
+ almond:{n:'Миндаль',c:'#c9a06a',cat:'tree',sp:400,wl:20,good:[],bad:[],tip:'Цветёт в феврале — крымская первая весна. Нужно два дерева для опыления.'},
+ cornel:{n:'Кизил',c:'#b04040',cat:'tree',sp:300,wl:15,good:[],bad:[],tip:'Живёт веками, стрижётся в живую изгородь, почти не болеет.'},
+ quince:{n:'Айва',c:'#d9b23a',cat:'tree',sp:350,wl:35,good:[],bad:[],tip:'Любит влажный угол у пруда. Классический подвой для груши.'},
+ chestnut:{n:'Каштан съедобный',c:'#8a5a36',cat:'tree',sp:800,wl:35,good:[],bad:[],tip:'Для просторных участков: тень, орехи и 100 лет жизни. Влаголюбив.'},
+ lemon:{n:'Лимон',e:'🍋',cat:'tree',sp:200,wl:15,good:[],bad:[],tip:'В степи — кадка с зимовкой в доме, на ЮБК — в грунт под укрытие.'},
+ loquat:{n:'Мушмула',c:'#d98a4a',cat:'tree',sp:350,wl:25,good:[],bad:[],tip:'Цветёт осенью, плодоносит в мае — крымская экзотика наоборот.'},
+ pomegranate:{n:'Гранат',c:'#b23a3a',cat:'tree',sp:250,wl:20,good:[],bad:[],tip:'Карликовые сорта плодоносят даже в кадке. Солнце обязательно.'},
+ jujube:{n:'Зизифус (унаби)',c:'#b07a3a',cat:'tree',sp:350,wl:12,good:[],bad:[],rg:'чемпион засухоустойчивости',tip:'Суперзасухоустойчив. Плоды как финики. ЮБК и юго-восток Крыма.'},
+ olive:{n:'Олива',c:'#8a9a5a',cat:'tree',sp:400,wl:10,good:[],bad:[],tip:'Для ЮБК. Растёт медленно, живёт веками, серебрится на ветру.'}};
+const OBJECTS={compost:{n:'Компост',w:1,h:1,tip:'Три секции: свежее → зреет → готово. Не копайте — переворачивайте редко.'},
+ barrel:{n:'Бочка с водой',w:1,h:1,tip:'Ставьте у водостока. Тёмная бочка греется на солнце — растениям приятнее.'},
+ greenhouse:{n:'Теплица',w:3,h:2,tip:'В Крыму чаще нужна не от холода, а от ветра и для ранней рассады.'},
+ pond:{n:'Пруд / ёмкость',w:2,h:2,tip:'Вода смягчает микроклимат: ночью прохладнее, жабы едят слизней.'}};
+const CATS=[['veg','🥕 Овощи'],['berry','🍓 Ягоды и лозы'],['herb','🌿 Зелень и травы'],['flower','🌼 Цветы-помощники'],['tree','🌳 Деревья']];
+const glyphHTML=d=>d.e?d.e:`<i class="noemo" style="background:${d.c||'#8a9a5a'}">${d.n[0]}</i>`;
+
+/* урожай кг/растение (средне по Крыму) и сезон сбора */
+const YLD={tomato:4.5,cherry:2.5,cucumber:3.5,pepper:2,chili:.8,eggplant:2.5,potato:.9,carrot:.1,beet:.15,turnip:.15,radish:.02,daikon:.4,onion:.12,garlic:.06,leek:.2,cabbage:2.5,redcab:2,broccoli:1,cauli:1.2,kohlrabi:.8,lettuce:.25,spinach:.08,arugula:.06,chard:.6,sorrel:.15,bean:.4,pea:.3,chickpea:.15,corn:.4,pumpkin:8,zucchini:5,pattypan:3,melon:4,watermelon:6,artichoke:1,asparagus:.3,okra:.7,sweetpotato:2,topinambur:2.5,
+ basil:.4,dill:.05,parsley:.1,cilantro:.05,mint:.3,melissa:.3,thyme:.15,oregano:.2,rosemary:.3,sage:.25,savory:.15,tarragon:.25,lavender:.1,bay:.5,
+ strawberry:.5,grape:5,raspberry:1.2,blackberry:2,currant:2,gooseberry:3,blueberry:1.5,seabuck:5,mulberry:15,honeysuckle:1.5,feijoa:8,
+ apple:40,pear:35,'sweet cherry':25,cherryS:15,plum:25,apricot:30,peach:30,fig:20,walnut:20,persimmon:30,almond:5,cornel:15,quince:25,chestnut:15,lemon:3,loquat:15,pomegranate:10,jujube:15,olive:8};
+const SEASON={tomato:'июль–сентябрь',cherry:'июль–сентябрь',cucumber:'июнь–сентябрь',pepper:'июль–сентябрь',chili:'июль–октябрь',eggplant:'июль–сентябрь',potato:'июнь–июль',carrot:'июнь–октябрь',beet:'июль–октябрь',turnip:'сентябрь–октябрь',radish:'апрель–май, сент.–окт.',daikon:'сентябрь–октябрь',onion:'июль–август',garlic:'июнь–июль',leek:'сентябрь–октябрь',cabbage:'июль–октябрь',redcab:'август–октябрь',broccoli:'июнь–октябрь',cauli:'июнь–сентябрь',kohlrabi:'май–октябрь',lettuce:'апрель–октябрь',spinach:'апрель–май, сент.–окт.',arugula:'весь сезон',chard:'май–октябрь',sorrel:'апрель–октябрь',bean:'июль–сентябрь',pea:'май–июль',chickpea:'июль–август',corn:'август–сентябрь',pumpkin:'август–сентябрь',zucchini:'июнь–сентябрь',pattypan:'июнь–сентябрь',melon:'июль–сентябрь',watermelon:'август–сентябрь',artichoke:'июнь–август',asparagus:'апрель–май',okra:'июль–сентябрь',sweetpotato:'сентябрь–октябрь',topinambur:'сентябрь–ноябрь',basil:'июнь–октябрь',dill:'весь сезон',parsley:'апрель–ноябрь',cilantro:'весь сезон',mint:'май–сентябрь',melissa:'май–сентябрь',thyme:'июнь–август',oregano:'июнь–август',rosemary:'круглый год',sage:'май–октябрь',savory:'июнь–сентябрь',tarragon:'май–октябрь',lavender:'июнь–июль',bay:'круглый год',strawberry:'май–июнь',grape:'август–октябрь',raspberry:'июнь–октябрь',blackberry:'июль–август',currant:'июнь–июль',gooseberry:'июнь–июль',blueberry:'июнь–август',seabuck:'август–сентябрь',mulberry:'май–июнь',honeysuckle:'май',feijoa:'октябрь–ноябрь',apple:'август–октябрь',pear:'август–сентябрь','sweet cherry':'май–июнь',cherryS:'июнь',plum:'июль–август',apricot:'июнь–июль',peach:'июль–август',fig:'июль–октябрь',walnut:'сентябрь–октябрь',persimmon:'октябрь–ноябрь',almond:'август',cornel:'август–сентябрь',quince:'сентябрь–октябрь',chestnut:'октябрь',lemon:'октябрь–декабрь',loquat:'май–июнь',pomegranate:'сентябрь–октябрь',jujube:'сентябрь–октябрь',olive:'октябрь–ноябрь'};
+
+const FAMS={night:{n:'Паслёновые',e:'🍅'},cucurbit:{n:'Тыквенные',e:'🥒'},brassica:{n:'Капустные',e:'🥬'},
+ legume:{n:'Бобовые',e:'🫘'},root:{n:'Луки',e:'🧅'},umbel:{n:'Зонтичные',e:'🥕'},chen:{n:'Маревые и листовые',e:'🌱'},
+ green:{n:'Салаты и зелень',e:'🥗'},berry:{n:'Ягоды',e:'🍓'},other:{n:'Прочие однолетники',e:'🌽'},
+ flower:{n:'Цветы и медоносы',e:'🌼'},tree:{n:'Деревья и кустарники',e:'🌳'},sider:{n:'Сидераты / отдых',e:'🌾'}};
+const CHAIN=['night','legume','brassica','root','umbel','cucurbit','chen','green','berry','other','sider'];
+const FAM={tomato:'night',cherry:'night',pepper:'night',chili:'night',eggplant:'night',potato:'night',
+ cucumber:'cucurbit',pumpkin:'cucurbit',zucchini:'cucurbit',pattypan:'cucurbit',melon:'cucurbit',watermelon:'cucurbit',
+ cabbage:'brassica',redcab:'brassica',broccoli:'brassica',cauli:'brassica',kohlrabi:'brassica',arugula:'brassica',turnip:'brassica',radish:'brassica',daikon:'brassica',
+ onion:'root',garlic:'root',leek:'root',
+ carrot:'umbel',dill:'umbel',parsley:'umbel',cilantro:'umbel',
+ beet:'chen',spinach:'chen',chard:'chen',sorrel:'chen',
+ bean:'legume',pea:'legume',chickpea:'legume',
+ lettuce:'green',corn:'other',artichoke:'other',asparagus:'other',okra:'other',sweetpotato:'other',topinambur:'other',
+ basil:'green',mint:'green',melissa:'green',thyme:'green',oregano:'green',rosemary:'green',sage:'green',savory:'green',tarragon:'green',lavender:'green',bay:'green',
+ marigold:'flower',sunflower:'flower',rose:'flower',calendula:'flower',nasturtium:'flower',phacelia:'flower',borage:'flower',echinacea:'flower',cosmos:'flower',
+ strawberry:'berry',grape:'berry',raspberry:'berry',blackberry:'berry',currant:'berry',gooseberry:'berry',blueberry:'berry',seabuck:'berry',honeysuckle:'berry',
+ mulberry:'tree',feijoa:'tree',apple:'tree',pear:'tree','sweet cherry':'tree',cherryS:'tree',plum:'tree',apricot:'tree',peach:'tree',fig:'tree',walnut:'tree',persimmon:'tree',
+ almond:'tree',cornel:'tree',quince:'tree',chestnut:'tree',lemon:'tree',loquat:'tree',pomegranate:'tree',jujube:'tree',olive:'tree'};
+
+const REGIONS={
+ simf:{n:'Симферополь',lat:44.952,lon:34.102,zone:'7b–8a',frost:'~25 апр / 20 окт',rain:'~480 мм/год',note:'предгорье: жаркий день, росистые ночи',fS:[4,25],fA:[10,20]},
+ sev:{n:'Севастополь',lat:44.616,lon:33.525,zone:'8a',frost:'~5 апр / 30 окт',rain:'~430 мм/год',note:'море смягчает: весна ранняя, ветра',fS:[4,5],fA:[10,30]},
+ yalta:{n:'Ялта (ЮБК)',lat:44.495,lon:34.166,zone:'8b–9a',frost:'~20 фев / 25 ноя',rain:'~560 мм/год',note:'субтропики: инжир, хурма, кипарисы',fS:[2,20],fA:[11,25]},
+ kerch:{n:'Керчь',lat:45.353,lon:36.474,zone:'7b',frost:'~15 апр / 25 окт',rain:'~420 мм/год',note:'самый ветреный угол Крыма',fS:[4,15],fA:[10,25]},
+ evp:{n:'Евпатория',lat:45.190,lon:33.366,zone:'7b–8a',frost:'~20 апр / 22 окт',rain:'~400 мм/год',note:'степь у моря: сухо, солоноватые ветра',fS:[4,20],fA:[10,22]},
+ feo:{n:'Феодосия',lat:45.030,lon:35.380,zone:'8a',frost:'~10 апр / 28 окт',rain:'~450 мм/год',note:'виноградный край Киммерии',fS:[4,10],fA:[10,28]},
+ bah:{n:'Бахчисарай',lat:44.755,lon:33.860,zone:'7b–8a',frost:'~15 апр / 25 окт',rain:'~500 мм/год',note:'долина в скалах: сады и лаванда',fS:[4,15],fA:[10,25]},
+ dzh:{n:'Джанкой',lat:45.708,lon:34.393,zone:'7b',frost:'~18 апр / 18 окт',rain:'~380 мм/год',note:'северная степь: полив обязателен',fS:[4,18],fA:[10,18]}};
+const WMO={0:['☀️','Ясно'],1:['🌤','Малооблачно'],2:['⛅','Переменная облачность'],3:['☁️','Пасмурно'],45:['🌫','Туман'],48:['🌫','Изморозь'],51:['🌦','Морось'],53:['🌦','Морось'],55:['🌧','Морось'],61:['🌧','Небольшой дождь'],63:['🌧','Дождь'],65:['🌧','Сильный дождь'],71:['🌨','Снег'],73:['🌨','Снег'],75:['❄️','Сильный снег'],80:['🌦','Ливень'],81:['🌧','Ливень'],82:['⛈','Ливень'],95:['⛈','Гроза'],96:['⛈','Гроза с градом'],99:['⛈','Гроза с градом']};
+const wmo=c=>WMO[c]||['🌡','—'];
+
+const CAL=[
+ {k:'tomato',s:[2.0,3.4],g:[4.6,5.5],h:[6.6,9.5]},{k:'pepper',s:[1.6,2.9],g:[5.0,5.8],h:[7,9.5]},
+ {k:'eggplant',s:[1.6,2.9],g:[5.0,5.8],h:[7,9.3]},{k:'cucumber',s:[3.6,4.6],g:[4.8,6.4],h:[6.2,9]},
+ {k:'cabbage',s:[2.4,3.5],g:[4.0,4.8],h:[6,7.6]},{k:'carrot',g:[3.0,4.2],g2:[7.6,8.5],h:[5.8,10.5]},
+ {k:'potato',g:[2.9,4.0],h:[5.9,7.5]},{k:'onion',g:[2.8,4.0],h:[6.5,8]},
+ {k:'garlic',g:[10.0,11.2],h:[6.0,7.2]},{k:'pea',g:[3.0,4.2],h:[5.5,7]},
+ {k:'bean',g:[5.0,6.2],h:[7,9]},{k:'pumpkin',g:[5.0,5.8],h:[8,9.6]},
+ {k:'melon',s:[3.8,4.6],g:[5.3,6.0],h:[7.4,9]},{k:'watermelon',s:[3.8,4.6],g:[5.3,6.0],h:[7.5,9.2]},
+ {k:'lettuce',g:[3.4,9.0],h:[4.3,10.2]},{k:'strawberry',g:[8.8,10.0],h:[5.4,6.8]},
+ {k:'grape',g:[3.4,4.6],g2:[10.0,11.3],h:[8,9.8]}];
+
+const MONTHS=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const MGEN=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+const TASKS=[
+ ['Обрезка винограда и деревьев (в дни выше −5°)','Проверить семенной фонд и составить план','Заготовить золу и яичную скорлупу в компост','Подкормить птиц — они отблагодарят весной'],
+ ['Посев перцев и баклажанов на рассаду (конец месяца)','Закончить обрезку винограда','Купить грунт, стаканы, семена','Побелить стволы на солнце'],
+ ['Посев томатов на рассаду','В грунт: зелень, морковь, редис; на ЮБК — картофель','Первая подкормка ягодников','Вырезать сухие ветви малины'],
+ ['Посадка картофеля (середина месяца)','Посев свёклы и моркови в грунт','Высадка рассады под плёнку','Обработка от вредителей по зелёному конусу'],
+ ['Высадка рассады в грунт после возвратных заморозков','Мульчирование всех грядок','Установить капельный полив','Посадка укоренённых чубуков винограда'],
+ ['Полив под корень, рано утром','Пасынкование томатов','Посеять сидераты на свободные места','Притенить молодые саженцы сеткой'],
+ ['Сбор урожая и заготовки','Урожай чеснока — выкопать в сухой день','Притенение в зной лутрасилом','Посеять зелень вторым оборотом'],
+ ['Сушка трав: лаванда, чабер, мята','Посев зелени, дайкона и редьки на осень','Прищипнуть верхушки томатов','Готовить грядки под осень — сидераты'],
+ ['🍓 Посадка клубники — лучшее время в Крыму!','Сидераты на освободившиеся грядки','Посадка деревьев и кустов (в Крыму осень лучше весны)','Собрать семена бархатцев и укропа'],
+ ['Посадка озимого чеснока','Посадка саженцев винограда и деревьев','Мульчирование многолетников на зиму','Уборка тыквы и поздних перцев'],
+ ['Завершить посадку деревьев','Укрытие молодого винограда','Санитарная обрезка после листопада','Компостную кучу укрыть на зиму'],
+ ['Планы на новый сезон: севооборот и соседи','Стратификация семян (лаванда, розы)','Проверить укрытия в оттепель','Кормушки для птиц — союзники против вредителей']];
+const TIPS=['В Крыму главный ресурс — вода. Бочка под каждым водостоком важнее дорогого забора.','Не копайте — кормите: слой компоста и мульчи сверху работает лучше лопаты.','Южная стена дома — это батарея: посадите рядом виноград или инжир, и они дозреют быстрее.','Бархатцы по углам каждой грядки — дешёвая «аптека» от нематоды.','После уборки чеснока в июле сразу сейте сидераты — земля не должна стоять голой под солнцем.','Мульча 10 см снижает полив вдвое — проверено степью.','Виноград любит «горячие ноги»: щебень вокруг куста греет корни ночью.','Деревья сажайте в Крыму осенью, а не весной — зима мягкая, корни успеют освоиться.','Смешанные посадки ломают циклы вредителей: моно-грядка — шведский стол, смешанная — лабиринт.','Капельный полив утром экономит до 40% воды по сравнению со шлангом в полдень.','Настурция примет тлю на себя — сажайте её подальше от капусты, у жертвенного цветка.','Острый перец не сажайте рядом со сладким: переопылятся, и сладкий станет жгучим.','Фацелия после урожая — месяц, и грядка укрыта зелёным одеялом и накормлена.','Крымская известь — подарок для лаванды, розмарина, винограда и граната.'];
+const COMBOS=[['tomato','basil','carrot','marigold','Томат под защитой базилика, морковь рыхлит междурядья, бархатцы держат оборону периметра.'],
+ ['corn','bean','pumpkin','«Три сестры»: кукуруза — опора, фасоль — азот, тыква — живая мульча.'],
+ ['strawberry','garlic','lettuce','Клубника с чесноком не болеет, салат прикрывает землю.'],
+ ['cucumber','dill','corn','Огурцы плетутся по кукурузе, укроп зовёт божьих коровок.'],
+ ['cabbage','dill','marigold','Капуста под прикрытием укропа и бархатцев — бабочки пролетят мимо.'],
+ ['pepper','basil','onion','Перцы в ароматном кольце: базилик сверху, лук снизу.'],
+ ['potato','bean','marigold','Фасоль даёт картофелю азот, бархатцы отгоняют нематоду.'],
+ ['grape','lavender','Лоза и лаванда: крымский дуэт, которому радуются пчёлы и соседи.'],
+ ['beet','onion','lettuce','Свёкла с луком — классика: лук отгоняет свекольную муху.'],
+ ['zucchini','nasturtium','borage','Кабачок, настурция и огуречная трава — пчёлы слетятся со всей округи.']];
+const SIDER=[['🌼','Горчица белая','Сейте в июле после чеснока и лука — очищает землю от проволочника и гнилей. За месяц готова.','июль–сентябрь'],
+ ['💜','Фацелия','Медонос №1: в любое время, смягчает землю, кормит пчёл. Идеальна между грядками.','весь сезон'],
+ ['🌾','Овёс и рожь','Осенний посев — зелёный ковёр уйдёт под зиму и удержит влагу.','сентябрь–октябрь'],
+ ['🍀','Клевер белый','В междурядья и под деревья: азот, не боится тропинок, кормит пчёл.','весна и осень']];
+const SOIL=[['🪨','Известковая (щелочная)','Рай для лаванды, розмарина, винограда и граната. Под голубику и щавель — кислый торф в отдельную яму.'],
+ ['🧱','Тяжёлая глинистая','Сидераты + компост + высокие грядки. Не копайте мокрую глину — зацементится.'],
+ ['🏖','Песчаная','Компост вёдрами, толстая мульча, полив чаще и меньше. Добавьте глины при посадке деревьев.'],
+ ['🟤','Южный чернозём','Не перекормите азотом — лучше мульча и компост раз в год. Земля мечты, берегите её.']];
+const PESTS=[
+ {e:'🪲',n:'Колорадский жук',on:'картофель, баклажаны',m:'Собирать вручную утром; опудривать золой; раствор горчицы с уксусом (100 г горчицы + 100 мл уксуса на 10 л). Куры и цесарки — лучшие «тракторы».',pl:'календула между рядами, фасоль по краю картофельной грядки'},
+ {e:'🐜',n:'Тля',on:'молодые побеги, бобы, фруктовые деревья',m:'Мыльный раствор (300 г хозяйственного мыла на 10 л), обрабатывать вечером. Божьи коровки съедают сотни тлей в день — приманите их зонтичными.',pl:'укроп и фацелия для божьих коровок, настурция — жертвенная приманка'},
+ {e:'🪱',n:'Проволочник',on:'корни, картофель, морковь',m:'Главное — вывести пырей: он его дом. Горчица как сидерат, приманки из кусочков картофеля, не давать земле пересыхать.',pl:'горчица белая, фацелия, бархатцы'},
+ {e:'🦋',n:'Капустница и совка',on:'все капустные',m:'Лёгкий агроткань или сетка сразу после высадки. Опудривание золой и табачной пылью, настой луковой шелухи.',pl:'укроп и календула привлекают наездников — врагов гусениц'},
+ {e:'🥕',n:'Морковная муха',on:'морковь, петрушка',m:'Смешанные посадки с луком (запах сбивает с толку), не загущать посевы, мульчировать табачной пылью.',pl:'лук, чеснок, бархатцы'},
+ {e:'🧅',n:'Луковая муха',on:'лук, чеснок',m:'Совместная грядка с морковью — они защищают друг друга. Мульча, зола по всходам, рыхление.',pl:'морковь, календула'},
+ {e:'🕷️',n:'Паутинный клещ',on:'огурцы, перцы — особенно в жару',m:'Любит сухость: чаще опрыскивайте листья, мульчируйте. Настой луковой шелухи (200 г на 10 л, сутки).',pl:'бархатцы рядом с огурцами'},
+ {e:'🍇',n:'Милдью (ложная мучнистая роса)',on:'виноград',m:'Проветриваемая формировка, не загущать; оборвать нижние листья; бордоская жидкость 1% до цветения. Выбирайте устойчивые сорта.',pl:'роза и лаванда рядом — индикаторы здоровья виноградника'},
+ {e:'⚪',n:'Мучнистая роса',on:'крыжовник, кабачки, розы',m:'Раствор сыворотки 1:10 по листу; сода + мыло (50 г + 40 г на 10 л); коллоидная сера. Не кормить азотом во второй половине лета.',pl:'календула и настурция оздоравливают грядку'},
+ {e:'🍅',n:'Фитофтора',on:'томаты, картофель',m:'Полив только под корень утром; мульча — барьер спорам из почвы; снимать плоды бурыми; медьсодержащие по листу в сырую погоду.',pl:'базилик и чеснок рядом с томатами'},
+ {e:'🐌',n:'Слини и слизни',on:'рассада, салаты, клубника',m:'Пивные ловушки вкопать вровень с землёй; дорожки из золы и яичной скорлупы; собирать вечером. Ежи и жабы — ночная смена защиты.',pl:'розмарин и шалфей слизни не любят'},
+ {e:'🐜',n:'Муравьи',on:'разносят тлю',m:'Не уничтожайте всех — они рыхлят землю. Переносите муравейники от грядок; барьеры из мяты и корицы; сладкие ловушки.',pl:'мята по периметру грядок'}];
+const BADGES=[['bed1','🟫','Первая грядка'],['p10','🌱','Зелёные руки'],['s7','🌈','7 культур'],['love','🤝','Дружба на грядке'],['obj3','🏗','Обустройство'],['reg','🗺','Знаток климата'],['p30','🌳','Большой огород'],['s15','📖','Коллекционер'],['wat5','💧','Хранитель воды'],['j1','📒','Летописец']];
+const JTPL=['💧 Полил всё','🌱 Высадил рассаду','🐛 Проверка вредителей','🧺 Сбор урожая','🍂 Замульчировал','🪱 Подкормил компостом','✂️ Обрезка винограда','🌾 Посеял сидераты'];
+
+/* ══════════════════ УЧАСТКИ ══════════════════ */
+let plots={},activeId=null,state=null,bedSeq=0;
+const LS='crimea-garden-v1';
+const $=s=>document.querySelector(s);
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function freshState(){return{cols:24,rows:14,beds:[],plants:[],objects:[],paths:[],rot:{},water:{},journal:[]}}
+function fixState(s){
+  s=s&&typeof s==='object'?s:{};
+  s.cols=Math.min(48,Math.max(4,Number.isFinite(+s.cols)?Math.round(+s.cols):24));
+  s.rows=Math.min(32,Math.max(4,Number.isFinite(+s.rows)?Math.round(+s.rows):14));
+  s.beds=Array.isArray(s.beds)?s.beds:[];
+  s.plants=Array.isArray(s.plants)?s.plants:[];
+  s.objects=Array.isArray(s.objects)?s.objects:[];
+  s.paths=Array.isArray(s.paths)?[...new Set(s.paths.map(String))]:[];
+  s.rot=s.rot&&typeof s.rot==='object'?s.rot:{};
+  s.water=s.water&&typeof s.water==='object'?s.water:{};
+  s.journal=Array.isArray(s.journal)?s.journal:[];
+  s.beds=s.beds.filter(b=>b&&Number.isFinite(+b.x)&&Number.isFinite(+b.y)&&Number.isFinite(+b.w)&&Number.isFinite(+b.h)&&+b.w>0&&+b.h>0).map((b,i)=>({...b,x:Math.round(+b.x),y:Math.round(+b.y),w:Math.round(+b.w),h:Math.round(+b.h)}));
+  s.plants=s.plants.filter(p=>p&&PLANTS[p.t]&&Number.isFinite(+p.x)&&Number.isFinite(+p.y)).map(p=>({...p,x:Math.round(+p.x),y:Math.round(+p.y)}));
+  s.objects=s.objects.filter(o=>o&&OBJECTS[o.t]&&Number.isFinite(+o.x)&&Number.isFinite(+o.y)).map(o=>({...o,x:Math.round(+o.x),y:Math.round(+o.y)}));
+  s.paths=s.paths.filter(k=>/^\d+,\d+$/.test(k));
+  let mx=0;
+  s.beds.forEach((b,i)=>{if(b.id==null)b.id=i+1;b.id=Math.max(1,Math.round(+b.id)||i+1);if(b.id>mx)mx=b.id});
+  bedSeq=mx;
+  return s
+}
+function persistPlots(){localStorage.setItem('cd-plots',JSON.stringify(plots));localStorage.setItem('cd-active',activeId)}
+function saveAll(){plots[activeId].state=state;persistPlots()}
+function save(){saveAll()}
+function adoptState(s){state=fixState(JSON.parse(JSON.stringify(s)))}
+function ensurePlots(){try{plots=JSON.parse(localStorage.getItem('cd-plots'))||{}}catch(e){plots={}}
+  if(!Object.keys(plots).length){let old=null;try{old=JSON.parse(localStorage.getItem(LS))}catch(e){}
+    plots={p1:{name:'Моя делянка',state:(old&&old.cols)?old:freshState()}};activeId='p1';persistPlots()}
+  else{activeId=localStorage.getItem('cd-active');if(!plots[activeId])activeId=Object.keys(plots)[0]}}
+function renderPlotBar(){
+  $('#plotBar').innerHTML='<span style="font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--terra)">📁 Участки:</span>'+
+   Object.keys(plots).map(id=>`<button class="pChip ${id===activeId?'on':''}" data-id="${id}" title="Переключиться">${plots[id].name}</button>`).join('')+
+   `<button class="btn btn-line" id="plotNew" title="Новый участок">➕</button>
+    <button class="btn btn-line" id="plotRen" title="Переименовать">✏️</button>
+    <button class="btn btn-line" id="plotDel" title="Удалить участок">🗑</button>`;
+  $('#plotBar').querySelectorAll('.pChip').forEach(c=>c.onclick=()=>{if(c.dataset.id===activeId)return;
+    saveAll();activeId=c.dataset.id;adoptState(plots[activeId].state);persistPlots();fullRefresh();renderPlotBar();
+    toast(`📁 Участок «${plots[activeId].name}» загружен`,'good')});
+  $('#plotNew').onclick=()=>{saveAll();const id='p'+Date.now();
+    plots[id]={name:'Участок '+(Object.keys(plots).length+1),state:freshState()};
+    activeId=id;persistPlots();adoptState(plots[id].state);fullRefresh();renderPlotBar();toast('📁 Новый участок создан — творите!','good')};
+  $('#plotRen').onclick=()=>{const nm=prompt('Название участка:',plots[activeId].name);
+    if(nm&&nm.trim()){plots[activeId].name=nm.trim();persistPlots();renderPlotBar()}};
+  $('#plotDel').onclick=()=>{const ids=Object.keys(plots);
+    if(ids.length<=1)return toast('Это последний участок — удалять нельзя','bad');
+    if(!confirm(`Удалить участок «${plots[activeId].name}»?`))return;
+    delete plots[activeId];activeId=Object.keys(plots)[0];persistPlots();
+    adoptState(plots[activeId].state);fullRefresh();renderPlotBar();toast('Участок удалён')}}
+function fullRefresh(){sel=null;drag=null;
+  $('#pw').value=state.cols/2;$('#ph').value=state.rows/2;
+  resize();stats();renderInspector();renderRot();renderWater();renderHarv();renderJournal();draw()}
+
+/* ══════════════════ ОБЩЕЕ ══════════════════ */
+let tool='bed',plantSel='tomato',objSel='compost',sel=null,drag=null,moveDrag=null,lastC=null,hover=null,palQ='';
+let undoStack=[],unlocked=new Set(JSON.parse(localStorage.getItem('cd-badges')||'[]')),flags={},wx={tmax:30},strokeChanged=false;
+function pushUndo(){undoStack.push(JSON.stringify({beds:state.beds,plants:state.plants,objects:state.objects,paths:state.paths}));if(undoStack.length>40)undoStack.shift()}
+function undo(){if(!undoStack.length)return toast('Нечего отменять');const s=JSON.parse(undoStack.pop());
+  state.beds=s.beds;state.plants=s.plants;state.objects=s.objects;state.paths=s.paths;fixState(state);sel=null;afterChange();renderInspector();renderRot();renderWater()}
+function toast(msg,type=''){const t=document.createElement('div');t.className='toast '+type;t.textContent=msg;$('#toasts').appendChild(t);setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),320)},3800)}
+function cap(s){return s[0].toUpperCase()+s.slice(1)}
+
+/* ══════════════════ ХОЛСТ ══════════════════ */
+const cv=$('#cv'),ctx=cv.getContext('2d'),stage=document.querySelector('.frame');
+let cellPx=36,grassCv=null,seed=42;
+function rnd(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff}
+function resize(){
+  const avail=stage.clientWidth-24;
+  cellPx=Math.max(16,Math.min(44,Math.floor(avail/state.cols),Math.floor(540/state.rows)));
+  const dpr=window.devicePixelRatio||1,w=state.cols*cellPx,h=state.rows*cellPx;
+  cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+'px';cv.style.height=h+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);buildGrass(w,h);draw();
+}
+function buildGrass(w,h){
+  grassCv=document.createElement('canvas');grassCv.width=w;grassCv.height=h;
+  const g=grassCv.getContext('2d');seed=42;g.fillStyle='#7fae62';g.fillRect(0,0,w,h);
+  for(let i=0;i<7;i++){const x=rnd()*w,y=rnd()*h,r=60+rnd()*160;
+    const gr=g.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,rnd()>.5?'rgba(150,195,120,.35)':'rgba(95,140,75,.3)');gr.addColorStop(1,'rgba(0,0,0,0)');
+    g.fillStyle=gr;g.beginPath();g.arc(x,y,r,0,7);g.fill();}
+  for(let i=0;i<w*h/55;i++){const x=rnd()*w,y=rnd()*h,l=3+rnd()*4,a=rnd()*Math.PI;
+    g.strokeStyle=['#6d9c52','#8fbe70','#75a557','#95c37b'][i%4];g.lineWidth=1.1;
+    g.beginPath();g.moveTo(x,y);g.lineTo(x+Math.sin(a)*l,y-l);g.stroke();}
+  for(let i=0;i<w*h/2400;i++){const x=rnd()*w,y=rnd()*h;
+    g.fillStyle=rnd()>.5?'#fff8e7':'#f6d76b';g.beginPath();g.arc(x,y,1.9,0,7);g.fill();}
+}
+function emoji(e,x,y,size){ctx.font=size+'px "Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(e,x,y)}
+function drawGlyph(d,x,y,size){if(d.e)return emoji(d.e,x,y,size);
+  const r=size*0.42;ctx.fillStyle=d.c||'#8a9a5a';ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();
+  ctx.strokeStyle='rgba(0,0,0,.25)';ctx.lineWidth=1.5;ctx.stroke();
+  ctx.fillStyle='#fff';ctx.font='800 '+Math.round(r*1.15)+'px Nunito';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(d.n[0],x,y+1)}
+function drawBed(b){
+  const x=b.x*cellPx,y=b.y*cellPx,w=b.w*cellPx,h=b.h*cellPx,lw=Math.max(5,cellPx*.18);
+  ctx.fillStyle='#8a5f3c';ctx.fillRect(x,y,w,h);
+  let s=(b.x*37+b.y*91)%233+7;
+  for(let i=0;i<Math.min(70,w*h/150);i++){s=(s*1103515245+12345)&0x7fffffff;const rx=x+(s%1000)/1000*w;s=(s*1103515245+12345)&0x7fffffff;const ry=y+(s%1000)/1000*h;
+    ctx.fillStyle=i%2?'rgba(60,38,22,.28)':'rgba(214,182,140,.22)';ctx.fillRect(rx,ry,2.6,2.6);}
+  ctx.strokeStyle='#a9743f';ctx.lineWidth=lw;ctx.strokeRect(x+lw/2,y+lw/2,w-lw,h-lw);
+  ctx.strokeStyle='rgba(70,44,20,.5)';ctx.lineWidth=1.5;ctx.strokeRect(x+lw,y+lw,w-2*lw,h-2*lw);
+  ctx.fillStyle='rgba(255,248,225,.85)';ctx.font='700 '+Math.max(9,cellPx*.3)+'px Nunito';
+  ctx.textAlign='left';ctx.textBaseline='top';ctx.fillText('№'+b.id,x+lw+3,y+lw+2);
+}
+function drawPathCell(x,y){
+  const px=x*cellPx,py=y*cellPx,hsh=(x*31+y*17)%5;
+  ctx.fillStyle='#d9d2b6';ctx.fillRect(px+1,py+1,cellPx-2,cellPx-2);
+  ctx.fillStyle=hsh>2?'#b9b29a':'#c7c0a8';
+  ctx.beginPath();ctx.ellipse(px+cellPx*.32,py+cellPx*.36,cellPx*.22,cellPx*.16,hsh,0,7);ctx.fill();
+  ctx.beginPath();ctx.ellipse(px+cellPx*.68,py+cellPx*.64,cellPx*.2,cellPx*.14,-hsh,0,7);ctx.fill();
+}
+function drawObject(o){
+  const x=o.x*cellPx,y=o.y*cellPx,w=(OBJECTS[o.t].w)*cellPx,h=(OBJECTS[o.t].h)*cellPx,cx=x+w/2,cy=y+h/2;
+  if(o.t==='compost'){ctx.fillStyle='#6e4426';ctx.fillRect(x+3,y+3,w-6,h-6);ctx.strokeStyle='#4e2f18';ctx.lineWidth=2;
+    for(let i=1;i<4;i++){ctx.beginPath();ctx.moveTo(x+3,y+i*h/4);ctx.lineTo(x+w-3,y+i*h/4);ctx.stroke();}
+    ctx.strokeStyle='rgba(255,255,255,.65)';ctx.lineWidth=1.6;
+    for(const dx of[-w*.16,w*.16]){ctx.beginPath();ctx.moveTo(cx+dx,cy-h*.28);ctx.quadraticCurveTo(cx+dx+5,cy-h*.44,cx+dx-2,cy-h*.58);ctx.stroke();}}
+  else if(o.t==='barrel'){ctx.fillStyle='#4f7ea8';ctx.beginPath();ctx.arc(cx,cy,w*.4,0,7);ctx.fill();
+    ctx.strokeStyle='#38618a';ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(cx,cy,w*.4,0,7);ctx.stroke();
+    ctx.fillStyle='#7cc2e0';ctx.beginPath();ctx.arc(cx,cy,w*.27,0,7);ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.7)';ctx.beginPath();ctx.arc(cx-w*.1,cy-w*.1,w*.08,0,7);ctx.fill();}
+  else if(o.t==='greenhouse'){ctx.fillStyle='rgba(213,236,245,.9)';ctx.fillRect(x+3,y+h*.3,w-6,h*.66);
+    ctx.strokeStyle='#8fb8c9';ctx.lineWidth=2.5;ctx.strokeRect(x+3,y+h*.3,w-6,h*.66);
+    ctx.beginPath();ctx.moveTo(x+3,y+h*.3);ctx.quadraticCurveTo(cx,y-h*.15,x+w-3,y+h*.3);ctx.stroke();
+    ctx.lineWidth=1.3;for(let i=1;i<6;i++){ctx.beginPath();ctx.moveTo(x+3+i*(w-6)/6,y+h*.3);ctx.lineTo(x+3+i*(w-6)/6,y+h*.96);ctx.stroke();}}
+  else if(o.t==='pond'){const g=ctx.createRadialGradient(cx,cy,2,cx,cy,w*.5);g.addColorStop(0,'#8fd0e8');g.addColorStop(1,'#3e7ea6');
+    ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(cx,cy,w*.46,h*.42,0,0,7);ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.6)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx-w*.1,cy,w*.24,Math.PI*1.15,Math.PI*1.6);ctx.stroke();
+    ctx.fillStyle='#b9b29a';for(let i=0;i<5;i++){const a=i*1.3;ctx.beginPath();ctx.arc(cx+Math.cos(a)*w*.48,cy+Math.sin(a)*h*.44,3,0,7);ctx.fill();}}
+}
+function drawTree(p){
+  const d=PLANTS[p.t];const cx=(p.x+1)*cellPx,cy=(p.y+1)*cellPx,r=cellPx*1.3;
+  const g=ctx.createRadialGradient(cx-r*.3,cy-r*.3,r*.15,cx,cy,r);
+  g.addColorStop(0,'rgba(130,178,96,.5)');g.addColorStop(1,'rgba(58,108,54,.34)');
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,r,0,7);ctx.fill();
+  ctx.strokeStyle='rgba(45,85,40,.35)';ctx.lineWidth=1.5;ctx.stroke();
+  drawGlyph(d,cx,cy,cellPx*1.5);
+}
+function draw(){
+  const w=state.cols*cellPx,h=state.rows*cellPx;
+  ctx.clearRect(0,0,w,h);ctx.drawImage(grassCv,0,0,w,h);
+  ctx.strokeStyle='rgba(255,255,255,.13)';ctx.lineWidth=1;ctx.beginPath();
+  for(let x=1;x<state.cols;x++){ctx.moveTo(x*cellPx,0);ctx.lineTo(x*cellPx,h)}
+  for(let y=1;y<state.rows;y++){ctx.moveTo(0,y*cellPx);ctx.lineTo(w,y*cellPx)}
+  ctx.stroke();
+  ctx.strokeStyle='rgba(255,255,255,.3)';ctx.beginPath();
+  for(let x=2;x<state.cols;x+=2){ctx.moveTo(x*cellPx,0);ctx.lineTo(x*cellPx,h)}
+  for(let y=2;y<state.rows;y+=2){ctx.moveTo(0,y*cellPx);ctx.lineTo(w,y*cellPx)}
+  ctx.stroke();
+  state.beds.forEach(drawBed);
+  for(const k of state.paths){const[x,y]=k.split(',').map(Number);drawPathCell(x,y)}
+  state.objects.forEach(drawObject);
+  for(const p of state.plants){const d=PLANTS[p.t];
+    if(d.cat==='tree')drawTree(p);else drawGlyph(d,(p.x+.5)*cellPx,(p.y+.55)*cellPx,cellPx*.8);}
+  if(sel){ctx.strokeStyle='#ffd23f';ctx.lineWidth=2.5;ctx.setLineDash([6,4]);
+    const r=selRect(sel);ctx.strokeRect(r.x*cellPx-2,r.y*cellPx-2,r.w*cellPx+4,r.h*cellPx+4);ctx.setLineDash([])}
+  if(hover&&(tool==='plant')){const ok=plantable(hover.x,hover.y);
+    ctx.fillStyle=ok?'rgba(140,220,120,.35)':'rgba(230,90,60,.3)';ctx.fillRect(hover.x*cellPx,hover.y*cellPx,cellPx,cellPx);
+    ctx.globalAlpha=.6;drawGlyph(PLANTS[plantSel],(hover.x+.5)*cellPx,(hover.y+.55)*cellPx,cellPx*.8);ctx.globalAlpha=1}
+  if(hover&&tool==='object'){const o=OBJECTS[objSel];ctx.fillStyle='rgba(120,180,240,.3)';
+    ctx.fillRect(hover.x*cellPx,hover.y*cellPx,o.w*cellPx,o.h*cellPx)}
+  if(drag){const x=Math.min(drag.x0,drag.x1),y=Math.min(drag.y0,drag.y1),W=Math.abs(drag.x1-drag.x0)+1,H=Math.abs(drag.y1-drag.y0)+1;
+    ctx.fillStyle='rgba(138,95,60,.55)';ctx.fillRect(x*cellPx,y*cellPx,W*cellPx,H*cellPx);
+    ctx.strokeStyle='#a9743f';ctx.lineWidth=4;ctx.strokeRect(x*cellPx+2,y*cellPx+2,W*cellPx-4,H*cellPx-4)}
+  ctx.fillStyle='rgba(255,253,240,.9)';ctx.beginPath();ctx.arc(w-26,26,17,0,7);ctx.fill();
+  ctx.strokeStyle='#8a5a36';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#c65d3b';ctx.beginPath();ctx.moveTo(w-26,13);ctx.lineTo(w-31,29);ctx.lineTo(w-21,29);ctx.closePath();ctx.fill();
+  ctx.fillStyle='#2e3524';ctx.font='700 9px Nunito';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText('С',w-26,39);
+}
+function selRect(s){if(s.kind==='plant'){const d=PLANTS[s.ref.t];const sz=d.cat==='tree'?2:1;return{x:s.ref.x,y:s.ref.y,w:sz,h:sz}}
+  if(s.kind==='obj'){const o=OBJECTS[s.ref.t];return{x:s.ref.x,y:s.ref.y,w:o.w,h:o.h}}
+  return{x:s.ref.x,y:s.ref.y,w:s.ref.w,h:s.ref.h}}
+
+/* ══════════════════ ЛОГИКА УЧАСТКА ══════════════════ */
+const inB=(x,y)=>x>=0&&y>=0&&x<state.cols&&y<state.rows;
+const plantAt=(x,y)=>state.plants.find(p=>{const d=PLANTS[p.t];const sz=d.cat==='tree'?2:1;return x>=p.x&&x<p.x+sz&&y>=p.y&&y<p.y+sz});
+const objAt=(x,y)=>state.objects.find(o=>{const o2=OBJECTS[o.t];return x>=o.x&&x<o.x+o2.w&&y>=o.y&&y<o.y+o2.h});
+const bedAt=(x,y)=>state.beds.find(b=>x>=b.x&&x<b.x+b.w&&y>=b.y&&y<b.y+b.h);
+const plantable=(x,y)=>inB(x,y)&&!plantAt(x,y)&&!objAt(x,y);
+function pairInfo(a,b){const A=PLANTS[a],B=PLANTS[b];if(!A||!B)return{t:'neu'};
+  if((A.good||[]).includes(b)||(B.good||[]).includes(a))return{t:'good'};
+  if((A.bad||[]).includes(b))return{t:'bad',by:a};if((B.bad||[]).includes(a))return{t:'bad',by:b};return{t:'neu'}}
+function checkNeighbors(p){let found=null;
+  for(const q of state.plants){if(q===p)continue;
+    if(Math.abs(q.x-p.x)<=1&&Math.abs(q.y-p.y)<=1){const r=pairInfo(p.t,q.t);
+      if(r.t==='bad'){found={q,r};break}if(r.t==='good'&&!found)found={q,r}}}
+  if(found){const A=PLANTS[p.t],B=PLANTS[found.q.t];
+    toast(found.r.t==='good'?`🤝 ${A.n} + ${B.n} — отличные соседи!`:`⚠️ ${A.n} и ${B.n} — плохие соседи: ${PLANTS[found.r.by].rb||'угнетают друг друга'}`,found.r.t)}}
+function placePlant(x,y){if(!inB(x,y))return;
+  if(!plantable(x,y))return toast('⛔ Здесь уже занято','bad');
+  pushUndo();const p={x,y,t:plantSel};state.plants.push(p);sel=null;
+  pop(x,y,PLANTS[plantSel].e||'🌱');checkNeighbors(p);afterChange();toast(`${PLANTS[plantSel].e||'🌱'} ${PLANTS[plantSel].n} посажен!`,'good')}
+function placeObject(x,y){const o=OBJECTS[objSel];if(!inB(x,y)||!inB(x+o.w-1,y+o.h-1))return toast('Не влезает — участок мал','bad');
+  for(let i=x;i<x+o.w;i++)for(let j=y;j<y+o.h;j++)if(plantAt(i,j)||objAt(i,j)||bedAt(i,j))return toast('⛔ Место занято','bad');
+  pushUndo();state.objects.push({x,y,t:objSel});pop(x,y,'🏗');afterChange();toast(`🏗 ${o.n} — готово!`,'good')}
+function paintPath(c){if(!inB(c.x,c.y)||bedAt(c.x,c.y)||objAt(c.x,c.y))return false;
+  const key=c.x+','+c.y;if(state.paths.includes(key))return false;state.paths.push(key);return true}
+function eraseAt(c){const p=plantAt(c.x,c.y);if(p){state.plants=state.plants.filter(q=>q!==p);return true}
+  const o=objAt(c.x,c.y);if(o){state.objects=state.objects.filter(q=>q!==o);return true}
+  const key=c.x+','+c.y,pi=state.paths.indexOf(key);if(pi>=0){state.paths.splice(pi,1);return true}
+  const b=bedAt(c.x,c.y);if(b){state.beds=state.beds.filter(q=>q!==b);return true}
+  return false}
+function selectAt(c){const p=plantAt(c.x,c.y),o=objAt(c.x,c.y),b=bedAt(c.x,c.y);
+  sel=p?{kind:'plant',ref:p}:o?{kind:'obj',ref:o}:b?{kind:'bed',ref:b}:null;renderInspector();draw()}
+function pop(x,y,e){const d=document.createElement('div');d.className='pop';d.textContent=e;
+  d.style.left=(cv.offsetLeft+12+(x+.5)*cellPx-13)+'px';d.style.top=(cv.offsetTop+12+y*cellPx-8)+'px';
+  $('#pops').appendChild(d);setTimeout(()=>d.remove(),950)}
+function adjacency(){let f=0,b=0;const map={};state.plants.forEach(p=>map[p.x+','+p.y]=p.t);
+  state.plants.forEach(p=>{for(const[dx,dy]of[[1,0],[0,1],[1,1],[-1,1]]){const q=map[(p.x+dx)+','+(p.y+dy)];
+    if(q){const r=pairInfo(p.t,q.t);if(r.t==='good')f++;else if(r.t==='bad')b++}}});return{f,b}}
+function afterChange(){save();draw();stats();checkBadges();renderHarv()}
+
+/* события холста */
+function cellOf(e){const r=cv.getBoundingClientRect();const x=Math.floor((e.clientX-r.left)/cellPx),y=Math.floor((e.clientY-r.top)/cellPx);return inB(x,y)?{x,y}:null}
+cv.addEventListener('pointerdown',e=>{cv.setPointerCapture(e.pointerId);const c=cellOf(e);if(!c)return;hover=c;strokeChanged=false;moveDrag=null;
+  if(tool==='bed')drag={x0:c.x,y0:c.y,x1:c.x,y1:c.y};
+  else if(tool==='plant')placePlant(c.x,c.y);
+  else if(tool==='object')placeObject(c.x,c.y);
+  else if(tool==='path'||tool==='erase'){pushUndo();strokeChanged=tool==='path'?paintPath(c):eraseAt(c)}
+  else if(tool==='select'){selectAt(c);if(sel&&(sel.kind==='plant'||sel.kind==='obj'))moveDrag={ref:sel.ref,kind:sel.kind,x:c.x,y:c.y,changed:false}}
+  lastC=c;draw()});
+cv.addEventListener('pointermove',e=>{const c=cellOf(e);hover=c;
+  if(drag){if(c){drag.x1=c.x;drag.y1=c.y}}
+  if(moveDrag&&c&&e.buttons===1){const dx=c.x-moveDrag.x,dy=c.y-moveDrag.y;if(dx||dy){const r=moveDrag.ref;
+      const d=moveDrag.kind==='plant'?PLANTS[r.t]:OBJECTS[r.t]; const w=moveDrag.kind==='plant'?(d.cat==='tree'?2:1):d.w; const h=moveDrag.kind==='plant'?(d.cat==='tree'?2:1):d.h;
+      const nx=Math.max(0,Math.min(state.cols-w,r.x+dx)),ny=Math.max(0,Math.min(state.rows-h,r.y+dy));if(!moveDrag.changed)pushUndo();r.x=nx;r.y=ny;moveDrag.x=c.x;moveDrag.y=c.y;moveDrag.changed=true;draw()}}
+  if(c&&lastC&&c.x===lastC.x&&c.y===lastC.y){draw();return}
+  if(c&&e.buttons===1){if(tool==='path')strokeChanged=paintPath(c)||strokeChanged;else if(tool==='erase')strokeChanged=eraseAt(c)||strokeChanged}
+  lastC=c;draw()});
+cv.addEventListener('pointerup',()=>{if(moveDrag){if(moveDrag.changed){save();stats();renderInspector();renderHarv();toast('↔️ Объект перемещён','good')}moveDrag=null}
+  if(drag&&tool==='bed'){const x=Math.min(drag.x0,drag.x1),y=Math.min(drag.y0,drag.y1),W=Math.abs(drag.x1-drag.x0)+1,H=Math.abs(drag.y1-drag.y0)+1;
+    if(W&&H){pushUndo();state.beds.push({x,y,w:W,h:H,id:++bedSeq});pop(x,y,'🟫');afterChange();toast(`🟫 Грядка №${bedSeq} (${W/2}×${H/2} м) готова — пора сажать!`,'good')}}
+  else if((tool==='path'||tool==='erase')&&strokeChanged){afterChange()}
+  drag=null;strokeChanged=false;draw()});
+
+/* ══════════════════ ПАЛИТРА ══════════════════ */
+const HINTS={bed:'Протяните мышью по полю — получится грядка. Деревья лучше сажать с севера, чтобы не затеняли грядки.',
+ plant:'Выберите культуру (есть поиск!) и кликайте по грядкам. Я подскажу, если соседи не дружат 😉',
+ object:'Компост ставьте в тени у дальней границы, бочку — рядом с грядками.',
+ path:'Проведите линию — получится дорожка из камня.',erase:'Кликайте или ведите по тому, что хотите убрать.',
+ select:'Кликните по любому объекту — расскажу о нём и подскажу соседей.'};
+function setTool(t){tool=t;document.querySelectorAll('#toolbar [data-tool]').forEach(b=>b.classList.toggle('active',b.dataset.tool===t));
+  $('#toolHint').textContent=HINTS[t];cv.style.cursor=t==='select'?'pointer':'crosshair';renderPalette();draw()}
+document.querySelectorAll('#toolbar [data-tool]').forEach(b=>b.onclick=()=>setTool(b.dataset.tool));
+function renderPalette(){const p=$('#palette');
+  if(tool==='plant'){let html=`<input id="palSearch" placeholder="🔎 Поиск среди ${Object.keys(PLANTS).length} культур…" value="${esc(palQ)}">`;
+    const q=palQ.trim().toLowerCase();
+    for(const[cat,name]of CATS){
+      const items=Object.keys(PLANTS).filter(k=>PLANTS[k].cat===cat&&(!q||PLANTS[k].n.toLowerCase().includes(q)));
+      if(!items.length)continue;
+      html+=`<div class="palCat">${name} · ${items.length}</div>`;
+      html+=items.map(k=>`<button class="chip ${plantSel===k?'sel':''}" data-p="${k}" title="${PLANTS[k].n}">${glyphHTML(PLANTS[k])}<small>${PLANTS[k].n}</small></button>`).join('')}
+    p.innerHTML=html;
+    $('#palSearch').oninput=e=>{palQ=e.target.value;const s=e.target.selectionStart;renderPalette();const i=$('#palSearch');i.focus();i.setSelectionRange(s,s)};
+    p.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{plantSel=b.dataset.p;renderPalette()});}
+  else if(tool==='object'){p.innerHTML=Object.keys(OBJECTS).map(k=>`<button class="chip ${objSel===k?'sel':''}" data-o="${k}">${{compost:'🪵',barrel:'🛢',greenhouse:'🏠',pond:'💧'}[k]}<small>${OBJECTS[k].n}</small></button>`).join('');
+    p.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{objSel=b.dataset.o;renderPalette()})}
+  else{p.innerHTML=`<span style="font-size:13px;color:var(--ink2);align-self:center">💡 ${HINTS[tool]}</span>`}}
+
+/* ══════════════════ ИНСПЕКТОР И СТАТИСТИКА ══════════════════ */
+function renderInspector(){const el=$('#inspector');
+  if(!sel){el.innerHTML='<h3>🔍 Инспектор</h3><div class="empty">Выберите «👆 Выбор» и кликните по растению на плане — расскажу про полив, сроки и соседей.</div>';return}
+  if(sel.kind==='plant'){const d=PLANTS[sel.ref.t];const fam=FAM[sel.ref.t];
+    el.innerHTML=`<h3>🔍 Инспектор</h3><div class="insHead"><span class="bigE">${glyphHTML(d)}</span><div><b>${d.n}</b><div><span class="insTag">${CATS.find(c=>c[0]===d.cat)[1]}${fam?' · '+FAMS[fam].n:''}</span></div></div></div>
+    <div class="insRow">📏 Схема: ${d.sp} см &nbsp;·&nbsp; 💧 ~${d.wl} л/нед${YLD[sel.ref.t]?` &nbsp;·&nbsp; 🧺 ~${YLD[sel.ref.t]} кг/раст.`:''}</div>
+    <div class="insRow" style="color:var(--ink2)">Сбор: ${SEASON[sel.ref.t]||'лето–осень'}</div>
+    <div class="nb good">друзья: ${(d.good||[]).length?(d.good.filter(g=>PLANTS[g]).map(g=>glyphHTML(PLANTS[g])).join(' ')):'почти все'}</div>
+    <div class="nb bad">не сажать с: ${(d.bad||[]).length?d.bad.filter(g=>PLANTS[g]).map(g=>glyphHTML(PLANTS[g])).join(' '):'—'}</div>
+    <div class="insTip">«${d.tip}»</div>
+    <button class="btn btn-terra" id="delSel" style="margin-top:10px">Убрать с плана</button>`}
+  else if(sel.kind==='obj'){const o=OBJECTS[sel.ref.t];
+    el.innerHTML=`<h3>🔍 Инспектор</h3><div class="insHead"><b>🏗 ${o.n}</b></div><div class="insTip">«${o.tip}»</div>
+    <button class="btn btn-terra" id="delSel" style="margin-top:10px">Убрать с плана</button>`}
+  else{const b=sel.ref;
+    el.innerHTML=`<h3>🔍 Инспектор</h3><div class="insHead"><b>🟫 Грядка №${b.id} · ${(b.w/2).toFixed(1)} × ${(b.h/2).toFixed(1)} м</b></div>
+    <div class="insRow">Площадь: ${(b.w*b.h*0.25).toFixed(2)} м²</div>
+    <div class="insRow bedEdit">Размер: <input id="bedW" type="number" min=0.5 step=0.5 value=${(b.w/2).toFixed(1)}> × <input id="bedH" type="number" min=0.5 step=0.5 value=${(b.h/2).toFixed(1)}> м</div>
+    <div class="insTip">«Переключитесь на 🌱 Растения и засадите её — смешанная посадка всегда лучше монокультуры.»</div>
+    <button class="btn btn-green" id="bedApply" style="margin-top:8px">📐 Применить размер</button>
+    <button class="btn btn-green" id="bedWater" style="margin-top:8px">💧 Отметить полив</button>
+    <button class="btn btn-terra" id="delSel" style="margin-top:8px">Убрать грядку</button>`;
+    $('#bedWater').onclick=()=>setWatered(b.id);
+    $('#bedApply').onclick=()=>{const W=Math.max(1,Math.round((+$('#bedW').value||.5)*2)),H=Math.max(1,Math.round((+$('#bedH').value||.5)*2));
+      if(b.x+W>state.cols||b.y+H>state.rows)return toast('Новый размер не помещается на участке','bad');
+      pushUndo();b.w=W;b.h=H;afterChange();renderInspector();renderWater();toast(`📐 Грядка №${b.id}: ${W/2}×${H/2} м`,'good')}}
+  $('#delSel').onclick=()=>{pushUndo();
+    if(sel.kind==='plant')state.plants=state.plants.filter(p=>p!==sel.ref);
+    else if(sel.kind==='obj')state.objects=state.objects.filter(o=>o!==sel.ref);
+    else state.beds=state.beds.filter(b=>b!==sel.ref);
+    sel=null;afterChange();renderInspector();renderRot();renderWater()}}
+function waterDueCount(){const now=new Date();return state.beds.filter(b=>{const w=(state.water||{})[b.id];return w&&w.last&&nextWater(w)<=now}).length}
+function totalHarvest(){return state.plants.reduce((s,p)=>s+(PLANTS[p.t].cat!=='flower'?(YLD[p.t]||0):0),0)}
+function stats(){const bedArea=state.beds.reduce((s,b)=>s+b.w*b.h*0.25,0);
+  const spec=new Set(state.plants.map(p=>p.t)).size;
+  const water=state.plants.reduce((s,p)=>s+PLANTS[p.t].wl,0);
+  const{f,b}=adjacency();const due=waterDueCount();
+  $('#stats').innerHTML=`
+   <div class="statRow"><span>🟫 Грядки</span><b>${state.beds.length} шт · ${bedArea.toFixed(1)} м²</b></div>
+   <div class="statRow"><span>🌱 Растений</span><b>${state.plants.length} · ${spec} культур</b></div>
+   <div class="statRow"><span>💧 Полив, неделя</span><b>~${Math.round(water)} л (${Math.round(water/10)} вёдер)</b></div>
+   <div class="statRow"><span>🧺 Прогноз урожая</span><b>≈ ${totalHarvest().toFixed(1)} кг/сезон</b></div>
+   ${state.beds.length?`<div class="statRow"><span>⏰ Ждут полива</span><b style="color:${due?'#a3401f':'var(--green-d)'}">${due?due+' гряд. 🚨':'всё полито ✅'}</b></div>`:''}
+   <div class="statRow"><span>🤝 Соседство</span><b>${f} дружб · ${b} конфликтов ${b===0&&f>0?'🌟':b>0?'⚠️':''}</b></div>`}
+function checkBadges(){const spec=new Set(state.plants.map(p=>p.t)).size;
+  const conds={bed1:()=>state.beds.length>=1,p10:()=>state.plants.length>=10,s7:()=>spec>=7,
+   love:()=>adjacency().f>=3,obj3:()=>state.objects.length>=3,reg:()=>flags.regionChanged,
+   p30:()=>state.plants.length>=30,s15:()=>spec>=15,wat5:()=>(+localStorage.getItem('cd-watcnt')||0)>=5,
+   j1:()=>(state.journal||[]).length>=1};
+  for(const[id,,name]of BADGES){if(!unlocked.has(id)&&conds[id]&&conds[id]()){unlocked.add(id);
+    localStorage.setItem('cd-badges',JSON.stringify([...unlocked]));toast(`🏅 Достижение: ${name}!`,'good')}}
+  $('#badges').innerHTML=BADGES.map(([id,e,n])=>`<span class="badge ${unlocked.has(id)?'on':''}" title="${n}">${e} ${n}</span>`).join('')}
+
+/* ══════════════════ ПОГОДА ══════════════════ */
+$('#wxRegion').innerHTML=Object.keys(REGIONS).map(k=>`<option value="${k}">${REGIONS[k].n}</option>`).join('');
+$('#wxRegion').value='simf';
+function frostInfo(rk){const r=REGIONS[rk];const now=new Date();
+  const mk=([m,d],y)=>new Date(y,m-1,d,12);
+  let s=mk(r.fS,now.getFullYear()),a=mk(r.fA,now.getFullYear());
+  let target,label;
+  if(now>=s&&now<a){target=a;label='осенних заморозков'}
+  else{if(now>=a)s=mk(r.fS,now.getFullYear()+1);target=s;label='весенних заморозков'}
+  const days=Math.ceil((target-now)/864e5);
+  $('#wxFrost').innerHTML=`⏳ До ${label} ≈ ${target.toLocaleDateString('ru-RU',{day:'numeric',month:'long'})} — ${days} дн.`}
+async function loadWeather(key){const r=REGIONS[key];frostInfo(key);
+  $('#wxNow').innerHTML='<span class="wxEmoji">🌤</span><b>…°</b><span class="wxF">смотрим в крымское небо…</span>';
+  $('#wxFacts').textContent=`Климат: зона ${r.zone} · заморозки ${r.frost} · осадки ${r.rain} · ${r.note}`;
+  try{
+    const url=`https://api.open-meteo.com/v1/forecast?latitude=${r.lat}&longitude=${r.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,uv_index_max&timezone=Europe%2FSimferopol&forecast_days=7&wind_speed_unit=ms`;
+    const j=await(await fetch(url,{cache:'no-store'})).json();renderWx(j,r)}
+  catch(e){wx.tmax=30;$('#wxNow').innerHTML='<span class="wxEmoji">🌤</span><b>—</b><span class="wxF">нет соединения с погодным сервисом</span>';
+    $('#wxMeta').textContent='Показываем советы по сезонной норме; точные данные временно недоступны.';$('#wxFc').innerHTML='';
+    advices({temperature_2m_max:[31,30,29,30,31,29,30],precipitation_sum:[0,0,0,0,0,0,0],precipitation_probability_max:[5,5,5,5,5,5,5],uv_index_max:[7,7,7,7,7,7,7],time:[]},{});
+    toast('📡 Нет сети — показана климатическая норма Крыма','')}}
+function renderWx(j,r){const c=j.current,d=j.daily;wx.tmax=d.temperature_2m_max[0];
+  $('#wxNow').innerHTML=`<span class="wxEmoji">${wmo(c.weather_code)[0]}</span><b>${Math.round(c.temperature_2m)}°</b><span class="wxF">${wmo(c.weather_code)[1]}, ощущается как ${Math.round(c.apparent_temperature)}°</span>`;
+  $('#wxMeta').textContent=`💨 ${c.wind_speed_10m.toFixed(0)} м/с · 💧 влажность ${c.relative_humidity_2m}% · 🕶 UV сегодня: ${Math.round(d.uv_index_max[0]??'—')}`;
+  const dn=['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+  $('#wxFc').innerHTML=d.time.map((t,i)=>{const dt=new Date(t);
+    return`<div class="fcTile"><small>${i===0?'Сегодня':i===1?'Завтра':dn[dt.getDay()]}</small><div class="big">${wmo(d.weather_code[i])[0]}</div><b>${Math.round(d.temperature_2m_max[i])}°</b><small>☔${d.precipitation_probability_max[i]??0}%</small></div>`}).join('');
+  advices(d,c)}
+function advices(d,c){const a=[];const t1=d.temperature_2m_max[0]||0;const r1=d.precipitation_sum[1]||0;
+  if(t1>=33)a.push('🔥 Зной: полив строго до 7:00 или после 19:00, мульча обязательна, зелень — в полутень.');
+  else if(t1>=29)a.push('☀️ Жарко: проверяйте мульчу на грядках, томаты поливайте под корень.');
+  if(r1>=3)a.push(`🌧 Завтра дождь ~${r1} мм — пропустите полив и поставьте бочки под водосток.`);
+  if(c&&c.wind_speed_10m>=11)a.push('💨 Ветрено: проверьте подвязку томатов и укрытие рассады.');
+  if(c&&c.relative_humidity_2m<38&&t1>=30)a.push('🏜 Суховей: смочите дорожки, притените нежное лутрасилом.');
+  if(d.uv_index_max&&d.uv_index_max[0]>=8)a.push('🕶 УФ экстремальный: рассаду притенить с 11 до 16, себе — соломенную шляпу.');
+  if(!a.length)a.push('🌿 Спокойный день: полив под корень, рыхление заменяет мульча.');
+  const m=new Date().getMonth();
+  if(m===7)a.push('🍅 Август: снимайте томаты бурыми — дозарятся в тени, кустам легче.');
+  if(m===8)a.push('🍓 Сентябрь в Крыму = время сажать клубнику и деревья.');
+  if(m===9)a.push('🧄 Октябрь: пора озимого чеснока и сидератов.');
+  $('#wxAdvice').innerHTML=a.map(x=>`<li>${x}</li>`).join('')}
+$('#wxRegion').onchange=e=>{flags.regionChanged=true;checkBadges();loadWeather(e.target.value)};
+
+/* ══════════════════ СОВМЕСТИМОСТЬ ══════════════════ */
+function fillSel(el,val){el.innerHTML=CATS.map(([c,nm])=>`<optgroup label="${nm}">`+
+  Object.keys(PLANTS).filter(k=>PLANTS[k].cat===c).map(k=>`<option value="${k}">${PLANTS[k].e||'●'} ${PLANTS[k].n}</option>`).join('')+'</optgroup>').join('');el.value=val}
+fillSel($('#cSelA'),'tomato');fillSel($('#cSelB'),'basil');
+function verdict(){const a=$('#cSelA').value,b=$('#cSelB').value,A=PLANTS[a],B=PLANTS[b],r=pairInfo(a,b),v=$('#cVerdict');
+  if(a===b){v.style.background='#f6efdc';v.innerHTML=`<span class="ve">${glyphHTML(A)}</span><div><b>Одна культура подряд — моно-грядка</b><p>Урожай будет, но вредители найдут её быстрее. Разбавьте хотя бы бархатцами 🌼</p></div>`;return}
+  if(r.t==='good'){const why=A.good.includes(b)?(A.rg||B.rg):(B.rg||A.rg);
+    v.style.background='var(--green-l)';v.innerHTML=`<span class="ve">🤝</span><div><b>${A.n} + ${B.n} — отличная пара</b><p>${why?cap(B.n)+' помогает: '+why+'.':'Проверенное доброе соседство.'} Сажайте смело.</p></div>`}
+  else if(r.t==='bad'){const src=r.by===a?A:B;v.style.background='#fbe9e2';
+    v.innerHTML=`<span class="ve">⚔️</span><div><b>${A.n} и ${B.n} лучше развести по разным углам</b><p>${src.n} против: ${src.rb||'угнетение и общие вредители'}.</p></div>`}
+  else{v.style.background='#f3f0e2';v.innerHTML=`<span class="ve">🤷</span><div><b>Нейтральное соседство</b><p>${A.n} и ${B.n} друг другу не мешают — следите за расстоянием и питанием.</p></div>`}}
+$('#cSelA').onchange=$('#cSelB').onchange=verdict;
+$('#cSwap').onclick=()=>{const a=$('#cSelA').value;$('#cSelA').value=$('#cSelB').value;$('#cSelB').value=a;verdict()};
+$('#classics').innerHTML=[['tomato','basil','🍅+🌿 томат'],['corn','bean','🌽+🫘 сёстры'],['strawberry','garlic','🍓+🧄'],['carrot','onion','🥕+🧅'],['cabbage','dill','🥬+🌾'],['grape','lavender','🍇+🪻'],['chili','pepper','🌶️+🫑'],['zucchini','nasturtium','кабачок+настурция']]
+ .map(([a,b,t])=>`<span class="classic" data-a="${a}" data-b="${b}">${t}</span>`).join('');
+$('#classics').onclick=e=>{const c=e.target.closest('.classic');if(!c)return;$('#cSelA').value=c.dataset.a;$('#cSelB').value=c.dataset.b;verdict()};
+$('#scanBtn').onclick=()=>{const out=$('#scanOut');out.style.display='block';
+  const bads=[];const map={};state.plants.forEach(p=>map[p.x+','+p.y]=p);
+  state.plants.forEach(p=>{[[1,0],[0,1],[1,1],[-1,1]].forEach(([dx,dy])=>{const q=map[(p.x+dx)+','+(p.y+dy)];
+    if(q){const r=pairInfo(p.t,q.t);if(r.t==='bad')bads.push({p,q})}})});
+  const fr=adjacency();
+  if(!state.plants.length){out.innerHTML='<span style="color:var(--ink2)">План пуст — сначала посадите что-нибудь 🌱</span>';return}
+  out.innerHTML=bads.length?`<div class="stBad" style="margin-bottom:6px">⚠️ Конфликтов найдено: ${bads.length}</div>`+
+    bads.map(b=>`<div style="font-size:13px;padding:4px 0;border-bottom:1px dashed var(--line)">${glyphHTML(PLANTS[b.p.t])} ${PLANTS[b.p.t].n} (клетка ${b.p.x};${b.p.y}) ⇄ ${glyphHTML(PLANTS[b.q.t])} ${PLANTS[b.q.t].n} (клетка ${b.q.x};${b.q.y})</div>`).join('')
+    :`<div class="stOk">🌟 Конфликтов не найдено${fr.f?` · дружеских пар: ${fr.f}`:''}</div>`};
+verdict();
+
+/* ══════════════════ ЭНЦИКЛОПЕДИЯ ══════════════════ */
+let encCat='';
+function renderEnc(){const q=($('#encSearch').value||'').toLowerCase();
+  const list=Object.keys(PLANTS).filter(k=>{const d=PLANTS[k];return(!encCat||d.cat===encCat)&&(!q||d.n.toLowerCase().includes(q))});
+  $('#encGrid').innerHTML=list.map(k=>{const d=PLANTS[k];const fam=FAM[k];
+    return`<div class="encCard"><div class="encHead"><span class="encE">${glyphHTML(d)}</span><div><b>${d.n}</b><small>${CATS.find(c=>c[0]===d.cat)[1]}${fam?' · '+FAMS[fam].e+' '+FAMS[fam].n:''}</small></div></div>
+    <div class="encMeta">📏 схема ${d.sp} см · 💧 ~${d.wl} л/нед${YLD[k]?` · 🧺 ~${YLD[k]} кг`:''}</div>
+    <div>${(d.good||[]).filter(g=>PLANTS[g]).map(g=>`<span class="nb good">${PLANTS[g].n}</span>`).join('')}${(d.bad||[]).filter(g=>PLANTS[g]).map(g=>`<span class="nb bad">${PLANTS[g].n}</span>`).join('')}</div>
+    <div class="encTip">${d.tip}</div></div>`}).join('')||'<p class="empty">Ничего не нашлось 🌾</p>'}
+$('#encSearch').oninput=renderEnc;
+$('#encCats').innerHTML=`<button class="mChip on" data-c="">Все</button>`+CATS.map(([c,n])=>`<button class="mChip" data-c="${c}">${n}</button>`).join('');
+$('#encCats').onclick=e=>{const b=e.target.closest('.mChip');if(!b)return;encCat=b.dataset.c;
+  $('#encCats').querySelectorAll('.mChip').forEach(x=>x.classList.toggle('on',x===b));renderEnc()};
+$('#encCount').textContent=Object.keys(PLANTS).length+' культур для Крыма';
+$('#siderGrid').innerHTML=SIDER.map(([e,t,p,w])=>`<div class="permCard"><b>${e} ${t}</b><p>${p}</p><p style="color:var(--terra);font-weight:700">Когда: ${w}</p></div>`).join('');
+$('#soilGrid').innerHTML=SOIL.map(([e,t,p])=>`<div class="permCard"><b>${e} ${t}</b><p>${p}</p></div>`).join('');
+
+/* ══════════════════ ВРЕДИТЕЛИ ══════════════════ */
+$('#pestList').innerHTML=PESTS.map((p,i)=>`<div class="pest" data-i="${i}">
+  <button class="pestH">${p.e} ${p.n} <small>— поражает: ${p.on}</small><span class="pestA">▾</span></button>
+  <div class="pestB"><div class="pestWho">🎯 Кто страдает: ${p.on}</div><p>${p.m}</p>
+  ${p.pl?`<div class="pestPl">🌿 Растения-помощники: ${p.pl}</div>`:''}</div></div>`).join('');
+$('#pestList').onclick=e=>{const h=e.target.closest('.pestH');if(!h)return;h.parentElement.classList.toggle('open')};
+
+/* ══════════════════ КАЛЕНДАРЬ ══════════════════ */
+$('#calShift').innerHTML='<option value="0">Степь и предгорье</option><option value="5">Севастополь / побережье (−5 дней)</option><option value="12">Южный берег (−12 дней)</option>';
+function renderCal(){const shift=+$('#calShift').value;
+  $('#calMonths').innerHTML=MONTHS.map((m,i)=>`<span style="left:${(i+0.5)/12*100}%">${m.slice(0,3)}</span>`).join('');
+  const bar=(rng,cls,lane)=>{if(!rng)return'';let s=Math.max(0,rng[0]-shift/30),e2=Math.min(12,rng[1]-shift/30);
+    if(e2<=s)return'';return`<i class="bar ${cls}" style="left:${s/12*100}%;width:${(e2-s)/12*100}%;top:${lane}px"></i>`};
+  $('#calBody').innerHTML=CAL.map(c=>{const d=PLANTS[c.k];
+    return`<div class="calRow"><div class="calName">${d.e||'●'} ${d.n}</div><div class="calTrack">${bar(c.s,'bSeed',2)}${bar(c.g,'bPlant',10)}${bar(c.g2,'bPlant2',10)}${bar(c.h,'bHarv',18)}</div></div>`}).join('')+'<div id="calToday"></div>';
+  const now=new Date(),pos=(now.getMonth()+(now.getDate()-1)/30)/12;
+  requestAnimationFrame(()=>{const tr=document.querySelector('#calBody .calTrack');if(!tr)return;
+    const line=$('#calToday');line.style.left=(tr.offsetLeft+pos*tr.offsetWidth)+'px'})}
+$('#calShift').onchange=renderCal;
+window.addEventListener('resize',()=>{resize();renderCal()});
+
+/* ══════════════════ УРОЖАЙ ══════════════════ */
+function harvestData(){const bedKg=state.beds.map(()=>0);const byCrop={};let stray=0,helpers=0;
+  for(const p of state.plants){const d=PLANTS[p.t];
+    if(d.cat==='flower'){helpers++;continue}
+    const kg=YLD[p.t]||0;if(!kg)continue;
+    const bi=state.beds.findIndex(b=>p.x>=b.x&&p.x<b.x+b.w&&p.y>=b.y&&p.y<b.y+b.h);
+    if(bi>=0)bedKg[bi]+=kg;else stray+=kg;
+    byCrop[p.t]=(byCrop[p.t]||0)+kg}
+  return{bedKg,byCrop,stray,helpers}}
+function renderHarv(){const{bedKg,byCrop,stray,helpers}=harvestData();
+  const total=bedKg.reduce((a,b)=>a+b,0)+stray;
+  $('#harvSum').innerHTML=`
+   <div class="hChip"><b>≈ ${total.toFixed(1)} кг</b>прогноз за сезон</div>
+   <div class="hChip"><b>${state.beds.length}</b>грядок в деле</div>
+   <div class="hChip"><b>${helpers}</b>цветов-помощников 🌼</div>
+   ${stray>0?`<div class="hChip"><b>+${stray.toFixed(1)} кг</b>вне грядок</div>`:''}`;
+  if(!state.beds.length&&!state.plants.length){$('#harvBeds').innerHTML='<p class="empty">План пуст — нарисуйте грядки и посадите культуры, прогноз посчитается сам 🧺</p>'}
+  else{$('#harvBeds').innerHTML=state.beds.map((b,i)=>{
+    const cnt={};state.plants.forEach(p=>{if(p.x>=b.x&&p.x<b.x+b.w&&p.y>=b.y&&p.y<b.y+b.h){
+      if(PLANTS[p.t].cat!=='flower')cnt[p.t]=(cnt[p.t]||0)+1}});
+    const mix=Object.keys(cnt).map(k=>`<span class="nb good">${glyphHTML(PLANTS[k])} ${PLANTS[k].n} ×${cnt[k]} ≈ ${(cnt[k]*(YLD[k]||0)).toFixed(1)} кг</span>`).join('')||'<span class="nb bad">пусто — самое время посадить!</span>';
+    return`<div class="hBed"><div class="hBedHead"><b>🟫 Грядка №${b.id} · ${(b.w/2).toFixed(1)}×${(b.h/2).toFixed(1)} м</b><span style="color:var(--green-d)">≈ ${bedKg[i].toFixed(1)} кг</span></div><div class="hBedMix">${mix}</div></div>`}).join('')}
+  const rows=Object.keys(byCrop).sort((a,b)=>byCrop[b]-byCrop[a]).map(k=>{const d=PLANTS[k];
+    return`<tr><td>${glyphHTML(d)} ${d.n}</td><td class="hSeason">сбор: ${SEASON[k]||'лето–осень'}</td><td>≈ ${byCrop[k].toFixed(1)} кг</td></tr>`}).join('');
+  $('#harvCrops').innerHTML=rows||'<tr><td class="empty" colspan="3">Пока ничего не посажено</td></tr>'}
+
+/* ══════════════════ ДНЕВНИК ══════════════════ */
+function fmtD(s){const[y,m,d]=String(s).split('-').map(Number);return`${d} ${MGEN[(m||1)-1]} ${y}`}
+function renderJournal(){const j=state.journal||[];
+  $('#jList').innerHTML=j.length?j.slice().reverse().map((e,ri)=>{const idx=j.length-1-ri;
+    return`<div class="jEntry"><div class="jDate">${fmtD(e.d)}</div><div class="jText">${esc(e.t)}</div><button class="btn btn-line jDel" data-i="${idx}" title="Удалить запись">✕</button></div>`}).join('')
+   :'<p class="empty">Дневник пуст — запишите первое событие, например «разметила грядки» 🌱</p>'}
+$('#jTpl').innerHTML=JTPL.map(t=>`<button class="jt" data-t="${t}">${t}</button>`).join('');
+$('#jTpl').onclick=e=>{const b=e.target.closest('.jt');if(!b)return;
+  const ta=$('#jText');ta.value=ta.value?(ta.value.replace(/\s+$/,'')+', '+b.dataset.t.replace(/^[^\s]+\s/,'').toLowerCase()):b.dataset.t;ta.focus()};
+$('#jAdd').onclick=()=>{const t=$('#jText').value.trim();
+  if(!t)return toast('Напишите пару слов о сегодняшнем дне ✍️');
+  const d=$('#jDate').value||new Date().toISOString().slice(0,10);
+  state.journal.push({d,t});saveAll();$('#jText').value='';renderJournal();checkBadges();toast('📒 Записано в дневник!','good')};
+$('#jList').onclick=e=>{const b=e.target.closest('.jDel');if(!b)return;
+  state.journal.splice(+b.dataset.i,1);saveAll();renderJournal()};
+
+/* ══════════════════ ПЕЧАТЬ ══════════════════ */
+function buildPrint(){const now=new Date();const{bedKg,stray,helpers}=harvestData();
+  const total=bedKg.reduce((a,b)=>a+b,0)+stray;
+  const bedRows=state.beds.map((b,i)=>{const mix={};
+    state.plants.forEach(p=>{if(p.x>=b.x&&p.x<b.x+b.w&&p.y>=b.y&&p.y<b.y+b.h)mix[PLANTS[p.t].n]=(mix[PLANTS[p.t].n]||0)+1});
+    return`<tr><td>№${b.id}</td><td>${(b.w/2).toFixed(1)}×${(b.h/2).toFixed(1)} м</td><td>${Object.keys(mix).map(k=>`${k} ×${mix[k]}`).join(', ')||'—'}</td><td style="text-align:right">≈ ${bedKg[i].toFixed(1)} кг</td></tr>`}).join('');
+  const jr=(state.journal||[]).slice(-3).reverse().map(e=>`<li>${fmtD(e.d)}: ${esc(e.t)}</li>`).join('');
+  $('#printSheet').innerHTML=`
+   <h1>Крымская делянка — ${esc(plots[activeId].name)}</h1>
+   <p class="pMeta">Распечатано ${now.toLocaleDateString('ru-RU')} · регион: ${REGIONS[$('#wxRegion').value].n} · участок ${state.cols/2}×${state.rows/2} м (1 клетка = 0,5 м) · растений: ${state.plants.length}</p>
+   <img src="${cv.toDataURL('image/png')}" alt="План участка">
+   <h2>Показатели</h2>
+   <table><tr><th>Грядок</th><th>Площадь грядок</th><th>Полив/нед</th><th>Прогноз урожая</th><th>Цветов-помощников</th></tr>
+   <tr><td>${state.beds.length}</td><td>${state.beds.reduce((s,b)=>s+b.w*b.h*0.25,0).toFixed(1)} м²</td><td>~${Math.round(state.plants.reduce((s,p)=>s+PLANTS[p.t].wl,0))} л</td><td>≈ ${total.toFixed(1)} кг</td><td>${helpers}</td></tr></table>
+   ${state.beds.length?`<h2>Грядки и посадки</h2><table><tr><th>Грядка</th><th>Размер</th><th>Состав</th><th>Урожай</th></tr>${bedRows}</table>`:''}
+   ${jr?`<h2>Последние записи дневника</h2><ul>${jr}</ul>`:''}
+   <p class="pFoot">«Крымская делянка» — конструктор огорода, помощник по совместимости и севообороту. План хранится в браузере.</p>`}
+$('#print').onclick=()=>{buildPrint();window.print()};
+
+/* ══════════════════ СЕВООБОРОТ ══════════════════ */
+let rotYear=new Date().getFullYear();
+function dominantFam(b){const cnt={};for(const p of state.plants){
+    if(p.x>=b.x&&p.x<b.x+b.w&&p.y>=b.y&&p.y<b.y+b.h){const f=FAM[p.t];if(f)cnt[f]=(cnt[f]||0)+1}}
+  let best=null,mx=0;for(const k in cnt)if(cnt[k]>mx){mx=cnt[k];best=k}return best}
+function rotStatus(bedId,year,fam){
+  if(['sider','green','flower','tree'].includes(fam))return{s:'ok'};
+  const rot=state.rot||{};
+  for(let d=1;d<=3;d++){const prev=(rot[year-d]||{})[bedId];
+    if(prev){if(prev===fam)return d===1?{s:'bad'}:{s:'warn',y:year-d}}}
+  return{s:'ok'}}
+function renderRot(){
+  $('#chain').innerHTML='<b style="color:var(--green-d)">Цепочка:</b> '+CHAIN.map(f=>`${FAMS[f].e} ${FAMS[f].n}`).join(' → ');
+  const yrs=[2025,2026,2027,2028,2029,2030,2031];
+  $('#rotYears').innerHTML=yrs.map(y=>`<button class="mChip ${y===rotYear?'on':''}" data-y="${y}">${y}</button>`).join('');
+  $('#rotYears').querySelectorAll('.mChip').forEach(b=>b.onclick=()=>{rotYear=+b.dataset.y;renderRot()});
+  const beds=state.beds;if(!beds.length){$('#rotBody').innerHTML='<p class="empty">Сначала нарисуйте грядки на плане ✏️</p>';$('#rotSum').textContent='';return}
+  let bad=0,warn=0;
+  $('#rotBody').innerHTML=beds.map(b=>{
+    const val=(state.rot[rotYear]||{})[b.id]||'';const dom=dominantFam(b);
+    let stHtml='<span style="color:var(--ink2)">выберите семью</span>';
+    if(val){const st=rotStatus(b.id,rotYear,val);
+      if(st.s==='bad'){bad++;stHtml='<span class="stBad">⛔ та же семья, что в прошлом году — вредители и голод почвы</span>'}
+      else if(st.s==='warn'){warn++;stHtml=`<span class="stWarn">⚠️ ранний возврат: ${FAMS[val].n} тут были в ${st.y}</span>`}
+      else stHtml='<span class="stOk">✅ можно сажать</span>'}
+    return`<div class="rotRow">
+      <div>🟫 Грядка №${b.id} <small>${(b.w/2).toFixed(1)}×${(b.h/2).toFixed(1)} м${dom?` · сейчас на плане: ${FAMS[dom].e} ${FAMS[dom].n}`:''}</small></div>
+      <select class="rotSel" data-bed="${b.id}"><option value="">— не назначено —</option>
+        ${Object.keys(FAMS).map(f=>`<option value="${f}" ${val===f?'selected':''}>${FAMS[f].e} ${FAMS[f].n}</option>`).join('')}</select>
+      <div>${stHtml}</div></div>`}).join('');
+  $('#rotBody').querySelectorAll('.rotSel').forEach(s=>s.onchange=()=>{
+    state.rot[rotYear]=state.rot[rotYear]||{};const id=+s.dataset.bed;
+    if(s.value)state.rot[rotYear][id]=s.value;else delete state.rot[rotYear][id];
+    saveAll();renderRot()});
+  $('#rotSum').innerHTML=bad?`<span class="stBad">⛔ Конфликтов: ${bad}${warn?' · ⚠️ предупреждений: '+warn:''}</span>`
+    :warn?`<span class="stWarn">⚠️ Предупреждений: ${warn} — лучше сдвинуть семьи</span>`
+    :'<span class="stOk">🌟 Севооборот чистый — земля скажет спасибо</span>'}
+$('#rotAuto').onclick=()=>{if(!state.beds.length)return toast('Сначала нарисуйте грядки','bad');
+  state.rot[rotYear]=state.rot[rotYear]||{};
+  state.beds.forEach(b=>{if(state.rot[rotYear][b.id])return;
+    const base=(state.rot[rotYear-1]||{})[b.id]||dominantFam(b)||'green';
+    state.rot[rotYear][b.id]=CHAIN[(CHAIN.indexOf(base)+1)%CHAIN.length]});
+  saveAll();renderRot();toast('✨ Заполнил по цепочке севооборота','good')};
+
+/* ══════════════════ АВТОПОЛИВ ══════════════════ */
+let notified=new Set();
+function nextWater(w){const d=new Date(w.last);d.setDate(d.getDate()+(w.interval||3));
+  const[hh,mm]=(w.time||'06:30').split(':').map(Number);d.setHours(hh,mm,0,0);return d}
+function waterStatus(w){if(!w.last)return{text:'💤 ещё не поливали — нажмите ✅',over:false};
+  const diff=nextWater(w)-new Date();
+  if(diff<=0)return{text:'🚨 пора полить!',over:true};
+  const hrs=Math.floor(diff/36e5),min=Math.floor(diff%36e5/6e4);
+  return{text:hrs>0?`⏳ через ${hrs} ч ${min} мин`:`⏳ через ${min} мин`,over:false}}
+function setWatered(id){state.water=state.water||{};state.water[id]=state.water[id]||{interval:3,time:'06:30'};
+  state.water[id].last=Date.now();
+  localStorage.setItem('cd-watcnt',String((+localStorage.getItem('cd-watcnt')||0)+1));
+  saveAll();toast(`💧 Грядка №${id}: полив отмечен, таймер перезапущен`,'good');
+  renderWater();stats();checkBadges()}
+function renderWater(){const beds=state.beds;
+  if(!beds.length){$('#watBody').innerHTML='<p class="empty">Нарисуйте грядки на плане — и они появятся здесь с таймерами полива.</p>';return}
+  $('#watBody').innerHTML=beds.map(b=>{const w=(state.water||{})[b.id]||{interval:3,time:'06:30'};
+    const st=waterStatus(w);
+    return`<div class="watRow">
+      <div>🟫 Грядка №${b.id} <small>· ${(b.w/2).toFixed(1)}×${(b.h/2).toFixed(1)} м</small></div>
+      <label class="watIn">каждые <input type="number" min="1" max="14" value="${w.interval}" data-f="interval" data-bed="${b.id}"> дн. в</label>
+      <input type="time" value="${w.time||'06:30'}" data-f="time" data-bed="${b.id}">
+      <div class="watCd ${st.over?'overdue':''}" data-bed="${b.id}">${st.text}</div>
+      <button class="btn btn-green watDone" data-bed="${b.id}">💧 Полил</button></div>`}).join('');
+  $('#watBody').querySelectorAll('input').forEach(inp=>inp.onchange=()=>{
+    const id=+inp.dataset.bed;state.water[id]=state.water[id]||{last:undefined};
+    state.water[id][inp.dataset.f]=inp.dataset.f==='interval'?Math.max(1,+inp.value):inp.value;
+    saveAll();renderWater();stats()});
+  $('#watBody').querySelectorAll('.watDone').forEach(b=>b.onclick=()=>setWatered(+b.dataset.bed))}
+function updateCountdowns(){document.querySelectorAll('.watCd').forEach(el=>{
+  const w=(state.water||{})[+el.dataset.bed];if(!w)return;const st=waterStatus(w);
+  el.textContent=st.text;el.classList.toggle('overdue',st.over)})}
+function beep(){try{const a=new (window.AudioContext||window.webkitAudioContext)();
+  const o=a.createOscillator(),g=a.createGain();o.connect(g);g.connect(a.destination);
+  o.frequency.value=880;g.gain.value=.08;o.start();
+  g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.35);o.stop(a.currentTime+.4)}catch(e){}}
+function checkReminders(){const now=new Date();
+  for(const b of state.beds){const w=(state.water||{})[b.id];if(!w||!w.last)continue;
+    if(nextWater(w)<=now){const key=b.id+'-'+w.last+'-'+w.interval+'-'+w.time;
+      if(!notified.has(key)){notified.add(key);
+        toast(`🚨 Пора полить: Грядка №${b.id}!`,'bad');beep();
+        if('Notification' in window&&Notification.permission==='granted')
+          new Notification('Крымская делянка 🌱',{body:`Пора полить грядку №${b.id}`});
+        stats()}}}}
+$('#watSuggest').onclick=()=>{if(!state.beds.length)return toast('Сначала нарисуйте грядки','bad');
+  const k=wx.tmax>=33?2:wx.tmax>=29?3:4;
+  state.beds.forEach(b=>{state.water[b.id]=state.water[b.id]||{time:'06:30'};state.water[b.id].interval=k});
+  saveAll();renderWater();toast(`⛅ По погоде (${Math.round(wx.tmax)}°): интервал ${k} дн.`,'good')};
+$('#watBell').onclick=async()=>{if(!('Notification' in window))return toast('Браузер не умеет системные уведомления');
+  const p=await Notification.requestPermission();
+  toast(p==='granted'?'🔔 Уведомления включены — напомню о поливе!':'Уведомления не разрешены — буду напоминать тостами',p==='granted'?'good':'')};
+setInterval(()=>{checkReminders();
+  if($('#pn-water').classList.contains('on'))updateCountdowns();
+  stats()},30000);
+
+/* ══════════════════ ЛУНА ══════════════════ */
+const SYN=29.53058867;
+function moonInfo(d){const ref=Date.UTC(2000,0,6,18,14);const days=(d.getTime()-ref)/864e5;
+  let age=((days%SYN)+SYN)%SYN;const idx=Math.floor(((age+SYN/16)%SYN)/(SYN/8));
+  const names=['Новолуние','Молодая луна','Первая четверть','Растущая луна','Полнолуние','Убывающая луна','Последняя четверть','Старый серп'];
+  const adv=['Новолуние — отдых и планы. Не сеем и не сажаем.','Растущий серп — сеем зелень и всё, что растёт над землёй.','Первая четверть — пересадка рассады, полив, подкормки.','Растущая Луна — время томатов, огурцов и ягод.','Полнолуние — сбор урожая, сушка трав, прополка.','Убывающая Луна — сеем корнеплоды, сажаем деревья.','Последняя четверть — компост, обрезка, борьба с вредителями.','Старый серп — тихие работы: мульча, планирование.'];
+  const lit=Math.round((1-Math.cos(2*Math.PI*age/SYN))/2*100);
+  return{idx,name:names[idx],adv:adv[idx],lit}}
+function renderMoon(){const now=new Date(),m=moonInfo(now);
+  const emoAll=['🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘'];
+  $('#moonEmoji').textContent=emoAll[m.idx];$('#moonName').textContent=m.name+' · '+now.toLocaleDateString('ru-RU');
+  $('#moonAdv').textContent=m.adv;$('#moonLit').textContent='Освещённость диска: '+m.lit+'%';
+  let s='';for(let i=1;i<=7;i++){const d=new Date(now.getTime()+i*864e5),mm=moonInfo(d);
+    s+=`<div class="mDay"><small>${d.toLocaleDateString('ru-RU',{day:'numeric',month:'short'})}</small><div class="big">${emoAll[mm.idx]}</div>${mm.name}</div>`}
+  $('#moonStrip').innerHTML=s}
+
+/* ══════════════════ ЗАДАЧИ ══════════════════ */
+let curMonth=new Date().getMonth();
+function renderTasks(){$('#mChips').innerHTML=MONTHS.map((m,i)=>`<button class="mChip ${i===curMonth?'on':''}" data-m="${i}">${m.slice(0,3)}</button>`).join('');
+  $('#mChips').querySelectorAll('.mChip').forEach(b=>b.onclick=()=>{curMonth=+b.dataset.m;renderTasks()});
+  const saved=JSON.parse(localStorage.getItem('cd-tasks-'+curMonth)||'[]');
+  $('#taskList').innerHTML=TASKS[curMonth].map((t,i)=>`<label class="task ${saved.includes(i)?'done':''}"><input type="checkbox" ${saved.includes(i)?'checked':''} data-i="${i}"><span>${t}</span></label>`).join('');
+  $('#taskProg').style.width=(saved.length/TASKS[curMonth].length*100)+'%';
+  $('#taskList').querySelectorAll('input').forEach(ch=>ch.onchange=()=>{const i=+ch.dataset.i;
+    let s=JSON.parse(localStorage.getItem('cd-tasks-'+curMonth)||'[]');
+    s=ch.checked?[...new Set([...s,i])]:s.filter(x=>x!==i);
+    localStorage.setItem('cd-tasks-'+curMonth,JSON.stringify(s));renderTasks()})}
+
+/* ══════════════════ ПЕРМАКУЛЬТУРА ══════════════════ */
+const PERM=[['🧭','Зоны 0–5','Чем чаще нужно что-то посещать, тем ближе к дому: зелень — у двери, орех — на дальней границе.'],['🍂','Мульча — это вода','В Крыму слой 8–12 см соломы сокращает полив вдвое и кормит почву. Голая земля под солнцем — потерянная влага.'],['💧','Ловите воду','Бочки под водостоками, канавки-валки по склону, лунки вокруг деревьев. Каждая капля дождя должна остаться на участке.'],['🌽','Три сестры','Кукуруза даёт опору фасоли, фасоль — азот корням, тыква — живую мульчу. Древний приём, отлично работающий и в Крыму.'],['🌼','Цветущая полоса','Бархатцы, лаванда, укроп и календула кормят божьих коровок и наездников — бесплатную службу защиты урожая.'],['🌬','Живая изгородь','С наветренной стороны посадите плотный ряд кустов — суховеи и зимние боры смягчатся, а микроклимат станет ровнее.'],['🪱','Не копайте — кормите','Компост и мульча сверху, черви работают сами. Три секции компостера: свежее → зреет → готово.'],['🧩','Разнообразие ломает вредителей','Монокультура — шведский стол для жуков. Смешанная грядка для них — лабиринт.']];
+$('#permGrid').innerHTML=PERM.map(([e,t,p])=>`<div class="permCard reveal"><b>${e} ${t}</b><p>${p}</p></div>`).join('');
+const doy=Math.floor((Date.now()-new Date(new Date().getFullYear(),0,0))/864e5);
+$('#tipOfDay').textContent=TIPS[doy%TIPS.length];
+$('#comboBtn').onclick=()=>{const c=COMBOS[Math.floor(Math.random()*COMBOS.length)];
+  $('#comboOut').innerHTML=c.slice(0,-1).map(k=>glyphHTML(PLANTS[k])).join(' + ')+`<p><b>${c[c.length-1]}</b></p>`};
+
+/* ══════════════════ КАЛЬКУЛЯТОРЫ ══════════════════ */
+const MM={tomato:32,cherry:28,cucumber:38,pepper:26,chili:24,eggplant:28,potato:26,carrot:22,beet:24,radish:20,daikon:24,onion:20,garlic:16,leek:22,cabbage:36,redcab:33,broccoli:32,cauli:32,kohlrabi:30,lettuce:24,spinach:22,arugula:20,chard:26,sorrel:20,bean:24,pea:22,chickpea:16,corn:32,pumpkin:30,zucchini:30,pattypan:28,melon:26,watermelon:24,strawberry:26,grape:14,raspberry:26,currant:22,seabuck:15,mulberry:20,olive:10,jujube:12,fig:18};
+$('#w-crop').innerHTML=Object.keys(MM).map(k=>`<option value="${k}">${PLANTS[k].e||'●'} ${PLANTS[k].n}</option>`).join('');
+$('#p-crop').innerHTML=Object.keys(PLANTS).filter(k=>PLANTS[k].cat!=='tree').map(k=>`<option value="${k}">${PLANTS[k].e||'●'} ${PLANTS[k].n} (${PLANTS[k].sp} см)</option>`).join('');
+function heatK(){const t=wx.tmax;return t>=35?1.4:t>=32?1.25:t>=28?1.1:t<=22?0.85:1}
+function calcW(){const mm=MM[$('#w-crop').value]||20,area=+$('#w-area').value||0,soil=+$('#w-soil').value,hk=heatK();
+  const wk=mm*area*soil*hk;$('#w-out').innerHTML=`В неделю: <b>${Math.round(wk)} л</b> (${Math.round(wk/10)} вёдер)<br>За один полив (2 раза/нед): <b>${Math.round(wk/2)} л</b><br><small>поправка на жару +${Math.round((hk-1)*100)}% по текущей погоде</small>`}
+function calcP(){const d=PLANTS[$('#p-crop').value],L=+$('#p-len').value||0,W=+$('#p-wid').value||0;
+  const rows=Math.max(1,Math.floor(W*100/d.sp)),per=Math.floor(L*100/d.sp)+1,tot=rows*per;
+  $('#p-out').innerHTML=`Влезет: <b>${tot} растений</b> (${rows} ряда × ${per})<br>Семян с запасом 20%: <b>${Math.ceil(tot*1.2)} шт</b>`}
+function calcD(){const n=+$('#d-n').value||0,L=+$('#d-len').value||0,st=+$('#d-step').value||30;
+  const tape=n*L,em=Math.ceil(tape*100/st),flow=em*2;
+  $('#d-out').innerHTML=`Лента: <b>${tape} м</b> · капельниц: <b>${em} шт</b> (2 л/ч)<br>Расход за час: <b>${flow} л</b><br><small>в жару такой системе хватает 30–40 минут утром</small>`}
+function calcB(){const L=+$('#b-len').value||0,W=+$('#b-wid').value||0,H=+$('#b-h').value||0;
+  const v=L*W*H/100,per=2*(L+W),boards=Math.ceil(Math.ceil(H/15)*per/6);
+  $('#b-out').innerHTML=`Грунт: <b>${v.toFixed(2)} м³</b> (≈ ${Math.round(v*1.3*10)/10} т)<br>Доски 6 м: <b>${boards} шт</b> · компоста добавить: <b>${(v*0.3).toFixed(2)} м³</b>`}
+function calcM(){const a=+$('#m-area').value||0,l=+$('#m-layer').value||0,v=a*l/100*1000;
+  $('#m-out').innerHTML=`Нужно: <b>${Math.round(v)} л</b> ≈ ${Math.round(v/40)} мешков по 40 л<br><small>солома, щепа, скошенная трава — что найдётся</small>`}
+function calcC(){const g=+$('#c-green').value||0;
+  $('#c-out').innerHTML=`Добавьте «коричневого» (солома, картон, листья): <b>${(g*2.5).toFixed(1)} кг</b><br>Воды: <b>~${Math.round(g*0.7)} л</b>, слоями по 10 см<br><small>проверка: сжатый комок влажный, но не капает</small>`}
+[['w-crop',calcW],['w-area',calcW],['w-soil',calcW],['p-crop',calcP],['p-len',calcP],['p-wid',calcP],['d-n',calcD],['d-len',calcD],['d-step',calcD],['b-len',calcB],['b-wid',calcB],['b-h',calcB],['m-area',calcM],['m-layer',calcM],['c-green',calcC]]
+ .forEach(([id,fn])=>$('#'+id).addEventListener('input',fn));
+
+/* ══════════════════ БЫСТРОЕ УПРАВЛЕНИЕ ══════════════════ */
+document.addEventListener('keydown',e=>{if(e.target.matches('input,textarea,select'))return;const map={1:'bed',2:'plant',3:'object',4:'path',5:'erase',6:'select'};if(map[e.key])setTool(map[e.key]);if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();undo()}});
+/* ══════════════════ ВКЛАДКИ / ОБЩЕЕ ══════════════════ */
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));t.classList.add('on');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  $('#pn-'+t.dataset.t).classList.add('on');
+  if(t.dataset.t==='water')updateCountdowns();
+  if(t.dataset.t==='harv')renderHarv()});
+$('#undo').onclick=undo;
+$('#clear').onclick=()=>{if(confirm('Очистить участок полностью?')){pushUndo();
+  state.beds=[];state.plants=[];state.objects=[];state.paths=[];bedSeq=0;sel=null;
+  afterChange();renderInspector();renderRot();renderWater()}};
+$('#png').onclick=()=>{const a=document.createElement('a');a.download='moya-krymskaya-delyanka.png';a.href=cv.toDataURL('image/png');a.click();toast('🖼 План сохранён в картинку','good')};
+$('#helpBtn').onclick=()=>$('#helpModal').classList.add('on');
+$('#helpClose').onclick=()=>$('#helpModal').classList.remove('on');
+$('#helpModal').onclick=e=>{if(e.target.id==='helpModal')$('#helpModal').classList.remove('on')};
+$('#exp').onclick=()=>{const data={name:plots[activeId].name,state:state};
+  const blob=new Blob([JSON.stringify(data,null,1)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='delyanka-'+(plots[activeId].name||'plan')+'.json';a.click();
+  toast('📤 План выгружен в файл','good')};
+$('#imp').onclick=()=>$('#impFile').click();
+$('#impFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();
+  rd.onload=()=>{try{const j=JSON.parse(rd.result);const st=j.state||j;
+    if(!st||!Number.isFinite(+st.cols)||!Number.isFinite(+st.rows)||!Array.isArray(st.beds)||!Array.isArray(st.plants))throw 0;
+    adoptState(st);if(j.name){plots[activeId].name=j.name;renderPlotBar()}
+    saveAll();fullRefresh();renderPlotBar();toast('📥 План импортирован и сохранён','good')}catch(x){toast('Не получилось прочитать файл','bad')}};
+  rd.readAsText(f);e.target.value=''};
+function loadSample(){
+  const today=new Date().toISOString().slice(0,10);
+  state.beds=[{x:2,y:2,w:7,h:3,id:1},{x:11,y:2,w:7,h:3,id:2},{x:2,y:8,w:7,h:3,id:3},{x:11,y:8,w:7,h:3,id:4}];bedSeq=4;
+  state.plants=[];const mix=[['tomato','basil','tomato','basil','tomato','marigold','carrot'],
+   ['cucumber','dill','cucumber','dill','cucumber','lettuce','lettuce'],
+   ['strawberry','garlic','strawberry','garlic','strawberry','onion','onion'],
+   ['corn','bean','pumpkin','corn','bean','pumpkin','marigold']];
+  state.beds.forEach((b,bi)=>{for(let i=0;i<b.w;i++){const t=mix[bi][i];state.plants.push({x:b.x+i,y:b.y+1,t})}});
+  state.plants.push({x:9,y:1,t:'lavender'},{x:9,y:4,t:'lavender'},{x:9,y:8,t:'rosemary'},{x:9,y:11,t:'rose'},{x:2,y:6,t:'marigold'},{x:17,y:6,t:'calendula'},{x:0,y:6,t:'chili'});
+  state.plants.push({x:20,y:1,t:'apple'},{x:20,y:4,t:'peach'},{x:20,y:8,t:'fig'},{x:0,y:11,t:'jujube'},{x:12,y:11,t:'grape'});
+  state.objects=[{x:22,y:12,t:'compost'},{x:8,y:12,t:'barrel'},{x:20,y:12,t:'pond'}];
+  state.paths=[];for(let x=1;x<=19;x++)state.paths.push(x+',6');for(let y=6;y<=12;y++)state.paths.push('9,'+y);state.paths=[...new Set(state.paths)];
+  state.rot={2025:{1:'legume',2:'night',3:'green',4:'cucurbit'},
+             2026:{1:'night',2:'cucurbit',3:'berry',4:'legume'}};
+  state.water={1:{interval:3,time:'06:30',last:Date.now()-2*864e5},
+               2:{interval:3,time:'06:30',last:Date.now()-2*864e5},
+               3:{interval:2,time:'07:00',last:Date.now()-3*864e5}};
+  state.journal=[{d:today,t:'Посажен пример участка: томаты с базиликом, клубника с чесноком, грядка «три сестры». Лаванда вдоль дорожки.'},
+                 {d:today,t:'💧 Полил грядки 1 и 2, бочка на месте. Замульчировал томаты соломой.'}];
+  sel=null}
+$('#sample').onclick=()=>{pushUndo();loadSample();afterChange();renderInspector();renderRot();renderWater();renderJournal();toast('✨ Пример готов — перестраивайте как хотите!','good')};
+$('#pw').onchange=$('#ph').onchange=()=>{state.cols=Math.min(48,Math.max(4,Math.round((+$('#pw').value||12)*2)));
+  state.rows=Math.min(32,Math.max(4,Math.round((+$('#ph').value||7)*2)));
+  state.plants=state.plants.filter(p=>p.x<state.cols&&p.y<state.rows);
+  state.objects=state.objects.filter(o=>o.x+OBJECTS[o.t].w<=state.cols&&o.y+OBJECTS[o.t].h<=state.rows);
+  state.beds=state.beds.filter(b=>b.x+b.w<=state.cols&&b.y+b.h<=state.rows);
+  state.paths=[...new Set(state.paths)].filter(k=>{const[x,y]=k.split(',').map(Number);return x<state.cols&&y<state.rows});save();resize();stats();draw()};
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ══════════════════ СТАРТ ══════════════════ */
+ensurePlots();adoptState(plots[activeId].state);
+if(!state.beds.length&&!state.plants.length&&!localStorage.getItem('cd-seeded')){
+  loadSample();localStorage.setItem('cd-seeded','1');saveAll();
+  toast('✨ Загрузили пример делянки — творите смело!','good')}
+$('#pw').value=state.cols/2;$('#ph').value=state.rows/2;
+$('#jDate').value=new Date().toISOString().slice(0,10);
+calcW();calcP();calcD();calcB();calcM();calcC();
+setTool('bed');resize();stats();checkBadges();renderInspector();renderPlotBar();
+renderEnc();renderCal();renderMoon();renderTasks();renderRot();renderWater();renderHarv();renderJournal();loadWeather('simf');
+</script>
+</body>
+</html>
