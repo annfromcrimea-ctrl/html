@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Аракин 1–5 курс — расширенный учебный тренажёр</title>
+<style>
+:root{
+  --accent:#12324f;--accent2:#1d4f7a;--gold:#a67c00;--bg:#f3f5f8;--card:#fff;--dark:#0c1826;
+  --shadow:0 6px 22px rgba(12,24,38,.12);--radius:14px;--ok:#1f7a3d;--err:#b3261e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Segoe UI",system-ui,Roboto,Arial,sans-serif;background:var(--bg);color:#222;line-height:1.55}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:290px;background:linear-gradient(168deg,#08131f 0%,#12324f 58%,#3a1c10 100%);color:#eef3f9;z-index:50;display:flex;flex-direction:column;transition:transform .3s ease}
+.side-head{padding:18px 16px 12px;border-bottom:1px solid rgba(255,255,255,.12)}
+.side-head h1{font-size:15.5px;line-height:1.3;font-weight:700}
+.side-head p{font-size:11.5px;color:#9db3c8;margin-top:4px}
+.progress-wrap{padding:13px 16px 8px}
+.progress-label{display:flex;justify-content:space-between;font-size:10.5px;color:#9db3c8;margin-bottom:5px;text-transform:uppercase}
+.progress-track{height:8px;background:rgba(255,255,255,.14);border-radius:99px;overflow:hidden}
+.progress-fill{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--gold),#e7b416);transition:width .5s ease}
+.nav-list{flex:1;overflow-y:auto;padding:9px}
+.nav-list::-webkit-scrollbar{width:6px}
+.nav-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:3px}
+.course-tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:10px}
+.course-tab{background:rgba(255,255,255,.10);border-radius:8px;padding:7px 0;text-align:center;font-size:11px;font-weight:700;cursor:pointer;transition:.15s}
+.course-tab:hover{background:rgba(255,255,255,.18)}
+.course-tab.active{background:rgba(231,180,22,.28);color:#ffe7a1}
+.nav-sec{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:#84a0ba;padding:12px 8px 5px;font-weight:700}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px 8px;border-radius:10px;cursor:pointer;transition:background .16s;margin-bottom:2px;user-select:none}
+.nav-item:hover{background:rgba(255,255,255,.09)}
+.nav-item.active{background:rgba(166,124,0,.34)}
+.nav-num{flex:0 0 25px;height:25px;border-radius:8px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700}
+.nav-tt{flex:1;font-size:12.5px;font-weight:600;line-height:1.25}
+.badge{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:99px;background:rgba(255,255,255,.14);color:#d7e5f2;white-space:nowrap}
+.badge.ok{background:#1f7a3d;color:#fff}
+.badge.mid{background:#d9a520;color:#221a00}
+.badge.low{background:#b3261e;color:#fff}
+.side-foot{padding:11px 16px;border-top:1px solid rgba(255,255,255,.12);font-size:11px;color:#84a0ba;display:flex;justify-content:space-between;align-items:center}
+.side-foot a{color:#ffd76a;cursor:pointer;text-decoration:underline}
+.hamburger{display:none;position:fixed;top:12px;left:12px;z-index:60;width:44px;height:44px;border:none;border-radius:11px;background:var(--accent);color:#fff;font-size:20px;cursor:pointer;box-shadow:var(--shadow)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(6,12,20,.55);z-index:40}
+.main{margin-left:290px;padding:34px 42px 80px;max-width:1040px}
+.lesson-head{margin-bottom:24px;animation:fadeUp .45s ease}
+.lesson-tag{display:inline-block;background:var(--gold);color:#fff;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:5px 13px;border-radius:99px;margin-bottom:11px}
+.lesson-head h2{font-size:29px;color:var(--dark);line-height:1.2;margin-bottom:6px}
+.lesson-head .sub{font-size:14.5px;color:#58697d}
+.welcome{animation:fadeUp .5s ease}
+.hero{background:linear-gradient(135deg,#08131f,#12324f 55%,#5a3905);border-radius:18px;color:#fff;padding:42px 38px;margin-bottom:28px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero::after{content:"1–5";position:absolute;right:-10px;bottom:-26px;font-size:120px;font-weight:800;opacity:.08}
+.hero h2{font-size:30px;margin-bottom:12px;line-height:1.2}
+.hero p{max-width:760px;color:#c7d7e6;font-size:14.5px}
+.hero .start{margin-top:20px;display:inline-block;background:var(--gold);color:#fff;border:none;font-size:14.5px;font-weight:700;padding:12px 28px;border-radius:11px;cursor:pointer;transition:transform .15s;box-shadow:0 6px 18px rgba(166,124,0,.4)}
+.hero .start:hover{transform:translateY(-2px)}
+.course-grid,.lesson-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.course-card,.lesson-card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border-top:4px solid var(--gold);transition:transform .18s;cursor:pointer}
+.course-card:hover,.lesson-card:hover{transform:translateY(-3px)}
+.course-card h3,.lesson-card h3{color:var(--accent);font-size:16px;margin-bottom:5px}
+.course-card p,.lesson-card p{font-size:13px;color:#58697d}
+.grammar-card{background:var(--card);border-left:5px solid var(--gold);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 26px;margin-bottom:26px;animation:fadeUp .5s ease}
+.grammar-card h3{color:var(--accent);font-size:18px;margin-bottom:13px}
+.grammar-card h3::before{content:"§ ";color:var(--gold)}
+.grammar-card p{font-size:14px;margin-bottom:8px;color:#263447}
+table.gram{width:100%;border-collapse:collapse;margin:11px 0 15px;font-size:13.2px;background:#fff}
+table.gram th{background:var(--accent);color:#fff;padding:8px 11px;text-align:left;font-weight:600;font-size:12.5px}
+table.gram td{border:1px solid #dfe6ee;padding:8px 11px;vertical-align:top}
+table.gram tr:nth-child(even) td{background:#f7fafc}
+.example{background:#f5f8ff;border-left:3px solid var(--accent2);border-radius:0 9px 9px 0;padding:10px 14px;margin:9px 0;font-size:13.5px}
+.tip{background:#fff7e7;border-left:4px solid #e0a020;border-radius:0 10px 10px 0;padding:11px 15px;margin:13px 0;font-size:13.2px;color:#5d4a1f}
+.tip::before{content:"Примечание: ";font-weight:700}
+.ex-wrap h3.ex-title{font-size:20px;color:var(--dark);margin:32px 0 15px}
+.ex-wrap h3.ex-title::before{content:"Задания: ";color:var(--gold)}
+.ex-block{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:19px 21px;margin-bottom:14px;transition:box-shadow .2s;animation:fadeUp .4s ease}
+.ex-block:hover{box-shadow:0 9px 26px rgba(12,24,38,.15)}
+.ex-q{font-size:14.5px;font-weight:600;color:#172435;margin-bottom:12px}
+.ex-q .n{display:inline-flex;align-items:center;justify-content:center;width:23px;height:23px;border-radius:7px;background:var(--accent);color:#fff;font-size:12px;margin-right:9px;flex-shrink:0}
+.opts{display:flex;flex-wrap:wrap;gap:9px}
+.opt{border:2px solid #dfe6ee;background:#fbfcfe;border-radius:10px;padding:8px 14px;font-size:13.5px;cursor:pointer;transition:.15s;user-select:none}
+.opt:hover{border-color:var(--accent2);background:#eef5fb}
+.opt.selected{border-color:var(--accent);background:#e2effa;font-weight:600}
+.opt.correct{border-color:var(--ok);background:#e5f5ec;font-weight:700}
+.opt.wrong{border-color:var(--err);background:#fdebec}
+.fill-input{border:2px solid #dfe6ee;border-radius:10px;padding:9px 13px;font-size:14px;width:100%;max-width:400px;outline:none;transition:.15s;background:#fbfcfe;font-family:inherit}
+.fill-input:focus{border-color:var(--accent2);background:#fff}
+.fill-input.correct{border-color:var(--ok);background:#e5f5ec}
+.fill-input.wrong{border-color:var(--err);background:#fdebec}
+.feedback{margin-top:10px;font-size:13px;font-weight:600;display:none;border-radius:9px;padding:8px 12px}
+.feedback.ok{display:block;background:#e5f5ec;color:var(--ok)}
+.feedback.err{display:block;background:#fdebec;color:var(--err)}
+.btn-row{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+.btn{border:none;border-radius:11px;padding:12px 26px;font-size:14.5px;font-weight:700;cursor:pointer;transition:transform .15s;font-family:inherit}
+.btn-check{background:var(--gold);color:#fff;box-shadow:0 6px 16px rgba(166,124,0,.32)}
+.btn-check:hover{transform:translateY(-2px)}
+.btn-reset{background:#e8edf4;color:#3b4a5d}
+.btn-reset:hover{background:#dbe4ef}
+.result-box{display:none;margin-top:20px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;text-align:center;border-top:5px solid var(--gold);animation:fadeUp .4s ease}
+.result-box.show{display:block}
+.result-box .score{font-size:34px;font-weight:800;color:var(--accent)}
+.result-box .msg{font-size:16px;font-weight:700;margin-top:4px}
+.result-box .msg-en{font-size:13.5px;color:#66788c;margin-top:3px;font-style:italic}
+@keyframes fadeUp{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
+  .scope-card,.study-toolbox,.audit-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin:0 0 24px;border-top:4px solid var(--accent2)}
+  .scope-card h3,.study-toolbox h3,.audit-card h3{color:var(--accent);font-size:18px;margin-bottom:10px}
+  .scope-card p,.study-toolbox p,.audit-card p{font-size:14px;color:#263447;margin:8px 0}
+  .scope-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+  .scope-item{background:#f5f8ff;border:1px solid #dfe6ee;border-radius:10px;padding:12px 14px;font-size:13px;color:#263447}
+  .scope-item strong{display:block;color:var(--accent);margin-bottom:4px}
+  .study-toolbox ol{margin:10px 0 0 20px;color:#263447;font-size:14px}
+  .study-toolbox li{margin:6px 0}
+  .lesson-nav{display:flex;gap:10px;justify-content:space-between;margin-top:18px;flex-wrap:wrap}
+  .lesson-nav .btn{min-width:180px}.btn-nav{background:var(--accent);color:#fff}.btn-nav:disabled{opacity:.48;cursor:not-allowed}.btn-nav:not(:disabled):hover{background:var(--accent2)}
+  .course-tab,.nav-item{font-family:inherit;border:none;color:inherit}.course-tab{width:100%}.nav-item{width:100%;text-align:left;background:transparent}.course-card,.lesson-card{width:100%;text-align:left;font-family:inherit;background:var(--card)}
+  .course-card:focus-visible,.lesson-card:focus-visible,.nav-item:focus-visible,.course-tab:focus-visible,.opt:focus-visible,.btn:focus-visible{outline:3px solid #e7b416;outline-offset:3px}
+  .opt{font-family:inherit}.opt[aria-pressed="true"]{border-color:var(--accent);background:#e2effa;font-weight:600}
+  .checklist{margin:12px 0 0;padding-left:19px}.checklist li{margin:6px 0;color:#263447;font-size:13.7px}
+  .source-note{font-size:12.2px!important;color:#58697d!important;border-top:1px solid #dfe6ee;padding-top:10px;margin-top:13px!important}
+  @media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .hamburger{display:block}
+  .overlay.show{display:block}
+  .main{margin-left:0;padding:70px 16px 70px}
+  .lesson-head h2{font-size:24px}
+  .hero{padding:28px 22px}
+  .hero h2{font-size:25px}
+}
+</style>
+</head>
+<body>
+
+<button class="hamburger" onclick="toggleSide()">☰</button>
+<div class="overlay" id="ovl" onclick="toggleSide()"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="side-head">
+    <h1>Аракин · Практический курс английского</h1>
+    <p>Расширенный тренажёр · 52 тематических модуля</p>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Прогресс</span><span id="pr-text">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="pr-fill"></div></div>
+  </div>
+  <nav class="nav-list" id="navlist"></nav>
+  <div class="side-foot"><span id="foot-score"></span><a onclick="resetAll()">сбросить всё</a></div>
+</aside>
+
+<main class="main" id="main"></main>
+
+<script>
+const LS_KEY="arakin_all_courses_extended_v2";
+const COURSE_GUIDES=[
+  {focus:"Фонетическая база, чтение и ключевая морфология", task:"Прочитайте в своём лицензионном экземпляре выбранный фрагмент модуля вслух, отметьте пять трудных слов и составьте с ними собственные предложения."},
+  {focus:"Условные конструкции, привычки и управление глаголов", task:"Составьте четыре собственных высказывания: о реальном условии, нереальном настоящем, прошлом условии и привычке из прошлого. Затем объясните выбор формы."},
+  {focus:"Система грамматики уровня Upper-Intermediate", task:"Преобразуйте четыре собственных предложения в пассивную или косвенную речь и письменно прокомментируйте, почему вы выбрали именно эту форму."},
+  {focus:"Академическое чтение, лексическая сочетаемость и дискуссия", task:"Подготовьте мини-выступление на 90 секунд по теме модуля: тезис, два аргумента, пример и вывод. Используйте не менее пяти слов из активного словаря."},
+  {focus:"Профессиональная коммуникация учителя и тематический словарь", task:"Сделайте краткий план занятия или диалога по теме модуля. Включите учебную цель, языковой материал, вопрос для обсуждения и форму обратной связи."}
+];
+const ANSWER_ALIASES={
+  "travelled":["traveled"],
+  "cannot":["can not"],
+  "focussed":["focused"],
+  "travelling":["traveling"]
+};
+let scores=JSON.parse(localStorage.getItem(LS_KEY)||"{}");
+let currentC=null;
+let currentL=null;
+
+const COURSES=[
+{n:"1 курс",d:"Фонетика, чтение, базовая грамматика, времена, пассив, Complex Object, герундий",l:[
+["Правила чтения. Типы слога","I–IV типы слога, c/s/th/ck/kn",`<p>Четыре типа слога: I — открытый, II — закрытый, III — гласная + r, IV — гласная + r + e.</p><table class="gram"><tr><th>Тип</th><th>Пример</th></tr><tr><td>I</td><td>name, me, note</td></tr><tr><td>II</td><td>map, pen, not</td></tr><tr><td>III</td><td>park, her, fork</td></tr><tr><td>IV</td><td>fare, here, more</td></tr></table><p><b>c</b> перед e/i/y обычно даёт [s], <b>ck</b> — [k]. Сочетание <b>th</b> читается как [ð] в <i>this, the, though</i>, но как [θ] в <i>think, thin, bath</i>. Для чтения новых слов обязательно сверяйтесь с транскрипцией в словаре.</p>`,[
+["c","Как читается E в слове me?",["[e]","[i:]","[ei]"],"[i:]"],
+["c","Как читается O в слове not?",["[əu]","[ɒ]","[ʌ]"],"[ɒ]"],
+["c","Как читается th в слове this?",["[θ]","[ð]","[t]"],"[ð]"],
+["c","Как читается c в слове cent?",["[k]","[s]","[ts]"],"[s]"],
+["c","В каком слове s читается как [z]?",["sit","best","nose"],"nose"],
+["f","Сочетание ck в слове clock даёт звук ___ .","k"],
+["c","В каком слове a читается как [ei]?",["map","name","bad"],"name"],
+["c","Какое слово содержит закрытый слог?",["he","time","ten"],"ten"]
+]],
+["Глагол to be. Степени сравнения","am/is/are · taller/the tallest",`<table class="gram"><tr><th>Лицо</th><th>to be</th></tr><tr><td>I</td><td>am</td></tr><tr><td>he/she/it</td><td>is</td></tr><tr><td>we/you/they</td><td>are</td></tr></table><p>Степени сравнения: <i>tall — taller — the tallest</i>; <i>big — bigger</i>; <i>busy — busier</i>; <i>beautiful — more beautiful</i>. После односложных прилагательных с краткой ударной гласной конечная согласная часто удваивается; прилагательные на <i>-y</i> меняют <i>y</i> на <i>i</i>.</p><div class="example">This isn't a box, is it?</div><div class="tip">Сравнивайте сопоставимые объекты: <i>My room is larger than my sister's</i>, а не <i>than my sister</i>.</div>`,[
+["f","I ___ a student.","am"],
+["f","They ___ doctors.","are"],
+["f","She ___ twenty-two.","is"],
+["c","Are you a student? — No, ___.",["I'm not","I not","I aren't"],"I'm not"],
+["c","Is he a pupil? — Yes, ___.",["he is","he's","is he"],"he is"],
+["c","This isn't a box, ___ ?",["is it","isn't it","does it"],"is it"],
+["f","Сравнительная степень: big — ___","bigger"],
+["c","Сравнительная степень от beautiful:",["beautifuller","more beautiful","most beautiful"],"more beautiful"]
+]],
+["Множественное число существительных","-s/-es/-ies/-ves · исключения",`<p>-s/-es: <i>bus — buses, box — boxes</i>; <i>-y → -ies</i>: <i>family — families</i>; ряд слов на <i>-f/-fe</i> образует форму на <i>-ves</i>: <i>wife — wives</i>.</p><p>Исключения: <i>child — children, tooth — teeth, mouse — mice; sheep — sheep</i>. Не обобщайте правило <i>-f → -ves</i> механически: <i>roof — roofs</i>, <i>belief — beliefs</i>.</p><div class="example">the books of the students → the students' books</div>`,[
+["f","bus → ___","buses"],
+["f","family → ___","families"],
+["f","child → ___","children"],
+["f","tooth → ___","teeth"],
+["c","Множественное число от sheep:",["sheeps","sheep","sheepes"],"sheep"],
+["c","Множественное число от brother-in-law:",["brother-in-laws","brothers-in-law","brother-ins-law"],"brothers-in-law"],
+["f","wife → ___","wives"],
+["c","the books of the students = ?",["the students' books","the student's books","the students's books"],"the students' books"]
+]],
+["to have. some/any/no. Предлоги","have/has · on/in/into/out of",`<table class="gram"><tr><th>Лицо</th><th>have</th></tr><tr><td>I/you/we/they</td><td>have</td></tr><tr><td>he/she/it</td><td>has</td></tr></table><p><b>some</b> обычно употребляется в утверждениях, <b>any</b> — в вопросах и отрицаниях, <b>no</b> создаёт отрицательное значение при утвердительной форме глагола. В вежливых просьбах и предложениях часто используется <b>some</b>: <i>Would you like some tea?</i></p>`,[
+["f","I ___ a lot of friends.","have"],
+["f","My brother-in-law ___ a doctor.","has"],
+["c","Have you ___ relations?",["some","any","no"],"any"],
+["f","There isn't ___ chalk on the blackboard.","any"],
+["f","The book is ___ the table. (на)","on"],
+["f","The pencil is ___ the box. (в)","in"],
+["f","Go ___ the room! (в)","into"],
+["c","Take the newspaper ___ the bag.",["out of","from","off"],"out of"]
+]],
+["There is/are. Числительные. Время","there is/are · half past two",`<div class="example">There is a clock on the desk. There are many books on the shelf.</div><p>Важно: <b>forty</b> пишется без <i>u</i>. Время: <i>half past two</i>, <i>a quarter to three</i>. С днями недели используется <b>on</b>: <i>on Sunday</i>; с точным временем — <b>at</b>: <i>at 7.30</i>.</p>`,[
+["f","There ___ a clock on the desk.","is"],
+["f","There ___ many books on the shelf.","are"],
+["c","Is there ___ milk in the jug?",["much","many"],"much"],
+["f","15 словами:","fifteen"],
+["f","40 словами:","forty"],
+["c","2:30 по-английски:",["half past two","half to two","two past half"],"half past two"],
+["f","Без четверти три = a quarter ___ three","to"],
+["c","___ Sunday",["In","On","At"],"On"]
+]],
+["Модальные глаголы can/may/must","can/may/must · needn't/mustn't",`<p><b>can</b> выражает способность или неформальное разрешение, <b>may</b> — более формальное разрешение или вероятность, <b>must</b> — сильную обязанность либо логический вывод. <b>mustn't</b> означает запрет, а <b>needn't</b> — отсутствие необходимости.</p><div class="example">Must I read this book? — No, you needn't.</div>`,[
+["f","I ___ speak only two foreign languages. (умею)","can"],
+["f","___ I come in? (можно)","May"],
+["f","You ___ not smoke here. (нельзя, запрет)","must"],
+["c","Must I read this book? — No, you ___.",["mustn't","needn't","can't"],"needn't"],
+["c","Отрицательная форма глагола can пишется:",["can not","cannot","not can"],"cannot"],
+["f","She ___ play the piano very well. (умеет)","can"],
+["c","May I stay at home? — No, you ___.",["mustn't","needn't","may not"],"mustn't"],
+["f","___ you help me, please? (можете ли вы)","Can"]
+]],
+["Present Indefinite","V/V-s · do/does",`<p>Present Simple: I/you/we/they work; he/she works. Вопросы: Do/Does. Отрицания: don't/doesn't.</p><p>-es после s/ss/sh/ch/x: passes, teaches; y → ies: studies.</p>`,[
+["f","He ___ English very much. (like)","likes"],
+["f","She ___ at the Institute. (study)","studies"],
+["f","Tom ___ to school by bus. (go)","goes"],
+["f","Do you ___ winter? (like)","like"],
+["f","Does she ___ here? (work)","work"],
+["f","He ___ not like coffee.","does"],
+["f","pass → he ___","passes"],
+["f","Tom says: «I have a few English books.» → Tom says he ___ a few English books.","has"]
+]],
+["Present Continuous","am/is/are + V-ing",`<p>Present Continuous: am/is/are + V-ing. Орфография: take — taking, get — getting, lie — lying, travel — travelling, prefer — preferring.</p>`,[
+["f","take → ___","taking"],
+["f","get → ___","getting"],
+["f","lie → ___","lying"],
+["f","travel → ___","travelling"],
+["f","She ___ reading now.","is"],
+["f","We ___ having breakfast now.","are"],
+["c","What ___ you doing?",["do","are","is"],"are"],
+["c","Look! It ___ raining.",["is","does","are"],"is"]
+]],
+["Present Perfect","have/has + V3",`<p>Present Perfect: <b>have/has + Participle III</b>. Частые маркеры: <i>already, just, yet, ever, never, since, for</i>. Не употребляйте Present Perfect с законченным периодом, названным как точное время прошлого: <i>I saw her yesterday</i>, не <i>I have seen her yesterday</i>.</p><div class="example">He has already left. Have you had dinner yet?</div>`,[
+["f","He ___ already left for the Institute.","has"],
+["f","We ___ already had breakfast.","have"],
+["c","Have you had dinner ___?",["yet","already","still"],"yet"],
+["f","She ___ not finished her supper yet.","has"],
+["f","I have known her ___ childhood. (с)","since"],
+["c","They have been writing the test ___ two hours.",["since","for","during"],"for"],
+["f","Participle III от do:","done"],
+["c","Has the bell ___?",["gone","went","goed"],"gone"]
+]],
+["Past Indefinite и Past Continuous","V2 · was/were + V-ing",`<p>Past Simple: V2/did; Past Continuous: was/were + V-ing. Косвенная речь требует изменения не только времени, но и указателей времени и места, когда контекст этого требует: <i>today → that day</i>, <i>here → there</i>. После <i>say</i> объект не ставится без <i>to</i>: <i>said to me</i>, но <i>told me</i>.</p>`,[
+["f","stop → ___","stopped"],
+["f","try → ___","tried"],
+["c","travel → ?",["traveled","travelled","travellied"],"travelled"],
+["f","Past Indefinite от go:","went"],
+["f","She ___ at home yesterday.","was"],
+["f","They ___ not go to the theatre last week.","did"],
+["c","When I entered, she ___ at the table.",["was sitting","sat","sits"],"was sitting"],
+["c","«said to me» в косвенной речи заменяется на:",["told me","spoke me","said me"],"told me"]
+]],
+["Future Indefinite и Future Continuous","shall/will · if + Present",`<p>Future Simple: <b>will + V</b>; Future Continuous: <b>will be + V-ing</b>. Форма <i>shall</i> в современном английском ограничена формальным стилем, юридическими текстами, предложениями <i>Shall I/we ...?</i> и некоторыми вариантами британского употребления. В придаточных с <i>if/when/until/as soon as</i>, относящихся к будущему, обычно употребляется Present Simple.</p>`,[
+["f","I ___ go to the country next Saturday.",["shall","will"]],
+["f","will not (сокращённо):","won't"],
+["f","If it ___ tomorrow, we shan't go. (rain)","rains"],
+["f","When my friend ___ to Moscow, we shall go to the theatre. (come)","comes"],
+["f","I shall ___ able to translate this article next week.","be"],
+["c","shall have to означает:",["придётся","смогу","захочу"],"придётся"],
+["f","We ___ not go to the Institute on Sunday.","shall"],
+["c","If you don't hurry, you ___ the train.",["will miss","miss","are missing"],"will miss"]
+]],
+["Past Perfect. Согласование времён","had + V3 · would/should",`<p>Past Perfect: had + V3 — действие до другого действия в прошлом. Sequence of Tenses: is → was, will → would, has → had.</p>`,[
+["f","He ___ finished his work by five o'clock.","had"],
+["f","He said: «I will come.» → He said he ___ come.","would"],
+["f","I said: «I shall be busy.» → I said I ___ be busy.",["should","would"]],
+["c","Past Perfect образуется:",["had + Participle III","have + Participle I","was + Participle I"],"had + Participle III"],
+["f","He was sure that Tom ___ ill.","was"],
+["f","Roger said: «My uncle has been here.» → Roger said his uncle ___ been there.","had"],
+["c","She asked me: «Did you spend much time there?» → She asked me if I ___ much time there.",["had spent","have spent","spend"],"had spent"],
+["f","Participle III от know:","known"]
+]],
+["Пассивный залог","be + Participle III",`<p>Passive Voice: <b>be + Participle II</b>. Present: <i>is written</i>; Past: <i>was written</i>; Future: <i>will be written</i>; Perfect: <i>has been written</i>. Пассив уместен, когда важнее действие или результат, чем исполнитель; агента при необходимости вводят с <i>by</i>.</p><div class="example">I was shown the way.</div>`,[
+["f","The article ___ written by a famous journalist.","is"],
+["f","The house ___ built last year.","was"],
+["c","Future Passive:",["will be translated","will translate","is translated"],"will be translated"],
+["f","The letter has just ___ sent off.","been"],
+["f","The dictation ___ written without mistakes.","was"],
+["f","All the questions must ___ answered.","be"],
+["c","Пассивный залог образуется:",["be + Participle III","be + Participle I","have + Participle III"],"be + Participle III"],
+["c","Какой пример — активный залог?",["The students finished their translation.","Their translation was finished.","The translation is finished."],"The students finished their translation."]
+]],
+["Complex Object","want somebody to do",`<p>Complex Object: <i>want/expect + object + to V</i>; <i>see/hear + object + V/V-ing</i>; <i>make/let + object + V</i>. Bare infinitive после <i>see/hear</i> обычно передаёт действие как целое, а <i>V-ing</i> — наблюдаемый процесс. В пассиве после <i>make</i> появляется <i>to</i>.</p>`,[
+["f","I want you ___ buy this dress.","to"],
+["c","I saw him ___ the room.",["enter","to enter","entered"],"enter"],
+["c","She made me ___ it.",["do","to do","doing"],"do"],
+["f","We expect them ___ come soon.","to"],
+["f","They made me get up early. → I was made ___ get up early.","to"],
+["f","I heard her ___ beautifully. (sing)","sing"],
+["c","Перевод: «Я хочу, чтобы вы купили это платье».",["I want you to buy this dress.","I want you buy this dress.","I want that you buy this dress."],"I want you to buy this dress."],
+["c","Процесс: I saw Pete ___ towards me.",["coming","to come","came"],"coming"]
+]],
+["Герундий","V-ing после глаголов и предлогов",`<p>Герундий употребляется после enjoy, finish, mind, can't help, be worth, be fond of, be good at, without, go on.</p>`,[
+["f","I enjoy ___ English books. (read)","reading"],
+["f","Go on ___ ! (work)","working"],
+["f","He couldn't help ___ . (laugh)","laughing"],
+["f","She is fond of ___ . (sing)","singing"],
+["c","The poem is worth ___.",["reading","to read","read"],"reading"],
+["f","He left the room without ___ a word. (say)","saying"],
+["f","I don't mind ___ a little. (wait)","waiting"],
+["f","Have you finished ___ the letter? (write)","writing"]
+]],
+["Present Perfect Continuous. Повторение","have/has been + V-ing",`<p>Present Perfect Continuous: have/has been + V-ing; действие началось в прошлом и длится до сих пор. Маркеры: for, since.</p>`,[
+["f","I ___ been waiting for you for twenty minutes.","have"],
+["f","She has been studying music ___ early childhood.","since"],
+["f","They have been writing their test ___ two hours.","for"],
+["f","He has been ___ at his report since ten o'clock. (work)","working"],
+["c","Вопрос «How long have you been waiting?» спрашивает о:",["длительности действия","результате действия","частоте действия"],"длительности действия"],
+["f","Mary says: «I am making a new dress.» → Mary says she ___ making a new dress.","is"],
+["c","Would you like me ___ with you?",["to go","go","going"],"to go"],
+["f","Stop ___ , please! (talk)","talking"]
+]]
+]},
+
+{n:"2 курс",d:"Conditionals, used to, needn't have done, make/let, prevent, so did I",l:[
+["If I were you...","Present Unreal Conditional",`<p><b>If + Past Simple, would/should + V</b>. В формальном стиле часто <b>were</b> для всех лиц.</p><div class="example">If I were you, I should keep an eye on that boy.</div>`,[
+["f","If I ___ you, I should keep an eye on that boy.","were"],
+["c","If the weather ___ fine, we could go for a walk.",["is","were","was"],"were"],
+["f","I rather like the idea ___ having a cup of tea then.","of"],
+["c","We disliked the idea ___ at home on such a fine day.",["stay","to stay","staying"],"staying"],
+["f","If you ___ not work enough, you wouldn't get good marks.","did"],
+["c","If Anne ___ in Moscow, she would ring me up.",["is","were","was"],"were"],
+["f","If I were you, I should keep an ___ on that boy.","eye"],
+["c","Выберите реальное условие:",["If I were well, I should have a walking holiday.","If I am well, I shall have a walking holiday.","If I was well, I should have a walking holiday."],"If I am well, I shall have a walking holiday."]
+]],
+["If I had known...","Past Unreal Conditional",`<p><b>If + Past Perfect, would have + V3</b>. Возможны смешанные условия.</p><div class="example">It would have been strange if he hadn't called on me.</div>`,[
+["f","If I ___ known earlier, I should have called you.","had"],
+["c","It would have been strange if he ___ called on me when he was here last summer.",["hadn't","didn't","hasn't"],"hadn't"],
+["f","We shouldn't have made friends with them if we ___ stayed in the same camp.","hadn't"],
+["c","He seemed ___ all about influenza.",["to know","knowing","knew"],"to know"],
+["f","I can't keep ___ thinking about it.","from"],
+["f","Anne would have taken her spring exams if she ___ fallen ill.","hadn't"],
+["c","It ___ have been natural if the boy had gone to sleep.",["will","would","can"],"would"],
+["c","Какое предложение относится к прошлому?",["If I had time, I should go.","If I had had time, I should have gone.","If I have time, I shall go."],"If I had had time, I should have gone."]
+]],
+["The way and It is ... for somebody to do","Город и безличные конструкции",`<p><b>the way + subject + verb</b> = то, как...; <b>It is + adjective + for somebody + to do</b>.</p><div class="example">It is always interesting for tourists to take a trip along the Thames.</div>`,[
+["f","I like the ___ they work.","way"],
+["c","It is always interesting ___ tourists to take a trip along the Thames.",["for","to","of"],"for"],
+["f","It was difficult for the students to ___ notes of his lecture.","make"],
+["c","It will be convenient for you ___ in our hostel.",["to live","living","live"],"to live"],
+["f","It would be useful for him to give ___ smoking.","up"],
+["c","You don't like the way she ___ to you.",["speaks","speaking","spoke"],"speaks"],
+["f","It would have been natural for the sick man to fall ___ after the injection.","asleep"],
+["c","It was difficult for us ___ the lecture without notes.",["to follow","following","follow"],"to follow"]
+]],
+["Hardly ever able and It will never do","keep + object + adjective",`<p><b>be hardly ever able to</b> = почти никогда не мочь; <b>It will never do to...</b>; <b>keep + object + adjective</b>.</p>`,[
+["f","Mother is hardly ever ___ to have a treat like that.","able"],
+["c","You'll hardly ___ able to get to the British Museum today before the closing hours.",["be","been","being"],"be"],
+["f","Father was afraid that Mother might take ___ if she came.","cold"],
+["c","I thought she might spoil her complexion if she ___ on smoking.",["goes","went","go"],"went"],
+["f","It will never ___ to throw cigarette-ends on the floor.","do"],
+["c","It would never do ___ Father stay home.",["to let","letting","let"],"to let"],
+["f","That kept Mother ___ for a little while.","busy"],
+["c","Keep your feet ___, or you'll catch cold.",["warm","warmly","warming"],"warm"]
+]],
+["Used to and be used to","Привычки и emphatic it",`<p><b>used to + V</b> — раньше бывало; <b>be used to + V-ing</b> — быть привыкшим; <b>It was ... who/that</b> — эмфаза.</p>`,[
+["f","They used to ___ great friends.","be"],
+["c","There ___ to be a telephone-booth round the corner.",["used","use","uses"],"used"],
+["f","I'm not used to ___ presents. (receive)","receiving"],
+["c","She was not used to ___ unkindly.",["being treated","to treat","treat"],"being treated"],
+["f","It was Judy ___ had to read plain books.",["who","that"]],
+["c","When asked this question, he ___ smile and say nothing.",["would","will","is used to"],"would"],
+["f","Our students are used to ___ with a cassette-recorder. (work)","working"],
+["c","Did he ___ to work late at night?",["use","used","using"],"use"]
+]],
+["Needn't have done and than usual","needn't have + V3",`<p><b>needn't do</b> — действие не требуется сейчас или в будущем; <b>needn't have done</b> — действие было выполнено, хотя в нём не было необходимости. Сравните с <b>didn't need to do</b>, которое часто подчёркивает, что действие не совершалось. Двойной притяжательный падеж: <i>those eyes of his</i>.</p>`,[
+["f","You needn't ___ there tomorrow.","go"],
+["c","You needn't ___ gone there yesterday.",["have","to","being"],"have"],
+["f","I needn't have ___ him that; he knew it already. (tell)","told"],
+["c","He had been talking more than ___.",["usual","use","usually"],"usual"],
+["f","You've come ___ than usual.","later"],
+["c","Our homework today is ___ than usual.",["long","longer","longest"],"longer"],
+["f","He looked at me with those kind blue eyes ___ his.","of"],
+["c","The teacher needn't ___ such simple things; the pupils knew them.",["have explained","explained","to explain"],"have explained"]
+]],
+["There is hardly... and make somebody do","hardly и каузативный make",`<p><b>There is hardly...</b> = едва ли есть...; <b>make + object + bare infinitive</b>; в пассиве появляется <b>to</b>.</p>`,[
+["f","There is hardly a country in the world ___ such a variety of scenery can be found.","where"],
+["c","There is hardly a book by this author which he has ___ read.",["not","never","no"],"not"],
+["f","That would make you ___ you were in Holland.","think"],
+["c","The teacher made Jack ___ out all the ink marks.",["rub","to rub","rubbing"],"rub"],
+["f","They couldn't make William Tell ___ before the tyrant's cap.","bow"],
+["c","The slightest noise would make him ___.",["start","to start","starting"],"start"],
+["f","Make him ___ the rule.","repeat"],
+["c","В пассиве: He was made ___ repeat the rule.",["to","for","—"],"to"]
+]],
+["Prevent from and without doing","gerund после prevent/without",`<p><b>prevent/keep + object + from + V-ing</b>; <b>without + V-ing</b>; <b>make/find + object + adjective + to-infinitive</b>.</p>`,[
+["f","We must prevent him ___ leaving.","from"],
+["c","The cold weather prevented the girls ___ going for long walks.",["from","to","of"],"from"],
+["f","Various reasons kept Bill ___ joining the expedition.","from"],
+["f","You can't act ___ feeling.","without"],
+["c","Jolyon started without ___ made up his mind.",["having","to have","have"],"having"],
+["f","His clothes made him hard to ___.","recognize"],
+["c","Lots of mistakes made his speech difficult to ___.",["follow","following","followed"],"follow"],
+["f","We found ___ hard to make up our minds.","it"]
+]],
+["So did I and see somebody doing","Театр и согласие",`<p><b>So + auxiliary + subject</b> — тоже. <b>see/hear + object + V-ing</b> — процесс. <b>go on + V-ing</b> — продолжать.</p>`,[
+["f","«I tell you I was moved.» — «So ___ you, I dare say.»","were"],
+["c","She was greatly impressed by Laurence Olivier's acting. So ___ they.",["was","were","did"],"were"],
+["f","My friend guessed what mystery they were talking about. So ___ I.","did"],
+["c","«I wasn't trying to act. I really felt.» — «So ___ I, my boy.»",["am","did","do"],"did"],
+["f","Rose thought him quite ___.","funny"],
+["f","They always found Le Ros ___.","magnetic"],
+["c","For the first time in a long while Erik thought ___ wonderfully free.",["him","himself","his"],"himself"],
+["c","Meanwhile she went ___ talking in her earnest, convincing voice.",["on","in","at"],"on"]
+]]
+]},
+
+{n:"3 курс",d:"Tenses, conditionals, modals, non-finite forms, passive, articles",l:[
+["Revision of Tenses","Present/Past/Future и Perfect",`<p>Повторение системы времён: Present, Past, Future; Simple, Continuous, Perfect, Perfect Continuous.</p>`,[
+["c","By the time we arrived at the station, the train ___ .",["had already left","has already left","already left"],"had already left"],
+["f","She ___ here since 2010. (to work)","has worked"],
+["c","This time tomorrow I ___ on the beach.",["will be lying","will lie","am lying"],"will be lying"],
+["f","If it ___ tomorrow, we shall stay at home. (to rain)","rains"],
+["c","He ___ English for five years before he went to London.",["had been studying","has been studying","was studying"],"had been studying"],
+["f","By next Friday we ___ the project. (to finish)",["will have finished","shall have finished"]],
+["c","She ___ the piano when I called her.",["was playing","played","has played"],"was playing"],
+["c","He told me that he ___ the film twice.",["had seen","has seen","saw"],"had seen"]
+]],
+["Subjunctive & Conditional Mood","Условные предложения 0–3",`<p>Type 1: If + Present, will + V. Type 2: If + Past, would + V. Type 3: If + Past Perfect, would have + V3. I wish + Past/Past Perfect.</p>`,[
+["f","If I ___ you, I would accept the offer.","were"],
+["c","If he ___ harder last year, he would have got a scholarship.",["had studied","studied","would study"],"had studied"],
+["f","I wish I ___ the answer now.","knew"],
+["c","If only she ___ me the truth yesterday!",["had told","told","would tell"],"had told"],
+["f","If I ___ more time, I would travel more.","had"],
+["c","If water ___ heated to 100°C, it boils.",["is","were","would be"],"is"],
+["f","I wish I ___ my keys yesterday. (not to lose)","hadn't lost"],
+["c","If she ___ the invitation, she would have come to the party.",["had accepted","accepted","would accept"],"had accepted"]
+]],
+["Modal Verbs (Advanced)","must have, should have, needn't have",`<p>must have + V3 — уверенность; may/might have + V3 — вероятность; should have + V3 — следовало; needn't have + V3 — не нужно было; can't have + V3 — не может быть.</p>`,[
+["c","He ___ have left already. His car is not here.",["must","can","should"],"must"],
+["f","You ___ have bought so much food. We already had dinner.","needn't"],
+["c","She ___ have told me the truth, but she didn't.",["should","must","can"],"should"],
+["f","He ___ have done it. He was with me all day.",["can't","cannot"]],
+["c","You ___ see a doctor about that cough.",["should","must","can"],"should"],
+["f","She ___ have missed the train. She is very late.","might"],
+["c","___ I smoke here? — No, you mustn't.",["May","Must","Should"],"May"],
+["c","He ___ speak three languages when he was ten.",["could","can","must"],"could"]
+]],
+["Sequence of Tenses & Reported Speech","Согласование времён",`<p>Если главный глагол в прошлом: am/is → was, will → would, can → could, have/has → had; today → that day, tomorrow → the next day.</p>`,[
+["f","He said: I am busy. → He said he ___ busy.","was"],
+["f","She asked: Where do you live? → She asked me where I ___.","lived"],
+["c","He said: I will come tomorrow. → He said he ___ come the next day.",["would","will","should"],"would"],
+["f","She said: I have already finished. → She said she ___ already finished.","had"],
+["f","He asked: Can you help me? → He asked if I ___ help him.","could"],
+["c","I saw him yesterday, she said. → She said she ___ him the day before.",["had seen","saw","has seen"],"had seen"],
+["f","He said: I am working now. → He said he ___ working then.","was"],
+["c","She asked me: Have you ever been to London? → She asked me if I ___ ever been to London.",["had","have","did"],"had"]
+]],
+["The Infinitive","to V, Complex Object, for-to",`<p>Инфинитив: to write, to be writing, to have written. Конструкции: want somebody to do, It is important for somebody to do. После make/let/see/hear — без to, но в пассиве make — с to.</p>`,[
+["f","I want you ___ (to come) tomorrow.","to come"],
+["c","I saw him ___ the street.",["cross","to cross","crossing"],"cross"],
+["f","She made me ___ (to repeat) the sentence.","repeat"],
+["c","He was made ___ the rule again.",["to repeat","repeat","repeating"],"to repeat"],
+["f","It is important for you ___ (to know) this.","to know"],
+["c","I heard her ___ a beautiful song.",["sing","to sing","singing"],"sing"],
+["f","She seems ___ (to be) very happy today.","to be"],
+["c","He is said ___ abroad last year.",["to have gone","to go","to be going"],"to have gone"]
+]],
+["The Gerund","V-ing после глаголов и предлогов",`<p>Герундий: writing, having written, being written. Употребляется после enjoy, finish, suggest, deny, avoid, can't help, be worth, look forward to, object to, after/before/without.</p>`,[
+["f","I enjoy ___ (read) English books.","reading"],
+["f","He left without ___ (say) a word.","saying"],
+["c","She suggested ___ to the cinema.",["going","to go","go"],"going"],
+["f","I can't help ___ (to laugh) when I see this film.","laughing"],
+["c","He denied ___ the money.",["having stolen","to steal","steal"],"having stolen"],
+["f","She is fond of ___ (to sing).","singing"],
+["c","I look forward to ___ you soon.",["seeing","see","to see"],"seeing"],
+["f","It's worth ___ (to visit) this museum.","visiting"]
+]],
+["Participle I & II","V-ing/V3 и обороты",`<p>Participle I: writing, having written; Participle II: written. Функции: определение, обстоятельство, часть сказуемого. Perfect Participle показывает предшествование.</p>`,[
+["f","___ (To walk) along the street, I met an old friend.","Walking"],
+["c","The letter ___ yesterday was very important.",["written","writing","having written"],"written"],
+["f","___ (To have read) the letter, she smiled.","Having read"],
+["c","I saw him ___ the street.",["crossing","crossed","to cross"],"crossing"],
+["f","The weather ___ (to be) fine, we went for a walk.","being"],
+["c","___ in 1905, the building is now a museum.",["Built","Building","Having built"],"Built"],
+["f","___ (To sit) in the armchair, she was reading a book.","Sitting"],
+["c","___ by the noise, she opened the window.",["Attracted","Attracting","Having attracted"],"Attracted"]
+]],
+["Complex Object & Complex Subject","want/see/make; He is said to...",`<p>Complex Object: I want you to come; I saw him enter; She made me laugh. Complex Subject: He is said to be...; She seems to be...</p>`,[
+["f","I want you ___ (to come) here at once.","to come"],
+["c","I saw him ___ the room and sit down.",["enter","to enter","entering"],"enter"],
+["f","She was made ___ (to apologize) for her behaviour.","to apologize"],
+["c","He is said ___ a talented musician.",["to be","be","being"],"to be"],
+["f","I heard her ___ (to sing) a beautiful song.","sing"],
+["c","She seems ___ very upset today.",["to be","be","being"],"to be"],
+["f","The book is expected ___ (to publish) next month.","to be published"],
+["c","He is known ___ abroad last year.",["to have gone","to go","to be going"],"to have gone"]
+]],
+["The Passive Voice (All Tenses)","be + V3",`<p>Passive Voice во всех временах: is/are written, was/were written, will be written, has/have been written, is/are being written, must be done.</p>`,[
+["f","The letter ___ (to write) yesterday.","was written"],
+["c","The house ___ at the moment.",["is being built","is built","is building"],"is being built"],
+["f","The work must ___ (to finish) by Friday.","be finished"],
+["c","English ___ in many countries.",["is spoken","is speaking","speaks"],"is spoken"],
+["f","The book ___ (to publish) next year.","will be published"],
+["c","The letter ___ already ___ (to send).",["has ... been sent","was ... sent","is ... sent"],"has ... been sent"],
+["f","He ___ (to give) a new task at the meeting yesterday.","was given"],
+["c","This rule should ___ by all students.",["be followed","be following","followed"],"be followed"]
+]],
+["Articles (Advanced Usage)","a/an, the, zero article",`<p>a/an — первое упоминание; the — конкретный/единственный; zero — неисчисляемые, множественное число в общем значении, некоторые устойчивые выражения.</p>`,[
+["c","___ rich should help ___ poor.",["The ... the","A ... a","— ... —"],"The ... the"],
+["c","He went to ___ hospital because he was ill.",["the","a","—"],"—"],
+["f","She plays ___ piano very well.","the"],
+["c","I love ___ nature.",["the","a","—"],"—"],
+["f","___ Thames is the longest river in England.","The"],
+["c","He is ___ university student.",["a","an","the"],"a"],
+["f","She went to ___ bed early last night.","—"],
+["c","___ United States of America is a large country.",["The","A","—"],"The"]
+]],
+["Numerals, Pronouns & Nouns","few/little, other/another, uncountables",`<p>few/a few + исчисляемые; little/a little + неисчисляемые; another — ещё один; the other — другой из двух; information, advice, news — неисчисляемые.</p>`,[
+["c","I have ___ friends in this city. (исчисляемое, мало)",["few","little","a little"],"few"],
+["f","Give me ___ (ещё один) cup of tea, please.","another"],
+["c","___ student in our group has a dictionary.",["Each","Every","All"],"Each"],
+["f","I need some ___ (информация) about this.","information"],
+["c","I have ___ money left. (неисчисляемое, мало)",["little","few","a few"],"little"],
+["f","___ (Каждый) child likes sweets.","Every"],
+["c","I'd like ___ cup of coffee. (ещё одну)",["another","other","the other"],"another"],
+["f","___ (Ножницы) are on the table.","scissors"]
+]],
+["Final Revision","Повторение 3 курса",`<p>Повторение: Tenses, Conditionals, Modal Verbs, Reported Speech, Non-finite Forms, Passive Voice, Articles.</p>`,[
+["c","If I ___ you, I would accept the offer.",["were","am","was"],"were"],
+["f","He is said ___ (to be) a famous writer.","to be"],
+["c","The letter ___ by the secretary at the moment.",["is being typed","is typed","is typing"],"is being typed"],
+["f","I wish I ___ (to know) the answer.","knew"],
+["f","She suggested ___ (to go) to the theatre.","going"],
+["c","He must ___ left already. His coat is gone.",["have","has","had"],"have"],
+["f","___ (To walk) in the park, I met an old friend.","Walking"],
+["c","The book ___ by millions of people since it was published.",["has been read","was read","is read"],"has been read"]
+]]
+]},
+
+{n:"4 курс",d:"Persuasion, courts, phrasal verbs, exams, music, word meanings",l:[
+["Persuasion: Direct and Tentative Patterns","hard/soft/rational tactics",`<p>Tentative: Might it not be true that...? Direct: Surely you'd admit that...? Don't you think that...? Tag questions: ..., aren't they?</p>`,[
+["c","Which pattern is tentative?",["Surely you'd admit that he violated the principle.","Might it not be true that he didn't mean any harm?","Don't you think that the case is weak?"],"Might it not be true that he didn't mean any harm?"],
+["f","___ it not be true that the boy didn't mean any harm?","Might"],
+["c","Which phrase makes a direct persuasive point?",["Might it not be true","Surely you'd admit","Perhaps it is possible"],"Surely you'd admit"],
+["f","Don't you think that the prosecutor has built his case on an ___ assumption?","erroneous"],
+["f","People who rely on logic, reasons and ___ are usually the most successful.","compromise"],
+["f","The teacher objected to the suggestion that the offender should be ___ from school.","suspended"],
+["c","A telling-off is a kind of ___.",["punishment","reward","permission"],"punishment"],
+["c","All of these things are racial slurs, ___ they?",["aren't","don't","wouldn't"],"aren't"]
+]],
+["Courts and Trials: Basic Vocabulary","courts, offences, penalties",`<p>court of appeals, trial court, juvenile court; civil/criminal cases; felony/misdemeanour; robbery/burglary/theft; arson; perjury; bail; verdict; sentence.</p>`,[
+["c","A court that reviews decisions of lower courts is a ___.",["court of appeals","trial court","juvenile court"],"court of appeals"],
+["f","A civil case is different from a ___ case.","criminal"],
+["c","A less serious offence is usually called a ___.",["misdemeanour","felony","murder"],"misdemeanour"],
+["f","Illegal entry into a building in order to steal is ___.",["burglary","housebreaking"]],
+["c","Taking goods from a shop without paying is ___.",["shoplifting","mugging","arson"],"shoplifting"],
+["f","Taking people hostage for ransom is ___.","kidnapping"],
+["c","Willful destruction of property by fire is ___.",["arson","robbery","perjury"],"arson"],
+["f","Giving false evidence in court is ___.","perjury"]
+]],
+["Trial Procedure and Jury","suspect → arrest → charge → try",`<p>suspect → arrest → charge → try → convict/acquit → sentence → prison/probation/parole. Jury, judge, counsel, witness, testimony, verdict.</p>`,[
+["c","A person who police think may have committed a crime is ___.",["suspected","acquitted","paroled"],"suspected"],
+["f","The suspect was ___ by the police.","arrested"],
+["c","The formal accusation of an offence is called a ___.",["charge","verdict","bail"],"charge"],
+["f","In court the accused is ___ by a judge or jury.","tried"],
+["c","If the jury finds the accused not guilty, he is ___.",["acquitted","convicted","sentenced"],"acquitted"],
+["f","If the accused is found guilty, the judge imposes a ___.","sentence"],
+["c","A group of laymen who decide the facts is called a ___.",["jury","panel","counsel"],"jury"],
+["f","A person who gives evidence in court is a ___.","witness"]
+]],
+["Phrasal Verbs: Crime and Police","break in/out, catch out, look out/up",`<p>break in/into, break out of, catch somebody out, do away with, do somebody out of, look on/out/up/up to, make out.</p>`,[
+["f","Burglars ___ into our house while we were away.","broke"],
+["c","Six prisoners managed to ___ of jail.",["break","look","make"],"break"],
+["f","The police caught him ___ when he changed his story.","out"],
+["c","In slang, to do away with somebody means to ___.",["kill","visit","pay"],"kill"],
+["f","The dishonest salesman did her ___ of twenty dollars.","out"],
+["c","If you don't look ___, you'll catch cold.",["out","on","up"],"out"],
+["f","Trade usually ___ up in spring.","looks"],
+["c","Children need someone to look up ___.",["to","at","for"],"to"]
+]],
+["Examinations and Student Life","viva, swot up, get through",`<p>viva/oral examination, written papers, candidate, swot up/cram, get through, mark/grade papers, results come out, cut short, rally thoughts.</p>`,[
+["f","An oral university examination is often called a ___.","viva"],
+["c","To swot up means to ___.",["study intensively","take a rest","leave the room"],"study intensively"],
+["f","The results of the written test will ___ out soon.","come"],
+["c","To get through an exam means to ___.",["pass it","fail it","miss it"],"pass it"],
+["f","The teacher had to mark and ___ the papers.","grade"],
+["f","He was so nervous that he ___ through his answer.","stumbled"],
+["c","The chairperson may ___ a speaker short if he speaks too long.",["cut","put","take"],"cut"],
+["f","Before the viva the candidates were a ___ crowd.","subdued"]
+]],
+["Music: The Proms and Afro-American Traditions","live performance, improvisation",`<p>Proms, Albert Hall, stalls/boxes/balcony, live performance, recorded music, improvisation, hand clapping, foot stamping, reinterpret, worship.</p>`,[
+["f","The famous London classical music festival is called the ___.","Proms"],
+["c","A live performance is different from ___ music.",["recorded","printed","written"],"recorded"],
+["f","The whole notion of ___ is African in origin.","improvisation"],
+["c","In African tradition, drumming and ___ were important musical accompaniment.",["hand clapping","silent reading","painting"],"hand clapping"],
+["f","The slaves did not sing the songs exactly as they were ___ to them.","taught"],
+["c","They reinterpreted European religious culture to conform to an African way of ___.",["singing","cooking","travelling"],"singing"],
+["f","Some people say jazz has low class origin because it comes from ___ music.","folk"],
+["c","The Proms can stimulate public ___ about music.",["debate","silence","confusion"],"debate"]
+]],
+["Semantic Structure of Words","point, draw, doubt, reduce",`<p>Активный словарь строится на словах с высокой сочетаемостью: point, thing, draw, doubt, size, effort, reduce. Важно видеть прямое и переносное значение.</p>`,[
+["c","In the phrase the point of a pin, point means ___.",["the sharp end","the main idea","a small dot in a number"],"the sharp end"],
+["f","I don't see your ___. = Я не понимаю вашу мысль.","point"],
+["c","Draw your chair nearer to the table. Here draw means ___.",["to pull","to paint","to attract"],"to pull"],
+["f","The concert season is drawing to a ___.","close"],
+["c","There is no doubt about it. This means ___.",["there is certainty","there is fear","there is a mistake"],"there is certainty"],
+["f","They drew different ___ from the same facts.","conclusions"],
+["c","Size 36 shoes. Here size is ___.",["a numbered class","a feeling","an effort"],"a numbered class"],
+["f","The cruel news reduced her to ___. = заставило её заплакать.","tears"]
+]],
+["Final Revision","Повторение 4 курса",`<p>Повторение: persuasion patterns, courts, trial procedure, phrasal verbs, exams, music, semantic structure.</p>`,[
+["f","A person who steals goods from a shop is a ___.","shoplifter"],
+["c","The jury returned a verdict of not ___.",["guilty","sentence","court"],"guilty"],
+["f","Burglars broke ___ while we were out.","in"],
+["c","To look up to somebody means to ___.",["respect them","watch them secretly","arrest them"],"respect them"],
+["f","The student was afraid he would not get ___ the exam.","through"],
+["c","An oral examination may be called a ___.",["viva","lawsuit","parole"],"viva"],
+["f","The Proms take place in Albert ___.","Hall"],
+["c","Make out a cheque means to ___.",["write out a cheque","destroy a cheque","refuse a cheque"],"write out a cheque"]
+]]
+]},
+
+{n:"5 курс",d:"Кино, театр, профессия учителя, образование, путешествия, экология, поколения",l:[
+["Cinema: Its Past, Present and Future","director, cast, shoot, dubbed",`<p>film director, to shoot a film, cast, silent film, sound track, credits, documentary, feature film, thriller, dubbed film, release, video.</p>`,[
+["f","A person who directs a film is a film ___.","director"],
+["c","A film with no spoken sound is a ___ film.",["silent","dubbed","documentary"],"silent"],
+["f","All the actors who take part in a film are called the ___.","cast"],
+["c","To shoot a film means to ___.",["film it","sell it","write it"],"film it"],
+["f","A film translated into another language with new voices is a ___ film.","dubbed"],
+["c","A film about real facts and events is usually called a ___.",["documentary","cartoon","thriller"],"documentary"],
+["f","The list of actors and film-makers shown at the beginning or end of a film is called the ___.","credits"],
+["c","An exciting film, often about crime or danger, is a ___.",["thriller","lyrical comedy","silent film"],"thriller"]
+]],
+["Theatre and Drama","stage, audience, rehearsal",`<p>play/drama, stage, audience, actor, director, curtain, scenery, rehearsal, box-office, stalls/dress-circle/gallery, performance.</p>`,[
+["f","A play is a story presented by ___ on a stage.","actors"],
+["c","The people who watch a performance are the ___.",["audience","actors","critics"],"audience"],
+["f","A person who writes plays is a ___.",["dramatist","playwright"]],
+["f","Before the first performance actors usually have many ___.",["rehearsals","rehearsal"]],
+["c","The cloth that hides the stage before the performance is the ___.",["curtain","programme","ticket"],"curtain"],
+["f","In a theatre you may sit in the stalls, the dress-circle or the ___.","gallery"],
+["c","If you want to buy tickets, you usually go to the ___.",["box-office","stage","gallery"],"box-office"],
+["c","If an actor becomes careless, his work may become ___.",["slovenly","famous","silent"],"slovenly"]
+]],
+["Teaching Profession: Classroom Discipline","maintain discipline, prompt",`<p>maintain discipline, undermine discipline, prompt, stern measures, impose silence, tittering, attention catchers, complete failure, demand active response.</p>`,[
+["f","A good teacher tries to ___ discipline in class.","maintain"],
+["c","To undermine discipline means to ___.",["weaken it","support it","observe it"],"weaken it"],
+["f","Students should not ___ each other during a test.","prompt"],
+["c","Rapping knuckles on the table is usually a ___ measure.",["stern","playful","modern"],"stern"],
+["f","There was some ___ in the classroom when the boy made a funny face.","tittering"],
+["c","A student who only reads from his notebook may be described as ___ to it.",["glued","attached","opposed"],"glued"],
+["f","The teacher had to impose ___ because the class was too noisy.","silence"],
+["c","An attention catcher is used to get the pupils' ___.",["attention","homework","marks"],"attention"]
+]],
+["Methods and Techniques of Teaching English","audio-lingual, CAI, visual aids",`<p>audio-lingual method, CAI / computer-aided instruction, display terminal, drills, visual aids, flash-cards, target language, mother tongue, reading between the lines, methodological competence.</p>`,[
+["f","The audio-lingual method prescribed the order: listening, speaking, reading and ___.","writing"],
+["c","CAI means computer-___ instruction.",["aided","allowed","accidental"],"aided"],
+["f","Students can receive instruction at a display ___.","terminal"],
+["c","Vocabulary, grammar and spelling ___ are common in language programs.",["drills","holidays","dialogues"],"drills"],
+["f","Exposure without preparation may lead to incomprehension and ___.","discouragement"],
+["c","Pictures, flash-cards and film-strips are examples of ___ aids.",["visual","financial","legal"],"visual"],
+["f","In a more sophisticated application CAI will teach new subject matter and ___ the student on it.","quiz"],
+["c","In teaching, the HOW is as important as the ___.",["WHAT","WHEN","WHO"],"WHAT"]
+]],
+["Educational Problems and Learners","comics, curriculum, adolescence",`<p>background, comics/thrillers, curriculum, self-expression, digression, proclivity, yearning, inquisitiveness, mischievous, adolescence, parental authority.</p>`,[
+["f","Many children read only simple ___ and thrillers.","comics"],
+["c","The subjects taught at school are often part of the ___.",["curriculum","ticket","stage"],"curriculum"],
+["f","The teacher tried to encourage ___ among the children.","self-expression"],
+["c","An intentional digression is a move away from the main ___.",["topic","window","desk"],"topic"],
+["f","Roger shows a strong ___ for purposeless activity.","proclivity"],
+["c","A yearning is a strong ___.",["desire","fear","mistake"],"desire"],
+["f","The inherent ___ of children provides the drive to learning.","inquisitiveness"],
+["c","Teenagers may rebel against parental ___.",["authority","holidays","books"],"authority"]
+]],
+["Travelling, Holiday-Making and Environmental Protection","travel, litter, pollution, recycle",`<p>travel for pleasure, tourism, bird's-eye view, beauty spots, escape, strenuous activities, litter, dump waste, sewage, recycle, pollution, fit for drinking water.</p>`,[
+["c","According to the article, the only way to travel is on ___.",["foot","plane","train"],"foot"],
+["f","Travel means the consciousness of adventure and ___.","exploration"],
+["c","Tourism may be described as a codification of ___.",["adventure","homework","music"],"adventure"],
+["f","A bird's-eye view is a view from ___.","above"],
+["f","Some people prefer ___ holidays: climbing mountains, crossing oceans.","strenuous"],
+["c","Litter in the countryside usually means ___.",["rubbish","tickets","flowers"],"rubbish"],
+["f","Some factories ___ their chemical waste into rivers.","dump"],
+["c","Garbage can be ___ instead of being thrown away.",["recycled","burned only","forgotten"],"recycled"]
+]],
+["The Generation Gap","values, youth centre, family",`<p>generation gap, youth centre, dance, pub, values, marriage, family, traditional attitudes, parental authority, violence and lethargy. При обсуждении общественных тем отделяйте лексику учебного текста от современных фактических утверждений и проверяйте последние по актуальному источнику.</p>`,[
+["f","The difference in attitudes between young and old people is called the generation ___.","gap"],
+["c","A youth centre is a place where young people can ___.",["meet","fly","queue"],"meet"],
+["f","Paul says he only comes to the youth centre when there is a ___ on.","dance"],
+["c","В контексте учебного диалога подростки обсуждают посещение ___.",["pubs","schools","libraries"],"pubs"],
+["f","Mrs. Brent says the music isn't of her ___.","generation"],
+["c","Finchley says many young people have traditional attitudes to marriage and the ___.",["family","market","airport"],"family"],
+["f","Young people may look for opportunities to ___ others.","help"],
+["c","Some adults fear that teenagers have rejected old values for a mixture of violence and ___.",["lethargy","energy","kindness"],"lethargy"]
+]]
+]}
+];
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function norm(s){return String(s).toLowerCase().replace(/\s+/g," ").trim()}
+function acceptedAnswers(e){
+  const initial=Array.isArray(e[2])?e[2].slice():[e[2]];
+  const full=[];
+  initial.forEach(a=>{full.push(a);const aliases=ANSWER_ALIASES[norm(a)]||[];aliases.forEach(x=>full.push(x));});
+  return [...new Set(full)];
+}
+function lessonNavigation(ci,li){
+  const lessons=COURSES[ci].l;
+  const prev=li>0?'<button class="btn btn-nav" onclick="loadLesson('+ci+','+(li-1)+')">Предыдущий модуль</button>':'<button class="btn btn-nav" disabled>Предыдущий модуль</button>';
+  const next=li<lessons.length-1?'<button class="btn btn-nav" onclick="loadLesson('+ci+','+(li+1)+')">Следующий модуль</button>':'<button class="btn btn-nav" onclick="openCourse('+ci+')">К списку модулей</button>';
+  return '<div class="lesson-nav">'+prev+next+'</div>';
+}
+function key(c,l){return c+"-"+l}
+function allLessons(){let a=[];COURSES.forEach((c,ci)=>c.l.forEach((_,li)=>a.push({c:ci,l:li})));return a}
+function getScore(c,l){return scores[key(c,l)]}
+
+function buildNav(){
+const nav=document.getElementById("navlist");
+let html='<div class="course-tabs">';
+COURSES.forEach((c,i)=>{html+='<button type="button" class="course-tab'+(currentC===i?' active':'')+'" onclick="openCourse('+i+')">'+c.n+'</button>'});
+html+='</div>';
+if(currentC!==null){
+const c=COURSES[currentC];
+html+='<div class="nav-sec">'+esc(c.n)+' · '+c.l.length+' модулей</div>';
+c.l.forEach((l,i)=>{
+const sc=getScore(currentC,i);let badge="";
+if(sc&&sc.answered){const p=Math.round(sc.correct/sc.total*100);const cls=p===100?"ok":(p>=60?"mid":"low");badge='<span class="badge '+cls+'">'+sc.correct+'/'+sc.total+'</span>'}
+html+='<button type="button" class="nav-item'+(currentL===i?' active':'')+'" onclick="loadLesson('+currentC+','+i+')"><span class="nav-num">'+(i+1)+'</span><span class="nav-tt">'+esc(l[0])+'</span>'+badge+'</button>';
+});}
+nav.innerHTML=html;}
+
+function updateProgress(){
+const total=allLessons().length;
+const done=allLessons().filter(x=>{const s=getScore(x.c,x.l);return s&&s.answered}).length;
+const p=Math.round(done/total*100);
+document.getElementById("pr-fill").style.width=p+"%";
+document.getElementById("pr-text").textContent=p+"%";
+let tot=0;allLessons().forEach(x=>{const s=getScore(x.c,x.l);if(s&&s.answered)tot+=s.correct});
+document.getElementById("foot-score").textContent="Баллов: "+tot;}
+
+function showWelcome(){
+currentC=null;currentL=null;buildNav();
+let cards=COURSES.map((c,i)=>'<button type="button" class="course-card" onclick="openCourse('+i+')"><h3>'+esc(c.n)+'</h3><p>'+esc(c.d)+'</p><p style="margin-top:8px;color:var(--gold);font-weight:700">'+c.l.length+' тематических модулей</p></button>').join("");
+document.getElementById("main").innerHTML=`
+<div class="welcome">
+<div class="hero">
+<h2>Аракин · 1–5 курс<br>Расширенный учебный тренажёр</h2>
+<p>52 тематических модуля с краткими правилами, проверочными заданиями, учебными подсказками и сохранением прогресса. Это не электронная копия учебника и не заменяет работу с его лицензионным экземпляром.</p>
+<button class="start" onclick="openCourse(0)">Открыть 1 курс</button>
+</div>
+<div class="scope-card">
+  <h3>Что добавлено и как работать с материалом</h3>
+  <p>Тренажёр организует самостоятельную проработку темы, но не воспроизводит не предоставленные пользователем тексты, словари и упражнения защищённого издания.</p>
+  <div class="scope-grid">
+    <div class="scope-item"><strong>В тренажёре</strong>Краткие объяснения, 416 проверочных заданий, нормализация вариантов ответа, навигация и автоматическое сохранение результата.</div>
+    <div class="scope-item"><strong>В оригинальном учебнике</strong>Основные тексты, комментарии, речевые образцы, активный словарь, фонетика, перевод, чтение, письмо, дискуссии и приложения.</div>
+    <div class="scope-item"><strong>Рекомендуемый цикл</strong>Работа с легальным источником → конспект правила → задания тренажёра → собственная устная/письменная практика → повторение ошибок.</div>
+  </div>
+</div>
+<div class="course-grid">${cards}</div>
+</div>`;
+window.scrollTo({top:0});}
+
+function openCourse(ci){
+currentC=ci;currentL=null;buildNav();
+const c=COURSES[ci];
+let cards=c.l.map((l,i)=>{
+const sc=getScore(ci,i);
+let badge=sc&&sc.answered?('<p style="margin-top:8px;font-weight:700;color:var(--gold)">'+sc.correct+'/'+sc.total+'</p>'):"";
+return '<button type="button" class="lesson-card" onclick="loadLesson('+ci+','+i+')"><h3>Модуль '+(i+1)+'. '+esc(l[0])+'</h3><p>'+esc(l[1])+'</p>'+badge+'</button>';
+}).join("");
+document.getElementById("main").innerHTML=`
+<div class="welcome">
+<div class="hero">
+<h2>${esc(c.n)} · ${c.l.length} модулей</h2>
+<p>${esc(c.d)}</p>
+<button class="start" onclick="loadLesson(${ci},0)">Открыть модуль 1</button>
+</div>
+<div class="lesson-grid">${cards}</div>
+</div>`;
+window.scrollTo({top:0});}
+
+function loadLesson(ci,li){
+currentC=ci;currentL=li;buildNav();
+const c=COURSES[ci];const l=c.l[li];const ex=l[3];
+let exHtml="";
+ex.forEach((e,i)=>{
+const n='<span class="n">'+(i+1)+'</span>';
+let body="";
+if(e[0]==="c"){body='<div class="opts" role="group" aria-label="Варианты ответа">'+e[2].map(o=>'<button type="button" class="opt" aria-pressed="false" data-val="'+esc(o)+'" onclick="selectOpt(this)">'+esc(o)+'</button>').join("")+'</div>'}
+else{body='<input type="text" class="fill-input" placeholder="Введите ответ…" autocomplete="off">'}
+exHtml+='<div class="ex-block"><div class="ex-q">'+n+esc(e[1])+'</div>'+body+'<div class="feedback"></div></div>';
+});
+document.getElementById("main").innerHTML=`
+<div class="lesson-head">
+<span class="lesson-tag">${esc(c.n)} · Модуль ${(li+1)}</span>
+<h2>${esc(l[0])}</h2>
+<div class="sub">${esc(l[1])}</div>
+</div>
+<div class="grammar-card"><h3>Краткий материал модуля</h3>${l[2]}</div>
+	<div class="study-toolbox"><h3>Расширенная самостоятельная работа</h3><p><strong>Фокус курса:</strong> ${COURSE_GUIDES[ci].focus}.</p><ol><li>${COURSE_GUIDES[ci].task}</li><li>Выпишите не менее пяти сочетаний слов или речевых формул из своего законного экземпляра учебника; не ограничивайтесь отдельными словами.</li><li>Сделайте аудиозапись ответа на тему модуля длительностью 60–90 секунд и отметьте одну грамматическую форму, которую хотите улучшить.</li><li>После проверки теста составьте журнал ошибок: «форма — причина ошибки — собственный правильный пример».</li></ol><p class="source-note">Этот блок является оригинальным методическим дополнением. Полные тексты, упражнения и словари конкретного издания нужно использовать только из полученного законным способом экземпляра.</p></div>
+	<div class="ex-wrap">
+<h3 class="ex-title">Проверочные задания</h3>
+${exHtml}
+<div class="btn-row">
+<button class="btn btn-check" onclick="checkAll()">Проверить все ответы</button>
+	<button class="btn btn-reset" onclick="resetEx()">Сбросить ответы</button>
+</div>
+<div class="result-box" id="resbox" aria-live="polite">
+	<div class="score" id="res-score"></div>
+	<div class="msg" id="res-msg"></div>
+	<div class="msg-en" id="res-msg-en"></div>
+	</div>
+	</div>
+	${lessonNavigation(ci,li)}`;
+	window.scrollTo({top:0,behavior:"smooth"});
+if(window.innerWidth<=768)closeSide();}
+
+function selectOpt(el){el.parentElement.querySelectorAll(".opt").forEach(o=>{o.classList.remove("selected");o.setAttribute("aria-pressed","false")});el.classList.add("selected");el.setAttribute("aria-pressed","true")}
+
+function checkAll(){
+const l=COURSES[currentC].l[currentL];const ex=l[3];
+const blocks=document.querySelectorAll(".ex-block");let correct=0;
+blocks.forEach((blk,i)=>{
+const e=ex[i];const fb=blk.querySelector(".feedback");let ok=false;
+if(e[0]==="c"){
+const sel=blk.querySelector(".opt.selected");
+blk.querySelectorAll(".opt").forEach(o=>{o.classList.remove("correct","wrong");if(o.dataset.val===e[3])o.classList.add("correct");else if(o.classList.contains("selected"))o.classList.add("wrong")});
+ok=!!(sel&&sel.dataset.val===e[3]);
+fb.innerHTML=ok?"✓ Correct!":"✗ Неправильно. Правильный ответ: <b>"+esc(e[3])+"</b>";
+}else{
+const inp=blk.querySelector(".fill-input");const v=norm(inp.value);
+const acc=acceptedAnswers(e);
+ok=v.length>0&&acc.some(a=>norm(a)===v);
+inp.classList.remove("correct","wrong");if(v.length>0)inp.classList.add(ok?"correct":"wrong");
+fb.innerHTML=ok?"✓ Correct!":"✗ Неправильно. Правильный ответ: <b>"+esc(acc[0])+"</b>";
+}
+fb.className="feedback "+(ok?"ok":"err");if(ok)correct++;});
+const total=ex.length;const p=Math.round(correct/total*100);
+let msg,msgEn,color;
+if(p===100){msg="Отлично!";msgEn="Excellent! Perfect work!";color="var(--ok)"}
+else if(p>=80){msg="Очень хорошо!";msgEn="Very good! Keep it up!";color="var(--ok)"}
+else if(p>=60){msg="Неплохо!";msgEn="Not bad! Practise a little more.";color="#d9a520"}
+else{msg="Повторите материал модуля.";msgEn="Please revise the study material and try again.";color="var(--err)"}
+document.getElementById("res-score").textContent=correct+" / "+total+" ("+p+"%)";
+document.getElementById("res-score").style.color=color;
+document.getElementById("res-msg").textContent=msg;
+document.getElementById("res-msg").style.color=color;
+document.getElementById("res-msg-en").textContent=msgEn;
+document.getElementById("resbox").classList.add("show");
+document.getElementById("resbox").scrollIntoView({behavior:"smooth",block:"center"});
+scores[key(currentC,currentL)]={correct,total,answered:true};
+localStorage.setItem(LS_KEY,JSON.stringify(scores));
+buildNav();updateProgress();}
+
+function resetEx(){
+document.querySelectorAll(".opt").forEach(o=>{o.classList.remove("selected","correct","wrong");o.setAttribute("aria-pressed","false")});
+document.querySelectorAll(".fill-input").forEach(i=>{i.value="";i.classList.remove("correct","wrong")});
+document.querySelectorAll(".feedback").forEach(f=>{f.className="feedback";f.innerHTML=""});
+const box=document.getElementById("resbox");if(box)box.classList.remove("show");
+window.scrollTo({top:0,behavior:"smooth"});}
+
+function resetAll(){if(!confirm("Сбросить весь прогресс всех курсов?"))return;scores={};localStorage.removeItem(LS_KEY);buildNav();updateProgress();showWelcome();}
+function toggleSide(){document.getElementById("sidebar").classList.toggle("open");document.getElementById("ovl").classList.toggle("show")}
+function closeSide(){document.getElementById("sidebar").classList.remove("open");document.getElementById("ovl").classList.remove("show")}
+
+buildNav();updateProgress();showWelcome();
+</script>
+</body>
+</html>

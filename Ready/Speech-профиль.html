@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Спич-Профиль · диагностическая станция</title>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;💬&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&amp;family=Golos+Text:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#eef1ec;--ink:#182420;--ink2:#5c685f;--panel:#fff;--line:#d9dfd6;--teal:#0e6b5e;--teal-deep:#0a463d;--teal-soft:#e2efe9;--amber:#e0a63a;--ok:#1f9d6b;--warn:#e0a63a;--bad:#d64b4b;--na:#9aa79e;--mono:'JetBrains Mono',monospace;--disp:'Unbounded',sans-serif;--body:'Golos Text',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--bg);background-image:radial-gradient(900px 500px at 8% -5%,rgba(14,107,94,.10),transparent 60%),radial-gradient(800px 500px at 100% 100%,rgba(224,166,58,.10),transparent 60%);background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(24,36,32,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(24,36,32,.045) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1380px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+.topbar{position:sticky;top:0;z-index:40;background:var(--teal-deep);color:#eaf4f0;box-shadow:0 2px 14px rgba(10,70,61,.35)}
+.topbar .wrap{display:flex;align-items:center;gap:18px;height:58px}
+.logo{display:flex;align-items:center;gap:12px}.logo .mark{width:34px;height:34px;border-radius:9px;background:#fff;color:var(--teal-deep);font-family:var(--disp);font-weight:800;font-size:14px;display:grid;place-items:center}
+.logo b{font-family:var(--disp);font-weight:700;font-size:14px;letter-spacing:.06em}.logo small{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#9fc4ba}
+.sess{display:flex;align-items:center;gap:8px;margin-left:auto;font-family:var(--mono);font-size:13px}
+.dot{width:9px;height:9px;border-radius:50%;background:#5be3a9;animation:pulse 1.4s infinite}.dot.paused{background:var(--amber);animation:none}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(91,227,169,.5)}50%{box-shadow:0 0 0 6px rgba(91,227,169,0)}}
+.tbtn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:8px;padding:5px 12px;font:600 12px var(--mono);cursor:pointer;transition:.18s}.tbtn:hover{background:rgba(255,255,255,.25)}
+.savedot{font:11px var(--mono);color:#9fc4ba;display:flex;gap:6px;align-items:center;transition:.3s}.savedot i{width:7px;height:7px;border-radius:50%;background:#5be3a9;display:inline-block}.savedot.ping{color:#fff}.savedot.ping i{transform:scale(1.6)}
+.headcard{margin-top:26px;background:var(--panel);border:1.5px solid var(--ink);border-radius:18px;overflow:hidden;box-shadow:6px 6px 0 rgba(24,36,32,.12);display:grid;grid-template-columns:1.25fr 1fr;position:relative}
+.headcard::after{content:"ФОРМА № 1-Л";position:absolute;top:20px;right:-42px;transform:rotate(38deg);background:var(--ink);color:#fff;font:700 10px var(--mono);letter-spacing:.2em;padding:5px 52px;opacity:.85}
+.hc-left{padding:34px 34px 26px;border-right:1.5px dashed var(--line)}
+.overline{font:600 11px var(--mono);letter-spacing:.28em;text-transform:uppercase;color:var(--teal)}
+.hc-left h1{font-family:var(--disp);font-weight:800;font-size:clamp(28px,3.6vw,42px);line-height:1.05;margin:10px 0 12px}.hc-left h1 em{font-style:normal;color:var(--teal)}
+.hc-left p{color:var(--ink2);font-size:14px;max-width:56ch;line-height:1.55}
+#wf{display:flex;align-items:flex-end;gap:3px;height:48px;margin-top:20px}
+#wf span{flex:1;background:var(--teal);border-radius:3px 3px 0 0;height:calc(var(--h) * var(--amp,.45));transform-origin:bottom;animation:wfp var(--d) ease-in-out var(--dl) infinite alternate}
+@keyframes wfp{from{transform:scaleY(.25)}to{transform:scaleY(1)}}
+.hc-right{padding:26px 30px;background:repeating-linear-gradient(-45deg,#fbfcfa,#fbfcfa 12px,#f4f7f2 12px,#f4f7f2 24px)}
+.hc-right h2{font:700 11px var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ink2);margin-bottom:16px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px}
+.fgrid label{display:block;font:600 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-bottom:5px}
+.fgrid input{width:100%;border:none;border-bottom:2px solid rgba(24,36,32,.25);background:transparent;font:500 15px var(--body);padding:4px 2px;transition:.2s;color:var(--ink)}.fgrid input:focus{outline:none;border-color:var(--teal)}
+.statrow{display:flex;gap:12px;margin-top:20px}.stat{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.stat b{font-family:var(--disp);font-size:18px;display:block}.stat span{font:10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.stat b.good{color:var(--ok)}.stat b.mid{color:var(--warn)}.stat b.low{color:var(--bad)}
+.toolbar{margin:20px 0 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.chips{display:flex;gap:6px}.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font:600 12px var(--body);cursor:pointer;transition:.18s;color:var(--ink2)}
+.chip:hover{border-color:var(--teal);transform:translateY(-1px)}.chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.search{flex:1;min-width:170px;position:relative}.search input{width:100%;border:1.5px solid var(--line);border-radius:999px;padding:8px 16px 8px 36px;font:500 13px var(--body);background:#fff;transition:.2s}
+.search input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+.search svg{position:absolute;left:13px;top:9px;opacity:.45}#found{font:11px var(--mono);color:var(--teal)}
+.legend{display:flex;gap:10px;font:11px var(--mono);color:var(--ink2);align-items:center;flex-wrap:wrap}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.tacts{display:flex;gap:8px;margin-left:auto}
+.abtn{border:1.5px solid var(--ink);background:#fff;border-radius:9px;padding:7px 14px;font:700 12px var(--body);cursor:pointer;transition:.15s;color:var(--ink)}
+.abtn:hover{background:var(--ink);color:#fff;transform:translateY(-1px)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid rgba(14,107,94,.35);outline-offset:2px}
+button{font-family:inherit}
+@media (max-width:640px){.wrap{padding:0 12px}.topbar .wrap{gap:10px}.logo b{font-size:11px}.logo small{font-size:8px}.sess{font-size:11px}.savedot{display:none}.headcard{margin-top:14px;border-radius:14px}.hc-left{padding:24px 20px 20px}.hc-right{padding:20px}.fgrid{grid-template-columns:1fr}.statrow{display:grid;grid-template-columns:1fr 1fr}.toolbar{padding:10px}.tacts{width:100%;margin-left:0}.tacts .abtn{flex:1}.tabs{gap:5px}.tab{padding:9px 10px;font-size:10.5px}.tab small{display:none}.item{padding:12px}.itxt{min-width:100%}.seg{margin-left:auto}.note-btn{flex:none}.sec-h,.mod-h{padding:13px}.sec-t b,.mod-t b{font-size:13px}.mod-tag{display:none}.recgrid{grid-template-columns:1fr}.overlay{padding:20px 12px}.ovacts .abtn{flex:1}.spct{display:none}}
+
+.abtn.prime{background:var(--teal);border-color:var(--teal);color:#fff}.abtn.prime:hover{background:var(--teal-deep)}
+.abtn.danger:hover{background:var(--bad);border-color:var(--bad)}
+.tabs{display:flex;gap:8px;margin:18px 0;flex-wrap:wrap;position:sticky;top:58px;z-index:29;padding:8px 0;background:linear-gradient(var(--bg) 82%,transparent)}
+.tab{border:1.5px solid var(--ink);background:#fff;padding:10px 18px;border-radius:11px;font-family:var(--disp);font-weight:700;font-size:12.5px;cursor:pointer;transition:.18s;display:flex;gap:8px;align-items:center;color:var(--ink)}
+.tab small{font:600 10px var(--mono);background:var(--ink);color:#fff;border-radius:5px;padding:2px 6px;min-width:20px;text-align:center}
+.tab.on{background:var(--ink);color:#fff}.tab.on small{background:rgba(255,255,255,.25)}.tab:hover{transform:translateY(-2px)}
+.view{display:none}.view.on{display:block}.view .sec,.view .mod{opacity:1;transform:none}
+.app{display:grid;grid-template-columns:318px 1fr;gap:24px;margin:14px 0 30px;align-items:start}
+.side{position:sticky;top:132px;display:flex;flex-direction:column;gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.ringbox{display:flex;gap:16px;align-items:center}.ring{position:relative;width:86px;height:86px;flex:none}.ring svg{transform:rotate(-90deg)}
+.ring .fg{stroke:var(--teal);stroke-linecap:round;transition:stroke-dashoffset .6s ease}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--disp);font-size:17px}
+.ringbox .rt b{font-family:var(--disp);font-size:15px;display:block;margin-bottom:4px}.ringbox .rt span{font-size:12px;color:var(--ink2);line-height:1.4}
+.card h3{font:700 11px var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--ink2);margin-bottom:12px}
+.navrow{display:block;width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:7px 8px;border-radius:8px;transition:.15s;font-family:var(--body)}
+.navrow:hover{background:var(--teal-soft)}.navrow .nl{display:flex;justify-content:space-between;font-size:12.5px;font-weight:600;margin-bottom:5px}
+.navrow .np{font-family:var(--mono);font-size:11px;color:var(--ink2)}.nbar{height:6px;border-radius:4px;background:#eceee9;overflow:hidden}
+.nbar i{display:block;height:100%;border-radius:4px;background:var(--teal);width:0;transition:width .5s,background .4s}
+.hints li{font-size:12.5px;line-height:1.45;margin-bottom:9px;padding-left:18px;position:relative;list-style:none}
+.hints li::before{content:"▸";position:absolute;left:2px;color:var(--amber);font-weight:700}.hints .none{color:var(--ink2);font-style:italic;padding-left:2px}.hints .none::before{content:""}
+.sec,.mod{background:var(--panel);border:1px solid var(--line);border-radius:16px;margin-bottom:16px;overflow:hidden;opacity:1;transform:none;transition:box-shadow .4s}
+.sec.in,.mod.in{opacity:1;transform:none}.sec.flash,.mod.flash{animation:flash 1.3s}
+@keyframes flash{0%,100%{box-shadow:0 0 0 0 rgba(14,107,94,0)}30%{box-shadow:0 0 0 4px rgba(14,107,94,.45)}}
+.sec-h,.mod-h{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;user-select:none}.sec-h:hover,.mod-h:hover{background:#fafbf9}
+.lb{width:44px;height:44px;flex:none;border-radius:11px;background:var(--teal-deep);color:#fff;font-family:var(--disp);font-weight:700;font-size:19px;display:grid;place-items:center;transition:.4s}
+.sec.done .lb{background:var(--ok);animation:pop .45s}@keyframes pop{40%{transform:scale(1.18)}}
+.md-dot{width:14px;height:14px;flex:none;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(224,166,58,.25)}
+.sec-t,.mod-t{flex:1;min-width:0}.sec-t b,.mod-t b{font-family:var(--disp);font-weight:700;font-size:15px;display:block}
+.sec-t small,.mod-t small{font-size:12px;color:var(--ink2)}
+.mod-tag{font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--teal);border:1px solid var(--teal-soft);background:var(--teal-soft);border-radius:5px;padding:2px 7px;flex:none}
+.sec-meta{text-align:right;margin-right:6px}.sec-meta b{font-family:var(--mono);font-size:13px;display:block}.sec-meta span{font:10px var(--mono);color:var(--ink2);letter-spacing:.08em}
+.spct{width:110px;height:6px;border-radius:4px;background:#eceee9;overflow:hidden;margin-left:10px}
+.spct i{display:block;height:100%;width:0;background:var(--teal);transition:width .5s,background .4s}
+.chev{transition:.3s;flex:none;color:var(--ink2)}.closed .chev{transform:rotate(-90deg)}
+.sec-body,.mod-body{display:grid;grid-template-rows:1fr;transition:grid-template-rows .35s ease}
+.closed .sec-body,.closed .mod-body{grid-template-rows:0fr}
+.sec-body>div,.mod-body>div{overflow:hidden}
+.item{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:flex-start;padding:13px 20px;border-top:1px solid #eef0ea;transition:background .15s}
+.item:hover{background:#f8faf7}.item.hide{display:none}
+.itxt{flex:1;min-width:250px}.code{font:700 10.5px var(--mono);color:#fff;background:var(--ink);border-radius:5px;padding:2px 6px;margin-right:8px}
+.itxt .t{font-size:14px;font-weight:500}.hint{display:block;font-size:12px;color:var(--ink2);font-style:italic;margin:3px 0 0 40px}
+.atag{display:inline-block;font:600 10px var(--mono);color:var(--teal);background:var(--teal-soft);border-radius:5px;padding:1px 6px;margin-left:8px}
+.seg{display:flex;gap:5px}.sg{width:38px;height:32px;border:1.5px solid var(--line);background:#fff;border-radius:8px;font:700 13px var(--mono);color:var(--ink2);cursor:pointer;transition:.16s}
+.sg:hover{transform:translateY(-2px);border-color:var(--teal);color:var(--ink)}.sg:active{transform:scale(.9)}
+.sg.on.v2{background:var(--ok);border-color:var(--ok);color:#fff}.sg.on.v1{background:var(--warn);border-color:var(--warn);color:#fff}
+.sg.on.v0{background:var(--bad);border-color:var(--bad);color:#fff}.sg.on.vn{background:#6b7a72;border-color:#6b7a72;color:#fff}
+.note-btn{width:32px;height:32px;border-radius:8px;border:1.5px dashed var(--line);background:none;cursor:pointer;color:var(--ink2);transition:.15s;font-size:14px}
+.note-btn:hover{border-color:var(--teal);color:var(--teal)}.note-btn.filled{border-style:solid;background:var(--teal-soft);color:var(--teal)}
+.note-box{width:100%;display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}.item.open .note-box{grid-template-rows:1fr}
+.note-box>div{overflow:hidden}.note-box textarea{width:100%;margin:2px 0 4px;border:1.5px solid var(--line);border-radius:9px;padding:9px 12px;font:400 13px var(--body);resize:vertical;min-height:56px;background:#fbfcfa}
+.note-box textarea:focus,.mnote:focus,#vExtra:focus,.agrid textarea:focus,.agrid input:focus,.agrid select:focus{outline:none;border-color:var(--teal)}
+.mnote{width:calc(100% - 36px);margin:10px 18px 14px;border:1.5px dashed var(--line);border-radius:9px;padding:9px 12px;font:400 13px var(--body);resize:vertical;min-height:40px;background:#fbfcfa}
+footer{border-top:1.5px dashed var(--line);padding:22px 0 40px;font-size:12.5px;color:var(--ink2);line-height:1.6;max-width:82ch}footer b{color:var(--ink)}
+/* модули */
+.lvls{display:flex;gap:8px;padding:14px 20px 4px;flex-wrap:wrap;align-items:center}.lvls .cap{font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-right:4px}
+.lv{border:1.5px solid var(--line);border-radius:999px;padding:6px 14px;font:700 12px var(--body);cursor:pointer;transition:.15s;background:#fff}
+.lv:hover{border-color:var(--teal)}.lv.on{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep)}
+.mod-hint{margin:6px 20px;font:600 11.5px var(--mono);color:var(--teal-deep);background:var(--teal-soft);border-radius:8px;padding:7px 11px}
+.ck{display:flex;gap:10px;padding:11px 20px;border-top:1px solid #eef0ea;cursor:pointer;align-items:flex-start;transition:.15s}
+.ck:hover{background:#f8faf7}.ck input{display:none}
+.ck .box{width:20px;height:20px;border:2px solid var(--ink2);border-radius:6px;flex:none;margin-top:1px;position:relative;transition:.15s;background:#fff}
+.ck input:checked+.box{background:var(--teal);border-color:var(--teal)}
+.ck input:checked+.box::after{content:'✓';color:#fff;position:absolute;inset:0;display:grid;place-items:center;font-size:13px;font-weight:700}
+.ck .ct{font-size:13.5px;line-height:1.4}.ck .ch{font-size:11.5px;color:var(--ink2);font-style:italic;display:block}
+.ck .w{margin-left:auto;font:700 11px var(--mono);color:var(--amber);flex:none}
+.mod-meter{display:flex;align-items:center;gap:12px;padding:12px 20px;background:#fafbf8;border-top:1px dashed var(--line)}
+.mm-bar{flex:1;height:8px;background:#eceee9;border-radius:5px;overflow:hidden}.mm-bar i{display:block;height:100%;width:0;background:var(--teal);transition:.5s,background .4s}
+.mm-label{font:700 11px var(--mono);min-width:190px;text-align:right;color:var(--ink2)}
+.fchips{display:flex;flex-wrap:wrap;gap:6px;padding:0 20px 6px}.fchip{font:700 10.5px var(--mono);background:#fdf3e2;color:#8a5f14;border:1px solid #f0dcb4;border-radius:6px;padding:3px 8px}
+/* анамнез */
+.anam{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px}
+.anam h3{font-family:var(--disp);font-size:15px;margin-bottom:14px}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px}
+.agrid label{display:block;font:600 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-bottom:5px}
+.agrid input,.agrid select{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:8px 11px;font:500 13.5px var(--body);background:#fbfcfa;transition:.2s}
+.agrid textarea{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:8px 11px;font:400 13.5px var(--body);background:#fbfcfa;resize:vertical;min-height:54px}
+.agrid .full{grid-column:1/-1}
+.bilin{display:flex;align-items:center;gap:10px;font-size:13px;padding-top:22px;cursor:pointer}
+/* дифф */
+.dsum{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px}
+.dsum h3{font-family:var(--disp);font-size:15px;margin-bottom:4px}.dsum p{font-size:12.5px;color:var(--ink2);margin-bottom:14px}
+.drow{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.drow b{font-size:13.5px}.drow .dn{font:700 10px var(--mono);color:var(--ink2);margin-right:8px}
+.dopts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.dopt{border:1.5px solid var(--line);border-radius:9px;padding:7px 12px;font:600 12px var(--body);cursor:pointer;background:#fff;transition:.15s;text-align:left}
+.dopt small{display:block;font:600 9.5px var(--mono);color:var(--ink2);margin-top:2px;letter-spacing:.04em}
+.dopt:hover{border-color:var(--teal)}.dopt.on{border-color:var(--teal);background:var(--teal-soft);box-shadow:0 2px 8px rgba(14,107,94,.15)}
+/* заключение */
+.vcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px}
+.vcard h3{font-family:var(--disp);font-size:15px;margin-bottom:6px}.vcard>p{font-size:12.5px;color:var(--ink2);margin-bottom:14px}
+.hyp{margin-bottom:12px}.hyp .hl{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:5px}
+.hyp .hl span:last-child{font:700 11px var(--mono);color:var(--ink2)}
+.hb{height:10px;border-radius:5px;background:#eceee9;overflow:hidden}.hb i{display:block;height:100%;width:0;border-radius:5px;background:var(--teal);transition:width .6s,background .4s}
+.chipz{display:flex;flex-wrap:wrap;gap:8px}
+.cz{border:1.5px solid var(--line);border-radius:999px;padding:7px 14px;font:600 12.5px var(--body);cursor:pointer;background:#fff;transition:.15s;color:var(--ink)}
+.cz:hover{border-color:var(--teal);transform:translateY(-1px)}.cz.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.recgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+.recgrid .ck{border-top:none;border-bottom:1px solid #eef0ea;padding:9px 4px}
+#vExtra{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;font:400 13.5px var(--body);min-height:70px;resize:vertical;background:#fbfcfa}
+.overlay{position:fixed;inset:0;z-index:60;background:#fff;display:none;overflow:auto;padding:34px 22px}.overlay.show{display:block}
+.ovpanel{max-width:880px;margin:0 auto}.ovpanel h2{font-family:var(--disp);font-size:22px;margin-bottom:14px}
+.ovacts{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+#reportTxt{white-space:pre-wrap;border:1.5px solid var(--ink);border-radius:12px;padding:24px;font:12.5px/1.7 var(--mono);background:#fbfcfa}
+#toasts{position:fixed;bottom:20px;right:20px;z-index:80;display:flex;flex-direction:column;gap:8px}
+.toast{background:var(--ink);color:#fff;font:600 13px var(--body);padding:11px 18px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0;transform:translateX(20px);transition:.3s}.toast.show{opacity:1;transform:none}
+@media print{body *{visibility:hidden}.overlay{display:block!important;position:static;padding:0}.overlay *{visibility:visible}.ovacts,.ovpanel h2{display:none}#reportTxt{border:none;padding:0;font-size:11.5px}}
+@media (max-width:1020px){.app{grid-template-columns:1fr}.side{position:static}.headcard{grid-template-columns:1fr}.hc-left{border-right:none;border-bottom:1.5px dashed var(--line)}.agrid,.recgrid{grid-template-columns:1fr}.tabs{position:static}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.sec,.mod{opacity:1;transform:none}}
+</style>
+<style>#appError{display:none;margin:12px 0;padding:12px 14px;border:1px solid #d66;border-radius:10px;background:#fff3f3;color:#8b1e1e;font:600 12px/1.4 system-ui,sans-serif}#appError:not([hidden]){display:block}</style></head>
+<body><div hidden="True" id="appError"></div>
+<header class="topbar">
+<div class="wrap">
+<div class="logo"><div class="mark">СП</div><div><b>СПИЧ-ПРОФИЛЬ</b><small>логопед · психолог · нейро</small></div></div>
+<div class="sess"><span class="dot" id="sessDot"></span><span id="timer">00:00</span><button class="tbtn" id="timerBtn" type="button">пауза</button></div>
+<div class="savedot" id="saveDot"><i></i>автосохранение</div>
+</div>
+</header>
+<div class="wrap">
+<section class="headcard">
+<div class="hc-left">
+<div class="overline">карта · 10 модулей диагнозов · дифф. анализ · заключение</div>
+<h1>Диагностическая <em>станция</em></h1>
+<p>Полный маршрут обследования: структурированная карта наблюдения, критериальные модули (ЗРР, ОНР I–IV, ФФН, дизартрия, алалия, заикание, дисграфия, дислексия, ЗПР, маркеры РАС), матрица дифференциальной диагностики и автоматическое формирование заключения с рекомендациями.</p>
+<div aria-hidden="true" id="wf"></div>
+</div>
+<div class="hc-right">
+<h2>Паспорт обследования</h2>
+<div class="fgrid">
+<div style="grid-column:1/-1"><label>Ребёнок</label><input id="pName" placeholder="Фамилия, имя"/></div>
+<div><label>Возраст</label><input id="pAge" placeholder="лет / мес"/></div>
+<div><label>Обследование №</label><input id="pNum" placeholder="дата / номер"/></div>
+<div style="grid-column:1/-1"><label>Специалист</label><input id="pSpec" placeholder="логопед / психолог"/></div>
+</div>
+<div class="statrow">
+<div class="stat"><b id="stDone">0/54</b><span>карта</span></div>
+<div class="stat"><b id="stIdx">—</b><span>индекс речи</span></div>
+<div class="stat"><b id="stMod">0</b><span>маркеров</span></div>
+<div class="stat"><b id="stDiff">0/10</b><span>дифф.</span></div>
+</div>
+</div>
+</section>
+<div class="toolbar">
+<div class="chips" id="ageChips">
+<button class="chip on" data-age="all" type="button">Все возрасты</button>
+<button class="chip" data-age="0" type="button">2–4 года</button>
+<button class="chip" data-age="1" type="button">4–6 лет</button>
+<button class="chip" data-age="2" type="button">6+ лет</button>
+</div>
+<div class="search">
+<svg fill="none" height="15" stroke="#182420" stroke-width="2.4" viewbox="0 0 24 24" width="15"><circle cx="10.5" cy="10.5" r="7"></circle><path d="m21 21-5-5"></path></svg>
+<input id="search" placeholder="Поиск по карте обследования…"/><span id="found"></span>
+</div>
+<div class="legend">
+<span><i style="background:var(--ok)"></i>2 норма</span><span><i style="background:var(--warn)"></i>1 лёгкие</span>
+<span><i style="background:var(--bad)"></i>0 выраженные</span><span><i style="background:var(--na)"></i>н — не оценено</span>
+</div>
+<div class="tacts">
+<button class="abtn" id="btnCollapse" type="button">Свернуть всё</button>
+<button class="abtn prime" id="btnReport" type="button">Полный отчёт</button>
+<button class="abtn danger" id="btnClear" type="button">Очистить</button>
+</div>
+</div>
+<div class="tabs" id="tabs">
+<button class="tab on" data-view="map" type="button">Карта обследования <small id="tabCnt1">0</small></button>
+<button class="tab" data-view="mod" type="button">Диагностические модули <small id="tabCnt2">0</small></button>
+<button class="tab" data-view="diff" type="button">Дифф. анализ <small id="tabCnt3">0</small></button>
+<button class="tab" data-view="verd" type="button">Заключение <small id="tabCnt4">0</small></button>
+</div>
+<!-- ══ ВИД 1: КАРТА ══ -->
+<div class="view on" id="view-map">
+<div class="app">
+<aside class="side">
+<div class="card"><div class="ringbox">
+<div class="ring"><svg height="86" width="86"><circle cx="43" cy="43" fill="none" r="34" stroke="#eceee9" stroke-width="9"></circle><circle class="fg" cx="43" cy="43" fill="none" id="ringFg" r="34" stroke-dasharray="213.6" stroke-dashoffset="213.6" stroke-width="9"></circle></svg><b id="ringPct">0%</b></div>
+<div class="rt"><b>Заполнение карты</b><span id="ringNote">Оценивайте пункты — профиль строится автоматически.</span></div>
+</div></div>
+<div class="card"><h3>Профиль по сферам</h3><div id="navList"></div></div>
+<div class="card"><h3>Автоподсказки</h3><ul class="hints" id="hintsList"><li class="none">Пока недостаточно данных…</li></ul></div>
+</aside>
+<main id="sections"></main>
+</div>
+</div>
+<!-- ══ ВИД 2: МОДУЛИ ══ -->
+<div class="view" id="view-mod">
+<div class="anam">
+<h3>Анамнез и раннее развитие</h3>
+<div class="agrid">
+<div class="full"><label>Беременность, роды, ранний период</label><textarea id="aPreg" placeholder="Течение беременности, роды, диагнозы раннего периода…"></textarea></div>
+<div><label>Моторные рубежи</label><input id="aMoto" placeholder="голову держал, сидел, пошёл…"/></div>
+<div><label>Речевые рубежи</label><input id="aSpeech" placeholder="гуление, лепет, первые слова, фраза…"/></div>
+<div><label>Слух</label><select id="aHear"><option value="">— не указано —</option><option>в норме</option><option>снижен (аудиометрия)</option><option>под вопросом</option></select></div>
+<div><label>Неврологические диагнозы</label><input id="aNeuro" placeholder="заключения, наблюдения…"/></div>
+<div class="full"><label>Жалобы родителей / запрос</label><textarea id="aCompl" placeholder="Что беспокоит, запрос на обследование…"></textarea></div>
+<label class="bilin"><input id="aBilin" style="width:17px;height:17px;accent-color:var(--teal)" type="checkbox"/> Билингвальная среда / двуязычие в семье</label>
+</div>
+</div>
+<div id="modList"></div>
+</div>
+<!-- ══ ВИД 3: ДИФФ ══ -->
+<div class="view" id="view-diff">
+<div class="dsum">
+<h3>Сводка совпадений</h3>
+<p>Отмечайте наблюдаемый вариант в каждой строке — подсвечивается диагностическая колонка с наибольшим числом совпадений. Результат ориентировочный.</p>
+<div id="diffTally"></div>
+</div>
+<div id="diffRows"></div>
+</div>
+<!-- ══ ВИД 4: ЗАКЛЮЧЕНИЕ ══ -->
+<div class="view" id="view-verd">
+<div class="vcard">
+<h3>Диагностические гипотезы <button class="abtn" id="btnHypFill" style="float:right;font-size:11px;padding:5px 10px" type="button">Подставить в заключение ↑</button></h3>
+<p>Ранжированы по степени совпадения признаков: данные модулей (65%) и матрицы дифференциального анализа (35%).</p>
+<div id="hypList"></div>
+</div>
+<div class="vcard"><h3>Логопедическое заключение</h3><p>Выберите формулировки, которые подтверждаются данными обследования.</p><div class="chipz" id="lcChips"></div></div>
+<div class="vcard"><h3>Психологическое заключение</h3><p>Отметьте при наличии оснований.</p><div class="chipz" id="pcChips"></div></div>
+<div class="vcard"><h3>Рекомендации</h3><div class="recgrid" id="recList"></div></div>
+<div class="vcard"><h3>Дополнительно</h3><textarea id="vExtra" placeholder="Комментарии, динамика, особые наблюдения…"></textarea>
+<div style="margin-top:14px"><button class="abtn prime" id="btnVerdict" type="button">Сформировать заключение</button></div>
+</div>
+</div>
+<footer><b>Важно.</b> Сервис — вспомогательный инструмент структурирования наблюдения: критерии носят ориентировочный характер и не заменяют стандартизированные методики, клиническое обследование и решения ПМПК/врачей. Диагностическое заключение формируется специалистом комплексно. Автоподсказки и «вероятности» гипотез — эвристические ориентиры. Все данные хранятся только локально в вашем браузере.</footer>
+</div>
+<div class="overlay" id="reportOv"><div class="ovpanel">
+<h2 id="ovTitle">Отчёт</h2>
+<div class="ovacts"><button class="abtn prime" id="btnCopy" type="button">Копировать текст</button><button class="abtn" id="btnPrint" type="button">Печать / PDF</button><button class="abtn" id="btnCloseR" style="margin-left:auto" type="button">Закрыть</button></div>
+<pre id="reportTxt"></pre>
+</div></div>
+<div id="toasts"></div>
+<script>document.addEventListener('DOMContentLoaded',()=>{
+
+'use strict';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const AGES=['2–4','4–6','6+'],ROM={1:'I',2:'II',3:'III',4:'IV'};
+
+/* ── данные карты ── */
+const DATA=[
+{id:'contact',code:'А',title:'Контакт, поведение, предпосылки',items:[
+{t:'Вступление в контакт, принятие ситуации обследования',h:'первые 3–5 минут: дистанция, зрительный контакт',a:[0,1,2]},
+{t:'Адекватность поведения и реакций на оценку',a:[0,1,2]},{t:'Работоспособность: истощаемость, колебания',a:[0,1,2]},
+{t:'Принятие и удержание инструкции',a:[0,1,2]},{t:'Интерес к материалу, целенаправленность',a:[0,1,2]}]},
+{id:'motor',code:'Б',title:'Моторика и оральный праксис',items:[
+{t:'Общая моторика: координация, переключение',h:'«кулак–ребро–ладонь», прыжки, ловля мяча',a:[0,1,2]},
+{t:'Мелкая моторика и графомоторные навыки',a:[1,2]},
+{t:'Артикуляционная моторика: объём, точность, удержание',h:'«улыбка–трубочка», «чашечка», 5–10 с',a:[0,1,2]},
+{t:'Артикуляционный кинезис: переключаемость',a:[1,2]},
+{t:'Синкинезии, гиперкинезы, саливация',h:'2 — отсутствуют',a:[0,1,2]}]},
+{id:'impress',code:'В',title:'Понимание речи',items:[
+{t:'Понимание бытовых и игровых инструкций',a:[0,1,2]},
+{t:'Грамматические формы: число, падеж, диминутивы',h:'«покажи чашку и чашечку»',a:[1,2]},
+{t:'Предложные конструкции',h:'«на / под / за / между коробкой»',a:[1,2]},
+{t:'Логико-грамматические структуры',h:'«брат отца», «весна после зимы»',a:[2]},
+{t:'Слова сложной слоговой структуры',a:[1,2]}]},
+{id:'lexicon',code:'Г',title:'Словарь (активный)',items:[
+{t:'Существительные: предметы, части, обобщения',a:[0,1,2]},
+{t:'Глаголы и отглагольные образования',a:[0,1,2]},
+{t:'Прилагательные: признаки, цвет, форма, материал',a:[0,1,2]},
+{t:'Антонимы, синонимы, многозначность',a:[1,2]},
+{t:'Адекватность словоупотребления, парафазии',a:[1,2]}]},
+{id:'grammar',code:'Д',title:'Грамматический строй',items:[
+{t:'Словоизменение: согласование и управление',a:[1,2]},
+{t:'Словообразование',h:'диминутивы, профессии, детёныши, приставки',a:[1,2]},
+{t:'Построение предложений',a:[1,2]},
+{t:'Грамматическое оформление спонтанной речи',a:[1,2]}]},
+{id:'sound',code:'Е',title:'Звуковая сторона речи',items:[
+{t:'Губные, переднеязычные, мягкие лабиальные',a:[0,1,2]},
+{t:'Свистящие и аффрикаты',a:[1,2]},
+{t:'Сонорные и заднеязычные',a:[1,2]},
+{t:'Слоговая структура слова',h:'паук – паутина – регулировщик',a:[0,1,2]},
+{t:'Темп, плавность, речевое дыхание',a:[0,1,2]}]},
+{id:'phonemic',code:'Ж',title:'Фонематические процессы',items:[
+{t:'Различение неречевых и близких речевых звуков',a:[0,1]},
+{t:'Слуховая дифференциация оппозиционных фонем',a:[1,2]},
+{t:'Звуковой анализ и синтез',a:[1,2]},
+{t:'Фонематические представления',h:'слова на заданный звук',a:[1,2]}]},
+{id:'coherent',code:'З',title:'Связная речь',items:[
+{t:'Диалог: ответы, удержание темы',a:[0,1,2]},
+{t:'Пересказ короткого текста',a:[1,2]},
+{t:'Рассказ по серии картинок / по картине',a:[1,2]},
+{t:'Самостоятельность и развёрнутость высказывания',a:[1,2]}]},
+{id:'written',code:'И',title:'Чтение и письмо',items:[
+{t:'Чтение: способ, правильность, темп, понимание',a:[2]},
+{t:'Письмо: дисграфические ошибки',h:'замены, пропуски, перестановки, агграматизмы',a:[2]},
+{t:'Освоение орфографических навыков',a:[2]}]},
+{id:'hmf',code:'К',title:'Высшие психические функции',items:[
+{t:'Внимание: устойчивость, переключаемость',a:[0,1,2]},
+{t:'Слухоречевая память',h:'две группы слов, трёхзвеньевая инструкция',a:[0,1,2]},
+{t:'Зрительная память и зрительный гнозис',a:[0,1,2]},
+{t:'Мышление: анализ, обобщение, исключение',h:'«четвёртый лишний», классификация',a:[0,1,2]},
+{t:'Пространственные представления',a:[1,2]},
+{t:'Программирование и контроль деятельности',a:[1,2]}]},
+{id:'emotional',code:'Л',title:'Эмоционально-личностная сфера',items:[
+{t:'Эмоциональный фон и реактивность',a:[0,1,2]},
+{t:'Произвольная регуляция: ждать, принимать правила',a:[0,1,2]},
+{t:'Мотивация и критичность к результату',a:[1,2]},
+{t:'Маркеры тревожности, страхи, ритуалы',h:'2 — не отмечаются',a:[0,1,2]},
+{t:'Коммуникация со взрослыми и сверстниками',a:[1,2]}]},
+{id:'hearing',code:'М',title:'Слух и слуховое восприятие',items:[
+{t:'Реакция на звук, слуховое сосредоточение',a:[0,1,2]},
+{t:'Физический слух (сурдолог/аудиометрия)',h:'нет данных — «н»',a:[0,1,2]},
+{t:'Различение неречевых звуков и звукоподражаний',a:[0,1,2]}]}
+];
+
+/* ── диагностические модули ── */
+const MODULES=[
+{id:'zrr',diag:'ЗРР',name:'ЗРР — задержка речевого развития',tag:'2–4 года',desc:'Темповое отставание при сохранном слухе и первично сохранном интеллекте.',crit:[
+{w:2,t:'Объём активного словаря ниже возрастной нормы',h:'менее ~50 слов к 2 годам; фраза отсутствует к 2–2,5'},
+{w:2,t:'Фразовая речь отсутствует или единична'},
+{w:1,t:'Жестовая коммуникация преобладает над речевой'},
+{w:1,t:'Речевой негативизм, отказы говорить'},
+{w:1,t:'Понимание обращённой речи сохранно или слегка снижено'},
+{w:1,t:'Игра и предметная деятельность соответствуют возрасту'},
+{w:1,t:'Задержка ранних этапов: гуление, лепет, первые слова'},
+{w:2,t:'Нет данных за органическое поражение ЦНС'}]},
+{id:'onr',diag:'ОНР',name:'ОНР — общее недоразвитие речи',tag:'уровни 1–4',desc:'Системное нарушение всех компонентов речи при сохранном слухе и интеллекте.',levels:true,levelsData:{
+1:[{w:2,t:'Общеупотребительная речь отсутствует'},{w:1,t:'«Лепетные слова», звукоподражания, вокализации'},{w:1,t:'Активные жесты и мимика вместо речи'},{w:1,t:'Понимание ограничено бытовой ситуацией'},{w:1,t:'Фраза недоступна, диалог не складывается'}],
+2:[{w:2,t:'Зачатки фразовой речи, искажённые словосочетания'},{w:1,t:'Словарь резко ограничен, преимущественно бытовой'},{w:1,t:'Грубые аграмматизмы: падежи, число, предлоги'},{w:1,t:'Множественные искажения звуков и слоговой структуры'},{w:1,t:'Связное высказывание на уровне перечисления'}],
+3:[{w:2,t:'Фразовая речь с элементами лексико-грамматического и фонетического недоразвития'},{w:1,t:'Ошибки словообразования, сложные предлоги'},{w:1,t:'Слоговая структура сложных слов нарушена'},{w:1,t:'Фонетико-фонематические нарушения'},{w:1,t:'Монолог недостаточно связный, нужна помощь'}],
+4:[{w:1,t:'Остаточные пробелы в словаре: обобщения, абстракции'},{w:1,t:'Единичные ошибки словоизменения и словообразования'},{w:1,t:'Стёртые нарушения звуко-слоговой структуры'},{w:1,t:'Негрубые фонематические затруднения'},{w:1,t:'Риск трудностей при обучении письму'}]}},
+{id:'ffn',diag:'ФФН/ФНР',name:'ФФН / ФНР',tag:'звук + фонематика',desc:'Нарушения произношения и фонематических процессов при лексике и грамматике, близкой к норме.',crit:[
+{w:2,t:'Нарушено произношение одной или нескольких групп звуков'},
+{w:2,t:'Фонематический слух недостаточен'},
+{w:2,t:'Звуковой анализ и синтез нарушены'},
+{w:1,t:'Словарь и грамматика близки к возрастной норме'},
+{w:1,t:'Артикуляционный аппарат без грубой патологии'}]},
+{id:'dysarthria',diag:'Дизартрия',name:'Дизартрия (в т.ч. стёртая)',tag:'невро-маркеры',desc:'Нарушение произносительной стороны из-за органического поражения иннервации речевого аппарата.',crit:[
+{w:2,t:'Нарушен тонус артикуляционной мускулатуры',h:'спастика / гипотония / дистония'},
+{w:1,t:'Гиперкинезы, тремор, девиация языка'},
+{w:1,t:'Гиперсаливация или сухость во рту'},
+{w:1,t:'«Смазанная», нечёткая речь («каша во рту»)'},
+{w:1,t:'Голос тихий, слабый, назализованный'},
+{w:1,t:'Нарушено речевое дыхание'},
+{w:1,t:'Синкинезии, трудности орального праксиса'},
+{w:2,t:'Перинатальное поражение ЦНС в анамнезе'},
+{w:1,t:'Неврологическая микросимптоматика'}]},
+{id:'alalia',diag:'Алалия',name:'Алалия',tag:'моторная / сенсорная',desc:'Отсутствие или недоразвитие речи при органическом поражении речевых зон коры в ранний период.',forms:true,formsData:{
+m:[{w:2,t:'Собственная речь отсутствует/крайне бедна при относительной сохранности понимания'},
+{w:2,t:'Артикуляционная / оральная апраксия'},
+{w:1,t:'Речевой негативизм, отказ от речи'},
+{w:1,t:'Нарушено программирование высказывания'},
+{w:1,t:'Пассивный словарь сохраннее активного'},
+{w:1,t:'Данные за левостороннее поражение (анамнез)'}],
+s:[{w:2,t:'Грубо нарушено понимание обращённой речи'},
+{w:2,t:'«Слухоречевая агнозия»: речь воспринимается как шум'},
+{w:1,t:'Эхолалии, «речевая окрошка»'},
+{w:1,t:'Колебания слухового восприятия при нормальной аудиограмме'},
+{w:1,t:'Контакт неустойчив, мотивация к общению сохранна'}]}},
+{id:'stutter',diag:'Заикание',name:'Заикание',tag:'клонус / тонус',desc:'Нарушение темпо-ритмической организации речи с судорогами речевых мышц.',typeSel:true,crit:[
+{w:2,t:'Судороги артикуляторных, дыхательных или голосовых мышц'},
+{w:1,t:'Усиление запинок при эмоциональной нагрузке'},
+{w:1,t:'Уловки, эмболофразия, избегание трудных слов'},
+{w:1,t:'Логофобия (у старших детей)'},
+{w:1,t:'Вегетативные реакции: покраснение, напряжение'},
+{w:1,t:'Случаи заикания в семье'},
+{w:1,t:'Острое начало после стресса / инфекции'}]},
+{id:'dysgraphia',diag:'Дисграфия',name:'Дисграфия',tag:'школьный возраст',desc:'Специфические стойкие ошибки письма, не связанные с незнанием правил.',crit:[
+{w:1,t:'Замены звонких–глухих, свистящих–шипящих',h:'→ акустическая форма'},
+{w:1,t:'Пропуски гласных, удвоения, перестановки букв',h:'→ нарушение языкового анализа и синтеза'},
+{w:1,t:'Аграмматизмы: «красна машина», ошибки согласования',h:'→ аграмматическая форма'},
+{w:1,t:'Зеркальность, оптические замены букв',h:'→ оптическая форма'},
+{w:1,t:'Ошибки повторяют дефектное произношение',h:'→ артикуляторно-акустическая форма'},
+{w:2,t:'Ошибки стойкие, повторяющиеся, типичные'},
+{w:1,t:'Темп письма снижен, почерк неровный'}]},
+{id:'dyslexia',diag:'Дислексия',name:'Дислексия',tag:'школьный возраст',desc:'Специфические трудности овладения чтением.',crit:[
+{w:2,t:'Темп чтения ниже возрастной нормы'},
+{w:1,t:'Побуквенное чтение, угадывание'},
+{w:1,t:'Замены и искажения звуко-буквенной структуры'},
+{w:1,t:'Понимание прочитанного нарушено'},
+{w:1,t:'Аграмматизмы при чтении'},
+{w:1,t:'Избегание чтения, быстрая утомляемость'}]},
+{id:'zpr',diag:'ЗПР',name:'ЗПР / задержка познавательного развития',tag:'обучаемость',desc:'Замедленный темп созревания психических функций; ключевой критерий — обучаемость.',crit:[
+{w:2,t:'Помощь принимает, но перенос способа затруднён',h:'ключевой дифференциальный признак'},
+{w:2,t:'Эмоционально-волевая незрелость'},
+{w:1,t:'Сниженная работоспособность, неустойчивая нейродинамика'},
+{w:1,t:'Игровая деятельность незрелая, стереотипная'},
+{w:1,t:'Речевые нарушения вторичного характера'},
+{w:1,t:'Наглядно-образное мышление ниже нормы'},
+{w:1,t:'Есть заключение психолога / ПМПК'}]},
+{id:'ras',diag:'РАС (риск)',name:'Маркеры РАС',tag:'скрининг',desc:'Наблюдательные маркеры; при выявлении — направление к психиатру. Скрининг, не диагноз.',crit:[
+{w:2,t:'Зрительный контакт снижен или неустойчив'},
+{w:2,t:'Отклик на имя слабый или отсутствует'},
+{w:2,t:'Указательный жест отсутствует / слабый'},
+{w:1,t:'Стереотипии, манерность, повторяющиеся действия'},
+{w:1,t:'Сенсорные особенности: гипер-/гипочувствительность'},
+{w:1,t:'Использует руку взрослого как «инструмент»'},
+{w:1,t:'Эхолалии, некоммуникативная речь'},
+{w:1,t:'Стремление к неизменности, ритуалы'},
+{w:1,t:'Игра нефункциональная, фиксации на предметах'},
+{w:2,t:'Трудности социальной взаимности'}]}
+];
+
+/* ── дифференциальный анализ ── */
+const DIFF_COLS=['ЗРР','ОНР','ЗПР','РАС','Алалия','Тугоухость'];
+const DIFF_ROWS=[
+{t:'Зрительный контакт',opts:[['устойчивый',['ЗРР']],['избирательный',['ЗПР','РАС']],['избегает / не удерживает',['РАС']],['непостоянный',['Алалия','Тугоухость']]]},
+{t:'Отклик на имя',opts:[['стабильный',['ЗРР']],['нуждается в усилении',['ЗПР']],['слабый / отсутствует',['РАС','Тугоухость']]]},
+{t:'Понимание инструкций',opts:[['сохранно',['ЗРР']],['частично',['ОНР','ЗПР']],['грубо снижено',['Алалия','РАС','Тугоухость']]]},
+{t:'Компенсаторные жесты',opts:[['развитые',['ЗРР','Алалия']],['скудные',['РАС']],['ситуативные',['ЗПР']]]},
+{t:'Подражание',opts:[['сохранно',['ЗРР','ОНР']],['избирательное',['РАС']],['снижено',['ЗПР','Алалия']]]},
+{t:'Обучаемость: приём помощи и перенос',opts:[['хорошая',['ЗРР']],['частичная',['ОНР']],['низкая',['ЗПР']]]},
+{t:'Игровая деятельность',opts:[['развита',['ЗРР']],['незрелая',['ЗПР']],['нефункциональная / стереотипная',['РАС']]]},
+{t:'Коммуникативная инициатива',opts:[['сохранна',['ЗРР','ОНР']],['снижена',['РАС','Алалия']],['ситуативна',['ЗПР']]]},
+{t:'Слуховое поведение',opts:[['в норме',['ЗРР','ОНР','ЗПР']],['«не слышит» речь',['Тугоухость','Алалия']]]},
+{t:'Эмоциональная взаимность',opts:[['сохранна',['ЗРР','ОНР']],['частичная',['ЗПР']],['снижена',['РАС']]]}
+];
+
+const LC_CHIPS=['ЗРР','ОНР I уровня','ОНР II уровня','ОНР III уровня','ОНР IV уровня','ФФН','ФНР','Дизартрия','Стёртая дизартрия','Дислалия','Моторная алалия','Сенсорная алалия','Заикание','Дисграфия','Дислексия','Нарушения чтения и письма','Вариант возрастной нормы'];
+const PC_CHIPS=['ЗПР','Задержка познавательного развития','СДВГ-черты','Тревожность','Астенические проявления','РАС — риск (требуется уточнение)','Интеллектуальная сохранность'];
+const RECS=[['neuro','Консультация невролога (ЭЭГ, УЗДГ/МРТ по показаниям)'],['lor','Консультация сурдолога: объективная аудиометрия (КСВП/ASSR)'],['psy','Консультация психиатра (при подозрении на РАС)'],['pmpk','Прохождение ПМПК для определения маршрута'],['ind','Индивидуальные логопедические занятия 2–3 раза в неделю'],['group','Групповая коррекционная работа'],['massage','Логопедический массаж'],['neurocor','Нейропсихологическая коррекция'],['psych','Занятия с психологом (эмоционально-волевая сфера)'],['home','Единые рекомендации и домашние задания для родителей'],['control','Контрольное обследование через 3–6 месяцев']];
+const DG_FORMS=['акустическая','на почве нарушения языкового анализа и синтеза','аграмматическая','оптическая','артикуляторно-акустическая'];
+
+const LS='speechmap.v2';
+const EMPTY_STATE=()=>({patient:{},scores:{},notes:{},age:'all',elapsed:0,running:true,modules:{},diff:{},verdict:{lc:[],pc:[],recs:[],extra:''},anamnesis:{}});
+function load(){try{const raw=JSON.parse(localStorage.getItem(LS));if(!raw||typeof raw!=='object')return null;const d=EMPTY_STATE();return {
+ ...d,...raw,patient:{...d.patient,...(raw.patient||{})},scores:{...(raw.scores||{})},notes:{...(raw.notes||{})},modules:{...(raw.modules||{})},diff:{...(raw.diff||{})},anamnesis:{...d.anamnesis,...(raw.anamnesis||{})},verdict:{...d.verdict,...(raw.verdict||{}),lc:Array.isArray(raw.verdict?.lc)?raw.verdict.lc:[],pc:Array.isArray(raw.verdict?.pc)?raw.verdict.pc:[],recs:Array.isArray(raw.verdict?.recs)?raw.verdict.recs:[],extra:typeof raw.verdict?.extra==='string'?raw.verdict.extra:''}};
+ }catch(e){console.warn('Не удалось прочитать сохранённые данные',e);return null}}
+let state=load()||EMPTY_STATE();
+state.patient=state.patient&&typeof state.patient==='object'?state.patient:{};
+state.scores=state.scores&&typeof state.scores==='object'?state.scores:{};
+state.notes=state.notes&&typeof state.notes==='object'?state.notes:{};
+state.modules=state.modules&&typeof state.modules==='object'?state.modules:{};
+state.diff=state.diff&&typeof state.diff==='object'?state.diff:{};
+state.anamnesis=state.anamnesis&&typeof state.anamnesis==='object'?state.anamnesis:{};
+state.verdict=state.verdict&&typeof state.verdict==='object'?state.verdict:{};
+state.verdict.lc=Array.isArray(state.verdict.lc)?state.verdict.lc:[];
+state.verdict.pc=Array.isArray(state.verdict.pc)?state.verdict.pc:[];
+state.verdict.recs=Array.isArray(state.verdict.recs)?state.verdict.recs:[];
+state.verdict.extra=typeof state.verdict.extra==='string'?state.verdict.extra:'';
+function save(){try{localStorage.setItem(LS,JSON.stringify(state));const d=$('#saveDot');d.classList.add('ping');setTimeout(()=>d.classList.remove('ping'),600)}catch(e){toast('Не удалось сохранить данные локально')}}
+const esc=v=>String(v??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]));
+const code=(sec,i)=>sec.code+(i+1);
+function modState(id){if(!state.modules[id]||typeof state.modules[id]!=='object')state.modules[id]={marks:{}};if(!state.modules[id].marks||typeof state.modules[id].marks!=='object')state.modules[id].marks={};return state.modules[id]}
+
+/* ══ КАРТА ══ */
+function renderSections(){
+ $('#sections').innerHTML=DATA.map(sec=>`
+ <section class="sec" id="sec-${sec.id}">
+  <div class="sec-h" data-sec="${sec.id}">
+   <div class="lb">${sec.code}</div>
+   <div class="sec-t"><b>${sec.title}</b><small id="cnt-${sec.id}"></small></div>
+   <div class="spct"><i id="bar-${sec.id}"></i></div>
+   <div class="sec-meta"><b id="pct-${sec.id}">—</b><span>КАЧЕСТВО</span></div>
+   <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg>
+  </div>
+  <div class="sec-body"><div>
+  ${sec.items.map((it,i)=>{const c=code(sec,i);return `
+   <div class="item" id="it-${c}" data-id="${c}">
+    <div class="itxt"><span class="code">${c}</span><span class="t">${it.t}</span><span class="atag">${it.a.length===3?'все возраста':it.a.map(x=>AGES[x]).join(' · ')}</span>${it.h?`<span class="hint">${it.h}</span>`:''}</div>
+    <div class="seg">
+     <button class="sg v0" data-id="${c}" data-v="0" title="Выраженные нарушения" aria-label="Выраженные нарушения">0</button>
+     <button class="sg v1" data-id="${c}" data-v="1" title="Лёгкие нарушения" aria-label="Лёгкие нарушения">1</button>
+     <button class="sg v2" data-id="${c}" data-v="2" title="Возрастная норма" aria-label="Возрастная норма">2</button>
+     <button class="sg vn" data-id="${c}" data-v="n" title="Не оценено" aria-label="Не оценено">н</button>
+    </div>
+    <button class="note-btn" data-id="${c}" title="Заметка">✎</button>
+    <div class="note-box"><div><textarea data-id="${c}" placeholder="Заметка, фрагменты ответов, материал…"></textarea></div></div>
+   </div>`}).join('')}
+  </div></div>
+ </section>`).join('');
+ $('#navList').innerHTML=DATA.map(sec=>`
+  <button class="navrow" data-target="sec-${sec.id}">
+   <div class="nl"><span>${sec.code}. ${sec.title}</span><span class="np" id="np-${sec.id}">—</span></div>
+   <div class="nbar"><i id="nb-${sec.id}"></i></div>
+  </button>`).join('');
+ $$('.sg').forEach(b=>{const v=state.scores[b.dataset.id];if(v!==undefined&&String(v)===b.dataset.v)b.classList.add('on')});
+ $$('.note-box textarea').forEach(t=>{const n=state.notes[t.dataset.id];if(n){t.value=n;t.closest('.item').classList.add('open');t.closest('.item').querySelector('.note-btn').classList.add('filled')}});
+ ['Name','Age','Num','Spec'].forEach(k=>{if(state.patient[k.toLowerCase()])$('#p'+k).value=state.patient[k.toLowerCase()]});
+ $$('#ageChips .chip').forEach(x=>x.classList.toggle('on',x.dataset.age===String(state.age||'all')));
+}
+const itemApplicable=it=>state.age==='all'||it.a.includes(+state.age);
+function applyFilters(){
+ const q=$('#search').value.trim().toLowerCase();let found=0,total=0;
+ DATA.forEach(sec=>{let vis=0;
+  sec.items.forEach((it,i)=>{const el=$('#it-'+code(sec,i));const ageOk=itemApplicable(it);
+   const txtOk=!q||(it.t+' '+(it.h||'')).toLowerCase().includes(q);const show=ageOk&&txtOk;
+   el.classList.toggle('hide',!show);if(ageOk){total++;if(txtOk){found++;vis++}}});
+  $('#sec-'+sec.id).style.display=(q&&vis===0)?'none':'';});
+ $('#found').textContent=q?`найдено: ${found} из ${total}`:'';
+}
+const qLabel=q=>q>=.85?'в пределах нормы':q>=.6?'единичные затруднения':q>=.35?'умеренные нарушения':'выраженные нарушения';
+const qColor=q=>q>=.85?'var(--ok)':q>=.6?'var(--warn)':'var(--bad)';
+function secStats(sec){let app=0,scored=0,sum=0,rated=0;
+ sec.items.forEach((it,i)=>{if(!itemApplicable(it))return;app++;const v=state.scores[code(sec,i)];
+  if(v!==undefined){scored++;if(v===0||v===1||v===2){sum+=v;rated++}}});
+ return{app,scored,rated,sum,q:rated?sum/(2*rated):null}}
+const secById=id=>DATA.find(d=>d.id===id);
+
+function refreshMap(){
+ let appAll=0,scoredAll=0,sumAll=0,ratedAll=0;
+ DATA.forEach(sec=>{const s=secStats(sec);appAll+=s.app;scoredAll+=s.scored;sumAll+=s.sum;ratedAll+=s.rated;
+  $('#cnt-'+sec.id).textContent=`оценено ${s.scored} из ${s.app}`;
+  const pct=$('#pct-'+sec.id),bar=$('#bar-'+sec.id),nb=$('#nb-'+sec.id),np=$('#np-'+sec.id),card=$('#sec-'+sec.id);
+  if(s.q===null){pct.textContent='—';bar.style.width='0';nb.style.width='0';np.textContent='нет данных'}
+  else{const p=Math.round(s.q*100);pct.textContent=p+'%';bar.style.width=p+'%';bar.style.background=qColor(s.q);nb.style.width=p+'%';nb.style.background=qColor(s.q);np.textContent=p+'%'}
+  card.classList.toggle('done',s.app>0&&s.scored===s.app&&s.rated===s.app)});
+ let done=0;DATA.forEach(sec=>sec.items.forEach((it,i)=>{if(itemApplicable(it)&&state.scores[code(sec,i)]!==undefined)done++}));
+ const frac=appAll?Math.min(1,done/appAll):0;
+ $('#ringFg').style.strokeDashoffset=213.6*(1-frac);
+ $('#ringPct').textContent=Math.round(frac*100)+'%';
+ $('#stDone').textContent=done+'/'+appAll;$('#tabCnt1').textContent=done;
+ const idx=ratedAll?sumAll/(2*ratedAll):null;
+ $('#stIdx').textContent=idx===null?'—':Math.round(idx*100)+'%';
+ $('#stIdx').className=idx===null?'':(idx>=.85?'good':idx>=.6?'mid':'low');
+ $('#ringNote').textContent=frac<1?'Оценивайте пункты — профиль строится автоматически.':'Карта заполнена. Сформируйте отчёт.';
+ $('#wf').style.setProperty('--amp',(0.3+0.7*frac).toFixed(2));
+ refreshHints();
+}
+function refreshHints(){
+ const h=[],st={};DATA.forEach(sec=>st[sec.id]=secStats(sec));
+ const low=id=>st[id].q!==null&&st[id].q<.85&&st[id].rated>=2;
+ if(low('hearing'))h.push('Слуховое восприятие под вопросом — обязательна объективная аудиометрия (сурдолог).');
+ if(low('motor'))h.push('Моторные нарушения — рассмотреть псевдобульбарный компонент; наблюдение невролога.');
+ if(low('impress'))h.push('Трудности понимания — углублённая проверка импрессивной речи, дифф. с сенсорной алалией и тугоухостью.');
+ if([low('lexicon'),low('grammar'),low('coherent')].filter(Boolean).length>=2)h.push('Системный характер нарушений — определите уровень ОНР в модуле диагностики.');
+ if(low('sound')||low('phonemic'))h.push('Звукопроизношение и/или фонематические процессы — риск ФФН; модуль «ФФН/ФНР».');
+ if(low('written'))h.push('Нарушения письменной речи — риск дисграфии/дислексии; проанализируйте тетради.');
+ if(low('hmf'))h.push('Недостаточность ВПФ — рекомендована нейропсихологическая диагностика.');
+ if(low('emotional'))h.push('Эмоционально-личностные маркеры — динамическое наблюдение психолога.');
+ $('#hintsList').innerHTML=h.length?h.map(x=>`<li>${x}</li>`).join(''):'<li class="none">Пока недостаточно данных…</li>';
+}
+
+/* ══ МОДУЛИ ══ */
+function activeCrits(m){
+ if(m.levels){const l=modState(m.id).level||3;return m.levelsData[l].map((c,i)=>['l'+l+'c'+i,c])}
+ if(m.forms){const f=modState(m.id).form||'m';return m.formsData[f].map((c,i)=>[f+i,c])}
+ return m.crit.map((c,i)=>['c'+i,c]);
+}
+function allCrits(m){
+ if(m.levels){const a=[];for(let l=1;l<=4;l++)m.levelsData[l].forEach((c,i)=>a.push(['l'+l+'c'+i,c]));return a}
+ if(m.forms){const a=[];['m','s'].forEach(f=>m.formsData[f].forEach((c,i)=>a.push([f+i,c])));return a}
+ return m.crit.map((c,i)=>['c'+i,c]);
+}
+function moduleScore(m){let total=0,sum=0,marked=0;
+ activeCrits(m).forEach(([k,c])=>{total+=c.w;if(modState(m.id).marks[k]){sum+=c.w;marked++}});
+ return{total,sum,marked}}
+const critHtml=(m,k,c)=>`<label class="ck"><input type="checkbox" data-mod="${m.id}" data-k="${k}" ${modState(m.id).marks[k]?'checked':''}><span class="box"></span><span class="ct">${c.t}${c.h?`<span class="ch">${c.h}</span>`:''}</span><span class="w">${'★'.repeat(c.w)}</span></label>`;
+function critListHtml(m){
+ if(m.levels){const l=modState('onr').level||3;return m.levelsData[l].map((c,i)=>critHtml(m,'l'+l+'c'+i,c)).join('')}
+ if(m.forms){const f=modState('alalia').form||'m';return m.formsData[f].map((c,i)=>critHtml(m,f+i,c)).join('')}
+ return m.crit.map((c,i)=>critHtml(m,'c'+i,c)).join('');
+}
+function renderModules(){
+ $('#modList').innerHTML=MODULES.map(m=>{
+  let sel='';
+  if(m.levels){const cur=modState('onr').level||3;sel=`<div class="lvls"><span class="cap">Уровень:</span>${[1,2,3,4].map(l=>`<button class="lv ${cur===l?'on':''}" data-lv="${l}">${ROM[l]}</button>`).join('')}</div><div class="mod-hint" id="hint-onr"></div>`}
+  if(m.forms){const cur=modState('alalia').form||'m';sel=`<div class="lvls"><span class="cap">Форма:</span><button class="lv ${cur==='m'?'on':''}" data-form="m">моторная</button><button class="lv ${cur==='s'?'on':''}" data-form="s">сенсорная</button></div>`}
+  if(m.typeSel){const cur=modState('stutter').type||'смешанное';sel=`<div class="lvls"><span class="cap">Судороги:</span>${['клонические','тонические','смешанное'].map(t=>`<button class="lv ${cur===t?'on':''}" data-stype="${t}">${t}</button>`).join('')}</div>`}
+  const hint=m.id==='ffn'?'<div class="mod-hint" id="hint-ffn"></div>':'';
+  const forms=m.id==='dysgraphia'?'<div class="fchips" id="dgforms"></div>':'';
+  return`<section class="mod" id="mod-${m.id}">
+   <div class="mod-h">
+    <div class="md-dot"></div>
+    <div class="mod-t"><b>${m.name}</b><small>${m.desc}</small></div>
+    <span class="mod-tag">${m.tag}</span>
+    <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg>
+   </div>
+   <div class="mod-body"><div>
+    ${sel}${hint}<div class="crit-list" id="crit-${m.id}">${critListHtml(m)}</div>${forms}
+    <div class="mod-meter"><div class="mm-bar"><i id="mm-${m.id}"></i></div><span class="mm-label" id="mml-${m.id}">нет данных</span></div>
+    <textarea class="mnote" data-mod="${m.id}" placeholder="Заметка по модулю…">${esc(modState(m.id).note||'')}</textarea>
+   </div></div>
+  </section>`}).join('');
+ const a=state.anamnesis||{};
+ $('#aPreg').value=a.preg||'';$('#aMoto').value=a.moto||'';$('#aSpeech').value=a.speech||'';
+ $('#aHear').value=a.hear||'';$('#aNeuro').value=a.neuro||'';$('#aCompl').value=a.compl||'';
+ $('#aBilin').checked=!!a.bilin;
+}
+function refreshModules(){
+ let totalMarked=0;
+ MODULES.forEach(m=>{
+  const s=moduleScore(m);totalMarked+=s.marked;
+  const p=s.total?s.sum/s.total:0,bar=$('#mm-'+m.id),lbl=$('#mml-'+m.id);
+  bar.style.width=(p*100)+'%';
+  if(!s.marked){lbl.textContent='нет данных';bar.style.background='var(--teal)'}
+  else if(p>=.66){lbl.textContent=`высокая выраженность · ${s.marked} марк.`;bar.style.background='var(--bad)'}
+  else if(p>=.34){lbl.textContent=`умеренная выраженность · ${s.marked} марк.`;bar.style.background='var(--warn)'}
+  else{lbl.textContent=`слабые маркеры · ${s.marked} марк.`;bar.style.background='var(--ok)'}
+ });
+ $('#stMod').textContent=totalMarked;$('#tabCnt2').textContent=totalMarked;
+ const o=$('#hint-onr');if(o)o.textContent=onrHint();
+ const f=$('#hint-ffn');if(f)f.textContent=ffnHint();
+ const dg=$('#dgforms');if(dg){const ms=modState('dysgraphia').marks;const forms=DG_FORMS.filter((_,i)=>ms['c'+i]);
+  dg.innerHTML=forms.length?forms.map(x=>`<span class="fchip">предпол. форма: ${x}</span>`).join(''):''}
+}
+function onrHint(){const qs=['lexicon','grammar','coherent'].map(id=>secStats(secById(id)).q).filter(v=>v!==null);
+ if(!qs.length)return'По данным карты: недостаточно оценок лексики/грамматики/связной речи для ориентира.';
+ const a=qs.reduce((x,y)=>x+y)/qs.length;
+ if(a>=.92)return'По данным карты: признаки ОНР не выражены.';
+ const lv=a<.2?1:a<.45?2:a<.7?3:4;
+ return`По данным карты: ориентировочно — ОНР ${ROM[lv]} уровня (лексика, грамматика, связная речь).`}
+function ffnHint(){const q=id=>secStats(secById(id)).q;
+ const s=q('sound'),f=q('phonemic'),l=q('lexicon'),g=q('grammar');
+ if([s,f,l,g].some(v=>v===null))return'По данным карты: недостаточно оценок для ориентира.';
+ if((s<.85||f<.85)&&l>=.85&&g>=.85)return'По данным карты: паттерн соответствует ФФН — звуковая сторона страдает при сохранных лексике и грамматике.';
+ if(s<.85&&f>=.85&&l>=.85&&g>=.85)return'По данным карты: вероятнее ФНР — изолированное нарушение произношения.';
+ return'По данным карты: паттерн ФФН не выражен (страдают и другие компоненты).'}
+
+/* ══ ДИФФ ══ */
+function renderDiff(){
+ $('#diffRows').innerHTML=DIFF_ROWS.map((r,ri)=>`
+  <div class="drow"><b><span class="dn">${String(ri+1).padStart(2,'0')}</span>${r.t}</b>
+   <div class="dopts">${r.opts.map((o,oi)=>`<button class="dopt ${state.diff[ri]===oi?'on':''}" data-row="${ri}" data-opt="${oi}">${o[0]}<small>→ ${o[1].join(' · ')}</small></button>`).join('')}</div>
+  </div>`).join('');
+ refreshDiff();
+}
+function diffTally(){const t={};DIFF_COLS.forEach(c=>t[c]=0);
+ Object.entries(state.diff).forEach(([ri,oi])=>{DIFF_ROWS[ri].opts[oi][1].forEach(c=>t[c]++)});return t}
+function refreshDiff(){
+ const t=diffTally(),answered=Object.keys(state.diff).length;
+ $('#stDiff').textContent=answered+'/'+DIFF_ROWS.length;$('#tabCnt3').textContent=answered;
+ const mx=Math.max(...Object.values(t),0);
+ $('#diffTally').innerHTML=mx===0?'<p style="color:var(--ink2);font-style:italic">Отметьте варианты в строках ниже — здесь появится сводка совпадений.</p>':
+  Object.entries(t).sort((a,b)=>b[1]-a[1]).map(([k,v],i)=>`
+   <div class="hyp"><div class="hl"><span>${k}${v===mx&&mx>0?' <span style="color:var(--bad);font-size:11px">● максимум совпадений</span>':''}</span><span>${v} совп.</span></div>
+   <div class="hb"><i style="width:${mx?Math.round(v/mx*100):0}%;background:${v===mx?'var(--bad)':'var(--teal)'}"></i></div></div>`).join('');
+}
+
+/* ══ ЗАКЛЮЧЕНИЕ ══ */
+function hypScores(){
+ const out=[];
+ MODULES.forEach(m=>{const s=moduleScore(m);
+  if(s.marked)out.push({name:m.diag,marks:s.marked,total:activeCrits(m).length,p:s.sum/s.total,src:'модуль'})});
+ const t=diffTally(),mx=Math.max(...Object.values(t),1),answered=Object.keys(state.diff).length;
+ if(answered>=3)Object.entries(t).forEach(([k,v])=>{if(v>0){
+  const ex=out.find(o=>o.name===k||k.startsWith(o.name));const d=v/mx;
+  if(ex)ex.p=ex.p*.65+d*.35;else out.push({name:k,p:d*.75,src:'дифф.анализ'})}});
+ return out.sort((a,b)=>b.p-a.p);
+}
+function renderVerdict(){
+ $('#lcChips').innerHTML=LC_CHIPS.map(c=>`<button class="cz ${state.verdict.lc.includes(c)?'on':''}" data-g="lc" data-c="${c}">${c}</button>`).join('');
+ $('#pcChips').innerHTML=PC_CHIPS.map(c=>`<button class="cz ${state.verdict.pc.includes(c)?'on':''}" data-g="pc" data-c="${c}">${c}</button>`).join('');
+ $('#recList').innerHTML=RECS.map(([id,txt])=>`<label class="ck"><input type="checkbox" data-rec="${id}" ${state.verdict.recs.includes(id)?'checked':''}><span class="box"></span><span class="ct">${txt}</span></label>`).join('');
+ $('#vExtra').value=state.verdict.extra||'';
+ refreshVerdict();
+}
+function refreshVerdict(){
+ const hs=hypScores();
+ $('#hypList').innerHTML=hs.length?hs.map(h=>`
+  <div class="hyp"><div class="hl"><span>${h.name}</span><span>${Math.round(h.p*100)}% · ${h.marks!==undefined?h.marks+'/'+h.total+' марк.':h.src}</span></div>
+  <div class="hb"><i style="width:${Math.round(h.p*100)}%;background:${h.p>=.66?'var(--bad)':h.p>=.34?'var(--warn)':'var(--teal)'}"></i></div></div>`).join('')
+  :'<p style="color:var(--ink2);font-style:italic">Заполните модули и дифференциальный анализ — гипотезы появятся здесь.</p>';
+ $('#tabCnt4').textContent=state.verdict.lc.length+state.verdict.pc.length+state.verdict.recs.length;
+}
+
+/* ══ ОТЧЁТЫ ══ */
+const fmtT=s=>{const m=Math.floor(s/60);return String(m).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
+function headerLines(){const now=new Date();
+ return[`Дата: ${now.toLocaleDateString('ru-RU')} ${now.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})} · сессия: ${fmtT(state.elapsed)}`,
+ `Ребёнок: ${state.patient.name||'—'} · Возраст: ${state.patient.age||'—'}`,
+ `Обследование: ${state.patient.num||'—'} · Специалист: ${state.patient.spec||'—'}`]}
+function mapLines(){const L=[];const attention=[];
+ DATA.forEach(sec=>{const s=secStats(sec);
+  L.push(`${sec.code}. ${sec.title} — ${s.q===null?'не оценено':Math.round(s.q*100)+'% · '+qLabel(s.q)} (${s.scored}/${s.app})`);
+  sec.items.forEach((it,i)=>{if(state.scores[code(sec,i)]===0)attention.push(`${code(sec,i)} — ${it.t}`)})});
+ return{L,attention}}
+function buildMapSection(){const{L,attention}=mapLines();const out=[...L,''];
+ out.push('Требуют внимания (выраженные нарушения):');
+ out.push(...(attention.length?attention.map(x=>'• '+x):['• не выявлено']));return out}
+function buildAnamnesis(){const a=state.anamnesis;if(!a||Object.values(a).every(v=>!v))return null;
+ const L=['Беременность/роды: '+(a.preg||'—'),'Моторные рубежи: '+(a.moto||'—'),'Речевые рубежи: '+(a.speech||'—'),
+ 'Слух: '+(a.hear||'—')+(a.bilin?' · билингвальная среда':''),'Неврология: '+(a.neuro||'—'),'Жалобы: '+(a.compl||'—')];return L}
+function buildModulesSection(){const L=[];
+ MODULES.forEach(m=>{const s=moduleScore(m);
+  const p=s.total?s.sum/s.total:0;
+  const deg=!s.marked?'нет данных':p>=.66?'высокая выраженность':p>=.34?'умеренная':'слабые маркеры';
+  L.push(`${m.name} — ${s.marked} марк. (${deg})${modState(m.id).note?' · заметка: '+modState(m.id).note:''}`)});
+ return L}
+function buildDiffSection(){const t=diffTally();
+ if(!Object.keys(state.diff).length)return['не проводился'];
+ return Object.entries(t).sort((a,b)=>b[1]-a[1]).filter(([,v])=>v>0).map(([k,v])=>`${k}: ${v} совпад.`)}
+function buildHypSection(){const hs=hypScores();
+ return hs.length?hs.slice(0,6).map((h,i)=>`${i+1}. ${h.name} — ${Math.round(h.p*100)}%`):['нет данных']}
+function buildFullReport(){
+ const L=['«СПИЧ-ПРОФИЛЬ» — ПОЛНЫЙ ОТЧЁТ ОБ ОБСЛЕДОВАНИИ','='.repeat(50),...headerLines(),''];
+ const an=buildAnamnesis();if(an){L.push('АНАМНЕЗ','—'.repeat(50),...an,'')}
+ L.push('КАРТА ОБСЛЕДОВАНИЯ','—'.repeat(50),...buildMapSection(),'',
+ 'ДИАГНОСТИЧЕСКИЕ МОДУЛИ','—'.repeat(50),...buildModulesSection(),'',
+ 'ДИФФЕРЕНЦИАЛЬНЫЙ АНАЛИЗ','—'.repeat(50),...buildDiffSection(),'',
+ 'ГИПОТЕЗЫ (по совпадению признаков; не вероятность диагноза)','—'.repeat(50),...buildHypSection());
+ const v=state.verdict;
+ if(v.lc.length||v.pc.length||v.recs.length){L.push('','ЗАКЛЮЧЕНИЕ','—'.repeat(50));
+  if(v.lc.length)L.push('Логопедическое: '+v.lc.join('; '));
+  if(v.pc.length)L.push('Психологическое: '+v.pc.join('; '));
+  if(v.recs.length){L.push('Рекомендации:');RECS.forEach(([id,txt])=>{if(v.recs.includes(id))L.push('• '+txt)})}
+  if(v.extra)L.push('Дополнительно: '+v.extra)}
+ L.push('','* '.repeat(1)+'Чеклист — вспомогательный инструмент наблюдения; заключение формируется специалистом по итогам комплексного обследования и не заменяет ПМПК/врачебную диагностику.');
+ return L.join('\n');
+}
+function buildVerdictText(){
+ const L=['ЗАКЛЮЧЕНИЕ ПО ИТОГАМ ДИАГНОСТИЧЕСКОГО ОБСЛЕДОВАНИЯ','='.repeat(50),...headerLines(),''];
+ L.push('Диагностические гипотезы (ориентировочный индекс совпадения, не вероятность диагноза):');L.push(...buildHypSection());
+ const v=state.verdict;
+ L.push('','Логопедическое заключение: '+(v.lc.join('; ')||'—'));
+ L.push('Психологическое заключение: '+(v.pc.join('; ')||'—'));
+ if(v.recs.length){L.push('','Рекомендации:');RECS.forEach(([id,txt])=>{if(v.recs.includes(id))L.push('• '+txt)})}
+ if(v.extra)L.push('','Дополнительно: '+v.extra);
+ L.push('','* Заключение ориентировочное; подтверждается комплексным обследованием и/или ПМПК.');
+ return L.join('\n');
+}
+function openReport(title,text){$('#ovTitle').textContent=title;$('#reportTxt').textContent=text;$('#reportOv').classList.add('show')}
+
+/* ══ СОБЫТИЯ ══ */
+$('#tabs').addEventListener('click',e=>{
+ const t=e.target.closest('.tab');if(!t)return;
+ const id='view-'+t.dataset.view, target=document.getElementById(id);if(!target)return;
+ $$('.tab').forEach(x=>x.classList.remove('on'));t.classList.add('on');
+ $$('.view').forEach(v=>v.classList.remove('on'));target.classList.add('on');
+ try{
+   if(t.dataset.view==='map') refreshMap();
+   if(t.dataset.view==='mod'){ renderModules(); refreshModules(); }
+   if(t.dataset.view==='diff'){ renderDiff(); }
+   if(t.dataset.view==='verd'){ renderVerdict(); }
+ }catch(err){showAppError(err)}
+ window.scrollTo({top:0});
+});
+$('#sections').addEventListener('click',e=>{
+ const sg=e.target.closest('.sg');
+ if(sg){const{id,v}=sg.dataset;const val=v==='n'?'n':+v;
+  if(state.scores[id]!==undefined&&String(state.scores[id])===v)delete state.scores[id];else state.scores[id]=val;
+  document.querySelectorAll(`.sg[data-id="${id}"]`).forEach(b=>b.classList.toggle('on',state.scores[id]!==undefined&&String(state.scores[id])===b.dataset.v));
+  save();refreshMap();return}
+ const nb=e.target.closest('.note-btn');
+ if(nb){const it=nb.closest('.item');it.classList.toggle('open');if(it.classList.contains('open'))it.querySelector('textarea').focus();return}
+ const h=e.target.closest('.sec-h');if(h)h.closest('.sec').classList.toggle('closed');
+});
+$('#sections').addEventListener('input',e=>{if(e.target.tagName==='TEXTAREA'){const id=e.target.dataset.id;
+ if(e.target.value.trim())state.notes[id]=e.target.value;else delete state.notes[id];
+ e.target.closest('.item').querySelector('.note-btn').classList.toggle('filled',!!e.target.value.trim());save()}});
+['Name','Age','Num','Spec'].forEach(k=>$('#p'+k).addEventListener('input',e=>{state.patient[k.toLowerCase()]=e.target.value;save()}));
+$('#ageChips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;
+ $$('#ageChips .chip').forEach(x=>x.classList.remove('on'));c.classList.add('on');
+ state.age=c.dataset.age;save();applyFilters();refreshMap()});
+$('#search').addEventListener('input',applyFilters);
+$('#navList').addEventListener('click',e=>{const r=e.target.closest('.navrow');if(!r)return;
+ const sec=document.getElementById(r.dataset.target);sec.classList.remove('closed');
+ sec.scrollIntoView({behavior:'smooth',block:'start'});sec.classList.add('flash');setTimeout(()=>sec.classList.remove('flash'),1300)});
+
+$('#modList').addEventListener('click',e=>{
+ const lv=e.target.closest('.lv');
+ if(lv){
+  if(lv.dataset.lv){const st=modState('onr'),next=+lv.dataset.lv;if(st.level!==next){st.level=next;st.marks={}}}
+  else if(lv.dataset.form){const st=modState('alalia'),next=lv.dataset.form;if(st.form!==next){st.form=next;st.marks={}}}
+  else if(lv.dataset.stype){modState('stutter').type=lv.dataset.stype}
+  save();renderModules();refreshModules();return}
+ const h=e.target.closest('.mod-h');if(h)h.closest('.mod').classList.toggle('closed');
+});
+$('#modList').addEventListener('change',e=>{
+ const cb=e.target.closest('input[data-mod]');
+ if(cb){const st=modState(cb.dataset.mod);if(cb.checked)st.marks[cb.dataset.k]=1;else delete st.marks[cb.dataset.k];
+  save();refreshModules();return}
+});
+$('#modList').addEventListener('input',e=>{
+ if(e.target.classList.contains('mnote')){modState(e.target.dataset.mod).note=e.target.value;save()}
+ const map={aPreg:'preg',aMoto:'moto',aSpeech:'speech',aHear:'hear',aNeuro:'neuro',aCompl:'compl'};
+ if(map[e.target.id]){state.anamnesis[map[e.target.id]]=e.target.value;save()}
+ if(e.target.id==='aBilin'){state.anamnesis.bilin=e.target.checked;save()}
+});
+$('#aBilin').addEventListener('change',e=>{state.anamnesis.bilin=e.target.checked;save()});
+['aHear'].forEach(id=>$('#'+id).addEventListener('change',e=>{state.anamnesis.hear=e.target.value;save();refreshModules()}));
+window.addEventListener('beforeunload',()=>{try{save()}catch(e){}});
+
+$('#diffRows').addEventListener('click',e=>{const o=e.target.closest('.dopt');if(!o)return;
+ const ri=+o.dataset.row,oi=+o.dataset.opt;
+ if(state.diff[ri]===oi)delete state.diff[ri];else state.diff[ri]=oi;
+ save();renderDiff()});
+
+$('#view-verd').addEventListener('click',e=>{
+ const cz=e.target.closest('.cz');
+ if(cz){const arr=state.verdict[cz.dataset.g],c=cz.dataset.c;
+  const i=arr.indexOf(c);if(i>=0)arr.splice(i,1);else arr.push(c);
+  cz.classList.toggle('on');save();refreshVerdict();return}
+});
+$('#recList').addEventListener('change',e=>{const cb=e.target.closest('input[data-rec]');if(!cb)return;
+ const arr=state.verdict.recs,i=arr.indexOf(cb.dataset.rec);
+ if(cb.checked&&i<0)arr.push(cb.dataset.rec);if(!cb.checked&&i>=0)arr.splice(i,1);
+ save();refreshVerdict()});
+$('#vExtra').addEventListener('input',e=>{state.verdict.extra=e.target.value;save()});
+$('#btnHypFill').addEventListener('click',()=>{
+ const lvl=modState('onr').level||3;
+ const dict={'ЗРР':'ЗРР','ОНР':'ОНР '+ROM[lvl]+' уровня','ФФН/ФНР':'ФФН','Дизартрия':'Дизартрия','Заикание':'Заикание','Дисграфия':'Дисграфия','Дислексия':'Дислексия','Алалия':'Моторная алалия','ЗПР':'ЗПР','РАС (риск)':'РАС — риск (требуется уточнение)'};
+ let added=0;
+ hypScores().filter(h=>h.p>=.5).slice(0,3).forEach(h=>{const chip=dict[h.name];
+  if(chip){const g=(chip.includes('РАС')||chip==='ЗПР')?'pc':'lc';
+   if(!state.verdict[g].includes(chip)&&((g==='lc'?LC_CHIPS:PC_CHIPS).includes(chip))){state.verdict[g].push(chip);added++}}});
+ save();renderVerdict();toast(added?'Гипотезы подставлены в заключение':'Нет гипотез с достаточной выраженностью')});
+$('#btnVerdict').addEventListener('click',()=>openReport('Заключение по обследованию',buildVerdictText()));
+
+$('#btnCollapse').addEventListener('click',()=>{
+ const els=$$('.sec,.mod');const anyOpen=els.some(s=>!s.classList.contains('closed'));
+ els.forEach(s=>s.classList.toggle('closed',anyOpen));
+ $('#btnCollapse').textContent=anyOpen?'Развернуть всё':'Свернуть всё'});
+$('#btnClear').addEventListener('click',()=>{
+ if(!confirm('Полностью очистить карту, модули, дифф. анализ, заключение и паспорт?'))return;
+ localStorage.removeItem(LS);location.reload()});
+$('#btnReport').addEventListener('click',()=>openReport('Полный отчёт',buildFullReport()));
+$('#btnCloseR').addEventListener('click',()=>$('#reportOv').classList.remove('show'));
+$('#reportOv').addEventListener('click',e=>{if(e.target.id==='reportOv')e.currentTarget.classList.remove('show')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#reportOv').classList.remove('show')});
+$('#btnCopy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#reportTxt').textContent);toast('Скопировано')}catch(e){const r=document.createRange();r.selectNode($('#reportTxt'));getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy');getSelection().removeAllRanges();toast('Скопировано')}});
+$('#btnPrint').addEventListener('click',()=>window.print());
+
+setInterval(()=>{if(state.running){state.elapsed++;$('#timer').textContent=fmtT(state.elapsed);if(state.elapsed%10===0)save()}},1000);
+$('#timerBtn').addEventListener('click',()=>{state.running=!state.running;
+ $('#timerBtn').textContent=state.running?'пауза':'старт';$('#sessDot').classList.toggle('paused',!state.running)});
+$('#timer').textContent=fmtT(state.elapsed);
+
+(function(){const wf=$('#wf');for(let i=0;i<34;i++){const s=document.createElement('span');
+ s.style.setProperty('--h',(18+Math.random()*82)+'%');s.style.setProperty('--d',(0.8+Math.random()*0.9)+'s');
+ s.style.setProperty('--dl',(Math.random()*-2)+'s');wf.appendChild(s)}})();
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{threshold:.06});
+function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;
+ $('#toasts').appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));
+ setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),350)},2400)}
+
+function observeSections(){
+  $$('.sec,.mod').forEach(s=>{s.classList.add('in');});
+  if(typeof IntersectionObserver!=='undefined') $$('.sec,.mod').forEach(s=>io.observe(s));
+}
+function renderAll(){
+  renderSections();
+  renderModules();
+  renderDiff();
+  renderVerdict();
+  refreshModules();
+  observeSections();
+  applyFilters();
+  refreshMap();
+}
+function showAppError(err){
+  console.error(err);
+  const box=document.getElementById('appError');
+  if(box){box.hidden=false;box.textContent='Ошибка интерфейса: '+(err?.message||err);}
+}
+try{ renderAll(); }catch(err){ showAppError(err); }
+
+
+});</script>
+</body>
+</html>

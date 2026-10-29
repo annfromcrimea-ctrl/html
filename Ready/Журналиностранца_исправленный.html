@@ -1,0 +1,2869 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ЛингвоЖурнал — помощник учителя иностранных языков</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232e6b4f'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='%23ffcf33' font-family='sans-serif' font-weight='800'%3E%D0%9B%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet" />
+    <script>
+      try {
+        var d = JSON.parse(localStorage.getItem('lingvozhurnal:v1') || '{}');
+        if (d && d.settings && d.settings.theme === 'dark') document.documentElement.classList.add('dark');
+      } catch (e) {}
+      window.__ljBoot = false;
+      window.addEventListener('error', function (e) {
+        var el = document.getElementById('fatal');
+        if (el) { el.style.display = 'block'; el.textContent = 'Ошибка запуска: ' + (e.message || 'неизвестная ошибка') + '. Подробности в консоли (F12).'; }
+      });
+      window.addEventListener('unhandledrejection', function (e) {
+        var el = document.getElementById('fatal');
+        if (el) { el.style.display = 'block'; el.textContent = 'Ошибка: ' + ((e.reason && e.reason.message) || String(e.reason || 'неизвестная')); }
+      });
+      setTimeout(function () {
+        if (!window.__ljBoot) {
+          var el = document.getElementById('fatal');
+          if (el && el.style.display === 'none') {
+            el.style.display = 'block';
+            el.textContent = 'Приложение не запустилось за 10 секунд. Откройте консоль (F12) — там причина. Если файл собирали из частей, убедитесь, что он полный и заканчивается на </html>.';
+          }
+        }
+      }, 10000);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @custom-variant dark (&:where(.dark, .dark *));
+
+      @theme {
+        --font-display: "Unbounded", "Golos Text", ui-sans-serif, system-ui, sans-serif;
+        --font-body: "Golos Text", ui-sans-serif, system-ui, sans-serif;
+
+        --color-paper: #f5efe1;
+        --color-paper2: #ece3cd;
+        --color-card: #fffcf2;
+        --color-ink: #241f17;
+        --color-soft: #6f6555;
+        --color-line: #d8ccb2;
+
+        --color-pine: #2e6b4f;
+        --color-pine-deep: #1e4a36;
+        --color-pine-soft: #e0ede3;
+
+        --color-marker: #ffcf33;
+        --color-marker-soft: #fdf2c7;
+        --color-marker-ink: #7a6200;
+
+        --color-pen: #c94335;
+        --color-pen-soft: #f8e2dd;
+
+        --color-ochre: #c9862d;
+        --color-ochre-soft: #f4e6cd;
+        --color-ochre-ink: #7d5314;
+
+        --color-sky: #3d6fa6;
+        --color-sky-soft: #e0eaf4;
+
+        --color-plum: #7f5aa6;
+        --color-plum-soft: #ece2f4;
+
+        --shadow-hard: 4px 4px 0 0 color-mix(in srgb, #241f17 12%, transparent);
+      }
+
+      .dark {
+        --color-paper: #181510;
+        --color-paper2: #211d15;
+        --color-card: #221e16;
+        --color-ink: #efe8d6;
+        --color-soft: #a89e8d;
+        --color-line: #3b3527;
+        --color-pine: #56a37e;
+        --color-pine-deep: #86cda9;
+        --color-pine-soft: #1d3227;
+        --color-marker: #ffcf33;
+        --color-marker-soft: #3a310f;
+        --color-marker-ink: #ffd95e;
+        --color-pen: #e0685b;
+        --color-pen-soft: #3b211d;
+        --color-ochre: #d99b43;
+        --color-ochre-soft: #382b13;
+        --color-ochre-ink: #e8b264;
+        --color-sky: #6d9ecf;
+        --color-sky-soft: #1b2a3a;
+        --color-plum: #a985cf;
+        --color-plum-soft: #2c2138;
+        --shadow-hard: 4px 4px 0 0 rgba(0, 0, 0, 0.45);
+      }
+
+      html { scrollbar-gutter: stable; }
+      body {
+        font-family: var(--font-body);
+        color: var(--color-ink);
+        background-color: var(--color-paper);
+        background-image: radial-gradient(color-mix(in srgb, var(--color-ink) 11%, transparent) 1px, transparent 1.4px);
+        background-size: 22px 22px;
+        -webkit-font-smoothing: antialiased;
+      }
+      ::selection { background: var(--color-marker); color: #241f17; }
+      *::-webkit-scrollbar { height: 10px; width: 10px; }
+      *::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--color-soft) 45%, transparent); border: 2px solid var(--color-paper); }
+      *::-webkit-scrollbar-track { background: transparent; }
+      :focus-visible { outline: 2px solid var(--color-pine); outline-offset: 1px; }
+
+      @layer components {
+        .card { background: var(--color-card); border: 1px solid var(--color-line); box-shadow: var(--shadow-hard); }
+        .lift { transition: transform 0.16s ease, box-shadow 0.16s ease; }
+        .lift:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 0 color-mix(in srgb, var(--color-ink) 15%, transparent); }
+
+        .btn {
+          display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+          border: 1px solid var(--color-line); background: var(--color-card); color: var(--color-ink);
+          font-weight: 600; font-size: 13px; padding: 7px 12px; cursor: pointer; user-select: none; white-space: nowrap;
+          box-shadow: 2px 2px 0 0 color-mix(in srgb, var(--color-ink) 10%, transparent);
+          transition: transform 0.12s, box-shadow 0.12s, background 0.15s, border-color 0.15s;
+        }
+        .btn:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 0 color-mix(in srgb, var(--color-ink) 14%, transparent); border-color: color-mix(in srgb, var(--color-ink) 30%, var(--color-line)); }
+        .btn:active { transform: translate(1px, 1px); box-shadow: none; }
+        .btn:disabled { opacity: 0.45; pointer-events: none; }
+        .btn-primary { background: var(--color-pine); border-color: var(--color-pine-deep); color: var(--color-card); }
+        .btn-primary:hover { background: color-mix(in srgb, var(--color-pine) 88%, var(--color-ink)); }
+        .btn-danger { background: var(--color-pen); border-color: color-mix(in srgb, var(--color-pen) 70%, black); color: #fff; }
+        .btn-ghost { background: transparent; box-shadow: none; border-color: transparent; }
+        .btn-ghost:hover { background: var(--color-paper2); border-color: var(--color-line); }
+        .btn-sm { padding: 4px 9px; font-size: 12px; box-shadow: 1px 1px 0 0 color-mix(in srgb, var(--color-ink) 10%, transparent); }
+
+        .icon-btn {
+          display: inline-flex; align-items: center; justify-content: center; flex: none;
+          width: 32px; height: 32px; border: 1px solid var(--color-line); background: var(--color-card);
+          color: var(--color-ink); cursor: pointer; transition: transform 0.12s, background 0.15s, border-color 0.15s;
+        }
+        .icon-btn:hover { background: var(--color-paper2); transform: translateY(-1px); }
+        .icon-btn:active { transform: translateY(1px); }
+        .icon-btn-sm { width: 22px; height: 22px; }
+        .icon-btn:disabled { opacity: 0.35; pointer-events: none; }
+
+        .inp {
+          width: 100%; border: 1px solid var(--color-line); background: var(--color-card); color: var(--color-ink);
+          padding: 7px 10px; font-size: 13px; outline: none; font-family: inherit;
+          transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .inp:focus { border-color: var(--color-pine); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-pine) 18%, transparent); }
+        .inp::placeholder { color: color-mix(in srgb, var(--color-soft) 65%, transparent); }
+
+        .chip { display: inline-flex; align-items: center; gap: 5px; border: 1px solid; padding: 2px 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.02em; }
+        .tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; padding: 2px 7px; border: 1px solid var(--color-line); background: var(--color-paper2); color: var(--color-soft); }
+        .press { transition: transform 0.1s ease; }
+        .press:active { transform: scale(0.96); }
+
+        .jtable { border-collapse: separate; border-spacing: 0; }
+        .jtable th, .jtable td { border-bottom: 1px solid var(--color-line); border-right: 1px solid var(--color-line); }
+        .jtable thead th { border-bottom: 2px solid color-mix(in srgb, var(--color-ink) 35%, var(--color-line)); }
+        .jprint { border-collapse: collapse; }
+        .jprint th, .jprint td { border: 1px solid #555; padding: 3px 7px; text-align: left; vertical-align: top; }
+        .jprint th { background: #eee; }
+
+        .rise { animation: rise 0.45s cubic-bezier(0.2, 0.7, 0.3, 1) both; }
+        .pop { animation: pop 0.18s cubic-bezier(0.3, 1.4, 0.5, 1) both; }
+        .toast { animation: toastIn 0.25s ease both; }
+        .pulse-dot { animation: pulseRing 2s infinite; }
+        .flash { animation: rowFlash 1.4s ease 2; }
+        .print-sheet { display: none; }
+      }
+
+      @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes pop { from { opacity: 0; transform: scale(0.93) translateY(6px); } to { opacity: 1; transform: none; } }
+      @keyframes toastIn { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: none; } }
+      @keyframes pulseRing {
+        0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-pine) 55%, transparent); }
+        70% { box-shadow: 0 0 0 7px transparent; }
+        100% { box-shadow: 0 0 0 0 transparent; }
+      }
+      @keyframes rowFlash { 0%, 100% { background: transparent; } 35% { background: var(--color-marker-soft); } }
+
+      @media print {
+        body.printing { background: #fff; }
+        body.printing #root { display: none !important; }
+        body.printing .print-sheet { display: block !important; color: #111; }
+        .print-sheet, .print-sheet * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      }
+    </style>
+  
+<style id="theme-tools-style-2173725623579641179">.tm-card{margin:0;max-width:1100px;padding:22px;border:1px solid color-mix(in srgb,currentColor 14%,transparent);border-radius:20px;background:color-mix(in srgb,white 88%,transparent);box-shadow:0 8px 24px rgba(20,30,40,.07)}.tm-card h2{margin-top:0}.tm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.tm-grid details,.tm-grid label{padding:14px;border-radius:14px;background:rgba(255,255,255,.7)}.tm-form{display:flex;flex-wrap:wrap;gap:10px}.tm-form input,.tm-form select,.tm-form textarea,.tm-card>textarea{flex:1 1 220px;padding:12px;border:1px solid #b8c5cc;border-radius:10px;font:inherit}.tm-form button,.tm-actions button,.tm-buttons button,.tm-section-nav a{border:0;border-radius:10px;padding:12px 15px;background:#315d73;color:#fff;font:600 14px inherit;cursor:pointer;text-decoration:none}.tm-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}.tm-output, .tm-card pre{white-space:pre-wrap;line-height:1.6;padding:14px;background:rgba(0,0,0,.04);border-radius:12px}.tm-section-nav{display:flex;flex-wrap:wrap;gap:10px}.tm-note{opacity:.75;font-size:.92em}@media(max-width:600px){.tm-card{margin:0 10px;padding:16px;border-radius:16px}.tm-form{display:grid}.tm-form>*{width:100%;box-sizing:border-box}.tm-section-nav a,.tm-buttons button{min-height:46px;display:flex;align-items:center;justify-content:center}.tm-grid{grid-template-columns:1fr}}</style><style id="mobile-overflow-fix">@media(max-width:600px){html,body{max-width:100%;overflow-x:hidden}.press{max-width:100%;white-space:normal!important}.flex-none{min-width:0!important}}</style>
+</head>
+  <body>
+    <div id="root">
+      <div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#6f6555">
+        Загрузка ЛингвоЖурнала…
+      </div>
+    </div>
+    <div id="fatal" style="display:none;position:fixed;left:12px;right:12px;bottom:12px;z-index:999;background:#f8e2dd;color:#c94335;border:1px solid #c94335;padding:10px 14px;font:13px/1.4 sans-serif;white-space:pre-wrap"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.26.4/babel.min.js" crossorigin></script>
+    <script>
+      if (!window.React || !window.ReactDOM || !window.Babel) {
+        var f = document.getElementById('fatal');
+        f.style.display = 'block';
+        f.textContent = 'Не удалось загрузить библиотеки с CDN (jsdelivr). Нужен доступ в интернет.';
+      }
+    </script>
+
+    <script type="text/babel" data-presets="react">
+      const { useState, useEffect, useMemo, useRef, useReducer, useCallback, createContext, useContext } = React;
+      const { createPortal } = ReactDOM;
+
+      /* ================= КОНСТАНТЫ ================= */
+      const CEFR_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+      const GROUP_COLORS = ['pine', 'ochre', 'sky', 'pen', 'plum', 'marker'];
+      const LESSON_STATUSES = ['план', 'проведён', 'отменён'];
+      const EVENT_STATUSES = ['запланировано', 'проведено', 'отменено'];
+      const STICKY_COLORS = ['marker', 'pen', 'sky', 'pine', 'plum'];
+      const EVENT_TYPES = [
+        { id: 'олимпиада', label: 'Олимпиада', color: 'plum', icon: 'trophy' },
+        { id: 'конкурс', label: 'Конкурс', color: 'marker', icon: 'sparkle' },
+        { id: 'экскурсия', label: 'Экскурсия', color: 'sky', icon: 'bus' },
+        { id: 'праздник', label: 'Праздник', color: 'pen', icon: 'gift' },
+        { id: 'собрание', label: 'Собрание', color: 'ochre', icon: 'users' },
+        { id: 'другое', label: 'Другое', color: 'pine', icon: 'flag' },
+      ];
+      const MONTHS_RU_GEN = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+      const MONTHS_RU_NOM = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+      const WEEKDAYS_RU = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
+      const WEEKDAYS_RU_SHORT = ['вс','пн','вт','ср','чт','пт','сб'];
+
+      /* ================= УТИЛИТЫ ================= */
+      const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+      function toISO(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
+      function parseISO(iso) { const p = iso.split('-').map(Number); return new Date(p[0] || 2026, (p[1] || 1) - 1, p[2] || 1); }
+      const todayISO = () => toISO(new Date());
+      function addDaysISO(iso, n) { const d = parseISO(iso); d.setDate(d.getDate() + n); return toISO(d); }
+      const shiftISO = (n) => addDaysISO(todayISO(), n);
+      function weekMonday(iso) { const d = parseISO(iso); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return toISO(d); }
+      const fmtDateFull = (iso) => { const d = parseISO(iso); return `${d.getDate()} ${MONTHS_RU_GEN[d.getMonth()]} ${d.getFullYear()}`; };
+      const fmtDayMonth = (iso) => { const d = parseISO(iso); return `${d.getDate()} ${MONTHS_RU_GEN[d.getMonth()]}`; };
+      const fmtShort = (iso) => { const d = parseISO(iso); return `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}`; };
+      const fmtCol = (iso) => `${fmtShort(iso)} · ${WEEKDAYS_RU_SHORT[parseISO(iso).getDay()]}`;
+      function relDay(iso) {
+        const t = todayISO();
+        if (iso === t) return 'Сегодня';
+        if (iso === addDaysISO(t, 1)) return 'Завтра';
+        if (iso === addDaysISO(t, -1)) return 'Вчера';
+        return null;
+      }
+      function greeting() {
+        const h = new Date().getHours();
+        if (h >= 5 && h < 12) return 'Доброе утро';
+        if (h < 18) return 'Добрый день';
+        return 'Добрый вечер';
+      }
+      function plural(n, forms) {
+        const a = n % 10, b = n % 100;
+        if (a === 1 && b !== 11) return forms[0];
+        if (a >= 2 && a <= 4 && (b < 12 || b > 14)) return forms[1];
+        return forms[2];
+      }
+      function fmtAvg(v) {
+        if (v == null) return '—';
+        return v.toFixed(2).replace(/0+$/, '').replace(/\.$/, '').replace('.', ',');
+      }
+      function fmtSize(b) {
+        if (b < 1024) return `${b} Б`;
+        if (b < 1048576) return `${Math.round(b / 1024)} КБ`;
+        return `${(b / 1048576).toFixed(1).replace('.', ',')} МБ`;
+      }
+      function fmtAgo(ts) {
+        const s = Math.max(0, Math.floor((Date.now() - ts) / 1000));
+        if (s < 5) return 'только что';
+        if (s < 60) return `${s} с назад`;
+        if (s < 3600) return `${Math.floor(s / 60)} мин назад`;
+        return new Date(ts).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+      }
+
+      function cellValue(c) { if (!c || c.grade == null) return null; return c.grade + (c.bonus ? 0.1 : 0); }
+      function cellStr(c) {
+        if (!c) return '';
+        if (c.attendance) return c.attendance;
+        if (c.grade == null) return '';
+        return `${c.grade}${c.bonus ? '+' : ''}`;
+      }
+      function studentAverage(g, sid) {
+        const v = [];
+        g.columns.forEach(c => { const x = cellValue((g.marks[sid] || {})[c.id]); if (x != null) v.push(x); });
+        return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null;
+      }
+      function columnAverage(g, cid) {
+        const v = [];
+        g.students.forEach(s => { const x = cellValue((g.marks[s.id] || {})[cid]); if (x != null) v.push(x); });
+        return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null;
+      }
+      function groupAverage(g) {
+        const v = [];
+        g.students.forEach(s => g.columns.forEach(c => { const x = cellValue((g.marks[s.id] || {})[c.id]); if (x != null) v.push(x); }));
+        return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null;
+      }
+      function gradeCount(g, sid) { let n = 0; g.columns.forEach(c => { if (((g.marks[sid] || {})[c.id] || {}).grade != null) n++; }); return n; }
+      function missCount(g, sid) {
+        const r = { n: 0, b: 0, u: 0 };
+        g.columns.forEach(c => {
+          const a = ((g.marks[sid] || {})[c.id] || {}).attendance;
+          if (a === 'Н') r.n++; else if (a === 'Б') r.b++; else if (a === 'У') r.u++;
+        });
+        return r;
+      }
+      function avgColor(v) {
+        if (v == null) return 'var(--color-soft)';
+        if (v >= 4.5) return 'var(--color-pine)';
+        if (v >= 3.5) return 'var(--color-ink)';
+        return 'var(--color-pen)';
+      }
+      const gradeColorVar = (g) => g === 5 ? 'var(--color-pine)' : g === 4 ? 'var(--color-sky)' : g === 3 ? 'var(--color-ochre)' : 'var(--color-pen)';
+      const ATT_COLOR = { 'Н': 'var(--color-pen)', 'Б': 'var(--color-ochre)', 'У': 'var(--color-sky)' };
+
+      const accentVar = (c) => `var(--color-${c})`;
+      const accentText = (c) => `var(--color-${c}-ink, var(--color-${c}))`;
+      const chipStyle = (c) => ({
+        background: `color-mix(in srgb, ${accentVar(c)} 14%, var(--color-card))`,
+        borderColor: `color-mix(in srgb, ${accentVar(c)} 50%, transparent)`,
+        color: accentText(c),
+      });
+      const stickyStyle = (c) => ({
+        background: `color-mix(in srgb, ${accentVar(c)} 32%, var(--color-card))`,
+        borderColor: `color-mix(in srgb, ${accentVar(c)} 60%, transparent)`,
+      });
+
+      async function copyText(text) {
+        try { await navigator.clipboard.writeText(text); return true; }
+        catch {
+          try {
+            const ta = document.createElement('textarea');
+            ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            const ok = document.execCommand('copy');
+            ta.remove(); return ok;
+          } catch { return false; }
+        }
+      }
+      function download(name, content, mime = 'text/plain;charset=utf-8') {
+        const blob = new Blob([content], { type: mime });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = name;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 4000);
+      }
+
+      function buildICS(items, calName) {
+        const esc = (s) => s.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+        const n = new Date();
+        const stamp = `${toISO(n).replace(/-/g, '')}T${String(n.getHours()).padStart(2, '0')}${String(n.getMinutes()).padStart(2, '0')}00`;
+        const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//ЛингвоЖурнал//RU', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', `X-WR-CALNAME:${esc(calName)}`];
+        items.forEach(it => {
+          const dt = it.date.replace(/-/g, '');
+          lines.push('BEGIN:VEVENT', `UID:${uid()}@lingvozhurnal`, `DTSTAMP:${stamp}`);
+          if (it.time) lines.push(`DTSTART:${dt}T${it.time.replace(':', '')}00`);
+          else lines.push(`DTSTART;VALUE=DATE:${dt}`);
+          lines.push(`SUMMARY:${esc(it.title)}`);
+          if (it.place) lines.push(`LOCATION:${esc(it.place)}`);
+          if (it.description) lines.push(`DESCRIPTION:${esc(it.description)}`);
+          lines.push('END:VEVENT');
+        });
+        lines.push('END:VCALENDAR');
+        return lines.join('\r\n');
+      }
+      function journalToCSV(g) {
+        const esc = (v) => (/[";\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v);
+        const head = ['Ученик', ...g.columns.map(c => `${fmtShort(c.date)}${c.topic ? ' · ' + c.topic : ''}`), 'СР'];
+        const rows = g.students.map(s => [
+          s.name,
+          ...g.columns.map(c => cellStr((g.marks[s.id] || {})[c.id])),
+          fmtAvg(studentAverage(g, s.id)),
+        ]);
+        const dayAvg = ['СР дня', ...g.columns.map(c => fmtAvg(columnAverage(g, c.id))), fmtAvg(groupAverage(g))];
+        return '\uFEFF' + [head, ...rows, dayAvg].map(r => r.map(x => esc(String(x))).join(';')).join('\r\n');
+      }
+
+      function printWith(orientation) {
+        const style = document.createElement('style');
+        style.textContent = `@page { size: A4 ${orientation}; margin: 10mm; }`;
+        document.head.appendChild(style);
+        document.body.classList.add('printing');
+        const cleanup = () => {
+          style.remove();
+          document.body.classList.remove('printing');
+          window.removeEventListener('afterprint', cleanup);
+        };
+        window.addEventListener('afterprint', cleanup);
+        setTimeout(() => window.print(), 80);
+      }
+
+      /* ================= САНИТИЗАЦИЯ ================= */
+      const str = (v, max = 600) => (typeof v === 'string' ? v : '').slice(0, max);
+      const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+      const TIME_RE = /^\d{1,2}:\d{2}$/;
+      const safeUrl = (u) => (/^(https?:|mailto:)/i.test(u) ? u : '');
+
+      function sanitizeCell(v) {
+        if (!v || typeof v !== 'object') return null;
+        const grade = typeof v.grade === 'number' && [2, 3, 4, 5].includes(v.grade) ? v.grade : null;
+        const attendance = v.attendance === 'Н' || v.attendance === 'Б' || v.attendance === 'У' ? v.attendance : null;
+        if (grade == null && attendance == null) return null;
+        return { grade, bonus: v.bonus === true && grade != null, attendance };
+      }
+      function sanitizeGroup(v) {
+        if (!v || typeof v !== 'object') return null;
+        const name = str(v.name, 80).trim();
+        if (!name) return null;
+        const level = CEFR_LEVELS.includes(v.level) ? v.level : 'A1';
+        const color = GROUP_COLORS.includes(v.color) ? v.color : 'pine';
+        const students = Array.isArray(v.students)
+          ? v.students.map(s => { const nm = str((s || {}).name, 60).trim(); return nm ? { id: str((s || {}).id, 40) || uid(), name: nm } : null; }).filter(Boolean)
+          : [];
+        const columns = Array.isArray(v.columns)
+          ? v.columns.map(c => {
+              const co = c || {};
+              const d = str(co.date, 10);
+              return { id: str(co.id, 40) || uid(), date: DATE_RE.test(d) ? d : todayISO(), topic: str(co.topic, 200), homework: str(co.homework, 300) };
+            }).filter(Boolean).sort((a, b) => a.date.localeCompare(b.date))
+          : [];
+        const sids = new Set(students.map(s => s.id));
+        const cids = new Set(columns.map(c => c.id));
+        const marks = {};
+        const mo = v.marks || {};
+        Object.keys(mo).forEach(sid => {
+          if (!sids.has(sid)) return;
+          const row = mo[sid] || {};
+          const clean = {};
+          Object.keys(row).forEach(cid => {
+            if (!cids.has(cid)) return;
+            const cell = sanitizeCell(row[cid]);
+            if (cell) clean[cid] = cell;
+          });
+          if (Object.keys(clean).length) marks[sid] = clean;
+        });
+        return { id: str(v.id, 40) || uid(), name, language: str(v.language, 40) || 'Язык', level, color, students, columns, marks };
+      }
+      function sanitizeLesson(v) {
+        if (!v || typeof v !== 'object') return null;
+        const groupId = str(v.groupId, 40);
+        if (!groupId) return null;
+        const d = str(v.date, 10), t = str(v.time, 5);
+        const status = LESSON_STATUSES.includes(v.status) ? v.status : 'план';
+        return { id: str(v.id, 40) || uid(), groupId, date: DATE_RE.test(d) ? d : todayISO(), time: TIME_RE.test(t) ? t : '', topic: str(v.topic, 200), homework: str(v.homework, 300), status };
+      }
+      function sanitizeBlock(v) {
+        if (!v || typeof v !== 'object') return null;
+        const id = str(v.id, 40) || uid();
+        switch (v.type) {
+          case 'section': return { id, type: 'section', title: str(v.title, 120), content: str(v.content, 6000) };
+          case 'vocab': return {
+            id, type: 'vocab',
+            items: Array.isArray(v.items)
+              ? v.items.map(it => { const w = str((it || {}).word, 80).trim(), t = str((it || {}).translation, 120).trim(); return w || t ? { word: w, translation: t } : null; }).filter(Boolean)
+              : [],
+          };
+          case 'links': return {
+            id, type: 'links',
+            links: Array.isArray(v.links)
+              ? v.links.map(l => { const url = safeUrl(str((l || {}).url, 500)); return url ? { title: str((l || {}).title, 120) || url, url } : null; }).filter(Boolean)
+              : [],
+          };
+          case 'files': return {
+            id, type: 'files',
+            files: Array.isArray(v.files)
+              ? v.files.map(f => {
+                  const fo = f || {};
+                  const dataUrl = str(fo.dataUrl, 3500000);
+                  if (!dataUrl.startsWith('data:')) return null;
+                  const size = typeof fo.size === 'number' && isFinite(fo.size) ? fo.size : 0;
+                  if (size > 2 * 1024 * 1024 + 1024) return null;
+                  return { id: str(fo.id, 40) || uid(), name: str(fo.name, 120) || 'файл', mime: str(fo.mime, 60), size, dataUrl };
+                }).filter(Boolean)
+              : [],
+          };
+          case 'sticky': return { id, type: 'sticky', text: str(v.text, 1000), color: STICKY_COLORS.includes(v.color) ? v.color : 'marker' };
+          default: return null;
+        }
+      }
+      function sanitizeNote(v) {
+        if (!v || typeof v !== 'object') return null;
+        const d = str(v.date, 10);
+        const rating = typeof v.rating === 'number' && [2, 3, 4, 5].includes(v.rating) ? v.rating : null;
+        const dur = typeof v.duration === 'number' && isFinite(v.duration) ? Math.min(600, Math.max(0, Math.round(v.duration))) : 45;
+        return {
+          id: str(v.id, 40) || uid(), title: str(v.title, 160), date: DATE_RE.test(d) ? d : todayISO(),
+          duration: dur, goals: str(v.goals, 1500), equipment: str(v.equipment, 500), rating,
+          reflection: str(v.reflection, 2000),
+          blocks: Array.isArray(v.blocks) ? v.blocks.map(sanitizeBlock).filter(Boolean) : [],
+          updatedAt: typeof v.updatedAt === 'number' ? v.updatedAt : Date.now(),
+        };
+      }
+      function sanitizeEvent(v) {
+        if (!v || typeof v !== 'object') return null;
+        const title = str(v.title, 120).trim();
+        if (!title) return null;
+        const d = str(v.date, 10), t = str(v.time, 5);
+        const status = EVENT_STATUSES.includes(v.status) ? v.status : 'запланировано';
+        return {
+          id: str(v.id, 40) || uid(), type: str(v.type, 30) || 'другое', title,
+          date: DATE_RE.test(d) ? d : todayISO(), time: TIME_RE.test(t) ? t : '',
+          place: str(v.place, 120), description: str(v.description, 600), status,
+          groupIds: Array.isArray(v.groupIds) ? v.groupIds.map(x => str(x, 40)).filter(Boolean) : [],
+        };
+      }
+      function sanitizeSettings(v) {
+        const o = (v && typeof v === 'object') ? v : {};
+        return { teacherName: str(o.teacherName, 60).trim() || 'Учитель', theme: o.theme === 'dark' ? 'dark' : 'light', onboardingDone: o.onboardingDone === true };
+      }
+      function sanitizeAppData(raw) {
+        const o = (raw && typeof raw === 'object') ? raw : {};
+        const groups = (Array.isArray(o.groups) ? o.groups.map(sanitizeGroup) : []).filter(Boolean);
+        const gids = new Set(groups.map(g => g.id));
+        const lessons = (Array.isArray(o.lessons) ? o.lessons.map(sanitizeLesson) : []).filter(l => l && gids.has(l.groupId));
+        const notes = (Array.isArray(o.notes) ? o.notes.map(sanitizeNote) : []).filter(Boolean);
+        const events = (Array.isArray(o.events) ? o.events.map(sanitizeEvent) : []).filter(Boolean)
+          .map(e => ({ ...e, groupIds: e.groupIds.filter(id => gids.has(id)) }));
+        const stickers = (Array.isArray(o.stickers) ? o.stickers : [])
+          .map(s => {
+            const so = s || {};
+            const text = str(so.text, 400).trim();
+            return text ? { id: str(so.id, 40) || uid(), text, color: STICKY_COLORS.includes(so.color) ? so.color : 'marker', createdAt: typeof so.createdAt === 'number' ? so.createdAt : Date.now() } : null;
+          })
+          .filter(Boolean);
+        return { version: 1, groups, lessons, notes, events, stickers, settings: sanitizeSettings(o.settings) };
+      }
+      function emptyData(settings) {
+        return {
+          version: 1, groups: [], lessons: [], notes: [], events: [], stickers: [],
+          settings: settings ? { ...settings } : { teacherName: 'Учитель', theme: 'light', onboardingDone: true },
+        };
+      }
+      function mergeData(cur, inc) {
+        const byId = (a, b) => { const m = new Map(); a.forEach(x => m.set(x.id, x)); b.forEach(x => m.set(x.id, x)); return [...m.values()]; };
+        return sanitizeAppData({
+          version: 1,
+          groups: byId(cur.groups, inc.groups),
+          lessons: byId(cur.lessons, inc.lessons),
+          notes: byId(cur.notes, inc.notes),
+          events: byId(cur.events, inc.events),
+          stickers: byId(cur.stickers, inc.stickers),
+          settings: { ...cur.settings, ...inc.settings },
+        });
+      }
+
+      /* >>>>>>>>>> ЧАСТЬ 2 — вставьте продолжение сразу после этой строки <<<<<<<<<< */
+
+      /* ================= ДЕМО-ДАННЫЕ ================= */
+      let seed = 20260816;
+      const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+      const pickGrade = () => { const r = rnd(); return r < 0.05 ? 2 : r < 0.22 ? 3 : r < 0.6 ? 4 : 5; };
+      const mkStudents = (names) => names.map(n => ({ id: uid(), name: n }));
+
+      function fillJournal(g, topics, hws) {
+        const offsets = [-16, -14, -11, -9, -7, -4, -2];
+        g.columns = offsets.map((off, i) => ({ id: uid(), date: shiftISO(off), topic: topics[i % topics.length], homework: hws[i % hws.length] }));
+        g.students.forEach(s => {
+          const row = {};
+          g.columns.forEach(c => {
+            const r = rnd();
+            if (r < 0.12) {
+              const a = rnd();
+              row[c.id] = { grade: null, bonus: false, attendance: a < 0.45 ? 'Н' : a < 0.75 ? 'Б' : 'У' };
+            } else if (r < 0.8) {
+              const gr = pickGrade();
+              row[c.id] = { grade: gr, bonus: gr >= 4 && rnd() < 0.18, attendance: null };
+            }
+          });
+          if (Object.keys(row).length) g.marks[s.id] = row;
+        });
+      }
+      function makeDemo() {
+        const g1 = { id: uid(), name: '8 «А» · English', language: 'Английский', level: 'B1', color: 'pine', students: mkStudents(['Алиса Морозова','Ваня Климов','Даша Соколова','Егор Литвинов','Зоя Ким','Илья Гусев','Марта Оганесян','Никита Фомин']), columns: [], marks: {} };
+        const g2 = { id: uid(), name: '9 «Б» · Deutsch', language: 'Немецкий', level: 'A2', color: 'ochre', students: mkStudents(['Оля Виноградова','Паша Ершов','Кира Мельник','Тимур Ахметов','Соня Белова','Максим Орлов','Лиза Крылова']), columns: [], marks: {} };
+        const g3 = { id: uid(), name: 'Advanced English', language: 'Английский', level: 'C1', color: 'sky', students: mkStudents(['Вера Соловьёва','Даня Ковалёв','Аня Лебедева','Гриша Панов','Юля Штерн']), columns: [], marks: {} };
+        const g4 = { id: uid(), name: 'Español con alegría', language: 'Испанский', level: 'A1', color: 'marker', students: mkStudents(['Инга Романова','Саша Ткачёв','Нина Зайцева','Роман Фёдоров']), columns: [], marks: {} };
+
+        const T1 = ['Present Perfect: опыт и результаты','Past Simple vs Past Continuous','Чтение: “A Day Without Gadgets”','Лексика: Education. Идиомы','Future forms: will / going to','Аудирование: подкаст о школе','Говорение: дискуссия “School rules”'];
+        const H1 = ['РТ с. 34–35, упр. 4','Выучить 12 слов, карточки','Подготовить пересказ текста','Упр. 6 стр. 48 + слова','Повторить неправильные глаголы','Дочитать рассказ, с. 61','Проект: постер “My ideal school”'];
+        const T2 = ['Präteritum: неправильные глаголы','Лексика: Meine Stadt','Чтение: “Berlin für Kinder”','Perfekt: тренировка','Диалоги: Im Café','Страноведение: Германия','Повторение: артикли и предлоги'];
+        const H2 = ['Упр. 12 стр. 27','Слова урока 5, карточки','Рассказ о своём городе (8 предложений)','Рабочая тетрадь с. 18','Диалог по ролям','Мини-доклад: один город Германии','Подготовка к тесту'];
+        const T3 = ['Inversion & emphatic structures','Essay: argumentative writing','Listening: TED talk analysis','Vocabulary: success & failure','Use of English: word formation','Debate: “AI in education”','Mock exam: Reading & Writing'];
+        const H3 = ['Упр. на инверсию, лист 2','Черновик эссе (250 слов)','Выписать 10 фраз из выступления','Карточки: advanced adjectives','Тест word formation, вариант 3','Подготовить аргументы','Повторить форматы экзамена'];
+        const T4 = ['Ser и estar: знакомство','Числа и даты','Лексика: La familia','Глагол tener + конструкции','Диалоги: ¿Cómo te llamas?','Чтение: текст о Мексике','Повторение: артикли el / la'];
+        const H4 = ['Упр. 3 стр. 12','Цифры 1–100, аудио','Слова по теме «Семья»','Упр. 7 стр. 19','Диалог наизусть','Перевод текста письменно','Карточки: артикли'];
+
+        fillJournal(g1, T1, H1); fillJournal(g2, T2, H2); fillJournal(g3, T3, H3); fillJournal(g4, T4, H4);
+
+        const topicsOf = { [g1.id]: T1, [g2.id]: T2, [g3.id]: T3, [g4.id]: T4 };
+        const hwOf = { [g1.id]: H1, [g2.id]: H2, [g3.id]: H3, [g4.id]: H4 };
+        const L = (g, off, time, ti, status = 'план') => ({
+          id: uid(), groupId: g.id, date: shiftISO(off), time,
+          topic: topicsOf[g.id][ti % topicsOf[g.id].length],
+          homework: hwOf[g.id][ti % hwOf[g.id].length], status,
+        });
+        const lessons = [
+          L(g1, -2, '10:00', 6, 'проведён'), L(g2, -1, '12:00', 6, 'проведён'),
+          L(g1, -1, '10:00', 5),
+          L(g1, 0, '10:00', 0), L(g4, 0, '16:30', 4), L(g3, 0, '18:00', 5, 'отменён'),
+          L(g2, 1, '12:00', 1), L(g3, 1, '17:00', 1),
+          L(g1, 2, '10:00', 1), L(g4, 3, '16:30', 5), L(g2, 4, '12:00', 3), L(g3, 6, '18:00', 0),
+          L(g1, 9, '10:00', 2), L(g2, 13, '12:00', 5),
+        ];
+
+        const now = Date.now();
+        const sampleFile = {
+          id: uid(), name: 'карточки-глаголы.svg', mime: 'image/svg+xml', size: 780,
+          dataUrl: 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="180" height="110"><rect width="180" height="110" fill="#ffcf33"/><text x="14" y="44" font-family="sans-serif" font-size="15" fill="#241f17">go — went</text><text x="14" y="72" font-family="sans-serif" font-size="15" fill="#241f17">take — took</text></svg>'),
+        };
+        const notes = [
+          {
+            id: uid(), title: 'Past Simple: неправильные глаголы', date: shiftISO(-2), duration: 45,
+            goals: 'Познакомить с образованием Past Simple; отработать 12 неправильных глаголов в речи и на письме.',
+            equipment: 'Учебник Solutions, карточки, интерактивная доска, аудиоприложение', rating: 5,
+            reflection: 'Темп взят хорошо. В следующий раз дать больше говорения в парах — финальную игру пришлось скомкать.',
+            blocks: [
+              { id: uid(), type: 'section', title: 'Ход урока', content: '1. Warm-up: блиц-опрос по домашнему заданию (5 мин).\n2. Презентация грамматики на примерах из текста (10 мин).\n3. Тренировка: карточки и аудирование (15 мин).\n4. Говорение: история выходных в парах (10 мин).\n5. Рефлексия и ДЗ (5 мин).' },
+              { id: uid(), type: 'vocab', items: [{ word: 'go', translation: 'went' }, { word: 'take', translation: 'took' }, { word: 'see', translation: 'saw' }, { word: 'buy', translation: 'bought' }, { word: 'think', translation: 'thought' }] },
+              { id: uid(), type: 'links', links: [{ title: 'LearningApps: Past Simple drill', url: 'https://learningapps.org' }, { title: 'British Council: Past Simple', url: 'https://learnenglish.britishcouncil.org' }] },
+              { id: uid(), type: 'sticky', text: 'Раздать карточки в начале урока, иначе не хватит времени на игру!', color: 'marker' },
+            ],
+            updatedAt: now - 86400000 * 2,
+          },
+          {
+            id: uid(), title: 'Лексика: Путешествия (8 «А»)', date: shiftISO(-4), duration: 40,
+            goals: 'Ввести и первично закрепить 15 лексических единиц по теме «Путешествия». Вывести лексику в диалогическую речь.',
+            equipment: 'Проектор, раздаточные карточки, аудиозапись диалога', rating: 4,
+            reflection: 'Слова зашли хорошо через картинки. Диалог получился только у сильной половины — нужна дополнительная опора.',
+            blocks: [
+              { id: uid(), type: 'vocab', items: [{ word: 'journey', translation: 'поездка' }, { word: 'luggage', translation: 'багаж' }, { word: 'departure', translation: 'отправление' }, { word: 'platform', translation: 'платформа' }, { word: 'book a ticket', translation: 'забронировать билет' }] },
+              { id: uid(), type: 'section', title: 'Ход урока', content: '1. Лексическая разминка по картинкам.\n2. Аудирование диалога на вокзале.\n3. Составление собственных диалогов.\n4. Игра «Собери чемодан».' },
+              { id: uid(), type: 'files', files: [sampleFile] },
+              { id: uid(), type: 'links', links: [{ title: 'Quizlet: Travel set', url: 'https://quizlet.com' }] },
+            ],
+            updatedAt: now - 86400000 * 4,
+          },
+          {
+            id: uid(), title: 'Präteritum и Perfekt: сравнение (9 «Б»)', date: shiftISO(-6), duration: 45,
+            goals: 'Развести употребление Präteritum и Perfekt в речи; отработать образование Partizip II.',
+            equipment: 'Учебник Horizonte, таблица глаголов, мяч для игры', rating: 4,
+            reflection: 'Таблица сработала, но слабым ученикам нужно больше шаблонов. Добавить в следующий раз карточки-подсказки.',
+            blocks: [
+              { id: uid(), type: 'section', title: 'Ход урока', content: '1. Повторение: цепочка неправильных глаголов с мячом.\n2. Сравнение времён на примерах.\n3. Письменная тренировка.\n4. Говорение: «Was hast du am Wochenende gemacht?»' },
+              { id: uid(), type: 'vocab', items: [{ word: 'ging', translation: 'пошёл (Präteritum)' }, { word: 'ist gegangen', translation: 'пошёл (Perfekt)' }, { word: 'machte', translation: 'делал' }, { word: 'hat gemacht', translation: 'сделал' }] },
+              { id: uid(), type: 'sticky', text: 'Распечатать таблицу неправильных глаголов ×7 (по числу рядов)', color: 'pen' },
+            ],
+            updatedAt: now - 86400000 * 6,
+          },
+        ];
+        const events = [
+          { id: uid(), type: 'собрание', title: 'Организационное собрание родителей', date: shiftISO(3), time: '18:00', place: 'Кабинет 204', groupIds: [g1.id, g2.id], status: 'запланировано', description: 'План на полугодие, кружки, согласия на выезд.' },
+          { id: uid(), type: 'праздник', title: 'Welcome-квест для новичков', date: shiftISO(7), time: '15:00', place: 'Актовый зал', groupIds: [g4.id], status: 'запланировано', description: 'Станции на испанском, английском и немецком.' },
+          { id: uid(), type: 'олимпиада', title: 'Школьная олимпиада по английскому', date: shiftISO(21), time: '10:00', place: 'Кабинет 301', groupIds: [g1.id, g3.id], status: 'запланировано', description: '' },
+          { id: uid(), type: 'экскурсия', title: 'Выставка «Языки мира»', date: shiftISO(34), time: '11:00', place: 'Краеведческий музей', groupIds: [g2.id], status: 'запланировано', description: 'Нужны согласия и сопровождение.' },
+          { id: uid(), type: 'конкурс', title: 'Конкурс чтецов “Poetry aloud”', date: shiftISO(48), time: '14:00', place: 'Библиотека', groupIds: [g1.id, g3.id], status: 'запланировано', description: '' },
+          { id: uid(), type: 'конкурс', title: 'Рождественская викторина (прошлый сезон)', date: shiftISO(-40), time: '13:00', place: 'Кабинет 204', groupIds: [g1.id], status: 'проведено', description: '' },
+        ];
+        const stickers = [
+          { id: uid(), text: 'Распечатать карточки для 8 «А»', color: 'marker', createdAt: now - 3600000 },
+          { id: uid(), text: 'Собрать согласия на экскурсию 9 «Б»', color: 'pen', createdAt: now - 7200000 },
+          { id: uid(), text: 'Проверить тетради: эссе Advanced', color: 'sky', createdAt: now - 10800000 },
+          { id: uid(), text: 'Заказать грамоты для олимпиады', color: 'pine', createdAt: now - 14400000 },
+        ];
+        return { version: 1, groups: [g1, g2, g3, g4], lessons, notes, events, stickers, settings: { teacherName: 'Анна Викторовна', theme: 'light', onboardingDone: false } };
+      }
+
+      /* ================= ХРАНИЛИЩЕ ================= */
+      const STORE_KEY = 'lingvozhurnal:v1';
+      const channel = (() => { try { return new BroadcastChannel('lingvozhurnal-sync'); } catch { return null; } })();
+      function readStorage() {
+        try { const raw = localStorage.getItem(STORE_KEY); if (!raw) return null; return sanitizeAppData(JSON.parse(raw)); }
+        catch { return null; }
+      }
+      function writeStorage(d) {
+        try { localStorage.setItem(STORE_KEY, JSON.stringify(d)); return true; }
+        catch { return false; }
+      }
+      function broadcast(d) { try { channel && channel.postMessage({ __lj: 1, data: d }); } catch {} }
+      function onRemote(cb) {
+        if (!channel) return () => {};
+        const h = (e) => { if (e.data && e.data.__lj === 1) { try { cb(sanitizeAppData(e.data.data)); } catch {} } };
+        channel.addEventListener('message', h);
+        return () => channel.removeEventListener('message', h);
+      }
+
+      /* ================= ИКОНКИ ================= */
+      const ICONS = {
+        logo: <><path d="M2.5 9.5 12 4l9.5 5.5L12 15z" /><path d="M6.5 12.2V17c0 1.5 2.5 3 5.5 3s5.5-1.5 5.5-3v-4.8" /><path d="M21.5 9.5V15" /></>,
+        home: <><path d="M3.5 10.5 12 3.5l8.5 7" /><path d="M5.5 9.5V20h13V9.5" /><path d="M10 20v-5h4v5" /></>,
+        book: <><path d="M12 6.5C10.5 5 8.5 4.5 4 4.5v14c4.5 0 6.5.5 8 2 1.5-1.5 3.5-2 8-2v-14c-4.5 0-6.5.5-8 2z" /><path d="M12 6.5v14" /></>,
+        notebook: <><rect x="5" y="3.5" width="14" height="17" /><path d="M9 3.5v17" /><path d="M12.5 8.5H16M12.5 12H16" /></>,
+        users: <><circle cx="9" cy="8.5" r="3.2" /><path d="M3 19.5c.7-3 3-4.8 6-4.8s5.3 1.8 6 4.8" /><path d="M15.8 5.6a3.2 3.2 0 0 1 0 5.8" /><path d="M17.8 14.9c1.9.8 3 2.4 3.4 4.6" /></>,
+        calendar: <><rect x="3.5" y="5" width="17" height="15.5" /><path d="M3.5 9.5h17M8 3v4M16 3v4" /></>,
+        calcheck: <><rect x="3.5" y="5" width="17" height="15.5" /><path d="M3.5 9.5h17M8 3v4M16 3v4" /><path d="m9 15 2 2 4-4" /></>,
+        flag: <><path d="M5.5 21V4" /><path d="M5.5 4.5H17l-2.3 4L17 12.5H5.5" /></>,
+        chart: <><path d="M4.5 4v16h16" /><path d="M9 16v-4M13.5 16V7.5M18 16v-6" /></>,
+        database: <><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8" /><path d="M4.5 5.5v13c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-13" /><path d="M4.5 12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8" /></>,
+        search: <><circle cx="10.5" cy="10.5" r="6" /><path d="m15.5 15.5 5 5" /></>,
+        sun: <><circle cx="12" cy="12" r="4" /><path d="M12 2.5V5M12 19v2.5M2.5 12H5M19 12h2.5M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" /></>,
+        moon: <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" />,
+        help: <><circle cx="12" cy="12" r="8.5" /><path d="M9.6 9.4a2.4 2.4 0 1 1 3.6 2.1c-.8.5-1.2 1-1.2 1.9" /><path d="M12 16.6h.01" /></>,
+        x: <path d="M6 6l12 12M18 6 6 18" />,
+        plus: <path d="M12 5v14M5 12h14" />,
+        check: <path d="m4.5 12.5 5 5L19.5 7" />,
+        pencil: <><path d="m4 20 1-4L16.3 4.7a2.1 2.1 0 0 1 3 3L8 19z" /><path d="m13.5 7.5 3 3" /></>,
+        trash: <><path d="M4.5 7h15M9.5 4.5h5M6.5 7l1 13.5h9L17.5 7" /><path d="M10 10.5v6M14 10.5v6" /></>,
+        chevL: <path d="m14 6-6 6 6 6" />,
+        chevR: <path d="m10 6 6 6-6 6" />,
+        arrowU: <path d="M12 20V5M5.5 11.5 12 5l6.5 6.5" />,
+        arrowDn: <path d="M12 4v15M5.5 12.5 12 19l6.5-6.5" />,
+        clock: <><circle cx="12" cy="12" r="8.5" /><path d="M12 7v5l3.5 2" /></>,
+        timer: <><circle cx="12" cy="13.5" r="7" /><path d="M12 10.5v3l2 1.5" /><path d="M9.5 3h5M12 3v3" /><path d="m18.5 8.5 1.5-1.5" /></>,
+        dice: <><rect x="4" y="4" width="16" height="16" /><circle cx="9" cy="9" r="1.1" fill="currentColor" stroke="none" /><circle cx="15" cy="9" r="1.1" fill="currentColor" stroke="none" /><circle cx="9" cy="15" r="1.1" fill="currentColor" stroke="none" /><circle cx="15" cy="15" r="1.1" fill="currentColor" stroke="none" /></>,
+        print: <><path d="M7 8V3.5h10V8" /><path d="M7 17H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><rect x="7" y="14" width="10" height="6.5" /></>,
+        download: <><path d="M12 3.5v11M7 10l5 5 5-5" /><path d="M4.5 20h15" /></>,
+        upload: <><path d="M12 14.5v-11M7 8l5-5 5 5" /><path d="M4.5 20h15" /></>,
+        copy: <><rect x="8.5" y="8.5" width="12" height="12" /><path d="M5.5 15.5h-2v-12h12v2" /></>,
+        chat: <><path d="M20.5 11.5a8.5 8.5 0 0 1-12.4 7.6L3.5 20.5l1.4-4.6a8.5 8.5 0 1 1 15.6-4.4z" /><path d="M8.5 10.5h7M8.5 13.5h4" /></>,
+        mail: <><rect x="3" y="5.5" width="18" height="13" /><path d="m3.5 6.5 8.5 6 8.5-6" /></>,
+        link: <><path d="M9.5 14.5a4 4 0 0 1 0-5.7l3-3a4 4 0 0 1 5.7 5.7l-1.6 1.6" /><path d="M14.5 9.5a4 4 0 0 1 0 5.7l-3 3a4 4 0 0 1-5.7-5.7l1.6-1.6" /></>,
+        clip: <path d="m20 11-8.5 8.5a5 5 0 0 1-7-7L13 4a3.3 3.3 0 0 1 4.7 4.7L9.5 17" />,
+        note: <><path d="M4.5 4.5h15v10l-5 5h-10z" /><path d="M14.5 19.5v-5h5" /></>,
+        sparkle: <path d="M12 3.5 13.8 9.2 19.5 11 13.8 12.8 12 18.5 10.2 12.8 4.5 11 10.2 9.2z" />,
+        alert: <><path d="M12 3.5 21.5 20h-19z" /><path d="M12 9.5V14M12 17h.01" /></>,
+        refresh: <><path d="M20.5 4.5V10H15" /><path d="M20 10a8.5 8.5 0 1 0 .5 4" /></>,
+        play: <path d="M7 4.5v15l12-7.5z" />,
+        pause: <path d="M8 4.5v15M16 4.5v15" />,
+        megaphone: <><path d="M3 10v4h3l10 5V5L6 10z" /><path d="M19 9a4 4 0 0 1 0 6" /></>,
+        trophy: <><path d="M8 21h8M12 17v4M7 4h10v6a5 5 0 0 1-10 0z" /><path d="M7 5.5H4.5A2.5 2.5 0 0 0 7 10M17 5.5h2.5A2.5 2.5 0 0 1 17 10" /></>,
+        bus: <><rect x="3.5" y="4.5" width="17" height="12" /><path d="M3.5 12.5h17M8 4.5v8M16 4.5v8" /><circle cx="8" cy="19" r="1.6" /><circle cx="16" cy="19" r="1.6" /></>,
+        gift: <><rect x="3.5" y="9.5" width="17" height="11" /><path d="M3.5 9.5h17M12 9.5v11" /><path d="M12 9.5C12 6 8 4.5 7 6s3 3.5 5 3.5zm0 0c0-3.5 4-5 5-3.5s-3 3.5-5 3.5z" /></>,
+        globe: <><circle cx="12" cy="12" r="8.5" /><path d="M3.5 12h17" /><path d="M12 3.5c-2.7 2.3-4 5.2-4 8.5s1.3 6.2 4 8.5c2.7-2.3 4-5.2 4-8.5s-1.3-6.2-4-8.5z" /></>,
+        target: <><circle cx="12" cy="12" r="8.5" /><circle cx="12" cy="12" r="4.5" /><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" /></>,
+        file: <><path d="M6 3.5h8l4 4v13H6z" /><path d="M14 3.5v4h4" /></>,
+        shuffle: <><path d="M3.5 6.5H7l10 11h3.5M3.5 17.5H7l3-3.3M14 9.8l3-3.3h3.5" /><path d="m18 4 2.5 2.5L18 9M18 15l2.5 2.5L18 20" /></>,
+        dot: <circle cx="12" cy="12" r="4" fill="currentColor" stroke="none" />,
+      };
+      function Icon({ name, size = 16, className, sw = 1.7 }) {
+        return (
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={sw}
+            strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+            {ICONS[name]}
+          </svg>
+        );
+      }
+
+      /* ================= UI ================= */
+      function ToastHost({ items }) {
+        return (
+          <div className="fixed right-4 top-16 z-[80] flex flex-col gap-2">
+            {items.map(t => (
+              <div key={t.id} className={`toast card flex items-center gap-2 px-3 py-2 text-[13px] font-semibold ${
+                t.type === 'error' ? 'bg-pen-soft text-pen' : t.type === 'info' ? 'bg-sky-soft text-sky' : 'bg-pine-soft text-pine-deep'}`}>
+                <Icon name={t.type === 'error' ? 'alert' : t.type === 'info' ? 'dot' : 'check'} size={14} />
+                {t.msg}
+              </div>
+            ))}
+          </div>
+        );
+      }
+      function Modal({ title, onClose, children, footer, wide }) {
+        useEffect(() => {
+          const h = (e) => { if (e.key === 'Escape') onClose(); };
+          window.addEventListener('keydown', h);
+          return () => window.removeEventListener('keydown', h);
+        }, [onClose]);
+        return (
+          <div className="fixed inset-0 z-[60] flex items-center justify-center p-4" role="dialog" aria-modal="true">
+            <div className="absolute inset-0 bg-ink/45" onClick={onClose} />
+            <div className={`pop card relative max-h-[86vh] w-full overflow-auto ${wide ? 'max-w-2xl' : 'max-w-md'}`}>
+              <div className="flex items-center justify-between border-b border-line px-4 py-3">
+                <h3 className="font-display text-[15px] font-bold">{title}</h3>
+                <button className="icon-btn icon-btn-sm" onClick={onClose} aria-label="Закрыть"><Icon name="x" size={13} /></button>
+              </div>
+              <div className="p-4">{children}</div>
+              {footer && <div className="flex justify-end gap-2 border-t border-line px-4 py-3">{footer}</div>}
+            </div>
+          </div>
+        );
+      }
+      function ConfirmHost({ state, onClose }) {
+        if (!state) return null;
+        return (
+          <Modal title={state.title} onClose={onClose} footer={<>
+            <button className="btn" onClick={onClose}>Отмена</button>
+            <button className={state.danger ? 'btn btn-danger' : 'btn btn-primary'} onClick={() => { state.onConfirm(); onClose(); }}>
+              {state.confirmLabel || 'Подтвердить'}
+            </button>
+          </>}>
+            <p className="text-sm text-soft">{state.message}</p>
+          </Modal>
+        );
+      }
+      function EmptyState({ icon, title, hint, children }) {
+        return (
+          <div className="card flex flex-col items-center justify-center gap-2 border-dashed p-8 text-center">
+            <span className="flex h-11 w-11 items-center justify-center bg-paper2 text-soft"><Icon name={icon} size={22} /></span>
+            <div className="font-display text-sm font-bold">{title}</div>
+            {hint && <div className="max-w-sm text-[13px] text-soft">{hint}</div>}
+            {children}
+          </div>
+        );
+      }
+      function SectionTitle({ icon, children, right }) {
+        return (
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <h2 className="flex items-center gap-2.5 font-display text-base font-bold md:text-lg">
+              <span className="inline-flex h-7 w-7 flex-none items-center justify-center bg-marker text-ink shadow-hard"><Icon name={icon} size={15} /></span>
+              {children}
+            </h2>
+            {right}
+          </div>
+        );
+      }
+      function Field({ label, children, className }) {
+        return (
+          <label className={`block ${className || ''}`}>
+            <span className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-soft">{label}</span>
+            {children}
+          </label>
+        );
+      }
+      function GroupChip({ g }) {
+        return (
+          <span className="chip" style={chipStyle(g.color)}>
+            <span className="h-1.5 w-1.5 flex-none" style={{ background: `var(--color-${g.color})` }} />
+            {g.name}
+          </span>
+        );
+      }
+
+      /* ================= ОНБОРДИНГ ================= */
+      const OB_STEPS = [
+        { icon: 'logo', title: 'Добро пожаловать в ЛингвоЖурнал', text: 'Личный помощник учителя иностранных языков: журнал отметок, конспекты, планировщик, мероприятия и аналитика — всё в одном месте и всегда под рукой.' },
+        { icon: 'book', title: 'Журнал отметок', text: 'Выберите группу и кликайте по клеткам: оценки 2–5, бонус «+0,1», посещения Н/Б/У. Средние считаются автоматически — по ученику, дню и группе.' },
+        { icon: 'calcheck', title: 'Планы и конспекты', text: 'Планировщик разложит уроки по разделам и поможет отправить домашнее задание в чат. Конспекты — с блоками, словарём, файлами и печатью на A4.' },
+        { icon: 'database', title: 'Данные под защитой', text: 'Всё автоматически сохраняется в браузере и синхронизируется между вкладками. На вкладке «Данные» — JSON-бэкапы, CSV для Excel и импорт.' },
+      ];
+      function Onboarding({ onClose }) {
+        const [step, setStep] = useState(0);
+        const s = OB_STEPS[step];
+        const last = step === OB_STEPS.length - 1;
+        return (
+          <Modal title={`Шаг ${step + 1} из ${OB_STEPS.length}`} onClose={onClose} footer={<>
+            <button className="btn btn-ghost" onClick={onClose}>Пропустить</button>
+            {step > 0 && <button className="btn" onClick={() => setStep(step - 1)}><Icon name="chevL" size={14} />Назад</button>}
+            <button className="btn btn-primary" onClick={() => (last ? onClose() : setStep(step + 1))}>
+              {last ? 'Начать работу' : 'Далее'}{!last && <Icon name="chevR" size={14} />}
+            </button>
+          </>}>
+            <div className="flex flex-col items-center gap-3 py-2 text-center">
+              <span className="flex h-16 w-16 items-center justify-center bg-marker text-ink shadow-hard"><Icon name={s.icon} size={32} /></span>
+              <h3 className="font-display text-lg font-bold">{s.title}</h3>
+              <p className="max-w-md text-sm leading-relaxed text-soft">{s.text}</p>
+              <div className="mt-2 flex gap-1.5">
+                {OB_STEPS.map((_, i) => (
+                  <button key={i} aria-label={`Шаг ${i + 1}`} onClick={() => setStep(i)}
+                    className={`h-2 transition-all ${i === step ? 'w-6 bg-pine' : 'w-2 bg-line'}`} />
+                ))}
+              </div>
+            </div>
+          </Modal>
+        );
+      }
+
+      /* ================= ПЛАВАЮЩИЕ КНОПКИ ================= */
+      function RouletteFab() {
+        const { data, toast } = useApp();
+        const [open, setOpen] = useState(false);
+        const [groupId, setGroupId] = useState('all');
+        const [current, setCurrent] = useState(null);
+        const [rolling, setRolling] = useState(false);
+        const lastPick = useRef('');
+        const ivRef = useRef(null);
+
+        const pool = data.groups
+          .filter(g => groupId === 'all' || g.id === groupId)
+          .flatMap(g => g.students.map(s => ({ id: s.id, name: s.name, group: g.name })));
+
+        useEffect(() => () => { if (ivRef.current) clearInterval(ivRef.current); }, []);
+
+        const roll = () => {
+          if (rolling) return;
+          if (!pool.length) { toast('Ученики не найдены — добавьте группы', 'error'); return; }
+          setRolling(true);
+          let i = 0;
+          ivRef.current = setInterval(() => {
+            setCurrent(pool[Math.floor(Math.random() * pool.length)]);
+            i++;
+            if (i > 14) {
+              if (ivRef.current) clearInterval(ivRef.current);
+              let pick = pool[Math.floor(Math.random() * pool.length)];
+              if (pool.length > 1) {
+                let guard = 0;
+                while (pick.id === lastPick.current && guard++ < 30) pick = pool[Math.floor(Math.random() * pool.length)];
+              }
+              lastPick.current = pick.id;
+              setCurrent(pick);
+              setRolling(false);
+            }
+          }, 75);
+        };
+
+        return (
+          <div className="relative">
+            {open && (
+              <div className="pop card absolute bottom-14 right-0 w-72 p-4">
+                <div className="mb-2 flex items-center gap-2 font-display text-sm font-bold"><Icon name="dice" size={16} />Случайный ученик</div>
+                <select className="inp mb-3" value={groupId} onChange={e => { setGroupId(e.target.value); setCurrent(null); }}>
+                  <option value="all">Все группы</option>
+                  {data.groups.map(g => <option key={g.id} value={g.id}>{g.name}</option>)}
+                </select>
+                <div className="mb-3 flex min-h-[74px] flex-col items-center justify-center border border-dashed border-line bg-paper2 p-3 text-center">
+                  {current ? (
+                    <>
+                      <div className={`font-display text-lg font-black ${rolling ? 'opacity-60' : 'text-pine'}`}>{current.name}</div>
+                      <div className="text-[11px] text-soft">{current.group}</div>
+                    </>
+                  ) : (
+                    <span className="text-xs text-soft">Нажмите «Крутить» — недавние ответы не повторяются</span>
+                  )}
+                </div>
+                <button className="btn btn-primary w-full" onClick={roll} disabled={rolling}>
+                  <Icon name="shuffle" size={15} />{rolling ? 'Выбираем…' : 'Крутить'}
+                </button>
+              </div>
+            )}
+            <button className="btn press h-12 w-12 p-0 shadow-hard" title="Случайный ученик" onClick={() => setOpen(!open)}>
+              <Icon name="dice" size={22} />
+            </button>
+          </div>
+        );
+      }
+      function TimerFab() {
+        const { toast } = useApp();
+        const [open, setOpen] = useState(false);
+        const [total, setTotal] = useState(300);
+        const [left, setLeft] = useState(0);
+        const [running, setRunning] = useState(false);
+        const [custom, setCustom] = useState('5');
+        const endRef = useRef(0);
+
+        useEffect(() => {
+          if (!running) return;
+          const t = setInterval(() => {
+            const l = Math.max(0, Math.ceil((endRef.current - Date.now()) / 1000));
+            setLeft(l);
+            if (l <= 0) { setRunning(false); toast('Таймер активности завершён!', 'info'); }
+          }, 200);
+          return () => clearInterval(t);
+        }, [running, toast]);
+
+        const start = (sec) => {
+          if (sec <= 0) return;
+          setTotal(sec); setLeft(sec);
+          endRef.current = Date.now() + sec * 1000;
+          setRunning(true);
+        };
+        const pause = () => setRunning(false);
+        const resume = () => { if (left > 0) { endRef.current = Date.now() + left * 1000; setRunning(true); } };
+        const addMin = () => {
+          setTotal(t => t + 60);
+          if (running) endRef.current += 60000;
+          else setLeft(l => l + 60);
+        };
+        const reset = () => { setRunning(false); setLeft(0); };
+
+        const R = 52, C = 2 * Math.PI * R;
+        const frac = total > 0 ? left / total : 0;
+        const mm = String(Math.floor(left / 60)).padStart(2, '0');
+        const ss = String(left % 60).padStart(2, '0');
+
+        return (
+          <div className="relative">
+            {open && (
+              <div className="pop card absolute bottom-14 right-0 w-72 p-4">
+                <div className="mb-2 flex items-center gap-2 font-display text-sm font-bold"><Icon name="timer" size={16} />Таймер активности</div>
+                {!running && left === 0 && (
+                  <>
+                    <div className="mb-2 flex flex-wrap gap-1.5">
+                      {[1, 2, 5, 10, 15].map(m => (
+                        <button key={m} className="btn btn-sm" onClick={() => start(m * 60)}>{m} мин</button>
+                      ))}
+                    </div>
+                    <div className="flex gap-1.5">
+                      <input className="inp" type="number" min={1} max={120} value={custom} onChange={e => setCustom(e.target.value)} aria-label="Минуты" />
+                      <button className="btn btn-primary" onClick={() => start(Math.max(1, Math.min(120, parseInt(custom, 10) || 0)) * 60)}>
+                        <Icon name="play" size={14} />Старт
+                      </button>
+                    </div>
+                  </>
+                )}
+                {(running || left > 0) && (
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="relative h-32 w-32">
+                      <svg viewBox="0 0 120 120" className="h-32 w-32">
+                        <circle cx="60" cy="60" r={R} fill="none" stroke="var(--color-paper2)" strokeWidth="10" />
+                        <circle cx="60" cy="60" r={R} fill="none" stroke="var(--color-pine)" strokeWidth="10" strokeLinecap="butt"
+                          strokeDasharray={`${frac * C} ${C}`} transform="rotate(-90 60 60)" />
+                      </svg>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <span className="font-display text-2xl font-black tabular-nums">{mm}:{ss}</span>
+                        {left === 0 && <span className="text-[10px] font-bold uppercase text-pen">Готово!</span>}
+                      </div>
+                    </div>
+                    <div className="flex w-full gap-1.5">
+                      {running
+                        ? <button className="btn flex-1" onClick={pause}><Icon name="pause" size={14} />Пауза</button>
+                        : <button className="btn flex-1" onClick={resume} disabled={left === 0}><Icon name="play" size={14} />Дальше</button>}
+                      <button className="btn btn-sm flex-1" onClick={addMin}>+1 мин</button>
+                      <button className="icon-btn" onClick={reset} title="Сбросить"><Icon name="x" size={14} /></button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+            <button className="btn press h-12 w-12 p-0 shadow-hard" title="Таймер активности" onClick={() => setOpen(!open)}>
+              <Icon name="timer" size={22} />
+            </button>
+          </div>
+        );
+      }
+      function Fabs() {
+        return (
+          <div className="fixed bottom-5 right-4 z-40 flex flex-col items-end gap-3">
+            <RouletteFab />
+            <TimerFab />
+          </div>
+        );
+      }
+
+      /* ================= ОБЗОР ================= */
+      function OverviewTab() {
+        const { data, update, go, toast } = useApp();
+        const today = todayISO();
+        const tomorrow = addDaysISO(today, 1);
+        const [stText, setStText] = useState('');
+        const [stColor, setStColor] = useState('marker');
+
+        const todays = data.lessons.filter(l => l.date === today).sort((a, b) => a.time.localeCompare(b.time));
+        const hw = [];
+        data.lessons.filter(l => l.date === tomorrow && l.homework.trim()).forEach(l => {
+          const g = data.groups.find(x => x.id === l.groupId);
+          if (g) hw.push({ key: 'l' + l.id, gname: g.name, color: g.color, text: l.homework });
+        });
+        data.groups.forEach(g => g.columns.filter(c => c.date === tomorrow && c.homework.trim()).forEach(c => {
+          hw.push({ key: 'c' + c.id, gname: g.name, color: g.color, text: c.homework });
+        }));
+        const upcoming = data.events.filter(e => e.date >= today && e.status !== 'отменено').sort((a, b) => a.date.localeCompare(b.date)).slice(0, 4);
+        const latestNotes = [...data.notes].sort((a, b) => b.updatedAt - a.updatedAt).slice(0, 3);
+        const studentsTotal = data.groups.reduce((s, g) => s + g.students.length, 0);
+        const d = parseISO(today);
+
+        const conduct = (id) => {
+          update(dd => ({ ...dd, lessons: dd.lessons.map(l => (l.id === id ? { ...l, status: 'проведён' } : l)) }));
+          toast('Урок отмечен проведённым');
+        };
+        const addSticker = () => {
+          const t = stText.trim();
+          if (!t) return;
+          update(dd => ({ ...dd, stickers: [...dd.stickers, { id: uid(), text: t, color: stColor, createdAt: Date.now() }] }));
+          setStText('');
+        };
+        const delSticker = (id) => update(dd => ({ ...dd, stickers: dd.stickers.filter(s => s.id !== id) }));
+
+        return (
+          <div className="space-y-6 pt-5">
+            <div className="rise">
+              <h1 className="font-display text-2xl font-black leading-tight md:text-4xl">
+                {greeting()}, {data.settings.teacherName.split(' ')[0]}!
+              </h1>
+              <p className="mt-1 text-sm text-soft">
+                сегодня {WEEKDAYS_RU[d.getDay()]}, {fmtDayMonth(today)} · {data.groups.length} групп · {studentsTotal} учеников
+              </p>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-2">
+              <section className="rise" style={{ animationDelay: '60ms' }}>
+                <SectionTitle icon="clock">Расписание на сегодня</SectionTitle>
+                {todays.length === 0 ? (
+                  <EmptyState icon="calendar" title="Сегодня уроков нет" hint="Запланируйте урок в «Планировщике» — он появится здесь." />
+                ) : (
+                  <div className="space-y-2">
+                    {todays.map(l => {
+                      const g = data.groups.find(x => x.id === l.groupId);
+                      return (
+                        <div key={l.id} className="card lift flex flex-wrap items-center gap-3 p-3">
+                          <span className="font-display text-lg font-black tabular-nums">{l.time || '—'}</span>
+                          {g && <GroupChip g={g} />}
+                          <span className="min-w-0 flex-1 truncate text-sm font-semibold">{l.topic || 'Без темы'}</span>
+                          {l.status === 'план' && (
+                            <button className="btn btn-primary btn-sm" onClick={() => conduct(l.id)}><Icon name="check" size={13} />Провести</button>
+                          )}
+                          {l.status === 'проведён' && <span className="tag bg-pine-soft text-pine-deep">проведён</span>}
+                          {l.status === 'отменён' && <span className="tag bg-pen-soft text-pen">отменён</span>}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </section>
+
+              <section className="rise" style={{ animationDelay: '120ms' }}>
+                <SectionTitle icon="notebook">Домашнее задание на завтра</SectionTitle>
+                {hw.length === 0 ? (
+                  <EmptyState icon="note" title="На завтра ДЗ не задано" hint="Добавьте домашнее задание в планировщике или в колонке журнала." />
+                ) : (
+                  <div className="space-y-2">
+                    {hw.map(h => (
+                      <div key={h.key} className="card lift p-3">
+                        <span className="chip mb-1" style={{ background: `color-mix(in srgb, ${accentVar(h.color)} 14%, var(--color-card))`, borderColor: `color-mix(in srgb, ${accentVar(h.color)} 50%, transparent)`, color: accentText(h.color) }}>{h.gname}</span>
+                        <div className="text-sm">{h.text}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </section>
+
+              <section className="rise" style={{ animationDelay: '180ms' }}>
+                <SectionTitle icon="note">Доска заметок</SectionTitle>
+                <div className="card p-3">
+                  <div className="mb-3 flex gap-1.5">
+                    <input className="inp" placeholder="Новая заметка — Enter" value={stText}
+                      onChange={e => setStText(e.target.value)}
+                      onKeyDown={e => { if (e.key === 'Enter') addSticker(); }} />
+                    <div className="flex flex-none items-center gap-1">
+                      {STICKY_COLORS.map(c => (
+                        <button key={c} aria-label={c} onClick={() => setStColor(c)}
+                          className={`h-6 w-6 border-2 ${stColor === c ? 'border-ink' : 'border-transparent'}`}
+                          style={{ background: accentVar(c) }} />
+                      ))}
+                    </div>
+                    <button className="icon-btn" onClick={addSticker} title="Добавить"><Icon name="plus" size={16} /></button>
+                  </div>
+                  {data.stickers.length === 0 ? (
+                    <p className="py-4 text-center text-[13px] text-soft">Пока пусто. Запишите, что нельзя забыть.</p>
+                  ) : (
+                    <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+                      {data.stickers.map((s, i) => (
+                        <div key={s.id} className="rise group relative border p-2.5 pr-6 text-[13px] leading-snug"
+                          style={{ ...stickyStyle(s.color), transform: `rotate(${((i % 3) - 1) * 1.1}deg)` }}>
+                          {s.text}
+                          <button className="absolute right-1 top-1 hidden text-ink/60 hover:text-pen group-hover:block" onClick={() => delSticker(s.id)} aria-label="Удалить">
+                            <Icon name="x" size={12} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </section>
+
+              <div className="space-y-6">
+                <section className="rise" style={{ animationDelay: '240ms' }}>
+                  <SectionTitle icon="flag" right={<button className="btn btn-sm" onClick={() => go('events')}>Все<Icon name="chevR" size={12} /></button>}>
+                    Ближайшие мероприятия
+                  </SectionTitle>
+                  {upcoming.length === 0 ? (
+                    <EmptyState icon="flag" title="Мероприятий не запланировано" />
+                  ) : (
+                    <div className="space-y-2">
+                      {upcoming.map(e => {
+                        const meta = EVENT_TYPES.find(t => t.id === e.type) || EVENT_TYPES[5];
+                        return (
+                          <div key={e.id} className="card lift flex items-center gap-3 p-3">
+                            <div className="flex h-10 w-10 flex-none flex-col items-center justify-center border border-line bg-paper2">
+                              <span className="font-display text-sm font-black leading-none">{parseISO(e.date).getDate()}</span>
+                              <span className="text-[9px] uppercase text-soft">{fmtDayMonth(e.date).split(' ')[1]}</span>
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <div className="truncate text-sm font-bold">{e.title}</div>
+                              <div className="text-[11px] text-soft">{e.place || 'место уточняется'}{e.time ? ` · ${e.time}` : ''}</div>
+                            </div>
+                            <span className="chip flex-none" style={{ background: `color-mix(in srgb, ${accentVar(meta.color)} 16%, var(--color-card))`, borderColor: `color-mix(in srgb, ${accentVar(meta.color)} 45%, transparent)`, color: accentText(meta.color) }}>
+                              <Icon name={meta.icon} size={11} />{meta.label}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </section>
+
+                <section className="rise" style={{ animationDelay: '300ms' }}>
+                  <SectionTitle icon="notebook" right={<button className="btn btn-sm" onClick={() => go('notes')}>Все<Icon name="chevR" size={12} /></button>}>
+                    Последние конспекты
+                  </SectionTitle>
+                  {latestNotes.length === 0 ? (
+                    <EmptyState icon="notebook" title="Конспектов пока нет" />
+                  ) : (
+                    <div className="space-y-2">
+                      {latestNotes.map(n => (
+                        <button key={n.id} className="card lift flex w-full items-center gap-3 p-3 text-left" onClick={() => go('notes', { noteId: n.id })}>
+                          <span className="flex h-8 w-8 flex-none items-center justify-center bg-marker-soft text-marker-ink"><Icon name="notebook" size={15} /></span>
+                          <span className="min-w-0 flex-1">
+                            <span className="block truncate text-sm font-bold">{n.title || 'Без темы'}</span>
+                            <span className="text-[11px] text-soft">{fmtDayMonth(n.date)} · изменён {fmtAgo(n.updatedAt)}</span>
+                          </span>
+                          {n.rating != null && <span className="tag bg-marker-soft font-display text-marker-ink">{n.rating}</span>}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </section>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      /* ================= ЖУРНАЛ ================= */
+      function JournalTab() {
+        const { data, update, ask, navPayload, go } = useApp();
+        const [groupId, setGroupId] = useState((data.groups[0] || {}).id || '');
+        const [pop, setPop] = useState(null);
+        const [flashSid, setFlashSid] = useState(null);
+
+        const group = data.groups.find(g => g.id === groupId) || data.groups[0];
+
+        useEffect(() => {
+          if (navPayload && navPayload.groupId) {
+            setGroupId(navPayload.groupId);
+            if (navPayload.studentId) {
+              setFlashSid(navPayload.studentId);
+              const sid = navPayload.studentId;
+              setTimeout(() => { const el = document.getElementById('jrow-' + sid); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 120);
+              setTimeout(() => setFlashSid(null), 3200);
+            }
+          }
+        }, [navPayload]);
+
+        useEffect(() => {
+          if (!pop) return;
+          const h = (e) => { if (!e.target.closest('[data-pop]')) setPop(null); };
+          const k = (e) => { if (e.key === 'Escape') setPop(null); };
+          document.addEventListener('mousedown', h);
+          window.addEventListener('keydown', k);
+          return () => { document.removeEventListener('mousedown', h); window.removeEventListener('keydown', k); };
+        }, [pop]);
+
+        if (!group) {
+          return (
+            <div className="pt-10">
+              <EmptyState icon="book" title="Журнал пуст" hint="Создайте первую группу, чтобы начать вести журнал отметок.">
+                <button className="btn btn-primary mt-2" onClick={() => go('groups')}><Icon name="plus" size={14} />Создать группу</button>
+              </EmptyState>
+            </div>
+          );
+        }
+
+        const gid = group.id;
+        const setCell = (sid, cid, patch) => {
+          update(d => ({
+            ...d,
+            groups: d.groups.map(g => {
+              if (g.id !== gid) return g;
+              const marks = { ...g.marks };
+              const row = { ...(marks[sid] || {}) };
+              if (patch === null) delete row[cid];
+              else {
+                const prev = row[cid] || { grade: null, bonus: false, attendance: null };
+                const next = { ...prev, ...patch };
+                if (next.grade == null && next.attendance == null) delete row[cid];
+                else row[cid] = next;
+              }
+              if (Object.keys(row).length) marks[sid] = row; else delete marks[sid];
+              return { ...g, marks };
+            }),
+          }));
+        };
+        const openPop = (e, sid, cid) => {
+          const r = e.currentTarget.getBoundingClientRect();
+          const w = 218;
+          const x = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, window.innerWidth - w - 8));
+          let y = r.bottom + 8;
+          if (y + 240 > window.innerHeight) y = Math.max(8, r.top - 248);
+          setPop({ sid, cid, x, y });
+        };
+        const updateColumn = (cid, patch) =>
+          update(d => ({ ...d, groups: d.groups.map(g => (g.id !== gid ? g : { ...g, columns: g.columns.map(c => (c.id === cid ? { ...c, ...patch } : c)) })) }));
+        const addColumn = () =>
+          update(d => ({ ...d, groups: d.groups.map(g => (g.id !== gid ? g : { ...g, columns: [...g.columns, { id: uid(), date: todayISO(), topic: '', homework: '' }].sort((a, b) => a.date.localeCompare(b.date)) })) }));
+        const removeColumn = (cid) =>
+          ask({
+            title: 'Удалить дату?', message: 'Колонка и все отметки за этот день будут удалены безвозвратно.', danger: true, confirmLabel: 'Удалить',
+            onConfirm: () => update(d => ({
+              ...d,
+              groups: d.groups.map(g => {
+                if (g.id !== gid) return g;
+                const marks = {};
+                Object.keys(g.marks).forEach(sid => {
+                  const row = { ...g.marks[sid] };
+                  delete row[cid];
+                  if (Object.keys(row).length) marks[sid] = row;
+                });
+                return { ...g, columns: g.columns.filter(c => c.id !== cid), marks };
+              }),
+            })),
+          });
+
+        const popCell = pop ? ((group.marks[pop.sid] || {})[pop.cid]) : undefined;
+        const popStudent = pop ? group.students.find(s => s.id === pop.sid) : null;
+        const popCol = pop ? group.columns.find(c => c.id === pop.cid) : null;
+        const gAvg = groupAverage(group);
+
+        return (
+          <div className="pt-5">
+            <div className="mb-3 flex flex-wrap items-center gap-1.5">
+              {data.groups.map(g => (
+                <button key={g.id} onClick={() => { setGroupId(g.id); setPop(null); }}
+                  className={`chip press cursor-pointer ${g.id === group.id ? 'border-ink bg-ink text-card' : 'border-line bg-card hover:bg-paper2'}`}>
+                  <span className="h-1.5 w-1.5" style={{ background: `var(--color-${g.color})` }} />{g.name}
+                </button>
+              ))}
+              <div className="ml-auto flex gap-1.5">
+                <button className="btn btn-sm" onClick={addColumn}><Icon name="plus" size={13} />Дата</button>
+                <button className="btn btn-sm" onClick={() => printWith('landscape')} disabled={!group.columns.length}>
+                  <Icon name="print" size={13} />Печать
+                </button>
+              </div>
+            </div>
+
+            <div className="mb-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-soft">
+              <span className="font-display text-base font-bold text-ink">{group.name}</span>
+              <span>{group.language} · {group.level}</span>
+              <span>{group.students.length} {plural(group.students.length, ['ученик', 'ученика', 'учеников'])} · {group.columns.length} занятий</span>
+              <span>СР группы: <b style={{ color: avgColor(gAvg) }}>{fmtAvg(gAvg)}</b></span>
+            </div>
+
+            {group.students.length === 0 ? (
+              <EmptyState icon="users" title="В группе нет учеников" hint="Добавьте учеников на вкладке «Группы»." />
+            ) : (
+              <div className="card overflow-hidden">
+                <div className="max-h-[68vh] overflow-auto" onScroll={() => setPop(null)}>
+                  <table className="jtable w-full text-[13px]">
+                    <thead>
+                      <tr>
+                        <th className="sticky left-0 top-0 z-30 min-w-[200px] bg-card p-2 text-left align-bottom">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-soft">Ученик · явка</span>
+                        </th>
+                        {group.columns.map(c => (
+                          <th key={c.id} className="sticky top-0 z-20 min-w-[148px] bg-card p-1.5 align-top">
+                            <div className="flex items-center justify-between gap-1">
+                              <span className="whitespace-nowrap text-[11px] font-bold">{fmtCol(c.date)}</span>
+                              <button className="icon-btn icon-btn-sm" title="Удалить дату" onClick={() => removeColumn(c.id)}><Icon name="x" size={11} /></button>
+                            </div>
+                            <input className="inp mt-1 p-1 text-[11px]" placeholder="Тема урока" value={c.topic} onChange={e => updateColumn(c.id, { topic: e.target.value })} />
+                            <input className="inp mt-1 p-1 text-[11px]" placeholder="ДЗ" value={c.homework} onChange={e => updateColumn(c.id, { homework: e.target.value })} />
+                          </th>
+                        ))}
+                        <th className="sticky top-0 z-20 min-w-[64px] bg-marker-soft p-2 text-center text-[11px] font-black uppercase text-marker-ink">СР</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {group.students.map(s => {
+                        const m = missCount(group, s.id);
+                        const attended = group.columns.length - m.n - m.b - m.u;
+                        const avg = studentAverage(group, s.id);
+                        return (
+                          <tr key={s.id} id={'jrow-' + s.id} className={flashSid === s.id ? 'flash' : ''}>
+                            <td className="sticky left-0 z-10 bg-card p-2">
+                              <div className="font-semibold leading-tight">{s.name}</div>
+                              <div className="mt-0.5 flex gap-1.5 text-[10px] font-bold text-soft">
+                                <span className="text-pine">✓ {attended}</span>
+                                {m.n > 0 && <span className="text-pen">Н{m.n}</span>}
+                                {m.b > 0 && <span className="text-ochre">Б{m.b}</span>}
+                                {m.u > 0 && <span className="text-sky">У{m.u}</span>}
+                              </div>
+                            </td>
+                            {group.columns.map(c => {
+                              const cell = (group.marks[s.id] || {})[c.id];
+                              return (
+                                <td key={c.id} className="p-0.5 text-center">
+                                  <button
+                                    className="mx-auto flex h-9 w-12 items-center justify-center border border-transparent font-display text-[15px] font-bold transition hover:border-line hover:bg-paper2"
+                                    style={cell && cell.grade != null ? { color: gradeColorVar(cell.grade) } : cell && cell.attendance ? { color: ATT_COLOR[cell.attendance] } : { color: 'var(--color-line)' }}
+                                    onClick={e => openPop(e, s.id, c.id)}>
+                                    {cell && cell.attendance ? cell.attendance : cell && cell.grade != null ? <>{cell.grade}{cell.bonus && <sup className="ml-px text-[9px]">+</sup>}</> : '·'}
+                                  </button>
+                                </td>
+                              );
+                            })}
+                            <td className="bg-marker-soft/50 text-center font-display font-bold" style={{ color: avgColor(avg) }}>{fmtAvg(avg)}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td className="sticky left-0 z-10 bg-card p-2 font-display text-[11px] font-black uppercase text-soft">СР дня</td>
+                        {group.columns.map(c => {
+                          const a = columnAverage(group, c.id);
+                          return <td key={c.id} className="text-center font-display font-bold" style={{ color: avgColor(a) }}>{fmtAvg(a)}</td>;
+                        })}
+                        <td className="bg-marker-soft text-center font-display font-black" style={{ color: avgColor(gAvg) }}>{fmtAvg(gAvg)}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {pop && popStudent && popCol && (
+              <div data-pop className="pop card fixed z-50 w-[218px] p-2.5" style={{ left: pop.x, top: pop.y }}>
+                <div className="mb-2 text-[11px] font-bold text-soft">{popStudent.name} · {fmtCol(popCol.date)}</div>
+                <div className="grid grid-cols-4 gap-1">
+                  {[2, 3, 4, 5].map(gr => {
+                    const active = popCell && popCell.grade === gr;
+                    const cVar = gradeColorVar(gr);
+                    return (
+                      <button key={gr}
+                        className="h-9 border font-display text-base font-black transition press"
+                        style={active ? { background: `color-mix(in srgb, ${cVar} 22%, var(--color-card))`, borderColor: cVar, color: cVar } : { borderColor: 'var(--color-line)', color: cVar }}
+                        onClick={() => setCell(pop.sid, pop.cid, { grade: gr, attendance: null })}>
+                        {gr}
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="mt-1.5 grid grid-cols-3 gap-1">
+                  {['Н', 'Б', 'У'].map(a => {
+                    const active = popCell && popCell.attendance === a;
+                    const cVar = ATT_COLOR[a];
+                    return (
+                      <button key={a}
+                        className="h-8 border text-sm font-black transition press"
+                        style={active ? { background: `color-mix(in srgb, ${cVar} 22%, var(--color-card))`, borderColor: cVar, color: cVar } : { borderColor: 'var(--color-line)', color: cVar }}
+                        title={a === 'Н' ? 'Неуважительная' : a === 'Б' ? 'По уважительной причине' : 'Болезнь'}
+                        onClick={() => setCell(pop.sid, pop.cid, { attendance: active ? null : a, grade: null, bonus: false })}>
+                        {a}
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="mt-1.5 flex gap-1">
+                  <button
+                    className={`btn btn-sm flex-1 ${popCell && popCell.bonus ? 'border-marker bg-marker-soft text-marker-ink' : ''}`}
+                    disabled={!popCell || popCell.grade == null}
+                    onClick={() => setCell(pop.sid, pop.cid, { bonus: !(popCell && popCell.bonus) })}>
+                    + 0,1
+                  </button>
+                  <button className="btn btn-sm flex-1" disabled={!popCell} onClick={() => { setCell(pop.sid, pop.cid, null); setPop(null); }}>Стереть</button>
+                </div>
+              </div>
+            )}
+
+            {createPortal(
+              <div className="print-sheet p-2 text-[11px]">
+                <h1 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 18, fontWeight: 800, marginBottom: 2 }}>Журнал · {group.name}</h1>
+                <p style={{ marginBottom: 10, color: '#444' }}>{group.language}, уровень {group.level} · сформирован {fmtDateFull(todayISO())}</p>
+                <table className="jprint w-full">
+                  <thead>
+                    <tr>
+                      <th>Ученик</th>
+                      {group.columns.map(c => <th key={c.id}>{fmtCol(c.date)}<br /><span style={{ fontWeight: 400 }}>{c.topic}</span>{c.homework && <><br /><span style={{ fontWeight: 400 }}>ДЗ: {c.homework}</span></>}</th>)}
+                      <th>СР</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {group.students.map(s => (
+                      <tr key={s.id}>
+                        <td>{s.name}</td>
+                        {group.columns.map(c => {
+                          const cell = (group.marks[s.id] || {})[c.id];
+                          return <td key={c.id} style={{ textAlign: 'center', fontWeight: 700 }}>
+                            {cell && cell.attendance ? cell.attendance : cell && cell.grade != null ? `${cell.grade}${cell.bonus ? '+' : ''}` : ''}
+                          </td>;
+                        })}
+                        <td style={{ textAlign: 'center', fontWeight: 700 }}>{fmtAvg(studentAverage(group, s.id))}</td>
+                      </tr>
+                    ))}
+                    <tr>
+                      <td style={{ fontWeight: 800 }}>СР дня</td>
+                      {group.columns.map(c => <td key={c.id} style={{ textAlign: 'center', fontWeight: 800 }}>{fmtAvg(columnAverage(group, c.id))}</td>)}
+                      <td style={{ textAlign: 'center', fontWeight: 800 }}>{fmtAvg(groupAverage(group))}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p style={{ marginTop: 14 }}>Учитель: {data.settings.teacherName} · бонус «+» = +0,1 к среднему баллу</p>
+              </div>,
+              document.body,
+            )}
+          </div>
+        );
+      }
+
+      /* >>>>>>>>>> ЧАСТЬ 3 — вставьте продолжение сразу после этой строки <<<<<<<<<< */
+      /* ================= КОНСПЕКТЫ ================= */
+      function noteCounters(n) {
+        let sections = 0, words = 0, links = 0, files = 0, stickers = 0;
+        n.blocks.forEach(b => {
+          if (b.type === 'section') sections++;
+          else if (b.type === 'vocab') words += b.items.length;
+          else if (b.type === 'links') links += b.links.length;
+          else if (b.type === 'files') files += b.files.length;
+          else stickers++;
+        });
+        return { sections, words, links, files, stickers };
+      }
+      function NotesTab() {
+        const { data, update, ask, navPayload } = useApp();
+        const [editingId, setEditingId] = useState(null);
+        useEffect(() => { if (navPayload && navPayload.noteId) setEditingId(navPayload.noteId); }, [navPayload]);
+
+        const note = data.notes.find(n => n.id === editingId);
+        if (note) return <NoteEditor note={note} onClose={() => setEditingId(null)} />;
+
+        const createNote = () => {
+          const id = uid();
+          update(d => ({
+            ...d,
+            notes: [{ id, title: '', date: todayISO(), duration: 45, goals: '', equipment: '', rating: null, reflection: '', blocks: [], updatedAt: Date.now() }, ...d.notes],
+          }));
+          setEditingId(id);
+        };
+        const removeNote = (n) =>
+          ask({ title: 'Удалить конспект?', message: `«${n.title || 'Без темы'}» будет удалён безвозвратно.`, danger: true, confirmLabel: 'Удалить', onConfirm: () => update(d => ({ ...d, notes: d.notes.filter(x => x.id !== n.id) })) });
+
+        return (
+          <div className="pt-5">
+            <SectionTitle icon="notebook" right={<button className="btn btn-primary" onClick={createNote}><Icon name="plus" size={14} />Новый конспект</button>}>
+              Конспекты уроков
+            </SectionTitle>
+            {data.notes.length === 0 ? (
+              <EmptyState icon="notebook" title="Конспектов пока нет" hint="Создайте первый конспект: блоки, словарь, ссылки и файлы — всё внутри.">
+                <button className="btn btn-primary mt-2" onClick={createNote}><Icon name="plus" size={14} />Создать</button>
+              </EmptyState>
+            ) : (
+              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                {[...data.notes].sort((a, b) => b.updatedAt - a.updatedAt).map((n, i) => {
+                  const c = noteCounters(n);
+                  const chips = [
+                    c.sections && `разделы: ${c.sections}`, c.words && `слов: ${c.words}`, c.links && `ссылок: ${c.links}`,
+                    c.files && `файлов: ${c.files}`, c.stickers && `стикеров: ${c.stickers}`,
+                  ].filter(Boolean);
+                  return (
+                    <div key={n.id} className="card lift rise cursor-pointer p-4" style={{ animationDelay: `${i * 45}ms` }} onClick={() => setEditingId(n.id)}>
+                      <div className="mb-1.5 flex items-center justify-between text-[11px] text-soft">
+                        <span>{fmtDayMonth(n.date)} · {n.duration} мин</span>
+                        {n.rating != null && <span className="tag bg-marker-soft font-display text-sm text-marker-ink">{n.rating}</span>}
+                      </div>
+                      <h3 className="mb-2 font-display text-[15px] font-bold leading-snug">{n.title || 'Без темы'}</h3>
+                      <div className="mb-3 flex flex-wrap gap-1">
+                        {chips.length ? chips.map(x => <span key={x} className="tag">{x}</span>) : <span className="tag">пустой конспект</span>}
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] text-soft">изменён {fmtAgo(n.updatedAt)}</span>
+                        <button className="icon-btn icon-btn-sm" title="Удалить" onClick={e => { e.stopPropagation(); removeNote(n); }}>
+                          <Icon name="trash" size={12} />
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      }
+      function NoteEditor({ note, onClose }) {
+        const { update, toast, ask, data } = useApp();
+        const [saved, setSaved] = useState(true);
+        const tRef = useRef(null);
+        const fileRef = useRef(null);
+        const fileBlockRef = useRef('');
+
+        const touch = () => {
+          setSaved(false);
+          if (tRef.current) clearTimeout(tRef.current);
+          tRef.current = setTimeout(() => setSaved(true), 900);
+        };
+        const set = (patch) => {
+          update(d => ({ ...d, notes: d.notes.map(n => (n.id === note.id ? { ...n, ...patch, updatedAt: Date.now() } : n)) }));
+          touch();
+        };
+        const setBlocks = (blocks) => set({ blocks });
+        const patchBlock = (bid, fn) => set({ blocks: note.blocks.map(b => (b.id === bid ? fn(b) : b)) });
+        const move = (i, dir) => {
+          const j = i + dir;
+          if (j < 0 || j >= note.blocks.length) return;
+          const arr = [...note.blocks];
+          const x = arr.splice(i, 1)[0];
+          arr.splice(j, 0, x);
+          setBlocks(arr);
+        };
+        const addBlock = (type) => {
+          const defs = {
+            section: () => ({ id: uid(), type: 'section', title: 'Новый раздел', content: '' }),
+            vocab: () => ({ id: uid(), type: 'vocab', items: [{ word: '', translation: '' }] }),
+            links: () => ({ id: uid(), type: 'links', links: [{ title: '', url: '' }] }),
+            files: () => ({ id: uid(), type: 'files', files: [] }),
+            sticky: () => ({ id: uid(), type: 'sticky', text: '', color: 'marker' }),
+          };
+          setBlocks([...note.blocks, defs[type]()]);
+        };
+        const onFiles = (list, blockId) => {
+          if (!list) return;
+          Array.from(list).forEach(f => {
+            if (f.size > 2 * 1024 * 1024) { toast(`«${f.name}» больше 2 МБ — файл пропущен`, 'error'); return; }
+            const r = new FileReader();
+            r.onload = () => patchBlock(blockId, b =>
+              b.type === 'files' ? { ...b, files: [...b.files, { id: uid(), name: f.name, mime: f.type || 'application/octet-stream', size: f.size, dataUrl: String(r.result) }] } : b);
+            r.readAsDataURL(f);
+          });
+        };
+        const BLOCK_META = {
+          section: { label: 'Раздел', icon: 'notebook' },
+          vocab: { label: 'Словарь', icon: 'book' },
+          links: { label: 'Ссылки', icon: 'link' },
+          files: { label: 'Файлы', icon: 'clip' },
+          sticky: { label: 'Стикер', icon: 'note' },
+        };
+
+        return (
+          <div className="fixed inset-0 z-50 overflow-auto bg-paper pb-24">
+            <div className="sticky top-0 z-10 border-b border-line bg-card">
+              <div className="mx-auto flex max-w-4xl items-center gap-3 px-4 py-2.5">
+                <button className="icon-btn" onClick={onClose} title="Назад"><Icon name="chevL" size={16} /></button>
+                <span className="font-display text-sm font-bold">Конспект</span>
+                <span className={`text-[11px] font-semibold ${saved ? 'text-pine' : 'text-ochre'}`}>
+                  {saved ? '● Сохранено' : '○ Сохранение…'}
+                </span>
+                <div className="ml-auto flex gap-1.5">
+                  <button className="btn btn-sm" onClick={() => printWith('portrait')}><Icon name="print" size={13} />Печать</button>
+                  <button className="btn btn-sm" onClick={() => ask({
+                    title: 'Удалить конспект?', message: 'Действие нельзя отменить.', danger: true, confirmLabel: 'Удалить',
+                    onConfirm: () => { update(d => ({ ...d, notes: d.notes.filter(n => n.id !== note.id) })); onClose(); },
+                  })}><Icon name="trash" size={13} /></button>
+                </div>
+              </div>
+            </div>
+
+            <div className="mx-auto max-w-4xl space-y-5 px-4 pt-5">
+              <div className="card rise space-y-3 p-4">
+                <Field label="Тема урока">
+                  <input className="inp font-display text-base font-bold" placeholder="Например: Past Simple — первые шаги" value={note.title} onChange={e => set({ title: e.target.value })} />
+                </Field>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <Field label="Дата"><input type="date" className="inp" value={note.date} onChange={e => set({ date: e.target.value })} /></Field>
+                  <Field label="Длительность, мин"><input type="number" min={5} max={240} className="inp" value={note.duration} onChange={e => set({ duration: Math.max(0, parseInt(e.target.value, 10) || 0) })} /></Field>
+                  <Field label="Оценка за урок">
+                    <select className="inp" value={note.rating == null ? '' : note.rating} onChange={e => set({ rating: e.target.value ? Number(e.target.value) : null })}>
+                      <option value="">—</option>{[5, 4, 3, 2].map(x => <option key={x} value={x}>{x}</option>)}
+                    </select>
+                  </Field>
+                </div>
+                <Field label="Цели урока"><textarea className="inp min-h-[64px]" value={note.goals} onChange={e => set({ goals: e.target.value })} placeholder="Что ученики смогут в конце урока" /></Field>
+                <Field label="Оборудование"><input className="inp" value={note.equipment} onChange={e => set({ equipment: e.target.value })} placeholder="Учебник, доска, раздатка…" /></Field>
+              </div>
+
+              <div className="space-y-3">
+                {note.blocks.map((b, i) => (
+                  <div key={b.id} className="card rise p-4" style={{ animationDelay: `${i * 30}ms` }}>
+                    <div className="mb-3 flex items-center gap-1.5">
+                      <span className="tag"><Icon name={BLOCK_META[b.type].icon} size={11} />{BLOCK_META[b.type].label}</span>
+                      <div className="ml-auto flex gap-1">
+                        <button className="icon-btn icon-btn-sm" disabled={i === 0} onClick={() => move(i, -1)} title="Вверх"><Icon name="arrowU" size={12} /></button>
+                        <button className="icon-btn icon-btn-sm" disabled={i === note.blocks.length - 1} onClick={() => move(i, 1)} title="Вниз"><Icon name="arrowDn" size={12} /></button>
+                        <button className="icon-btn icon-btn-sm" onClick={() => setBlocks(note.blocks.filter(x => x.id !== b.id))} title="Удалить блок"><Icon name="trash" size={12} /></button>
+                      </div>
+                    </div>
+
+                    {b.type === 'section' && (
+                      <div className="space-y-2">
+                        <input className="inp font-bold" value={b.title} onChange={e => patchBlock(b.id, x => ({ ...x, title: e.target.value }))} placeholder="Название раздела" />
+                        <textarea className="inp min-h-[90px]" value={b.content} onChange={e => patchBlock(b.id, x => ({ ...x, content: e.target.value }))} placeholder="Ход урока, задания, тайминг…" />
+                      </div>
+                    )}
+
+                    {b.type === 'vocab' && (
+                      <div className="space-y-1.5">
+                        {b.items.map((it, k) => (
+                          <div key={k} className="flex gap-1.5">
+                            <input className="inp" placeholder="Слово" value={it.word}
+                              onChange={e => patchBlock(b.id, x => x.type === 'vocab' ? { ...x, items: x.items.map((y, j) => (j === k ? { ...y, word: e.target.value } : y)) } : x)} />
+                            <span className="flex items-center text-soft">—</span>
+                            <input className="inp" placeholder="Перевод" value={it.translation}
+                              onChange={e => patchBlock(b.id, x => x.type === 'vocab' ? { ...x, items: x.items.map((y, j) => (j === k ? { ...y, translation: e.target.value } : y)) } : x)} />
+                            <button className="icon-btn flex-none" onClick={() => patchBlock(b.id, x => x.type === 'vocab' ? { ...x, items: x.items.filter((_, j) => j !== k) } : x)}><Icon name="x" size={12} /></button>
+                          </div>
+                        ))}
+                        <button className="btn btn-sm" onClick={() => patchBlock(b.id, x => x.type === 'vocab' ? { ...x, items: [...x.items, { word: '', translation: '' }] } : x)}>
+                          <Icon name="plus" size={12} />Слово
+                        </button>
+                      </div>
+                    )}
+
+                    {b.type === 'links' && (
+                      <div className="space-y-1.5">
+                        {b.links.map((l, k) => (
+                          <div key={k} className="flex gap-1.5">
+                            <input className="inp" placeholder="Название" value={l.title}
+                              onChange={e => patchBlock(b.id, x => x.type === 'links' ? { ...x, links: x.links.map((y, j) => (j === k ? { ...y, title: e.target.value } : y)) } : x)} />
+                            <input className="inp" placeholder="https://…" value={l.url}
+                              onChange={e => patchBlock(b.id, x => x.type === 'links' ? { ...x, links: x.links.map((y, j) => (j === k ? { ...y, url: e.target.value } : y)) } : x)} />
+                            {l.url.startsWith('http') && <a className="icon-btn flex-none" href={l.url} target="_blank" rel="noreferrer" title="Открыть"><Icon name="link" size={12} /></a>}
+                            <button className="icon-btn flex-none" onClick={() => patchBlock(b.id, x => x.type === 'links' ? { ...x, links: x.links.filter((_, j) => j !== k) } : x)}><Icon name="x" size={12} /></button>
+                          </div>
+                        ))}
+                        <button className="btn btn-sm" onClick={() => patchBlock(b.id, x => x.type === 'links' ? { ...x, links: [...x.links, { title: '', url: '' }] } : x)}>
+                          <Icon name="plus" size={12} />Ссылка
+                        </button>
+                      </div>
+                    )}
+
+                    {b.type === 'files' && (
+                      <div>
+                        {b.files.length > 0 && (
+                          <div className="mb-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                            {b.files.map(f => (
+                              <div key={f.id} className="border border-line bg-paper2 p-1.5">
+                                {f.mime.startsWith('image/')
+                                  ? <img src={f.dataUrl} alt={f.name} className="mb-1 h-20 w-full border border-line object-cover" />
+                                  : <div className="mb-1 flex h-20 items-center justify-center text-soft"><Icon name="file" size={26} /></div>}
+                                <div className="truncate text-[11px] font-semibold" title={f.name}>{f.name}</div>
+                                <div className="flex items-center justify-between text-[10px] text-soft">
+                                  <span>{fmtSize(f.size)}</span>
+                                  <button className="text-pen" onClick={() => patchBlock(b.id, x => x.type === 'files' ? { ...x, files: x.files.filter(y => y.id !== f.id) } : x)}>удалить</button>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        <button className="btn btn-sm" onClick={() => { fileBlockRef.current = b.id; fileRef.current && fileRef.current.click(); }}>
+                          <Icon name="clip" size={13} />Добавить файл (до 2 МБ)
+                        </button>
+                      </div>
+                    )}
+
+                    {b.type === 'sticky' && (
+                      <div className="space-y-2">
+                        <textarea className="inp min-h-[70px] border-2" style={stickyStyle(b.color)} value={b.text}
+                          onChange={e => patchBlock(b.id, x => ({ ...x, text: e.target.value }))} placeholder="Заметка на полях…" />
+                        <div className="flex gap-1.5">
+                          {STICKY_COLORS.map(c => (
+                            <button key={c} className={`h-6 w-6 border-2 ${b.color === c ? 'border-ink' : 'border-transparent'}`}
+                              style={{ background: accentVar(c) }} onClick={() => patchBlock(b.id, x => ({ ...x, color: c }))} aria-label={c} />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div className="card flex flex-wrap items-center gap-1.5 p-3">
+                <span className="mr-1 text-[11px] font-bold uppercase tracking-wider text-soft">Добавить блок:</span>
+                {Object.keys(BLOCK_META).map(t => (
+                  <button key={t} className="btn btn-sm" onClick={() => addBlock(t)}><Icon name={BLOCK_META[t].icon} size={13} />{BLOCK_META[t].label}</button>
+                ))}
+              </div>
+
+              <div className="card rise p-4">
+                <Field label="Рефлексия"><textarea className="inp min-h-[70px]" value={note.reflection} onChange={e => set({ reflection: e.target.value })} placeholder="Что получилось, что изменить в следующий раз" /></Field>
+              </div>
+            </div>
+
+            <input ref={fileRef} type="file" multiple className="hidden" onChange={e => { onFiles(e.target.files, fileBlockRef.current); e.target.value = ''; }} />
+
+            {createPortal(
+              <div className="print-sheet p-2 text-[12px] leading-relaxed">
+                <h1 style={{ fontFamily: 'Unbounded, sans-serif', fontSize: 18, fontWeight: 800 }}>Конспект урока</h1>
+                <table className="jprint mt-2 w-full">
+                  <tbody>
+                    <tr><th style={{ width: 150 }}>Тема</th><td>{note.title || '—'}</td></tr>
+                    <tr><th>Дата</th><td>{fmtDateFull(note.date)}</td></tr>
+                    <tr><th>Длительность</th><td>{note.duration} мин</td></tr>
+                    <tr><th>Цели</th><td>{note.goals || '—'}</td></tr>
+                    <tr><th>Оборудование</th><td>{note.equipment || '—'}</td></tr>
+                    <tr><th>Оценка за урок</th><td>{note.rating == null ? '—' : note.rating}</td></tr>
+                  </tbody>
+                </table>
+                {note.blocks.map(b => (
+                  <div key={b.id} style={{ marginTop: 12 }}>
+                    {b.type === 'section' && <>
+                      <h3 style={{ fontWeight: 800, fontSize: 13 }}>{b.title}</h3>
+                      <p style={{ whiteSpace: 'pre-wrap' }}>{b.content}</p>
+                    </>}
+                    {b.type === 'vocab' && <>
+                      <h3 style={{ fontWeight: 800, fontSize: 13 }}>Словарь урока</h3>
+                      <table className="jprint w-full"><tbody>
+                        {b.items.map((it, i) => <tr key={i}><td style={{ width: '50%' }}>{it.word}</td><td>{it.translation}</td></tr>)}
+                      </tbody></table>
+                    </>}
+                    {b.type === 'links' && <>
+                      <h3 style={{ fontWeight: 800, fontSize: 13 }}>Ресурсы и ссылки</h3>
+                      <ul style={{ paddingLeft: 16, listStyle: 'disc' }}>
+                        {b.links.map((l, i) => <li key={i}>{l.title} — {l.url}</li>)}
+                      </ul>
+                    </>}
+                    {b.type === 'files' && b.files.length > 0 && <>
+                      <h3 style={{ fontWeight: 800, fontSize: 13 }}>Материалы</h3>
+                      <ul style={{ paddingLeft: 16, listStyle: 'disc' }}>{b.files.map(f => <li key={f.id}>{f.name} ({fmtSize(f.size)})</li>)}</ul>
+                    </>}
+                    {b.type === 'sticky' && <p style={{ border: '1px solid #999', padding: '6px 10px' }}>📌 {b.text}</p>}
+                  </div>
+                ))}
+                {note.reflection && <>
+                  <h3 style={{ fontWeight: 800, fontSize: 13, marginTop: 14 }}>Рефлексия</h3>
+                  <p style={{ whiteSpace: 'pre-wrap' }}>{note.reflection}</p>
+                </>}
+                <div style={{ marginTop: 46, display: 'flex', justifyContent: 'space-between' }}>
+                  <span>Учитель: ____________________ ({data.settings.teacherName})</span>
+                  <span>Дата проверки: ____________________</span>
+                </div>
+              </div>,
+              document.body,
+            )}
+          </div>
+        );
+      }
+
+      /* ================= ГРУППЫ ================= */
+      function GroupsTab() {
+        const { data, update, ask, toast } = useApp();
+        const addGroup = () => {
+          update(d => ({
+            ...d,
+            groups: [...d.groups, {
+              id: uid(), name: 'Новая группа', language: 'Английский', level: 'A1',
+              color: GROUP_COLORS[d.groups.length % GROUP_COLORS.length], students: [], columns: [], marks: {},
+            }],
+          }));
+          toast('Группа создана');
+        };
+        const patchGroup = (gid, patch) =>
+          update(d => ({ ...d, groups: d.groups.map(g => (g.id === gid ? { ...g, ...patch } : g)) }));
+        const removeGroup = (g) =>
+          ask({
+            title: `Удалить «${g.name}»?`, message: 'Вместе с группой будут удалены её ученики, отметки и запланированные уроки.', danger: true, confirmLabel: 'Удалить',
+            onConfirm: () => update(d => ({
+              ...d,
+              groups: d.groups.filter(x => x.id !== g.id),
+              lessons: d.lessons.filter(l => l.groupId !== g.id),
+              events: d.events.map(e => ({ ...e, groupIds: e.groupIds.filter(id => id !== g.id) })),
+            })),
+          });
+
+        return (
+          <div className="pt-5">
+            <SectionTitle icon="users" right={<button className="btn btn-primary" onClick={addGroup}><Icon name="plus" size={14} />Новая группа</button>}>
+              Группы
+            </SectionTitle>
+            {data.groups.length === 0 ? (
+              <div className="card border-dashed p-10 text-center">
+                <p className="mb-3 text-sm text-soft">Пока нет ни одной группы.</p>
+                <button className="btn btn-primary" onClick={addGroup}><Icon name="plus" size={14} />Создать первую группу</button>
+              </div>
+            ) : (
+              <div className="grid gap-5 lg:grid-cols-2">
+                {data.groups.map((g, gi) => (
+                  <GroupCard key={g.id} g={g} index={gi} onPatch={patchGroup} onRemove={() => removeGroup(g)} onToast={toast} />
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      }
+      function GroupCard({ g, index, onPatch, onRemove, onToast }) {
+        const { ask, update } = useApp();
+        const [newName, setNewName] = useState('');
+        const avg = groupAverage(g);
+        const totalMisses = g.students.reduce((s, st) => { const m = missCount(g, st.id); return s + m.n + m.b + m.u; }, 0);
+
+        const addStudent = () => {
+          const nm = newName.trim();
+          if (!nm) return;
+          onPatch(g.id, { students: [...g.students, { id: uid(), name: nm }] });
+          setNewName('');
+          onToast(`Ученик добавлен в «${g.name}»`);
+        };
+        const renameStudent = (sid, name) => onPatch(g.id, { students: g.students.map(s => (s.id === sid ? { ...s, name } : s)) });
+        const removeStudent = (sid, name) =>
+          ask({
+            title: 'Удалить ученика?', message: `${name} будет удалён(а) из группы вместе с отметками.`, danger: true, confirmLabel: 'Удалить',
+            onConfirm: () => update(d => ({
+              ...d,
+              groups: d.groups.map(x => {
+                if (x.id !== g.id) return x;
+                const marks = { ...x.marks };
+                delete marks[sid];
+                return { ...x, students: x.students.filter(s => s.id !== sid), marks };
+              }),
+            })),
+          });
+
+        return (
+          <div className="card rise p-4" style={{ animationDelay: `${index * 60}ms` }}>
+            <div className="mb-3 flex items-center gap-2">
+              <span className="h-4 w-4 flex-none border border-ink/20" style={{ background: `var(--color-${g.color})` }} />
+              <input className="inp font-display text-[15px] font-bold" value={g.name} onChange={e => onPatch(g.id, { name: e.target.value })} aria-label="Название группы" />
+              <button className="icon-btn flex-none" title="Удалить группу" onClick={onRemove}><Icon name="trash" size={14} /></button>
+            </div>
+            <div className="mb-3 grid grid-cols-2 gap-2">
+              <Field label="Язык"><input className="inp" value={g.language} onChange={e => onPatch(g.id, { language: e.target.value })} /></Field>
+              <Field label="Уровень CEFR">
+                <select className="inp" value={g.level} onChange={e => onPatch(g.id, { level: e.target.value })}>
+                  {CEFR_LEVELS.map(l => <option key={l}>{l}</option>)}
+                </select>
+              </Field>
+            </div>
+            <div className="mb-3 flex items-center gap-1.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-soft">Цвет:</span>
+              {GROUP_COLORS.map(c => (
+                <button key={c} aria-label={c} onClick={() => onPatch(g.id, { color: c })}
+                  className={`h-6 w-6 border-2 transition ${g.color === c ? 'scale-110 border-ink' : 'border-transparent'}`}
+                  style={{ background: `var(--color-${c})` }} />
+              ))}
+            </div>
+            <div className="mb-3 flex flex-wrap gap-1.5 text-[11px]">
+              <span className="tag">{g.students.length} {plural(g.students.length, ['ученик', 'ученика', 'учеников'])}</span>
+              <span className="tag">{g.columns.length} дат в журнале</span>
+              <span className="tag">СР: <b style={{ color: avgColor(avg) }}>{fmtAvg(avg)}</b></span>
+              <span className="tag">пропусков: {totalMisses}</span>
+            </div>
+            <div className="border-t border-line pt-3">
+              <div className="mb-2 text-[10px] font-bold uppercase tracking-wider text-soft">Ученики</div>
+              <div className="max-h-56 space-y-1 overflow-auto pr-1">
+                {g.students.length === 0 && <p className="py-2 text-center text-xs text-soft">Список пуст — добавьте первого ученика ниже.</p>}
+                {g.students.map(s => {
+                  const a = studentAverage(g, s.id);
+                  return (
+                    <div key={s.id} className="flex items-center gap-1.5">
+                      <input className="inp py-1.5" value={s.name} onChange={e => renameStudent(s.id, e.target.value)} />
+                      <span className="w-10 flex-none text-center font-display text-[12px] font-bold" style={{ color: avgColor(a) }}>{fmtAvg(a)}</span>
+                      <button className="icon-btn icon-btn-sm flex-none" title="Удалить" onClick={() => removeStudent(s.id, s.name)}><Icon name="x" size={11} /></button>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="mt-2 flex gap-1.5">
+                <input className="inp" placeholder="Новый ученик — нажмите Enter" value={newName}
+                  onChange={e => setNewName(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') addStudent(); }} />
+                <button className="icon-btn flex-none" onClick={addStudent} title="Добавить"><Icon name="plus" size={15} /></button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      /* ================= ПЛАНИРОВЩИК ================= */
+      const PL_SECTIONS = [
+        { key: 'overdue', title: 'Просрочено', color: 'pen', icon: 'alert' },
+        { key: 'today', title: 'Сегодня', color: 'marker', icon: 'clock' },
+        { key: 'tomorrow', title: 'Завтра', color: 'pine', icon: 'chevR' },
+        { key: 'week', title: 'На этой неделе', color: 'sky', icon: 'calendar' },
+        { key: 'later', title: 'Позже', color: 'ochre', icon: 'flag' },
+        { key: 'done', title: 'Проведённые', color: 'plum', icon: 'check' },
+      ];
+      function PlannerTab() {
+        const { data, update, ask, toast } = useApp();
+        const [showForm, setShowForm] = useState(false);
+        const [editingId, setEditingId] = useState(null);
+        const today = todayISO();
+
+        const buckets = { overdue: [], today: [], tomorrow: [], week: [], later: [], done: [] };
+        const tomorrowD = addDaysISO(today, 1);
+        const weekEnd = addDaysISO(today, 7);
+        data.lessons.forEach(l => {
+          if (l.status === 'проведён') buckets.done.push(l);
+          else if (l.date < today) buckets.overdue.push(l);
+          else if (l.date === today) buckets.today.push(l);
+          else if (l.date === tomorrowD) buckets.tomorrow.push(l);
+          else if (l.date <= weekEnd) buckets.week.push(l);
+          else buckets.later.push(l);
+        });
+        Object.values(buckets).forEach(arr => arr.sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time)));
+        buckets.done.sort((a, b) => (b.date + b.time).localeCompare(a.date + a.time));
+
+        const monday = weekMonday(today);
+        const sunday = addDaysISO(monday, 6);
+        const weekLessons = data.lessons.filter(l => l.date >= monday && l.date <= sunday && l.status !== 'отменён');
+        const weekDone = weekLessons.filter(l => l.status === 'проведён').length;
+        const pct = weekLessons.length ? Math.round((weekDone / weekLessons.length) * 100) : 0;
+
+        const save = (l, id) => {
+          if (id) update(d => ({ ...d, lessons: d.lessons.map(x => (x.id === id ? { ...x, ...l } : x)) }));
+          else update(d => ({ ...d, lessons: [...d.lessons, { ...l, id: uid(), status: 'план' }] }));
+          toast(id ? 'Урок обновлён' : 'Урок запланирован');
+          setShowForm(false);
+          setEditingId(null);
+        };
+        const setStatus = (id, status) => update(d => ({ ...d, lessons: d.lessons.map(l => (l.id === id ? { ...l, status } : l)) }));
+        const remove = (l) => ask({
+          title: 'Удалить урок?', message: `${fmtDateFull(l.date)} · ${l.topic || 'без темы'}`, danger: true, confirmLabel: 'Удалить',
+          onConfirm: () => update(d => ({ ...d, lessons: d.lessons.filter(x => x.id !== l.id) })),
+        });
+        const exportICS = () => {
+          const items = data.lessons.filter(l => l.status !== 'отменён').map(l => {
+            const g = data.groups.find(x => x.id === l.groupId);
+            return { date: l.date, time: l.time || undefined, title: `Урок: ${(g || {}).name || ''} — ${l.topic || 'без темы'}`, description: l.homework ? `ДЗ: ${l.homework}` : undefined };
+          });
+          if (!items.length) { toast('Нет уроков для экспорта', 'info'); return; }
+          download('uroki.ics', buildICS(items, 'Уроки · ЛингвоЖурнал'), 'text/calendar;charset=utf-8');
+          toast('Файл uroki.ics сохранён');
+        };
+
+        if (data.groups.length === 0) {
+          return <div className="pt-10"><EmptyState icon="calcheck" title="Сначала создайте группу" hint="Планировщик привязывает уроки к группам." /></div>;
+        }
+
+        return (
+          <div className="pt-5">
+            <SectionTitle icon="calcheck" right={
+              <div className="flex gap-1.5">
+                <button className="btn btn-sm" onClick={exportICS}><Icon name="download" size={13} />.ics</button>
+                <button className="btn btn-primary btn-sm" onClick={() => setShowForm(!showForm)}><Icon name={showForm ? 'x' : 'plus'} size={13} />{showForm ? 'Скрыть' : 'Урок'}</button>
+              </div>
+            }>Планировщик</SectionTitle>
+
+            <div className="card rise mb-4 flex flex-wrap items-center gap-4 p-4">
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-soft">Прогресс недели</div>
+                <div className="font-display text-2xl font-black">{pct}%</div>
+              </div>
+              <div className="min-w-[200px] flex-1">
+                <div className="mb-1 flex justify-between text-[11px] text-soft">
+                  <span>{weekDone} из {weekLessons.length} уроков</span><span>{fmtDayMonth(monday)} – {fmtDayMonth(sunday)}</span>
+                </div>
+                <div className="h-3.5 border border-line bg-paper2">
+                  <div className="h-full bg-pine transition-all" style={{ width: `${pct}%` }} />
+                </div>
+              </div>
+            </div>
+
+            {showForm && (
+              <div className="pop card mb-4 p-4">
+                <LessonForm onSave={l => save(l)} onCancel={() => setShowForm(false)} />
+              </div>
+            )}
+
+            <div className="space-y-6">
+              {PL_SECTIONS.map(sec => {
+                const items = sec.key === 'done' ? buckets.done.slice(0, 12) : buckets[sec.key];
+                return (
+                  <section key={sec.key}>
+                    <div className="mb-2 flex items-center gap-2">
+                      <span className="flex h-6 w-6 items-center justify-center" style={{ background: `color-mix(in srgb, ${accentVar(sec.color)} 20%, var(--color-card))`, color: accentText(sec.color) }}>
+                        <Icon name={sec.icon} size={13} />
+                      </span>
+                      <h3 className="font-display text-sm font-bold">{sec.title}</h3>
+                      <span className="tag">{items.length}</span>
+                    </div>
+                    {items.length === 0 ? (
+                      <p className="pl-8 text-[12px] italic text-soft">пусто</p>
+                    ) : (
+                      <div className="space-y-2">
+                        {items.map((l, i) => (
+                          <LessonCard key={l.id} l={l} index={i} editing={editingId === l.id}
+                            onEdit={() => setEditingId(editingId === l.id ? null : l.id)}
+                            onSave={x => save(x, l.id)} onCancelEdit={() => setEditingId(null)}
+                            onStatus={setStatus} onRemove={() => remove(l)} />
+                        ))}
+                      </div>
+                    )}
+                  </section>
+                );
+              })}
+            </div>
+          </div>
+        );
+      }
+      function LessonCard({ l, index, editing, onEdit, onSave, onCancelEdit, onStatus, onRemove }) {
+        const { data, toast } = useApp();
+        const g = data.groups.find(x => x.id === l.groupId);
+        const rel = relDay(l.date);
+
+        const lessonText = () => [
+          `📅 ${fmtDateFull(l.date)}${l.time ? ', ' + l.time : ''}`,
+          `Группа: ${(g || {}).name || '—'}`,
+          `Тема: ${l.topic || '—'}`,
+          l.homework ? `ДЗ: ${l.homework}` : '',
+        ].filter(Boolean).join('\n');
+
+        const send = async (kind) => {
+          const text = lessonText();
+          if (kind === 'copy') { (await copyText(text)) ? toast('Скопировано в буфер обмена') : toast('Не удалось скопировать', 'error'); }
+          if (kind === 'wa') window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+          if (kind === 'mail') window.open(`mailto:?subject=${encodeURIComponent('Урок ' + fmtDateFull(l.date))}&body=${encodeURIComponent(text)}`, '_self');
+        };
+
+        if (editing) {
+          return <div className="card rise p-3"><LessonForm initial={l} onSave={onSave} onCancel={onCancelEdit} /></div>;
+        }
+
+        return (
+          <div className={`card rise lift flex flex-wrap items-center gap-3 p-3 ${l.status === 'отменён' ? 'opacity-60' : ''}`} style={{ animationDelay: `${index * 35}ms` }}>
+            <div className="w-16 flex-none text-center">
+              <div className="font-display text-base font-black tabular-nums">{l.time || '—'}</div>
+              <div className="text-[10px] font-bold uppercase" style={{ color: rel ? 'var(--color-pen)' : 'var(--color-soft)' }}>{rel || fmtDayMonth(l.date)}</div>
+            </div>
+            {g && <GroupChip g={g} />}
+            <div className="min-w-[160px] flex-1">
+              <div className="text-sm font-bold leading-tight">{l.topic || 'Без темы'}</div>
+              {l.homework && <div className="mt-0.5 truncate text-[11px] text-soft">ДЗ: {l.homework}</div>}
+              {l.status === 'отменён' && <span className="tag mt-1 bg-pen-soft text-pen">отменён</span>}
+            </div>
+            <div className="flex flex-none items-center gap-1">
+              {l.status === 'план' && <button className="btn btn-primary btn-sm" onClick={() => { onStatus(l.id, 'проведён'); toast('Урок проведён'); }}><Icon name="check" size={12} />Провести</button>}
+              {l.status === 'план' && <button className="icon-btn icon-btn-sm" title="Отменить урок" onClick={() => onStatus(l.id, 'отменён')}><Icon name="x" size={12} /></button>}
+              {l.status !== 'план' && <button className="icon-btn icon-btn-sm" title="Вернуть в план" onClick={() => onStatus(l.id, 'план')}><Icon name="refresh" size={12} /></button>}
+              <span className="mx-1 h-5 w-px bg-line" />
+              <button className="icon-btn icon-btn-sm" title="Копировать для чата" onClick={() => send('copy')}><Icon name="copy" size={12} /></button>
+              <button className="icon-btn icon-btn-sm" title="WhatsApp" onClick={() => send('wa')}><Icon name="chat" size={12} /></button>
+              <button className="icon-btn icon-btn-sm" title="E-mail" onClick={() => send('mail')}><Icon name="mail" size={12} /></button>
+              <span className="mx-1 h-5 w-px bg-line" />
+              <button className="icon-btn icon-btn-sm" title="Редактировать" onClick={onEdit}><Icon name="pencil" size={12} /></button>
+              <button className="icon-btn icon-btn-sm" title="Удалить" onClick={onRemove}><Icon name="trash" size={12} /></button>
+            </div>
+          </div>
+        );
+      }
+      function LessonForm({ initial, onSave, onCancel }) {
+        const { data } = useApp();
+        const init = initial || {};
+        const [groupId, setGroupId] = useState(init.groupId || (data.groups[0] || {}).id || '');
+        const [date, setDate] = useState(init.date || todayISO());
+        const [time, setTime] = useState(init.time || '10:00');
+        const [topic, setTopic] = useState(init.topic || '');
+        const [homework, setHw] = useState(init.homework || '');
+
+        return (
+          <div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+              <Field label="Группа">
+                <select className="inp" value={groupId} onChange={e => setGroupId(e.target.value)}>
+                  {data.groups.map(g => <option key={g.id} value={g.id}>{g.name}</option>)}
+                </select>
+              </Field>
+              <Field label="Дата"><input type="date" className="inp" value={date} onChange={e => setDate(e.target.value)} /></Field>
+              <Field label="Время"><input type="time" className="inp" value={time} onChange={e => setTime(e.target.value)} /></Field>
+              <Field label="Тема"><input className="inp" value={topic} onChange={e => setTopic(e.target.value)} placeholder="Тема урока" /></Field>
+              <Field label="Домашнее задание"><input className="inp" value={homework} onChange={e => setHw(e.target.value)} placeholder="ДЗ" /></Field>
+            </div>
+            <div className="mt-3 flex justify-end gap-2">
+              <button className="btn" onClick={onCancel}>Отмена</button>
+              <button className="btn btn-primary" disabled={!groupId || !date} onClick={() => onSave({ groupId, date, time, topic: topic.trim(), homework: homework.trim() })}>
+                <Icon name="check" size={14} />Сохранить
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      /* ================= МЕРОПРИЯТИЯ ================= */
+      function EventsTab() {
+        const { data, update, ask, toast } = useApp();
+        const [typeFilter, setTypeFilter] = useState('all');
+        const [statusFilter, setStatusFilter] = useState('all');
+        const [modal, setModal] = useState({ open: false });
+        const today = todayISO();
+
+        const filtered = data.events
+          .filter(e => (typeFilter === 'all' || e.type === typeFilter) && (statusFilter === 'all' || e.status === statusFilter))
+          .sort((a, b) => a.date.localeCompare(b.date));
+
+        const months = new Map();
+        filtered.forEach(e => {
+          const key = e.date.slice(0, 7);
+          const arr = months.get(key) || [];
+          arr.push(e);
+          months.set(key, arr);
+        });
+
+        const saveEvent = (item) => {
+          update(d => {
+            const exists = d.events.some(x => x.id === item.id);
+            return { ...d, events: exists ? d.events.map(x => (x.id === item.id ? item : x)) : [...d.events, item] };
+          });
+          toast('Мероприятие сохранено');
+          setModal({ open: false });
+        };
+        const removeEvent = (e) => ask({
+          title: 'Удалить мероприятие?', message: e.title, danger: true, confirmLabel: 'Удалить',
+          onConfirm: () => update(d => ({ ...d, events: d.events.filter(x => x.id !== e.id) })),
+        });
+        const toggleDone = (e) =>
+          update(d => ({ ...d, events: d.events.map(x => (x.id === e.id ? { ...x, status: x.status === 'проведено' ? 'запланировано' : 'проведено' } : x)) }));
+        const exportICS = () => {
+          if (!filtered.length) { toast('Нет мероприятий для экспорта', 'info'); return; }
+          const items = filtered.map(e => ({ date: e.date, time: e.time || undefined, title: e.title, place: e.place || undefined, description: e.description || undefined }));
+          download('meropriyatiya.ics', buildICS(items, 'Мероприятия · ЛингвоЖурнал'), 'text/calendar;charset=utf-8');
+          toast('Файл meropriyatiya.ics сохранён');
+        };
+        const meta = (t) => EVENT_TYPES.find(x => x.id === t) || EVENT_TYPES[5];
+
+        return (
+          <div className="pt-5">
+            <SectionTitle icon="megaphone" right={
+              <div className="flex gap-1.5">
+                <button className="btn btn-sm" onClick={exportICS}><Icon name="download" size={13} />В календарь</button>
+                <button className="btn btn-primary btn-sm" onClick={() => setModal({ open: true })}><Icon name="plus" size={13} />Мероприятие</button>
+              </div>
+            }>Мероприятия</SectionTitle>
+
+            <div className="mb-4 flex flex-wrap items-center gap-1.5">
+              <button className={`chip press ${typeFilter === 'all' ? 'border-ink bg-ink text-card' : 'border-line bg-card'}`} onClick={() => setTypeFilter('all')}>Все типы</button>
+              {EVENT_TYPES.map(t => (
+                <button key={t.id} className="chip press" onClick={() => setTypeFilter(typeFilter === t.id ? 'all' : t.id)}
+                  style={typeFilter === t.id
+                    ? { background: accentVar(t.color), borderColor: accentVar(t.color), color: '#fff' }
+                    : { background: `color-mix(in srgb, ${accentVar(t.color)} 14%, var(--color-card))`, borderColor: `color-mix(in srgb, ${accentVar(t.color)} 45%, transparent)`, color: accentText(t.color) }}>
+                  <Icon name={t.icon} size={11} />{t.label}
+                </button>
+              ))}
+              <select className="inp ml-auto w-auto" value={statusFilter} onChange={e => setStatusFilter(e.target.value)} aria-label="Статус">
+                <option value="all">Все статусы</option>
+                {EVENT_STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
+              </select>
+            </div>
+
+            {filtered.length === 0 ? (
+              <EmptyState icon="flag" title="Ничего не найдено" hint="Измените фильтры или добавьте новое мероприятие.">
+                <button className="btn btn-primary mt-2" onClick={() => setModal({ open: true })}><Icon name="plus" size={14} />Добавить</button>
+              </EmptyState>
+            ) : (
+              [...months.entries()].map(([key, items]) => {
+                const parts = key.split('-').map(Number);
+                return (
+                  <div key={key} className="mb-6">
+                    <h3 className="mb-3 font-display text-lg font-black">{MONTHS_RU_NOM[parts[1] - 1]} {parts[0]}</h3>
+                    <div className="relative ml-2 border-l-2 border-line pl-5">
+                      {items.map((e, i) => {
+                        const t = meta(e.type);
+                        const d = parseISO(e.date);
+                        const past = e.date < today;
+                        return (
+                          <div key={e.id} className={`rise relative mb-3 ${past && e.status !== 'проведено' ? 'opacity-70' : ''}`} style={{ animationDelay: `${i * 40}ms` }}>
+                            <span className="absolute -left-[27px] top-4 h-3 w-3 border-2 border-card" style={{ background: accentVar(t.color) }} />
+                            <div className="card lift flex flex-wrap items-center gap-3 p-3">
+                              <div className="flex h-12 w-12 flex-none flex-col items-center justify-center border border-line bg-paper2">
+                                <span className="font-display text-lg font-black leading-none">{d.getDate()}</span>
+                                <span className="text-[9px] font-bold uppercase text-soft">{WEEKDAYS_RU_SHORT[d.getDay()]}</span>
+                              </div>
+                              <div className="min-w-[180px] flex-1">
+                                <div className="flex flex-wrap items-center gap-2">
+                                  <span className="text-sm font-bold">{e.title}</span>
+                                  <span className="chip" style={{ background: `color-mix(in srgb, ${accentVar(t.color)} 16%, var(--color-card))`, borderColor: `color-mix(in srgb, ${accentVar(t.color)} 45%, transparent)`, color: accentText(t.color) }}>
+                                    <Icon name={t.icon} size={10} />{t.label}
+                                  </span>
+                                  {e.status === 'проведено' && <span className="tag bg-pine-soft text-pine-deep">проведено</span>}
+                                  {e.status === 'отменено' && <span className="tag bg-pen-soft text-pen">отменено</span>}
+                                </div>
+                                <div className="mt-1 flex flex-wrap items-center gap-2 text-[11px] text-soft">
+                                  <span>{fmtDateFull(e.date)}{e.time ? ` · ${e.time}` : ''}</span>
+                                  {e.place && <span>· {e.place}</span>}
+                                </div>
+                                {e.groupIds.length > 0 && (
+                                  <div className="mt-1.5 flex flex-wrap gap-1">
+                                    {e.groupIds.map(gid => { const g = data.groups.find(x => x.id === gid); return g ? <GroupChip key={gid} g={g} /> : null; })}
+                                  </div>
+                                )}
+                              </div>
+                              <div className="flex flex-none gap-1">
+                                <button className="icon-btn icon-btn-sm" title={e.status === 'проведено' ? 'Вернуть в план' : 'Отметить проведённым'} onClick={() => toggleDone(e)}>
+                                  <Icon name={e.status === 'проведено' ? 'refresh' : 'check'} size={12} />
+                                </button>
+                                <button className="icon-btn icon-btn-sm" title="Редактировать" onClick={() => setModal({ open: true, item: e })}><Icon name="pencil" size={12} /></button>
+                                <button className="icon-btn icon-btn-sm" title="Удалить" onClick={() => removeEvent(e)}><Icon name="trash" size={12} /></button>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })
+            )}
+
+            {modal.open && <EventModal initial={modal.item} onSave={saveEvent} onClose={() => setModal({ open: false })} />}
+          </div>
+        );
+      }
+      function EventModal({ initial, onSave, onClose }) {
+        const { data } = useApp();
+        const init = initial || {};
+        const [type, setType] = useState(init.type || 'другое');
+        const [title, setTitle] = useState(init.title || '');
+        const [date, setDate] = useState(init.date || todayISO());
+        const [time, setTime] = useState(init.time || '');
+        const [place, setPlace] = useState(init.place || '');
+        const [groupIds, setGroupIds] = useState(init.groupIds || []);
+        const [status, setStatus] = useState(init.status || 'запланировано');
+        const [description, setDescription] = useState(init.description || '');
+
+        return (
+          <Modal title={initial ? 'Мероприятие' : 'Новое мероприятие'} onClose={onClose} wide footer={<>
+            <button className="btn" onClick={onClose}>Отмена</button>
+            <button className="btn btn-primary" disabled={!title.trim() || !date}
+              onClick={() => onSave({ id: init.id || uid(), type, title: title.trim(), date, time, place: place.trim(), groupIds, status, description: description.trim() })}>
+              <Icon name="check" size={14} />Сохранить
+            </button>
+          </>}>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Field label="Название" className="sm:col-span-2"><input className="inp" value={title} onChange={e => setTitle(e.target.value)} placeholder="Например: Олимпиада по английскому" /></Field>
+              <Field label="Тип">
+                <select className="inp" value={type} onChange={e => setType(e.target.value)}>
+                  {EVENT_TYPES.map(t => <option key={t.id} value={t.id}>{t.label}</option>)}
+                </select>
+              </Field>
+              <Field label="Статус">
+                <select className="inp" value={status} onChange={e => setStatus(e.target.value)}>
+                  {EVENT_STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
+                </select>
+              </Field>
+              <Field label="Дата"><input type="date" className="inp" value={date} onChange={e => setDate(e.target.value)} /></Field>
+              <Field label="Время"><input type="time" className="inp" value={time} onChange={e => setTime(e.target.value)} /></Field>
+              <Field label="Место" className="sm:col-span-2"><input className="inp" value={place} onChange={e => setPlace(e.target.value)} placeholder="Кабинет, зал, адрес…" /></Field>
+              <Field label="Группы" className="sm:col-span-2">
+                <div className="flex flex-wrap gap-1.5">
+                  {data.groups.length === 0 && <span className="text-xs text-soft">Групп пока нет</span>}
+                  {data.groups.map(g => {
+                    const on = groupIds.includes(g.id);
+                    return (
+                      <button key={g.id} className={`chip press ${on ? 'border-pine bg-pine-soft text-pine-deep' : 'border-line bg-card'}`}
+                        onClick={() => setGroupIds(on ? groupIds.filter(x => x !== g.id) : [...groupIds, g.id])}>
+                        {on && <Icon name="check" size={10} />}{g.name}
+                      </button>
+                    );
+                  })}
+                </div>
+              </Field>
+              <Field label="Описание" className="sm:col-span-2"><textarea className="inp min-h-[60px]" value={description} onChange={e => setDescription(e.target.value)} /></Field>
+            </div>
+          </Modal>
+        );
+      }
+
+      /* ================= АНАЛИТИКА ================= */
+      function AnalyticsTab() {
+        const { data } = useApp();
+        const counts = { 2: 0, 3: 0, 4: 0, 5: 0 };
+        const att = { present: 0, n: 0, b: 0, u: 0 };
+        const allVals = [];
+
+        data.groups.forEach(g => g.students.forEach(s => g.columns.forEach(c => {
+          const cell = (g.marks[s.id] || {})[c.id];
+          if (cell && cell.attendance === 'Н') att.n++;
+          else if (cell && cell.attendance === 'Б') att.b++;
+          else if (cell && cell.attendance === 'У') att.u++;
+          else {
+            att.present++;
+            if (cell && cell.grade != null) { counts[cell.grade]++; const v = cellValue(cell); if (v != null) allVals.push(v); }
+          }
+        })));
+
+        const totalSlots = att.present + att.n + att.b + att.u;
+        const attPct = totalSlots ? Math.round((att.present / totalSlots) * 100) : 100;
+        const overallAvg = allVals.length ? allVals.reduce((a, b) => a + b, 0) / allVals.length : null;
+        const month = todayISO().slice(0, 7);
+        const conductedMonth = data.lessons.filter(l => l.status === 'проведён' && l.date.startsWith(month)).length;
+        const studentsTotal = data.groups.reduce((s, g) => s + g.students.length, 0);
+
+        const ranked = data.groups.flatMap(g => g.students.map(s => ({
+          name: s.name, group: g.name, avg: studentAverage(g, s.id), cnt: gradeCount(g, s.id),
+        })));
+        const top = ranked.filter(x => x.avg != null && x.cnt >= 3).sort((a, b) => (b.avg || 0) - (a.avg || 0)).slice(0, 5);
+
+        const attention = [];
+        data.groups.forEach(g => g.students.forEach(s => {
+          const avg = studentAverage(g, s.id);
+          const cnt = gradeCount(g, s.id);
+          const m = missCount(g, s.id);
+          const misses = m.n + m.b + m.u;
+          const reasons = [];
+          if (avg != null && cnt >= 2 && avg < 3.5) reasons.push(`СР ${fmtAvg(avg)}`);
+          if (misses >= 3) reasons.push(`пропусков: ${misses}`);
+          if (reasons.length) attention.push({ name: s.name, group: g.name, reason: reasons.join(', ') });
+        }));
+
+        const maxCount = Math.max(1, counts[2], counts[3], counts[4], counts[5]);
+        const KPI = [
+          { label: 'Групп', value: String(data.groups.length), icon: 'users' },
+          { label: 'Учеников', value: String(studentsTotal), icon: 'globe' },
+          { label: 'Средний балл', value: fmtAvg(overallAvg), icon: 'target', color: avgColor(overallAvg) },
+          { label: 'Посещаемость', value: `${attPct}%`, icon: 'check', color: attPct >= 90 ? 'var(--color-pine)' : attPct >= 75 ? 'var(--color-ochre)' : 'var(--color-pen)' },
+          { label: 'Проведено в этом месяце', value: String(conductedMonth), icon: 'calcheck' },
+        ];
+
+        if (!data.groups.length) {
+          return <div className="pt-10"><div className="card border-dashed p-10 text-center text-sm text-soft">Добавьте группы и отметки, чтобы увидеть аналитику.</div></div>;
+        }
+
+        const donutSegs = [
+          { value: att.present, color: 'var(--color-pine)', label: 'Присутствие' },
+          { value: att.u, color: 'var(--color-sky)', label: 'У — болезнь' },
+          { value: att.b, color: 'var(--color-ochre)', label: 'Б — уваж. причина' },
+          { value: att.n, color: 'var(--color-pen)', label: 'Н — прогул' },
+        ];
+
+        return (
+          <div className="space-y-6 pt-5">
+            <SectionTitle icon="chart">Аналитика</SectionTitle>
+
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
+              {KPI.map((k, i) => (
+                <div key={k.label} className="card rise p-3" style={{ animationDelay: `${i * 50}ms` }}>
+                  <div className="mb-1 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-soft"><Icon name={k.icon} size={12} />{k.label}</div>
+                  <div className="font-display text-2xl font-black" style={k.color ? { color: k.color } : undefined}>{k.value}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid gap-5 lg:grid-cols-2">
+              <div className="card rise p-4">
+                <h3 className="mb-3 flex items-center gap-2 font-display text-sm font-bold"><Icon name="chart" size={15} />Успеваемость по группам</h3>
+                <div className="space-y-3">
+                  {data.groups.map(g => {
+                    const avg = groupAverage(g);
+                    return (
+                      <div key={g.id}>
+                        <div className="mb-1 flex items-center justify-between gap-2 text-xs">
+                          <GroupChip g={g} />
+                          <b className="font-display" style={{ color: avgColor(avg) }}>{fmtAvg(avg)}</b>
+                        </div>
+                        <div className="h-3 border border-line bg-paper2">
+                          <div className="h-full transition-all" style={{ width: `${((avg || 0) / 5) * 100}%`, background: accentVar(g.color) }} />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="card rise flex flex-wrap items-center gap-5 p-4" style={{ animationDelay: '60ms' }}>
+                <svg viewBox="0 0 120 120" className="h-40 w-40 flex-none">
+                  <circle cx="60" cy="60" r="42" fill="none" stroke="var(--color-paper2)" strokeWidth="16" />
+                  {(() => {
+                    const C = 2 * Math.PI * 42;
+                    const total = Math.max(1, totalSlots);
+                    let acc = 0;
+                    return donutSegs.map((s, i) => {
+                      const frac = s.value / total;
+                      const el = <circle key={i} cx="60" cy="60" r="42" fill="none" stroke={s.color} strokeWidth="16"
+                        strokeDasharray={`${frac * C} ${C}`} strokeDashoffset={-acc * C} transform="rotate(-90 60 60)" />;
+                      acc += frac;
+                      return el;
+                    });
+                  })()}
+                  <text x="60" y="57" textAnchor="middle" fontSize="17" fontWeight="800" fill="var(--color-ink)">{attPct}%</text>
+                  <text x="60" y="72" textAnchor="middle" fontSize="7.5" fill="var(--color-soft)">посещаемость</text>
+                </svg>
+                <div className="space-y-1.5 text-xs">
+                  {donutSegs.map(s => (
+                    <div key={s.label} className="flex items-center gap-2">
+                      <span className="h-3 w-3 flex-none" style={{ background: s.color }} />
+                      <span className="text-soft">{s.label}</span>
+                      <b className="ml-auto font-display">{s.value}</b>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="card rise p-4" style={{ animationDelay: '120ms' }}>
+                <h3 className="mb-3 flex items-center gap-2 font-display text-sm font-bold"><Icon name="sparkle" size={15} />Распределение оценок</h3>
+                {allVals.length === 0 ? (
+                  <p className="py-6 text-center text-xs text-soft">Отметок пока нет.</p>
+                ) : (
+                  <div className="flex h-40 items-end gap-4 px-2">
+                    {[5, 4, 3, 2].map(gr => (
+                      <div key={gr} className="flex flex-1 flex-col items-center gap-1">
+                        <span className="text-xs font-bold">{counts[gr]}</span>
+                        <div className="w-full border border-line transition-all" style={{ height: `${Math.max(2, (counts[gr] / maxCount) * 100)}%`, background: gr === 5 ? 'var(--color-pine)' : gr === 4 ? 'var(--color-sky)' : gr === 3 ? 'var(--color-ochre)' : 'var(--color-pen)' }} />
+                        <span className="font-display text-sm font-black">{gr}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <p className="mt-2 text-center text-[11px] text-soft">{allVals.length} {plural(allVals.length, ['отметка', 'отметки', 'отметок'])} в журналах</p>
+              </div>
+
+              <div className="space-y-5">
+                <div className="card rise p-4" style={{ animationDelay: '180ms' }}>
+                  <h3 className="mb-3 flex items-center gap-2 font-display text-sm font-bold"><Icon name="trophy" size={15} />Сильнейшие</h3>
+                  {top.length === 0 ? <p className="py-3 text-center text-xs text-soft">Нужно минимум 3 отметки у ученика.</p> : (
+                    <div className="space-y-1.5">
+                      {top.map((s, i) => (
+                        <div key={s.name + i} className="flex items-center gap-2 text-sm">
+                          <span className={`flex h-6 w-6 flex-none items-center justify-center font-display text-xs font-black ${i < 3 ? 'bg-marker text-ink' : 'bg-paper2 text-soft'}`}>{i + 1}</span>
+                          <span className="min-w-0 flex-1 truncate font-semibold">{s.name}</span>
+                          <span className="hidden truncate text-[11px] text-soft sm:block">{s.group}</span>
+                          <b className="font-display" style={{ color: avgColor(s.avg) }}>{fmtAvg(s.avg)}</b>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <div className="card rise p-4" style={{ animationDelay: '240ms' }}>
+                  <h3 className="mb-3 flex items-center gap-2 font-display text-sm font-bold"><Icon name="alert" size={15} />Требуют внимания</h3>
+                  {attention.length === 0 ? <p className="py-3 text-center text-xs text-soft">Все в порядке — поводов для беспокойства нет.</p> : (
+                    <div className="space-y-1.5">
+                      {attention.slice(0, 8).map((s, i) => (
+                        <div key={s.name + i} className="flex items-center gap-2 border-l-2 border-pen bg-pen-soft/40 px-2 py-1.5 text-sm">
+                          <span className="min-w-0 flex-1 truncate font-semibold">{s.name}</span>
+                          <span className="hidden truncate text-[11px] text-soft sm:block">{s.group}</span>
+                          <span className="text-[11px] font-bold text-pen">{s.reason}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      /* ================= ДАННЫЕ ================= */
+      function DataTab() {
+        const { data, update, toast, ask, sync } = useApp();
+        const [mode, setMode] = useState('merge');
+        const [text, setText] = useState('');
+        const [err, setErr] = useState(null);
+        const [drag, setDrag] = useState(false);
+        const [csvGroup, setCsvGroup] = useState((data.groups[0] || {}).id || '');
+        const fileRef = useRef(null);
+        const [, tick] = useReducer(x => x + 1, 0);
+
+        useEffect(() => { const t = setInterval(tick, 1000); return () => clearInterval(t); }, []);
+        const secsToSync = Math.max(0, Math.ceil((sync.nextAt - Date.now()) / 1000));
+
+        const handleImport = (raw) => {
+          setErr(null);
+          if (!raw.trim()) { setErr('Вставьте JSON или выберите файл.'); return; }
+          let parsed;
+          try { parsed = JSON.parse(raw); } catch { setErr('Не удалось разобрать JSON — проверьте формат копии.'); return; }
+          if (!parsed || typeof parsed !== 'object') { setErr('Файл не похож на резервную копию ЛингвоЖурнала.'); return; }
+          const keys = ['groups', 'lessons', 'notes', 'events', 'stickers', 'settings'];
+          if (!keys.some(k => k in parsed)) { setErr('В данных нет ни одного известного раздела (groups, lessons, notes…).'); return; }
+          const inc = sanitizeAppData(parsed);
+          if (mode === 'replace') update(() => inc);
+          else update(d => mergeData(d, inc));
+          toast(mode === 'replace' ? 'Данные заменены из копии' : 'Данные объединены с копией');
+          setText('');
+        };
+        const readFile = (f) => { f.text().then(handleImport).catch(() => setErr('Не удалось прочитать файл.')); };
+
+        const exportJSON = () => {
+          download(`lingvozhurnal-backup-${todayISO()}.json`, JSON.stringify(data, null, 2), 'application/json;charset=utf-8');
+          toast('Резервная копия сохранена');
+        };
+        const exportCSV = () => {
+          const g = data.groups.find(x => x.id === csvGroup);
+          if (!g) { toast('Выберите группу', 'error'); return; }
+          download(`zhurnal-${g.name.replace(/[^\wа-яё-]+/gi, '_')}.csv`, journalToCSV(g), 'text/csv;charset=utf-8');
+          toast('CSV для Excel сохранён');
+        };
+        const exportAllICS = () => {
+          const lessons = data.lessons.filter(l => l.status !== 'отменён').map(l => {
+            const g = data.groups.find(x => x.id === l.groupId);
+            return { date: l.date, time: l.time || undefined, title: `Урок: ${(g || {}).name || ''} — ${l.topic || 'без темы'}`, description: l.homework ? `ДЗ: ${l.homework}` : undefined };
+          });
+          const events = data.events.filter(e => e.status !== 'отменено').map(e => ({ date: e.date, time: e.time || undefined, title: e.title, place: e.place || undefined, description: e.description || undefined }));
+          const items = [...lessons, ...events];
+          if (!items.length) { toast('Календарь пуст', 'info'); return; }
+          download('kalendar.ics', buildICS(items, 'ЛингвоЖурнал — полный календарь'), 'text/calendar;charset=utf-8');
+          toast('Календарь .ics сохранён');
+        };
+
+        return (
+          <div className="pt-5">
+            <SectionTitle icon="database">Данные и синхронизация</SectionTitle>
+            <div className="grid gap-5 lg:grid-cols-2">
+              <div className="card rise space-y-3 p-4">
+                <h3 className="flex items-center gap-2 font-display text-sm font-bold"><Icon name="download" size={15} />Экспорт</h3>
+                <button className="btn w-full" onClick={exportJSON}><Icon name="download" size={14} />Резервная копия JSON</button>
+                <div className="flex gap-1.5">
+                  <select className="inp" value={csvGroup} onChange={e => setCsvGroup(e.target.value)} aria-label="Группа для CSV">
+                    {data.groups.length === 0 && <option value="">нет групп</option>}
+                    {data.groups.map(g => <option key={g.id} value={g.id}>{g.name}</option>)}
+                  </select>
+                  <button className="btn flex-none" onClick={exportCSV} disabled={!data.groups.length}>CSV для Excel</button>
+                </div>
+                <p className="text-[11px] text-soft">CSV: разделитель «;» + BOM — файл сразу корректно открывается в русском Excel.</p>
+                <button className="btn w-full" onClick={exportAllICS}><Icon name="calendar" size={14} />Весь календарь (.ics): уроки + мероприятия</button>
+              </div>
+
+              <div className="card rise p-4" style={{ animationDelay: '60ms' }}>
+                <h3 className="mb-3 flex items-center gap-2 font-display text-sm font-bold"><Icon name="refresh" size={15} />Синхронизация</h3>
+                <div className="flex items-center gap-3">
+                  <span className="pulse-dot inline-block h-3 w-3 flex-none bg-pine" />
+                  <div className="flex-1">
+                    <div className="font-display text-xl font-black">{sync.count}</div>
+                    <div className="text-[11px] text-soft">синхронизаций за сессию</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-display text-xl font-black tabular-nums">{secsToSync} с</div>
+                    <div className="text-[11px] text-soft">до автосинхронизации (каждые 25 с)</div>
+                  </div>
+                </div>
+                <div className="mt-3 space-y-1 text-[12px] text-soft">
+                  <p>Последняя синхронизация: <b className="text-ink">{sync.last ? fmtAgo(sync.last) : 'ещё не было'}</b></p>
+                  <p>Изменения мгновенно передаются между открытыми вкладками через BroadcastChannel и автоматически сохраняются в localStorage.</p>
+                </div>
+              </div>
+
+              <div className="card rise space-y-3 p-4" style={{ animationDelay: '120ms' }}>
+                <h3 className="flex items-center gap-2 font-display text-sm font-bold"><Icon name="upload" size={15} />Импорт из резервной копии</h3>
+                <div
+                  className={`flex cursor-pointer flex-col items-center gap-1 border-2 border-dashed p-6 text-center transition ${drag ? 'border-pine bg-pine-soft' : 'border-line hover:border-soft'}`}
+                  onClick={() => fileRef.current && fileRef.current.click()}
+                  onDragOver={e => { e.preventDefault(); setDrag(true); }}
+                  onDragLeave={() => setDrag(false)}
+                  onDrop={e => { e.preventDefault(); setDrag(false); const f = e.dataTransfer.files && e.dataTransfer.files[0]; if (f) readFile(f); }}>
+                  <Icon name="upload" size={22} className="text-soft" />
+                  <span className="text-sm font-semibold">Перетащите JSON-файл сюда или нажмите</span>
+                  <span className="text-[11px] text-soft">поддерживаются копии ЛингвоЖурнала</span>
+                </div>
+                <input ref={fileRef} type="file" accept=".json,application/json" className="hidden"
+                  onChange={e => { const f = e.target.files && e.target.files[0]; if (f) readFile(f); e.target.value = ''; }} />
+                <textarea className="inp min-h-[80px] font-mono text-[11px]" placeholder="…или вставьте JSON текстом" value={text} onChange={e => setText(e.target.value)} />
+                <div className="flex flex-wrap items-center gap-3">
+                  <label className="flex cursor-pointer items-center gap-1.5 text-[13px]">
+                    <input type="radio" name="mode" checked={mode === 'merge'} onChange={() => setMode('merge')} />
+                    Объединить с текущими
+                  </label>
+                  <label className="flex cursor-pointer items-center gap-1.5 text-[13px]">
+                    <input type="radio" name="mode" checked={mode === 'replace'} onChange={() => setMode('replace')} />
+                    Полностью заменить
+                  </label>
+                  <button className="btn btn-primary ml-auto" onClick={() => handleImport(text)}><Icon name="upload" size={14} />Импортировать</button>
+                </div>
+                {err && (
+                  <div className="flex items-center gap-2 border border-pen bg-pen-soft px-3 py-2 text-[12px] font-semibold text-pen">
+                    <Icon name="alert" size={14} />{err}
+                  </div>
+                )}
+              </div>
+
+              <div className="card rise space-y-4 p-4" style={{ animationDelay: '180ms' }}>
+                <div>
+                  <h3 className="mb-2 flex items-center gap-2 font-display text-sm font-bold"><Icon name="pencil" size={15} />Настройки</h3>
+                  <Field label="Имя учителя (для приветствий и печати)">
+                    <input className="inp" value={data.settings.teacherName} onChange={e => update(d => ({ ...d, settings: { ...d.settings, teacherName: e.target.value } }))} />
+                  </Field>
+                </div>
+                <div className="border-t border-line pt-3">
+                  <h3 className="mb-2 flex items-center gap-2 font-display text-sm font-bold"><Icon name="sparkle" size={15} />Демо и очистка</h3>
+                  <div className="flex flex-wrap gap-2">
+                    <button className="btn" onClick={() => ask({
+                      title: 'Загрузить демо-данные?', message: 'Текущие данные будут полностью заменены демонстрационным набором.', confirmLabel: 'Загрузить',
+                      onConfirm: () => { update(() => makeDemo()); toast('Демо-данные загружены'); },
+                    })}><Icon name="refresh" size={14} />Загрузить демо</button>
+                    <button className="btn btn-danger" onClick={() => ask({
+                      title: 'Очистить все данные?', message: 'Группы, уроки, конспекты, мероприятия и заметки будут удалены. Настройки сохранятся.', danger: true, confirmLabel: 'Очистить',
+                      onConfirm: () => { update(d => emptyData(d.settings)); toast('Данные очищены', 'info'); },
+                    })}><Icon name="trash" size={14} />Очистить всё</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      /* ================= СОСТОЯНИЕ ПРИЛОЖЕНИЯ ================= */
+      const AppCtx = createContext(null);
+      function useApp() {
+        const c = useContext(AppCtx);
+        if (!c) throw new Error('AppCtx missing');
+        return c;
+      }
+      function AppProvider({ children }) {
+        const [data, setData] = useState(() => {
+          const stored = readStorage();
+          if (stored) return stored;
+          const demo = makeDemo();
+          writeStorage(demo);
+          return demo;
+        });
+        const [tab, setTab] = useState('overview');
+        const [navPayload, setNavPayload] = useState(null);
+        const [toasts, setToasts] = useState([]);
+        const [confirmState, setConfirmState] = useState(null);
+        const [helpOpen, setHelpOpen] = useState(false);
+        const [sync, setSync] = useState({ count: 0, last: null, nextAt: Date.now() + 25000 });
+
+        const dataRef = useRef(data);
+        dataRef.current = data;
+        const toastRef = useRef(() => {});
+
+        const toast = useCallback((msg, type = 'success') => {
+          const id = Date.now() + Math.random();
+          setToasts(t => [...t.slice(-3), { id, msg, type }]);
+          setTimeout(() => setToasts(t => t.filter(x => x.id !== id)), 4000);
+        }, []);
+        toastRef.current = toast;
+
+        const update = useCallback((fn) => {
+          setData(prev => {
+            const next = fn(prev);
+            if (!writeStorage(next)) toastRef.current('Хранилище переполнено — удалите крупные файлы', 'error');
+            broadcast(next);
+            return next;
+          });
+        }, []);
+
+        useEffect(() => onRemote(d => {
+          setData(d);
+          setSync(s => ({ ...s, count: s.count + 1, last: Date.now() }));
+        }), []);
+
+        useEffect(() => {
+          const t = setInterval(() => {
+            const stored = readStorage();
+            if (stored && JSON.stringify(stored) !== JSON.stringify(dataRef.current)) {
+              setData(stored);
+              setSync(s => ({ count: s.count + 1, last: Date.now(), nextAt: Date.now() + 25000 }));
+            } else {
+              setSync(s => ({ ...s, last: s.last || Date.now(), nextAt: Date.now() + 25000 }));
+            }
+          }, 25000);
+          return () => clearInterval(t);
+        }, []);
+
+        useEffect(() => {
+          document.documentElement.classList.toggle('dark', data.settings.theme === 'dark');
+        }, [data.settings.theme]);
+
+        const go = useCallback((t, payload) => {
+          setTab(t);
+          setNavPayload(payload || null);
+          window.scrollTo({ top: 0 });
+        }, []);
+        const ask = useCallback((opts) => setConfirmState(opts), []);
+        const openHelp = useCallback(() => setHelpOpen(true), []);
+
+        return (
+          <AppCtx.Provider value={{ data, tab, navPayload, sync, update, go, toast, ask, openHelp }}>
+            {children}
+            <ToastHost items={toasts} />
+            <ConfirmHost state={confirmState} onClose={() => setConfirmState(null)} />
+            {(helpOpen || !data.settings.onboardingDone) && (
+              <Onboarding onClose={() => { update(d => ({ ...d, settings: { ...d.settings, onboardingDone: true } })); setHelpOpen(false); }} />
+            )}
+          </AppCtx.Provider>
+        );
+      }
+
+      /* ================= ОБОЛОЧКА ================= */
+      const TABS = [
+        { id: 'overview', label: 'Обзор', icon: 'home' },
+        { id: 'journal', label: 'Журнал', icon: 'book' },
+        { id: 'notes', label: 'Конспекты', icon: 'notebook' },
+        { id: 'groups', label: 'Группы', icon: 'users' },
+        { id: 'planner', label: 'Планировщик', icon: 'calcheck' },
+        { id: 'events', label: 'Мероприятия', icon: 'megaphone' },
+        { id: 'analytics', label: 'Аналитика', icon: 'chart' },
+        { id: 'data', label: 'Данные', icon: 'database' },
+      ];
+      function GlobalSearch() {
+        const { data, go } = useApp();
+        const [q, setQ] = useState('');
+        const results = useMemo(() => {
+          const t = q.trim().toLowerCase();
+          if (t.length < 2) return [];
+          const out = [];
+          data.groups.forEach(g => g.students.forEach(s => {
+            if (s.name.toLowerCase().includes(t)) out.push({ sid: s.id, name: s.name, gid: g.id, gname: g.name });
+          }));
+          return out.slice(0, 8);
+        }, [q, data.groups]);
+
+        return (
+          <div className="relative w-full max-w-[260px]">
+            <span className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-soft"><Icon name="search" size={14} /></span>
+            <input className="inp py-1.5 pl-8 text-[13px]" placeholder="Поиск ученика…" value={q}
+              onChange={e => setQ(e.target.value)} onBlur={() => setTimeout(() => setQ(''), 150)} />
+            {results.length > 0 && (
+              <div className="pop card absolute left-0 right-0 top-full z-50 mt-1 max-h-64 overflow-auto">
+                {results.map(r => (
+                  <button key={r.gid + r.sid} className="flex w-full flex-col items-start border-b border-line px-3 py-2 text-left last:border-0 hover:bg-paper2"
+                    onMouseDown={() => { go('journal', { groupId: r.gid, studentId: r.sid }); setQ(''); }}>
+                    <span className="text-[13px] font-semibold">{r.name}</span>
+                    <span className="text-[10px] text-soft">{r.gname}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+            {q.trim().length >= 2 && results.length === 0 && (
+              <div className="pop card absolute left-0 right-0 top-full z-50 mt-1 px-3 py-2 text-[12px] text-soft">Никого не нашли</div>
+            )}
+          </div>
+        );
+      }
+      function Header() {
+        const { data, tab, go, update, openHelp, sync } = useApp();
+        return (
+          <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
+            <div className="mx-auto flex max-w-[1440px] items-center gap-3 px-3 pt-2.5 md:px-5">
+              <button className="flex items-center gap-2.5" onClick={() => go('overview')} title="На главную">
+                <span className="flex h-9 w-9 items-center justify-center bg-pine text-marker shadow-hard"><Icon name="logo" size={22} /></span>
+                <span className="hidden text-left sm:block">
+                  <span className="block font-display text-[17px] font-black leading-none">ЛингвоЖурнал</span>
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-soft">помощник учителя языков</span>
+                </span>
+              </button>
+              <div className="ml-auto flex items-center gap-2">
+                <GlobalSearch />
+                <span className="hidden items-center gap-1.5 text-[11px] font-semibold text-soft md:flex" title={`Синхронизаций за сессию: ${sync.count}`}>
+                  <span className="pulse-dot inline-block h-2 w-2 bg-pine" />синхр. {sync.count}
+                </span>
+                <button className="icon-btn" title={data.settings.theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'}
+                  onClick={() => update(d => ({ ...d, settings: { ...d.settings, theme: d.settings.theme === 'dark' ? 'light' : 'dark' } }))}>
+                  <Icon name={data.settings.theme === 'dark' ? 'sun' : 'moon'} size={16} />
+                </button>
+                <button className="icon-btn" title="Справка" onClick={openHelp}><Icon name="help" size={16} /></button>
+              </div>
+            </div>
+            <nav className="mx-auto flex max-w-[1440px] gap-1.5 overflow-x-auto px-3 pb-2 pt-2 md:px-5">
+              {TABS.map(t => {
+                const active = tab === t.id;
+                return (
+                  <button key={t.id} onClick={() => go(t.id)}
+                    className={`press flex flex-none items-center gap-1.5 border px-3 py-1.5 text-[13px] font-bold transition ${
+                      active ? 'border-pine-deep bg-pine text-card shadow-hard' : 'border-line bg-card hover:-translate-y-px hover:bg-paper2'}`}>
+                    <Icon name={t.icon} size={14} />{t.label}
+                  </button>
+                );
+              })}
+            </nav>
+          </header>
+        );
+      }
+      function Shell() {
+        const { tab } = useApp();
+        return (
+          <>
+            <Header />
+            <main className="mx-auto w-full max-w-[1440px] px-3 pb-28 md:px-5">
+              <div key={tab} className="rise">
+                {tab === 'overview' && <OverviewTab />}
+                {tab === 'journal' && <JournalTab />}
+                {tab === 'notes' && <NotesTab />}
+                {tab === 'groups' && <GroupsTab />}
+                {tab === 'planner' && <PlannerTab />}
+                {tab === 'events' && <EventsTab />}
+                {tab === 'analytics' && <AnalyticsTab />}
+                {tab === 'data' && <DataTab />}
+              </div>
+            </main>
+            <Fabs />
+          </>
+        );
+      }
+      function App() {
+        return (
+          <AppProvider>
+            <Shell />
+          </AppProvider>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+      window.__ljBoot = true;
+    </script>
+<section class="tm-card tm-notes"><h2>Полный конспект темы</h2><div class="tm-form"><input id="foreigner-topic" placeholder="Тема или ситуация"/><input id="foreigner-language" placeholder="Язык и уровень"/><textarea id="foreigner-context" rows="3" placeholder="Что нужно подтянуть: слова, грамматика, культура, документы…"></textarea><button id="foreigner-generate">Создать подробный конспект</button></div><textarea id="foreigner-output" rows="20" placeholder="Подробный конспект появится здесь"></textarea><div class="tm-actions"><button id="foreigner-save">Сохранить</button><button id="foreigner-word">Экспорт Word</button></div></section><script id="theme-tools-script">(()=>{const q=s=>document.querySelector(s), text=(s)=>String(s||'').trim(); const saveWord=(name,content)=>{const blob=new Blob(['\ufeff', '<html><head><meta charset="utf-8"></head><body><pre style="white-space:pre-wrap;font:15px Arial">'+content.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+'</pre></body></html>'],{type:'application/msword'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name+'.doc';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};document.title=document.title.replace(' · Генератор','');document.documentElement.dataset.themeNote='Добавлен подробный генератор конспекта с сохранением и экспортом в Word.';document.querySelectorAll('[data-home]').forEach(b=>b.onclick=()=>q('#home-output').textContent='Сценарий «'+b.dataset.home+'»: выберите 3 главных действия, назначьте время и оставьте один запасной шаг.');document.querySelectorAll('[data-build]').forEach(b=>b.onclick=()=>q('#build-output').textContent='Этап «'+b.dataset.build+'»: проверьте соответствие проекту, качество выполнения, безопасность и зафиксируйте замечания.');document.querySelectorAll('[data-mama]').forEach(b=>b.onclick=()=>q('#mama-output').textContent='Сценарий «'+b.dataset.mama+'»: подготовьте вещи заранее, выберите одно обязательное действие и один спокойный резерв.');document.querySelectorAll('[data-cook]').forEach(b=>b.onclick=()=>q('#cook-output').textContent='Раздел «'+b.dataset.cook+'»: запишите конкретные действия, время и нужные продукты.');const fkey='foreign-journal-note';q('#foreigner-generate').onclick=()=>{let t=text(q('#foreigner-topic').value)||'Выбранная тема',l=text(q('#foreigner-language').value)||'иностранный язык',c=text(q('#foreigner-context').value)||'лексика, грамматика и культурный контекст';q('#foreigner-output').value=`ПОДРОБНЫЙ КОНСПЕКТ\nТема: ${t}\nЯзык и уровень: ${l}\nЗапрос: ${c}\n\n1. Краткая карта темы\nОпределите ситуацию, цель общения и ожидаемый результат.\n\n2. Словарь\nКлючевые слова: контекст, пример употребления, синоним или антоним, форма множественного числа/спряжение при необходимости.\n\n3. Грамматика\nСформулируйте правило, приведите утвердительную, отрицательную и вопросительную модели.\n\n4. Практика\nСначала подстановка по образцу, затем перевод смысла, затем свободный диалог.\n\n5. Культурная заметка\nОтметьте вежливость, регистр, реалии и возможные ложные друзья переводчика.\n\n6. Самопроверка\n5 вопросов по теме, мини-текст и список ошибок для повторения.\n\n7. Следующий шаг\nПовторите материал через 1 день, 3 дня и неделю.`;localStorage.setItem(fkey,q('#foreigner-output').value)};q('#foreigner-save').onclick=()=>localStorage.setItem(fkey,q('#foreigner-output').value);q('#foreigner-word').onclick=()=>saveWord('foreign-journal-konspekt',q('#foreigner-output').value);})();</script>
+</body>
+</html>

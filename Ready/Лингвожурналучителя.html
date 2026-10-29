@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ЛингвоЖурнал — помощник учителя</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700;800&family=Golos+Text:wght@400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Golos Text', system-ui, sans-serif;
+            box-sizing: border-box;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .font-unbounded {
+            font-family: 'Unbounded', sans-serif;
+        }
+        body {
+            background: #f7f2e9;
+            background-image: radial-gradient(circle, #d4cdc0 0.8px, transparent 0.8px);
+            background-size: 24px 24px;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .theme-dark body {
+            background: #1e1b16;
+            background-image: radial-gradient(circle, #3a352e 0.8px, transparent 0.8px);
+            background-size: 24px 24px;
+        }
+        .paper-bg {
+            background: #faf6ed;
+        }
+        .theme-dark .paper-bg {
+            background: #25201a;
+        }
+        .paper-border {
+            border: 1.5px solid #d4cdc0;
+        }
+        .theme-dark .paper-border {
+            border-color: #4a443b;
+        }
+        .chip-green {
+            background: #2d5a3d;
+            color: #faf6ed;
+        }
+        .chip-yellow {
+            background: #e8c84c;
+            color: #1e1b16;
+        }
+        .chip-red {
+            background: #c0392b;
+            color: #faf6ed;
+        }
+        .chip-blue {
+            background: #3a6b8f;
+            color: #faf6ed;
+        }
+        .chip-ochre {
+            background: #b8860b;
+            color: #faf6ed;
+        }
+        .btn-primary {
+            background: #2d5a3d;
+            color: #faf6ed;
+            transition: all 0.15s;
+        }
+        .btn-primary:hover {
+            background: #1e3f2b;
+            transform: translateY(-1px);
+        }
+        .btn-primary:active {
+            transform: scale(0.96);
+        }
+        .btn-secondary {
+            background: #e8c84c;
+            color: #1e1b16;
+            transition: all 0.15s;
+        }
+        .btn-secondary:hover {
+            background: #d4b43a;
+            transform: translateY(-1px);
+        }
+        .btn-secondary:active {
+            transform: scale(0.96);
+        }
+        .btn-outline {
+            border: 1.5px solid #2d5a3d;
+            color: #2d5a3d;
+            background: transparent;
+            transition: all 0.15s;
+        }
+        .btn-outline:hover {
+            background: #2d5a3d10;
+        }
+        .theme-dark .btn-outline {
+            border-color: #4a8a5a;
+            color: #4a8a5a;
+        }
+        .theme-dark .btn-outline:hover {
+            background: #4a8a5a20;
+        }
+        .card {
+            background: #faf6ed;
+            border: 1.5px solid #d4cdc0;
+            transition: all 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+        .theme-dark .card {
+            background: #2a241f;
+            border-color: #4a443b;
+        }
+        .theme-dark .card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        .sticky-note {
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.06);
+            transition: all 0.2s;
+        }
+        .sticky-note:hover {
+            transform: rotate(-0.5deg) scale(1.01);
+        }
+        .tab-active {
+            border-bottom: 3px solid #2d5a3d;
+            color: #1e1b16;
+            font-weight: 600;
+        }
+        .theme-dark .tab-active {
+            border-bottom-color: #4a8a5a;
+            color: #f0ebe2;
+        }
+        .tab-inactive {
+            color: #8a8478;
+            border-bottom: 3px solid transparent;
+        }
+        .theme-dark .tab-inactive {
+            color: #8a8478;
+        }
+        .tab-inactive:hover {
+            color: #1e1b16;
+            border-bottom-color: #d4cdc0;
+        }
+        .theme-dark .tab-inactive:hover {
+            color: #f0ebe2;
+            border-bottom-color: #4a443b;
+        }
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: #d4cdc0;
+            border-radius: 4px;
+        }
+        .theme-dark .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: #4a443b;
+        }
+        .pulse-sync {
+            animation: pulse-sync 2s ease-in-out infinite;
+        }
+        @keyframes pulse-sync {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .cascade-in>* {
+            animation: fadeIn 0.3s ease-out both;
+        }
+        .cascade-in>*:nth-child(1) {
+            animation-delay: 0.02s;
+        }
+        .cascade-in>*:nth-child(2) {
+            animation-delay: 0.06s;
+        }
+        .cascade-in>*:nth-child(3) {
+            animation-delay: 0.10s;
+        }
+        .cascade-in>*:nth-child(4) {
+            animation-delay: 0.14s;
+        }
+        .cascade-in>*:nth-child(5) {
+            animation-delay: 0.18s;
+        }
+        .cascade-in>*:nth-child(6) {
+            animation-delay: 0.22s;
+        }
+        .cascade-in>*:nth-child(7) {
+            animation-delay: 0.26s;
+        }
+        .cascade-in>*:nth-child(8) {
+            animation-delay: 0.30s;
+        }
+        .popover-enter {
+            animation: popoverIn 0.2s ease-out;
+        }
+        @keyframes popoverIn {
+            from {
+                opacity: 0;
+                transform: scale(0.92) translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .ring-progress {
+            transform: rotate(-90deg);
+        }
+        .ring-progress circle {
+            transition: stroke-dashoffset 0.3s ease;
+        }
+        .btn-float {
+            transition: all 0.2s;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+        .btn-float:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+        }
+        .btn-float:active {
+            transform: scale(0.94);
+        }
+        .toast {
+            animation: toastIn 0.3s ease-out;
+        }
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .toast-out {
+            animation: toastOut 0.25s ease-in forwards;
+        }
+        @keyframes toastOut {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+        }
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .print-journal,
+            .print-journal * {
+                visibility: visible;
+            }
+            .print-journal {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background: white;
+            }
+            .print-journal .no-print {
+                display: none !important;
+            }
+            .print-plan {
+                page-break-after: avoid;
+            }
+        }
+        .grade-btn {
+            transition: all 0.1s;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .grade-btn:hover {
+            transform: scale(1.08);
+        }
+        .grade-btn:active {
+            transform: scale(0.92);
+        }
+        .theme-dark input,
+        .theme-dark textarea,
+        .theme-dark select {
+            background: #2a241f;
+            color: #f0ebe2;
+            border-color: #4a443b;
+        }
+        input,
+        textarea,
+        select {
+            background: #faf6ed;
+            border: 1.5px solid #d4cdc0;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 14px;
+            transition: border-color 0.15s;
+        }
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #2d5a3d;
+        }
+        .theme-dark input:focus,
+        .theme-dark textarea:focus,
+        .theme-dark select:focus {
+            border-color: #4a8a5a;
+        }
+    </style>
+
+<style id="theme-tools-style-616911615166130829">.tm-card{margin:0;max-width:1100px;padding:22px;border:1px solid color-mix(in srgb,currentColor 14%,transparent);border-radius:20px;background:color-mix(in srgb,white 88%,transparent);box-shadow:0 8px 24px rgba(20,30,40,.07)}.tm-card h2{margin-top:0}.tm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.tm-grid details,.tm-grid label{padding:14px;border-radius:14px;background:rgba(255,255,255,.7)}.tm-form{display:flex;flex-wrap:wrap;gap:10px}.tm-form input,.tm-form select,.tm-form textarea,.tm-card>textarea{flex:1 1 220px;padding:12px;border:1px solid #b8c5cc;border-radius:10px;font:inherit}.tm-form button,.tm-actions button,.tm-buttons button,.tm-section-nav a{border:0;border-radius:10px;padding:12px 15px;background:#315d73;color:#fff;font:600 14px inherit;cursor:pointer;text-decoration:none}.tm-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}.tm-output, .tm-card pre{white-space:pre-wrap;line-height:1.6;padding:14px;background:rgba(0,0,0,.04);border-radius:12px}.tm-section-nav{display:flex;flex-wrap:wrap;gap:10px}.tm-note{opacity:.75;font-size:.92em}@media(max-width:600px){.tm-card{margin:0 10px;padding:16px;border-radius:16px}.tm-form{display:grid}.tm-form>*{width:100%;box-sizing:border-box}.tm-section-nav a,.tm-buttons button{min-height:46px;display:flex;align-items:center;justify-content:center}.tm-grid{grid-template-columns:1fr}}</style></head>
+<body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js">
+    </script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js">
+    </script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js">
+    </script>
+
+    <script type="text/babel">
+        // ============================================================
+        //  ЛИНГВОЖУРНАЛ — исправленная версия
+        //  Все компоненты переписаны на JSX для корректной работы
+        // ============================================================
+
+        const { useState, useEffect, useRef, useCallback, useMemo, createContext, useContext } = React;
+
+        // ---------- Иконки (inline SVG) ----------
+        const Icons = {
+            Search: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>,
+            Plus: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M5 12h14"/></svg>,
+            Trash: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>,
+            Edit: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>,
+            Close: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>,
+            Check: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>,
+            Calendar: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>,
+            Clock: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>,
+            User: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+            Users: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+            Book: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>,
+            Settings: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>,
+            Sun: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>,
+            Moon: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>,
+            Random: () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M12 22V12"/><path d="M9 10.5 12 12l3-1.5"/></svg>,
+            Timer: () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/><path d="M15 3 9 3"/></svg>,
+            Copy: () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>,
+            WhatsApp: () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>,
+            Mail: () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>,
+            Download: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
+            Upload: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>,
+            File: () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>,
+            Link: () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>,
+            Sticker: () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12h8"/></svg>,
+            ChevronRight: () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>,
+            ChevronLeft: () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>,
+            Star: () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
+            Print: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M18 9H6"/><path d="M18 13v6H6v-6"/><rect x="8" y="14" width="8" height="4"/></svg>,
+            PlusCircle: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>,
+            Info: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>,
+            Pause: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>,
+            Play: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>,
+            Reset: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9m0 0v6m0-6h-6"/></svg>,
+            External: () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>,
+        };
+
+        // ---------- Утилиты ----------
+        const uid = () => Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 6);
+        const today = () => new Date().toISOString().slice(0, 10);
+        const formatDate = (d) => { if (!d) return ''; const dt = new Date(d + 'T00:00:00'); return dt.toLocaleDateString(
+                'ru-RU', { day: 'numeric', month: 'short', year: 'numeric' }); };
+        const formatDateShort = (d) => { if (!d) return ''; const dt = new Date(d + 'T00:00:00'); return dt.toLocaleDateString(
+                'ru-RU', { day: 'numeric', month: 'short' }); };
+        const formatTime = (t) => t ? t.slice(0, 5) : '';
+        const isToday = (d) => d === today();
+        const isTomorrow = (d) => { const t = new Date(); t.setDate(t.getDate() + 1); return d === t.toISOString().slice(0,
+            10); };
+        const isPast = (d) => d < today();
+        const getWeekNum = (d) => { const dt = new Date(d + 'T00:00:00'); const start = new Date(dt.getFullYear(), 0, 1);
+            const diff = (dt - start + (start.getTimezoneOffset() - dt.getTimezoneOffset()) * 60000) / 86400000; return Math
+                .ceil((diff + start.getDay() + 1) / 7); };
+        const getWeekStart = (d) => { const dt = new Date(d + 'T00:00:00'); const day = dt.getDay() || 7; dt.setDate(dt
+            .getDate() - day + 1); return dt.toISOString().slice(0, 10); };
+        const getWeekDays = (d) => { const start = getWeekStart(d); const days = []; for (let i = 0; i < 7; i++) { const dt =
+                new Date(start + 'T00:00:00'); dt.setDate(dt.getDate() + i);
+            days.push(dt.toISOString().slice(0, 10)); } return days; };
+        const cefrLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+        const colors = ['#2d5a3d', '#b8860b', '#3a6b8f', '#c0392b', '#8e44ad', '#d4a017', '#1a7a5a', '#a04040'];
+        const stickerColors = ['#fef3c7', '#fce4ec', '#e3f2fd', '#e8f5e9', '#fff3e0', '#f3e5f5', '#e0f7fa', '#fbe9e7'];
+        const eventTypes = ['Урок', 'Семинар', 'Вебинар', 'Конференция', 'Встреча', 'Экзамен', 'Другое'];
+        const statuses = ['Запланировано', 'Проведено', 'Отменено', 'Перенесено'];
+        const attendanceOptions = ['Н', 'Б', 'У'];
+        const gradeOptions = ['2', '3', '4', '5', '+'];
+
+        // ---------- Хранилище ----------
+        const STORAGE_KEY = 'lingvojournal_data';
+        const SETTINGS_KEY = 'lingvojournal_settings';
+
+        function getDefaultData() {
+            const now = today();
+            const groupId1 = uid(),
+                groupId2 = uid();
+            const studentNames = ['Анна Смирнова', 'Борис Иванов', 'Виктор Петров', 'Галина Сидорова', 'Дмитрий Козлов',
+                'Елена Морозова', 'Жанна Новикова', 'Игорь Кузнецов'
+            ];
+            const studentNames2 = ['Мария Попова', 'Николай Соколов', 'Ольга Лебедева', 'Павел Фёдоров', 'Роман Волков',
+                'Светлана Егорова'
+            ];
+            const topics = ['Приветствия', 'Семья', 'Еда', 'Город', 'Работа', 'Путешествия', 'Погода', 'Хобби'];
+            const homeworks = ['Упр. 1-5 стр. 12', 'Составить диалог', 'Подготовить рассказ', 'Выучить слова', 'Письмо другу'];
+
+            const students1 = studentNames.map(n => ({ id: uid(), name: n }));
+            const students2 = studentNames2.map(n => ({ id: uid(), name: n }));
+
+            const dateCols = [];
+            for (let i = -3; i <= 6; i++) {
+                const d = new Date(now + 'T00:00:00');
+                d.setDate(d.getDate() + i);
+                const ds = d.toISOString().slice(0, 10);
+                dateCols.push({
+                    date: ds,
+                    topic: topics[(i + 4) % topics.length],
+                    homework: homeworks[(i + 3) % homeworks.length]
+                });
+            }
+
+            const grades1 = {};
+            students1.forEach(s => {
+                grades1[s.id] = {};
+                dateCols.forEach(c => {
+                    const r = Math.random();
+                    if (r > 0.25) {
+                        const gs = ['2', '3', '4', '5'];
+                        grades1[s.id][c.date] = gs[Math.floor(Math.random() * gs.length)];
+                    }
+                    if (Math.random() > 0.7) grades1[s.id][c.date + '_att'] = attendanceOptions[Math.floor(Math
+                    .random() * 3)];
+                });
+            });
+            const grades2 = {};
+            students2.forEach(s => {
+                grades2[s.id] = {};
+                dateCols.forEach(c => {
+                    const r = Math.random();
+                    if (r > 0.3) {
+                        const gs = ['2', '3', '4', '5'];
+                        grades2[s.id][c.date] = gs[Math.floor(Math.random() * gs.length)];
+                    }
+                    if (Math.random() > 0.7) grades2[s.id][c.date + '_att'] = attendanceOptions[Math.floor(Math
+                    .random() * 3)];
+                });
+            });
+
+            const group1 = {
+                id: groupId1,
+                name: 'Английский A2',
+                language: 'Английский',
+                level: 'A2',
+                color: colors[0],
+                students: students1,
+                dateCols: dateCols,
+                grades: grades1
+            };
+            const group2 = {
+                id: groupId2,
+                name: 'Французский B1',
+                language: 'Французский',
+                level: 'B1',
+                color: colors[2],
+                students: students2,
+                dateCols: dateCols.slice(0, 7),
+                grades: grades2
+            };
+
+            const lessons = [];
+            for (let i = -2; i <= 8; i++) {
+                const d = new Date(now + 'T00:00:00');
+                d.setDate(d.getDate() + i);
+                const ds = d.toISOString().slice(0, 10);
+                const g = i % 2 === 0 ? group1 : group2;
+                const stat = i < 0 ? 'Проведено' : (i === 0 ? 'Сегодня' : (i === 1 ? 'Завтра' : 'Запланировано'));
+                lessons.push({
+                    id: uid(),
+                    groupId: g.id,
+                    groupName: g.name,
+                    date: ds,
+                    time: `${8 + (i % 6)}:${i % 2 === 0 ? '00' : '30'}`,
+                    topic: topics[(i + 2) % topics.length],
+                    homework: homeworks[(i + 1) % homeworks.length],
+                    status: stat
+                });
+            }
+
+            const plans = [];
+            for (let i = 0; i < 4; i++) {
+                const d = new Date(now + 'T00:00:00');
+                d.setDate(d.getDate() + i * 2 - 1);
+                plans.push({
+                    id: uid(),
+                    topic: topics[(i + 3) % topics.length] + ' (план)',
+                    date: d.toISOString().slice(0, 10),
+                    duration: 45 + i * 15,
+                    goals: 'Цель: развитие навыков говорения',
+                    equipment: 'Доска, проектор, раздаточный материал',
+                    rating: 4 + (i % 2),
+                    reflection: 'Урок прошёл хорошо, студенты активно участвовали.',
+                    sections: ['Введение', 'Основная часть', 'Закрепление'],
+                    vocabulary: [{ word: 'hello', translation: 'привет' }, { word: 'goodbye', translation: 'до свидания' }],
+                    links: ['https://example.com'],
+                    files: [],
+                    sticker: stickerColors[i % stickerColors.length],
+                    createdAt: now
+                });
+            }
+
+            const events = [];
+            for (let i = -1; i <= 5; i++) {
+                const d = new Date(now + 'T00:00:00');
+                d.setDate(d.getDate() + i * 2);
+                events.push({
+                    id: uid(),
+                    type: eventTypes[i % eventTypes.length],
+                    title: eventTypes[i % eventTypes.length] + ' ' + (i + 1),
+                    date: d.toISOString().slice(0, 10),
+                    location: 'Ауд. ' + (10 + i * 3),
+                    groups: [i % 2 === 0 ? group1.name : group2.name],
+                    status: statuses[i % statuses.length],
+                    description: 'Описание мероприятия'
+                });
+            }
+
+            const stickers = [
+                { id: uid(), content: 'Проверить ДЗ у группы А2', color: stickerColors[0], createdAt: now },
+                { id: uid(), content: 'Подготовить материалы для B1', color: stickerColors[2], createdAt: now },
+                { id: uid(), content: 'Встреча с родителями 25.04', color: stickerColors[4], createdAt: now },
+            ];
+
+            return {
+                groups: [group1, group2],
+                lessons: lessons,
+                plans: plans,
+                events: events,
+                stickers: stickers,
+                settings: { theme: 'light' }
+            };
+        }
+
+        let data = null;
+        let settings = { theme: 'light' };
+
+        function loadData() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed && parsed.groups) {
+                        data = parsed;
+                        settings = data.settings || { theme: 'light' };
+                        return;
+                    }
+                }
+            } catch (e) { /* ignore */ }
+            data = getDefaultData();
+            settings = data.settings || { theme: 'light' };
+            saveData();
+        }
+
+        function saveData() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+                broadcast('save');
+            } catch (e) { /* ignore */ }
+        }
+
+        function broadcast(action, payload) {
+            try {
+                const bc = new BroadcastChannel('lingvojournal');
+                bc.postMessage({ action, payload, timestamp: Date.now() });
+                bc.close();
+            } catch (e) { /* ignore */ }
+        }
+
+        function sanitize(str) {
+            if (typeof str !== 'string') return '';
+            return str.replace(/[<>]/g, '').trim();
+        }
+
+        // ---------- Контекст ----------
+        const AppContext = React.createContext(null);
+
+        // ---------- Компонент: Toast ----------
+        function ToastSystem({ toasts, removeToast }) {
+            return (
+                <div className="fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full">
+                    {toasts.map((t) => (
+                        <div
+                            key={t.id}
+                            className={`toast paper-bg paper-border p-4 rounded-md shadow-lg flex items-start gap-3 ${t.type === 'error' ? 'border-red-500 border-l-4' : t.type === 'success' ? 'border-green-600 border-l-4' : 'border-ochre border-l-4'}`}
+                            style={{ animation: 'toastIn 0.3s ease-out' }}
+                        >
+                            <span className="flex-1 text-sm">{t.message}</span>
+                            <button onClick={() => removeToast(t.id)} className="text-gray-400 hover:text-gray-600 flex-shrink-0">
+                                <Icons.Close />
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        // ---------- Компонент: Модалка подтверждения ----------
+        function ConfirmModal({ isOpen, title, message, onConfirm, onCancel }) {
+            if (!isOpen) return null;
+            return (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
+                    <div className="paper-bg paper-border p-6 rounded-md max-w-md w-full shadow-xl fade-in">
+                        <h3 className="font-unbounded text-lg font-bold mb-2">{title}</h3>
+                        <p className="text-gray-600 text-sm mb-6">{message}</p>
+                        <div className="flex gap-3 justify-end">
+                            <button onClick={onCancel} className="btn-outline px-4 py-2 rounded-md text-sm">Отмена</button>
+                            <button onClick={onConfirm} className="btn-primary px-4 py-2 rounded-md text-sm">Подтвердить</button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ---------- Компонент: Онбординг ----------
+        function Onboarding({ onComplete, currentStep, setStep }) {
+            const steps = [
+                { title: 'Добро пожаловать!', desc: 'ЛингвоЖурнал — ваш персональный помощник для ведения занятий.' },
+                { title: 'Журнал', desc: 'Ведите учёт посещаемости и оценок. Отмечайте Н/Б/У и ставьте оценки 2–5.' },
+                { title: 'Конспекты', desc: 'Создавайте планы уроков, добавляйте разделы, словарь, ссылки и файлы.' },
+                { title: 'Планировщик', desc: 'Управляйте расписанием, отслеживайте статусы и экспортируйте в календарь.' },
+            ];
+            if (currentStep >= steps.length) {
+                onComplete();
+                return null;
+            }
+            const s = steps[currentStep];
+            return (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+                    <div className="paper-bg paper-border p-8 rounded-md max-w-md w-full shadow-xl fade-in">
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="text-xs font-medium text-gray-400">{currentStep+1}/{steps.length}</span>
+                            <div className="flex-1 h-1 bg-gray-200 rounded">
+                                <div className="h-1 bg-green-600 rounded transition-all" style={{ width: `${((currentStep+1)/steps.length)*100}%` }} />
+                            </div>
+                        </div>
+                        <h3 className="font-unbounded text-lg font-bold mb-2">{s.title}</h3>
+                        <p className="text-gray-600 text-sm mb-6">{s.desc}</p>
+                        <div className="flex gap-3 justify-end">
+                            <button onClick={() => { if (currentStep === steps.length-1) onComplete(); else setStep(currentStep+1); }} className="btn-primary px-6 py-2 rounded-md text-sm">
+                                {currentStep === steps.length - 1 ? 'Начать' : 'Далее'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ---------- Компонент: Глобальный поиск ----------
+        function GlobalSearch({ onSelect }) {
+            const [query, setQuery] = useState('');
+            const [results, setResults] = useState([]);
+            const [isOpen, setIsOpen] = useState(false);
+            const inputRef = useRef(null);
+
+            useEffect(() => {
+                if (!query.trim() || !data) {
+                    setResults([]);
+                    return;
+                }
+                const q = query.toLowerCase().trim();
+                const found = [];
+                data.groups.forEach(g => {
+                    g.students.forEach(s => {
+                        if (s.name.toLowerCase().includes(q)) {
+                            found.push({ student: s, group: g });
+                        }
+                    });
+                });
+                setResults(found.slice(0, 8));
+                setIsOpen(found.length > 0);
+            }, [query]);
+
+            const handleSelect = (item) => {
+                onSelect(item);
+                setQuery('');
+                setResults([]);
+                setIsOpen(false);
+            };
+
+            return (
+                <div className="relative">
+                    <div className="flex items-center gap-2 bg-white/70 paper-border rounded-md px-3 py-1.5">
+                        <Icons.Search />
+                        <input
+                            ref={inputRef}
+                            type="text"
+                            placeholder="Поиск ученика..."
+                            className="bg-transparent border-0 outline-none text-sm w-44"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            onFocus={() => { if (query.trim()) setIsOpen(true); }}
+                            onBlur={() => setTimeout(() => setIsOpen(false), 200)}
+                        />
+                    </div>
+                    {isOpen && results.length > 0 && (
+                        <div className="absolute top-full left-0 mt-1 w-64 paper-bg paper-border rounded-md shadow-lg z-30 max-h-56 overflow-y-auto">
+                            {results.map((r, i) => (
+                                <div
+                                    key={i}
+                                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm flex items-center gap-2"
+                                    onMouseDown={() => handleSelect(r)}
+                                >
+                                    <Icons.User />
+                                    <span>{r.student.name}</span>
+                                    <span className="text-gray-400 text-xs">{r.group.name}</span>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // ============================================================
+        //  КОМПОНЕНТЫ ВКЛАДОК (все переписаны на JSX)
+        // ============================================================
+
+        // ---------- Вкладка: Обзор ----------
+        function TabOverview({ setTab, setSelectedStudent }) {
+            const now = today();
+            const todayLessons = (data.lessons || []).filter(l => l.date === now && l.status !== 'Проведено');
+            const tomorrowLessons = (data.lessons || []).filter(l => isTomorrow(l.date));
+            const upcomingEvents = (data.events || []).filter(e => e.date >= now).sort((a, b) => a.date.localeCompare(b
+            .date)).slice(0, 4);
+            const recentPlans = (data.plans || []).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
+
+            return (
+                <div className="space-y-6 fade-in">
+                    <div className="flex items-start justify-between">
+                        <div>
+                            <h2 className="font-unbounded text-2xl font-bold">👋 Добро пожаловать!</h2>
+                            <p className="text-gray-500 text-sm">{formatDate(now)} • {new Date().toLocaleDateString(
+                                'ru-RU', { weekday: 'long' })}</p>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                            <span className="w-2 h-2 rounded-full bg-green-600" />
+                            Всего групп: {(data.groups || []).length}
+                        </div>
+                    </div>
+
+                    <div className="card rounded-md p-4">
+                        <h3 className="font-unbounded font-bold text-lg mb-3 flex items-center gap-2">
+                            <Icons.Calendar /> Расписание на сегодня
+                        </h3>
+                        {todayLessons.length === 0 ? (
+                            <p className="text-gray-400 text-sm">Нет занятий на сегодня 🎉</p>
+                        ) : (
+                            <div className="space-y-2">
+                                {todayLessons.map(l => (
+                                    <div key={l.id} className="flex items-center justify-between p-2 bg-gray-50 rounded-md">
+                                        <div className="flex items-center gap-3">
+                                            <span className="text-sm font-medium">{formatTime(l.time)}</span>
+                                            <span className="text-sm">{l.groupName}</span>
+                                            <span className="text-xs text-gray-400">{l.topic}</span>
+                                        </div>
+                                        <button className="btn-primary text-xs px-3 py-1 rounded-md">Провести</button>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="card rounded-md p-4">
+                        <h3 className="font-unbounded font-bold text-lg mb-3 flex items-center gap-2">
+                            <Icons.Book /> Домашнее задание на завтра
+                        </h3>
+                        {tomorrowLessons.length === 0 ? (
+                            <p className="text-gray-400 text-sm">Нет заданий на завтра</p>
+                        ) : (
+                            <div className="space-y-2">
+                                {tomorrowLessons.map(l => (
+                                    <div key={l.id} className="flex items-center justify-between p-2 bg-gray-50 rounded-md">
+                                        <div className="flex items-center gap-3">
+                                            <span className="text-sm">{l.groupName}</span>
+                                            <span className="text-xs text-gray-400">{l.homework || '—'}</span>
+                                        </div>
+                                        <span className="text-xs text-gray-400">{formatTime(l.time)}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="card rounded-md p-4">
+                        <h3 className="font-unbounded font-bold text-lg mb-3 flex items-center gap-2">
+                            <Icons.Sticker /> Заметки
+                        </h3>
+                        <div className="flex flex-wrap gap-3">
+                            {(data.stickers || []).slice(0, 6).map(s => (
+                                <div key={s.id} className="sticky-note px-4 py-2 rounded-sm text-sm" style={{ background: s
+                                        .color || '#fef3c7' }}>
+                                    {s.content}
+                                </div>
+                            ))}
+                            {(data.stickers || []).length === 0 && <p className="text-gray-400 text-sm">Нет заметок</p>}
+                        </div>
+                    </div>
+
+                    <div className="card rounded-md p-4">
+                        <h3 className="font-unbounded font-bold text-lg mb-3 flex items-center gap-2">
+                            <Icons.Calendar /> Ближайшие мероприятия
+                        </h3>
+                        {upcomingEvents.length === 0 ? (
+                            <p className="text-gray-400 text-sm">Нет предстоящих мероприятий</p>
+                        ) : (
+                            <div className="space-y-2">
+                                {upcomingEvents.map(e => (
+                                    <div key={e.id} className="flex items-center justify-between p-2 bg-gray-50 rounded-md">
+                                        <div className="flex items-center gap-3">
+                                            <span className="text-xs font-medium">{formatDateShort(e.date)}</span>
+                                            <span className="text-sm">{e.title}</span>
+                                            <span className="text-xs text-gray-400">{e.location}</span>
+                                        </div>
+                                        <span className="text-xs px-2 py-0.5 rounded-full bg-gray-200">{e.status}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="card rounded-md p-4">
+                        <h3 className="font-unbounded font-bold text-lg mb-3 flex items-center gap-2">
+                            <Icons.Book /> Последние конспекты
+                        </h3>
+                        {recentPlans.length === 0 ? (
+                            <p className="text-gray-400 text-sm">Нет конспектов</p>
+                        ) : (
+                            <div className="space-y-2">
+                                {recentPlans.map(p => (
+                                    <div key={p.id} className="flex items-center justify-between p-2 bg-gray-50 rounded-md cursor-pointer hover:bg-gray-100" onClick={() => setTab(
+                                            'plans')}>
+                                        <div className="flex items-center gap-3">
+                                            <span className="text-sm">{p.topic}</span>
+                                            <span className="text-xs text-gray-400">{formatDateShort(p.date)}</span>
+                                        </div>
+                                        <span className="text-xs px-2 py-0.5 rounded-full bg-gray-200">⭐ {p.rating || '—'}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        // ---------- Вкладка: Журнал ----------
+        function TabJournal() {
+            const [selectedGroupId, setSelectedGroupId] = useState(data.groups && data.groups.length > 0 ? data.groups[0].id :
+            null);
+            const [popover, setPopover] = useState(null);
+            const [printMode, setPrintMode] = useState(false);
+
+            const group = data.groups?.find(g => g.id === selectedGroupId);
+            if (!group) return <div className="text-gray-400 text-center py-12">Выберите группу</div>;
+
+            const students = group.students || [];
+            const dateCols = group.dateCols || [];
+            const grades = group.grades || {};
+
+            const getGrade = (studentId, date) => {
+                const row = grades[studentId];
+                if (!row) return null;
+                return row[date] || null;
+            };
+            const getAtt = (studentId, date) => {
+                const row = grades[studentId];
+                if (!row) return null;
+                return row[date + '_att'] || null;
+            };
+            const setGrade = (studentId, date, val) => {
+                if (!data) return;
+                const g = data.groups.find(gr => gr.id === selectedGroupId);
+                if (!g) return;
+                if (!g.grades[studentId]) g.grades[studentId] = {};
+                if (val === null) {
+                    delete g.grades[studentId][date];
+                    delete g.grades[studentId][date + '_att'];
+                } else if (attendanceOptions.includes(val)) {
+                    g.grades[studentId][date + '_att'] = val;
+                } else {
+                    g.grades[studentId][date] = val;
+                }
+                saveData();
+                setPopover(null);
+            };
+
+            const avgStudent = (studentId) => {
+                const row = grades[studentId] || {};
+                let sum = 0,
+                    count = 0;
+                dateCols.forEach(c => {
+                    const v = row[c.date];
+                    if (v && v !== '+' && !attendanceOptions.includes(v)) {
+                        const n = parseFloat(v);
+                        if (!isNaN(n)) { sum += n;
+                            count++; }
+                    } else if (v === '+') { sum += 0.1;
+                        count++; }
+                });
+                return count > 0 ? (sum / count).toFixed(2) : '—';
+            };
+
+            const avgDay = (date) => {
+                let sum = 0,
+                    count = 0;
+                students.forEach(s => {
+                    const v = getGrade(s.id, date);
+                    if (v && v !== '+' && !attendanceOptions.includes(v)) {
+                        const n = parseFloat(v);
+                        if (!isNaN(n)) { sum += n;
+                            count++; }
+                    } else if (v === '+') { sum += 0.1;
+                        count++; }
+                });
+                return count > 0 ? (sum / count).toFixed(2) : '—';
+            };
+
+            const avgGroup = () => {
+                let sum = 0,
+                    count = 0;
+                students.forEach(s => {
+                    const row = grades[s.id] || {};
+                    dateCols.forEach(c => {
+                        const v = row[c.date];
+                        if (v && v !== '+' && !attendanceOptions.includes(v)) {
+                            const n = parseFloat(v);
+                            if (!isNaN(n)) { sum += n;
+                                count++; }
+                        } else if (v === '+') { sum += 0.1;
+                            count++; }
+                    });
+                });
+                return count > 0 ? (sum / count).toFixed(2) : '—';
+            };
+
+            const handlePrint = () => {
+                setPrintMode(true);
+                setTimeout(() => {
+                    window.print();
+                    setTimeout(() => setPrintMode(false), 500);
+                }, 300);
+            };
+
+            return (
+                <div className="space-y-4 fade-in">
+                    <div className="flex flex-wrap gap-2">
+                        {data.groups?.map(g => (
+                            <button
+                                key={g.id}
+                                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${selectedGroupId === g.id ? 'chip-green' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}`}
+                                onClick={() => setSelectedGroupId(g.id)}
+                            >
+                                {g.name} ({g.level})
+                            </button>
+                        ))}
+                    </div>
+
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                        <div className="flex items-center gap-3 text-sm">
+                            <span className="text-gray-500">Ср. учеников: <span className="font-medium text-gray-700">{avgGroup()}</span></span>
+                            <span className="text-gray-400">|</span>
+                            <span className="text-gray-500">Ср. дня: <span className="font-medium text-gray-700">{dateCols.length > 0 ?
+                                    avgDay(dateCols[dateCols.length - 1].date) : '—'}</span></span>
+                        </div>
+                        <button onClick={handlePrint} className="btn-secondary px-4 py-1.5 rounded-md text-sm flex items-center gap-2">
+                            <Icons.Print /> Печать
+                        </button>
+                    </div>
+
+                    <div className="overflow-x-auto paper-border rounded-md">
+                        <table className="w-full text-sm border-collapse">
+                            <thead className="bg-gray-100">
+                                <tr>
+                                    <th className="sticky left-0 z-10 bg-gray-100 p-2 text-left font-medium border-b border-r min-w-[120px]">
+                                        Ученик
+                                    </th>
+                                    <th className="sticky left-[120px] z-10 bg-gray-100 p-2 text-left font-medium border-b border-r min-w-[80px]">
+                                        Ср.
+                                    </th>
+                                    {dateCols.map(c => (
+                                        <th key={c.date} className="p-2 text-center font-medium border-b border-r min-w-[80px]">
+                                            <div className="text-xs">{formatDateShort(c.date)}</div>
+                                            <div className="text-[10px] font-normal text-gray-400 truncate max-w-[70px]">
+                                                {c.topic || '—'}
+                                            </div>
+                                            <div className="text-[10px] font-normal text-gray-300 truncate max-w-[70px]">
+                                                ДЗ: {c.homework || '—'}
+                                            </div>
+                                        </th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {students.map(s => {
+                                    const avg = avgStudent(s.id);
+                                    return (
+                                        <tr key={s.id} className="hover:bg-gray-50">
+                                            <td className="sticky left-0 z-10 bg-white p-2 border-b border-r font-medium">
+                                                {s.name}
+                                            </td>
+                                            <td className="sticky left-[120px] z-10 bg-white p-2 text-center border-b border-r font-bold text-green-700">
+                                                {avg}
+                                            </td>
+                                            {dateCols.map(c => {
+                                                const g = getGrade(s.id, c.date);
+                                                const att = getAtt(s.id, c.date);
+                                                const display = att || g || '—';
+                                                const isAtt = attendanceOptions.includes(att);
+                                                return (
+                                                    <td
+                                                        key={c.date}
+                                                        className="p-1 text-center border-b border-r cursor-pointer hover:bg-gray-50 relative"
+                                                        onClick={(e) => {
+                                                            const rect = e.currentTarget
+                                                                .getBoundingClientRect();
+                                                            setPopover({
+                                                                studentId: s.id,
+                                                                date: c.date,
+                                                                x: rect.left + rect.width / 2,
+                                                                y: rect.top + rect.height
+                                                            });
+                                                        }}
+                                                    >
+                                                        <span
+                                                            className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${isAtt ? 'bg-gray-200' : g === '+' ? 'text-yellow-600' : g ? 'text-green-700' : 'text-gray-300'}`}
+                                                            style={isAtt ? {} : { fontWeight: g ? 'bold' : 'normal' }}
+                                                        >
+                                                            {display}
+                                                        </span>
+                                                    </td>
+                                                );
+                                            })}
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {popover && (
+                        <div
+                            className="fixed z-40 popover-enter"
+                            style={{ left: popover.x - 80, top: popover.y + 6 }}
+                        >
+                            <div className="paper-bg paper-border rounded-md shadow-xl p-3 w-48">
+                                <div className="grid grid-cols-3 gap-1 mb-2">
+                                    {gradeOptions.map(g => (
+                                        <button
+                                            key={g}
+                                            className={`grade-btn px-2 py-1 text-sm ${g === '+' ? 'text-yellow-600 bg-yellow-50' : 'bg-gray-100 hover:bg-gray-200'}`}
+                                            onClick={() => setGrade(popover.studentId, popover.date, g)}
+                                        >
+                                            {g}
+                                        </button>
+                                    ))}
+                                </div>
+                                <div className="grid grid-cols-3 gap-1 mb-2">
+                                    {attendanceOptions.map(a => (
+                                        <button
+                                            key={a}
+                                            className="grade-btn px-2 py-1 text-sm bg-blue-50 hover:bg-blue-100 text-blue-700"
+                                            onClick={() => setGrade(popover.studentId, popover.date, a)}
+                                        >
+                                            {a}
+                                        </button>
+                                    ))}
+                                </div>
+                                <button
+                                    className="w-full text-xs text-red-500 hover:text-red-700 py-1 border-t border-gray-200 mt-1"
+                                    onClick={() => setGrade(popover.studentId, popover.date, null)}
+                                >
+                                    ✕ Стереть
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {printMode && (
+                        <div className="print-journal">
+                            <div className="p-8">
+                                <h2 className="font-unbounded text-xl font-bold mb-4">{group.name} — Журнал</h2>
+                                <table className="w-full text-sm border-collapse">
+                                    <thead>
+                                        <tr>
+                                            <th className="border p-1 text-left">Ученик</th>
+                                            {dateCols.map(c => (
+                                                <th key={c.date} className="border p-1 text-center text-xs">
+                                                    {formatDateShort(c.date)}
+                                                </th>
+                                            ))}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {students.map(s => (
+                                            <tr key={s.id}>
+                                                <td className="border p-1 font-medium">{s.name}</td>
+                                                {dateCols.map(c => {
+                                                    const g = getGrade(s.id, c.date);
+                                                    const att = getAtt(s.id, c.date);
+                                                    return <td key={c.date} className="border p-1 text-center">{att || g || '—'}</td>;
+                                                })}
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // ---------- Вкладка: Конспекты ----------
+        function TabPlans() {
+            const [selectedPlan, setSelectedPlan] = useState(null);
+            const [editorOpen, setEditorOpen] = useState(false);
+            const [newSection, setNewSection] = useState('');
+            const [newVocab, setNewVocab] = useState({ word: '', translation: '' });
+            const [newLink, setNewLink] = useState('');
+
+            const plans = data.plans || [];
+
+            const openEditor = (plan) => {
+                setSelectedPlan(plan || { id: uid(), topic: '', date: today(), duration: 45, goals: '', equipment: '',
+                        rating: 4, reflection: '', sections: [], vocabulary: [], links: [], files: [], sticker: stickerColors[
+                            0], createdAt: today() });
+                setEditorOpen(true);
+            };
+
+            const savePlan = () => {
+                if (!selectedPlan) return;
+                if (!selectedPlan.topic.trim()) { showToast('Введите тему конспекта', 'error'); return; }
+                if (selectedPlan.id.startsWith('_')) {
+                    data.plans.push({ ...selectedPlan, id: uid() });
+                } else {
+                    const idx = data.plans.findIndex(p => p.id === selectedPlan.id);
+                    if (idx >= 0) data.plans[idx] = selectedPlan;
+                }
+                saveData();
+                setEditorOpen(false);
+                setSelectedPlan(null);
+                showToast('Конспект сохранён', 'success');
+            };
+
+            const deletePlan = (id) => {
+                if (!confirm('Удалить конспект?')) return;
+                data.plans = data.plans.filter(p => p.id !== id);
+                saveData();
+                showToast('Конспект удалён', 'success');
+            };
+
+            const addSection = () => {
+                if (!newSection.trim()) return;
+                if (!selectedPlan) return;
+                selectedPlan.sections.push(newSection.trim());
+                setNewSection('');
+            };
+            const removeSection = (idx) => {
+                if (!selectedPlan) return;
+                selectedPlan.sections.splice(idx, 1);
+            };
+            const addVocab = () => {
+                if (!newVocab.word.trim() || !newVocab.translation.trim()) return;
+                if (!selectedPlan) return;
+                selectedPlan.vocabulary.push({ ...newVocab });
+                setNewVocab({ word: '', translation: '' });
+            };
+            const removeVocab = (idx) => {
+                if (!selectedPlan) return;
+                selectedPlan.vocabulary.splice(idx, 1);
+            };
+            const addLink = () => {
+                if (!newLink.trim()) return;
+                if (!selectedPlan) return;
+                selectedPlan.links.push(newLink.trim());
+                setNewLink('');
+            };
+            const removeLink = (idx) => {
+                if (!selectedPlan) return;
+                selectedPlan.links.splice(idx, 1);
+            };
+
+            return (
+                <div className="space-y-4 fade-in">
+                    <div className="flex items-center justify-between">
+                        <h2 className="font-unbounded text-xl font-bold">📝 Конспекты уроков</h2>
+                        <button onClick={() => openEditor(null)} className="btn-primary px-4 py-2 rounded-md text-sm flex items-center gap-2">
+                            <Icons.Plus /> Новый конспект
+                        </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 cascade-in">
+                        {plans.map(p => (
+                            <div key={p.id} className="card rounded-md p-4 cursor-pointer hover:shadow-md" onClick={() => openEditor(p)}>
+                                <div className="flex items-start justify-between">
+                                    <div className="flex-1">
+                                        <h3 className="font-unbounded font-bold text-base">{p.topic || 'Без темы'}</h3>
+                                        <p className="text-xs text-gray-400">{formatDate(p.date) || '—'}</p>
+                                        <div className="flex flex-wrap gap-1 mt-2">
+                                            <span className="text-xs bg-gray-100 px-2 py-0.5 rounded">⏱ {p.duration || 45}мин</span>
+                                            {p.rating && <span className="text-xs bg-yellow-100 px-2 py-0.5 rounded">⭐ {p.rating}</span>}
+                                        </div>
+                                    </div>
+                                    <button
+                                        className="text-gray-400 hover:text-red-500 p-1"
+                                        onClick={(e) => { e.stopPropagation(); deletePlan(p.id); }}
+                                    >
+                                        <Icons.Trash />
+                                    </button>
+                                </div>
+                                {p.sections && p.sections.length > 0 && <div className="mt-2 text-xs text-gray-400">Разделы: {p.sections.length}</div>}
+                                {p.vocabulary && p.vocabulary.length > 0 && <div className="mt-1 text-xs text-gray-400">Слова: {p.vocabulary.length}</div>}
+                            </div>
+                        ))}
+                    </div>
+
+                    {plans.length === 0 && <div className="text-center py-12 text-gray-400">Нет конспектов. Создайте первый!</div>}
+
+                    {editorOpen && selectedPlan && (
+                        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
+                            <div className="paper-bg paper-border rounded-md w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 shadow-xl">
+                                <div className="flex items-center justify-between mb-4">
+                                    <h3 className="font-unbounded font-bold text-lg">{selectedPlan.id.startsWith('_') ? 'Новый конспект' : 'Редактировать конспект'}</h3>
+                                    <button onClick={() => { setEditorOpen(false); setSelectedPlan(null); }} className="text-gray-400 hover:text-gray-600">
+                                        <Icons.Close />
+                                    </button>
+                                </div>
+
+                                <div className="space-y-3">
+                                    <div>
+                                        <label className="text-sm font-medium">Тема *</label>
+                                        <input
+                                            type="text"
+                                            className="w-full"
+                                            value={selectedPlan.topic || ''}
+                                            onChange={(e) => setSelectedPlan({ ...selectedPlan, topic: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <div>
+                                            <label className="text-sm font-medium">Дата</label>
+                                            <input
+                                                type="date"
+                                                className="w-full"
+                                                value={selectedPlan.date || ''}
+                                                onChange={(e) => setSelectedPlan({ ...selectedPlan, date: e.target.value })}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm font-medium">Длительность (мин)</label>
+                                            <input
+                                                type="number"
+                                                className="w-full"
+                                                value={selectedPlan.duration || 45}
+                                                onChange={(e) => setSelectedPlan({ ...selectedPlan, duration: parseInt(e.target.value) || 45 })}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="text-sm font-medium">Цели</label>
+                                        <textarea
+                                            className="w-full"
+                                            rows={2}
+                                            value={selectedPlan.goals || ''}
+                                            onChange={(e) => setSelectedPlan({ ...selectedPlan, goals: e.target.value })}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="text-sm font-medium">Оборудование</label>
+                                        <textarea
+                                            className="w-full"
+                                            rows={2}
+                                            value={selectedPlan.equipment || ''}
+                                            onChange={(e) => setSelectedPlan({ ...selectedPlan, equipment: e.target.value })}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="text-sm font-medium">Оценка за урок (1-5)</label>
+                                        <input
+                                            type="number"
+                                            className="w-full"
+                                            min={1}
+                                            max={5}
+                                            value={selectedPlan.rating || 4}
+                                            onChange={(e) => setSelectedPlan({ ...selectedPlan, rating: parseInt(e.target.value) || 4 })}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="text-sm font-medium">Рефлексия</label>
+                                        <textarea
+                                            className="w-full"
+                                            rows={2}
+                                            value={selectedPlan.reflection || ''}
+                                            onChange={(e) => setSelectedPlan({ ...selectedPlan, reflection: e.target.value })}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="text-sm font-medium">Разделы</label>
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="text"
+                                                className="flex-1"
+                                                placeholder="Новый раздел"
+                                                value={newSection}
+                                                onChange={(e) => setNewSection(e.target.value)}
+                                                onKeyDown={(e) => { if (e.key === 'Enter') addSection(); }}
+                                            />
+                                            <button onClick={addSection} className="btn-secondary px-3 py-1 rounded-md text-sm">Добавить</button>
+                                        </div>
+                                        <div className="flex flex-wrap gap-1 mt-1">
+                                            {(selectedPlan.sections || []).map((s, i) => (
+                                                <span key={i} className="bg-gray-100 px-2 py-0.5 rounded text-sm flex items-center gap-1">
+                                                    {s}
+                                                    <button onClick={() => removeSection(i)} className="text-gray-400 hover:text-red-500">✕</button>
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="text-sm font-medium">Словарь (слово — перевод)</label>
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="text"
+                                                className="flex-1"
+                                                placeholder="Слово"
+                                                value={newVocab.word}
+                                                onChange={(e) => setNewVocab({ ...newVocab, word: e.target.value })}
+                                            />
+                                            <input
+                                                type="text"
+                                                className="flex-1"
+                                                placeholder="Перевод"
+                                                value={newVocab.translation}
+                                                onChange={(e) => setNewVocab({ ...newVocab, translation: e.target.value })}
+                                                onKeyDown={(e) => { if (e.key === 'Enter') addVocab(); }}
+                                            />
+                                            <button onClick={addVocab} className="btn-secondary px-3 py-1 rounded-md text-sm">Добавить</button>
+                                        </div>
+                                        <div className="flex flex-wrap gap-1 mt-1">
+                                            {(selectedPlan.vocabulary || []).map((v, i) => (
+                                                <span key={i} className="bg-gray-100 px-2 py-0.5 rounded text-sm flex items-center gap-1">
+                                                    {v.word} — {v.translation}
+                                                    <button onClick={() => removeVocab(i)} className="text-gray-400 hover:text-red-500">✕</button>
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="text-sm font-medium">Ссылки</label>
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="text"
+                                                className="flex-1"
+                                                placeholder="https://..."
+                                                value={newLink}
+                                                onChange={(e) => setNewLink(e.target.value)}
+                                                onKeyDown={(e) => { if (e.key === 'Enter') addLink(); }}
+                                            />
+                                            <button onClick={addLink} className="btn-secondary px-3 py-1 rounded-md text-sm">Добавить</button>
+                                        </div>
+                                        <div className="flex flex-wrap gap-1 mt-1">
+                                            {(selectedPlan.links || []).map((l, i) => (
+                                                <span key={i} className="bg-gray-100 px-2 py-0.5 rounded text-sm flex items-center gap-1">
+                                                    <Icons.Link />
+                                                    <a href={l} target="_blank" className="text-blue-600 hover:underline text-xs truncate max-w-[150px]">{l}</a>
+                                                    <button onClick={() => removeLink(i)} className="text-gray-400 hover:text-red-500">✕</button>
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="text-sm font-medium">Цвет стикера</label>
+                                        <div className="flex flex-wrap gap-2 mt-1">
+                                            {stickerColors.map(c => (
+                                                <button
+                                                    key={c}
+                                                    className="w-6 h-6 rounded-sm border-2 border-gray-200 hover:border-gray-400"
+                                                    style={{ background: c, borderColor: selectedPlan.sticker === c ? '#2d5a3d' : '#e5e7eb' }}
+                                                    onClick={() => setSelectedPlan({ ...selectedPlan, sticker: c })}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="flex gap-3 justify-end pt-4 border-t border-gray-200">
+                                        <button onClick={() => { setEditorOpen(false); setSelectedPlan(null); }} className="btn-outline px-4 py-2 rounded-md text-sm">Отмена</button>
+                                        <button onClick={savePlan} className="btn-primary px-6 py-2 rounded-md text-sm">Сохранить</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // ---------- Вкладка: Группы ----------
+        function TabGroups() {
+            const [editingGroup, setEditingGroup] = useState(null);
+            const [newStudent, setNewStudent] = useState('');
+            const [editingStudent, setEditingStudent] = useState(null);
+
+            const groups = data.groups || [];
+
+            const updateGroup = (id, field, value) => {
+                const g = data.groups.find(gr => gr.id === id);
+                if (!g) return;
+                g[field] = value;
+                saveData();
+            };
+
+            const addStudent = (groupId) => {
+                if (!newStudent.trim()) return;
+                const g = data.groups.find(gr => gr.id === groupId);
+                if (!g) return;
+                g.students.push({ id: uid(), name: newStudent.trim() });
+                setNewStudent('');
+                saveData();
+                showToast('Ученик добавлен', 'success');
+            };
+
+            const removeStudent = (groupId, studentId) => {
+                if (!confirm('Удалить ученика?')) return;
+                const g = data.groups.find(gr => gr.id === groupId);
+                if (!g) return;
+                g.students = g.students.filter(s => s.id !== studentId);
+                delete g.grades[studentId];
+                saveData();
+                showToast('Ученик удалён', 'success');
+            };
+
+            const renameStudent = (groupId, studentId, newName) => {
+                if (!newName.trim()) return;
+                const g = data.groups.find(gr => gr.id === groupId);
+                if (!g) return;
+                const s = g.students.find(st => st.id === studentId);
+                if (s) s.name = newName.trim();
+                saveData();
+                setEditingStudent(null);
+            };
+
+            const deleteGroup = (id) => {
+                if (!confirm('Удалить группу со всеми данными?')) return;
+                data.groups = data.groups.filter(g => g.id !== id);
+                saveData();
+                showToast('Группа удалена', 'success');
+            };
+
+            return (
+                <div className="space-y-6 fade-in">
+                    <div className="flex items-center justify-between">
+                        <h2 className="font-unbounded text-xl font-bold">📚 Группы</h2>
+                        <button onClick={() => {
+                            const g = { id: uid(), name: 'Новая группа', language: 'Английский', level: 'A1',
+                                color: colors[0], students: [], dateCols: [], grades: {} };
+                            data.groups.push(g);
+                            saveData();
+                            showToast('Группа создана', 'success');
+                        }} className="btn-primary px-4 py-2 rounded-md text-sm flex items-center gap-2">
+                            <Icons.Plus /> Новая группа
+                        </button>
+                    </div>
+
+                    {groups.map(g => (
+                        <div key={g.id} className="card rounded-md p-4">
+                            <div className="flex items-start justify-between flex-wrap gap-2 mb-3">
+                                <div className="flex items-center gap-3 flex-wrap">
+                                    <span className="w-4 h-4 rounded-sm" style={{ background: g.color || colors[0] }} />
+                                    <input
+                                        type="text"
+                                        className="font-unbounded font-bold text-lg border-0 bg-transparent p-0 w-auto"
+                                        value={g.name}
+                                        onChange={(e) => updateGroup(g.id, 'name', e.target.value)}
+                                    />
+                                    <select
+                                        className="text-sm"
+                                        value={g.language || ''}
+                                        onChange={(e) => updateGroup(g.id, 'language', e.target.value)}
+                                    >
+                                        {['Английский', 'Французский', 'Немецкий', 'Испанский', 'Итальянский', 'Китайский',
+                                            'Японский', 'Другой'
+                                        ].map(l => <option key={l} value={l}>{l}</option>)}
+                                    </select>
+                                    <select
+                                        className="text-sm"
+                                        value={g.level || 'A1'}
+                                        onChange={(e) => updateGroup(g.id, 'level', e.target.value)}
+                                    >
+                                        {cefrLevels.map(l => <option key={l} value={l}>{l}</option>)}
+                                    </select>
+                                    <input
+                                        type="color"
+                                        className="w-8 h-8 p-0 border-0"
+                                        value={g.color || colors[0]}
+                                        onChange={(e) => updateGroup(g.id, 'color', e.target.value)}
+                                    />
+                                </div>
+                                <button onClick={() => deleteGroup(g.id)} className="text-gray-400 hover:text-red-500">
+                                    <Icons.Trash />
+                                </button>
+                            </div>
+
+                            <div>
+                                <label className="text-sm font-medium">Ученики ({g.students.length})</label>
+                                <div className="flex flex-wrap gap-2 mt-1">
+                                    {g.students.map(s => (
+                                        <span key={s.id} className="bg-gray-100 px-2 py-1 rounded text-sm flex items-center gap-1">
+                                            {editingStudent === s.id ? (
+                                                <input
+                                                    type="text"
+                                                    className="text-sm w-24 bg-transparent border-0 p-0"
+                                                    value={s.name}
+                                                    onChange={(e) => {
+                                                        const ns = { ...s, name: e.target.value };
+                                                        const idx = g.students.findIndex(st => st.id === s.id);
+                                                        if (idx >= 0) g.students[idx] = ns;
+                                                    }}
+                                                    onBlur={() => renameStudent(g.id, s.id, s.name)}
+                                                    onKeyDown={(e) => { if (e.key === 'Enter') renameStudent(g.id, s.id, s.name); }}
+                                                    autoFocus
+                                                />
+                                            ) : (
+                                                <span className="cursor-pointer hover:text-green-700" onClick={() => setEditingStudent(s.id)}>
+                                                    {s.name}
+                                                </span>
+                                            )}
+                                            <button onClick={() => removeStudent(g.id, s.id)} className="text-gray-400 hover:text-red-500">✕</button>
+                                        </span>
+                                    ))}
+                                    <div className="flex items-center gap-1">
+                                        <input
+                                            type="text"
+                                            className="text-sm w-28"
+                                            placeholder="Добавить..."
+                                            value={newStudent}
+                                            onChange={(e) => setNewStudent(e.target.value)}
+                                            onKeyDown={(e) => { if (e.key === 'Enter') addStudent(g.id); }}
+                                        />
+                                        <button onClick={() => addStudent(g.id)} className="btn-secondary px-2 py-1 rounded text-xs">➕</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-2 text-xs text-gray-400">
+                                Колонок: {(g.dateCols || []).length} | Оценок: {Object.keys(g.grades || {}).length}
+                            </div>
+                        </div>
+                    ))}
+
+                    {groups.length === 0 && <div className="text-center py-12 text-gray-400">Нет групп. Создайте первую!</div>}
+                </div>
+            );
+        }
+
+        // ---------- Вкладка: Планировщик ----------
+        function TabPlanner() {
+            const [filter, setFilter] = useState('all');
+            const lessons = data.lessons || [];
+            const now = today();
+
+            const sections = {
+                overdue: lessons.filter(l => l.date < now && l.status !== 'Проведено' && l.status !== 'Отменено'),
+                today: lessons.filter(l => l.date === now && l.status !== 'Проведено' && l.status !== 'Отменено'),
+                tomorrow: lessons.filter(l => isTomorrow(l.date) && l.status !== 'Проведено' && l.status !== 'Отменено'),
+                week: lessons.filter(l => {
+                    const d = l.date;
+                    if (d <= now || isTomorrow(d) || isToday(d)) return false;
+                    const weekEnd = new Date(now + 'T00:00:00');
+                    weekEnd.setDate(weekEnd.getDate() + 7);
+                    return d < weekEnd.toISOString().slice(0, 10) && l.status !== 'Проведено' && l.status !== 'Отменено';
+                }),
+                later: lessons.filter(l => {
+                    const weekEnd = new Date(now + 'T00:00:00');
+                    weekEnd.setDate(weekEnd.getDate() + 7);
+                    return l.date >= weekEnd.toISOString().slice(0, 10) && l.status !== 'Проведено' && l.status !== 'Отменено';
+                }),
+                completed: lessons.filter(l => l.status === 'Проведено')
+            };
+
+            const updateStatus = (id, status) => {
+                const l = data.lessons.find(ls => ls.id === id);
+                if (l) { l.status = status; saveData(); }
+            };
+
+            const deleteLesson = (id) => {
+                if (!confirm('Удалить урок?')) return;
+                data.lessons = data.lessons.filter(l => l.id !== id);
+                saveData();
+                showToast('Урок удалён', 'success');
+            };
+
+            const addLesson = () => {
+                const g = data.groups && data.groups.length > 0 ? data.groups[0] : null;
+                if (!g) { showToast('Сначала создайте группу', 'error'); return; }
+                data.lessons.push({
+                    id: uid(),
+                    groupId: g.id,
+                    groupName: g.name,
+                    date: today(),
+                    time: '10:00',
+                    topic: 'Новый урок',
+                    homework: '',
+                    status: 'Запланировано'
+                });
+                saveData();
+                showToast('Урок добавлен', 'success');
+            };
+
+            const renderSection = (title, items, statusColor) => {
+                if (items.length === 0) return null;
+                return (
+                    <div className="space-y-2">
+                        <h3 className="font-unbounded font-bold text-sm text-gray-500">{title} ({items.length})</h3>
+                        {items.map(l => (
+                            <div key={l.id} className="flex items-center justify-between p-2 bg-gray-50 rounded-md">
+                                <div className="flex items-center gap-3 flex-wrap">
+                                    <span className="text-xs font-medium">{formatDateShort(l.date)}</span>
+                                    <span className="text-sm">{l.groupName}</span>
+                                    <span className="text-xs text-gray-400">{formatTime(l.time)}</span>
+                                    <span className="text-sm">{l.topic}</span>
+                                    {l.homework && <span className="text-xs text-gray-400">ДЗ: {l.homework}</span>}
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <select
+                                        className="text-xs py-0.5 px-1"
+                                        value={l.status || 'Запланировано'}
+                                        onChange={(e) => updateStatus(l.id, e.target.value)}
+                                    >
+                                        {statuses.map(s => <option key={s} value={s}>{s}</option>)}
+                                    </select>
+                                    <button onClick={() => deleteLesson(l.id)} className="text-gray-400 hover:text-red-500">
+                                        <Icons.Trash />
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                );
+            };
+
+            const weekProgress = () => {
+                const weekDays = getWeekDays(now);
+                const total = weekDays.length;
+                let done = 0;
+                weekDays.forEach(d => {
+                    const ls = lessons.filter(l => l.date === d && l.status === 'Проведено');
+                    if (ls.length > 0) done++;
+                });
+                return Math.round((done / total) * 100);
+            };
+
+            return (
+                <div className="space-y-4 fade-in">
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                        <h2 className="font-unbounded text-xl font-bold">📋 Планировщик</h2>
+                        <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2 text-sm">
+                                <span className="text-gray-500">Прогресс недели:</span>
+                                <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                    <div className="h-full bg-green-600 transition-all" style={{ width: weekProgress() + '%' }} />
+                                </div>
+                                <span className="font-medium">{weekProgress()}%</span>
+                            </div>
+                            <button onClick={addLesson} className="btn-primary px-3 py-1.5 rounded-md text-sm flex items-center gap-1">
+                                <Icons.Plus /> Урок
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="space-y-4">
+                        {renderSection('🔴 Просрочено', sections.overdue)}
+                        {renderSection('🟢 Сегодня', sections.today)}
+                        {renderSection('🟡 Завтра', sections.tomorrow)}
+                        {renderSection('🔵 Неделя', sections.week)}
+                        {renderSection('⚪ Позже', sections.later)}
+                        {renderSection('✅ Проведённые', sections.completed)}
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-200">
+                        <button className="btn-outline px-3 py-1.5 rounded-md text-sm flex items-center gap-1"><Icons.Copy /> Копировать</button>
+                        <button className="btn-outline px-3 py-1.5 rounded-md text-sm flex items-center gap-1"><Icons.WhatsApp /> WhatsApp</button>
+                        <button className="btn-outline px-3 py-1.5 rounded-md text-sm flex items-center gap-1"><Icons.Mail /> E-mail</button>
+                        <button className="btn-outline px-3 py-1.5 rounded-md text-sm flex items-center gap-1"><Icons.Calendar /> Экспорт .ics</button>
+                    </div>
+                </div>
+            );
+        }
+
+        // ---------- Вкладка: Мероприятия ----------
+        function TabEvents() {
+            const [filterType, setFilterType] = useState('all');
+            const [filterStatus, setFilterStatus] = useState('all');
+            const events = data.events || [];
+
+            const filtered = events.filter(e => {
+                if (filterType !== 'all' && e.type !== filterType) return false;
+                if (filterStatus !== 'all' && e.status !== filterStatus) return false;
+                return true;
+            }).sort((a, b) => a.date.localeCompare(b.date));
+
+            const addEvent = () => {
+                data.events.push({
+                    id: uid(),
+                    type: 'Урок',
+                    title: 'Новое мероприятие',
+                    date: today(),
+                    location: '',
+                    groups: [],
+                    status: 'Запланировано',
+                    description: ''
+                });
+                saveData();
+                showToast('Мероприятие добавлено', 'success');
+            };
+
+            const deleteEvent = (id) => {
+                if (!confirm('Удалить мероприятие?')) return;
+                data.events = data.events.filter(e => e.id !== id);
+                saveData();
+                showToast('Мероприятие удалено', 'success');
+            };
+
+            return (
+                <div className="space-y-4 fade-in">
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                        <h2 className="font-unbounded text-xl font-bold">🎯 Мероприятия</h2>
+                        <button onClick={addEvent} className="btn-primary px-4 py-2 rounded-md text-sm flex items-center gap-2">
+                            <Icons.Plus /> Добавить
+                        </button>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                        <select className="text-sm" value={filterType} onChange={(e) => setFilterType(e.target.value)}>
+                            <option value="all">Все типы</option>
+                            {eventTypes.map(t => <option key={t} value={t}>{t}</option>)}
+                        </select>
+                        <select className="text-sm" value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
+                            <option value="all">Все статусы</option>
+                            {statuses.map(s => <option key={s} value={s}>{s}</option>)}
+                        </select>
+                    </div>
+
+                    <div className="space-y-3">
+                        {filtered.map(e => (
+                            <div key={e.id} className="card rounded-md p-4">
+                                <div className="flex items-start justify-between">
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-3 flex-wrap">
+                                            <span className="font-unbounded font-bold">{e.title}</span>
+                                            <span className="text-xs px-2 py-0.5 rounded-full bg-gray-200">{e.type}</span>
+                                            <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100">{e.status}</span>
+                                        </div>
+                                        <p className="text-xs text-gray-400 mt-1">
+                                            {formatDate(e.date) || '—'} {e.location ? ' • ' + e.location : ''}
+                                        </p>
+                                        {e.groups && e.groups.length > 0 && (
+                                            <div className="flex flex-wrap gap-1 mt-1">
+                                                {e.groups.map(g => <span key={g} className="text-xs bg-gray-100 px-2 py-0.5 rounded">{g}</span>)}
+                                            </div>
+                                        )}
+                                        {e.description && <p className="text-sm text-gray-500 mt-1">{e.description}</p>}
+                                    </div>
+                                    <button onClick={() => deleteEvent(e.id)} className="text-gray-400 hover:text-red-500">
+                                        <Icons.Trash />
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {filtered.length === 0 && <div className="text-center py-12 text-gray-400">Нет мероприятий</div>}
+                </div>
+            );
+        }
+
+        // ---------- Вкладка: Аналитика ----------
+        function TabAnalytics() {
+            const groups = data.groups || [];
+            const now = today();
+
+            const calcStats = (g) => {
+                const students = g.students || [];
+                const grades = g.grades || {};
+                const dateCols = g.dateCols || [];
+                let total = 0,
+                    count = 0,
+                    attPresent = 0,
+                    attTotal = 0;
+                const studentAvgs = [];
+                students.forEach(s => {
+                    let sum = 0,
+                        cnt = 0;
+                    dateCols.forEach(c => {
+                        const v = grades[s.id]?.[c.date];
+                        if (v && v !== '+' && !attendanceOptions.includes(v)) {
+                            const n = parseFloat(v);
+                            if (!isNaN(n)) { sum += n;
+                                cnt++; }
+                        } else if (v === '+') { sum += 0.1;
+                            cnt++; }
+                        const att = grades[s.id]?.[c.date + '_att'];
+                        if (att) { attTotal++;
+                            attPresent++; }
+                    });
+                    const avg = cnt > 0 ? sum / cnt : 0;
+                    studentAvgs.push({ student: s, avg, count: cnt });
+                    total += sum;
+                    count += cnt;
+                });
+                const overall = count > 0 ? total / count : 0;
+                const attendance = attTotal > 0 ? (attPresent / attTotal) * 100 : 0;
+                studentAvgs.sort((a, b) => b.avg - a.avg);
+                const strongest = studentAvgs.slice(0, 3).map(s => s.student.name);
+                const weakest = studentAvgs.filter(s => s.count > 0).slice(-3).reverse().map(s => s.student.name);
+                return { overall, attendance, strongest, weakest, studentAvgs };
+            };
+
+            return (
+                <div className="space-y-6 fade-in">
+                    <h2 className="font-unbounded text-xl font-bold">📊 Аналитика</h2>
+
+                    {groups.map(g => {
+                        const stats = calcStats(g);
+                        return (
+                            <div key={g.id} className="card rounded-md p-4">
+                                <h3 className="font-unbounded font-bold text-lg">{g.name}</h3>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-3">
+                                    <div className="bg-gray-50 rounded-md p-3 text-center">
+                                        <div className="text-2xl font-bold text-green-700">{stats.overall.toFixed(2)}</div>
+                                        <div className="text-xs text-gray-400">Ср. балл</div>
+                                    </div>
+                                    <div className="bg-gray-50 rounded-md p-3 text-center">
+                                        <div className="text-2xl font-bold text-blue-600">{stats.attendance.toFixed(0)}%</div>
+                                        <div className="text-xs text-gray-400">Посещаемость</div>
+                                    </div>
+                                    <div className="bg-gray-50 rounded-md p-3 text-center">
+                                        <div className="text-sm font-bold text-green-600">{stats.strongest.join(', ') || '—'}</div>
+                                        <div className="text-xs text-gray-400">Сильнейшие</div>
+                                    </div>
+                                    <div className="bg-gray-50 rounded-md p-3 text-center">
+                                        <div className="text-sm font-bold text-red-600">{stats.weakest.join(', ') || '—'}</div>
+                                        <div className="text-xs text-gray-400">Требуют внимания</div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+
+                    {groups.length === 0 && <div className="text-center py-12 text-gray-400">Нет данных для аналитики</div>}
+                </div>
+            );
+        }
+
+        // ---------- Вкладка: Данные ----------
+        function TabData() {
+            const [syncStatus, setSyncStatus] = useState('Синхронизировано');
+            const [importMode, setImportMode] = useState('replace');
+
+            const exportJSON = () => {
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `lingvojournal_backup_${today()}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast('Экспорт JSON выполнен', 'success');
+            };
+
+            const exportCSV = () => {
+                let csv = '\uFEFF';
+                const groups = data.groups || [];
+                groups.forEach(g => {
+                    csv += `Группа;${g.name};${g.language};${g.level}\n`;
+                    csv += 'Ученик;';
+                    (g.dateCols || []).forEach(c => { csv += `${formatDateShort(c.date)};`; });
+                    csv += 'Средний\n';
+                    (g.students || []).forEach(s => {
+                        csv += `${s.name};`;
+                        let sum = 0,
+                            cnt = 0;
+                        (g.dateCols || []).forEach(c => {
+                            const v = g.grades[s.id]?.[c.date];
+                            if (v && v !== '+' && !attendanceOptions.includes(v)) {
+                                const n = parseFloat(v);
+                                if (!isNaN(n)) { sum += n;
+                                    cnt++; }
+                            } else if (v === '+') { sum += 0.1;
+                                cnt++; }
+                            const att = g.grades[s.id]?.[c.date + '_att'];
+                            csv += `${att || v || ''};`;
+                        });
+                        csv += `${cnt > 0 ? (sum/cnt).toFixed(2) : ''}\n`;
+                    });
+                    csv += '\n';
+                });
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `lingvojournal_export_${today()}.csv`;
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast('Экспорт CSV выполнен', 'success');
+            };
+
+            const handleImport = (file) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const imported = JSON.parse(e.target.result);
+                        if (!imported.groups || !Array.isArray(imported.groups)) {
+                            showToast('Неверный формат файла', 'error');
+                            return;
+                        }
+                        if (importMode === 'replace') {
+                            data.groups = imported.groups || [];
+                            data.lessons = imported.lessons || [];
+                            data.plans = imported.plans || [];
+                            data.events = imported.events || [];
+                            data.stickers = imported.stickers || [];
+                        } else {
+                            imported.groups?.forEach(g => {
+                                if (!data.groups.find(gr => gr.id === g.id)) data.groups.push(g);
+                            });
+                            imported.lessons?.forEach(l => {
+                                if (!data.lessons.find(ls => ls.id === l.id)) data.lessons.push(l);
+                            });
+                            imported.plans?.forEach(p => {
+                                if (!data.plans.find(pl => pl.id === p.id)) data.plans.push(p);
+                            });
+                            imported.events?.forEach(e => {
+                                if (!data.events.find(ev => ev.id === e.id)) data.events.push(e);
+                            });
+                            imported.stickers?.forEach(s => {
+                                if (!data.stickers.find(st => st.id === s.id)) data.stickers.push(s);
+                            });
+                        }
+                        saveData();
+                        showToast('Импорт выполнен успешно', 'success');
+                    } catch (err) {
+                        showToast('Ошибка при импорте: ' + err.message, 'error');
+                    }
+                };
+                reader.readAsText(file);
+            };
+
+            const resetDemo = () => {
+                if (!confirm('Загрузить демо-данные? Текущие данные будут заменены.')) return;
+                data = getDefaultData();
+                saveData();
+                showToast('Демо-данные загружены', 'success');
+            };
+
+            const clearAll = () => {
+                if (!confirm('Удалить все данные? Это действие необратимо.')) return;
+                data = { groups: [], lessons: [], plans: [], events: [], stickers: [], settings: { theme: 'light' } };
+                saveData();
+                showToast('Все данные удалены', 'success');
+            };
+
+            return (
+                <div className="space-y-6 fade-in">
+                    <h2 className="font-unbounded text-xl font-bold">💾 Управление данными</h2>
+
+                    <div className="card rounded-md p-4">
+                        <h3 className="font-unbounded font-bold text-lg mb-3">Экспорт</h3>
+                        <div className="flex flex-wrap gap-3">
+                            <button onClick={exportJSON} className="btn-primary px-4 py-2 rounded-md text-sm flex items-center gap-2">
+                                <Icons.Download /> JSON-бэкап
+                            </button>
+                            <button onClick={exportCSV} className="btn-primary px-4 py-2 rounded-md text-sm flex items-center gap-2">
+                                <Icons.Download /> CSV (Excel)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="card rounded-md p-4">
+                        <h3 className="font-unbounded font-bold text-lg mb-3">Импорт</h3>
+                        <div className="flex flex-wrap gap-3 items-center">
+                            <select className="text-sm" value={importMode} onChange={(e) => setImportMode(e.target.value)}>
+                                <option value="replace">Заменить</option>
+                                <option value="merge">Объединить</option>
+                            </select>
+                            <label className="btn-secondary px-4 py-2 rounded-md text-sm flex items-center gap-2 cursor-pointer">
+                                <Icons.Upload /> Выбрать файл
+                                <input
+                                    type="file"
+                                    accept=".json"
+                                    className="hidden"
+                                    onChange={(e) => { if (e.target.files[0]) handleImport(e.target.files[0]); }}
+                                />
+                            </label>
+                            <div className="text-xs text-gray-400">или перетащите файл сюда</div>
+                        </div>
+                    </div>
+
+                    <div className="card rounded-md p-4">
+                        <h3 className="font-unbounded font-bold text-lg mb-3">Сервис</h3>
+                        <div className="flex flex-wrap gap-3">
+                            <button onClick={resetDemo} className="btn-outline px-4 py-2 rounded-md text-sm">🔄 Демо-данные</button>
+                            <button onClick={clearAll} className="px-4 py-2 rounded-md text-sm bg-red-100 text-red-600 hover:bg-red-200">🗑️ Очистить всё</button>
+                        </div>
+                    </div>
+
+                    <div className="text-xs text-gray-400 flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-green-600 pulse-sync" />
+                        {syncStatus} • {new Date().toLocaleTimeString()}
+                    </div>
+                </div>
+            );
+        }
+
+        // ---------- Плавающие кнопки ----------
+        function FloatingButtons() {
+            const [rouletteOpen, setRouletteOpen] = useState(false);
+            const [timerOpen, setTimerOpen] = useState(false);
+            const [timerRunning, setTimerRunning] = useState(false);
+            const [timerSeconds, setTimerSeconds] = useState(60);
+            const [timerTotal, setTimerTotal] = useState(60);
+            const [timerPaused, setTimerPaused] = useState(false);
+            const [lastStudent, setLastStudent] = useState(null);
+            const [currentStudent, setCurrentStudent] = useState(null);
+            const timerInterval = useRef(null);
+
+            const allStudents = useMemo(() => {
+                const list = [];
+                data.groups?.forEach(g => {
+                    g.students?.forEach(s => {
+                        list.push({ student: s, group: g });
+                    });
+                });
+                return list;
+            }, [data]);
+
+            const pickRandom = () => {
+                if (allStudents.length === 0) { showToast('Нет учеников', 'error'); return; }
+                let available = allStudents;
+                if (lastStudent) {
+                    available = allStudents.filter(s => s.student.id !== lastStudent.student.id);
+                }
+                if (available.length === 0) available = allStudents;
+                const picked = available[Math.floor(Math.random() * available.length)];
+                setLastStudent(picked);
+                setCurrentStudent(picked);
+                showToast(`🎲 ${picked.student.name} (${picked.group.name})`, 'success');
+            };
+
+            const startTimer = (secs) => {
+                setTimerTotal(secs);
+                setTimerSeconds(secs);
+                setTimerRunning(true);
+                setTimerPaused(false);
+                if (timerInterval.current) clearInterval(timerInterval.current);
+                timerInterval.current = setInterval(() => {
+                    setTimerSeconds(prev => {
+                        if (prev <= 1) {
+                            clearInterval(timerInterval.current);
+                            setTimerRunning(false);
+                            showToast('⏰ Время вышло!', 'success');
+                            return 0;
+                        }
+                        return prev - 1;
+                    });
+                }, 1000);
+            };
+
+            const pauseTimer = () => {
+                if (timerPaused) {
+                    setTimerPaused(false);
+                    timerInterval.current = setInterval(() => {
+                        setTimerSeconds(prev => {
+                            if (prev <= 1) {
+                                clearInterval(timerInterval.current);
+                                setTimerRunning(false);
+                                showToast('⏰ Время вышло!', 'success');
+                                return 0;
+                            }
+                            return prev - 1;
+                        });
+                    }, 1000);
+                } else {
+                    setTimerPaused(true);
+                    if (timerInterval.current) clearInterval(timerInterval.current);
+                }
+            };
+
+            const resetTimer = () => {
+                if (timerInterval.current) clearInterval(timerInterval.current);
+                setTimerRunning(false);
+                setTimerPaused(false);
+                setTimerSeconds(timerTotal);
+            };
+
+            const addMinute = () => {
+                setTimerSeconds(prev => prev + 60);
+                setTimerTotal(prev => prev + 60);
+            };
+
+            const circleSize = 56;
+            const strokeWidth = 4;
+            const radius = (circleSize - strokeWidth) / 2;
+            const circumference = 2 * Math.PI * radius;
+            const progress = timerTotal > 0 ? (timerSeconds / timerTotal) : 1;
+            const dashOffset = circumference * (1 - progress);
+
+            return (
+                <>
+                    <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-40">
+                        <button
+                            onClick={() => { setRouletteOpen(!rouletteOpen); setTimerOpen(false); }}
+                            className="btn-float w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center"
+                            title="Случайный ученик"
+                        >
+                            <Icons.Random />
+                        </button>
+                        <button
+                            onClick={() => { setTimerOpen(!timerOpen); setRouletteOpen(false); }}
+                            className="btn-float w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center"
+                            title="Таймер"
+                        >
+                            <Icons.Timer />
+                        </button>
+                    </div>
+
+                    {rouletteOpen && (
+                        <div className="fixed bottom-28 right-6 w-64 paper-bg paper-border rounded-md shadow-xl p-4 z-40 popover-enter">
+                            <div className="flex items-center justify-between mb-3">
+                                <span className="font-unbounded font-bold text-sm">🎲 Рулетка</span>
+                                <button onClick={() => setRouletteOpen(false)} className="text-gray-400 hover:text-gray-600">
+                                    <Icons.Close />
+                                </button>
+                            </div>
+                            {currentStudent && (
+                                <div className="bg-gray-100 rounded-md p-2 text-center mb-3">
+                                    <div className="font-bold text-lg">{currentStudent.student.name}</div>
+                                    <div className="text-xs text-gray-400">{currentStudent.group.name}</div>
+                                </div>
+                            )}
+                            <button onClick={pickRandom} className="btn-primary w-full py-2 rounded-md text-sm">Крутить!</button>
+                            {allStudents.length === 0 && <p className="text-xs text-gray-400 text-center mt-2">Нет учеников</p>}
+                        </div>
+                    )}
+
+                    {timerOpen && (
+                        <div className="fixed bottom-28 right-6 w-64 paper-bg paper-border rounded-md shadow-xl p-4 z-40 popover-enter">
+                            <div className="flex items-center justify-between mb-3">
+                                <span className="font-unbounded font-bold text-sm">⏱️ Таймер</span>
+                                <button onClick={() => setTimerOpen(false)} className="text-gray-400 hover:text-gray-600">
+                                    <Icons.Close />
+                                </button>
+                            </div>
+                            <div className="flex justify-center mb-3">
+                                <svg width={circleSize} height={circleSize} viewBox={`0 0 ${circleSize} ${circleSize}`}>
+                                    <circle cx={circleSize/2} cy={circleSize/2} r={radius} fill="none" stroke="#e5e7eb" strokeWidth={strokeWidth} />
+                                    <circle
+                                        className="ring-progress"
+                                        cx={circleSize/2}
+                                        cy={circleSize/2}
+                                        r={radius}
+                                        fill="none"
+                                        stroke="#2d5a3d"
+                                        strokeWidth={strokeWidth}
+                                        strokeDasharray={circumference}
+                                        strokeDashoffset={dashOffset}
+                                        strokeLinecap="round"
+                                    />
+                                    <text x={circleSize/2} y={circleSize/2 + 6} textAnchor="middle" className="text-sm font-bold fill-current">
+                                        {Math.floor(timerSeconds / 60)}:{String(timerSeconds % 60).padStart(2, '0')}
+                                    </text>
+                                </svg>
+                            </div>
+                            <div className="flex gap-2 mb-3 flex-wrap justify-center">
+                                {[60, 120, 180, 300].map(s => (
+                                    <button
+                                        key={s}
+                                        onClick={() => { if (!timerRunning) startTimer(s); }}
+                                        className="btn-outline px-2 py-0.5 rounded text-xs"
+                                        disabled={timerRunning}
+                                    >
+                                        {Math.floor(s / 60)}м
+                                    </button>
+                                ))}
+                            </div>
+                            <div className="flex items-center justify-center gap-2">
+                                {!timerRunning ? (
+                                    <button onClick={() => startTimer(timerTotal)} className="btn-primary px-4 py-1 rounded-md text-sm">Старт</button>
+                                ) : (
+                                    <>
+                                        <button onClick={pauseTimer} className="btn-secondary px-4 py-1 rounded-md text-sm">
+                                            {timerPaused ? '▶' : '⏸'}
+                                        </button>
+                                        <button onClick={resetTimer} className="btn-outline px-4 py-1 rounded-md text-sm">↺</button>
+                                        <button onClick={addMinute} className="btn-outline px-4 py-1 rounded-md text-sm">+1м</button>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    )}
+                </>
+            );
+        }
+
+        // ---------- Основной компонент приложения ----------
+        function App() {
+            const [tab, setTab] = useState('overview');
+            const [theme, setTheme] = useState(settings.theme || 'light');
+            const [toasts, setToasts] = useState([]);
+            const [showOnboarding, setShowOnboarding] = useState(true);
+            const [onboardStep, setOnboardStep] = useState(0);
+            const [searchResult, setSearchResult] = useState(null);
+
+            useEffect(() => {
+                loadData();
+                setTheme(settings.theme || 'light');
+                try {
+                    const bc = new BroadcastChannel('lingvojournal');
+                    bc.onmessage = (e) => {
+                        if (e.data.action === 'save') {
+                            loadData();
+                            setTheme(settings.theme || 'light');
+                            showToast('🔄 Данные синхронизированы', 'success');
+                        }
+                    };
+                    return () => bc.close();
+                } catch (e) { /* ignore */ }
+            }, []);
+
+            useEffect(() => {
+                const interval = setInterval(() => {
+                    if (data) saveData();
+                }, 25000);
+                return () => clearInterval(interval);
+            }, []);
+
+            useEffect(() => {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('theme-dark');
+                } else {
+                    document.documentElement.classList.remove('theme-dark');
+                }
+                if (data) {
+                    data.settings = { theme };
+                    settings.theme = theme;
+                    saveData();
+                }
+            }, [theme]);
+
+            const showToast = (message, type = 'info') => {
+                const id = uid();
+                setToasts(prev => [...prev, { id, message, type }]);
+                setTimeout(() => {
+                    setToasts(prev => prev.filter(t => t.id !== id));
+                }, 3000);
+            };
+            window.showToast = showToast;
+
+            const removeToast = (id) => {
+                setToasts(prev => prev.filter(t => t.id !== id));
+            };
+
+            const handleSearchSelect = (item) => {
+                setSearchResult(item);
+                setTab('journal');
+                showToast(`🔍 ${item.student.name} (${item.group.name})`, 'success');
+            };
+
+            if (!data) return <div className="flex items-center justify-center min-h-screen text-gray-400">Загрузка...</div>;
+
+            const tabs = [
+                { id: 'overview', label: 'Обзор', icon: '🏠' },
+                { id: 'journal', label: 'Журнал', icon: '📖' },
+                { id: 'plans', label: 'Конспекты', icon: '📝' },
+                { id: 'groups', label: 'Группы', icon: '👥' },
+                { id: 'planner', label: 'Планировщик', icon: '📋' },
+                { id: 'events', label: 'Мероприятия', icon: '🎯' },
+                { id: 'analytics', label: 'Аналитика', icon: '📊' },
+                { id: 'data', label: 'Данные', icon: '💾' },
+            ];
+
+            const renderTab = () => {
+                switch (tab) {
+                    case 'overview': return <TabOverview setTab={setTab} setSelectedStudent={handleSearchSelect} />;
+                    case 'journal': return <TabJournal />;
+                    case 'plans': return <TabPlans />;
+                    case 'groups': return <TabGroups />;
+                    case 'planner': return <TabPlanner />;
+                    case 'events': return <TabEvents />;
+                    case 'analytics': return <TabAnalytics />;
+                    case 'data': return <TabData />;
+                    default: return <div>Страница не найдена</div>;
+                }
+            };
+
+            return (
+                <div className="min-h-screen paper-bg text-gray-800">
+                    <header className="sticky top-0 z-30 paper-bg paper-border-b border-b px-4 py-3 flex items-center justify-between flex-wrap gap-3">
+                        <div className="flex items-center gap-3">
+                            <span className="font-unbounded text-xl font-bold text-green-800">📓 ЛингвоЖурнал</span>
+                            <span className="text-xs text-gray-400 hidden sm:inline">v1.0</span>
+                        </div>
+                        <div className="flex items-center gap-3 flex-1 max-w-sm">
+                            <GlobalSearch onSelect={handleSearchSelect} />
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <button
+                                onClick={() => { setTheme(theme === 'light' ? 'dark' : 'light'); }}
+                                className="p-2 rounded-md hover:bg-gray-200 text-gray-600"
+                            >
+                                {theme === 'light' ? <Icons.Moon /> : <Icons.Sun />}
+                            </button>
+                            <button
+                                onClick={() => { setShowOnboarding(true); setOnboardStep(0); }}
+                                className="p-2 rounded-md hover:bg-gray-200 text-gray-600 text-sm font-bold"
+                            >
+                                ?
+                            </button>
+                        </div>
+                    </header>
+
+                    <nav className="px-4 pt-2 flex overflow-x-auto gap-1 border-b border-gray-200 scrollbar-thin">
+                        {tabs.map(t => (
+                            <button
+                                key={t.id}
+                                className={`px-3 py-2 text-sm font-medium transition-all whitespace-nowrap ${tab === t.id ? 'tab-active' : 'tab-inactive'}`}
+                                onClick={() => setTab(t.id)}
+                            >
+                                {t.icon} {t.label}
+                            </button>
+                        ))}
+                    </nav>
+
+                    <main className="p-4 max-w-7xl mx-auto">
+                        {renderTab()}
+                    </main>
+
+                    <FloatingButtons />
+                    <ToastSystem toasts={toasts} removeToast={removeToast} />
+
+                    {showOnboarding && (
+                        <Onboarding
+                            onComplete={() => setShowOnboarding(false)}
+                            currentStep={onboardStep}
+                            setStep={setOnboardStep}
+                        />
+                    )}
+
+                    <ConfirmModal isOpen={false} title="" message="" onConfirm={() => {}} onCancel={() => {}} />
+                </div>
+            );
+        }
+
+        // ---------- Запуск ----------
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+<section class="tm-card tm-notes"><h2>Генератор расширенного конспекта</h2><div class="tm-form"><input id="lj-topic" placeholder="Тема урока"/><select id="lj-level"><option>начальный уровень</option><option>средний уровень</option><option>продвинутый уровень</option></select><input id="lj-goal" placeholder="Цель и результат занятия"/><button id="lj-generate">Сформировать подробный конспект</button></div><textarea id="lj-output" rows="16" placeholder="Здесь появится структурированный конспект"></textarea><div class="tm-actions"><button id="lj-copy">Копировать</button><button id="lj-word">Скачать Word</button></div></section><script id="theme-tools-script">(()=>{const q=s=>document.querySelector(s), text=(s)=>String(s||'').trim(); const saveWord=(name,content)=>{const blob=new Blob(['\ufeff', '<html><head><meta charset="utf-8"></head><body><pre style="white-space:pre-wrap;font:15px Arial">'+content.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+'</pre></body></html>'],{type:'application/msword'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name+'.doc';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};document.title=document.title.replace(' · Генератор','');document.documentElement.dataset.themeNote='Добавлен генератор подробного конспекта с локальным экспортом в Word.';document.querySelectorAll('[data-home]').forEach(b=>b.onclick=()=>q('#home-output').textContent='Сценарий «'+b.dataset.home+'»: выберите 3 главных действия, назначьте время и оставьте один запасной шаг.');document.querySelectorAll('[data-build]').forEach(b=>b.onclick=()=>q('#build-output').textContent='Этап «'+b.dataset.build+'»: проверьте соответствие проекту, качество выполнения, безопасность и зафиксируйте замечания.');document.querySelectorAll('[data-mama]').forEach(b=>b.onclick=()=>q('#mama-output').textContent='Сценарий «'+b.dataset.mama+'»: подготовьте вещи заранее, выберите одно обязательное действие и один спокойный резерв.');document.querySelectorAll('[data-cook]').forEach(b=>b.onclick=()=>q('#cook-output').textContent='Раздел «'+b.dataset.cook+'»: запишите конкретные действия, время и нужные продукты.');q('#lj-generate').onclick=()=>{let t=text(q('#lj-topic').value)||'Тема урока',l=q('#lj-level').value,g=text(q('#lj-goal').value)||'ученик применяет навык в речи';q('#lj-output').value=`КОНСПЕКТ: ${t}\nУровень: ${l}\nЦель: ${g}\n\n1. Вход в тему\nКороткий вопрос, визуальная опора и актуализация знакомых слов.\n\n2. Теория\nДайте правило простыми словами, покажите 2–3 модели и выделите типичные ошибки.\n\n3. Управляемая практика\nВыполните задание по образцу, затем попросите ученика объяснить выбор.\n\n4. Коммуникативная практика\nСитуация из жизни с обязательным использованием нового материала.\n\n5. Проверка\nМини-задание без подсказки, самооценка и короткая обратная связь.\n\n6. Домашний шаг\nПовторение слов в контексте и одно творческое задание.`};q('#lj-copy').onclick=()=>navigator.clipboard?.writeText(q('#lj-output').value);q('#lj-word').onclick=()=>saveWord('lingvo-konspekt',q('#lj-output').value);})();</script>
+</body>
+</html>

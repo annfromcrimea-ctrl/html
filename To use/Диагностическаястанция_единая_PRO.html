@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Спич-Профиль · единая диагностическая станция PRO</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+<!-- Шрифты намеренно не загружаются из сети: приложение полностью автономно. -->
+<style>
+:root{--bg:#eef1ec;--ink:#182420;--ink2:#5c685f;--panel:#fff;--line:#d9dfd6;--teal:#0e6b5e;--teal-deep:#0a463d;--teal-soft:#e2efe9;--amber:#e0a63a;--ok:#1f9d6b;--warn:#e0a63a;--bad:#d64b4b;--na:#9aa79e;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;--disp:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--bg);background-image:radial-gradient(900px 500px at 8% -5%,rgba(14,107,94,.10),transparent 60%),radial-gradient(800px 500px at 100% 100%,rgba(224,166,58,.10),transparent 60%);background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(24,36,32,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(24,36,32,.045) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1380px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+.topbar{position:sticky;top:0;z-index:40;background:var(--teal-deep);color:#eaf4f0;box-shadow:0 2px 14px rgba(10,70,61,.35)}
+.topbar .wrap{display:flex;align-items:center;gap:18px;height:58px}
+.logo{display:flex;align-items:center;gap:12px}.logo .mark{width:34px;height:34px;border-radius:9px;background:#fff;color:var(--teal-deep);font-family:var(--disp);font-weight:800;font-size:14px;display:grid;place-items:center}
+.logo b{font-family:var(--disp);font-weight:700;font-size:14px;letter-spacing:.06em}.logo small{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#9fc4ba}
+.sess{display:flex;align-items:center;gap:8px;margin-left:auto;font-family:var(--mono);font-size:13px}
+.dot{width:9px;height:9px;border-radius:50%;background:#5be3a9;animation:pulse 1.4s infinite}.dot.paused{background:var(--amber);animation:none}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(91,227,169,.5)}50%{box-shadow:0 0 0 6px rgba(91,227,169,0)}}
+.tbtn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:8px;padding:5px 12px;font:600 12px var(--mono);cursor:pointer;transition:.18s}.tbtn:hover{background:rgba(255,255,255,.25)}
+.savedot{font:11px var(--mono);color:#9fc4ba;display:flex;gap:6px;align-items:center;transition:.3s}.savedot i{width:7px;height:7px;border-radius:50%;background:#5be3a9;display:inline-block}.savedot.ping{color:#fff}.savedot.ping i{transform:scale(1.6)}
+.headcard{margin-top:26px;background:var(--panel);border:1.5px solid var(--ink);border-radius:18px;overflow:hidden;box-shadow:6px 6px 0 rgba(24,36,32,.12);display:grid;grid-template-columns:1.25fr 1fr;position:relative}
+.headcard::after{content:"ФОРМА № 1-Л";position:absolute;top:20px;right:-42px;transform:rotate(38deg);background:var(--ink);color:#fff;font:700 10px var(--mono);letter-spacing:.2em;padding:5px 52px;opacity:.85}
+.hc-left{padding:34px 34px 26px;border-right:1.5px dashed var(--line)}
+.overline{font:600 11px var(--mono);letter-spacing:.28em;text-transform:uppercase;color:var(--teal)}
+.hc-left h1{font-family:var(--disp);font-weight:800;font-size:clamp(28px,3.6vw,42px);line-height:1.05;margin:10px 0 12px}.hc-left h1 em{font-style:normal;color:var(--teal)}
+.hc-left p{color:var(--ink2);font-size:14px;max-width:56ch;line-height:1.55}
+#wf{display:flex;align-items:flex-end;gap:3px;height:48px;margin-top:20px}
+#wf span{flex:1;background:var(--teal);border-radius:3px 3px 0 0;height:calc(var(--h) * var(--amp,.45));transform-origin:bottom;animation:wfp var(--d) ease-in-out var(--dl) infinite alternate}
+@keyframes wfp{from{transform:scaleY(.25)}to{transform:scaleY(1)}}
+.hc-right{padding:26px 30px;background:repeating-linear-gradient(-45deg,#fbfcfa,#fbfcfa 12px,#f4f7f2 12px,#f4f7f2 24px)}
+.hc-right h2{font:700 11px var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ink2);margin-bottom:16px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px}
+.fgrid label{display:block;font:600 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-bottom:5px}
+.fgrid input{width:100%;border:none;border-bottom:2px solid rgba(24,36,32,.25);background:transparent;font:500 15px var(--body);padding:4px 2px;transition:.2s;color:var(--ink)}.fgrid input:focus{outline:none;border-color:var(--teal)}
+.statrow{display:flex;gap:12px;margin-top:20px}.stat{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.stat b{font-family:var(--disp);font-size:18px;display:block}.stat span{font:10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.stat b.good{color:var(--ok)}.stat b.mid{color:var(--warn)}.stat b.low{color:var(--bad)}
+.toolbar{margin:20px 0 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.chips{display:flex;gap:6px}.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font:600 12px var(--body);cursor:pointer;transition:.18s;color:var(--ink2)}
+.chip:hover{border-color:var(--teal);transform:translateY(-1px)}.chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.search{flex:1;min-width:170px;position:relative}.search input{width:100%;border:1.5px solid var(--line);border-radius:999px;padding:8px 16px 8px 36px;font:500 13px var(--body);background:#fff;transition:.2s}
+.search input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+.search svg{position:absolute;left:13px;top:9px;opacity:.45}#found{font:11px var(--mono);color:var(--teal)}
+.legend{display:flex;gap:10px;font:11px var(--mono);color:var(--ink2);align-items:center;flex-wrap:wrap}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.tacts{display:flex;gap:8px;margin-left:auto}
+.abtn{border:1.5px solid var(--ink);background:#fff;border-radius:9px;padding:7px 14px;font:700 12px var(--body);cursor:pointer;transition:.15s;color:var(--ink)}
+.abtn:hover{background:var(--ink);color:#fff;transform:translateY(-1px)}
+.abtn.prime{background:var(--teal);border-color:var(--teal);color:#fff}.abtn.prime:hover{background:var(--teal-deep)}
+.abtn.danger:hover{background:var(--bad);border-color:var(--bad)}
+.tabs{display:flex;gap:8px;margin:18px 0;flex-wrap:wrap;position:sticky;top:58px;z-index:29;padding:8px 0;background:linear-gradient(var(--bg) 82%,transparent)}
+.tab{border:1.5px solid var(--ink);background:#fff;padding:10px 18px;border-radius:11px;font-family:var(--disp);font-weight:700;font-size:12.5px;cursor:pointer;transition:.18s;display:flex;gap:8px;align-items:center;color:var(--ink)}
+.tab small{font:600 10px var(--mono);background:var(--ink);color:#fff;border-radius:5px;padding:2px 6px;min-width:20px;text-align:center}
+.tab.on{background:var(--ink);color:#fff}.tab.on small{background:rgba(255,255,255,.25)}.tab:hover{transform:translateY(-2px)}
+.view{display:none}.view.on{display:block}
+.app{display:grid;grid-template-columns:318px 1fr;gap:24px;margin:14px 0 30px;align-items:start}
+.side{position:sticky;top:132px;display:flex;flex-direction:column;gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.ringbox{display:flex;gap:16px;align-items:center}.ring{position:relative;width:86px;height:86px;flex:none}.ring svg{transform:rotate(-90deg)}
+.ring .fg{stroke:var(--teal);stroke-linecap:round;transition:stroke-dashoffset .6s ease}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--disp);font-size:17px}
+.ringbox .rt b{font-family:var(--disp);font-size:15px;display:block;margin-bottom:4px}.ringbox .rt span{font-size:12px;color:var(--ink2);line-height:1.4}
+.card h3{font:700 11px var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--ink2);margin-bottom:12px}
+.navrow{display:block;width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:7px 8px;border-radius:8px;transition:.15s;font-family:var(--body)}
+.navrow:hover{background:var(--teal-soft)}.navrow .nl{display:flex;justify-content:space-between;font-size:12.5px;font-weight:600;margin-bottom:5px}
+.navrow .np{font-family:var(--mono);font-size:11px;color:var(--ink2)}.nbar{height:6px;border-radius:4px;background:#eceee9;overflow:hidden}
+.nbar i{display:block;height:100%;border-radius:4px;background:var(--teal);width:0;transition:width .5s,background .4s}
+.hints li{font-size:12.5px;line-height:1.45;margin-bottom:9px;padding-left:18px;position:relative;list-style:none}
+.hints li::before{content:"▸";position:absolute;left:2px;color:var(--amber);font-weight:700}.hints .none{color:var(--ink2);font-style:italic;padding-left:2px}.hints .none::before{content:""}
+.sec,.mod{background:var(--panel);border:1px solid var(--line);border-radius:16px;margin-bottom:16px;overflow:hidden;opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s,box-shadow .4s}
+.sec.in,.mod.in{opacity:1;transform:none}.sec.flash,.mod.flash{animation:flash 1.3s}
+@keyframes flash{0%,100%{box-shadow:0 0 0 0 rgba(14,107,94,0)}30%{box-shadow:0 0 0 4px rgba(14,107,94,.45)}}
+.sec-h,.mod-h{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;user-select:none}.sec-h:hover,.mod-h:hover{background:#fafbf9}
+.lb{width:44px;height:44px;flex:none;border-radius:11px;background:var(--teal-deep);color:#fff;font-family:var(--disp);font-weight:700;font-size:19px;display:grid;place-items:center;transition:.4s}
+.sec.done .lb{background:var(--ok);animation:pop .45s}@keyframes pop{40%{transform:scale(1.18)}}
+.md-dot{width:14px;height:14px;flex:none;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(224,166,58,.25)}
+.sec-t,.mod-t{flex:1;min-width:0}.sec-t b,.mod-t b{font-family:var(--disp);font-weight:700;font-size:15px;display:block}
+.sec-t small,.mod-t small{font-size:12px;color:var(--ink2)}
+.mod-tag{font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--teal);border:1px solid var(--teal-soft);background:var(--teal-soft);border-radius:5px;padding:2px 7px;flex:none}
+.sec-meta{text-align:right;margin-right:6px}.sec-meta b{font-family:var(--mono);font-size:13px;display:block}.sec-meta span{font:10px var(--mono);color:var(--ink2);letter-spacing:.08em}
+.spct{width:110px;height:6px;border-radius:4px;background:#eceee9;overflow:hidden;margin-left:10px}
+.spct i{display:block;height:100%;width:0;background:var(--teal);transition:width .5s,background .4s}
+.chev{transition:.3s;flex:none;color:var(--ink2)}.closed .chev{transform:rotate(-90deg)}
+.sec-body,.mod-body{display:grid;grid-template-rows:1fr;transition:grid-template-rows .35s ease}
+.closed .sec-body,.closed .mod-body{grid-template-rows:0fr}
+.sec-body>div,.mod-body>div{overflow:hidden}
+.item{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:flex-start;padding:13px 20px;border-top:1px solid #eef0ea;transition:background .15s}
+.item:hover{background:#f8faf7}.item.hide{display:none}
+.itxt{flex:1;min-width:250px}.code{font:700 10.5px var(--mono);color:#fff;background:var(--ink);border-radius:5px;padding:2px 6px;margin-right:8px}
+.itxt .t{font-size:14px;font-weight:500}.hint{display:block;font-size:12px;color:var(--ink2);font-style:italic;margin:3px 0 0 40px}
+.atag{display:inline-block;font:600 10px var(--mono);color:var(--teal);background:var(--teal-soft);border-radius:5px;padding:1px 6px;margin-left:8px}
+.seg{display:flex;gap:5px}.sg{width:38px;height:32px;border:1.5px solid var(--line);background:#fff;border-radius:8px;font:700 13px var(--mono);color:var(--ink2);cursor:pointer;transition:.16s}
+.sg:hover{transform:translateY(-2px);border-color:var(--teal);color:var(--ink)}.sg:active{transform:scale(.9)}
+.sg.on.v2{background:var(--ok);border-color:var(--ok);color:#fff}.sg.on.v1{background:var(--warn);border-color:var(--warn);color:#fff}
+.sg.on.v0{background:var(--bad);border-color:var(--bad);color:#fff}.sg.on.vn{background:#6b7a72;border-color:#6b7a72;color:#fff}
+.note-btn{width:32px;height:32px;border-radius:8px;border:1.5px dashed var(--line);background:none;cursor:pointer;color:var(--ink2);transition:.15s;font-size:14px}
+.note-btn:hover{border-color:var(--teal);color:var(--teal)}.note-btn.filled{border-style:solid;background:var(--teal-soft);color:var(--teal)}
+.note-box{width:100%;display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}.item.open .note-box{grid-template-rows:1fr}
+.note-box>div{overflow:hidden}.note-box textarea{width:100%;margin:2px 0 4px;border:1.5px solid var(--line);border-radius:9px;padding:9px 12px;font:400 13px var(--body);resize:vertical;min-height:56px;background:#fbfcfa}
+.note-box textarea:focus,.mnote:focus,#vExtra:focus,.agrid textarea:focus,.agrid input:focus,.agrid select:focus{outline:none;border-color:var(--teal)}
+.mnote{width:calc(100% - 36px);margin:10px 18px 14px;border:1.5px dashed var(--line);border-radius:9px;padding:9px 12px;font:400 13px var(--body);resize:vertical;min-height:40px;background:#fbfcfa}
+footer{border-top:1.5px dashed var(--line);padding:22px 0 40px;font-size:12.5px;color:var(--ink2);line-height:1.6;max-width:82ch}footer b{color:var(--ink)}
+/* модули */
+.lvls{display:flex;gap:8px;padding:14px 20px 4px;flex-wrap:wrap;align-items:center}.lvls .cap{font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-right:4px}
+.lv{border:1.5px solid var(--line);border-radius:999px;padding:6px 14px;font:700 12px var(--body);cursor:pointer;transition:.15s;background:#fff}
+.lv:hover{border-color:var(--teal)}.lv.on{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep)}
+.mod-hint{margin:6px 20px;font:600 11.5px var(--mono);color:var(--teal-deep);background:var(--teal-soft);border-radius:8px;padding:7px 11px}
+.ck{display:flex;gap:10px;padding:11px 20px;border-top:1px solid #eef0ea;cursor:pointer;align-items:flex-start;transition:.15s}
+.ck:hover{background:#f8faf7}.ck input{display:none}
+.ck .box{width:20px;height:20px;border:2px solid var(--ink2);border-radius:6px;flex:none;margin-top:1px;position:relative;transition:.15s;background:#fff}
+.ck input:checked+.box{background:var(--teal);border-color:var(--teal)}
+.ck input:checked+.box::after{content:'✓';color:#fff;position:absolute;inset:0;display:grid;place-items:center;font-size:13px;font-weight:700}
+.ck .ct{font-size:13.5px;line-height:1.4}.ck .ch{font-size:11.5px;color:var(--ink2);font-style:italic;display:block}
+.ck .w{margin-left:auto;font:700 11px var(--mono);color:var(--amber);flex:none}
+.mod-meter{display:flex;align-items:center;gap:12px;padding:12px 20px;background:#fafbf8;border-top:1px dashed var(--line)}
+.mm-bar{flex:1;height:8px;background:#eceee9;border-radius:5px;overflow:hidden}.mm-bar i{display:block;height:100%;width:0;background:var(--teal);transition:.5s,background .4s}
+.mm-label{font:700 11px var(--mono);min-width:190px;text-align:right;color:var(--ink2)}
+.fchips{display:flex;flex-wrap:wrap;gap:6px;padding:0 20px 6px}.fchip{font:700 10.5px var(--mono);background:#fdf3e2;color:#8a5f14;border:1px solid #f0dcb4;border-radius:6px;padding:3px 8px}
+/* анамнез */
+.anam{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px}
+.anam h3{font-family:var(--disp);font-size:15px;margin-bottom:14px}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px}
+.agrid label{display:block;font:600 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-bottom:5px}
+.agrid input,.agrid select{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:8px 11px;font:500 13.5px var(--body);background:#fbfcfa;transition:.2s}
+.agrid textarea{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:8px 11px;font:400 13.5px var(--body);background:#fbfcfa;resize:vertical;min-height:54px}
+.agrid .full{grid-column:1/-1}
+.bilin{display:flex;align-items:center;gap:10px;font-size:13px;padding-top:22px;cursor:pointer}
+/* дифф */
+.dsum{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px}
+.dsum h3{font-family:var(--disp);font-size:15px;margin-bottom:4px}.dsum p{font-size:12.5px;color:var(--ink2);margin-bottom:14px}
+.drow{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.drow b{font-size:13.5px}.drow .dn{font:700 10px var(--mono);color:var(--ink2);margin-right:8px}
+.dopts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.dopt{border:1.5px solid var(--line);border-radius:9px;padding:7px 12px;font:600 12px var(--body);cursor:pointer;background:#fff;transition:.15s;text-align:left}
+.dopt small{display:block;font:600 9.5px var(--mono);color:var(--ink2);margin-top:2px;letter-spacing:.04em}
+.dopt:hover{border-color:var(--teal)}.dopt.on{border-color:var(--teal);background:var(--teal-soft);box-shadow:0 2px 8px rgba(14,107,94,.15)}
+/* заключение */
+.vcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px}
+.vcard h3{font-family:var(--disp);font-size:15px;margin-bottom:6px}.vcard>p{font-size:12.5px;color:var(--ink2);margin-bottom:14px}
+.hyp{margin-bottom:12px}.hyp .hl{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:5px}
+.hyp .hl span:last-child{font:700 11px var(--mono);color:var(--ink2)}
+.hb{height:10px;border-radius:5px;background:#eceee9;overflow:hidden}.hb i{display:block;height:100%;width:0;border-radius:5px;background:var(--teal);transition:width .6s,background .4s}
+.chipz{display:flex;flex-wrap:wrap;gap:8px}
+.cz{border:1.5px solid var(--line);border-radius:999px;padding:7px 14px;font:600 12.5px var(--body);cursor:pointer;background:#fff;transition:.15s;color:var(--ink)}
+.cz:hover{border-color:var(--teal);transform:translateY(-1px)}.cz.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.recgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+.recgrid .ck{border-top:none;border-bottom:1px solid #eef0ea;padding:9px 4px}
+#vExtra{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;font:400 13.5px var(--body);min-height:70px;resize:vertical;background:#fbfcfa}
+.overlay{position:fixed;inset:0;z-index:60;background:#fff;display:none;overflow:auto;padding:34px 22px}.overlay.show{display:block}
+.ovpanel{max-width:880px;margin:0 auto}.ovpanel h2{font-family:var(--disp);font-size:22px;margin-bottom:14px}
+.ovacts{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+#reportTxt{white-space:pre-wrap;border:1.5px solid var(--ink);border-radius:12px;padding:24px;font:12.5px/1.7 var(--mono);background:#fbfcfa}
+#toasts{position:fixed;bottom:20px;right:20px;z-index:80;display:flex;flex-direction:column;gap:8px}
+.toast{background:var(--ink);color:#fff;font:600 13px var(--body);padding:11px 18px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0;transform:translateX(20px);transition:.3s}.toast.show{opacity:1;transform:none}
+@media print{body *{visibility:hidden}.overlay{display:block!important;position:static;padding:0}.overlay *{visibility:visible}.ovacts,.ovpanel h2{display:none}#reportTxt{border:none;padding:0;font-size:11.5px}}
+@media (max-width:1020px){.app{grid-template-columns:1fr}.side{position:static}.headcard{grid-template-columns:1fr}.hc-left{border-right:none;border-bottom:1.5px dashed var(--line)}.agrid,.recgrid{grid-template-columns:1fr}.tabs{position:static}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.sec,.mod{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="logo"><div class="mark">СП</div><div><b>СПИЧ-ПРОФИЛЬ</b><small>логопед · психолог · нейро</small></div></div>
+    <div class="sess"><span class="dot" id="sessDot"></span><span id="timer">00:00</span><button class="tbtn" id="timerBtn">пауза</button></div>
+    <div class="savedot" id="saveDot" role="status" aria-live="polite"><i></i>автосохранение</div>
+  </div>
+</header>
+
+<div class="wrap">
+<section class="headcard">
+  <div class="hc-left">
+    <div class="overline">карта · модули · динамика · материалы · автоматизация · заключение</div>
+    <h1>Диагностическая <em>станция</em></h1>
+    <p>Полный маршрут обследования: структурированная карта наблюдения, критериальные модули (ЗРР, ОНР I–IV, ФФН, дизартрия, алалия, заикание, дисграфия, дислексия, ЗПР, маркеры РАС), матрица дифференциальной диагностики и автоматическое формирование заключения с рекомендациями.</p>
+    <div id="wf" aria-hidden="true"></div>
+  </div>
+  <div class="hc-right">
+    <h2>Паспорт обследования</h2>
+    <div class="fgrid">
+      <div style="grid-column:1/-1"><label>Ребёнок</label><input id="pName" placeholder="Фамилия, имя"></div>
+      <div><label>Возраст</label><input id="pAge" placeholder="лет / мес"></div>
+      <div><label>Обследование №</label><input id="pNum" placeholder="дата / номер"></div>
+      <div style="grid-column:1/-1"><label>Специалист</label><input id="pSpec" placeholder="логопед / психолог"></div>
+    </div>
+    <div class="statrow">
+      <div class="stat"><b id="stDone">0/54</b><span>карта</span></div>
+      <div class="stat"><b id="stIdx">—</b><span>индекс речи</span></div>
+      <div class="stat"><b id="stMod">0</b><span>маркеров</span></div>
+      <div class="stat"><b id="stDiff">0/10</b><span>дифф.</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="toolbar">
+  <div class="chips" id="ageChips">
+    <button class="chip on" data-age="all">Все возрасты</button>
+    <button class="chip" data-age="0">2–4 года</button>
+    <button class="chip" data-age="1">4–6 лет</button>
+    <button class="chip" data-age="2">6+ лет</button>
+  </div>
+  <div class="search">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#182420" stroke-width="2.4"><circle cx="10.5" cy="10.5" r="7"/><path d="m21 21-5-5"/></svg>
+    <input id="search" placeholder="Поиск по карте обследования…"><span id="found"></span>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--ok)"></i>2 норма</span><span><i style="background:var(--warn)"></i>1 лёгкие</span>
+    <span><i style="background:var(--bad)"></i>0 выраженные</span><span><i style="background:var(--na)"></i>н — не оценено</span>
+  </div>
+  <div class="tacts">
+    <button class="abtn" id="btnCollapse">Свернуть всё</button>
+    <button class="abtn prime" id="btnReport">Полный отчёт</button>
+    <button class="abtn danger" id="btnClear">Очистить</button>
+  </div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-view="map">Карта обследования <small id="tabCnt1">0</small></button>
+  <button class="tab" data-view="mod">Диагностические модули <small id="tabCnt2">0</small></button>
+  <button class="tab" data-view="diff">Дифф. анализ <small id="tabCnt3">0</small></button>
+  <button class="tab" data-view="verd">Заключение <small id="tabCnt4">0</small></button>
+</div>
+
+<!-- ══ ВИД 1: КАРТА ══ -->
+<div class="view on" id="view-map">
+  <div class="app">
+    <aside class="side">
+      <div class="card"><div class="ringbox">
+        <div class="ring"><svg width="86" height="86"><circle cx="43" cy="43" r="34" fill="none" stroke="#eceee9" stroke-width="9"/><circle class="fg" id="ringFg" cx="43" cy="43" r="34" fill="none" stroke-width="9" stroke-dasharray="213.6" stroke-dashoffset="213.6"/></svg><b id="ringPct">0%</b></div>
+        <div class="rt"><b>Заполнение карты</b><span id="ringNote">Оценивайте пункты — профиль строится автоматически.</span></div>
+      </div></div>
+      <div class="card"><h3>Профиль по сферам</h3><div id="navList"></div></div>
+      <div class="card"><h3>Автоподсказки</h3><ul class="hints" id="hintsList"><li class="none">Пока недостаточно данных…</li></ul></div>
+    </aside>
+    <main id="sections"></main>
+  </div>
+</div>
+
+<!-- ══ ВИД 2: МОДУЛИ ══ -->
+<div class="view" id="view-mod">
+  <div class="anam">
+    <h3>Анамнез и раннее развитие</h3>
+    <div class="agrid">
+      <div class="full"><label>Беременность, роды, ранний период</label><textarea id="aPreg" placeholder="Течение беременности, роды, диагнозы раннего периода…"></textarea></div>
+      <div><label>Моторные рубежи</label><input id="aMoto" placeholder="голову держал, сидел, пошёл…"></div>
+      <div><label>Речевые рубежи</label><input id="aSpeech" placeholder="гуление, лепет, первые слова, фраза…"></div>
+      <div><label>Слух</label><select id="aHear"><option value="">— не указано —</option><option>в норме</option><option>снижен (аудиометрия)</option><option>под вопросом</option></select></div>
+      <div><label>Неврологические диагнозы</label><input id="aNeuro" placeholder="заключения, наблюдения…"></div>
+      <div class="full"><label>Жалобы родителей / запрос</label><textarea id="aCompl" placeholder="Что беспокоит, запрос на обследование…"></textarea></div>
+      <label class="bilin"><input type="checkbox" id="aBilin" style="width:17px;height:17px;accent-color:var(--teal)"> Билингвальная среда / двуязычие в семье</label>
+    </div>
+  </div>
+  <div id="modList"></div>
+</div>
+
+<!-- ══ ВИД 3: ДИФФ ══ -->
+<div class="view" id="view-diff">
+  <div class="dsum">
+    <h3>Сводка совпадений</h3>
+    <p>Отмечайте наблюдаемый вариант в каждой строке — подсвечивается диагностическая колонка с наибольшим числом совпадений. Результат ориентировочный.</p>
+    <div id="diffTally"></div>
+  </div>
+  <div id="diffRows"></div>
+</div>
+
+<!-- ══ ВИД 4: ЗАКЛЮЧЕНИЕ ══ -->
+<div class="view" id="view-verd">
+  <div class="vcard">
+    <h3>Диагностические гипотезы <button class="abtn" id="btnHypFill" style="float:right;font-size:11px;padding:5px 10px">Подставить в заключение ↑</button></h3>
+    <p>Ранжированы по степени совпадения признаков: данные модулей (65%) и матрицы дифференциального анализа (35%).</p>
+    <div id="hypList"></div>
+  </div>
+  <div class="vcard"><h3>Логопедическое заключение</h3><p>Выберите формулировки, которые подтверждаются данными обследования.</p><div class="chipz" id="lcChips"></div></div>
+  <div class="vcard"><h3>Психологическое заключение</h3><p>Отметьте при наличии оснований.</p><div class="chipz" id="pcChips"></div></div>
+  <div class="vcard"><h3>Рекомендации</h3><div class="recgrid" id="recList"></div></div>
+  <div class="vcard"><h3>Дополнительно</h3><textarea id="vExtra" placeholder="Комментарии, динамика, особые наблюдения…"></textarea>
+    <div style="margin-top:14px"><button class="abtn prime" id="btnVerdict">Сформировать заключение</button></div>
+  </div>
+</div>
+
+<footer><b>Важно.</b> Сервис — вспомогательный инструмент структурирования наблюдения: критерии носят ориентировочный характер и не заменяют стандартизированные методики, клиническое обследование и решения ПМПК/врачей. Диагностическое заключение формируется специалистом комплексно. Автоподсказки и «вероятности» гипотез — эвристические ориентиры. Все данные хранятся только локально в вашем браузере.</footer>
+</div>
+
+<div class="overlay" id="reportOv" role="dialog" aria-modal="true" aria-labelledby="ovTitle"><div class="ovpanel">
+  <h2 id="ovTitle">Отчёт</h2>
+  <div class="ovacts"><button class="abtn prime" id="btnCopy">Копировать текст</button><button class="abtn" id="btnPrint">Печать / PDF</button><button class="abtn" id="btnCloseR" style="margin-left:auto">Закрыть</button></div>
+  <pre id="reportTxt"></pre>
+</div></div>
+<div id="toasts"></div>
+
+<script>
+'use strict';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const AGES=['2–4','4–6','6+'],ROM={1:'I',2:'II',3:'III',4:'IV'};
+
+/* ── данные карты ── */
+const DATA=[
+{id:'contact',code:'А',title:'Контакт, поведение, предпосылки',items:[
+{t:'Вступление в контакт, принятие ситуации обследования',h:'первые 3–5 минут: дистанция, зрительный контакт',a:[0,1,2]},
+{t:'Адекватность поведения и реакций на оценку',a:[0,1,2]},{t:'Работоспособность: истощаемость, колебания',a:[0,1,2]},
+{t:'Принятие и удержание инструкции',a:[0,1,2]},{t:'Интерес к материалу, целенаправленность',a:[0,1,2]}]},
+{id:'motor',code:'Б',title:'Моторика и оральный праксис',items:[
+{t:'Общая моторика: координация, переключение',h:'«кулак–ребро–ладонь», прыжки, ловля мяча',a:[0,1,2]},
+{t:'Мелкая моторика и графомоторные навыки',a:[1,2]},
+{t:'Артикуляционная моторика: объём, точность, удержание',h:'«улыбка–трубочка», «чашечка», 5–10 с',a:[0,1,2]},
+{t:'Артикуляционный кинезис: переключаемость',a:[1,2]},
+{t:'Синкинезии, гиперкинезы, саливация',h:'2 — отсутствуют',a:[0,1,2]}]},
+{id:'impress',code:'В',title:'Понимание речи',items:[
+{t:'Понимание бытовых и игровых инструкций',a:[0,1,2]},
+{t:'Грамматические формы: число, падеж, диминутивы',h:'«покажи чашку и чашечку»',a:[1,2]},
+{t:'Предложные конструкции',h:'«на / под / за / между коробкой»',a:[1,2]},
+{t:'Логико-грамматические структуры',h:'«брат отца», «весна после зимы»',a:[2]},
+{t:'Слова сложной слоговой структуры',a:[1,2]}]},
+{id:'lexicon',code:'Г',title:'Словарь (активный)',items:[
+{t:'Существительные: предметы, части, обобщения',a:[0,1,2]},
+{t:'Глаголы и отглагольные образования',a:[0,1,2]},
+{t:'Прилагательные: признаки, цвет, форма, материал',a:[0,1,2]},
+{t:'Антонимы, синонимы, многозначность',a:[1,2]},
+{t:'Адекватность словоупотребления, парафазии',a:[1,2]}]},
+{id:'grammar',code:'Д',title:'Грамматический строй',items:[
+{t:'Словоизменение: согласование и управление',a:[1,2]},
+{t:'Словообразование',h:'диминутивы, профессии, детёныши, приставки',a:[1,2]},
+{t:'Построение предложений',a:[1,2]},
+{t:'Грамматическое оформление спонтанной речи',a:[1,2]}]},
+{id:'sound',code:'Е',title:'Звуковая сторона речи',items:[
+{t:'Губные, переднеязычные, мягкие лабиальные',a:[0,1,2]},
+{t:'Свистящие и аффрикаты',a:[1,2]},
+{t:'Сонорные и заднеязычные',a:[1,2]},
+{t:'Слоговая структура слова',h:'паук – паутина – регулировщик',a:[0,1,2]},
+{t:'Темп, плавность, речевое дыхание',a:[0,1,2]}]},
+{id:'phonemic',code:'Ж',title:'Фонематические процессы',items:[
+{t:'Различение неречевых и близких речевых звуков',a:[0,1]},
+{t:'Слуховая дифференциация оппозиционных фонем',a:[1,2]},
+{t:'Звуковой анализ и синтез',a:[1,2]},
+{t:'Фонематические представления',h:'слова на заданный звук',a:[1,2]}]},
+{id:'coherent',code:'З',title:'Связная речь',items:[
+{t:'Диалог: ответы, удержание темы',a:[0,1,2]},
+{t:'Пересказ короткого текста',a:[1,2]},
+{t:'Рассказ по серии картинок / по картине',a:[1,2]},
+{t:'Самостоятельность и развёрнутость высказывания',a:[1,2]}]},
+{id:'written',code:'И',title:'Чтение и письмо',items:[
+{t:'Чтение: способ, правильность, темп, понимание',a:[2]},
+{t:'Письмо: дисграфические ошибки',h:'замены, пропуски, перестановки, агграматизмы',a:[2]},
+{t:'Освоение орфографических навыков',a:[2]}]},
+{id:'hmf',code:'К',title:'Высшие психические функции',items:[
+{t:'Внимание: устойчивость, переключаемость',a:[0,1,2]},
+{t:'Слухоречевая память',h:'две группы слов, трёхзвеньевая инструкция',a:[0,1,2]},
+{t:'Зрительная память и зрительный гнозис',a:[0,1,2]},
+{t:'Мышление: анализ, обобщение, исключение',h:'«четвёртый лишний», классификация',a:[0,1,2]},
+{t:'Пространственные представления',a:[1,2]},
+{t:'Программирование и контроль деятельности',a:[1,2]}]},
+{id:'emotional',code:'Л',title:'Эмоционально-личностная сфера',items:[
+{t:'Эмоциональный фон и реактивность',a:[0,1,2]},
+{t:'Произвольная регуляция: ждать, принимать правила',a:[0,1,2]},
+{t:'Мотивация и критичность к результату',a:[1,2]},
+{t:'Маркеры тревожности, страхи, ритуалы',h:'2 — не отмечаются',a:[0,1,2]},
+{t:'Коммуникация со взрослыми и сверстниками',a:[1,2]}]},
+{id:'hearing',code:'М',title:'Слух и слуховое восприятие',items:[
+{t:'Реакция на звук, слуховое сосредоточение',a:[0,1,2]},
+{t:'Физический слух (сурдолог/аудиометрия)',h:'нет данных — «н»',a:[0,1,2]},
+{t:'Различение неречевых звуков и звукоподражаний',a:[0,1,2]}]}
+];
+
+/* ── диагностические модули ── */
+const MODULES=[
+{id:'zrr',diag:'ЗРР',name:'ЗРР — задержка речевого развития',tag:'2–4 года',desc:'Темповое отставание при сохранном слухе и первично сохранном интеллекте.',crit:[
+{w:2,t:'Объём активного словаря ниже возрастной нормы',h:'менее ~50 слов к 2 годам; фраза отсутствует к 2–2,5'},
+{w:2,t:'Фразовая речь отсутствует или единична'},
+{w:1,t:'Жестовая коммуникация преобладает над речевой'},
+{w:1,t:'Речевой негативизм, отказы говорить'},
+{w:1,t:'Понимание обращённой речи сохранно или слегка снижено'},
+{w:1,t:'Игра и предметная деятельность соответствуют возрасту'},
+{w:1,t:'Задержка ранних этапов: гуление, лепет, первые слова'},
+{w:2,t:'Нет данных за органическое поражение ЦНС'}]},
+{id:'onr',diag:'ОНР',name:'ОНР — общее недоразвитие речи',tag:'уровни 1–4',desc:'Системное нарушение всех компонентов речи при сохранном слухе и интеллекте.',levels:true,levelsData:{
+1:[{w:2,t:'Общеупотребительная речь отсутствует'},{w:1,t:'«Лепетные слова», звукоподражания, вокализации'},{w:1,t:'Активные жесты и мимика вместо речи'},{w:1,t:'Понимание ограничено бытовой ситуацией'},{w:1,t:'Фраза недоступна, диалог не складывается'}],
+2:[{w:2,t:'Зачатки фразовой речи, искажённые словосочетания'},{w:1,t:'Словарь резко ограничен, преимущественно бытовой'},{w:1,t:'Грубые аграмматизмы: падежи, число, предлоги'},{w:1,t:'Множественные искажения звуков и слоговой структуры'},{w:1,t:'Связное высказывание на уровне перечисления'}],
+3:[{w:2,t:'Фразовая речь с элементами лексико-грамматического и фонетического недоразвития'},{w:1,t:'Ошибки словообразования, сложные предлоги'},{w:1,t:'Слоговая структура сложных слов нарушена'},{w:1,t:'Фонетико-фонематические нарушения'},{w:1,t:'Монолог недостаточно связный, нужна помощь'}],
+4:[{w:1,t:'Остаточные пробелы в словаре: обобщения, абстракции'},{w:1,t:'Единичные ошибки словоизменения и словообразования'},{w:1,t:'Стёртые нарушения звуко-слоговой структуры'},{w:1,t:'Негрубые фонематические затруднения'},{w:1,t:'Риск трудностей при обучении письму'}]}},
+{id:'ffn',diag:'ФФН/ФНР',name:'ФФН / ФНР',tag:'звук + фонематика',desc:'Нарушения произношения и фонематических процессов при лексике и грамматике, близкой к норме.',crit:[
+{w:2,t:'Нарушено произношение одной или нескольких групп звуков'},
+{w:2,t:'Фонематический слух недостаточен'},
+{w:2,t:'Звуковой анализ и синтез нарушены'},
+{w:1,t:'Словарь и грамматика близки к возрастной норме'},
+{w:1,t:'Артикуляционный аппарат без грубой патологии'}]},
+{id:'dysarthria',diag:'Дизартрия',name:'Дизартрия (в т.ч. стёртая)',tag:'невро-маркеры',desc:'Нарушение произносительной стороны из-за органического поражения иннервации речевого аппарата.',crit:[
+{w:2,t:'Нарушен тонус артикуляционной мускулатуры',h:'спастика / гипотония / дистония'},
+{w:1,t:'Гиперкинезы, тремор, девиация языка'},
+{w:1,t:'Гиперсаливация или сухость во рту'},
+{w:1,t:'«Смазанная», нечёткая речь («каша во рту»)'},
+{w:1,t:'Голос тихий, слабый, назализованный'},
+{w:1,t:'Нарушено речевое дыхание'},
+{w:1,t:'Синкинезии, трудности орального праксиса'},
+{w:2,t:'Перинатальное поражение ЦНС в анамнезе'},
+{w:1,t:'Неврологическая микросимптоматика'}]},
+{id:'alalia',diag:'Алалия',name:'Алалия',tag:'моторная / сенсорная',desc:'Отсутствие или недоразвитие речи при органическом поражении речевых зон коры в ранний период.',forms:true,formsData:{
+m:[{w:2,t:'Собственная речь отсутствует/крайне бедна при относительной сохранности понимания'},
+{w:2,t:'Артикуляционная / оральная апраксия'},
+{w:1,t:'Речевой негативизм, отказ от речи'},
+{w:1,t:'Нарушено программирование высказывания'},
+{w:1,t:'Пассивный словарь сохраннее активного'},
+{w:1,t:'Данные за левостороннее поражение (анамнез)'}],
+s:[{w:2,t:'Грубо нарушено понимание обращённой речи'},
+{w:2,t:'«Слухоречевая агнозия»: речь воспринимается как шум'},
+{w:1,t:'Эхолалии, «речевая окрошка»'},
+{w:1,t:'Колебания слухового восприятия при нормальной аудиограмме'},
+{w:1,t:'Контакт неустойчив, мотивация к общению сохранна'}]}},
+{id:'stutter',diag:'Заикание',name:'Заикание',tag:'клонус / тонус',desc:'Нарушение темпо-ритмической организации речи с судорогами речевых мышц.',typeSel:true,crit:[
+{w:2,t:'Судороги артикуляторных, дыхательных или голосовых мышц'},
+{w:1,t:'Усиление запинок при эмоциональной нагрузке'},
+{w:1,t:'Уловки, эмболофразия, избегание трудных слов'},
+{w:1,t:'Логофобия (у старших детей)'},
+{w:1,t:'Вегетативные реакции: покраснение, напряжение'},
+{w:1,t:'Случаи заикания в семье'},
+{w:1,t:'Острое начало после стресса / инфекции'}]},
+{id:'dysgraphia',diag:'Дисграфия',name:'Дисграфия',tag:'школьный возраст',desc:'Специфические стойкие ошибки письма, не связанные с незнанием правил.',crit:[
+{w:1,t:'Замены звонких–глухих, свистящих–шипящих',h:'→ акустическая форма'},
+{w:1,t:'Пропуски гласных, удвоения, перестановки букв',h:'→ нарушение языкового анализа и синтеза'},
+{w:1,t:'Аграмматизмы: «красна машина», ошибки согласования',h:'→ аграмматическая форма'},
+{w:1,t:'Зеркальность, оптические замены букв',h:'→ оптическая форма'},
+{w:1,t:'Ошибки повторяют дефектное произношение',h:'→ артикуляторно-акустическая форма'},
+{w:2,t:'Ошибки стойкие, повторяющиеся, типичные'},
+{w:1,t:'Темп письма снижен, почерк неровный'}]},
+{id:'dyslexia',diag:'Дислексия',name:'Дислексия',tag:'школьный возраст',desc:'Специфические трудности овладения чтением.',crit:[
+{w:2,t:'Темп чтения ниже возрастной нормы'},
+{w:1,t:'Побуквенное чтение, угадывание'},
+{w:1,t:'Замены и искажения звуко-буквенной структуры'},
+{w:1,t:'Понимание прочитанного нарушено'},
+{w:1,t:'Аграмматизмы при чтении'},
+{w:1,t:'Избегание чтения, быстрая утомляемость'}]},
+{id:'zpr',diag:'ЗПР',name:'ЗПР / задержка познавательного развития',tag:'обучаемость',desc:'Замедленный темп созревания психических функций; ключевой критерий — обучаемость.',crit:[
+{w:2,t:'Помощь принимает, но перенос способа затруднён',h:'ключевой дифференциальный признак'},
+{w:2,t:'Эмоционально-волевая незрелость'},
+{w:1,t:'Сниженная работоспособность, неустойчивая нейродинамика'},
+{w:1,t:'Игровая деятельность незрелая, стереотипная'},
+{w:1,t:'Речевые нарушения вторичного характера'},
+{w:1,t:'Наглядно-образное мышление ниже нормы'},
+{w:1,t:'Есть заключение психолога / ПМПК'}]},
+{id:'ras',diag:'РАС (риск)',name:'Маркеры РАС',tag:'скрининг',desc:'Наблюдательные маркеры; при выявлении — направление к психиатру. Скрининг, не диагноз.',crit:[
+{w:2,t:'Зрительный контакт снижен или неустойчив'},
+{w:2,t:'Отклик на имя слабый или отсутствует'},
+{w:2,t:'Указательный жест отсутствует / слабый'},
+{w:1,t:'Стереотипии, манерность, повторяющиеся действия'},
+{w:1,t:'Сенсорные особенности: гипер-/гипочувствительность'},
+{w:1,t:'Использует руку взрослого как «инструмент»'},
+{w:1,t:'Эхолалии, некоммуникативная речь'},
+{w:1,t:'Стремление к неизменности, ритуалы'},
+{w:1,t:'Игра нефункциональная, фиксации на предметах'},
+{w:2,t:'Трудности социальной взаимности'}]}
+];
+
+/* ── дифференциальный анализ ── */
+const DIFF_COLS=['ЗРР','ОНР','ЗПР','РАС','Алалия','Тугоухость'];
+const DIFF_ROWS=[
+{t:'Зрительный контакт',opts:[['устойчивый',['ЗРР']],['избирательный',['ЗПР','РАС']],['избегает / не удерживает',['РАС']],['непостоянный',['Алалия','Тугоухость']]]},
+{t:'Отклик на имя',opts:[['стабильный',['ЗРР']],['нуждается в усилении',['ЗПР']],['слабый / отсутствует',['РАС','Тугоухость']]]},
+{t:'Понимание инструкций',opts:[['сохранно',['ЗРР']],['частично',['ОНР','ЗПР']],['грубо снижено',['Алалия','РАС','Тугоухость']]]},
+{t:'Компенсаторные жесты',opts:[['развитые',['ЗРР','Алалия']],['скудные',['РАС']],['ситуативные',['ЗПР']]]},
+{t:'Подражание',opts:[['сохранно',['ЗРР','ОНР']],['избирательное',['РАС']],['снижено',['ЗПР','Алалия']]]},
+{t:'Обучаемость: приём помощи и перенос',opts:[['хорошая',['ЗРР']],['частичная',['ОНР']],['низкая',['ЗПР']]]},
+{t:'Игровая деятельность',opts:[['развита',['ЗРР']],['незрелая',['ЗПР']],['нефункциональная / стереотипная',['РАС']]]},
+{t:'Коммуникативная инициатива',opts:[['сохранна',['ЗРР','ОНР']],['снижена',['РАС','Алалия']],['ситуативна',['ЗПР']]]},
+{t:'Слуховое поведение',opts:[['в норме',['ЗРР','ОНР','ЗПР']],['«не слышит» речь',['Тугоухость','Алалия']]]},
+{t:'Эмоциональная взаимность',opts:[['сохранна',['ЗРР','ОНР']],['частичная',['ЗПР']],['снижена',['РАС']]]}
+];
+
+const LC_CHIPS=['ЗРР','ОНР I уровня','ОНР II уровня','ОНР III уровня','ОНР IV уровня','ФФН','ФНР','Дизартрия','Стёртая дизартрия','Дислалия','Моторная алалия','Сенсорная алалия','Заикание','Дисграфия','Дислексия','Нарушения чтения и письма','Вариант возрастной нормы'];
+const PC_CHIPS=['ЗПР','Задержка познавательного развития','СДВГ-черты','Тревожность','Астенические проявления','РАС — риск (требуется уточнение)','Интеллектуальная сохранность'];
+const RECS=[['neuro','Консультация невролога (ЭЭГ, УЗДГ/МРТ по показаниям)'],['lor','Консультация сурдолога: объективная аудиометрия (КСВП/ASSR)'],['psy','Консультация психиатра (при подозрении на РАС)'],['pmpk','Прохождение ПМПК для определения маршрута'],['ind','Индивидуальные логопедические занятия 2–3 раза в неделю'],['group','Групповая коррекционная работа'],['massage','Логопедический массаж'],['neurocor','Нейропсихологическая коррекция'],['psych','Занятия с психологом (эмоционально-волевая сфера)'],['home','Единые рекомендации и домашние задания для родителей'],['control','Контрольное обследование через 3–6 месяцев']];
+const DG_FORMS=['акустическая','на почве нарушения языкового анализа и синтеза','аграмматическая','оптическая','артикуляторно-акустическая'];
+
+const LS='speechmap.v3';
+const LEGACY_LS='speechmap.v2';
+const blankState=()=>({patient:{},scores:{},notes:{},age:'all',elapsed:0,running:true,modules:{},diff:{},verdict:{lc:[],pc:[],recs:[],extra:''},anamnesis:{},pro:{}});
+function normalizeState(raw){
+ const b=blankState(),r=(raw&&typeof raw==='object')?raw:{};
+ b.patient={...r.patient};b.scores={...r.scores};b.notes={...r.notes};b.modules={...r.modules};b.diff={...r.diff};b.anamnesis={...r.anamnesis};b.pro={...r.pro};
+ b.verdict={...b.verdict,...(r.verdict||{})};
+ b.verdict.lc=Array.isArray(b.verdict.lc)?b.verdict.lc:[];b.verdict.pc=Array.isArray(b.verdict.pc)?b.verdict.pc:[];b.verdict.recs=Array.isArray(b.verdict.recs)?b.verdict.recs:[];
+ b.age=['all','0','1','2'].includes(String(r.age))?String(r.age):'all';
+ b.elapsed=Math.max(0,Number.isFinite(+r.elapsed)?Math.floor(+r.elapsed):0);b.running=typeof r.running==='boolean'?r.running:true;
+ return b
+}
+function load(){try{return JSON.parse(localStorage.getItem(LS)||localStorage.getItem(LEGACY_LS)||'null')}catch(e){return null}}
+let state=normalizeState(load());
+function save(){try{localStorage.setItem(LS,JSON.stringify(state));localStorage.removeItem(LEGACY_LS);const d=$('#saveDot');d.classList.add('ping');setTimeout(()=>d.classList.remove('ping'),600)}catch(e){toast('Не удалось сохранить данные в браузере')}}
+const code=(sec,i)=>sec.code+(i+1);
+function modState(id){return state.modules[id]||(state.modules[id]={marks:{}})}
+
+/* ══ КАРТА ══ */
+function renderSections(){
+ $('#sections').innerHTML=DATA.map(sec=>`
+ <section class="sec" id="sec-${sec.id}">
+  <div class="sec-h" data-sec="${sec.id}">
+   <div class="lb">${sec.code}</div>
+   <div class="sec-t"><b>${sec.title}</b><small id="cnt-${sec.id}"></small></div>
+   <div class="spct"><i id="bar-${sec.id}"></i></div>
+   <div class="sec-meta"><b id="pct-${sec.id}">—</b><span>КАЧЕСТВО</span></div>
+   <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg>
+  </div>
+  <div class="sec-body"><div>
+  ${sec.items.map((it,i)=>{const c=code(sec,i);return `
+   <div class="item" id="it-${c}" data-id="${c}">
+    <div class="itxt"><span class="code">${c}</span><span class="t">${it.t}</span><span class="atag">${it.a.length===3?'все возраста':it.a.map(x=>AGES[x]).join(' · ')}</span>${it.h?`<span class="hint">${it.h}</span>`:''}</div>
+    <div class="seg">
+     <button class="sg v0" data-id="${c}" data-v="0" title="Выраженные нарушения">0</button>
+     <button class="sg v1" data-id="${c}" data-v="1" title="Лёгкие нарушения">1</button>
+     <button class="sg v2" data-id="${c}" data-v="2" title="Возрастная норма">2</button>
+     <button class="sg vn" data-id="${c}" data-v="n" title="Не оценено">н</button>
+    </div>
+    <button class="note-btn" data-id="${c}" title="Заметка">✎</button>
+    <div class="note-box"><div><textarea data-id="${c}" placeholder="Заметка, фрагменты ответов, материал…"></textarea></div></div>
+   </div>`}).join('')}
+  </div></div>
+ </section>`).join('');
+ $('#navList').innerHTML=DATA.map(sec=>`
+  <button class="navrow" data-target="sec-${sec.id}">
+   <div class="nl"><span>${sec.code}. ${sec.title}</span><span class="np" id="np-${sec.id}">—</span></div>
+   <div class="nbar"><i id="nb-${sec.id}"></i></div>
+  </button>`).join('');
+ $$('.sg').forEach(b=>{const v=state.scores[b.dataset.id];if(v!==undefined&&String(v)===b.dataset.v)b.classList.add('on')});
+ $$('.note-box textarea').forEach(t=>{const n=state.notes[t.dataset.id];if(n){t.value=n;t.closest('.item').classList.add('open');t.closest('.item').querySelector('.note-btn').classList.add('filled')}});
+ ['Name','Age','Num','Spec'].forEach(k=>{if(state.patient[k.toLowerCase()])$('#p'+k).value=state.patient[k.toLowerCase()]});
+}
+const itemApplicable=it=>state.age==='all'||it.a.includes(+state.age);
+function applyFilters(){
+ const q=$('#search').value.trim().toLowerCase();let found=0,total=0;
+ DATA.forEach(sec=>{let vis=0;
+  sec.items.forEach((it,i)=>{const el=$('#it-'+code(sec,i));const ageOk=itemApplicable(it);
+   const txtOk=!q||(it.t+' '+(it.h||'')).toLowerCase().includes(q);const show=ageOk&&txtOk;
+   el.classList.toggle('hide',!show);if(ageOk){total++;if(txtOk){found++;vis++}}});
+  $('#sec-'+sec.id).style.display=(q&&vis===0)?'none':'';});
+ $('#found').textContent=q?`найдено: ${found} из ${total}`:'';
+}
+const qLabel=q=>q>=.85?'в пределах нормы':q>=.6?'единичные затруднения':q>=.35?'умеренные нарушения':'выраженные нарушения';
+const qColor=q=>q>=.85?'var(--ok)':q>=.6?'var(--warn)':'var(--bad)';
+function secStats(sec){let app=0,scored=0,sum=0,rated=0;
+ sec.items.forEach((it,i)=>{if(!itemApplicable(it))return;app++;const v=state.scores[code(sec,i)];
+  if(v!==undefined){scored++;if(v===0||v===1||v===2){sum+=v;rated++}}});
+ return{app,scored,rated,sum,q:rated?sum/(2*rated):null}}
+const secById=id=>DATA.find(d=>d.id===id);
+
+function refreshMap(){
+ let appAll=0,scoredAll=0,sumAll=0,ratedAll=0;
+ DATA.forEach(sec=>{const s=secStats(sec);appAll+=s.app;scoredAll+=s.scored;sumAll+=s.sum;ratedAll+=s.rated;
+  $('#cnt-'+sec.id).textContent=`оценено ${s.scored} из ${s.app}`;
+  const pct=$('#pct-'+sec.id),bar=$('#bar-'+sec.id),nb=$('#nb-'+sec.id),np=$('#np-'+sec.id),card=$('#sec-'+sec.id);
+  if(s.q===null){pct.textContent='—';bar.style.width='0';nb.style.width='0';np.textContent='нет данных'}
+  else{const p=Math.round(s.q*100);pct.textContent=p+'%';bar.style.width=p+'%';bar.style.background=qColor(s.q);nb.style.width=p+'%';nb.style.background=qColor(s.q);np.textContent=p+'%'}
+  card.classList.toggle('done',s.app>0&&s.scored===s.app&&s.rated===s.app)});
+ const done=scoredAll,frac=appAll?Math.min(1,scoredAll/appAll):0;
+ $('#ringFg').style.strokeDashoffset=213.6*(1-frac);
+ $('#ringPct').textContent=Math.round(frac*100)+'%';
+ $('#stDone').textContent=done+'/'+appAll;$('#tabCnt1').textContent=done;
+ const idx=ratedAll?sumAll/(2*ratedAll):null;
+ $('#stIdx').textContent=idx===null?'—':Math.round(idx*100)+'%';
+ $('#stIdx').className=idx===null?'':(idx>=.85?'good':idx>=.6?'mid':'low');
+ $('#ringNote').textContent=frac<1?'Оценивайте пункты — профиль строится автоматически.':'Карта заполнена. Сформируйте отчёт.';
+ $('#wf').style.setProperty('--amp',(0.3+0.7*frac).toFixed(2));
+ refreshHints();
+}
+function refreshHints(){
+ const h=[],st={};DATA.forEach(sec=>st[sec.id]=secStats(sec));
+ const low=id=>st[id].q!==null&&st[id].q<.85&&st[id].rated>=2;
+ if(low('hearing'))h.push('Слуховое восприятие под вопросом — обязательна объективная аудиометрия (сурдолог).');
+ if(low('motor'))h.push('Моторные нарушения — рассмотреть псевдобульбарный компонент; наблюдение невролога.');
+ if(low('impress'))h.push('Трудности понимания — углублённая проверка импрессивной речи, дифф. с сенсорной алалией и тугоухостью.');
+ if([low('lexicon'),low('grammar'),low('coherent')].filter(Boolean).length>=2)h.push('Системный характер нарушений — определите уровень ОНР в модуле диагностики.');
+ if(low('sound')||low('phonemic'))h.push('Звукопроизношение и/или фонематические процессы — риск ФФН; модуль «ФФН/ФНР».');
+ if(low('written'))h.push('Нарушения письменной речи — риск дисграфии/дислексии; проанализируйте тетради.');
+ if(low('hmf'))h.push('Недостаточность ВПФ — рекомендована нейропсихологическая диагностика.');
+ if(low('emotional'))h.push('Эмоционально-личностные маркеры — динамическое наблюдение психолога.');
+ $('#hintsList').innerHTML=h.length?h.map(x=>`<li>${x}</li>`).join(''):'<li class="none">Пока недостаточно данных…</li>';
+}
+
+/* ══ МОДУЛИ ══ */
+function allCrits(m){
+ if(m.levels){const a=[];for(let l=1;l<=4;l++)m.levelsData[l].forEach((c,i)=>a.push(['l'+l+'c'+i,c]));return a}
+ if(m.forms){const a=[];['m','s'].forEach(f=>m.formsData[f].forEach((c,i)=>a.push([f+i,c])));return a}
+ return m.crit.map((c,i)=>['c'+i,c]);
+}
+function moduleScore(m){let total=0,sum=0,marked=0;
+ allCrits(m).forEach(([k,c])=>{total+=c.w;if(modState(m.id).marks[k]){sum+=c.w;marked++}});
+ return{total,sum,marked}}
+const critHtml=(m,k,c)=>`<label class="ck"><input type="checkbox" data-mod="${m.id}" data-k="${k}" ${modState(m.id).marks[k]?'checked':''}><span class="box"></span><span class="ct">${c.t}${c.h?`<span class="ch">${c.h}</span>`:''}</span><span class="w">${'★'.repeat(c.w)}</span></label>`;
+function critListHtml(m){
+ if(m.levels){const l=modState('onr').level||3;return m.levelsData[l].map((c,i)=>critHtml(m,'l'+l+'c'+i,c)).join('')}
+ if(m.forms){const f=modState('alalia').form||'m';return m.formsData[f].map((c,i)=>critHtml(m,f+i,c)).join('')}
+ return m.crit.map((c,i)=>critHtml(m,'c'+i,c)).join('');
+}
+function renderModules(){
+ $('#modList').innerHTML=MODULES.map(m=>{
+  let sel='';
+  if(m.levels){const cur=modState('onr').level||3;sel=`<div class="lvls"><span class="cap">Уровень:</span>${[1,2,3,4].map(l=>`<button class="lv ${cur===l?'on':''}" data-lv="${l}">${ROM[l]}</button>`).join('')}</div><div class="mod-hint" id="hint-onr"></div>`}
+  if(m.forms){const cur=modState('alalia').form||'m';sel=`<div class="lvls"><span class="cap">Форма:</span><button class="lv ${cur==='m'?'on':''}" data-form="m">моторная</button><button class="lv ${cur==='s'?'on':''}" data-form="s">сенсорная</button></div>`}
+  if(m.typeSel){const cur=modState('stutter').type||'смешанное';sel=`<div class="lvls"><span class="cap">Судороги:</span>${['клонические','тонические','смешанное'].map(t=>`<button class="lv ${cur===t?'on':''}" data-stype="${t}">${t}</button>`).join('')}</div>`}
+  const hint=m.id==='ffn'?'<div class="mod-hint" id="hint-ffn"></div>':'';
+  const forms=m.id==='dysgraphia'?'<div class="fchips" id="dgforms"></div>':'';
+  return`<section class="mod" id="mod-${m.id}">
+   <div class="mod-h">
+    <div class="md-dot"></div>
+    <div class="mod-t"><b>${m.name}</b><small>${m.desc}</small></div>
+    <span class="mod-tag">${m.tag}</span>
+    <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg>
+   </div>
+   <div class="mod-body"><div>
+    ${sel}${hint}<div class="crit-list" id="crit-${m.id}">${critListHtml(m)}</div>${forms}
+    <div class="mod-meter"><div class="mm-bar"><i id="mm-${m.id}"></i></div><span class="mm-label" id="mml-${m.id}">нет данных</span></div>
+    <textarea class="mnote" data-mod="${m.id}" placeholder="Заметка по модулю…"></textarea>
+   </div></div>
+  </section>`}).join('');
+ const a=state.anamnesis||{};
+ $('#aPreg').value=a.preg||'';$('#aMoto').value=a.moto||'';$('#aSpeech').value=a.speech||'';
+ $('#aHear').value=a.hear||'';$('#aNeuro').value=a.neuro||'';$('#aCompl').value=a.compl||'';
+ $('#aBilin').checked=!!a.bilin;
+ $$('.mnote').forEach(t=>{t.value=modState(t.dataset.mod).note||''});
+}
+function refreshModules(){
+ let totalMarked=0;
+ MODULES.forEach(m=>{
+  const s=moduleScore(m);totalMarked+=s.marked;
+  const p=s.total?s.sum/s.total:0,bar=$('#mm-'+m.id),lbl=$('#mml-'+m.id);
+  bar.style.width=(p*100)+'%';
+  if(!s.marked){lbl.textContent='нет данных';bar.style.background='var(--teal)'}
+  else if(p>=.66){lbl.textContent=`высокая выраженность · ${s.marked} марк.`;bar.style.background='var(--bad)'}
+  else if(p>=.34){lbl.textContent=`умеренная выраженность · ${s.marked} марк.`;bar.style.background='var(--warn)'}
+  else{lbl.textContent=`слабые маркеры · ${s.marked} марк.`;bar.style.background='var(--ok)'}
+ });
+ $('#stMod').textContent=totalMarked;$('#tabCnt2').textContent=totalMarked;
+ const o=$('#hint-onr');if(o)o.textContent=onrHint();
+ const f=$('#hint-ffn');if(f)f.textContent=ffnHint();
+ const dg=$('#dgforms');if(dg){const ms=modState('dysgraphia').marks;const forms=DG_FORMS.filter((_,i)=>ms['c'+i]);
+  dg.innerHTML=forms.length?forms.map(x=>`<span class="fchip">предпол. форма: ${x}</span>`).join(''):''}
+}
+function onrHint(){const qs=['lexicon','grammar','coherent'].map(id=>secStats(secById(id)).q).filter(v=>v!==null);
+ if(!qs.length)return'По данным карты: недостаточно оценок лексики/грамматики/связной речи для ориентира.';
+ const a=qs.reduce((x,y)=>x+y)/qs.length;
+ if(a>=.92)return'По данным карты: признаки ОНР не выражены.';
+ const lv=a<.2?1:a<.45?2:a<.7?3:4;
+ return`По данным карты: ориентировочно — ОНР ${ROM[lv]} уровня (лексика, грамматика, связная речь).`}
+function ffnHint(){const q=id=>secStats(secById(id)).q;
+ const s=q('sound'),f=q('phonemic'),l=q('lexicon'),g=q('grammar');
+ if([s,f,l,g].some(v=>v===null))return'По данным карты: недостаточно оценок для ориентира.';
+ if((s<.85||f<.85)&&l>=.85&&g>=.85)return'По данным карты: паттерн соответствует ФФН — звуковая сторона страдает при сохранных лексике и грамматике.';
+ if(s<.85&&f>=.85&&l>=.85&&g>=.85)return'По данным карты: вероятнее ФНР — изолированное нарушение произношения.';
+ return'По данным карты: паттерн ФФН не выражен (страдают и другие компоненты).'}
+
+/* ══ ДИФФ ══ */
+function renderDiff(){
+ $('#diffRows').innerHTML=DIFF_ROWS.map((r,ri)=>`
+  <div class="drow"><b><span class="dn">${String(ri+1).padStart(2,'0')}</span>${r.t}</b>
+   <div class="dopts">${r.opts.map((o,oi)=>`<button class="dopt ${state.diff[ri]===oi?'on':''}" data-row="${ri}" data-opt="${oi}">${o[0]}<small>→ ${o[1].join(' · ')}</small></button>`).join('')}</div>
+  </div>`).join('');
+ refreshDiff();
+}
+function diffTally(){const t={};DIFF_COLS.forEach(c=>t[c]=0);
+ Object.entries(state.diff).forEach(([ri,oi])=>{DIFF_ROWS[ri].opts[oi][1].forEach(c=>t[c]++)});return t}
+function refreshDiff(){
+ const t=diffTally(),answered=Object.keys(state.diff).length;
+ $('#stDiff').textContent=answered+'/'+DIFF_ROWS.length;$('#tabCnt3').textContent=answered;
+ const mx=Math.max(...Object.values(t),0);
+ $('#diffTally').innerHTML=mx===0?'<p style="color:var(--ink2);font-style:italic">Отметьте варианты в строках ниже — здесь появится сводка совпадений.</p>':
+  Object.entries(t).sort((a,b)=>b[1]-a[1]).map(([k,v],i)=>`
+   <div class="hyp"><div class="hl"><span>${k}${v===mx&&mx>0?' <span style="color:var(--bad);font-size:11px">● максимум совпадений</span>':''}</span><span>${v} совп.</span></div>
+   <div class="hb"><i style="width:${mx?Math.round(v/mx*100):0}%;background:${v===mx?'var(--bad)':'var(--teal)'}"></i></div></div>`).join('');
+}
+
+/* ══ ЗАКЛЮЧЕНИЕ ══ */
+function hypScores(){
+ const out=[];
+ MODULES.forEach(m=>{const s=moduleScore(m);
+  if(s.marked)out.push({name:m.diag,marks:s.marked,total:allCrits(m).length,p:s.sum/s.total,src:'модуль'})});
+ const t=diffTally(),mx=Math.max(...Object.values(t),1),answered=Object.keys(state.diff).length;
+ if(answered>=3)Object.entries(t).forEach(([k,v])=>{if(v>0){
+  const ex=out.find(o=>o.name===k||k.startsWith(o.name));const d=v/mx;
+  if(ex)ex.p=ex.p*.65+d*.35;else out.push({name:k,p:d*.75,src:'дифф.анализ'})}});
+ return out.sort((a,b)=>b.p-a.p);
+}
+function renderVerdict(){
+ $('#lcChips').innerHTML=LC_CHIPS.map(c=>`<button class="cz ${state.verdict.lc.includes(c)?'on':''}" data-g="lc" data-c="${c}">${c}</button>`).join('');
+ $('#pcChips').innerHTML=PC_CHIPS.map(c=>`<button class="cz ${state.verdict.pc.includes(c)?'on':''}" data-g="pc" data-c="${c}">${c}</button>`).join('');
+ $('#recList').innerHTML=RECS.map(([id,txt])=>`<label class="ck"><input type="checkbox" data-rec="${id}" ${state.verdict.recs.includes(id)?'checked':''}><span class="box"></span><span class="ct">${txt}</span></label>`).join('');
+ $('#vExtra').value=state.verdict.extra||'';
+ refreshVerdict();
+}
+function refreshVerdict(){
+ const hs=hypScores();
+ $('#hypList').innerHTML=hs.length?hs.map(h=>`
+  <div class="hyp"><div class="hl"><span>${h.name}</span><span>${Math.round(h.p*100)}% · ${h.marks!==undefined?h.marks+'/'+h.total+' марк.':h.src}</span></div>
+  <div class="hb"><i style="width:${Math.round(h.p*100)}%;background:${h.p>=.66?'var(--bad)':h.p>=.34?'var(--warn)':'var(--teal)'}"></i></div></div>`).join('')
+  :'<p style="color:var(--ink2);font-style:italic">Заполните модули и дифференциальный анализ — гипотезы появятся здесь.</p>';
+ $('#tabCnt4').textContent=state.verdict.lc.length+state.verdict.pc.length+state.verdict.recs.length;
+}
+
+/* ══ ОТЧЁТЫ ══ */
+const fmtT=s=>{const m=Math.floor(s/60);return String(m).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
+function headerLines(){const now=new Date();
+ return[`Дата: ${now.toLocaleDateString('ru-RU')} ${now.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})} · сессия: ${fmtT(state.elapsed)}`,
+ `Ребёнок: ${state.patient.name||'—'} · Возраст: ${state.patient.age||'—'}`,
+ `Обследование: ${state.patient.num||'—'} · Специалист: ${state.patient.spec||'—'}`]}
+function mapLines(){const L=[];const attention=[];
+ DATA.forEach(sec=>{const s=secStats(sec);
+  L.push(`${sec.code}. ${sec.title} — ${s.q===null?'не оценено':Math.round(s.q*100)+'% · '+qLabel(s.q)} (${s.scored}/${s.app})`);
+  sec.items.forEach((it,i)=>{if(state.scores[code(sec,i)]===0)attention.push(`${code(sec,i)} — ${it.t}`)})});
+ return{L,attention}}
+function buildMapSection(){const{L,attention}=mapLines();const out=[...L,''];
+ out.push('Требуют внимания (выраженные нарушения):');
+ out.push(...(attention.length?attention.map(x=>'• '+x):['• не выявлено']));return out}
+function buildAnamnesis(){const a=state.anamnesis;if(!a||Object.values(a).every(v=>!v))return null;
+ const L=['Беременность/роды: '+(a.preg||'—'),'Моторные рубежи: '+(a.moto||'—'),'Речевые рубежи: '+(a.speech||'—'),
+ 'Слух: '+(a.hear||'—')+(a.bilin?' · билингвальная среда':''),'Неврология: '+(a.neuro||'—'),'Жалобы: '+(a.compl||'—')];return L}
+function buildModulesSection(){const L=[];
+ MODULES.forEach(m=>{const s=moduleScore(m);
+  const p=s.total?s.sum/s.total:0;
+  const deg=!s.marked?'нет данных':p>=.66?'высокая выраженность':p>=.34?'умеренная':'слабые маркеры';
+  L.push(`${m.name} — ${s.marked} марк. (${deg})${modState(m.id).note?' · заметка: '+modState(m.id).note:''}`)});
+ return L}
+function buildDiffSection(){const t=diffTally();
+ if(!Object.keys(state.diff).length)return['не проводился'];
+ return Object.entries(t).sort((a,b)=>b[1]-a[1]).filter(([,v])=>v>0).map(([k,v])=>`${k}: ${v} совпад.`)}
+function buildHypSection(){const hs=hypScores();
+ return hs.length?hs.slice(0,6).map((h,i)=>`${i+1}. ${h.name} — ${Math.round(h.p*100)}%`):['нет данных']}
+function buildFullReport(){
+ const L=['«СПИЧ-ПРОФИЛЬ» — ПОЛНЫЙ ОТЧЁТ ОБ ОБСЛЕДОВАНИИ','='.repeat(50),...headerLines(),''];
+ const an=buildAnamnesis();if(an){L.push('АНАМНЕЗ','—'.repeat(50),...an,'')}
+ L.push('КАРТА ОБСЛЕДОВАНИЯ','—'.repeat(50),...buildMapSection(),'',
+ 'ДИАГНОСТИЧЕСКИЕ МОДУЛИ','—'.repeat(50),...buildModulesSection(),'',
+ 'ДИФФЕРЕНЦИАЛЬНЫЙ АНАЛИЗ','—'.repeat(50),...buildDiffSection(),'',
+ 'ГИПОТЕЗЫ (по совпадению признаков)','—'.repeat(50),...buildHypSection());
+ const v=state.verdict;
+ if(v.lc.length||v.pc.length||v.recs.length){L.push('','ЗАКЛЮЧЕНИЕ','—'.repeat(50));
+  if(v.lc.length)L.push('Логопедическое: '+v.lc.join('; '));
+  if(v.pc.length)L.push('Психологическое: '+v.pc.join('; '));
+  if(v.recs.length){L.push('Рекомендации:');RECS.forEach(([id,txt])=>{if(v.recs.includes(id))L.push('• '+txt)})}
+  if(v.extra)L.push('Дополнительно: '+v.extra)}
+ L.push('','* '.repeat(1)+'Чеклист — вспомогательный инструмент наблюдения; заключение формируется специалистом по итогам комплексного обследования и не заменяет ПМПК/врачебную диагностику.');
+ return L.join('\n');
+}
+function buildVerdictText(){
+ const L=['ЗАКЛЮЧЕНИЕ ПО ИТОГАМ ДИАГНОСТИЧЕСКОГО ОБСЛЕДОВАНИЯ','='.repeat(50),...headerLines(),''];
+ L.push('Диагностические гипотезы:');L.push(...buildHypSection());
+ const v=state.verdict;
+ L.push('','Логопедическое заключение: '+(v.lc.join('; ')||'—'));
+ L.push('Психологическое заключение: '+(v.pc.join('; ')||'—'));
+ if(v.recs.length){L.push('','Рекомендации:');RECS.forEach(([id,txt])=>{if(v.recs.includes(id))L.push('• '+txt)})}
+ if(v.extra)L.push('','Дополнительно: '+v.extra);
+ L.push('','* Заключение ориентировочное; подтверждается комплексным обследованием и/или ПМПК.');
+ return L.join('\n');
+}
+function openReport(title,text){$('#ovTitle').textContent=title;$('#reportTxt').textContent=text;$('#reportOv').classList.add('show')}
+
+/* ══ СОБЫТИЯ ══ */
+$('#tabs').addEventListener('click',e=>{const t=e.target.closest('.tab');if(!t)return;
+ $$('.tab').forEach(x=>x.classList.remove('on'));t.classList.add('on');
+ $$('.view').forEach(v=>v.classList.remove('on'));$('#view-'+t.dataset.view).classList.add('on');
+ window.scrollTo({top:0})});
+$('#sections').addEventListener('click',e=>{
+ const sg=e.target.closest('.sg');
+ if(sg){const{id,v}=sg.dataset;const val=v==='n'?'n':+v;
+  if(state.scores[id]!==undefined&&String(state.scores[id])===v)delete state.scores[id];else state.scores[id]=val;
+  document.querySelectorAll(`.sg[data-id="${id}"]`).forEach(b=>b.classList.toggle('on',state.scores[id]!==undefined&&String(state.scores[id])===b.dataset.v));
+  save();refreshMap();return}
+ const nb=e.target.closest('.note-btn');
+ if(nb){const it=nb.closest('.item');it.classList.toggle('open');if(it.classList.contains('open'))it.querySelector('textarea').focus();return}
+ const h=e.target.closest('.sec-h');if(h)h.closest('.sec').classList.toggle('closed');
+});
+$('#sections').addEventListener('input',e=>{if(e.target.tagName==='TEXTAREA'){const id=e.target.dataset.id;
+ if(e.target.value.trim())state.notes[id]=e.target.value;else delete state.notes[id];
+ e.target.closest('.item').querySelector('.note-btn').classList.toggle('filled',!!e.target.value.trim());save()}});
+['Name','Age','Num','Spec'].forEach(k=>$('#p'+k).addEventListener('input',e=>{state.patient[k.toLowerCase()]=e.target.value;save()}));
+$('#ageChips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;
+ $$('#ageChips .chip').forEach(x=>x.classList.remove('on'));c.classList.add('on');
+ state.age=c.dataset.age;save();applyFilters();refreshMap()});
+$('#search').addEventListener('input',applyFilters);
+$('#navList').addEventListener('click',e=>{const r=e.target.closest('.navrow');if(!r)return;
+ const sec=document.getElementById(r.dataset.target);sec.classList.remove('closed');
+ sec.scrollIntoView({behavior:'smooth',block:'start'});sec.classList.add('flash');setTimeout(()=>sec.classList.remove('flash'),1300)});
+
+$('#modList').addEventListener('click',e=>{
+ const lv=e.target.closest('.lv');
+ if(lv){if(lv.dataset.lv){modState('onr').level=+lv.dataset.lv}
+  else if(lv.dataset.form){modState('alalia').form=lv.dataset.form}
+  else if(lv.dataset.stype){modState('stutter').type=lv.dataset.stype}
+  save();renderModules();refreshModules();return}
+ const h=e.target.closest('.mod-h');if(h)h.closest('.mod').classList.toggle('closed');
+});
+$('#modList').addEventListener('change',e=>{
+ const cb=e.target.closest('input[data-mod]');
+ if(cb){const st=modState(cb.dataset.mod);if(cb.checked)st.marks[cb.dataset.k]=1;else delete st.marks[cb.dataset.k];
+  save();refreshModules();return}
+});
+$('#modList').addEventListener('input',e=>{
+ if(e.target.classList.contains('mnote')){modState(e.target.dataset.mod).note=e.target.value;save()}
+ const map={aPreg:'preg',aMoto:'moto',aSpeech:'speech',aHear:'hear',aNeuro:'neuro',aCompl:'compl'};
+ if(map[e.target.id]){state.anamnesis[map[e.target.id]]=e.target.value;save()}
+ if(e.target.id==='aBilin'){state.anamnesis.bilin=e.target.checked;save()}
+});
+$('#aBilin').addEventListener('change',e=>{state.anamnesis.bilin=e.target.checked;save()});
+
+$('#diffRows').addEventListener('click',e=>{const o=e.target.closest('.dopt');if(!o)return;
+ const ri=+o.dataset.row,oi=+o.dataset.opt;
+ if(state.diff[ri]===oi)delete state.diff[ri];else state.diff[ri]=oi;
+ save();renderDiff()});
+
+$('#view-verd').addEventListener('click',e=>{
+ const cz=e.target.closest('.cz');
+ if(cz){const arr=state.verdict[cz.dataset.g],c=cz.dataset.c;
+  const i=arr.indexOf(c);if(i>=0)arr.splice(i,1);else arr.push(c);
+  cz.classList.toggle('on');save();refreshVerdict();return}
+});
+$('#recList').addEventListener('change',e=>{const cb=e.target.closest('input[data-rec]');if(!cb)return;
+ const arr=state.verdict.recs,i=arr.indexOf(cb.dataset.rec);
+ if(cb.checked&&i<0)arr.push(cb.dataset.rec);if(!cb.checked&&i>=0)arr.splice(i,1);
+ save();refreshVerdict()});
+$('#vExtra').addEventListener('input',e=>{state.verdict.extra=e.target.value;save()});
+$('#btnHypFill').addEventListener('click',()=>{
+ const lvl=modState('onr').level||3;
+ const dict={'ЗРР':'ЗРР','ОНР':'ОНР '+ROM[lvl]+' уровня','ФФН/ФНР':'ФФН','Дизартрия':'Дизартрия','Заикание':'Заикание','Дисграфия':'Дисграфия','Дислексия':'Дислексия','Алалия':'Моторная алалия','ЗПР':'ЗПР','РАС (риск)':'РАС — риск (требуется уточнение)'};
+ let added=0;
+ hypScores().filter(h=>h.p>=.5).slice(0,3).forEach(h=>{const chip=dict[h.name];
+  if(chip){const g=(chip.includes('РАС')||chip==='ЗПР')?'pc':'lc';
+   if(!state.verdict[g].includes(chip)&&((g==='lc'?LC_CHIPS:PC_CHIPS).includes(chip))){state.verdict[g].push(chip);added++}}});
+ save();renderVerdict();toast(added?'Гипотезы подставлены в заключение':'Нет гипотез с достаточной выраженностью')});
+$('#btnVerdict').addEventListener('click',()=>openReport('Заключение по обследованию',buildVerdictText()));
+
+$('#btnCollapse').addEventListener('click',()=>{
+ const els=$$('.sec,.mod');const anyOpen=els.some(s=>!s.classList.contains('closed'));
+ els.forEach(s=>s.classList.toggle('closed',anyOpen));
+ $('#btnCollapse').textContent=anyOpen?'Развернуть всё':'Свернуть всё'});
+$('#btnClear').addEventListener('click',()=>{
+ if(!confirm('Полностью очистить карту, модули, дифф. анализ, заключение и паспорт?'))return;
+ localStorage.removeItem(LS);location.reload()});
+$('#btnReport').addEventListener('click',()=>openReport('Полный отчёт',buildFullReport()));
+$('#btnCloseR').addEventListener('click',()=>$('#reportOv').classList.remove('show'));
+$('#btnCopy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#reportTxt').textContent);toast('Скопировано')}catch(e){const r=document.createRange();r.selectNode($('#reportTxt'));getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy');getSelection().removeAllRanges();toast('Скопировано')}});
+$('#btnPrint').addEventListener('click',()=>window.print());
+
+setInterval(()=>{if(state.running){state.elapsed++;$('#timer').textContent=fmtT(state.elapsed);if(state.elapsed%10===0)save()}},1000);
+$('#timerBtn').addEventListener('click',()=>{state.running=!state.running;
+ $('#timerBtn').textContent=state.running?'пауза':'старт';$('#sessDot').classList.toggle('paused',!state.running);save()});
+$('#timer').textContent=fmtT(state.elapsed);
+$('#timerBtn').textContent=state.running?'пауза':'старт';$('#sessDot').classList.toggle('paused',!state.running);
+
+(function(){const wf=$('#wf');for(let i=0;i<34;i++){const s=document.createElement('span');
+ s.style.setProperty('--h',(18+Math.random()*82)+'%');s.style.setProperty('--d',(0.8+Math.random()*0.9)+'s');
+ s.style.setProperty('--dl',(Math.random()*-2)+'s');wf.appendChild(s)}})();
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{threshold:.06});
+function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;
+ $('#toasts').appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));
+ setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),350)},2400)}
+
+renderSections();renderModules();renderDiff();renderVerdict();
+$$('.sec,.mod').forEach(s=>io.observe(s));
+applyFilters();refreshMap();
+</script>
+
+<script>
+/* Улучшения автономности, доступности, резервного копирования и отчётности */
+(function(){
+ 'use strict';
+ const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&quot;').replace(/'/g,'&#39;');
+ const saveDot=$('#saveDot');
+ function announce(message){saveDot.innerHTML='<i></i>'+esc(message);saveDot.classList.add('ping');setTimeout(()=>{saveDot.innerHTML='<i></i>автосохранение';saveDot.classList.remove('ping')},1600)}
+ const coreSave=save;
+ window.save=function(){coreSave();announce('сохранено локально')};
+ function rerenderAll(){
+   renderSections();renderModules();renderDiff();renderVerdict();applyFilters();refreshMap();refreshModules();
+   enhanceA11y();
+ }
+ function safeFileName(){
+   const name=(state.patient.name||'без_имени').trim().replace(/[\\/:*?"<>|]+/g,'_').replace(/\s+/g,'_').slice(0,48)||'без_имени';
+   return 'speech-profile_'+name+'_'+new Date().toISOString().slice(0,10)+'.json';
+ }
+ function exportBackup(){
+   const payload={app:'Speech-профиль',version:3,exportedAt:new Date().toISOString(),data:state};
+   const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'}));
+   const a=document.createElement('a');a.href=url;a.download=safeFileName();document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500);toast('Резервная копия выгружена');
+ }
+ function restoreBackup(file){
+   if(!file)return;
+   if(file.size>3*1024*1024){toast('Файл резервной копии слишком большой');return}
+   file.text().then(text=>{
+     let raw;try{raw=JSON.parse(text)}catch(e){throw new Error('Неверный JSON')}
+     const candidate=raw&&raw.data?raw.data:raw;
+     if(!candidate||typeof candidate!=='object')throw new Error('Не найдены данные профиля');
+     state=normalizeState(candidate);save();rerenderAll();toast('Резервная копия восстановлена');
+   }).catch(e=>toast('Не удалось восстановить: '+e.message));
+ }
+ function addTools(){
+   const box=document.querySelector('.tacts');
+   if(!box||$('#btnBackup'))return;
+   box.insertAdjacentHTML('afterbegin',`<button class="abtn" id="btnSaveNow" title="Сохранить данные в браузере">Сохранить</button><button class="abtn" id="btnBackup" title="Скачать резервную копию">Экспорт</button><button class="abtn" id="btnRestore" title="Загрузить резервную копию">Импорт</button><input id="backupFile" type="file" accept="application/json,.json" hidden>`);
+   $('#btnSaveNow').addEventListener('click',()=>{save();toast('Данные сохранены на этом устройстве')});
+   $('#btnBackup').addEventListener('click',exportBackup);
+   $('#btnRestore').addEventListener('click',()=>$('#backupFile').click());
+   $('#backupFile').addEventListener('change',e=>{restoreBackup(e.target.files[0]);e.target.value=''});
+ }
+ function enhanceA11y(){
+   $$('.sec-h,.mod-h').forEach(h=>{const host=h.closest('.sec,.mod');h.setAttribute('role','button');h.tabIndex=0;h.setAttribute('aria-expanded',String(!host.classList.contains('closed')))});
+   $$('.sg').forEach(b=>{b.type='button';b.setAttribute('aria-pressed',String(b.classList.contains('on')));b.setAttribute('aria-label',(b.title||'Оценка')+'; значение '+b.dataset.v)});
+   $$('.note-btn').forEach(b=>{b.type='button';b.setAttribute('aria-label','Открыть заметку к пункту')});
+   $$('.dopt,.cz,.lv').forEach(b=>{b.type='button';b.setAttribute('aria-pressed',String(b.classList.contains('on')))});
+ }
+ document.addEventListener('keydown',e=>{
+   if(e.key==='Escape'&&$('#reportOv').classList.contains('show')){$('#reportOv').classList.remove('show');return}
+   const header=e.target.closest&&e.target.closest('.sec-h,.mod-h');
+   if(header&&(e.key==='Enter'||e.key===' ')){e.preventDefault();header.click();enhanceA11y()}
+ });
+ $('#sections').addEventListener('click',()=>setTimeout(enhanceA11y,0));
+ $('#modList').addEventListener('click',()=>setTimeout(enhanceA11y,0));
+ $('#view-verd').addEventListener('click',()=>setTimeout(enhanceA11y,0));
+ const oldOpenReport=openReport;
+ window.openReport=function(title,text){oldOpenReport(title,text);setTimeout(()=>$('#btnCopy').focus(),0)};
+ const oldFull=buildFullReport;
+ window.buildFullReport=function(){
+   const base=oldFull();let applicable=0,scored=0,notRated=0,notes=[];
+   DATA.forEach(sec=>sec.items.forEach((it,i)=>{if(itemApplicable(it)){applicable++;const id=code(sec,i);if(state.scores[id]!==undefined)scored++;if(state.scores[id]==='n')notRated++;if(state.notes[id])notes.push(id+' — '+it.t+': '+state.notes[id])}}));
+   const add=['','СТАТУС ЗАПОЛНЕНИЯ','—'.repeat(50),`Возрастной фильтр: ${state.age==='all'?'все возрасты':AGES[+state.age]+' лет'}`,`Оценено пунктов: ${scored} из ${applicable}`,`Помечено «не оценено»: ${notRated}`];
+   if(notes.length)add.push('','ЗАМЕТКИ ПО КАРТЕ','—'.repeat(50),...notes.map(x=>'• '+x));
+   return base+'\n'+add.join('\n');
+ };
+ addTools();enhanceA11y();refreshModules();refreshVerdict();save();
+})();
+</script>
+
+<script>
+/* Расширение «необходимые функции» для автономного Speech‑профиля */
+(function () {
+  'use strict';
+
+  const SNAP_KEY = 'speechmap.v3.snapshots';
+  const MAX_SNAPSHOTS = 8;
+  const escapeHTML = value => String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&quot;').replace(/'/g, '&#39;');
+  const clone = value => JSON.parse(JSON.stringify(value));
+  const nowLabel = iso => new Date(iso).toLocaleString('ru-RU', {dateStyle: 'short', timeStyle: 'short'});
+
+  function injectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      :focus-visible{outline:3px solid #e0a63a!important;outline-offset:3px!important}
+      .utility-label{font:600 10px var(--mono);letter-spacing:.08em;color:var(--ink2);white-space:nowrap}
+      .quality-pill{border:1px solid var(--teal-soft);background:var(--teal-soft);color:var(--teal-deep);border-radius:999px;padding:5px 9px;font:700 10px var(--mono);white-space:nowrap}
+      .quality-pill.warn{border-color:#f0dcb4;background:#fdf3e2;color:#8a5f14}.quality-pill.bad{border-color:#f0c4c4;background:#fff0f0;color:#a33434}
+      .utility-modal{position:fixed;inset:0;z-index:90;display:none;place-items:center;padding:18px;background:rgba(10,30,25,.58);backdrop-filter:blur(3px)}
+      .utility-modal.show{display:grid}.utility-panel{width:min(700px,100%);max-height:min(78vh,760px);overflow:auto;background:#fff;border:1px solid var(--ink);border-radius:16px;box-shadow:10px 12px 0 rgba(24,36,32,.18);padding:22px}
+      .utility-panel h2{font:800 19px var(--disp);margin:0 0 8px}.utility-panel p{color:var(--ink2);line-height:1.5;margin:0 0 14px}.quality-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:16px 0}.quality-stat{border:1px solid var(--line);border-radius:10px;padding:11px;background:#fbfcfa}.quality-stat b{display:block;font:800 20px var(--disp);color:var(--teal-deep)}.quality-stat span{font:11px var(--mono);color:var(--ink2)}
+      .check-list{display:grid;gap:8px;margin:14px 0}.check-item{border-left:4px solid var(--teal);padding:9px 11px;background:#f5faf7;border-radius:0 8px 8px 0;font-size:13px;line-height:1.4}.check-item.warn{border-color:var(--amber);background:#fff8eb}.check-item.bad{border-color:var(--bad);background:#fff3f3}.check-item strong{display:block;margin-bottom:2px}
+      .modal-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:18px}.modal-actions .abtn{min-height:38px}.snapshot-list{display:grid;gap:9px;margin-top:14px}.snapshot{border:1px solid var(--line);border-radius:10px;padding:11px;display:flex;gap:10px;align-items:center;justify-content:space-between}.snapshot strong{display:block;font-size:13px}.snapshot small{display:block;color:var(--ink2);font:11px var(--mono);margin-top:3px}.snapshot-actions{display:flex;gap:6px;flex-wrap:wrap}.snapshot-actions .abtn{padding:6px 9px;font-size:11px}
+      .shortcut-grid{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;align-items:center;margin-top:14px}.shortcut-grid kbd{justify-self:start;border:1px solid var(--ink2);border-bottom-width:3px;border-radius:5px;padding:2px 6px;background:#fff;font:700 11px var(--mono)}
+      @media (max-width:760px){.tacts{width:100%;margin-left:0;flex-wrap:wrap}.tacts .abtn{flex:1 1 auto;padding:8px 10px}.utility-label,.quality-pill{display:none}.quality-grid{grid-template-columns:1fr}.utility-panel{padding:17px}.snapshot{align-items:flex-start;flex-direction:column}.tabs{top:58px}.tab{flex:1 1 42%;justify-content:center;padding:9px 8px;font-size:11px}.app{grid-template-columns:1fr}.side{position:static;order:2}.sec-h,.mod-h{padding:13px}.item{padding:12px}.itxt{min-width:min(100%,220px)}.seg{width:100%;justify-content:flex-start}}
+      @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}}
+      @media print{.utility-modal,.utility-label,.quality-pill,#btnQuality,#btnSnapshot,#btnHistory,#btnHelp{display:none!important}}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function getSnapshots() {
+    try {
+      const list = JSON.parse(localStorage.getItem(SNAP_KEY) || '[]');
+      return Array.isArray(list) ? list.filter(item => item && item.data && item.id) : [];
+    } catch (_) { return []; }
+  }
+
+  function putSnapshots(list) {
+    try { localStorage.setItem(SNAP_KEY, JSON.stringify(list.slice(0, MAX_SNAPSHOTS))); }
+    catch (_) { toast('Не удалось сохранить журнал снимков'); }
+  }
+
+  function saveSnapshot(reason) {
+    const snapshots = getSnapshots();
+    snapshots.unshift({
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      createdAt: new Date().toISOString(),
+      reason: reason || 'ручной снимок',
+      label: String(state.patient?.name || 'без идентификатора').trim() || 'без идентификатора',
+      data: clone(state)
+    });
+    putSnapshots(snapshots);
+    updateUtilityState();
+    toast('Снимок сессии сохранён');
+  }
+
+  function removeSnapshot(id) {
+    putSnapshots(getSnapshots().filter(item => item.id !== id));
+    renderHistory();
+    updateUtilityState();
+  }
+
+  function downloadSnapshot(id) {
+    const item = getSnapshots().find(snapshot => snapshot.id === id);
+    if (!item) return;
+    const blob = new Blob([JSON.stringify({app: 'Speech‑профиль', version: 3, exportedAt: new Date().toISOString(), data: item.data}, null, 2)], {type: 'application/json;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `speech-profile_snapshot_${item.createdAt.slice(0, 10)}.json`;
+    document.body.appendChild(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 500);
+    toast('Снимок выгружен в файл');
+  }
+
+  function renderEverything() {
+    renderSections(); renderModules(); renderDiff(); renderVerdict(); applyFilters(); refreshMap(); refreshModules(); refreshVerdict();
+    applyAccessibility(); updateUtilityState();
+  }
+
+  function restoreSnapshot(id) {
+    const item = getSnapshots().find(snapshot => snapshot.id === id);
+    if (!item) return;
+    if (!confirm(`Восстановить снимок от ${nowLabel(item.createdAt)}? Текущее состояние будет заменено; перед этим автоматически создаётся снимок.`)) return;
+    saveSnapshot('перед восстановлением');
+    state = normalizeState(clone(item.data));
+    save(); renderEverything(); closeUtilityModal(); toast('Снимок восстановлен');
+  }
+
+  function startNewSession() {
+    if (!confirm('Начать новую сессию? Текущая сессия будет автоматически сохранена в журнал снимков.')) return;
+    saveSnapshot('перед новой сессией');
+    state = normalizeState(null);
+    save(); renderEverything();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    $('#pName').focus();
+    toast('Создана новая чистая сессия');
+  }
+
+  function qualityData() {
+    let applicable = 0, scored = 0, rated = 0, notRated = 0, attention = 0;
+    const emptySections = [];
+    DATA.forEach(section => {
+      const stats = secStats(section);
+      applicable += stats.app; scored += stats.scored; rated += stats.rated;
+      section.items.forEach((item, index) => {
+        if (!itemApplicable(item)) return;
+        const value = state.scores[code(section, index)];
+        if (value === 'n') notRated++;
+        if (value === 0) attention++;
+      });
+      if (stats.app && stats.scored === 0) emptySections.push(section.title);
+    });
+    const issues = [];
+    if (!String(state.patient?.age || '').trim()) issues.push({level: 'bad', title: 'Не указан возраст', text: 'Введите возраст в паспорте обследования: от него зависят интерпретация результатов и отбор заданий.'});
+    if (scored < applicable) issues.push({level: scored ? 'warn' : 'bad', title: 'Карта заполнена не полностью', text: `Оценено ${scored} из ${applicable} применимых пунктов. Не заполнены: ${Math.max(0, applicable - scored)}.`});
+    if (notRated) issues.push({level: 'warn', title: 'Есть пункты без оценки', text: `Пунктов со значением «н»: ${notRated}. При необходимости добавьте заметку с причиной.`});
+    if (emptySections.length) issues.push({level: 'warn', title: 'Есть неоценённые сферы', text: `Без оценок: ${emptySections.join('; ')}.`});
+    if (!state.anamnesis?.hear) issues.push({level: 'warn', title: 'Не заполнены сведения о слухе', text: 'Внесите доступные сведения об объективной оценке слуха или отметьте, что данных нет.'});
+    if (Object.keys(state.diff || {}).length && Object.keys(state.diff || {}).length < 3) issues.push({level: 'warn', title: 'Дифференциальный анализ начат', text: 'Для ориентировочной сводки рекомендуется отметить не менее трёх наблюдаемых признаков.'});
+    if (!issues.length) issues.push({level: 'ok', title: 'Проверка пройдена', text: 'Критических пропусков не обнаружено. Перед использованием отчёта проверьте профессиональную интерпретацию результатов.'});
+    return {applicable, scored, rated, notRated, attention, issues, completed: applicable ? Math.round(scored / applicable * 100) : 0};
+  }
+
+  function qualityReportLines() {
+    const q = qualityData();
+    const lines = [
+      'КОНТРОЛЬ КАЧЕСТВА ЗАПОЛНЕНИЯ', '—'.repeat(50),
+      `Оценено применимых пунктов: ${q.scored} из ${q.applicable} (${q.completed}%)`,
+      `Оценок «н»: ${q.notRated}`, `Пунктов с выраженными нарушениями: ${q.attention}`
+    ];
+    q.issues.forEach(issue => lines.push(`• ${issue.title}: ${issue.text}`));
+    return lines;
+  }
+
+  function openUtilityModal(kind) {
+    const modal = $('#utilityModal');
+    const body = $('#utilityContent');
+    if (kind === 'quality') {
+      const q = qualityData();
+      body.innerHTML = `<h2 id="utilityTitle">Проверка заполнения</h2><p>Автоматическая проверка полноты данных. Она не формирует медицинский диагноз и не заменяет профессиональную оценку.</p><div class="quality-grid"><div class="quality-stat"><b>${q.completed}%</b><span>заполнение карты</span></div><div class="quality-stat"><b>${q.notRated}</b><span>значений «н»</span></div><div class="quality-stat"><b>${q.attention}</b><span>выраженных пунктов</span></div></div><div class="check-list">${q.issues.map(item => `<div class="check-item ${item.level === 'ok' ? '' : item.level}"><strong>${escapeHTML(item.title)}</strong>${escapeHTML(item.text)}</div>`).join('')}</div><div class="modal-actions"><button class="abtn" id="btnJumpMissing">К первой незаполненной сфере</button><button class="abtn prime" id="btnQualityReport">Сформировать отчёт</button><button class="abtn" data-close-utility>Закрыть</button></div>`;
+      $('#btnJumpMissing').addEventListener('click', jumpToFirstMissing);
+      $('#btnQualityReport').addEventListener('click', () => { closeUtilityModal(); openReport('Полный отчёт', buildFullReport()); });
+    } else if (kind === 'history') {
+      body.innerHTML = `<h2 id="utilityTitle">Журнал снимков</h2><p>Снимки хранятся только в этом браузере. При восстановлении текущее состояние автоматически сохраняется в новый снимок.</p><div class="snapshot-list" id="snapshotList"></div><div class="modal-actions"><button class="abtn danger" id="btnClearHistory">Очистить журнал</button><button class="abtn" data-close-utility>Закрыть</button></div>`;
+      renderHistory();
+      $('#btnClearHistory').addEventListener('click', () => { if (confirm('Удалить все сохранённые снимки? Текущая сессия сохранится.')) { putSnapshots([]); renderHistory(); updateUtilityState(); } });
+    } else {
+      body.innerHTML = `<h2 id="utilityTitle">Горячие клавиши</h2><p>Команды работают, когда фокус не находится в поле ввода текста.</p><div class="shortcut-grid"><kbd>Alt + S</kbd><span>сохранить текущую сессию</span><kbd>Alt + N</kbd><span>создать снимок текущего состояния</span><kbd>Alt + K</kbd><span>открыть проверку заполнения</span><kbd>Alt + R</kbd><span>сформировать полный отчёт</span><kbd>Esc</kbd><span>закрыть окно отчёта или служебное окно</span><kbd>Enter / Space</kbd><span>раскрыть заголовок раздела при фокусе</span></div><div class="modal-actions"><button class="abtn" data-close-utility>Закрыть</button></div>`;
+    }
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden', 'false');
+    const first = modal.querySelector('button, [href], input, select, textarea');
+    if (first) setTimeout(() => first.focus(), 0);
+  }
+
+  function renderHistory() {
+    const target = $('#snapshotList');
+    if (!target) return;
+    const snapshots = getSnapshots();
+    target.innerHTML = snapshots.length ? snapshots.map(item => `<article class="snapshot"><div><strong>${escapeHTML(item.label)}</strong><small>${escapeHTML(nowLabel(item.createdAt))} · ${escapeHTML(item.reason)}</small></div><div class="snapshot-actions"><button class="abtn" data-snapshot-restore="${item.id}">Восстановить</button><button class="abtn" data-snapshot-download="${item.id}">Скачать</button><button class="abtn danger" data-snapshot-remove="${item.id}" aria-label="Удалить снимок">×</button></div></article>`).join('') : '<div class="check-item">Снимков пока нет. Нажмите «Снимок», чтобы сохранить контрольную точку.</div>';
+    target.querySelectorAll('[data-snapshot-restore]').forEach(button => button.addEventListener('click', () => restoreSnapshot(button.dataset.snapshotRestore)));
+    target.querySelectorAll('[data-snapshot-download]').forEach(button => button.addEventListener('click', () => downloadSnapshot(button.dataset.snapshotDownload)));
+    target.querySelectorAll('[data-snapshot-remove]').forEach(button => button.addEventListener('click', () => { removeSnapshot(button.dataset.snapshotRemove); }));
+  }
+
+  function closeUtilityModal() {
+    const modal = $('#utilityModal');
+    modal.classList.remove('show'); modal.setAttribute('aria-hidden', 'true');
+  }
+
+  function jumpToFirstMissing() {
+    closeUtilityModal();
+    $('#tabs .tab[data-view="map"]').click();
+    const section = DATA.find(item => { const s = secStats(item); return s.app && s.scored < s.app; });
+    if (!section) { toast('Незаполненных применимых пунктов нет'); return; }
+    const node = $('#sec-' + section.id);
+    node.classList.remove('closed'); node.scrollIntoView({behavior: 'smooth', block: 'start'}); node.classList.add('flash');
+    setTimeout(() => node.classList.remove('flash'), 1300);
+  }
+
+  function updateUtilityState() {
+    const pill = $('#qualityPill');
+    if (!pill) return;
+    const q = qualityData();
+    pill.textContent = q.completed === 100 && !q.notRated ? 'проверка: готово' : `проверка: ${q.completed}%`;
+    pill.className = 'quality-pill' + (q.completed === 100 && !q.notRated ? '' : q.completed ? ' warn' : ' bad');
+    const count = getSnapshots().length;
+    const label = $('#snapshotCount');
+    if (label) label.textContent = count ? `снимков: ${count}` : 'снимков нет';
+  }
+
+  function applyAccessibility() {
+    $('#tabs').setAttribute('role', 'tablist');
+    $$('#tabs .tab').forEach((tab, index) => {
+      const view = $('#view-' + tab.dataset.view);
+      tab.setAttribute('role', 'tab'); tab.id = 'tab-' + tab.dataset.view;
+      tab.setAttribute('aria-selected', String(tab.classList.contains('on'))); tab.tabIndex = tab.classList.contains('on') ? 0 : -1;
+      if (view) { view.setAttribute('role', 'tabpanel'); view.setAttribute('aria-labelledby', tab.id); }
+      tab.dataset.tabIndex = index;
+    });
+    $$('.sec-h,.mod-h').forEach(header => {
+      const host = header.closest('.sec,.mod');
+      header.setAttribute('aria-expanded', String(!host.classList.contains('closed')));
+    });
+    $$('.dopt,.cz,.lv').forEach(button => button.setAttribute('aria-pressed', String(button.classList.contains('on'))));
+  }
+
+  function addControls() {
+    const tools = document.querySelector('.tacts');
+    if (!tools || $('#btnQuality')) return;
+    tools.insertAdjacentHTML('afterbegin', `<span class="utility-label" id="snapshotCount">снимков нет</span><span class="quality-pill" id="qualityPill">проверка</span><button class="abtn" id="btnQuality" title="Проверить полноту данных">Проверка</button><button class="abtn" id="btnSnapshot" title="Сохранить контрольный снимок сессии">Снимок</button><button class="abtn" id="btnHistory" title="Открыть журнал снимков">Журнал</button><button class="abtn" id="btnNewSession" title="Начать новую сессию с сохранением текущей">Новая сессия</button><button class="abtn" id="btnHelp" title="Горячие клавиши и управление с клавиатуры">Справка</button>`);
+    document.body.insertAdjacentHTML('beforeend', `<div class="utility-modal" id="utilityModal" role="dialog" aria-modal="true" aria-labelledby="utilityTitle" aria-hidden="true"><div class="utility-panel" id="utilityContent"></div></div>`);
+    $('#btnQuality').addEventListener('click', () => openUtilityModal('quality'));
+    $('#btnSnapshot').addEventListener('click', () => saveSnapshot('ручной снимок'));
+    $('#btnHistory').addEventListener('click', () => openUtilityModal('history'));
+    $('#btnNewSession').addEventListener('click', startNewSession);
+    $('#btnHelp').addEventListener('click', () => openUtilityModal('help'));
+    $('#utilityModal').addEventListener('click', event => { if (event.target === $('#utilityModal') || event.target.closest('[data-close-utility]')) closeUtilityModal(); });
+  }
+
+  function addEventSafety() {
+    const existingSave = window.save;
+    window.save = function () { existingSave(); updateUtilityState(); };
+    $('#tabs').addEventListener('click', () => setTimeout(applyAccessibility, 0));
+    $('#sections').addEventListener('click', () => setTimeout(updateUtilityState, 0));
+    $('#modList').addEventListener('change', () => setTimeout(updateUtilityState, 0));
+    $('#diffRows').addEventListener('click', () => setTimeout(updateUtilityState, 0));
+    $('#view-verd').addEventListener('click', () => setTimeout(updateUtilityState, 0));
+    document.addEventListener('keydown', event => {
+      const inField = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || '');
+      if (event.key === 'Escape') { if ($('#utilityModal').classList.contains('show')) { closeUtilityModal(); event.preventDefault(); } return; }
+      if (inField || !event.altKey || event.ctrlKey || event.metaKey) return;
+      const key = event.key.toLowerCase();
+      if (key === 's') { event.preventDefault(); save(); toast('Данные сохранены'); }
+      if (key === 'n') { event.preventDefault(); saveSnapshot('горячая клавиша'); }
+      if (key === 'k') { event.preventDefault(); openUtilityModal('quality'); }
+      if (key === 'r') { event.preventDefault(); openReport('Полный отчёт', buildFullReport()); }
+    });
+    $('#tabs').addEventListener('keydown', event => {
+      if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+      const tabs = $$('#tabs .tab'); const current = tabs.indexOf(document.activeElement); if (current < 0) return;
+      event.preventDefault();
+      let next = current;
+      if (event.key === 'ArrowRight') next = (current + 1) % tabs.length;
+      if (event.key === 'ArrowLeft') next = (current - 1 + tabs.length) % tabs.length;
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = tabs.length - 1;
+      tabs[next].focus(); tabs[next].click();
+    });
+    window.addEventListener('beforeunload', () => { try { save(); } catch (_) {} });
+  }
+
+  const previousFullReport = buildFullReport;
+  window.buildFullReport = function () { return previousFullReport() + '\n\n' + qualityReportLines().join('\n'); };
+
+  injectStyles();
+  addControls();
+  addEventSafety();
+  applyAccessibility();
+  updateUtilityState();
+})();
+
+</script>
+<script>
+/* Единый PRO‑модуль для автономного «Спич‑Профиля» */
+(function () {
+  'use strict';
+
+  const PRO_SOUNDS = ['С', "С'", 'З', "З'", 'Ц', 'Ш', 'Ж', 'Ч', 'Щ', 'Л', "Л'", 'Р', "Р'"];
+  const PRO_STAGES = ['не начата', 'изолированно', 'слоги', 'слова', 'фразы и спонтанная речь', 'автоматизирован'];
+  const STIMULI = [
+    {title:'Лексика и обобщения', items:[
+      ['Обобщающие слова', 'Мебель: стол, стул, диван, шкаф, кресло.\nПосуда: чашка, тарелка, ложка, чайник, кастрюля.\nТранспорт: машина, автобус, поезд, самолёт, корабль.\nЗадание: назови предметы одним словом и объясни свой выбор.'],
+      ['Антонимы', 'большой — маленький\nдлинный — короткий\nгорячий — холодный\nбыстрый — медленный\nгромкий — тихий\nЗадание: скажи наоборот и составь короткое предложение.'],
+      ['Многозначные слова', 'Ручка: у ребёнка / у двери.\nЛук: овощ / оружие.\nИголка: для шитья / у ежа.\nЗадание: объясни оба значения.']
+    ]},
+    {title:'Слоговая структура', items:[
+      ['Повтори слова', '1–2 слога: мама, окно, диван, утка.\n3 слога: банан, машина, лопатка.\n4–5 слогов: мотоцикл, гусеница, сковорода, велосипед.\nЗадание: повтори; затем назови, сколько в слове слогов.']
+    ]},
+    {title:'Звукопроизношение', items:[
+      ['Проверка звуков', 'С: сом, автобус, лес.\nШ: шапка, машина, кошка.\nР: ракета, рыба, гора.\nЛ: лампа, лодка, пол.\nЗадание: оцени звук в начале, середине и конце слова.']
+    ]},
+    {title:'Фонематический слух', items:[
+      ['Слоги и пары слов', 'са — ша; са — за; ба — па; та — да; ла — ра.\nбочка — почка; дом — том; коза — коса.\nЗадание: повтори, покажи или назови услышанное слово.'],
+      ['Звуковой анализ', 'Первый звук: нос, дом, часы, окно.\nПоследний звук: кот, рот, дом, мак.\nЗадание: назови первый / последний звук и составь схему слова.']
+    ]},
+    {title:'Грамматический строй', items:[
+      ['Один — много', 'стол — столы; стул — стулья; ухо — уши; дерево — деревья.\nЗадание: измени слово и составь словосочетание.'],
+      ['Предлоги', 'Положи карандаш: на, в, под, за, перед, между коробками.\nДостань: из, из-под, из-за коробки.\nЗадание: выполни инструкцию, затем объясни положение предмета.']
+    ]},
+    {title:'Связная речь', items:[
+      ['Пересказ «Щенок»', 'Ребята нашли в парке маленького щенка. Он сидел под кустом и скулил. Петя принёс щенка домой. Маша налила ему молоко. Щенок напился и уснул.\nЗадание: перескажи; оцени последовательность, полноту и грамматическое оформление.'],
+      ['Серия картинок', 'Утро: 1) ребёнок проснулся; 2) умылся; 3) позавтракал; 4) вышел из дома.\nЗадание: составь рассказ с началом, последовательностью событий и концовкой.']
+    ]},
+    {title:'Внимание, память, мышление', items:[
+      ['Трёхзвеньевые инструкции', 'Положи карандаш под тетрадь, затем на тетрадь, затем в пенал.\nВозьми кубик, поставь на книгу и спрячь за спину.\nЗадание: выполняй после однократной инструкции.'],
+      ['Четвёртый лишний', 'яблоко, груша, огурец, банан\nстол, стул, шкаф, окно\nмашина, автобус, самолёт, велосипед\nЗадание: назови лишнее, объясни принцип.']
+    ]},
+    {title:'Чтение и письмо', items:[
+      ['Слоги и слова для записи', 'са — ша; ра — ла; ба — па; чу — щу.\nкот, кит, щётка, машина, солнце, птица.\nЗадание: списывание и диктовка; фиксируй характер, а не только количество ошибок.'],
+      ['Текст для чтения', 'Пришла зима. Выпал снег. Во дворе дети лепят снеговика. Они скатали три кома. Папа принёс морковку и шапку. Снеговик получился весёлый.\nЗадание: чтение в удобном темпе, затем вопросы по содержанию.']
+    ]},
+    {title:'Артикуляция, дыхание и голос', items:[
+      ['Артикуляционная гимнастика', 'Губы: «улыбка», «трубочка».\nЯзык: «лопатка», «иголочка», «качели», «лошадка», «чашечка».\nЗадание: удерживай позу 5–10 секунд перед зеркалом; фиксируй точность и переключаемость.'],
+      ['Игровое дыхание', '«Футбол»: плавно дуй на ватный шарик в ворота.\n«Бабочка»: сдуй бумажную фигуру с ладони.\nЗадание: наблюдай плавность выдоха без подъёма плеч.']
+    ]}
+  ];
+
+  const esc = value => String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&quot;').replace(/'/g, '&#39;');
+  const clone = value => JSON.parse(JSON.stringify(value));
+  const $pro = selector => document.querySelector(selector);
+
+  function ensurePro() {
+    if (!state.pro || typeof state.pro !== 'object') state.pro = {};
+    if (!Array.isArray(state.pro.timeline)) state.pro.timeline = [];
+    if (!state.pro.sounds || typeof state.pro.sounds !== 'object') state.pro.sounds = {};
+    return state.pro;
+  }
+
+  function computeIndex() {
+    let sum = 0, rated = 0;
+    DATA.forEach(section => section.items.forEach((item, index) => {
+      const value = state.scores[code(section, index)];
+      if (value === 0 || value === 1 || value === 2) { sum += value; rated++; }
+    }));
+    return rated ? Math.round(sum / (2 * rated) * 100) : null;
+  }
+
+  function safeCopy(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => toast('Материал скопирован')).catch(() => fallbackCopy(text));
+    } else fallbackCopy(text);
+  }
+
+  function fallbackCopy(text) {
+    const field = document.createElement('textarea');
+    field.value = text; field.style.position = 'fixed'; field.style.opacity = '0';
+    document.body.appendChild(field); field.select(); document.execCommand('copy'); field.remove(); toast('Материал скопирован');
+  }
+
+  function injectProStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .pro-hero{background:linear-gradient(135deg,#0a463d,#0e6b5e);color:#fff;border-radius:16px;padding:22px;margin-bottom:16px;position:relative;overflow:hidden}
+      .pro-hero:after{content:'PRO';position:absolute;right:18px;top:-13px;font:800 76px var(--disp);color:rgba(255,255,255,.09);letter-spacing:-.08em}.pro-hero h3{font:800 19px var(--disp);margin:0 0 7px;position:relative}.pro-hero p{margin:0;max-width:68ch;line-height:1.5;color:#dbeee9;position:relative}
+      .pro-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(270px,.8fr);gap:16px}.pro-card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:18px;margin-bottom:16px}.pro-card h3{font:800 15px var(--disp);margin:0 0 6px}.pro-card>p{font-size:12.5px;color:var(--ink2);line-height:1.5;margin:0 0 14px}.pro-statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.pro-stat{border:1px solid var(--line);border-radius:10px;background:#fbfcfa;padding:10px}.pro-stat b{display:block;color:var(--teal-deep);font:800 20px var(--disp)}.pro-stat span{font:10px var(--mono);color:var(--ink2)}
+      .pro-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.pro-controls input,.pro-controls select{border:1.5px solid var(--line);border-radius:9px;padding:8px 10px;background:#fff;font:500 13px var(--body);min-height:36px}.pro-controls input{flex:1;min-width:180px}.pro-controls select{flex:1;min-width:160px}.pro-chart{border:1px dashed var(--line);border-radius:12px;padding:10px;background:#fbfcfa;min-height:178px}.pro-chart svg{width:100%;height:auto;display:block}.pro-empty{font-size:13px;color:var(--ink2);font-style:italic;padding:14px 0}.pro-timeline{display:grid;gap:9px;margin-top:14px}.pro-entry{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:10px 11px;background:#fff}.pro-entry strong{font-size:13px;display:block}.pro-entry small{font:11px var(--mono);color:var(--ink2);display:block;margin-top:3px}.pro-entry b{margin-left:auto;font:800 18px var(--disp);color:var(--teal-deep)}.pro-entry button{margin-left:4px}
+      .pro-compare{overflow:auto}.pro-table{border-collapse:collapse;width:100%;font-size:12.5px}.pro-table th{font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}.pro-table td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}.pro-table tr:hover td{background:#f8faf7}.pro-up{color:var(--ok);font-weight:700}.pro-down{color:var(--bad);font-weight:700}
+      .stim-group{padding:0;margin-bottom:12px;overflow:hidden}.stim-group summary{list-style:none;cursor:pointer;padding:15px 18px;font:800 14px var(--disp);background:#fff;border:1px solid var(--line);border-radius:13px;position:relative}.stim-group summary::-webkit-details-marker{display:none}.stim-group summary:after{content:'+';position:absolute;right:17px;font:800 20px var(--mono);color:var(--teal)}.stim-group[open] summary{border-radius:13px 13px 0 0;background:var(--teal-soft)}.stim-group[open] summary:after{content:'–'}.stim-inner{border:1px solid var(--line);border-top:none;border-radius:0 0 13px 13px;background:#fff}.stim-item{padding:14px 18px;border-top:1px solid #edf0eb}.stim-item:first-child{border-top:none}.stim-item-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.stim-item h4{font-size:13.5px;margin:0}.stim-text{white-space:pre-wrap;font:400 13px/1.55 var(--body);background:#fbfcfa;border:1px dashed var(--line);border-radius:9px;padding:10px;margin-top:8px}.stim-item .abtn{font-size:11px;padding:5px 9px;flex:none}
+      .sound-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eef0ea;flex-wrap:wrap}.sound-symbol{width:52px;font:800 18px var(--disp);color:var(--teal-deep)}.sound-stages{display:flex;gap:5px;flex-wrap:wrap}.sound-stage{width:35px;height:31px;border:1.5px solid var(--line);border-radius:8px;background:#fff;color:var(--ink2);font:700 11px var(--mono);cursor:pointer}.sound-stage:hover{border-color:var(--teal);transform:translateY(-1px)}.sound-stage.on{background:var(--teal);border-color:var(--teal);color:#fff}.sound-stage.complete{background:var(--ok);border-color:var(--ok)}.sound-label{font-size:12px;color:var(--ink2);margin-left:auto}.reference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.reference-list{margin:0;padding-left:20px}.reference-list li{font-size:13px;line-height:1.45;margin:0 0 8px}.reference-alert{background:#fff4f0;border-color:#f1c3b7}.reference-alert h3{color:#9e3b26}
+      .pro-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+      @media(max-width:850px){.pro-layout,.reference-grid{grid-template-columns:1fr}.pro-statrow{grid-template-columns:1fr}.pro-entry{align-items:flex-start;flex-wrap:wrap}.pro-entry b{margin-left:0}.sound-label{width:100%;margin-left:0}.pro-controls{align-items:stretch}.pro-controls input,.pro-controls select{width:100%;flex:auto}}
+      @media print{#view-dynpro,#view-stimpro,#view-autopro,#view-refpro,.pro-tab{display:none!important}}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function addProTabs() {
+    const tabs = $pro('#tabs');
+    if (!tabs || $pro('[data-view="dynpro"]')) return;
+    tabs.insertAdjacentHTML('beforeend', `
+      <button class="tab pro-tab" data-view="dynpro" type="button">Динамика <small id="proDynCount">0</small></button>
+      <button class="tab pro-tab" data-view="stimpro" type="button">Материалы <small>${STIMULI.reduce((n, group) => n + group.items.length, 0)}</small></button>
+      <button class="tab pro-tab" data-view="autopro" type="button">Звуки <small id="proSoundCount">0</small></button>
+      <button class="tab pro-tab" data-view="refpro" type="button">Справочник <small>!</small></button>`);
+    const mainWrap = document.querySelector('body > .wrap');
+    if (!mainWrap) return;
+    mainWrap.insertAdjacentHTML('beforeend', `
+      <div class="view" id="view-dynpro"></div>
+      <div class="view" id="view-stimpro"></div>
+      <div class="view" id="view-autopro"></div>
+      <div class="view" id="view-refpro"></div>`);
+    tabs.addEventListener('click', event => {
+      const tab = event.target.closest('.pro-tab');
+      if (!tab) return;
+      setTimeout(() => { renderProViews(); setProA11y(); }, 0);
+    });
+  }
+
+  function profileSlice(label) {
+    const sectionScores = {};
+    DATA.forEach(section => { sectionScores[section.id] = secStats(section).q; });
+    return {
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      label: String(label || '').trim() || `Срез ${ensurePro().timeline.length + 1}`,
+      createdAt: new Date().toISOString(),
+      index: computeIndex() ?? 0,
+      completed: Object.keys(state.scores || {}).length,
+      sectionScores,
+      sounds: clone(ensurePro().sounds)
+    };
+  }
+
+  function createTimelineSlice() {
+    const input = $pro('#proSliceLabel');
+    ensurePro().timeline.push(profileSlice(input ? input.value : ''));
+    ensurePro().timeline = ensurePro().timeline.slice(-12);
+    save(); renderProViews(); toast('Срез динамики сохранён');
+  }
+
+  function deleteTimelineSlice(id) {
+    if (!confirm('Удалить этот срез динамики?')) return;
+    ensurePro().timeline = ensurePro().timeline.filter(item => item.id !== id);
+    save(); renderProViews(); toast('Срез динамики удалён');
+  }
+
+  function deltaLabel(value) {
+    if (value === null || Number.isNaN(value)) return '—';
+    if (value > 0) return `<span class="pro-up">▲ +${value}</span>`;
+    if (value < 0) return `<span class="pro-down">▼ ${value}</span>`;
+    return '＝ 0';
+  }
+
+  function renderChart(timeline) {
+    if (!timeline.length) return '<div class="pro-empty">Сохраните первый срез, чтобы увидеть динамику индекса профиля.</div>';
+    const W = 660, H = 210, left = 38, right = 18, top = 22, bottom = 34;
+    const x = index => timeline.length === 1 ? (left + (W - left - right) / 2) : left + index * (W - left - right) / (timeline.length - 1);
+    const y = value => top + (100 - value) * (H - top - bottom) / 100;
+    let grid = '';
+    [0, 25, 50, 75, 100].forEach(value => { grid += `<line x1="${left}" y1="${y(value)}" x2="${W-right}" y2="${y(value)}" stroke="#e3e8e0"/><text x="6" y="${y(value)+3}" font-size="9" fill="#718078">${value}</text>`; });
+    const points = timeline.map((item, index) => `${x(index)},${y(item.index)}`).join(' ');
+    const nodes = timeline.map((item, index) => `<circle cx="${x(index)}" cy="${y(item.index)}" r="5" fill="#0e6b5e" stroke="#fff" stroke-width="2"/><text x="${x(index)}" y="${y(item.index)-10}" text-anchor="middle" font-size="10" font-weight="700" fill="#0a463d">${item.index}%</text><text x="${x(index)}" y="${H-12}" text-anchor="middle" font-size="8.5" fill="#718078">${index+1}</text>`).join('');
+    return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="График динамики индекса профиля. Количество точек: ${timeline.length}"><title>Динамика индекса профиля</title>${grid}<polyline points="${points}" fill="none" stroke="#0e6b5e" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${nodes}</svg>`;
+  }
+
+  function renderComparison(timeline) {
+    if (timeline.length < 2) return '<div class="pro-empty">Для сравнения сохраните минимум два среза динамики.</div>';
+    const a = timeline[timeline.length - 2], b = timeline[timeline.length - 1];
+    const rows = DATA.map(section => {
+      const left = a.sectionScores[section.id], right = b.sectionScores[section.id];
+      const l = left === null || left === undefined ? '—' : `${Math.round(left * 100)}%`;
+      const r = right === null || right === undefined ? '—' : `${Math.round(right * 100)}%`;
+      const delta = left === null || left === undefined || right === null || right === undefined ? null : Math.round((right - left) * 100);
+      return `<tr><td>${esc(section.code)}. ${esc(section.title)}</td><td>${l}</td><td>${r}</td><td>${deltaLabel(delta)}</td></tr>`;
+    }).join('');
+    return `<div class="pro-compare"><table class="pro-table"><thead><tr><th>Сфера</th><th>${esc(a.label)}</th><th>${esc(b.label)}</th><th>Δ</th></tr></thead><tbody><tr><td><b>Индекс профиля</b></td><td><b>${a.index}%</b></td><td><b>${b.index}%</b></td><td>${deltaLabel(b.index-a.index)}</td></tr>${rows}</tbody></table></div>`;
+  }
+
+  function renderDynamics() {
+    const target = $pro('#view-dynpro'); if (!target) return;
+    const timeline = ensurePro().timeline;
+    const last = timeline[timeline.length - 1];
+    target.innerHTML = `<section class="pro-hero"><h3>Динамика обследования</h3><p>Сохраняйте сравнимые срезы после завершения этапа работы. Показатели помогают видеть изменения по сферам, но не заменяют профессиональную интерпретацию причин этой динамики.</p></section><div class="pro-layout"><div><section class="pro-card"><h3>Новый срез</h3><p>В срез попадают текущий индекс, заполненность карты, профиль по сферам и статус автоматизации звуков. Срезы остаются только на этом устройстве.</p><div class="pro-controls"><input id="proSliceLabel" maxlength="80" placeholder="Например: первичное обследование / контроль 3 месяца"><button class="abtn prime" id="btnProSlice" type="button">Сохранить срез</button></div><div class="pro-statrow" style="margin-top:14px"><div class="pro-stat"><b>${computeIndex() ?? '—'}${computeIndex() === null ? '' : '%'}</b><span>текущий индекс</span></div><div class="pro-stat"><b>${Object.keys(state.scores || {}).length}</b><span>оценено пунктов</span></div><div class="pro-stat"><b>${timeline.length}</b><span>срезов динамики</span></div></div></section><section class="pro-card"><h3>График динамики</h3><div class="pro-chart">${renderChart(timeline)}</div></section><section class="pro-card"><h3>Сравнение двух последних срезов</h3>${renderComparison(timeline)}</section></div><aside><section class="pro-card"><h3>Журнал срезов</h3><p>Последний срез: ${last ? esc(new Date(last.createdAt).toLocaleString('ru-RU')) : 'ещё не создан'}.</p><div class="pro-timeline">${timeline.length ? [...timeline].reverse().map(item => `<article class="pro-entry"><div><strong>${esc(item.label)}</strong><small>${esc(new Date(item.createdAt).toLocaleString('ru-RU'))} · ${item.completed} пунктов</small></div><b>${item.index}%</b><button class="abtn danger" type="button" data-pro-delete="${esc(item.id)}" aria-label="Удалить срез ${esc(item.label)}">×</button></article>`).join('') : '<div class="pro-empty">Срезов пока нет.</div>'}</div></section></aside></div>`;
+    $pro('#btnProSlice').addEventListener('click', createTimelineSlice);
+    target.querySelectorAll('[data-pro-delete]').forEach(button => button.addEventListener('click', () => deleteTimelineSlice(button.dataset.proDelete)));
+  }
+
+  function renderStimuli() {
+    const target = $pro('#view-stimpro'); if (!target) return;
+    target.innerHTML = `<section class="pro-hero"><h3>Библиотека стимульного материала</h3><p>Наборы можно копировать в протокол или адаптировать под возраст, состояние и цель обследования. Материал служит рабочей опорой, а не стандартизированной методикой.</p></section>${STIMULI.map(group => `<details class="stim-group"><summary>${esc(group.title)} <span class="pro-sr">— раскрыть материалы</span></summary><div class="stim-inner">${group.items.map(item => `<article class="stim-item"><div class="stim-item-head"><h4>${esc(item[0])}</h4><button class="abtn" type="button" data-pro-copy="${esc(encodeURIComponent(item[1]))}">Копировать</button></div><div class="stim-text">${esc(item[1])}</div></article>`).join('')}</div></details>`).join('')}`;
+    target.querySelectorAll('[data-pro-copy]').forEach(button => button.addEventListener('click', () => safeCopy(decodeURIComponent(button.dataset.proCopy))));
+  }
+
+  function renderSounds() {
+    const target = $pro('#view-autopro'); if (!target) return;
+    const sounds = ensurePro().sounds;
+    const active = PRO_SOUNDS.filter(sound => (sounds[sound] ?? 0) > 0).length;
+    const complete = PRO_SOUNDS.filter(sound => (sounds[sound] ?? 0) === 5).length;
+    target.innerHTML = `<section class="pro-hero"><h3>Трекер автоматизации звуков</h3><p>Фиксируйте рабочий этап каждого звука. Повторный клик по выбранному этапу сбрасывает отметку. Этот трекер описывает динамику занятий, а не подтверждает диагноз.</p></section><section class="pro-card"><div class="pro-statrow"><div class="pro-stat"><b>${active}</b><span>звуков в работе</span></div><div class="pro-stat"><b>${complete}</b><span>автоматизировано</span></div><div class="pro-stat"><b>${PRO_SOUNDS.length}</b><span>всего звуков</span></div></div><div id="proSoundRows" style="margin-top:16px">${PRO_SOUNDS.map(sound => { const current = Number(sounds[sound] ?? 0); return `<div class="sound-row"><span class="sound-symbol">${esc(sound)}</span><div class="sound-stages">${PRO_STAGES.map((stage, index) => `<button type="button" class="sound-stage ${current===index ? 'on' : ''} ${current===index && index===5 ? 'complete' : ''}" data-pro-sound="${esc(sound)}" data-pro-stage="${index}" aria-pressed="${current===index}" title="${esc(stage)}">${index===0 ? '—' : index===5 ? '✓' : index}</button>`).join('')}</div><span class="sound-label">${esc(PRO_STAGES[current])}</span></div>`; }).join('')}</div></section>`;
+    target.querySelectorAll('[data-pro-sound]').forEach(button => button.addEventListener('click', () => {
+      const sound = button.dataset.proSound, stage = Number(button.dataset.proStage), soundsState = ensurePro().sounds;
+      if (Number(soundsState[sound] ?? 0) === stage && stage !== 0) delete soundsState[sound]; else soundsState[sound] = stage;
+      save(); renderSounds(); updateProCounts();
+    }));
+  }
+
+  function renderReference() {
+    const target = $pro('#view-refpro'); if (!target) return;
+    target.innerHTML = `<section class="pro-hero"><h3>Рабочий справочник</h3><p>Краткие ориентиры для организации обследования и маршрутизации. Они не являются нормами для постановки диагноза, не заменяют очную оценку и должны сверяться с актуальными профильными методиками.</p></section><div class="reference-grid"><section class="pro-card"><h3>Перед началом обследования</h3><ul class="reference-list"><li>Уточните возраст, ведущий язык и языковую среду ребёнка.</li><li>Отдельно зафиксируйте данные о слухе: объективную оценку, если она доступна, или отсутствие сведений.</li><li>Подбирайте задания по возрасту, состоянию и контакту, фиксируя условия выполнения в заметках.</li><li>Разделяйте наблюдаемые факты, профессиональные гипотезы и итоговое заключение.</li></ul></section><section class="pro-card"><h3>Чтение результатов</h3><ul class="reference-list"><li>Одна отметка не подтверждает нарушение: важны повторяемость, контекст и совокупность данных.</li><li>Значение «н» означает отсутствие оценки, а не отсутствие трудностей.</li><li>Сравнивайте срезы только при сопоставимых условиях и близком наборе заданий.</li><li>Используйте полный отчёт как черновик специалиста; проверьте формулировки перед передачей.</li></ul></section><section class="pro-card reference-alert"><h3>Сигналы для своевременной маршрутизации</h3><ul class="reference-list"><li>Отсутствие или резкое изменение реакции на звук/речь — обсудите необходимость оценки слуха с профильным специалистом.</li><li>Утрата ранее приобретённых навыков, выраженные неврологические проявления или остро возникшие изменения поведения требуют очной медицинской оценки без откладывания.</li><li>Сочетание устойчивых трудностей контакта, социальной взаимности и коммуникации — основание для комплексной очной оценки, а не для самостоятельного вывода.</li></ul></section><section class="pro-card"><h3>Конфиденциальность и резервирование</h3><ul class="reference-list"><li>Все рабочие данные хранятся локально в браузере текущего устройства.</li><li>Перед очисткой браузера или переходом на другое устройство сделайте экспорт резервной копии.</li><li>Контрольные снимки и срезы динамики также локальны; важные сведения нужно отдельно экспортировать.</li></ul></section></div>`;
+  }
+
+  function updateProCounts() {
+    ensurePro();
+    const dynCount = $pro('#proDynCount'); if (dynCount) dynCount.textContent = ensurePro().timeline.length;
+    const soundCount = $pro('#proSoundCount'); if (soundCount) soundCount.textContent = PRO_SOUNDS.filter(sound => (ensurePro().sounds[sound] ?? 0) > 0).length;
+  }
+
+  function renderProViews() { ensurePro(); renderDynamics(); renderStimuli(); renderSounds(); renderReference(); updateProCounts(); }
+
+  function setProA11y() {
+    document.querySelectorAll('.pro-tab').forEach(tab => {
+      tab.setAttribute('role', 'tab'); tab.setAttribute('aria-selected', String(tab.classList.contains('on')));
+      const view = $pro('#view-' + tab.dataset.view); if (view) view.setAttribute('role', 'tabpanel');
+    });
+  }
+
+  function extendReport() {
+    const previous = buildFullReport;
+    window.buildFullReport = function () {
+      const timeline = ensurePro().timeline;
+      const sounds = ensurePro().sounds;
+      const lines = [previous()];
+      const activeSounds = PRO_SOUNDS.filter(sound => Number(sounds[sound] ?? 0) > 0);
+      if (activeSounds.length) {
+        lines.push('', 'АВТОМАТИЗАЦИЯ ЗВУКОВ', '—'.repeat(50));
+        activeSounds.forEach(sound => lines.push(`${sound}: этап «${PRO_STAGES[Number(sounds[sound])]}»`));
+      }
+      if (timeline.length) {
+        lines.push('', 'ДИНАМИКА', '—'.repeat(50));
+        timeline.forEach((slice, index) => lines.push(`${index + 1}. ${slice.label} · ${new Date(slice.createdAt).toLocaleDateString('ru-RU')} · индекс ${slice.index}% · оценено ${slice.completed} пунктов`));
+      }
+      return lines.join('\n');
+    };
+  }
+
+  function bindProRefresh() {
+    ['#sections', '#modList', '#diffRows', '#view-verd'].forEach(selector => {
+      const node = $pro(selector); if (node) node.addEventListener('click', () => setTimeout(updateProCounts, 0));
+    });
+    const beforeSave = window.save;
+    window.save = function () { beforeSave(); updateProCounts(); };
+  }
+
+  injectProStyles();
+  addProTabs();
+  ensurePro();
+  extendReport();
+  renderProViews();
+  setProA11y();
+  bindProRefresh();
+})();
+
+</script>
+</body>
+</html>
