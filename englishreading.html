@@ -1,0 +1,2336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌸 Spring Reading Adventure — Весеннее Чтение</title>
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --green-light: #7bed9f;
+        --green: #2ed573;
+        --green-dark: #26a65a;
+        --yellow: #ffa502;
+        --orange: #ff6348;
+        --red: #ff4757;
+        --pink: #ff6b81;
+        --purple: #5352ed;
+        --blue: #70a1ff;
+        --cyan: #1e90ff;
+        --cream: #f1f2f6;
+        --white: #ffffff;
+        --text: #2f3542;
+        --shadow: 0 8px 24px rgba(46, 213, 115, 0.2);
+        --shadow-hover: 0 12px 32px rgba(46, 213, 115, 0.35);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: 'Nunito', sans-serif;
+        background: linear-gradient(135deg, #f1f2f6 0%, #dfe4ea 100%);
+        color: var(--text);
+        min-height: 100vh;
+        padding-bottom: 60px;
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    /* Весенний декор */
+    body::before {
+        content: '🌸🌺🌼🌷🌻🌹💐🌿🍀🌱';
+        position: fixed;
+        top: 50%;
+        left: 2%;
+        font-size: 2rem;
+        opacity: 0.15;
+        pointer-events: none;
+        z-index: 0;
+        writing-mode: vertical-rl;
+        letter-spacing: 20px;
+    }
+
+    body::after {
+        content: '🐝🐞🌸🌺🌼🌷🌻';
+        position: fixed;
+        top: 50%;
+        right: 2%;
+        font-size: 2rem;
+        opacity: 0.15;
+        pointer-events: none;
+        z-index: 0;
+        writing-mode: vertical-rl;
+        letter-spacing: 20px;
+    }
+
+    header {
+        background: linear-gradient(135deg, var(--green), var(--green-light));
+        color: var(--white);
+        padding: 25px 20px;
+        text-align: center;
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-bottom: 4px solid var(--yellow);
+    }
+
+    header h1 {
+        font-family: 'Patrick Hand', cursive;
+        font-size: 2.8rem;
+        margin-bottom: 8px;
+        text-shadow: 2px 2px 0 rgba(38, 166, 90, 0.3);
+        letter-spacing: 1px;
+    }
+
+    header .subtitle {
+        font-size: 1.1rem;
+        opacity: 0.95;
+        font-style: italic;
+    }
+
+    .stats-board {
+        margin-top: 12px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .stat-item {
+        font-size: 1.2rem;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 6px 18px;
+        border-radius: 25px;
+        backdrop-filter: blur(5px);
+        border: 2px dashed var(--white);
+        font-weight: 700;
+    }
+
+    .progress-bar {
+        margin-top: 15px;
+        background: rgba(255, 255, 255, 0.3);
+        height: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 2px solid var(--white);
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--yellow), var(--orange));
+        transition: width 0.5s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: var(--white);
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 20px;
+        background: var(--white);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        position: sticky;
+        top: 130px;
+        z-index: 99;
+        border-bottom: 3px solid var(--green-light);
+    }
+
+    .nav-btn {
+        padding: 10px 18px;
+        border: 3px solid var(--green);
+        border-radius: 25px;
+        background: var(--white);
+        color: var(--green-dark);
+        font-family: 'Patrick Hand', cursive;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: 600;
+    }
+
+    .nav-btn:hover {
+        transform: translateY(-3px) rotate(-1deg);
+        background: var(--green);
+        color: var(--white);
+        box-shadow: var(--shadow);
+    }
+
+    .nav-btn.active {
+        background: linear-gradient(135deg, var(--green), var(--green-dark));
+        color: var(--white);
+        border-color: var(--green-dark);
+        box-shadow: 0 5px 15px rgba(46, 213, 115, 0.4);
+        transform: translateY(-2px);
+    }
+
+    main {
+        max-width: 1400px;
+        margin: 30px auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .section { display: none; animation: fadeIn 0.5s; }
+    .section.active { display: block; }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+        background: var(--white);
+        border-radius: 25px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+        margin-bottom: 30px;
+        border: 3px solid var(--green-light);
+        position: relative;
+    }
+
+    .card::before {
+        content: '🌸';
+        position: absolute;
+        top: -15px;
+        right: 20px;
+        font-size: 2.5rem;
+        transform: rotate(20deg);
+    }
+
+    h2 {
+        font-family: 'Patrick Hand', cursive;
+        text-align: center;
+        margin-bottom: 10px;
+        color: var(--green-dark);
+        font-size: 2.4rem;
+        letter-spacing: 1px;
+    }
+
+    h3 {
+        font-family: 'Patrick Hand', cursive;
+        color: var(--green-dark);
+        font-size: 1.7rem;
+        margin: 20px 0 15px;
+        padding-left: 10px;
+        border-left: 5px solid var(--yellow);
+    }
+
+    p.desc {
+        text-align: center;
+        color: var(--text);
+        margin-bottom: 25px;
+        font-size: 1.1rem;
+        font-style: italic;
+    }
+
+    .subtabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        margin-bottom: 25px;
+    }
+
+    .subtab {
+        padding: 8px 18px;
+        border: 2px solid var(--blue);
+        border-radius: 20px;
+        background: var(--white);
+        color: var(--blue);
+        font-family: 'Patrick Hand', cursive;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .subtab:hover { background: var(--blue); color: var(--white); }
+    .subtab.active { background: var(--purple); color: var(--white); border-color: var(--purple); }
+
+    .subcontent { display: none; }
+    .subcontent.active { display: block; animation: fadeIn 0.4s; }
+
+    /* Сетки */
+    .alpha-grid, .word-grid, .sight-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 15px;
+    }
+
+    .alpha-card, .word-card {
+        background: linear-gradient(135deg, var(--white), #f8f9fa);
+        border: 3px solid var(--green-light);
+        border-radius: 18px;
+        padding: 15px 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.25s;
+        position: relative;
+    }
+
+    .alpha-card:hover, .word-card:hover {
+        transform: scale(1.08) rotate(-2deg);
+        border-color: var(--green);
+        box-shadow: var(--shadow-hover);
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    }
+
+    .alpha-card .letter {
+        font-family: 'Patrick Hand', cursive;
+        font-size: 2.8rem;
+        color: var(--green-dark);
+        line-height: 1;
+    }
+
+    .alpha-card .letter small {
+        font-size: 1.2rem;
+        color: var(--text);
+        display: block;
+        margin-top: 2px;
+    }
+
+    .alpha-card .emoji, .word-card .emoji { font-size: 2rem; margin: 5px 0; }
+    .alpha-card .word, .word-card .word { font-size: 0.95rem; color: var(--text); font-weight: 700; }
+    .alpha-card .sound {
+        font-size: 0.85rem;
+        color: var(--purple);
+        font-style: italic;
+        margin-top: 3px;
+    }
+
+    .word-card .trans {
+        font-size: 0.9rem;
+        color: var(--text);
+        margin-top: 5px;
+        font-style: italic;
+    }
+
+    .sight-card {
+        background: linear-gradient(135deg, var(--yellow), var(--orange));
+        border-radius: 18px;
+        padding: 25px 10px;
+        text-align: center;
+        font-family: 'Patrick Hand', cursive;
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--white);
+        cursor: pointer;
+        transition: all 0.25s;
+        box-shadow: 0 4px 10px rgba(255, 165, 2, 0.3);
+        border: 3px solid var(--white);
+    }
+
+    .sight-card:hover {
+        transform: scale(1.08) rotate(-2deg);
+        box-shadow: 0 8px 20px rgba(255, 165, 2, 0.5);
+    }
+
+    /* Blending */
+    .blend-container { text-align: center; }
+    .blend-emoji { font-size: 7rem; margin: 20px 0; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
+    .blend-letters {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .blend-btn {
+        width: 90px;
+        height: 90px;
+        font-family: 'Patrick Hand', cursive;
+        font-size: 3rem;
+        font-weight: bold;
+        border: 3px solid var(--yellow);
+        border-radius: 18px;
+        background: var(--white);
+        color: var(--text);
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .blend-btn:hover {
+        background: var(--yellow);
+        color: var(--white);
+        transform: scale(1.1);
+    }
+
+    .blend-btn.whole {
+        background: var(--green);
+        border-color: var(--green-dark);
+        color: var(--white);
+        width: auto;
+        padding: 0 35px;
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .blend-btn.whole:hover { background: var(--green-dark); }
+
+    /* Story */
+    .story-text {
+        font-size: 1.8rem;
+        line-height: 2.2;
+        text-align: center;
+        font-family: 'Patrick Hand', cursive;
+        color: var(--text);
+    }
+
+    .story-word {
+        cursor: pointer;
+        padding: 4px 10px;
+        border-radius: 10px;
+        transition: all 0.2s;
+        position: relative;
+        display: inline-block;
+        border-bottom: 2px dotted var(--green);
+    }
+
+    .story-word:hover {
+        background: var(--green-light);
+        color: var(--green-dark);
+        transform: scale(1.05);
+    }
+
+    .story-word .tooltip {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        bottom: 110%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--purple);
+        color: var(--white);
+        padding: 8px 15px;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        white-space: nowrap;
+        transition: all 0.2s;
+        pointer-events: none;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    .story-word:hover .tooltip { visibility: visible; opacity: 1; }
+
+    /* Games */
+    .game-area { text-align: center; }
+    .game-emoji { font-size: 9rem; margin: 20px 0; }
+    .game-options {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+
+    .game-btn {
+        padding: 20px 35px;
+        font-family: 'Patrick Hand', cursive;
+        font-size: 1.6rem;
+        font-weight: bold;
+        border: 3px solid var(--green);
+        border-radius: 18px;
+        background: var(--white);
+        color: var(--text);
+        cursor: pointer;
+        transition: all 0.2s;
+        min-width: 150px;
+    }
+
+    .game-btn:hover {
+        border-color: var(--green-dark);
+        transform: translateY(-5px);
+        box-shadow: var(--shadow);
+    }
+
+    .game-btn.correct {
+        background: var(--green);
+        color: var(--white);
+        border-color: var(--green-dark);
+        animation: pulse 0.5s;
+    }
+
+    .game-btn.wrong {
+        background: var(--red);
+        color: var(--white);
+        border-color: var(--red);
+        animation: shake 0.5s;
+    }
+
+    .spell-zone {
+        min-height: 100px;
+        border: 4px dashed var(--green);
+        border-radius: 20px;
+        margin: 25px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding: 25px;
+        flex-wrap: wrap;
+        background: rgba(123, 237, 159, 0.1);
+        max-width: 600px;
+    }
+
+    .spell-letter {
+        width: 70px;
+        height: 70px;
+        font-family: 'Patrick Hand', cursive;
+        font-size: 2.5rem;
+        font-weight: bold;
+        background: var(--green);
+        color: var(--white);
+        border: 3px solid var(--green-dark);
+        border-radius: 15px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .spell-letter:hover { transform: scale(1.15) rotate(-3deg); }
+    .spell-letter.used { opacity: 0.25; pointer-events: none; transform: scale(0.9); }
+
+    .spell-result {
+        font-family: 'Patrick Hand', cursive;
+        font-size: 3rem;
+        font-weight: bold;
+        color: var(--text);
+        letter-spacing: 8px;
+    }
+
+    .spell-result .placed { color: var(--green-dark); }
+
+    .reset-btn {
+        margin-top: 20px;
+        padding: 14px 30px;
+        font-family: 'Patrick Hand', cursive;
+        font-size: 1.3rem;
+        background: var(--green);
+        color: var(--white);
+        border: 3px solid var(--green-dark);
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+        background: var(--green-dark);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow);
+    }
+
+    .game-switcher {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+    }
+
+    .game-switcher .nav-btn {
+        font-size: 1.1rem;
+        padding: 10px 20px;
+    }
+
+    /* Memory Game */
+    .memory-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 12px;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .memory-card {
+        aspect-ratio: 1;
+        background: var(--green);
+        border-radius: 15px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        transition: all 0.3s;
+        border: 3px solid var(--green-dark);
+        position: relative;
+        transform-style: preserve-3d;
+    }
+
+    .memory-card .front, .memory-card .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backface-visibility: hidden;
+        border-radius: 12px;
+        padding: 5px;
+    }
+
+    .memory-card .front {
+        background: var(--green);
+        font-size: 2rem;
+    }
+
+    .memory-card .back {
+        background: var(--white);
+        transform: rotateY(180deg);
+        flex-direction: column;
+        font-size: 0.9rem;
+    }
+
+    .memory-card .back .m-emoji { font-size: 2rem; }
+    .memory-card .back .m-word {
+        font-family: 'Patrick Hand', cursive;
+        font-size: 1.2rem;
+        color: var(--text);
+        font-weight: bold;
+    }
+
+    .memory-card.flipped { transform: rotateY(180deg); }
+    .memory-card.matched {
+        background: var(--green-light);
+        border-color: var(--green-dark);
+        opacity: 0.7;
+        pointer-events: none;
+    }
+
+    /* Quiz */
+    .quiz-container {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .quiz-question {
+        font-family: 'Patrick Hand', cursive;
+        font-size: 2rem;
+        color: var(--purple);
+        margin: 20px 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 15px;
+        border: 3px solid var(--blue);
+    }
+
+    .quiz-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .quiz-option {
+        padding: 20px;
+        font-family: 'Patrick Hand', cursive;
+        font-size: 1.5rem;
+        border: 3px solid var(--green);
+        border-radius: 15px;
+        background: var(--white);
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .quiz-option:hover {
+        background: var(--green-light);
+        transform: scale(1.05);
+    }
+
+    .quiz-option.correct {
+        background: var(--green);
+        color: var(--white);
+        border-color: var(--green-dark);
+    }
+
+    .quiz-option.wrong {
+        background: var(--red);
+        color: var(--white);
+        border-color: var(--red);
+    }
+
+    /* Sentence Builder */
+    .sentence-zone {
+        min-height: 80px;
+        border: 4px dashed var(--purple);
+        border-radius: 20px;
+        margin: 20px auto;
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        background: rgba(83, 82, 237, 0.05);
+    }
+
+    .sentence-word {
+        padding: 10px 20px;
+        font-family: 'Patrick Hand', cursive;
+        font-size: 1.5rem;
+        background: var(--blue);
+        color: var(--white);
+        border: 3px solid var(--purple);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .sentence-word:hover {
+        transform: scale(1.1);
+        background: var(--purple);
+    }
+
+    .sentence-word.used {
+        opacity: 0.3;
+        pointer-events: none;
+    }
+
+    .word-bank {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    /* Achievements */
+    .achievements-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .achievement {
+        background: linear-gradient(135deg, var(--yellow), var(--orange));
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        color: var(--white);
+        font-family: 'Patrick Hand', cursive;
+        font-size: 1.2rem;
+        border: 3px solid var(--white);
+        transition: all 0.3s;
+        opacity: 0.3;
+    }
+
+    .achievement.unlocked {
+        opacity: 1;
+        animation: pulse 1s;
+    }
+
+    .achievement .badge {
+        font-size: 3rem;
+        margin-bottom: 10px;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+    }
+
+    .confetti {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+        display: none;
+    }
+
+    @media (max-width: 600px) {
+        header h1 { font-size: 2rem; }
+        .nav-btn { font-size: 0.9rem; padding: 8px 12px; }
+        h2 { font-size: 1.8rem; }
+        .blend-btn { width: 70px; height: 70px; font-size: 2.2rem; }
+        .blend-emoji { font-size: 5rem; }
+        .game-emoji { font-size: 6rem; }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>🌸 Spring Reading Adventure 🌺</h1>
+    <div class="subtitle">Яркое весеннее обучение чтению на английском</div>
+    <div class="stats-board">
+        <div class="stat-item">⭐ Звёзды: <span id="score">0</span></div>
+        <div class="stat-item">🌸 Цветы: <span id="flowers">0</span></div>
+        <div class="stat-item">🏆 Уровень: <span id="level">1</span></div>
+    </div>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 0%">0%</div>
+    </div>
+</header>
+
+<nav>
+    <button class="nav-btn active" data-target="phonics">🔤 Алфавит</button>
+    <button class="nav-btn" data-target="cvc">🧩 CVC</button>
+    <button class="nav-btn" data-target="cvce">✨ Magic E</button>
+    <button class="nav-btn" data-target="digraphs">🔗 Digraphs</button>
+    <button class="nav-btn" data-target="blends">🎭 Blends</button>
+    <button class="nav-btn" data-target="vowels">🎨 Vowels</button>
+    <button class="nav-btn" data-target="sight">👀 Sight</button>
+    <button class="nav-btn" data-target="vocab">📚 Словарь</button>
+    <button class="nav-btn" data-target="story">📖 Сказки</button>
+    <button class="nav-btn" data-target="quiz">❓ Тесты</button>
+    <button class="nav-btn" data-target="builder">🔨 Конструктор</button>
+    <button class="nav-btn" data-target="games">🎮 Игры</button>
+    <button class="nav-btn" data-target="achievements">🏆 Достижения</button>
+</nav>
+
+<main>
+
+    <!-- 1. ALPHABET -->
+    <section id="phonics" class="section active">
+        <div class="card">
+            <h2> Алфавит и Звуки</h2>
+            <p class="desc">Нажми на букву — услышишь её имя, звук и слово! 🌸</p>
+            <div class="alpha-grid" id="alphaGrid"></div>
+        </div>
+    </section>
+
+    <!-- 2. CVC WORDS -->
+    <section id="cvc" class="section">
+        <div class="card">
+            <h2>🧩 CVC Слова</h2>
+            <p class="desc">Короткие слова из трёх звуков. Нажми на звук, потом на зелёную кнопку!</p>
+
+            <div class="subtabs">
+                <button class="subtab active" data-sub="cvc-a">Семья -a-</button>
+                <button class="subtab" data-sub="cvc-e">Семья -e-</button>
+                <button class="subtab" data-sub="cvc-i">Семья -i-</button>
+                <button class="subtab" data-sub="cvc-o">Семья -o-</button>
+                <button class="subtab" data-sub="cvc-u">Семья -u-</button>
+            </div>
+
+            <div id="cvc-a" class="subcontent active">
+                <h3>🐱 Короткий звук /æ/ как в "cat"</h3>
+                <div class="word-grid" id="cvcAGrid"></div>
+            </div>
+            <div id="cvc-e" class="subcontent">
+                <h3>🛏️ Короткий звук /ɛ/ как в "bed"</h3>
+                <div class="word-grid" id="cvcEGrid"></div>
+            </div>
+            <div id="cvc-i" class="subcontent">
+                <h3>🐷 Короткий звук /ɪ/ как в "pig"</h3>
+                <div class="word-grid" id="cvcIGrid"></div>
+            </div>
+            <div id="cvc-o" class="subcontent">
+                <h3>🐶 Короткий звук // как в "dog"</h3>
+                <div class="word-grid" id="cvcOGrid"></div>
+            </div>
+            <div id="cvc-u" class="subcontent">
+                <h3>☀️ Короткий звук /ʌ/ как в "sun"</h3>
+                <div class="word-grid" id="cvcUGrid"></div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px dashed var(--green);">
+                <h3>🎯 Тренировка слияния</h3>
+                <div class="blend-container" id="blendContainer"></div>
+                <div class="blend-nav">
+                    <button class="reset-btn" onclick="prevBlend()">⬅️ Назад</button>
+                    <button class="reset-btn" onclick="nextBlend()">Вперёд ➡️</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. CVCe (Magic E) -->
+    <section id="cvce" class="section">
+        <div class="card">
+            <h2>✨ Magic E — Волшебная буква E</h2>
+            <p class="desc">Тихая "e" в конце делает гласную долгой! cat → cāte 🪄</p>
+
+            <div class="subtabs">
+                <button class="subtab active" data-sub="cvce-a">a_e (cake)</button>
+                <button class="subtab" data-sub="cvce-i">i_e (bike)</button>
+                <button class="subtab" data-sub="cvce-o">o_e (home)</button>
+                <button class="subtab" data-sub="cvce-u">u_e (cube)</button>
+            </div>
+
+            <div id="cvce-a" class="subcontent active">
+                <h3>🎂 Долгий звук /eɪ/ — a_e</h3>
+                <div class="word-grid" id="cvceAGrid"></div>
+            </div>
+            <div id="cvce-i" class="subcontent">
+                <h3>🚲 Долгий звук /aɪ/ — i_e</h3>
+                <div class="word-grid" id="cvceIGrid"></div>
+            </div>
+            <div id="cvce-o" class="subcontent">
+                <h3> Долгий звук /oʊ/ — o_e</h3>
+                <div class="word-grid" id="cvceOGrid"></div>
+            </div>
+            <div id="cvce-u" class="subcontent">
+                <h3>🧊 Долгий звук /juː/ — u_e</h3>
+                <div class="word-grid" id="cvceUGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. DIGRAPHS -->
+    <section id="digraphs" class="section">
+        <div class="card">
+            <h2>🔗 Digraphs — Две буквы, один звук</h2>
+            <p class="desc">Две буквы работают вместе и дают новый звук! 🤝</p>
+
+            <div class="subtabs">
+                <button class="subtab active" data-sub="dig-sh">sh</button>
+                <button class="subtab" data-sub="dig-ch">ch</button>
+                <button class="subtab" data-sub="dig-th">th</button>
+                <button class="subtab" data-sub="dig-ph">ph</button>
+                <button class="subtab" data-sub="dig-wh">wh</button>
+                <button class="subtab" data-sub="dig-ck">ck</button>
+            </div>
+
+            <div id="dig-sh" class="subcontent active">
+                <h3>🤫 sh — как "ш"</h3>
+                <div class="word-grid" id="digShGrid"></div>
+            </div>
+            <div id="dig-ch" class="subcontent">
+                <h3>🚂 ch — как "ч"</h3>
+                <div class="word-grid" id="digChGrid"></div>
+            </div>
+            <div id="dig-th" class="subcontent">
+                <h3> th — межзубный</h3>
+                <div class="word-grid" id="digThGrid"></div>
+            </div>
+            <div id="dig-ph" class="subcontent">
+                <h3>📞 ph — как "ф"</h3>
+                <div class="word-grid" id="digPhGrid"></div>
+            </div>
+            <div id="dig-wh" class="subcontent">
+                <h3> wh — как "у/в"</h3>
+                <div class="word-grid" id="digWhGrid"></div>
+            </div>
+            <div id="dig-ck" class="subcontent">
+                <h3> ck — как "к" в конце</h3>
+                <div class="word-grid" id="digCkGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. BLENDS -->
+    <section id="blends" class="section">
+        <div class="card">
+            <h2>🎭 Blends — Слияния согласных</h2>
+            <p class="desc">Две-три буквы рядом, каждая слышна! </p>
+
+            <div class="subtabs">
+                <button class="subtab active" data-sub="bl-l">L-blends</button>
+                <button class="subtab" data-sub="bl-r">R-blends</button>
+                <button class="subtab" data-sub="bl-s">S-blends</button>
+            </div>
+
+            <div id="bl-l" class="subcontent active">
+                <h3>🌊 L-слияния</h3>
+                <div class="word-grid" id="blLGrid"></div>
+            </div>
+            <div id="bl-r" class="subcontent">
+                <h3>🏃 R-слияния</h3>
+                <div class="word-grid" id="blRGrid"></div>
+            </div>
+            <div id="bl-s" class="subcontent">
+                <h3> S-слияния</h3>
+                <div class="word-grid" id="blSGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. VOWEL TEAMS -->
+    <section id="vowels" class="section">
+        <div class="card">
+            <h2> Vowel Teams — Команды гласных</h2>
+            <p class="desc">Две гласные вместе — одна говорит, другая молчит!</p>
+
+            <div class="subtabs">
+                <button class="subtab active" data-sub="vt-ai">ai/ay</button>
+                <button class="subtab" data-sub="vt-ee">ee/ea</button>
+                <button class="subtab" data-sub="vt-oa">oa/ow</button>
+                <button class="subtab" data-sub="vt-oo">oo</button>
+                <button class="subtab" data-sub="vt-ou">ou/ow</button>
+                <button class="subtab" data-sub="vt-oi">oi/oy</button>
+                <button class="subtab" data-sub="vt-ar">ar</button>
+                <button class="subtab" data-sub="vt-or">or</button>
+            </div>
+
+            <div id="vt-ai" class="subcontent active">
+                <h3>🌧️ ai/ay — долгий /eɪ/</h3>
+                <div class="word-grid" id="vtAiGrid"></div>
+            </div>
+            <div id="vt-ee" class="subcontent">
+                <h3>🌳 ee/ea — долгий /iː/</h3>
+                <div class="word-grid" id="vtEeGrid"></div>
+            </div>
+            <div id="vt-oa" class="subcontent">
+                <h3>⛵ oa/ow — долгий /oʊ/</h3>
+                <div class="word-grid" id="vtOaGrid"></div>
+            </div>
+            <div id="vt-oo" class="subcontent">
+                <h3> oo — долгий /uː/ и короткий /ʊ/</h3>
+                <div class="word-grid" id="vtOoGrid"></div>
+            </div>
+            <div id="vt-ou" class="subcontent">
+                <h3>🏠 ou/ow — как "ау" /aʊ/</h3>
+                <div class="word-grid" id="vtOuGrid"></div>
+            </div>
+            <div id="vt-oi" class="subcontent">
+                <h3>🪙 oi/oy — как "ой" /ɔɪ/</h3>
+                <div class="word-grid" id="vtOiGrid"></div>
+            </div>
+            <div id="vt-ar" class="subcontent">
+                <h3>🚗 ar — как "ар" /ɑːr/</h3>
+                <div class="word-grid" id="vtArGrid"></div>
+            </div>
+            <div id="vt-or" class="subcontent">
+                <h3>🌽 or — как "ор" /ɔːr/</h3>
+                <div class="word-grid" id="vtOrGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. SIGHT WORDS -->
+    <section id="sight" class="section">
+        <div class="card">
+            <h2> Sight Words — Слова-чемпионы</h2>
+            <p class="desc">Эти слова встречаются чаще всех! Учим их целиком. 🏆</p>
+
+            <div class="subtabs">
+                <button class="subtab active" data-sub="sw-1">Уровень 1</button>
+                <button class="subtab" data-sub="sw-2">Уровень 2</button>
+                <button class="subtab" data-sub="sw-3">Уровень 3</button>
+                <button class="subtab" data-sub="sw-4">Уровень 4</button>
+            </div>
+
+            <div id="sw-1" class="subcontent active"><div class="sight-grid" id="sw1Grid"></div></div>
+            <div id="sw-2" class="subcontent"><div class="sight-grid" id="sw2Grid"></div></div>
+            <div id="sw-3" class="subcontent"><div class="sight-grid" id="sw3Grid"></div></div>
+            <div id="sw-4" class="subcontent"><div class="sight-grid" id="sw4Grid"></div></div>
+        </div>
+    </section>
+
+    <!-- 8. VOCABULARY -->
+    <section id="vocab" class="section">
+        <div class="card">
+            <h2>📚 Тематический Словарь</h2>
+            <p class="desc">Слова по темам. Нажми — услышишь! 🎧</p>
+
+            <div class="subtabs">
+                <button class="subtab active" data-sub="v-animals">🐾 Животные</button>
+                <button class="subtab" data-sub="v-food">🍎 Еда</button>
+                <button class="subtab" data-sub="v-colors">🎨 Цвета</button>
+                <button class="subtab" data-sub="v-numbers">🔢 Цифры</button>
+                <button class="subtab" data-sub="v-family">👨‍👩‍ Семья</button>
+                <button class="subtab" data-sub="v-body"> Тело</button>
+                <button class="subtab" data-sub="v-emotions">😊 Эмоции</button>
+                <button class="subtab" data-sub="v-weather">️ Погода</button>
+                <button class="subtab" data-sub="v-seasons">🌸 Времена года</button>
+                <button class="subtab" data-sub="v-clothes">👕 Одежда</button>
+                <button class="subtab" data-sub="v-school">🏫 Школа</button>
+                <button class="subtab" data-sub="v-home">🏠 Дом</button>
+            </div>
+
+            <div id="v-animals" class="subcontent active"><div class="word-grid" id="vAnimals"></div></div>
+            <div id="v-food" class="subcontent"><div class="word-grid" id="vFood"></div></div>
+            <div id="v-colors" class="subcontent"><div class="word-grid" id="vColors"></div></div>
+            <div id="v-numbers" class="subcontent"><div class="word-grid" id="vNumbers"></div></div>
+            <div id="v-family" class="subcontent"><div class="word-grid" id="vFamily"></div></div>
+            <div id="v-body" class="subcontent"><div class="word-grid" id="vBody"></div></div>
+            <div id="v-emotions" class="subcontent"><div class="word-grid" id="vEmotions"></div></div>
+            <div id="v-weather" class="subcontent"><div class="word-grid" id="vWeather"></div></div>
+            <div id="v-seasons" class="subcontent"><div class="word-grid" id="vSeasons"></div></div>
+            <div id="v-clothes" class="subcontent"><div class="word-grid" id="vClothes"></div></div>
+            <div id="v-school" class="subcontent"><div class="word-grid" id="vSchool"></div></div>
+            <div id="v-home" class="subcontent"><div class="word-grid" id="vHome"></div></div>
+        </div>
+    </section>
+
+    <!-- 9. STORIES -->
+    <section id="story" class="section">
+        <div class="card">
+            <h2>📖 Интерактивные Сказки</h2>
+            <p class="desc">Нажимай на слова — услышишь и увидишь перевод! 🌸</p>
+
+            <div class="subtabs">
+                <button class="subtab active" data-sub="story-1"> Spring Day</button>
+                <button class="subtab" data-sub="story-2"> The Cat</button>
+                <button class="subtab" data-sub="story-3"> In the Park</button>
+            </div>
+
+            <div id="story-1" class="subcontent active">
+                <h3> Spring Day</h3>
+                <div class="story-text" id="story1Text"></div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="reset-btn" onclick="speakStory(1)">🔊 Прочитать вслух</button>
+                </div>
+            </div>
+            <div id="story-2" class="subcontent">
+                <h3>🐱 The Cat</h3>
+                <div class="story-text" id="story2Text"></div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="reset-btn" onclick="speakStory(2)"> Прочитать вслух</button>
+                </div>
+            </div>
+            <div id="story-3" class="subcontent">
+                <h3>🌳 In the Park</h3>
+                <div class="story-text" id="story3Text"></div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="reset-btn" onclick="speakStory(3)">🔊 Прочитать вслух</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. QUIZ -->
+    <section id="quiz" class="section">
+        <div class="card">
+            <h2>❓ Тесты и Викторины</h2>
+            <p class="desc">Проверь свои знания! </p>
+
+            <div class="subtabs">
+                <button class="subtab active" data-sub="quiz-phonics">🔤 Звуки</button>
+                <button class="subtab" data-sub="quiz-words"> Слова</button>
+                <button class="subtab" data-sub="quiz-listening">👂 Аудирование</button>
+            </div>
+
+            <div id="quiz-phonics" class="subcontent active">
+                <div class="quiz-container" id="phonicsQuiz"></div>
+            </div>
+            <div id="quiz-words" class="subcontent">
+                <div class="quiz-container" id="wordsQuiz"></div>
+            </div>
+            <div id="quiz-listening" class="subcontent">
+                <div class="quiz-container" id="listeningQuiz"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. SENTENCE BUILDER -->
+    <section id="builder" class="section">
+        <div class="card">
+            <h2>🔨 Конструктор Предложений</h2>
+            <p class="desc">Составь правильное предложение из слов! 🌟</p>
+
+            <div class="quiz-container">
+                <div class="quiz-question" id="sentenceTarget"></div>
+                <div class="sentence-zone" id="sentenceZone"></div>
+                <div class="word-bank" id="wordBank"></div>
+                <button class="reset-btn" onclick="checkSentence()">✅ Проверить</button>
+                <button class="reset-btn" onclick="loadSentence()">🔄 Новое</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. GAMES -->
+    <section id="games" class="section">
+        <div class="card">
+            <h2>🎮 Мини-Игры</h2>
+
+            <div class="game-switcher">
+                <button class="nav-btn active" onclick="switchGame('match')" id="btnMatch">️ Угадай</button>
+                <button class="nav-btn" onclick="switchGame('spell')" id="btnSpell">🔤 Собери</button>
+                <button class="nav-btn" onclick="switchGame('memory')" id="btnMemory">🧠 Memory</button>
+                <button class="nav-btn" onclick="switchGame('speed')" id="btnSpeed">⚡ Скорость</button>
+            </div>
+
+            <div id="gameMatch" class="game-area">
+                <div class="game-emoji" id="matchEmoji"></div>
+                <div class="game-options" id="matchOptions"></div>
+            </div>
+
+            <div id="gameSpell" class="game-area" style="display: none;">
+                <div class="game-emoji" id="spellEmoji"></div>
+                <div class="spell-zone">
+                    <div class="spell-result" id="spellResultText">?</div>
+                </div>
+                <div class="game-options" id="spellLetters"></div>
+                <button class="reset-btn" onclick="loadSpellGame()">🔄 Новое слово</button>
+            </div>
+
+            <div id="gameMemory" class="game-area" style="display: none;">
+                <p class="desc">Найди все пары! 🌸</p>
+                <div class="memory-grid" id="memoryGrid"></div>
+                <button class="reset-btn" onclick="loadMemoryGame()">🔄 Новая игра</button>
+            </div>
+
+            <div id="gameSpeed" class="game-area" style="display: none;">
+                <p class="desc">Успей нажать на правильное слово за 10 секунд! ⏱️</p>
+                <div class="game-emoji" id="speedEmoji"></div>
+                <div class="quiz-question" id="speedWord"></div>
+                <div class="game-options" id="speedOptions"></div>
+                <div class="quiz-question" id="speedTimer">Время: 10</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13. ACHIEVEMENTS -->
+    <section id="achievements" class="section">
+        <div class="card">
+            <h2>🏆 Достижения</h2>
+            <p class="desc">Зарабатывай достижения за активность! 🌟</p>
+            <div class="achievements-grid" id="achievementsGrid"></div>
+        </div>
+    </section>
+
+</main>
+
+<canvas class="confetti" id="confettiCanvas"></canvas>
+
+<script>
+// ==================== DATA ====================
+
+const alphabetData = [
+    {l:'A', s:'æ', w:'Apple', e:'🍎'}, {l:'B', s:'b', w:'Bear', e:'🐻'}, {l:'C', s:'k', w:'Cat', e:'🐱'},
+    {l:'D', s:'d', w:'Dog', e:'🐶'}, {l:'E', s:'ɛ', w:'Egg', e:''}, {l:'F', s:'f', w:'Fish', e:'🐟'},
+    {l:'G', s:'g', w:'Giraffe', e:'🦒'}, {l:'H', s:'h', w:'Hat', e:''}, {l:'I', s:'ɪ', w:'Igloo', e:'🏠'},
+    {l:'J', s:'dʒ', w:'Juice', e:'🧃'}, {l:'K', s:'k', w:'Kite', e:'🪁'}, {l:'L', s:'l', w:'Leaf', e:''},
+    {l:'M', s:'m', w:'Monkey', e:''}, {l:'N', s:'n', w:'Nest', e:'🪺'}, {l:'O', s:'ɒ', w:'Orange', e:'🍊'},
+    {l:'P', s:'p', w:'Pumpkin', e:'🎃'}, {l:'Q', s:'kw', w:'Queen', e:'👸'}, {l:'R', s:'r', w:'Rabbit', e:'🐰'},
+    {l:'S', s:'s', w:'Sun', e:'☀️'}, {l:'T', s:'t', w:'Tree', e:'🌳'}, {l:'U', s:'ʌ', w:'Umbrella', e:'☂️'},
+    {l:'V', s:'v', w:'Van', e:'🚐'}, {l:'W', s:'w', w:'Whale', e:'🐳'}, {l:'X', s:'ks', w:'Fox', e:'🦊'},
+    {l:'Y', s:'j', w:'Yo-yo', e:'🪀'}, {l:'Z', s:'z', w:'Zebra', e:'🦓'}
+];
+
+const cvcData = {
+    a: [
+        {w:'cat', p:['c','a','t'], e:'🐱', ru:'кот'}, {w:'hat', p:['h','a','t'], e:'🎩', ru:'шляпа'},
+        {w:'bat', p:['b','a','t'], e:'🦇', ru:'летучая мышь'}, {w:'mat', p:['m','a','t'], e:'', ru:'коврик'},
+        {w:'rat', p:['r','a','t'], e:'🐀', ru:'крыса'}, {w:'van', p:['v','a','n'], e:'🚐', ru:'фургон'},
+        {w:'fan', p:['f','a','n'], e:'🌀', ru:'вентилятор'}, {w:'can', p:['c','a','n'], e:'🥫', ru:'банка'},
+        {w:'man', p:['m','a','n'], e:'👨', ru:'мужчина'}, {w:'pan', p:['p','a','n'], e:'🍳', ru:'сковорода'},
+        {w:'bag', p:['b','a','g'], e:'👜', ru:'сумка'}, {w:'tag', p:['t','a','g'], e:'🏷️', ru:'бирка'},
+        {w:'rag', p:['r','a','g'], e:'🧹', ru:'тряпка'}, {w:'jam', p:['j','a','m'], e:'🍓', ru:'варенье'},
+        {w:'map', p:['m','a','p'], e:'🗺️', ru:'карта'}, {w:'tap', p:['t','a','p'], e:'🚰', ru:'кран'}
+    ],
+    e: [
+        {w:'bed', p:['b','e','d'], e:'️', ru:'кровать'}, {w:'red', p:['r','e','d'], e:'🔴', ru:'красный'},
+        {w:'hen', p:['h','e','n'], e:'🐔', ru:'курица'}, {w:'pen', p:['p','e','n'], e:'🖊️', ru:'ручка'},
+        {w:'ten', p:['t','e','n'], e:'🔟', ru:'десять'}, {w:'men', p:['m','e','n'], e:'👥', ru:'мужчины'},
+        {w:'leg', p:['l','e','g'], e:'🦵', ru:'нога'}, {w:'peg', p:['p','e','g'], e:'📌', ru:'колышек'},
+        {w:'jet', p:['j','e','t'], e:'✈️', ru:'реактивный самолёт'}, {w:'net', p:['n','e','t'], e:'', ru:'сеть'},
+        {w:'pet', p:['p','e','t'], e:'🐾', ru:'питомец'}, {w:'wet', p:['w','e','t'], e:'💧', ru:'мокрый'},
+        {w:'bell', p:['b','e','l','l'], e:'🔔', ru:'колокольчик'}, {w:'well', p:['w','e','l','l'], e:'️', ru:'колодец'}
+    ],
+    i: [
+        {w:'pig', p:['p','i','g'], e:'🐷', ru:'свинья'}, {w:'big', p:['b','i','g'], e:'', ru:'большой'},
+        {w:'dig', p:['d','i','g'], e:'⛏️', ru:'копать'}, {w:'fig', p:['f','i','g'], e:'🌰', ru:'инжир'},
+        {w:'wig', p:['w','i','g'], e:'💇', ru:'парик'}, {w:'pin', p:['p','i','n'], e:'📌', ru:'булавка'},
+        {w:'bin', p:['b','i','n'], e:'🗑️', ru:'мусорка'}, {w:'fin', p:['f','i','n'], e:'', ru:'плавник'},
+        {w:'win', p:['w','i','n'], e:'🏆', ru:'побеждать'}, {w:'sit', p:['s','i','t'], e:'🪑', ru:'сидеть'},
+        {w:'hit', p:['h','i','t'], e:'🥊', ru:'ударять'}, {w:'bit', p:['b','i','t'], e:'🦷', ru:'кусочек'},
+        {w:'fit', p:['f','i','t'], e:'👌', ru:'подходить'}, {w:'lip', p:['l','i','p'], e:'👄', ru:'губа'},
+        {w:'zip', p:['z','i','p'], e:'🤐', ru:'молния'}, {w:'hip', p:['h','i','p'], e:'', ru:'бедро'},
+        {w:'rib', p:['r','i','b'], e:'🦴', ru:'ребро'}, {w:'bib', p:['b','i','b'], e:'🍼', ru:'слюнявчик'}
+    ],
+    o: [
+        {w:'dog', p:['d','o','g'], e:'🐶', ru:'собака'}, {w:'log', p:['l','o','g'], e:'🪵', ru:'бревно'},
+        {w:'fog', p:['f','o','g'], e:'🌫️', ru:'туман'}, {w:'hog', p:['h','o','g'], e:'🐖', ru:'кабан'},
+        {w:'jog', p:['j','o','g'], e:'🏃', ru:'бегать трусцой'}, {w:'cog', p:['c','o','g'], e:'⚙️', ru:'шестерёнка'},
+        {w:'hot', p:['h','o','t'], e:'🔥', ru:'горячий'}, {w:'pot', p:['p','o','t'], e:'', ru:'горшок'},
+        {w:'dot', p:['d','o','t'], e:'⚫', ru:'точка'}, {w:'lot', p:['l','o','t'], e:'🎟️', ru:'лот'},
+        {w:'not', p:['n','o','t'], e:'❌', ru:'не'}, {w:'cot', p:['c','o','t'], e:'🛏️', ru:'детская кроватка'},
+        {w:'fox', p:['f','o','x'], e:'', ru:'лиса'}, {w:'box', p:['b','o','x'], e:'', ru:'коробка'},
+        {w:'pox', p:['p','o','x'], e:'🤒', ru:'оспа'}, {w:'mom', p:['m','o','m'], e:'👩', ru:'мама'},
+        {w:'pop', p:['p','o','p'], e:'🍿', ru:'лопаться'}, {w:'top', p:['t','o','p'], e:'⬆️', ru:'верх'}
+    ],
+    u: [
+        {w:'sun', p:['s','u','n'], e:'☀️', ru:'солнце'}, {w:'fun', p:['f','u','n'], e:'🎉', ru:'веселье'},
+        {w:'run', p:['r','u','n'], e:'🏃', ru:'бежать'}, {w:'bun', p:['b','u','n'], e:'🥐', ru:'булочка'},
+        {w:'gun', p:['g','u','n'], e:'🔫', ru:'пушка'}, {w:'nun', p:['n','u','n'], e:'👩‍🦰', ru:'монахиня'},
+        {w:'pup', p:['p','u','p'], e:'', ru:'щенок'}, {w:'cup', p:['c','u','p'], e:'', ru:'чашка'},
+        {w:'hug', p:['h','u','g'], e:'🤗', ru:'обнимать'}, {w:'bug', p:['b','u','g'], e:'🐛', ru:'жук'},
+        {w:'mug', p:['m','u','g'], e:'☕', ru:'кружка'}, {w:'rug', p:['r','u','g'], e:'🟫', ru:'ковёр'},
+        {w:'tug', p:['t','u','g'], e:'💪', ru:'тянуть'}, {w:'bus', p:['b','u','s'], e:'', ru:'автобус'},
+        {w:'cut', p:['c','u','t'], e:'✂️', ru:'резать'}, {w:'nut', p:['n','u','t'], e:'🌰', ru:'орех'},
+        {w:'but', p:['b','u','t'], e:'🤔', ru:'но'}
+    ]
+};
+
+const cvceData = {
+    a: [
+        {w:'cake', e:'🎂', ru:'торт'}, {w:'lake', e:'🏞️', ru:'озеро'}, {w:'make', e:'🔨', ru:'делать'},
+        {w:'take', e:'✋', ru:'брать'}, {w:'bake', e:'🥐', ru:'печь'}, {w:'fake', e:'🎭', ru:'поддельный'},
+        {w:'gate', e:'🚪', ru:'ворота'}, {w:'late', e:'⏰', ru:'поздно'}, {w:'mate', e:'', ru:'приятель'},
+        {w:'rate', e:'⭐', ru:'оценка'}, {w:'cane', e:'🦯', ru:'трость'}, {w:'lane', e:'🛣️', ru:'полоса'},
+        {w:'mane', e:'🦁', ru:'грива'}, {w:'pane', e:'🪟', ru:'оконное стекло'}, {w:'game', e:'🎮', ru:'игра'},
+        {w:'name', e:'📛', ru:'имя'}, {w:'same', e:'👯', ru:'такой же'}, {w:'flame', e:'🔥', ru:'пламя'}
+    ],
+    i: [
+        {w:'bike', e:'🚲', ru:'велосипед'}, {w:'hike', e:'🥾', ru:'поход'}, {w:'like', e:'👍', ru:'нравиться'},
+        {w:'mike', e:'🎤', ru:'микрофон'}, {w:'pine', e:'🌲', ru:'сосна'}, {w:'vine', e:'', ru:'лоза'},
+        {w:'wine', e:'🍷', ru:'вино'}, {w:'line', e:'📏', ru:'линия'}, {w:'mine', e:'⛏️', ru:'шахта'},
+        {w:'nine', e:'9️', ru:'девять'}, {w:'fine', e:'✨', ru:'отличный'}, {w:'five', e:'5️⃣', ru:'пять'},
+        {w:'give', e:'🎁', ru:'давать'}, {w:'live', e:'🏠', ru:'жить'}, {w:'time', e:'⏰', ru:'время'},
+        {w:'kite', e:'🪁', ru:'воздушный змей'}, {w:'bite', e:'🦷', ru:'кусать'}, {w:'site', e:'🌐', ru:'сайт'}
+    ],
+    o: [
+        {w:'home', e:'', ru:'дом'}, {w:'bone', e:'🦴', ru:'кость'}, {w:'cone', e:'🍦', ru:'рожок'},
+        {w:'phone', e:'', ru:'телефон'}, {w:'stone', e:'🪨', ru:'камень'}, {w:'zone', e:'', ru:'зона'},
+        {w:'hole', e:'🕳️', ru:'дыра'}, {w:'pole', e:'', ru:'шест'}, {w:'role', e:'🎭', ru:'роль'},
+        {w:'tore', e:'', ru:'рвал'}, {w:'rope', e:'🪢', ru:'верёвка'}, {w:'hope', e:'🙏', ru:'надежда'},
+        {w:'note', e:'📝', ru:'заметка'}, {w:'vote', e:'️', ru:'голосовать'}, {w:'cute', e:'🥰', ru:'милый'}
+    ],
+    u: [
+        {w:'cube', e:'🧊', ru:'куб'}, {w:'tube', e:'🧴', ru:'тюбик'}, {w:'lute', e:'🎸', ru:'лютня'},
+        {w:'cute', e:'🥰', ru:'милый'}, {w:'mute', e:'🔇', ru:'немой'}, {w:'mule', e:'🫏', ru:'мул'},
+        {w:'rule', e:'📏', ru:'правило'}, {w:'June', e:'📅', ru:'июнь'}, {w:'flute', e:'🎵', ru:'флейта'},
+        {w:'brute', e:'🦍', ru:'грубый'}, {w:'use', e:'🔧', ru:'использовать'}, {w:'huge', e:'🏔️', ru:'огромный'}
+    ]
+};
+
+const digraphData = {
+    sh: [
+        {w:'ship', e:'🚢', ru:'корабль'}, {w:'fish', e:'🐟', ru:'рыба'}, {w:'dish', e:'🍽️', ru:'тарелка'},
+        {w:'wish', e:'🌠', ru:'желание'}, {w:'brush', e:'🖌️', ru:'щётка'}, {w:'crash', e:'💥', ru:'авария'},
+        {w:'flash', e:'⚡', ru:'вспышка'}, {w:'shell', e:'', ru:'ракушка'}, {w:'shelf', e:'📚', ru:'полка'},
+        {w:'sheep', e:'🐑', ru:'овца'}, {w:'sheet', e:'🛏️', ru:'простыня'}, {w:'shoe', e:'👟', ru:'туфля'},
+        {w:'shop', e:'🏪', ru:'магазин'}, {w:'shot', e:'💉', ru:'укол'}, {w:'show', e:'🎭', ru:'шоу'},
+        {w:'shut', e:'🚪', ru:'закрывать'}, {w:'shy', e:'😳', ru:'застенчивый'}
+    ],
+    ch: [
+        {w:'chair', e:'🪑', ru:'стул'}, {w:'cheese', e:'', ru:'сыр'}, {w:'cherry', e:'🍒', ru:'вишня'},
+        {w:'chest', e:'📦', ru:'сундук'}, {w:'chick', e:'🐤', ru:'цыплёнок'}, {w:'child', e:'', ru:'ребёнок'},
+        {w:'chin', e:'🧔', ru:'подбородок'}, {w:'chip', e:'🍟', ru:'чипс'}, {w:'chop', e:'🪓', ru:'рубить'},
+        {w:'church', e:'⛪', ru:'церковь'}, {w:'lunch', e:'', ru:'обед'}, {w:'much', e:'📊', ru:'много'},
+        {w:'such', e:'👉', ru:'такой'}, {w:'teach', e:'👩‍🏫', ru:'учить'}, {w:'watch', e:'', ru:'часы'},
+        {w:'catch', e:'🤾', ru:'ловить'}, {w:'match', e:'🔥', ru:'спичка/матч'}
+    ],
+    th: [
+        {w:'think', e:'🤔', ru:'думать'}, {w:'thank', e:'🙏', ru:'благодарить'}, {w:'three', e:'3️⃣', ru:'три'},
+        {w:'thick', e:'📚', ru:'толстый'}, {w:'thin', e:'📏', ru:'тонкий'}, {w:'thing', e:'', ru:'вещь'},
+        {w:'thumb', e:'👍', ru:'большой палец'}, {w:'thunder', e:'⛈️', ru:'гром'}, {w:'this', e:'👉', ru:'этот'},
+        {w:'that', e:'👈', ru:'тот'}, {w:'the', e:'📖', ru:'определённый артикль'}, {w:'they', e:'👥', ru:'они'},
+        {w:'them', e:'👥', ru:'их'}, {w:'then', e:'⏭️', ru:'потом'}, {w:'there', e:'', ru:'там'},
+        {w:'with', e:'🤝', ru:'с'}, {w:'mother', e:'👩', ru:'мама'}, {w:'father', e:'👨', ru:'папа'}
+    ],
+    ph: [
+        {w:'phone', e:'📞', ru:'телефон'}, {w:'photo', e:'', ru:'фото'}, {w:'phrase', e:'💬', ru:'фраза'},
+        {w:'phoenix', e:'🔥', ru:'феникс'}, {w:'dolphin', e:'🐬', ru:'дельфин'}, {w:'elephant', e:'', ru:'слон'},
+        {w:'graph', e:'📊', ru:'график'}, {w:'alphabet', e:'🔤', ru:'алфавит'}, {w:'pharmacy', e:'💊', ru:'аптека'},
+        {w:'phantom', e:'', ru:'призрак'}
+    ],
+    wh: [
+        {w:'whale', e:'🐳', ru:'кит'}, {w:'white', e:'⚪', ru:'белый'}, {w:'wheel', e:'', ru:'колесо'},
+        {w:'whip', e:'', ru:'кнут'}, {w:'whisper', e:'🤫', ru:'шептать'}, {w:'whistle', e:'🎵', ru:'свистеть'},
+        {w:'what', e:'❓', ru:'что'}, {w:'when', e:'⏰', ru:'когда'}, {w:'where', e:'📍', ru:'где'},
+        {w:'which', e:'🤔', ru:'какой'}, {w:'why', e:'❓', ru:'почему'}
+    ],
+    ck: [
+        {w:'duck', e:'🦆', ru:'утка'}, {w:'luck', e:'🍀', ru:'удача'}, {w:'truck', e:'🚚', ru:'грузовик'},
+        {w:'sock', e:'🧦', ru:'носок'}, {w:'rock', e:'🪨', ru:'камень'}, {w:'lock', e:'🔒', ru:'замок'},
+        {w:'clock', e:'⏰', ru:'часы'}, {w:'block', e:'🧱', ru:'блок'}, {w:'flock', e:'🐑', ru:'стадо'},
+        {w:'knock', e:'🚪', ru:'стучать'}, {w:'snack', e:'', ru:'перекус'}, {w:'track', e:'🛤️', ru:'тропа'},
+        {w:'brick', e:'🧱', ru:'кирпич'}, {w:'chick', e:'🐤', ru:'цыплёнок'}, {w:'trick', e:'🎩', ru:'трюк'}
+    ]
+};
+
+const blendsData = {
+    l: [
+        {w:'black', e:'⚫', ru:'чёрный'}, {w:'blanket', e:'🛌', ru:'одеяло'}, {w:'blue', e:'🔵', ru:'синий'},
+        {w:'blow', e:'💨', ru:'дуть'}, {w:'class', e:'🏫', ru:'класс'}, {w:'clap', e:'👏', ru:'хлопать'},
+        {w:'clean', e:'🧹', ru:'чистый'}, {w:'climb', e:'', ru:'лазить'}, {w:'clock', e:'⏰', ru:'часы'},
+        {w:'flag', e:'🚩', ru:'флаг'}, {w:'flat', e:'🏢', ru:'плоский'}, {w:'fly', e:'🪁', ru:'летать'},
+        {w:'glass', e:'🥛', ru:'стекло'}, {w:'glow', e:'✨', ru:'светить'}, {w:'glue', e:'🧴', ru:'клей'},
+        {w:'plane', e:'️', ru:'самолёт'}, {w:'play', e:'🎮', ru:'играть'}, {w:'please', e:'', ru:'пожалуйста'},
+        {w:'sleep', e:'😴', ru:'спать'}, {w:'slide', e:'🛝', ru:'горка'}, {w:'slow', e:'🐢', ru:'медленный'}
+    ],
+    r: [
+        {w:'bread', e:'🍞', ru:'хлеб'}, {w:'break', e:'☕', ru:'перерыв'}, {w:'brown', e:'🟫', ru:'коричневый'},
+        {w:'brush', e:'️', ru:'щётка'}, {w:'crab', e:'🦀', ru:'краб'}, {w:'cry', e:'😢', ru:'плакать'},
+        {w:'crop', e:'🌾', ru:'урожай'}, {w:'crown', e:'👑', ru:'корона'}, {w:'drum', e:'🥁', ru:'барабан'},
+        {w:'drop', e:'💧', ru:'капля'}, {w:'drink', e:'🥤', ru:'пить'}, {w:'dress', e:'👗', ru:'платье'},
+        {w:'frog', e:'🐸', ru:'лягушка'}, {w:'friend', e:'👫', ru:'друг'}, {w:'fruit', e:'🍎', ru:'фрукт'},
+        {w:'grass', e:'🌿', ru:'трава'}, {w:'green', e:'🟢', ru:'зелёный'}, {w:'grow', e:'', ru:'расти'},
+        {w:'prize', e:'🏆', ru:'приз'}, {w:'print', e:'🖨️', ru:'печатать'}, {w:'train', e:'🚂', ru:'поезд'},
+        {w:'tree', e:'🌳', ru:'дерево'}, {w:'trip', e:'🧳', ru:'поездка'}
+    ],
+    s: [
+        {w:'school', e:'🏫', ru:'школа'}, {w:'score', e:'', ru:'счёт'}, {w:'sky', e:'☁️', ru:'небо'},
+        {w:'skin', e:'🧴', ru:'кожа'}, {w:'skip', e:'🤸', ru:'прыгать'}, {w:'sleep', e:'😴', ru:'спать'},
+        {w:'slow', e:'🐢', ru:'медленный'}, {w:'small', e:'🐜', ru:'маленький'}, {w:'smile', e:'😊', ru:'улыбка'},
+        {w:'smoke', e:'💨', ru:'дым'}, {w:'snake', e:'🐍', ru:'змея'}, {w:'snow', e:'❄️', ru:'снег'},
+        {w:'snail', e:'🐌', ru:'улитка'}, {w:'space', e:'🚀', ru:'космос'}, {w:'spoon', e:'🥄', ru:'ложка'},
+        {w:'spin', e:'🌀', ru:'крутить'}, {w:'star', e:'⭐', ru:'звезда'}, {w:'stop', e:'', ru:'стоп'},
+        {w:'store', e:'🏪', ru:'магазин'}, {w:'swim', e:'🏊', ru:'плавать'}, {w:'sweet', e:'🍬', ru:'сладкий'}
+    ]
+};
+
+const vowelTeamsData = {
+    ai: [
+        {w:'rain', e:'🌧️', ru:'дождь'}, {w:'train', e:'🚂', ru:'поезд'}, {w:'brain', e:'🧠', ru:'мозг'},
+        {w:'pain', e:'🤕', ru:'боль'}, {w:'mail', e:'📬', ru:'почта'}, {w:'tail', e:'🦊', ru:'хвост'},
+        {w:'sail', e:'⛵', ru:'парус'}, {w:'play', e:'🎮', ru:'играть'}, {w:'day', e:'🌞', ru:'день'},
+        {w:'say', e:'💬', ru:'говорить'}, {w:'may', e:'🌸', ru:'май/можно'}, {w:'way', e:'🛣️', ru:'путь'},
+        {w:'stay', e:'', ru:'оставаться'}, {w:'pay', e:'💰', ru:'платить'}
+    ],
+    ee: [
+        {w:'tree', e:'🌳', ru:'дерево'}, {w:'bee', e:'', ru:'пчела'}, {w:'see', e:'👁️', ru:'видеть'},
+        {w:'sea', e:'🌊', ru:'море'}, {w:'tea', e:'🍵', ru:'чай'}, {w:'read', e:'📖', ru:'читать'},
+        {w:'eat', e:'🍽️', ru:'есть'}, {w:'meat', e:'🥩', ru:'мясо'}, {w:'head', e:'🧠', ru:'голова'},
+        {w:'bread', e:'🍞', ru:'хлеб'}, {w:'dead', e:'💀', ru:'мёртвый'}, {w:'green', e:'🟢', ru:'зелёный'},
+        {w:'sheep', e:'🐑', ru:'овца'}, {w:'sleep', e:'😴', ru:'спать'}, {w:'sweet', e:'🍬', ru:'сладкий'},
+        {w:'feet', e:'🦶', ru:'ступни'}, {w:'meet', e:'🤝', ru:'встречать'}, {w:'week', e:'📅', ru:'неделя'}
+    ],
+    oa: [
+        {w:'boat', e:'⛵', ru:'лодка'}, {w:'coat', e:'🧥', ru:'пальто'}, {w:'goat', e:'🐐', ru:'коза'},
+        {w:'road', e:'🛣️', ru:'дорога'}, {w:'toad', e:'🐸', ru:'жаба'}, {w:'load', e:'', ru:'груз'},
+        {w:'snow', e:'❄️', ru:'снег'}, {w:'grow', e:'🌱', ru:'расти'}, {w:'show', e:'🎭', ru:'шоу'},
+        {w:'slow', e:'🐢', ru:'медленный'}, {w:'blow', e:'', ru:'дуть'}, {w:'bowl', e:'🥣', ru:'миска'},
+        {w:'own', e:'🏠', ru:'владеть'}, {w:'low', e:'⬇️', ru:'низкий'}
+    ],
+    oo: [
+        {w:'moon', e:'🌙', ru:'луна'}, {w:'spoon', e:'', ru:'ложка'}, {w:'food', e:'🍎', ru:'еда'},
+        {w:'cool', e:'😎', ru:'крутой'}, {w:'pool', e:'🏊', ru:'бассейн'}, {w:'school', e:'🏫', ru:'школа'},
+        {w:'zoo', e:'🦁', ru:'зоопарк'}, {w:'book', e:'', ru:'книга'}, {w:'cook', e:'👨‍', ru:'повар'},
+        {w:'look', e:'👀', ru:'смотреть'}, {w:'good', e:'👍', ru:'хороший'}, {w:'foot', e:'🦶', ru:'ступня'},
+        {w:'wood', e:'🪵', ru:'дерево'}, {w:'wool', e:'🧶', ru:'шерсть'}
+    ],
+    ou: [
+        {w:'house', e:'🏠', ru:'дом'}, {w:'mouse', e:'🐭', ru:'мышь'}, {w:'mouth', e:'👄', ru:'рот'},
+        {w:'cloud', e:'☁️', ru:'облако'}, {w:'loud', e:'🔊', ru:'громкий'}, {w:'pound', e:'💷', ru:'фунт'},
+        {w:'round', e:'⭕', ru:'круглый'}, {w:'found', e:'🔍', ru:'нашёл'}, {w:'cow', e:'🐄', ru:'корова'},
+        {w:'how', e:'❓', ru:'как'}, {w:'now', e:'', ru:'сейчас'}, {w:'brown', e:'🟫', ru:'коричневый'},
+        {w:'down', e:'️', ru:'вниз'}, {w:'town', e:'🏘️', ru:'город'}
+    ],
+    oi: [
+        {w:'coin', e:'🪙', ru:'монета'}, {w:'oil', e:'🛢️', ru:'масло'}, {w:'boil', e:'🫖', ru:'кипятить'},
+        {w:'soil', e:'🌱', ru:'почва'}, {w:'foil', e:'', ru:'фольга'}, {w:'boy', e:'👦', ru:'мальчик'},
+        {w:'toy', e:'🧸', ru:'игрушка'}, {w:'joy', e:'😄', ru:'радость'}, {w:'royal', e:'', ru:'королевский'}
+    ],
+    ar: [
+        {w:'car', e:'🚗', ru:'машина'}, {w:'star', e:'⭐', ru:'звезда'}, {w:'farm', e:'🚜', ru:'ферма'},
+        {w:'park', e:'🌳', ru:'парк'}, {w:'mark', e:'📝', ru:'метка'}, {w:'dark', e:'🌑', ru:'тёмный'},
+        {w:'hard', e:'💪', ru:'твёрдый'}, {w:'yard', e:'🏡', ru:'двор'}, {w:'card', e:'🃏', ru:'карта'},
+        {w:'shark', e:'🦈', ru:'акула'}, {w:'start', e:'🏁', ru:'старт'}, {w:'heart', e:'❤️', ru:'сердце'}
+    ],
+    or: [
+        {w:'corn', e:'🌽', ru:'кукуруза'}, {w:'fork', e:'🍴', ru:'вилка'}, {w:'horse', e:'🐴', ru:'лошадь'},
+        {w:'horn', e:'📯', ru:'рог'}, {w:'storm', e:'⛈️', ru:'шторм'}, {w:'sport', e:'⚽', ru:'спорт'},
+        {w:'short', e:'', ru:'короткий'}, {w:'north', e:'🧭', ru:'север'}, {w:'forest', e:'', ru:'лес'},
+        {w:'morning', e:'🌅', ru:'утро'}, {w:'orange', e:'🍊', ru:'апельсин'}
+    ]
+};
+
+const sightWordsData = {
+    1: ['the','be','to','of','and','a','in','that','have','I','it','for','not','on','with','he','as','you','do','at'],
+    2: ['this','but','his','by','from','they','we','say','her','she','or','an','will','my','one','all','would','there','their','what'],
+    3: ['so','up','out','if','about','who','get','which','go','me','when','make','can','like','time','no','just','him','know','take'],
+    4: ['people','into','year','your','good','some','could','them','see','other','than','then','now','look','only','come','its','over','think','also']
+};
+
+const vocabData = {
+    animals: [
+        {w:'cat', e:'🐱', ru:'кот'}, {w:'dog', e:'🐶', ru:'собака'}, {w:'bird', e:'🐦', ru:'птица'},
+        {w:'fish', e:'🐟', ru:'рыба'}, {w:'rabbit', e:'🐰', ru:'кролик'}, {w:'mouse', e:'🐭', ru:'мышь'},
+        {w:'bear', e:'🐻', ru:'медведь'}, {w:'fox', e:'🦊', ru:'лиса'}, {w:'wolf', e:'🐺', ru:'волк'},
+        {w:'deer', e:'🦌', ru:'олень'}, {w:'horse', e:'🐴', ru:'лошадь'}, {w:'cow', e:'', ru:'корова'},
+        {w:'pig', e:'🐷', ru:'свинья'}, {w:'sheep', e:'', ru:'овца'}, {w:'goat', e:'🐐', ru:'коза'},
+        {w:'chicken', e:'🐔', ru:'курица'}, {w:'duck', e:'🦆', ru:'утка'}, {w:'frog', e:'🐸', ru:'лягушка'},
+        {w:'snake', e:'🐍', ru:'змея'}, {w:'turtle', e:'🐢', ru:'черепаха'}, {w:'lion', e:'🦁', ru:'лев'},
+        {w:'tiger', e:'🐯', ru:'тигр'}, {w:'elephant', e:'🐘', ru:'слон'}, {w:'giraffe', e:'🦒', ru:'жираф'},
+        {w:'monkey', e:'🐒', ru:'обезьяна'}, {w:'panda', e:'🐼', ru:'панда'}, {w:'whale', e:'', ru:'кит'},
+        {w:'dolphin', e:'🐬', ru:'дельфин'}, {w:'shark', e:'', ru:'акула'}, {w:'butterfly', e:'🦋', ru:'бабочка'},
+        {w:'bee', e:'🐝', ru:'пчела'}, {w:'ant', e:'🐜', ru:'муравей'}, {w:'spider', e:'🕷️', ru:'паук'}
+    ],
+    food: [
+        {w:'apple', e:'🍎', ru:'яблоко'}, {w:'banana', e:'', ru:'банан'}, {w:'orange', e:'🍊', ru:'апельсин'},
+        {w:'grape', e:'🍇', ru:'виноград'}, {w:'strawberry', e:'🍓', ru:'клубника'}, {w:'cherry', e:'🍒', ru:'вишня'},
+        {w:'peach', e:'', ru:'персик'}, {w:'lemon', e:'🍋', ru:'лимон'}, {w:'watermelon', e:'', ru:'арбуз'},
+        {w:'carrot', e:'🥕', ru:'морковь'}, {w:'potato', e:'', ru:'картофель'}, {w:'tomato', e:'🍅', ru:'помидор'},
+        {w:'corn', e:'🌽', ru:'кукуруза'}, {w:'broccoli', e:'🥦', ru:'брокколи'}, {w:'bread', e:'🍞', ru:'хлеб'},
+        {w:'cheese', e:'🧀', ru:'сыр'}, {w:'egg', e:'🥚', ru:'яйцо'}, {w:'milk', e:'', ru:'молоко'},
+        {w:'butter', e:'🧈', ru:'масло'}, {w:'rice', e:'🍚', ru:'рис'}, {w:'meat', e:'🥩', ru:'мясо'},
+        {w:'chicken', e:'🍗', ru:'курица'}, {w:'fish', e:'🐟', ru:'рыба'}, {w:'pizza', e:'', ru:'пицца'},
+        {w:'cake', e:'🎂', ru:'торт'}, {w:'cookie', e:'🍪', ru:'печенье'}, {w:'chocolate', e:'🍫', ru:'шоколад'},
+        {w:'ice cream', e:'🍦', ru:'мороженое'}, {w:'candy', e:'🍬', ru:'конфета'}, {w:'tea', e:'🍵', ru:'чай'},
+        {w:'coffee', e:'☕', ru:'кофе'}, {w:'juice', e:'', ru:'сок'}, {w:'water', e:'💧', ru:'вода'}
+    ],
+    colors: [
+        {w:'red', e:'🔴', ru:'красный'}, {w:'blue', e:'', ru:'синий'}, {w:'yellow', e:'🟡', ru:'жёлтый'},
+        {w:'green', e:'🟢', ru:'зелёный'}, {w:'orange', e:'🟠', ru:'оранжевый'}, {w:'purple', e:'', ru:'фиолетовый'},
+        {w:'pink', e:'', ru:'розовый'}, {w:'brown', e:'🟫', ru:'коричневый'}, {w:'black', e:'⚫', ru:'чёрный'},
+        {w:'white', e:'⚪', ru:'белый'}, {w:'gray', e:'🩶', ru:'серый'}, {w:'gold', e:'🏅', ru:'золотой'},
+        {w:'silver', e:'🥈', ru:'серебряный'}
+    ],
+    numbers: [
+        {w:'one', e:'1️⃣', ru:'один'}, {w:'two', e:'2️⃣', ru:'два'}, {w:'three', e:'3️', ru:'три'},
+        {w:'four', e:'4️⃣', ru:'четыре'}, {w:'five', e:'5️⃣', ru:'пять'}, {w:'six', e:'6️⃣', ru:'шесть'},
+        {w:'seven', e:'7️⃣', ru:'семь'}, {w:'eight', e:'8️⃣', ru:'восемь'}, {w:'nine', e:'9️⃣', ru:'девять'},
+        {w:'ten', e:'', ru:'десять'}, {w:'eleven', e:'1️⃣1️⃣', ru:'одиннадцать'}, {w:'twelve', e:'1️⃣2️⃣', ru:'двенадцать'},
+        {w:'thirteen', e:'🔢', ru:'тринадцать'}, {w:'fourteen', e:'🔢', ru:'четырнадцать'}, {w:'fifteen', e:'🔢', ru:'пятнадцать'},
+        {w:'sixteen', e:'🔢', ru:'шестнадцать'}, {w:'seventeen', e:'🔢', ru:'семнадцать'}, {w:'eighteen', e:'', ru:'восемнадцать'},
+        {w:'nineteen', e:'', ru:'девятнадцать'}, {w:'twenty', e:'2️⃣0️', ru:'двадцать'}, {w:'thirty', e:'3️⃣0️⃣', ru:'тридцать'},
+        {w:'forty', e:'4️0️⃣', ru:'сорок'}, {w:'fifty', e:'5️⃣0️⃣', ru:'пятьдесят'}, {w:'hundred', e:'💯', ru:'сто'}
+    ],
+    family: [
+        {w:'mom', e:'👩', ru:'мама'}, {w:'dad', e:'👨', ru:'папа'}, {w:'sister', e:'', ru:'сестра'},
+        {w:'brother', e:'👦', ru:'брат'}, {w:'baby', e:'', ru:'малыш'}, {w:'grandma', e:'👵', ru:'бабушка'},
+        {w:'grandpa', e:'👴', ru:'дедушка'}, {w:'aunt', e:'👩', ru:'тётя'}, {w:'uncle', e:'👨', ru:'дядя'},
+        {w:'cousin', e:'👫', ru:'двоюродный брат/сестра'}, {w:'family', e:'👨‍👩‍', ru:'семья'}, {w:'friend', e:'👫', ru:'друг'}
+    ],
+    body: [
+        {w:'head', e:'🧠', ru:'голова'}, {w:'hair', e:'', ru:'волосы'}, {w:'eye', e:'👁️', ru:'глаз'},
+        {w:'ear', e:'', ru:'ухо'}, {w:'nose', e:'👃', ru:'нос'}, {w:'mouth', e:'👄', ru:'рот'},
+        {w:'tooth', e:'🦷', ru:'зуб'}, {w:'tongue', e:'', ru:'язык'}, {w:'face', e:'😊', ru:'лицо'},
+        {w:'neck', e:'🦒', ru:'шея'}, {w:'shoulder', e:'🤷', ru:'плечо'}, {w:'arm', e:'💪', ru:'рука'},
+        {w:'hand', e:'✋', ru:'кисть'}, {w:'finger', e:'👆', ru:'палец'}, {w:'leg', e:'', ru:'нога'},
+        {w:'foot', e:'🦶', ru:'ступня'}, {w:'toe', e:'', ru:'палец ноги'}, {w:'back', e:'🔙', ru:'спина'},
+        {w:'heart', e:'❤️', ru:'сердце'}, {w:'stomach', e:'🫃', ru:'живот'}
+    ],
+    emotions: [
+        {w:'happy', e:'😊', ru:'счастливый'}, {w:'sad', e:'😢', ru:'грустный'}, {w:'angry', e:'😠', ru:'злой'},
+        {w:'scared', e:'😨', ru:'испуганный'}, {w:'surprised', e:'😲', ru:'удивлённый'}, {w:'tired', e:'😴', ru:'уставший'},
+        {w:'hungry', e:'🤤', ru:'голодный'}, {w:'thirsty', e:'🥵', ru:'хочет пить'}, {w:'cold', e:'🥶', ru:'холодный'},
+        {w:'hot', e:'🥵', ru:'жаркий'}, {w:'sick', e:'🤒', ru:'больной'}, {w:'brave', e:'', ru:'храбрый'},
+        {w:'shy', e:'😳', ru:'застенчивый'}, {w:'proud', e:'🦚', ru:'гордый'}, {w:'excited', e:'🤩', ru:'в восторге'},
+        {w:'bored', e:'😒', ru:'скучающий'}, {w:'calm', e:'', ru:'спокойный'}, {w:'funny', e:'😄', ru:'смешной'}
+    ],
+    weather: [
+        {w:'sun', e:'☀️', ru:'солнце'}, {w:'cloud', e:'☁️', ru:'облако'}, {w:'rain', e:'🌧️', ru:'дождь'},
+        {w:'snow', e:'❄️', ru:'снег'}, {w:'wind', e:'💨', ru:'ветер'}, {w:'storm', e:'⛈️', ru:'шторм'},
+        {w:'thunder', e:'⚡', ru:'гром'}, {w:'lightning', e:'️', ru:'молния'}, {w:'fog', e:'🌫️', ru:'туман'},
+        {w:'rainbow', e:'🌈', ru:'радуга'}, {w:'hot', e:'🔥', ru:'жарко'}, {w:'cold', e:'🥶', ru:'холодно'},
+        {w:'warm', e:'🌤️', ru:'тепло'}, {w:'cool', e:'😎', ru:'прохладно'}, {w:'weather', e:'🌦️', ru:'погода'}
+    ],
+    seasons: [
+        {w:'spring', e:'🌸', ru:'весна'}, {w:'summer', e:'☀️', ru:'лето'}, {w:'autumn', e:'', ru:'осень'},
+        {w:'fall', e:'🍁', ru:'осень (амер.)'}, {w:'winter', e:'❄️', ru:'зима'}, {w:'season', e:'🗓️', ru:'время года'}
+    ],
+    clothes: [
+        {w:'shirt', e:'👕', ru:'рубашка'}, {w:'pants', e:'👖', ru:'брюки'}, {w:'dress', e:'👗', ru:'платье'},
+        {w:'skirt', e:'👗', ru:'юбка'}, {w:'coat', e:'🧥', ru:'пальто'}, {w:'jacket', e:'🧥', ru:'куртка'},
+        {w:'sweater', e:'🧶', ru:'свитер'}, {w:'socks', e:'🧦', ru:'носки'}, {w:'shoes', e:'👟', ru:'туфли'},
+        {w:'boots', e:'', ru:'сапоги'}, {w:'hat', e:'🎩', ru:'шляпа'}, {w:'cap', e:'🧢', ru:'кепка'},
+        {w:'scarf', e:'🧣', ru:'шарф'}, {w:'gloves', e:'🧤', ru:'перчатки'}, {w:'belt', e:'👔', ru:'ремень'},
+        {w:'tie', e:'👔', ru:'галстук'}
+    ],
+    school: [
+        {w:'school', e:'🏫', ru:'школа'}, {w:'teacher', e:'👩‍🏫', ru:'учитель'}, {w:'student', e:'‍🎓', ru:'ученик'},
+        {w:'book', e:'📚', ru:'книга'}, {w:'pen', e:'🖊️', ru:'ручка'}, {w:'pencil', e:'✏️', ru:'карандаш'},
+        {w:'paper', e:'📄', ru:'бумага'}, {w:'desk', e:'🪑', ru:'парта'}, {w:'chair', e:'🪑', ru:'стул'},
+        {w:'bag', e:'🎒', ru:'сумка'}, {w:'ruler', e:'📏', ru:'линейка'}, {w:'scissors', e:'️', ru:'ножницы'},
+        {w:'glue', e:'🧴', ru:'клей'}, {w:'paint', e:'🎨', ru:'краска'}, {w:'computer', e:'', ru:'компьютер'},
+        {w:'lesson', e:'📖', ru:'урок'}, {w:'homework', e:'', ru:'домашнее задание'}, {w:'test', e:'📝', ru:'тест'}
+    ],
+    home: [
+        {w:'house', e:'🏠', ru:'дом'}, {w:'room', e:'🚪', ru:'комната'}, {w:'door', e:'🚪', ru:'дверь'},
+        {w:'window', e:'🪟', ru:'окно'}, {w:'bed', e:'🛏️', ru:'кровать'}, {w:'table', e:'🪑', ru:'стол'},
+        {w:'chair', e:'🪑', ru:'стул'}, {w:'kitchen', e:'🍳', ru:'кухня'}, {w:'bathroom', e:'🚿', ru:'ванная'},
+        {w:'living room', e:'🛋️', ru:'гостиная'}, {w:'garden', e:'🌳', ru:'сад'}, {w:'tree', e:'🌳', ru:'дерево'},
+        {w:'flower', e:'🌸', ru:'цветок'}, {w:'lamp', e:'💡', ru:'лампа'}, {w:'tv', e:'', ru:'телевизор'},
+        {w:'phone', e:'📞', ru:'телефон'}
+    ]
+};
+
+const storiesData = {
+    1: [
+        {en:'It', ru:'Это'}, {en:'is', ru:'есть'}, {en:'a', ru:'один'}, {en:'beautiful', ru:'красивый'}, {en:'spring', ru:'весенний'}, {en:'day.', ru:'день.'},
+        {en:'<br>', ru:''},
+        {en:'The', ru:'Этот'}, {en:'sun', ru:'солнце'}, {en:'is', ru:''}, {en:'shining', ru:'светит'}, {en:'brightly.', ru:'ярко.'},
+        {en:'<br>', ru:''},
+        {en:'Flowers', ru:'Цветы'}, {en:'are', ru:''}, {en:'blooming', ru:'цветут'}, {en:'in', ru:'в'}, {en:'the', ru:''}, {en:'garden.', ru:'саду.'},
+        {en:'<br>', ru:''},
+        {en:'Birds', ru:'Птицы'}, {en:'are', ru:''}, {en:'singing', ru:'поют'}, {en:'in', ru:'в'}, {en:'the', ru:''}, {en:'trees.', ru:'деревьях.'},
+        {en:'<br>', ru:''},
+        {en:'It', ru:'Это'}, {en:'is', ru:''}, {en:'so', ru:'так'}, {en:'warm', ru:'тепло'}, {en:'and', ru:'и'}, {en:'lovely.', ru:'прекрасно.'}, {en:'🌸', ru:''}
+    ],
+    2: [
+        {en:'I', ru:'Я'}, {en:'have', ru:'имею'}, {en:'a', ru:''}, {en:'little', ru:'маленький'}, {en:'cat.', ru:'кот.'},
+        {en:'<br>', ru:''},
+        {en:'His', ru:'Его'}, {en:'name', ru:'имя'}, {en:'is', ru:''}, {en:'Tom.', ru:'Том.'},
+        {en:'<br>', ru:''},
+        {en:'Tom', ru:'Том'}, {en:'is', ru:''}, {en:'very', ru:'очень'}, {en:'cute', ru:'милый'}, {en:'and', ru:'и'}, {en:'fluffy.', ru:'пушистый.'},
+        {en:'<br>', ru:''},
+        {en:'He', ru:'Он'}, {en:'likes', ru:'любит'}, {en:'to', ru:''}, {en:'play', ru:'играть'}, {en:'with', ru:'с'}, {en:'a', ru:''}, {en:'ball.', ru:'мячом.'},
+        {en:'<br>', ru:''},
+        {en:'I', ru:'Я'}, {en:'love', ru:'люблю'}, {en:'my', ru:'мой'}, {en:'cat!', ru:'кот!'}, {en:'🐱', ru:''}
+    ],
+    3: [
+        {en:'We', ru:'Мы'}, {en:'go', ru:'идём'}, {en:'to', ru:'в'}, {en:'the', ru:''}, {en:'park', ru:'парк'}, {en:'on', ru:'в'}, {en:'Sunday.', ru:'воскресенье.'},
+        {en:'<br>', ru:''},
+        {en:'There', ru:'Там'}, {en:'are', ru:''}, {en:'big', ru:'большие'}, {en:'green', ru:'зелёные'}, {en:'trees.', ru:'деревья.'},
+        {en:'<br>', ru:''},
+        {en:'Children', ru:'Дети'}, {en:'are', ru:''}, {en:'playing', ru:'играют'}, {en:'on', ru:'на'}, {en:'the', ru:''}, {en:'grass.', ru:'траве.'},
+        {en:'<br>', ru:''},
+        {en:'Some', ru:'Некоторые'}, {en:'are', ru:''}, {en:'running,', ru:'бегают,'}, {en:'some', ru:'некоторые'}, {en:'are', ru:''}, {en:'jumping.', ru:'прыгают.'},
+        {en:'<br>', ru:''},
+        {en:'It', ru:'Это'}, {en:'is', ru:''}, {en:'so', ru:'так'}, {en:'much', ru:'очень'}, {en:'fun!', ru:'весело!'}, {en:'', ru:''}
+    ]
+};
+
+const sentencesData = [
+    {en:'The cat is on the mat.', ru:'Кот на коврике.', words:['The','cat','is','on','the','mat']},
+    {en:'I like to play.', ru:'Я люблю играть.', words:['I','like','to','play']},
+    {en:'The sun is shining.', ru:'Солнце светит.', words:['The','sun','is','shining']},
+    {en:'She has a red ball.', ru:'У неё красный мяч.', words:['She','has','a','red','ball']},
+    {en:'We go to school.', ru:'Мы ходим в школу.', words:['We','go','to','school']},
+    {en:'The dog is big.', ru:'Собака большая.', words:['The','dog','is','big']},
+    {en:'I can see a bird.', ru:'Я вижу птицу.', words:['I','can','see','a','bird']},
+    {en:'They are happy.', ru:'Они счастливы.', words:['They','are','happy']}
+];
+
+const achievementsData = [
+    {id:'first_star', badge:'⭐', name:'Первая звезда', desc:'Заработай первую звезду', condition: () => score >= 1},
+    {id:'ten_stars', badge:'', name:'10 звёзд', desc:'Заработай 10 звёзд', condition: () => score >= 10},
+    {id:'fifty_stars', badge:'💫', name:'50 звёзд', desc:'Заработай 50 звёзд', condition: () => score >= 50},
+    {id:'hundred_stars', badge:'🏆', name:'100 звёзд', desc:'Заработай 100 звёзд', condition: () => score >= 100},
+    {id:'first_flower', badge:'🌸', name:'Первый цветок', desc:'Заработай первый цветок', condition: () => flowers >= 1},
+    {id:'ten_flowers', badge:'💐', name:'10 цветов', desc:'Заработай 10 цветов', condition: () => flowers >= 10},
+    {id:'fifty_flowers', badge:'🌺', name:'50 цветов', desc:'Заработай 50 цветов', condition: () => flowers >= 50},
+    {id:'level_2', badge:'🥈', name:'Уровень 2', desc:'Достигни 2 уровня', condition: () => level >= 2},
+    {id:'level_5', badge:'🥇', name:'Уровень 5', desc:'Достигни 5 уровня', condition: () => level >= 5},
+    {id:'level_10', badge:'👑', name:'Уровень 10', desc:'Достигни 10 уровня', condition: () => level >= 10},
+    {id:'quiz_master', badge:'🎯', name:'Мастер тестов', desc:'Правильно ответь на 10 вопросов', condition: () => quizCorrect >= 10},
+    {id:'game_winner', badge:'🎮', name:'Игрок', desc:'Выиграй 5 игр', condition: () => gamesWon >= 5}
+];
+
+// ==================== STATE ====================
+let score = 0;
+let flowers = 0;
+let level = 1;
+let quizCorrect = 0;
+let gamesWon = 0;
+let unlockedAchievements = new Set();
+let currentBlendIdx = 0;
+let currentBlendList = [];
+let currentSpellWord = null;
+let currentSpellLetters = [];
+let currentSpellInput = [];
+let currentSentence = null;
+let currentSentenceInput = [];
+
+// ==================== UTILS ====================
+function speak(text, rate = 0.85) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US';
+        u.rate = rate;
+        u.pitch = 1.15;
+        window.speechSynthesis.speak(u);
+    }
+}
+
+function addScore(val) {
+    score += val;
+    flowers += Math.ceil(val / 5);
+    level = Math.floor(score / 50) + 1;
+    updateStats();
+    checkAchievements();
+    if (val > 0) triggerConfetti();
+}
+
+function updateStats() {
+    document.getElementById('score').innerText = score;
+    document.getElementById('flowers').innerText = flowers;
+    document.getElementById('level').innerText = level;
+    const progress = (score % 50) * 2;
+    document.getElementById('progressFill').style.width = progress + '%';
+    document.getElementById('progressFill').innerText = progress + '%';
+}
+
+function checkAchievements() {
+    achievementsData.forEach(ach => {
+        if (!unlockedAchievements.has(ach.id) && ach.condition()) {
+            unlockedAchievements.add(ach.id);
+            showAchievement(ach);
+        }
+    });
+    renderAchievements();
+}
+
+function showAchievement(ach) {
+    const div = document.createElement('div');
+    div.style.cssText = 'position:fixed;top:20%;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ffa502,#ff6348);color:white;padding:30px;border-radius:20px;font-size:2rem;z-index:10000;box-shadow:0 10px 30px rgba(0,0,0,0.3);animation:pulse 1s;text-align:center;';
+    div.innerHTML = `<div style="font-size:4rem">${ach.badge}</div><div style="font-family:'Patrick Hand',cursive">${ach.name}</div>`;
+    document.body.appendChild(div);
+    setTimeout(() => div.remove(), 3000);
+}
+
+// ==================== NAVIGATION ====================
+document.querySelectorAll('.nav-btn[data-target]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.nav-btn[data-target]').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.target).classList.add('active');
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+});
+
+document.querySelectorAll('.subtab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        const parent = tab.closest('.card') || tab.closest('.section');
+        parent.querySelectorAll('.subtab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const targetId = tab.dataset.sub;
+        parent.querySelectorAll('.subcontent').forEach(c => c.classList.remove('active'));
+        const target = document.getElementById(targetId);
+        if (target) target.classList.add('active');
+    });
+});
+
+// ==================== MODULE 1: ALPHABET ====================
+function initPhonics() {
+    const grid = document.getElementById('alphaGrid');
+    alphabetData.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'alpha-card';
+        div.innerHTML = `
+            <div class="letter">${item.l}<small>${item.l.toLowerCase()}</small></div>
+            <div class="emoji">${item.e}</div>
+            <div class="word">${item.w}</div>
+            <div class="sound">[${item.s}]</div>
+        `;
+        div.onclick = () => {
+            speak(item.l);
+            setTimeout(() => speak(item.s), 500);
+            setTimeout(() => speak(item.w), 1000);
+        };
+        grid.appendChild(div);
+    });
+}
+
+// ==================== MODULE 2: CVC WORDS ====================
+function initCVC() {
+    const families = {a:'cvcAGrid', e:'cvcEGrid', i:'cvcIGrid', o:'cvcOGrid', u:'cvcUGrid'};
+    Object.entries(families).forEach(([key, gridId]) => {
+        const grid = document.getElementById(gridId);
+        cvcData[key].forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'word-card';
+            div.innerHTML = `<div class="emoji">${item.e}</div><div class="word">${item.w}</div><div class="trans">${item.ru}</div>`;
+            div.onclick = () => {
+                item.p.forEach((l, i) => setTimeout(() => speak(l), i * 400));
+                setTimeout(() => speak(item.w), item.p.length * 400 + 200);
+            };
+            grid.appendChild(div);
+        });
+    });
+    currentBlendList = [...cvcData.a, ...cvcData.e, ...cvcData.i, ...cvcData.o, ...cvcData.u];
+    loadBlend();
+}
+
+function loadBlend() {
+    const item = currentBlendList[currentBlendIdx];
+    const cont = document.getElementById('blendContainer');
+    cont.innerHTML = `
+        <div class="blend-emoji">${item.e}</div>
+        <div class="blend-letters">
+            ${item.p.map(l => `<button class="blend-btn" onclick="speak('${l}', 0.7)">${l}</button>`).join('')}
+            <button class="blend-btn whole" onclick="speak('${item.w}')">= ${item.w}</button>
+        </div>
+        <div style="font-family:'Patrick Hand',cursive; font-size:1.3rem; color:var(--text); margin-top:10px;">
+            "${item.ru}" — нажми на звуки по порядку!
+        </div>
+    `;
+}
+
+function nextBlend() {
+    currentBlendIdx = (currentBlendIdx + 1) % currentBlendList.length;
+    loadBlend();
+}
+
+function prevBlend() {
+    currentBlendIdx = (currentBlendIdx - 1 + currentBlendList.length) % currentBlendList.length;
+    loadBlend();
+}
+
+// ==================== MODULE 3: CVCe ====================
+function initCVCe() {
+    const families = {a:'cvceAGrid', i:'cvceIGrid', o:'cvceOGrid', u:'cvceUGrid'};
+    Object.entries(families).forEach(([key, gridId]) => {
+        const grid = document.getElementById(gridId);
+        cvceData[key].forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'word-card';
+            div.innerHTML = `<div class="emoji">${item.e}</div><div class="word">${item.w}</div><div class="trans">${item.ru}</div>`;
+            div.onclick = () => speak(item.w);
+            grid.appendChild(div);
+        });
+    });
+}
+
+// ==================== MODULE 4: DIGRAPHS ====================
+function initDigraphs() {
+    const map = {sh:'digShGrid', ch:'digChGrid', th:'digThGrid', ph:'digPhGrid', wh:'digWhGrid', ck:'digCkGrid'};
+    Object.entries(map).forEach(([key, gridId]) => {
+        const grid = document.getElementById(gridId);
+        digraphData[key].forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'word-card';
+            div.innerHTML = `<div class="emoji">${item.e}</div><div class="word">${item.w}</div><div class="trans">${item.ru}</div>`;
+            div.onclick = () => speak(item.w);
+            grid.appendChild(div);
+        });
+    });
+}
+
+// ==================== MODULE 5: BLENDS ====================
+function initBlends() {
+    const map = {l:'blLGrid', r:'blRGrid', s:'blSGrid'};
+    Object.entries(map).forEach(([key, gridId]) => {
+        const grid = document.getElementById(gridId);
+        blendsData[key].forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'word-card';
+            div.innerHTML = `<div class="emoji">${item.e}</div><div class="word">${item.w}</div><div class="trans">${item.ru}</div>`;
+            div.onclick = () => speak(item.w);
+            grid.appendChild(div);
+        });
+    });
+}
+
+// ==================== MODULE 6: VOWEL TEAMS ====================
+function initVowelTeams() {
+    const map = {ai:'vtAiGrid', ee:'vtEeGrid', oa:'vtOaGrid', oo:'vtOoGrid', ou:'vtOuGrid', oi:'vtOiGrid', ar:'vtArGrid', or:'vtOrGrid'};
+    Object.entries(map).forEach(([key, gridId]) => {
+        const grid = document.getElementById(gridId);
+        vowelTeamsData[key].forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'word-card';
+            div.innerHTML = `<div class="emoji">${item.e}</div><div class="word">${item.w}</div><div class="trans">${item.ru}</div>`;
+            div.onclick = () => speak(item.w);
+            grid.appendChild(div);
+        });
+    });
+}
+
+// ==================== MODULE 7: SIGHT WORDS ====================
+function initSight() {
+    for (let i = 1; i <= 4; i++) {
+        const grid = document.getElementById(`sw${i}Grid`);
+        sightWordsData[i].forEach(w => {
+            const div = document.createElement('div');
+            div.className = 'sight-card';
+            div.innerText = w;
+            div.onclick = () => speak(w);
+            grid.appendChild(div);
+        });
+    }
+}
+
+// ==================== MODULE 8: VOCABULARY ====================
+function initVocab() {
+    const map = {
+        animals:'vAnimals', food:'vFood', colors:'vColors', numbers:'vNumbers',
+        family:'vFamily', body:'vBody', emotions:'vEmotions', weather:'vWeather',
+        seasons:'vSeasons', clothes:'vClothes', school:'vSchool', home:'vHome'
+    };
+    Object.entries(map).forEach(([key, gridId]) => {
+        const grid = document.getElementById(gridId);
+        vocabData[key].forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'word-card';
+            div.innerHTML = `<div class="emoji">${item.e}</div><div class="word">${item.w}</div><div class="trans">${item.ru}</div>`;
+            div.onclick = () => speak(item.w);
+            grid.appendChild(div);
+        });
+    });
+}
+
+// ==================== MODULE 9: STORIES ====================
+function initStories() {
+    for (let i = 1; i <= 3; i++) {
+        const cont = document.getElementById(`story${i}Text`);
+        storiesData[i].forEach(item => {
+            if (item.en === '<br>') {
+                cont.innerHTML += '<br>';
+            } else if (item.en.match(/^[🌸🐱🌳]$/)) {
+                const span = document.createElement('span');
+                span.className = 'story-word';
+                span.innerHTML = item.en;
+                span.onclick = () => speak('love');
+                cont.appendChild(span);
+                cont.appendChild(document.createTextNode(' '));
+            } else {
+                const span = document.createElement('span');
+                span.className = 'story-word';
+                span.innerHTML = `${item.en} <span class="tooltip">${item.ru || '...'}</span>`;
+                span.onclick = () => speak(item.en.replace(/[.,!?]/g, ''));
+                cont.appendChild(span);
+                cont.appendChild(document.createTextNode(' '));
+            }
+        });
+    }
+}
+
+function speakStory(num) {
+    const text = storiesData[num].filter(x => x.en !== '<br>' && !x.en.match(/^[🌸🌳]$/)).map(x => x.en.replace(/[.,!?]/g, '')).join(' ');
+    speak(text, 0.75);
+}
+
+// ==================== MODULE 10: QUIZ ====================
+function initQuiz() {
+    loadPhonicsQuiz();
+    loadWordsQuiz();
+    loadListeningQuiz();
+}
+
+function loadPhonicsQuiz() {
+    const cont = document.getElementById('phonicsQuiz');
+    const letter = alphabetData[Math.floor(Math.random() * alphabetData.length)];
+    const options = [letter.s];
+    while (options.length < 4) {
+        const rnd = alphabetData[Math.floor(Math.random() * alphabetData.length)].s;
+        if (!options.includes(rnd)) options.push(rnd);
+    }
+    options.sort(() => Math.random() - 0.5);
+
+    cont.innerHTML = `
+        <div class="quiz-question">Какой звук у буквы "${letter.l}"?</div>
+        <div class="quiz-options">
+            ${options.map(opt => `<button class="quiz-option" onclick="checkPhonicsAnswer(this, '${opt}', '${letter.s}')">${opt}</button>`).join('')}
+        </div>
+    `;
+}
+
+function checkPhonicsAnswer(btn, selected, correct) {
+    if (selected === correct) {
+        btn.classList.add('correct');
+        speak('Correct!');
+        addScore(10);
+        quizCorrect++;
+        setTimeout(loadPhonicsQuiz, 1500);
+    } else {
+        btn.classList.add('wrong');
+        speak('Try again');
+        setTimeout(() => btn.classList.remove('wrong'), 500);
+    }
+}
+
+function loadWordsQuiz() {
+    const cont = document.getElementById('wordsQuiz');
+    const allWords = [...cvcData.a, ...vocabData.animals];
+    const word = allWords[Math.floor(Math.random() * allWords.length)];
+    const options = [word.ru];
+    while (options.length < 4) {
+        const rnd = allWords[Math.floor(Math.random() * allWords.length)].ru;
+        if (!options.includes(rnd)) options.push(rnd);
+    }
+    options.sort(() => Math.random() - 0.5);
+
+    cont.innerHTML = `
+        <div class="quiz-question">Что означает "${word.w}"?</div>
+        <div class="quiz-options">
+            ${options.map(opt => `<button class="quiz-option" onclick="checkWordsAnswer(this, '${opt}', '${word.ru}', '${word.w}')">${opt}</button>`).join('')}
+        </div>
+    `;
+}
+
+function checkWordsAnswer(btn, selected, correct, word) {
+    if (selected === correct) {
+        btn.classList.add('correct');
+        speak(word);
+        addScore(10);
+        quizCorrect++;
+        setTimeout(loadWordsQuiz, 1500);
+    } else {
+        btn.classList.add('wrong');
+        speak('Try again');
+        setTimeout(() => btn.classList.remove('wrong'), 500);
+    }
+}
+
+function loadListeningQuiz() {
+    const cont = document.getElementById('listeningQuiz');
+    const allWords = [...vocabData.food, ...vocabData.animals];
+    const word = allWords[Math.floor(Math.random() * allWords.length)];
+    const options = [word.w];
+    while (options.length < 4) {
+        const rnd = allWords[Math.floor(Math.random() * allWords.length)].w;
+        if (!options.includes(rnd)) options.push(rnd);
+    }
+    options.sort(() => Math.random() - 0.5);
+
+    cont.innerHTML = `
+        <div class="quiz-question"> Послушай и выбери правильное слово</div>
+        <button class="reset-btn" onclick="speak('${word.w}')" style="margin:20px 0">🔊 Прослушать</button>
+        <div class="quiz-options">
+            ${options.map(opt => `<button class="quiz-option" onclick="checkListeningAnswer(this, '${opt}', '${word.w}')">${opt}</button>`).join('')}
+        </div>
+    `;
+    setTimeout(() => speak(word.w), 500);
+}
+
+function checkListeningAnswer(btn, selected, correct) {
+    if (selected === correct) {
+        btn.classList.add('correct');
+        speak('Excellent!');
+        addScore(15);
+        quizCorrect++;
+        setTimeout(loadListeningQuiz, 1500);
+    } else {
+        btn.classList.add('wrong');
+        speak('Try again');
+        setTimeout(() => btn.classList.remove('wrong'), 500);
+    }
+}
+
+// ==================== MODULE 11: SENTENCE BUILDER ====================
+function loadSentence() {
+    currentSentenceInput = [];
+    currentSentence = sentencesData[Math.floor(Math.random() * sentencesData.length)];
+    document.getElementById('sentenceTarget').innerText = `Составь: "${currentSentence.ru}"`;
+    document.getElementById('sentenceZone').innerHTML = '';
+    
+    const words = currentSentence.words.slice().sort(() => Math.random() - 0.5);
+    const bank = document.getElementById('wordBank');
+    bank.innerHTML = '';
+    words.forEach((word, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'sentence-word';
+        btn.innerText = word;
+        btn.id = `sent-btn-${idx}`;
+        btn.onclick = () => handleSentenceClick(word, idx);
+        bank.appendChild(btn);
+    });
+}
+
+function handleSentenceClick(word, idx) {
+    currentSentenceInput.push({word, idx});
+    document.getElementById(`sent-btn-${idx}`).classList.add('used');
+    
+    const zone = document.getElementById('sentenceZone');
+    const span = document.createElement('span');
+    span.className = 'sentence-word';
+    span.innerText = word;
+    span.style.background = 'var(--green)';
+    zone.appendChild(span);
+}
+
+function checkSentence() {
+    const formed = currentSentenceInput.map(x => x.word).join(' ');
+    const correct = currentSentence.words.join(' ');
+    if (formed === correct) {
+        speak(currentSentence.en);
+        addScore(20);
+        setTimeout(loadSentence, 2000);
+    } else {
+        speak('Try again');
+        currentSentenceInput = [];
+        document.querySelectorAll('.sentence-word').forEach(b => {
+            if (!b.classList.contains('used')) b.remove();
+        });
+        document.querySelectorAll('#wordBank .sentence-word').forEach(b => b.classList.remove('used'));
+        document.getElementById('sentenceZone').innerHTML = '';
+    }
+}
+
+// ==================== MODULE 12: GAMES ====================
+function switchGame(type) {
+    document.getElementById('btnMatch').classList.toggle('active', type === 'match');
+    document.getElementById('btnSpell').classList.toggle('active', type === 'spell');
+    document.getElementById('btnMemory').classList.toggle('active', type === 'memory');
+    document.getElementById('btnSpeed').classList.toggle('active', type === 'speed');
+    document.getElementById('gameMatch').style.display = type === 'match' ? 'block' : 'none';
+    document.getElementById('gameSpell').style.display = type === 'spell' ? 'block' : 'none';
+    document.getElementById('gameMemory').style.display = type === 'memory' ? 'block' : 'none';
+    document.getElementById('gameSpeed').style.display = type === 'speed' ? 'block' : 'none';
+    if (type === 'match') loadMatchGame();
+    else if (type === 'spell') loadSpellGame();
+    else if (type === 'memory') loadMemoryGame();
+    else if (type === 'speed') loadSpeedGame();
+}
+
+function loadMatchGame() {
+    const allWords = [...cvcData.a, ...cvcData.e, ...cvcData.i, ...cvcData.o, ...cvcData.u,
+                      ...cvceData.a, ...cvceData.i, ...digraphData.sh, ...vocabData.animals, ...vocabData.food];
+    const correct = allWords[Math.floor(Math.random() * allWords.length)];
+    document.getElementById('matchEmoji').innerText = correct.e;
+    
+    let options = [correct.w];
+    while (options.length < 4) {
+        const rnd = allWords[Math.floor(Math.random() * allWords.length)].w;
+        if (!options.includes(rnd)) options.push(rnd);
+    }
+    options.sort(() => Math.random() - 0.5);
+
+    const cont = document.getElementById('matchOptions');
+    cont.innerHTML = '';
+    options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'game-btn';
+        btn.innerText = opt;
+        btn.onclick = () => {
+            if (opt === correct.w) {
+                btn.classList.add('correct');
+                speak(correct.w);
+                addScore(10);
+                gamesWon++;
+                setTimeout(loadMatchGame, 1500);
+            } else {
+                btn.classList.add('wrong');
+                setTimeout(() => btn.classList.remove('wrong'), 500);
+            }
+        };
+        cont.appendChild(btn);
+    });
+}
+
+function loadSpellGame() {
+    currentSpellInput = [];
+    const allWords = [...cvcData.a, ...cvcData.e, ...cvcData.i, ...cvcData.o, ...cvcData.u, ...cvceData.a, ...cvceData.i];
+    currentSpellWord = allWords[Math.floor(Math.random() * allWords.length)];
+    document.getElementById('spellEmoji').innerText = currentSpellWord.e;
+    currentSpellLetters = currentSpellWord.p.slice().sort(() => Math.random() - 0.5);
+    
+    const resText = document.getElementById('spellResultText');
+    resText.innerHTML = '<span style="color:#cbd5e1">_ </span>'.repeat(currentSpellWord.p.length);
+    
+    const cont = document.getElementById('spellLetters');
+    cont.innerHTML = '';
+    currentSpellLetters.forEach((l, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'spell-letter';
+        btn.innerText = l;
+        btn.id = `spell-btn-${idx}`;
+        btn.onclick = () => handleSpellClick(l, idx);
+        cont.appendChild(btn);
+    });
+}
+
+function handleSpellClick(letter, idx) {
+    currentSpellInput.push({letter, idx});
+    document.getElementById(`spell-btn-${idx}`).classList.add('used');
+    
+    const resText = document.getElementById('spellResultText');
+    let html = '';
+    for(let i=0; i<currentSpellWord.p.length; i++) {
+        if (i < currentSpellInput.length) {
+            html += `<span class="placed">${currentSpellInput[i].letter}</span> `;
+        } else {
+            html += `<span style="color:#cbd5e1">_ </span>`;
+        }
+    }
+    resText.innerHTML = html;
+
+    if (currentSpellInput.length === currentSpellWord.p.length) {
+        const formed = currentSpellInput.map(x => x.letter).join('');
+        if (formed === currentSpellWord.w) {
+            speak(currentSpellWord.w);
+            addScore(20);
+            gamesWon++;
+            setTimeout(loadSpellGame, 2000);
+        } else {
+            speak("Try again");
+            currentSpellInput = [];
+            document.querySelectorAll('.spell-letter').forEach(b => b.classList.remove('used'));
+            resText.innerHTML = '<span style="color:#cbd5e1">_ </span>'.repeat(currentSpellWord.p.length);
+        }
+    }
+}
+
+function loadMemoryGame() {
+    const grid = document.getElementById('memoryGrid');
+    grid.innerHTML = '';
+    const allWords = [...vocabData.animals, ...vocabData.food, ...vocabData.colors];
+    const selected = [];
+    const used = new Set();
+    while (selected.length < 6) {
+        const rnd = allWords[Math.floor(Math.random() * allWords.length)];
+        if (!used.has(rnd.w)) {
+            used.add(rnd.w);
+            selected.push(rnd);
+        }
+    }
+    
+    const cards = [];
+    selected.forEach(item => {
+        cards.push({type:'emoji', content:item.e, pair:item.w});
+        cards.push({type:'word', content:item.w, pair:item.e});
+    });
+    cards.sort(() => Math.random() - 0.5);
+
+    let flipped = [];
+    let matched = 0;
+
+    cards.forEach((card, idx) => {
+        const div = document.createElement('div');
+        div.className = 'memory-card';
+        div.innerHTML = `
+            <div class="front">🌸</div>
+            <div class="back">
+                <div class="m-emoji">${card.type === 'emoji' ? card.content : ''}</div>
+                <div class="m-word">${card.type === 'word' ? card.content : ''}</div>
+            </div>
+        `;
+        div.dataset.idx = idx;
+        div.dataset.pair = card.pair;
+        div.onclick = () => {
+            if (div.classList.contains('flipped') || div.classList.contains('matched') || flipped.length >= 2) return;
+            div.classList.add('flipped');
+            if (card.type === 'word') speak(card.content);
+            flipped.push(div);
+            
+            if (flipped.length === 2) {
+                const [a, b] = flipped;
+                const cardA = cards[a.dataset.idx];
+                const cardB = cards[b.dataset.idx];
+                if (cardA.pair === cardB.content || cardB.pair === cardA.content) {
+                    setTimeout(() => {
+                        a.classList.add('matched');
+                        b.classList.add('matched');
+                        matched++;
+                        addScore(15);
+                        gamesWon++;
+                        flipped = [];
+                        if (matched === 6) {
+                            setTimeout(() => { speak('Congratulations!'); addScore(50); }, 500);
+                        }
+                    }, 500);
+                } else {
+                    setTimeout(() => {
+                        a.classList.remove('flipped');
+                        b.classList.remove('flipped');
+                        flipped = [];
+                    }, 1000);
+                }
+            }
+        };
+        grid.appendChild(div);
+    });
+}
+
+function loadSpeedGame() {
+    const allWords = [...vocabData.animals, ...vocabData.food];
+    const correct = allWords[Math.floor(Math.random() * allWords.length)];
+    document.getElementById('speedEmoji').innerText = correct.e;
+    document.getElementById('speedWord').innerText = `Найди: "${correct.ru}"`;
+    
+    let options = [correct.w];
+    while (options.length < 4) {
+        const rnd = allWords[Math.floor(Math.random() * allWords.length)].w;
+        if (!options.includes(rnd)) options.push(rnd);
+    }
+    options.sort(() => Math.random() - 0.5);
+
+    const cont = document.getElementById('speedOptions');
+    cont.innerHTML = '';
+    options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'game-btn';
+        btn.innerText = opt;
+        btn.onclick = () => {
+            if (opt === correct.w) {
+                btn.classList.add('correct');
+                speak(correct.w);
+                addScore(15);
+                gamesWon++;
+                clearInterval(timer);
+                setTimeout(loadSpeedGame, 1500);
+            } else {
+                btn.classList.add('wrong');
+                setTimeout(() => btn.classList.remove('wrong'), 500);
+            }
+        };
+        cont.appendChild(btn);
+    });
+
+    let timeLeft = 10;
+    document.getElementById('speedTimer').innerText = `Время: ${timeLeft}`;
+    const timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById('speedTimer').innerText = `Время: ${timeLeft}`;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            speak('Time is up!');
+            setTimeout(loadSpeedGame, 1500);
+        }
+    }, 1000);
+}
+
+// ==================== MODULE 13: ACHIEVEMENTS ====================
+function renderAchievements() {
+    const grid = document.getElementById('achievementsGrid');
+    grid.innerHTML = '';
+    achievementsData.forEach(ach => {
+        const div = document.createElement('div');
+        div.className = 'achievement' + (unlockedAchievements.has(ach.id) ? ' unlocked' : '');
+        div.innerHTML = `<div class="badge">${ach.badge}</div><div>${ach.name}</div><div style="font-size:0.9rem">${ach.desc}</div>`;
+        grid.appendChild(div);
+    });
+}
+
+// ==================== CONFETTI ====================
+function triggerConfetti() {
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.display = 'block';
+    
+    const particles = [];
+    const colors = ['#7bed9f', '#2ed573', '#ffa502', '#ff6348', '#ff4757', '#ff6b81', '#5352ed', '#70a1ff'];
+    
+    for (let i = 0; i < 100; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height - canvas.height,
+            w: Math.random() * 10 + 5,
+            h: Math.random() * 10 + 5,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            speed: Math.random() * 3 + 2,
+            angle: Math.random() * Math.PI * 2
+        });
+    }
+
+    let frames = 0;
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            ctx.fillStyle = p.color;
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.angle);
+            ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+            ctx.restore();
+            p.y += p.speed;
+            p.angle += 0.1;
+        });
+        frames++;
+        if (frames < 100) requestAnimationFrame(animate);
+        else { canvas.style.display = 'none'; ctx.clearRect(0, 0, canvas.width, canvas.height); }
+    }
+    animate();
+}
+
+// ==================== INIT ====================
+initPhonics();
+initCVC();
+initCVCe();
+initDigraphs();
+initBlends();
+initVowelTeams();
+initSight();
+initVocab();
+initStories();
+initQuiz();
+loadSentence();
+renderAchievements();
+updateStats();
+</script>
+</body>
+</html>
