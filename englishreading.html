@@ -7,19 +7,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
     :root {
-        /* Палитра "Чистое чтение": бумага, чернила, спокойные акценты */
-        --bg-paper: #fdfbf7;       /* Кремовый фон страницы */
-        --card-white: #ffffff;     /* Чистый белый для карточек */
-        --ink-dark: #2c3e50;       /* Темно-серый текст (не черный) */
-        --accent-blue: #5b9bd5;    /* Спокойный синий (навигация) */
-        --accent-green: #6ab04c;   /* Природный зеленый (успех) */
-        --accent-coral: #ff7f50;   /* Мягкий коралл (внимание/действие) */
-        --accent-purple: #9b59b6;  /* Фиолетовый (сложное) */
-        
+        --bg-paper: #fdfbf7;
+        --card-white: #ffffff;
+        --ink-dark: #2c3e50;
+        --accent-blue: #5b9bd5;
+        --accent-green: #6ab04c;
+        --accent-coral: #ff7f50;
+        --accent-purple: #9b59b6;
         --border-color: #eaeaea;
         --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.05);
-        --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.08);
-        
         --font-main: 'Lexend', sans-serif;
         --font-display: 'Fredoka One', cursive;
     }
@@ -37,7 +33,6 @@
         overflow-x: hidden;
     }
 
-    /* Тонкая текстура бумаги через CSS паттерн */
     body::before {
         content: "";
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -122,7 +117,7 @@
         background: var(--card-white);
         box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         position: sticky;
-        top: 140px; /* Под шапку */
+        top: 140px;
         z-index: 99;
         border-bottom: 1px solid var(--border-color);
     }
@@ -138,6 +133,7 @@
         font-weight: 600;
         cursor: pointer;
         transition: all 0.2s;
+        box-shadow: 0 4px 0 #e0e0e0;
     }
 
     .nav-btn:hover {
@@ -145,10 +141,15 @@
         transform: translateY(-2px);
     }
 
+    .nav-btn:active {
+        transform: translateY(2px);
+        box-shadow: 0 1px 0 #e0e0e0;
+    }
+
     .nav-btn.active {
         background: var(--accent-blue);
         color: white;
-        box-shadow: 0 4px 10px rgba(91, 155, 213, 0.3);
+        box-shadow: 0 4px 0 #3a7bb8, 0 6px 10px rgba(91, 155, 213, 0.3);
     }
 
     main {
@@ -230,19 +231,20 @@
         cursor: pointer;
         transition: all 0.2s;
         font-weight: 600;
+        box-shadow: 0 3px 0 #e0e0e0;
     }
 
-    .subtab:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+    .subtab:hover { border-color: var(--accent-blue); color: var(--accent-blue); transform: translateY(-1px); }
     .subtab.active { 
         background: var(--accent-blue); 
         color: white; 
         border-color: var(--accent-blue);
+        box-shadow: 0 3px 0 #3a7bb8;
     }
 
     .subcontent { display: none; }
     .subcontent.active { display: block; animation: fadeIn 0.3s; }
 
-    /* === GRID SYSTEMS === */
     .alpha-grid, .word-grid, .sight-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -251,28 +253,36 @@
 
     .alpha-card, .word-card {
         background: var(--card-white);
-        border: 1px solid var(--border-color);
-        border-radius: 16px;
+        border: 3px solid var(--border-color);
+        border-radius: 20px;
         padding: 20px 10px;
         text-align: center;
         cursor: pointer;
-        transition: all 0.2s;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        transition: all 0.15s;
+        box-shadow: 0 8px 0 #e0e0e0, 0 10px 15px rgba(0,0,0,0.05);
         position: relative;
     }
 
+    .alpha-card { border-color: var(--accent-blue); }
+
     .alpha-card:hover, .word-card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-4px);
         border-color: var(--accent-blue);
-        box-shadow: var(--shadow-hover);
+        box-shadow: 0 12px 0 #d0e8f2, 0 15px 20px rgba(91, 155, 213, 0.15);
+    }
+
+    .alpha-card:active, .word-card:active {
+        transform: translateY(4px);
+        box-shadow: 0 4px 0 #e0e0e0, 0 5px 8px rgba(0,0,0,0.05);
     }
 
     .alpha-card .letter {
         font-family: var(--font-display);
-        font-size: 3rem;
+        font-size: 3.5rem;
         color: var(--accent-blue);
         line-height: 1;
         margin-bottom: 5px;
+        text-shadow: 2px 2px 0 #d0e8f2;
     }
 
     .alpha-card .letter small {
@@ -319,8 +329,8 @@
 
     .sight-card {
         background: var(--bg-paper);
-        border: 2px dashed var(--accent-purple);
-        border-radius: 12px;
+        border: 3px dashed var(--accent-purple);
+        border-radius: 16px;
         padding: 20px 10px;
         text-align: center;
         font-family: var(--font-display);
@@ -328,16 +338,17 @@
         color: var(--accent-purple);
         cursor: pointer;
         transition: all 0.2s;
+        box-shadow: 0 6px 0 #e8d8f0;
     }
 
     .sight-card:hover {
         background: var(--accent-purple);
         color: white;
         border-style: solid;
-        transform: scale(1.05);
+        transform: translateY(-4px);
+        box-shadow: 0 10px 0 #d0b8e0;
     }
 
-    /* === BLENDING SECTION === */
     .blend-container { text-align: center; }
     .blend-emoji { font-size: 6rem; margin: 20px 0; }
     .blend-letters {
@@ -354,18 +365,18 @@
         height: 80px;
         font-family: var(--font-display);
         font-size: 2.5rem;
-        border: 2px solid var(--border-color);
+        border: 3px solid var(--border-color);
         border-radius: 16px;
         background: var(--card-white);
         color: var(--ink-dark);
         cursor: pointer;
-        transition: all 0.2s;
-        box-shadow: 0 4px 0 #eee;
+        transition: all 0.15s;
+        box-shadow: 0 8px 0 #e0e0e0, 0 10px 15px rgba(0,0,0,0.05);
     }
 
     .blend-btn:active {
         transform: translateY(4px);
-        box-shadow: none;
+        box-shadow: 0 4px 0 #e0e0e0;
     }
 
     .blend-btn:hover {
@@ -380,7 +391,7 @@
         width: auto;
         padding: 0 30px;
         font-size: 2rem;
-        box-shadow: 0 4px 0 #4a8a32;
+        box-shadow: 0 8px 0 #4a8a32, 0 10px 15px rgba(106, 176, 76, 0.2);
     }
     
     .blend-btn.whole:hover {
@@ -388,7 +399,6 @@
         color: white;
     }
 
-    /* === STORY READER === */
     .story-text {
         font-size: 1.6rem;
         line-height: 2.4;
@@ -397,10 +407,10 @@
         color: var(--ink-dark);
         max-width: 800px;
         margin: 0 auto;
-        background: #fffdf5; /* Оттенок старой книги */
+        background: #fffdf5;
         padding: 30px;
         border-radius: 15px;
-        border: 1px solid #f0e6d2;
+        border: 2px solid #f0e6d2;
     }
 
     .story-word {
@@ -439,7 +449,6 @@
 
     .story-word:hover .tooltip { visibility: visible; opacity: 1; }
 
-    /* === GAMES UI === */
     .game-area { text-align: center; }
     .game-emoji { font-size: 8rem; margin: 20px 0; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1)); }
     .game-options {
@@ -460,22 +469,27 @@
         background: var(--card-white);
         color: var(--ink-dark);
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.15s;
         min-width: 140px;
-        box-shadow: 0 4px 0 #eee;
+        box-shadow: 0 6px 0 #e0e0e0, 0 8px 10px rgba(0,0,0,0.05);
     }
 
     .game-btn:hover {
         border-color: var(--accent-blue);
         transform: translateY(-2px);
-        box-shadow: 0 6px 0 #eee;
+        box-shadow: 0 8px 0 #e0e0e0, 0 10px 15px rgba(0,0,0,0.05);
+    }
+
+    .game-btn:active {
+        transform: translateY(4px);
+        box-shadow: 0 2px 0 #e0e0e0;
     }
 
     .game-btn.correct {
         background: var(--accent-green);
         color: white;
         border-color: var(--accent-green);
-        box-shadow: 0 4px 0 #4a8a32;
+        box-shadow: 0 6px 0 #4a8a32;
         animation: pulse 0.4s;
     }
 
@@ -483,7 +497,7 @@
         background: #e74c3c;
         color: white;
         border-color: #c0392b;
-        box-shadow: 0 4px 0 #962d22;
+        box-shadow: 0 6px 0 #962d22;
         animation: shake 0.4s;
     }
 
@@ -512,12 +526,13 @@
         border: 2px solid var(--border-color);
         border-radius: 12px;
         cursor: pointer;
-        transition: all 0.2s;
-        box-shadow: 0 4px 0 #ddd;
+        transition: all 0.15s;
+        box-shadow: 0 6px 0 #e0e0e0, 0 8px 10px rgba(0,0,0,0.05);
     }
 
     .spell-letter:hover { transform: translateY(-3px); border-color: var(--accent-blue); }
-    .spell-letter.used { opacity: 0.3; pointer-events: none; transform: scale(0.9); }
+    .spell-letter:active { transform: translateY(2px); box-shadow: 0 2px 0 #e0e0e0; }
+    .spell-letter.used { opacity: 0.3; pointer-events: none; transform: scale(0.9); box-shadow: none; }
 
     .spell-result {
         font-family: var(--font-display);
@@ -525,8 +540,6 @@
         color: var(--ink-dark);
         letter-spacing: 5px;
     }
-
-    .spell-result .placed { color: var(--accent-green); }
 
     .reset-btn {
         margin-top: 20px;
@@ -539,12 +552,18 @@
         border-radius: 10px;
         cursor: pointer;
         font-weight: 700;
-        transition: all 0.2s;
+        transition: all 0.15s;
+        box-shadow: 0 4px 0 #d0e8f2;
     }
 
     .reset-btn:hover {
         background: var(--accent-blue);
         color: white;
+    }
+
+    .reset-btn:active {
+        transform: translateY(2px);
+        box-shadow: 0 2px 0 #d0e8f2;
     }
 
     .game-switcher {
@@ -575,7 +594,7 @@
         transition: all 0.4s;
         position: relative;
         transform-style: preserve-3d;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        box-shadow: 0 6px 0 #3a7bb8, 0 8px 10px rgba(0,0,0,0.1);
     }
 
     .memory-card .front, .memory-card .back {
@@ -594,6 +613,7 @@
         background: var(--accent-blue);
         color: white;
         font-size: 1.5rem;
+        font-family: var(--font-display);
     }
 
     .memory-card .back {
@@ -618,6 +638,7 @@
         border-color: var(--accent-green);
         opacity: 0.8;
         pointer-events: none;
+        box-shadow: 0 6px 0 #4a8a32;
     }
 
     .quiz-container {
@@ -654,25 +675,34 @@
         border-radius: 12px;
         background: var(--card-white);
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.15s;
         color: var(--ink-dark);
+        box-shadow: 0 4px 0 #e0e0e0;
     }
 
     .quiz-option:hover {
         border-color: var(--accent-blue);
         background: #f4f9ff;
+        transform: translateY(-2px);
+    }
+
+    .quiz-option:active {
+        transform: translateY(2px);
+        box-shadow: 0 1px 0 #e0e0e0;
     }
 
     .quiz-option.correct {
         background: var(--accent-green);
         color: white;
         border-color: var(--accent-green);
+        box-shadow: 0 4px 0 #4a8a32;
     }
 
     .quiz-option.wrong {
         background: #e74c3c;
         color: white;
         border-color: #c0392b;
+        box-shadow: 0 4px 0 #962d22;
     }
 
     .sentence-zone {
@@ -699,18 +729,27 @@
         border: 2px solid var(--accent-purple);
         border-radius: 8px;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.15s;
+        box-shadow: 0 4px 0 #e8d8f0;
     }
 
     .sentence-word:hover {
         background: var(--accent-purple);
         color: white;
+        transform: translateY(-2px);
+    }
+
+    .sentence-word:active {
+        transform: translateY(2px);
+        box-shadow: 0 1px 0 #e8d8f0;
     }
 
     .sentence-word.used {
         opacity: 0.3;
         pointer-events: none;
         border-style: dashed;
+        box-shadow: none;
+        transform: none;
     }
 
     .word-bank {
@@ -730,7 +769,7 @@
 
     .achievement {
         background: var(--card-white);
-        border: 1px solid var(--border-color);
+        border: 2px solid var(--border-color);
         border-radius: 12px;
         padding: 20px;
         text-align: center;
@@ -739,13 +778,14 @@
         transition: all 0.3s;
         opacity: 0.5;
         filter: grayscale(1);
+        box-shadow: 0 4px 0 #e0e0e0;
     }
 
     .achievement.unlocked {
         opacity: 1;
         filter: grayscale(0);
         border-color: var(--accent-coral);
-        box-shadow: 0 4px 15px rgba(255, 127, 80, 0.2);
+        box-shadow: 0 6px 0 #e8c8b8, 0 8px 15px rgba(255, 127, 80, 0.2);
     }
 
     .achievement .badge {
@@ -794,7 +834,7 @@
     }
     .nonsense-card {
         background: var(--card-white);
-        border: 2px dashed #95a5a6;
+        border: 3px dashed #95a5a6;
         border-radius: 12px;
         padding: 15px 8px;
         text-align: center;
@@ -803,11 +843,13 @@
         color: #7f8c8d;
         cursor: pointer;
         transition: all 0.2s;
+        box-shadow: 0 4px 0 #e0e0e0;
     }
     .nonsense-card:hover {
         border-color: var(--accent-purple);
         color: var(--accent-purple);
-        transform: scale(1.05);
+        transform: translateY(-3px);
+        box-shadow: 0 7px 0 #e8d8f0;
     }
 
     .family-row {
@@ -832,31 +874,35 @@
     .family-row .fam-word {
         padding: 8px 16px;
         background: var(--bg-paper);
-        border: 1px solid var(--border-color);
+        border: 2px solid var(--border-color);
         border-radius: 8px;
         font-family: var(--font-main);
         font-size: 1.2rem;
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.15s;
         color: var(--ink-dark);
+        box-shadow: 0 3px 0 #e0e0e0;
     }
     .family-row .fam-word:hover {
         background: var(--accent-blue);
         color: white;
         border-color: var(--accent-blue);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 0 #d0e8f2;
     }
 
     .syllable-card {
         background: var(--card-white);
-        border: 1px solid var(--border-color);
+        border: 2px solid var(--border-color);
         border-radius: 12px;
         padding: 15px;
         text-align: center;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.15s;
+        box-shadow: 0 4px 0 #e0e0e0;
     }
-    .syllable-card:hover { transform: translateY(-3px); border-color: var(--accent-purple); }
+    .syllable-card:hover { transform: translateY(-3px); border-color: var(--accent-purple); box-shadow: 0 7px 0 #e8d8f0; }
     .syllable-card .syl-word { font-family: var(--font-display); font-size: 1.6rem; color: var(--accent-purple); display: block;}
     .syllable-card .syl-dots { font-size: 1.1rem; color: var(--ink-dark); letter-spacing: 2px; margin-top: 5px; font-weight: 700;}
     .syllable-card .trans { font-size: 0.9rem; color: #95a5a6; margin-top: 5px; }
@@ -906,7 +952,6 @@
 
 <main>
 
-    <!-- 1. ALPHABET -->
     <section id="phonics" class="section active">
         <div class="card">
             <h2>The Alphabet Sounds</h2>
@@ -918,7 +963,6 @@
         </div>
     </section>
 
-    <!-- 2. CVC WORDS -->
     <section id="cvc" class="section">
         <div class="card">
             <h2>CVC Short Vowels</h2>
@@ -989,7 +1033,6 @@
         </div>
     </section>
 
-    <!-- 3. CVCe (Magic E) -->
     <section id="cvce" class="section">
         <div class="card">
             <h2>Magic 'e'</h2>
@@ -1024,7 +1067,6 @@
         </div>
     </section>
 
-    <!-- 4. DIGRAPHS -->
     <section id="digraphs" class="section">
         <div class="card">
             <h2>Digraphs</h2>
@@ -1066,7 +1108,6 @@
         </div>
     </section>
 
-    <!-- 5. BLENDS -->
     <section id="blends" class="section">
         <div class="card">
             <h2>Consonant Blends</h2>
@@ -1093,7 +1134,6 @@
         </div>
     </section>
 
-    <!-- 6. VOWEL TEAMS -->
     <section id="vowels" class="section">
         <div class="card">
             <h2>Vowel Teams</h2>
@@ -1145,7 +1185,6 @@
         </div>
     </section>
 
-    <!-- 7. SYLLABLES -->
     <section id="syllables" class="section">
         <div class="card">
             <h2>Syllables</h2>
@@ -1163,7 +1202,6 @@
         </div>
     </section>
 
-    <!-- 8. SIGHT WORDS -->
     <section id="sight" class="section">
         <div class="card">
             <h2>Sight Words</h2>
@@ -1183,7 +1221,6 @@
         </div>
     </section>
 
-    <!-- 9. VOCABULARY -->
     <section id="vocab" class="section">
         <div class="card">
             <h2>Picture Dictionary</h2>
@@ -1219,7 +1256,6 @@
         </div>
     </section>
 
-    <!-- 10. STORIES -->
     <section id="story" class="section">
         <div class="card">
             <h2>Read Along</h2>
@@ -1255,7 +1291,6 @@
         </div>
     </section>
 
-    <!-- 11. QUIZ -->
     <section id="quiz" class="section">
         <div class="card">
             <h2>Knowledge Check</h2>
@@ -1286,7 +1321,6 @@
         </div>
     </section>
 
-    <!-- 12. SENTENCE BUILDER -->
     <section id="builder" class="section">
         <div class="card">
             <h2>Sentence Builder</h2>
@@ -1302,7 +1336,6 @@
         </div>
     </section>
 
-    <!-- 13. GAMES -->
     <section id="games" class="section">
         <div class="card">
             <h2>Practice Games</h2>
@@ -1344,7 +1377,6 @@
         </div>
     </section>
 
-    <!-- 14. ACHIEVEMENTS -->
     <section id="achievements" class="section">
         <div class="card">
             <h2>Your Awards</h2>
@@ -1453,7 +1485,6 @@ const nonsenseWords = [
     {w:'bup', p:['b','u','p']}, {w:'hib', p:['h','i','b']}, {w:'gav', p:['g','a','v']}
 ];
 
-// ИСПРАВЛЕНИЕ ОШИБКИ ЗДЕСЬ: Была сломана структура объекта
 const doubleConsonantData = [
     {w:'stop → stopped', e:'🛑', ru:'остановился'}, 
     {w:'drip → dripping', e:'💧', ru:'капает'}, 
@@ -1709,7 +1740,8 @@ const vocabData = {
     body: [
         {w:'head', e:'🧠', ru:'голова'}, {w:'hair', e:'💇', ru:'волосы'}, {w:'eye', e:'👁️', ru:'глаз'},
         {w:'ear', e:'👂', ru:'ухо'}, {w:'nose', e:'👃', ru:'нос'}, {w:'mouth', e:'👄', ru:'рот'},
-        {w:'tooth', e:'🦷', ru:'зуб'}, {w:'tongue', e:'👅', ru:'язык'},         {w:'face', e:'😊', ru:'лицо'}, {w:'neck', e:'🦒', ru:'шея'}, {w:'shoulder', e:'🤷', ru:'плечо'},
+        {w:'tooth', e:'🦷', ru:'зуб'}, {w:'tongue', e:'👅', ru:'язык'}, {w:'face', e:'😊', ru:'лицо'},
+        {w:'neck', e:'🦒', ru:'шея'}, {w:'shoulder', e:'🤷', ru:'плечо'},
         {w:'arm', e:'💪', ru:'рука'}, {w:'hand', e:'✋', ru:'кисть'}, {w:'finger', e:'👆', ru:'палец'},
         {w:'leg', e:'🦵', ru:'нога'}, {w:'foot', e:'🦶', ru:'ступня'}, {w:'toe', e:'👣', ru:'палец ноги'},
         {w:'back', e:'🔙', ru:'спина'}, {w:'heart', e:'❤️', ru:'сердце'}, {w:'stomach', e:'🫃', ru:'живот'}
@@ -2279,7 +2311,6 @@ let progressCheckCorrect = 0;
 
 function loadProgressQuiz() {
     const cont = document.getElementById('progressQuiz');
-    // 10 слов: 6 по правилам + 4 sight words
     const ruleWords = [];
     const pool = [...cvcData.a, ...cvcData.e, ...cvcData.i, ...cvcData.o, ...cvcData.u];
     while (ruleWords.length < 6) {
@@ -2409,3 +2440,315 @@ function loadMatchGame() {
     let options = [correct.w];
     while (options.length < 4) {
         const rnd = allWords[Math.floor(Math.random() * allWords.length)].w;
+        if (!options.includes(rnd)) options.push(rnd);
+    }
+    options.sort(() => Math.random() - 0.5);
+
+    
+    const cont = document.getElementById('matchOptions');
+    cont.innerHTML = options.map(opt => 
+        `<button class="game-btn" onclick="checkMatchAnswer(this, '${opt}', '${correct.w}')">${opt}</button>`
+    ).join('');
+}
+
+function checkMatchAnswer(btn, selected, correct) {
+    if (selected === correct) {
+        btn.classList.add('correct');
+        speak('Perfect!');
+        addScore(10);
+        gamesWon++;
+        setTimeout(loadMatchGame, 1500);
+    } else {
+        btn.classList.add('wrong');
+        speak('Try again');
+        setTimeout(() => btn.classList.remove('wrong'), 500);
+    }
+}
+
+function loadSpellGame() {
+    const allWords = [...cvcData.a, ...cvcData.e, ...cvcData.i, ...cvcData.o, ...cvcData.u];
+    currentSpellWord = allWords[Math.floor(Math.random() * allWords.length)];
+    currentSpellLetters = currentSpellWord.w.split('');
+    currentSpellInput = [];
+    
+    document.getElementById('spellEmoji').innerText = currentSpellWord.e;
+    document.getElementById('spellResultText').innerHTML = '_'.repeat(currentSpellWord.w.length);
+    
+    const extraLetters = 'abcdefghijklmnopqrstuvwxyz'.split('').filter(l => !currentSpellLetters.includes(l));
+    const letters = [...currentSpellLetters];
+    while (letters.length < Math.max(8, currentSpellLetters.length + 3)) {
+        const rnd = extraLetters[Math.floor(Math.random() * extraLetters.length)];
+        if (!letters.includes(rnd)) letters.push(rnd);
+    }
+    letters.sort(() => Math.random() - 0.5);
+    
+    const cont = document.getElementById('spellLetters');
+    cont.innerHTML = letters.map((l, i) => 
+        `<button class="spell-letter" id="spell-letter-${i}" onclick="handleSpellClick('${l}', ${i})">${l}</button>`
+    ).join('');
+    
+    speak(currentSpellWord.w);
+}
+
+function handleSpellClick(letter, idx) {
+    const btn = document.getElementById(`spell-letter-${idx}`);
+    if (btn.classList.contains('used')) return;
+    
+    btn.classList.add('used');
+    currentSpellInput.push(letter);
+    
+    const resultEl = document.getElementById('spellResultText');
+    let display = '';
+    for (let i = 0; i < currentSpellWord.w.length; i++) {
+        if (i < currentSpellInput.length) {
+            display += `<span class="placed">${currentSpellInput[i]}</span>`;
+        } else {
+            display += '_';
+        }
+    }
+    resultEl.innerHTML = display;
+    
+    if (currentSpellInput.length === currentSpellWord.w.length) {
+        const spelled = currentSpellInput.join('');
+        if (spelled === currentSpellWord.w) {
+            speak('Excellent! ' + currentSpellWord.w);
+            addScore(15);
+            gamesWon++;
+            setTimeout(loadSpellGame, 1500);
+        } else {
+            speak('Try again');
+            setTimeout(() => {
+                currentSpellInput = [];
+                resultEl.innerHTML = '_'.repeat(currentSpellWord.w.length);
+                document.querySelectorAll('.spell-letter').forEach(b => b.classList.remove('used'));
+            }, 800);
+        }
+    }
+}
+
+let flippedCards = [];
+let matchedPairs = 0;
+let memoryLocked = false;
+
+function loadMemoryGame() {
+    flippedCards = [];
+    matchedPairs = 0;
+    memoryLocked = false;
+    
+    const allWords = [...cvcData.a, ...cvcData.e, ...cvcData.i, ...cvcData.o, ...cvcData.u];
+    const selected = [];
+    while (selected.length < 6) {
+        const rnd = allWords[Math.floor(Math.random() * allWords.length)];
+        if (!selected.find(x => x.w === rnd.w)) selected.push(rnd);
+    }
+    
+    const cards = [];
+    selected.forEach((word, idx) => {
+        cards.push({type: 'word', text: word.w, id: idx});
+        cards.push({type: 'emoji', text: word.e, id: idx});
+    });
+    cards.sort(() => Math.random() - 0.5);
+    
+    const cont = document.getElementById('memoryGrid');
+    cont.innerHTML = '';
+    cards.forEach((card, idx) => {
+        const div = document.createElement('div');
+        div.className = 'memory-card';
+        div.dataset.id = card.id;
+        div.dataset.type = card.type;
+        div.dataset.idx = idx;
+        div.innerHTML = `
+            <div class="front">?</div>
+            <div class="back">
+                ${card.type === 'emoji' ? `<div class="m-emoji">${card.text}</div>` : `<div class="m-word">${card.text}</div>`}
+            </div>
+        `;
+        div.onclick = () => flipCard(div);
+        cont.appendChild(div);
+    });
+}
+
+function flipCard(card) {
+    if (memoryLocked) return;
+    if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+    if (flippedCards.length >= 2) return;
+    
+    card.classList.add('flipped');
+    flippedCards.push(card);
+    
+    if (flippedCards.length === 2) {
+        memoryLocked = true;
+        const [card1, card2] = flippedCards;
+        
+        if (card1.dataset.id === card2.dataset.id && card1.dataset.type !== card2.dataset.type) {
+            setTimeout(() => {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                flippedCards = [];
+                matchedPairs++;
+                memoryLocked = false;
+                speak('Match!');
+                if (matchedPairs === 6) {
+                    speak('You won! Great job!');
+                    addScore(20);
+                    gamesWon++;
+                    setTimeout(loadMemoryGame, 2000);
+                }
+            }, 500);
+        } else {
+            setTimeout(() => {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+                flippedCards = [];
+                memoryLocked = false;
+            }, 1000);
+        }
+    }
+}
+
+let speedTimerInterval = null;
+
+function loadSpeedGame() {
+    if (speedTimerInterval) clearInterval(speedTimerInterval);
+    
+    const allWords = [...vocabData.animals, ...vocabData.food, ...vocabData.colors];
+    const word = allWords[Math.floor(Math.random() * allWords.length)];
+    document.getElementById('speedEmoji').innerText = word.e;
+    document.getElementById('speedWord').innerText = word.ru;
+    
+    let options = [word.w];
+    while (options.length < 4) {
+        const rnd = allWords[Math.floor(Math.random() * allWords.length)].w;
+        if (!options.includes(rnd)) options.push(rnd);
+    }
+    options.sort(() => Math.random() - 0.5);
+    
+    const cont = document.getElementById('speedOptions');
+    cont.innerHTML = options.map(opt => 
+        `<button class="game-btn" onclick="checkSpeedAnswer(this, '${opt}', '${word.w}')">${opt}</button>`
+    ).join('');
+    
+    let timeLeft = 10;
+    const timerEl = document.getElementById('speedTimer');
+    timerEl.innerText = `Time: ${timeLeft}`;
+    
+    speedTimerInterval = setInterval(() => {
+        timeLeft--;
+        timerEl.innerText = `Time: ${timeLeft}`;
+        if (timeLeft <= 0) {
+            clearInterval(speedTimerInterval);
+            speak('Time is up!');
+            setTimeout(loadSpeedGame, 1500);
+        }
+    }, 1000);
+}
+
+function checkSpeedAnswer(btn, selected, correct) {
+    if (speedTimerInterval) clearInterval(speedTimerInterval);
+    
+    if (selected === correct) {
+        btn.classList.add('correct');
+        speak('Fast! Correct!');
+        addScore(10);
+        gamesWon++;
+        setTimeout(loadSpeedGame, 1500);
+    } else {
+        btn.classList.add('wrong');
+        speak('Oops! Try again');
+        setTimeout(loadSpeedGame, 1500);
+    }
+}
+
+// ==================== MODULE 14: ACHIEVEMENTS ====================
+function renderAchievements() {
+    const cont = document.getElementById('achievementsGrid');
+    cont.innerHTML = achievementsData.map(ach => {
+        const unlocked = unlockedAchievements.has(ach.id);
+        return `
+            <div class="achievement ${unlocked ? 'unlocked' : ''}">
+                <span class="badge">${ach.badge}</span>
+                <div style="font-weight:700">${ach.name}</div>
+                <div style="font-size:0.85rem; color:#7f8c8d; margin-top:5px;">${ach.desc}</div>
+            </div>
+        `;
+    }).join('');
+}
+
+// ==================== CONFETTI ====================
+function triggerConfetti() {
+    if (confettiActive) return;
+    confettiActive = true;
+    
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.display = 'block';
+    
+    const particles = [];
+    const colors = ['#ff7f50', '#5b9bd5', '#6ab04c', '#9b59b6', '#ffc107', '#e74c3c'];
+    
+    for (let i = 0; i < 120; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: -10 - Math.random() * 100,
+            size: Math.random() * 8 + 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            speed: Math.random() * 3 + 2,
+            angle: Math.random() * Math.PI * 2,
+            spin: Math.random() * 0.2 - 0.1
+        });
+    }
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let active = false;
+        
+        particles.forEach(p => {
+            p.y += p.speed;
+            p.x += Math.sin(p.angle) * 0.8;
+            p.angle += p.spin;
+            
+            if (p.y < canvas.height + 20) {
+                active = true;
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.angle);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                ctx.restore();
+            }
+        });
+        
+        if (active) {
+            requestAnimationFrame(animate);
+        } else {
+            canvas.style.display = 'none';
+            confettiActive = false;
+        }
+    }
+    
+    animate();
+}
+
+// ==================== INIT ====================
+window.addEventListener('load', () => {
+    initPhonics();
+    initCVC();
+    initCVCe();
+    initDigraphs();
+    initBlends();
+    initVowelTeams();
+    initSyllables();
+    initSight();
+    initVocab();
+    initStories();
+    initQuiz();
+    loadSentence();
+    loadMatchGame();
+    renderAchievements();
+    updateStats();
+});
+</script>
+</body>
+</html>
