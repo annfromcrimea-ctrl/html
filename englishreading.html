@@ -9,7 +9,7 @@
     :root {
         --green-light: #7bed9f;
         --green: #2ed573;
-        --green-dark: #26a65a;
+        --green-dark: #1e8449;
         --yellow: #ffa502;
         --orange: #ff6348;
         --red: #ff4757;
@@ -36,7 +36,6 @@
         overflow-x: hidden;
     }
 
-    /* Весенний декор */
     body::before {
         content: '🌸🌺🌼🌷🌻🌹💐🌿🍀🌱';
         position: fixed;
@@ -79,7 +78,7 @@
         font-family: 'Patrick Hand', cursive;
         font-size: 2.8rem;
         margin-bottom: 8px;
-        text-shadow: 2px 2px 0 rgba(38, 166, 90, 0.3);
+        text-shadow: 2px 2px 0 rgba(30, 132, 73, 0.4);
         letter-spacing: 1px;
     }
 
@@ -99,7 +98,7 @@
 
     .stat-item {
         font-size: 1.2rem;
-        background: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.3);
         padding: 6px 18px;
         border-radius: 25px;
         backdrop-filter: blur(5px);
@@ -260,7 +259,6 @@
     .subcontent { display: none; }
     .subcontent.active { display: block; animation: fadeIn 0.4s; }
 
-    /* Сетки */
     .alpha-grid, .word-grid, .sight-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -335,7 +333,6 @@
         box-shadow: 0 8px 20px rgba(255, 165, 2, 0.5);
     }
 
-    /* Blending */
     .blend-container { text-align: center; }
     .blend-emoji { font-size: 7rem; margin: 20px 0; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
     .blend-letters {
@@ -381,7 +378,6 @@
 
     .blend-btn.whole:hover { background: var(--green-dark); }
 
-    /* Story */
     .story-text {
         font-size: 1.8rem;
         line-height: 2.2;
@@ -422,11 +418,11 @@
         transition: all 0.2s;
         pointer-events: none;
         font-family: 'Nunito', sans-serif;
+        z-index: 5;
     }
 
     .story-word:hover .tooltip { visibility: visible; opacity: 1; }
 
-    /* Games */
     .game-area { text-align: center; }
     .game-emoji { font-size: 9rem; margin: 20px 0; }
     .game-options {
@@ -546,7 +542,6 @@
         padding: 10px 20px;
     }
 
-    /* Memory Game */
     .memory-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -610,7 +605,6 @@
         pointer-events: none;
     }
 
-    /* Quiz */
     .quiz-container {
         max-width: 800px;
         margin: 0 auto;
@@ -663,7 +657,6 @@
         border-color: var(--red);
     }
 
-    /* Sentence Builder */
     .sentence-zone {
         min-height: 80px;
         border: 4px dashed var(--purple);
@@ -708,7 +701,6 @@
         margin: 20px 0;
     }
 
-    /* Achievements */
     .achievements-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -760,6 +752,86 @@
         display: none;
     }
 
+    .info-box {
+        background: linear-gradient(135deg, #fff9e6, #fff3cd);
+        border-left: 6px solid var(--yellow);
+        border-radius: 12px;
+        padding: 15px 20px;
+        margin: 20px 0;
+        font-size: 1rem;
+        color: var(--text);
+    }
+    .info-box strong { color: var(--green-dark); }
+
+    .nonsense-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 12px;
+    }
+    .nonsense-card {
+        background: linear-gradient(135deg, #e8eaf6, #c5cae9);
+        border: 3px dashed var(--purple);
+        border-radius: 15px;
+        padding: 15px 8px;
+        text-align: center;
+        font-family: 'Patrick Hand', cursive;
+        font-size: 1.6rem;
+        color: var(--purple);
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .nonsense-card:hover {
+        transform: scale(1.08) rotate(2deg);
+        background: var(--purple);
+        color: var(--white);
+    }
+
+    .family-row {
+        background: #f8f9fa;
+        border-radius: 14px;
+        padding: 12px 16px;
+        border: 2px solid var(--green-light);
+    }
+    .family-row .fam-label {
+        font-family: 'Patrick Hand', cursive;
+        font-size: 1.5rem;
+        color: var(--green-dark);
+        margin-bottom: 8px;
+    }
+    .family-row .fam-words {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .family-row .fam-word {
+        padding: 6px 14px;
+        background: var(--white);
+        border: 2px solid var(--green);
+        border-radius: 12px;
+        font-family: 'Patrick Hand', cursive;
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .family-row .fam-word:hover {
+        background: var(--green);
+        color: var(--white);
+        transform: translateY(-2px);
+    }
+
+    .syllable-card {
+        background: var(--white);
+        border: 3px solid var(--purple);
+        border-radius: 15px;
+        padding: 15px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .syllable-card:hover { transform: scale(1.05); background: #f3e5f5; }
+    .syllable-card .syl-word { font-family: 'Patrick Hand', cursive; font-size: 1.8rem; color: var(--purple); }
+    .syllable-card .syl-dots { font-size: 1rem; color: var(--text); letter-spacing: 4px; margin-top: 6px; }
+
     @media (max-width: 600px) {
         header h1 { font-size: 2rem; }
         .nav-btn { font-size: 0.9rem; padding: 8px 12px; }
@@ -792,6 +864,7 @@
     <button class="nav-btn" data-target="digraphs">🔗 Digraphs</button>
     <button class="nav-btn" data-target="blends">🎭 Blends</button>
     <button class="nav-btn" data-target="vowels">🎨 Vowels</button>
+    <button class="nav-btn" data-target="syllables">✂️ Слоги</button>
     <button class="nav-btn" data-target="sight">👀 Sight</button>
     <button class="nav-btn" data-target="vocab">📚 Словарь</button>
     <button class="nav-btn" data-target="story">📖 Сказки</button>
@@ -806,8 +879,11 @@
     <!-- 1. ALPHABET -->
     <section id="phonics" class="section active">
         <div class="card">
-            <h2> Алфавит и Звуки</h2>
+            <h2>🔤 Алфавит и Звуки</h2>
             <p class="desc">Нажми на букву — услышишь её имя, звук и слово! 🌸</p>
+            <div class="info-box">
+                <strong>Важно:</strong> сначала учим <em>звуки</em> (фонемы), а не названия букв. В правилах чтения работают именно звуки: /k/ /æ/ /t/ = cat.
+            </div>
             <div class="alpha-grid" id="alphaGrid"></div>
         </div>
     </section>
@@ -816,7 +892,11 @@
     <section id="cvc" class="section">
         <div class="card">
             <h2>🧩 CVC Слова</h2>
-            <p class="desc">Короткие слова из трёх звуков. Нажми на звук, потом на зелёную кнопку!</p>
+            <p class="desc">Согласная-гласная-согласная. Гласная звучит кратко. Нажми на слово — услышишь его по звукам!</p>
+
+            <div class="info-box">
+                <strong>CVC</strong> — фундамент чтения. Освоив cat, dog, sit, ребёнок переходит к сочетаниям согласных (stop, plan) и Magic E (cake).
+            </div>
 
             <div class="subtabs">
                 <button class="subtab active" data-sub="cvc-a">Семья -a-</button>
@@ -824,6 +904,9 @@
                 <button class="subtab" data-sub="cvc-i">Семья -i-</button>
                 <button class="subtab" data-sub="cvc-o">Семья -o-</button>
                 <button class="subtab" data-sub="cvc-u">Семья -u-</button>
+                <button class="subtab" data-sub="cvc-fam">👨‍👩‍👧 Семьи слов</button>
+                <button class="subtab" data-sub="cvc-non">🤪 Нонсенс</button>
+                <button class="subtab" data-sub="cvc-double">✌️ Удвоение</button>
             </div>
 
             <div id="cvc-a" class="subcontent active">
@@ -839,16 +922,34 @@
                 <div class="word-grid" id="cvcIGrid"></div>
             </div>
             <div id="cvc-o" class="subcontent">
-                <h3>🐶 Короткий звук // как в "dog"</h3>
+                <h3>🐶 Короткий звук /ɒ/ как в "dog"</h3>
                 <div class="word-grid" id="cvcOGrid"></div>
             </div>
             <div id="cvc-u" class="subcontent">
                 <h3>☀️ Короткий звук /ʌ/ как в "sun"</h3>
                 <div class="word-grid" id="cvcUGrid"></div>
             </div>
+            <div id="cvc-fam" class="subcontent">
+                <h3>👨‍👩‍👧 Семьи слов (Word Families)</h3>
+                <p class="desc">Слова рифмуются и имеют общую часть — так запоминать легче!</p>
+                <div id="wordFamilies" style="display:flex; flex-direction:column; gap:12px;"></div>
+            </div>
+            <div id="cvc-non" class="subcontent">
+                <h3>🤪 Нонсенс-слова</h3>
+                <p class="desc">Выдуманные слова по схеме CVC. Они проверяют, понимает ли ребёнок <em>правила</em>, а не просто запомнил слова.</p>
+                <div class="nonsense-grid" id="nonsenseGrid"></div>
+            </div>
+            <div id="cvc-double" class="subcontent">
+                <h3>✌️ Удвоение согласных</h3>
+                <p class="desc">В односложных CVC-словах при добавлении окончания последняя согласная часто удваивается.</p>
+                <div class="info-box">
+                    <strong>Правило:</strong> stop → stopp<u>ed</u>, drip → dripp<u>ing</u>, big → bigg<u>er</u>. Гласная остаётся краткой!
+                </div>
+                <div class="word-grid" id="doubleGrid"></div>
+            </div>
 
             <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px dashed var(--green);">
-                <h3>🎯 Тренировка слияния</h3>
+                <h3>🎯 Тренировка слияния (Blending)</h3>
                 <div class="blend-container" id="blendContainer"></div>
                 <div class="blend-nav">
                     <button class="reset-btn" onclick="prevBlend()">⬅️ Назад</button>
@@ -862,7 +963,10 @@
     <section id="cvce" class="section">
         <div class="card">
             <h2>✨ Magic E — Волшебная буква E</h2>
-            <p class="desc">Тихая "e" в конце делает гласную долгой! cat → cāte 🪄</p>
+            <p class="desc">Тихая "e" в конце делает гласную долгой! cat → cāke 🪄</p>
+            <div class="info-box">
+                <strong>Схема VCe:</strong> согласная + гласная + согласная + немая e. Буква e не читается, но «протягивает» гласную.
+            </div>
 
             <div class="subtabs">
                 <button class="subtab active" data-sub="cvce-a">a_e (cake)</button>
@@ -880,7 +984,7 @@
                 <div class="word-grid" id="cvceIGrid"></div>
             </div>
             <div id="cvce-o" class="subcontent">
-                <h3> Долгий звук /oʊ/ — o_e</h3>
+                <h3>🏠 Долгий звук /oʊ/ — o_e</h3>
                 <div class="word-grid" id="cvceOGrid"></div>
             </div>
             <div id="cvce-u" class="subcontent">
@@ -914,7 +1018,7 @@
                 <div class="word-grid" id="digChGrid"></div>
             </div>
             <div id="dig-th" class="subcontent">
-                <h3> th — межзубный</h3>
+                <h3>👅 th — межзубный</h3>
                 <div class="word-grid" id="digThGrid"></div>
             </div>
             <div id="dig-ph" class="subcontent">
@@ -922,11 +1026,11 @@
                 <div class="word-grid" id="digPhGrid"></div>
             </div>
             <div id="dig-wh" class="subcontent">
-                <h3> wh — как "у/в"</h3>
+                <h3>❓ wh — как "у/в"</h3>
                 <div class="word-grid" id="digWhGrid"></div>
             </div>
             <div id="dig-ck" class="subcontent">
-                <h3> ck — как "к" в конце</h3>
+                <h3>🔒 ck — как "к" в конце</h3>
                 <div class="word-grid" id="digCkGrid"></div>
             </div>
         </div>
@@ -953,7 +1057,7 @@
                 <div class="word-grid" id="blRGrid"></div>
             </div>
             <div id="bl-s" class="subcontent">
-                <h3> S-слияния</h3>
+                <h3>⭐ S-слияния</h3>
                 <div class="word-grid" id="blSGrid"></div>
             </div>
         </div>
@@ -962,7 +1066,7 @@
     <!-- 6. VOWEL TEAMS -->
     <section id="vowels" class="section">
         <div class="card">
-            <h2> Vowel Teams — Команды гласных</h2>
+            <h2>🎨 Vowel Teams — Команды гласных</h2>
             <p class="desc">Две гласные вместе — одна говорит, другая молчит!</p>
 
             <div class="subtabs">
@@ -989,7 +1093,7 @@
                 <div class="word-grid" id="vtOaGrid"></div>
             </div>
             <div id="vt-oo" class="subcontent">
-                <h3> oo — долгий /uː/ и короткий /ʊ/</h3>
+                <h3>🌙 oo — долгий /uː/ и короткий /ʊ/</h3>
                 <div class="word-grid" id="vtOoGrid"></div>
             </div>
             <div id="vt-ou" class="subcontent">
@@ -1011,10 +1115,28 @@
         </div>
     </section>
 
-    <!-- 7. SIGHT WORDS -->
+    <!-- 7. SYLLABLES -->
+    <section id="syllables" class="section">
+        <div class="card">
+            <h2>✂️ Деление на слоги</h2>
+            <p class="desc">Длинные слова легче читать по слогам! Нажми — услышишь слово.</p>
+
+            <div class="info-box">
+                <strong>Как делить:</strong> границу проводят перед согласной + le (ta-ble), между двумя согласными (car-pet), после закрытого слога (in-side).
+            </div>
+
+            <h3>Согласная + le (-ble, -cle, -dle, -tle)</h3>
+            <div class="word-grid" id="sylLeGrid"></div>
+
+            <h3>Двухсложные слова</h3>
+            <div class="word-grid" id="sylTwoGrid"></div>
+        </div>
+    </section>
+
+    <!-- 8. SIGHT WORDS -->
     <section id="sight" class="section">
         <div class="card">
-            <h2> Sight Words — Слова-чемпионы</h2>
+            <h2>👀 Sight Words — Слова-чемпионы</h2>
             <p class="desc">Эти слова встречаются чаще всех! Учим их целиком. 🏆</p>
 
             <div class="subtabs">
@@ -1031,7 +1153,7 @@
         </div>
     </section>
 
-    <!-- 8. VOCABULARY -->
+    <!-- 9. VOCABULARY -->
     <section id="vocab" class="section">
         <div class="card">
             <h2>📚 Тематический Словарь</h2>
@@ -1042,10 +1164,10 @@
                 <button class="subtab" data-sub="v-food">🍎 Еда</button>
                 <button class="subtab" data-sub="v-colors">🎨 Цвета</button>
                 <button class="subtab" data-sub="v-numbers">🔢 Цифры</button>
-                <button class="subtab" data-sub="v-family">👨‍👩‍ Семья</button>
-                <button class="subtab" data-sub="v-body"> Тело</button>
+                <button class="subtab" data-sub="v-family">👨‍👩‍👧 Семья</button>
+                <button class="subtab" data-sub="v-body">🦵 Тело</button>
                 <button class="subtab" data-sub="v-emotions">😊 Эмоции</button>
-                <button class="subtab" data-sub="v-weather">️ Погода</button>
+                <button class="subtab" data-sub="v-weather">🌦️ Погода</button>
                 <button class="subtab" data-sub="v-seasons">🌸 Времена года</button>
                 <button class="subtab" data-sub="v-clothes">👕 Одежда</button>
                 <button class="subtab" data-sub="v-school">🏫 Школа</button>
@@ -1067,20 +1189,20 @@
         </div>
     </section>
 
-    <!-- 9. STORIES -->
+    <!-- 10. STORIES -->
     <section id="story" class="section">
         <div class="card">
             <h2>📖 Интерактивные Сказки</h2>
             <p class="desc">Нажимай на слова — услышишь и увидишь перевод! 🌸</p>
 
             <div class="subtabs">
-                <button class="subtab active" data-sub="story-1"> Spring Day</button>
-                <button class="subtab" data-sub="story-2"> The Cat</button>
-                <button class="subtab" data-sub="story-3"> In the Park</button>
+                <button class="subtab active" data-sub="story-1">🌸 Spring Day</button>
+                <button class="subtab" data-sub="story-2">🐱 The Cat</button>
+                <button class="subtab" data-sub="story-3">🌳 In the Park</button>
             </div>
 
             <div id="story-1" class="subcontent active">
-                <h3> Spring Day</h3>
+                <h3>🌸 Spring Day</h3>
                 <div class="story-text" id="story1Text"></div>
                 <div style="text-align: center; margin-top: 20px;">
                     <button class="reset-btn" onclick="speakStory(1)">🔊 Прочитать вслух</button>
@@ -1090,7 +1212,7 @@
                 <h3>🐱 The Cat</h3>
                 <div class="story-text" id="story2Text"></div>
                 <div style="text-align: center; margin-top: 20px;">
-                    <button class="reset-btn" onclick="speakStory(2)"> Прочитать вслух</button>
+                    <button class="reset-btn" onclick="speakStory(2)">🔊 Прочитать вслух</button>
                 </div>
             </div>
             <div id="story-3" class="subcontent">
@@ -1103,7 +1225,7 @@
         </div>
     </section>
 
-    <!-- 10. QUIZ -->
+    <!-- 11. QUIZ -->
     <section id="quiz" class="section">
         <div class="card">
             <h2>❓ Тесты и Викторины</h2>
@@ -1111,8 +1233,9 @@
 
             <div class="subtabs">
                 <button class="subtab active" data-sub="quiz-phonics">🔤 Звуки</button>
-                <button class="subtab" data-sub="quiz-words"> Слова</button>
+                <button class="subtab" data-sub="quiz-words">📖 Слова</button>
                 <button class="subtab" data-sub="quiz-listening">👂 Аудирование</button>
+                <button class="subtab" data-sub="quiz-progress">📊 Проверка прогресса</button>
             </div>
 
             <div id="quiz-phonics" class="subcontent active">
@@ -1124,10 +1247,16 @@
             <div id="quiz-listening" class="subcontent">
                 <div class="quiz-container" id="listeningQuiz"></div>
             </div>
+            <div id="quiz-progress" class="subcontent">
+                <div class="info-box">
+                    <strong>Проверка прогресса:</strong> прочитай 10–15 слов вслух. Часть — по правилам, часть — sight words. Отметь, сколько прочитано без подсказок.
+                </div>
+                <div class="quiz-container" id="progressQuiz"></div>
+            </div>
         </div>
     </section>
 
-    <!-- 11. SENTENCE BUILDER -->
+    <!-- 12. SENTENCE BUILDER -->
     <section id="builder" class="section">
         <div class="card">
             <h2>🔨 Конструктор Предложений</h2>
@@ -1143,13 +1272,13 @@
         </div>
     </section>
 
-    <!-- 12. GAMES -->
+    <!-- 13. GAMES -->
     <section id="games" class="section">
         <div class="card">
             <h2>🎮 Мини-Игры</h2>
 
             <div class="game-switcher">
-                <button class="nav-btn active" onclick="switchGame('match')" id="btnMatch">️ Угадай</button>
+                <button class="nav-btn active" onclick="switchGame('match')" id="btnMatch">🎯 Угадай</button>
                 <button class="nav-btn" onclick="switchGame('spell')" id="btnSpell">🔤 Собери</button>
                 <button class="nav-btn" onclick="switchGame('memory')" id="btnMemory">🧠 Memory</button>
                 <button class="nav-btn" onclick="switchGame('speed')" id="btnSpeed">⚡ Скорость</button>
@@ -1185,7 +1314,7 @@
         </div>
     </section>
 
-    <!-- 13. ACHIEVEMENTS -->
+    <!-- 14. ACHIEVEMENTS -->
     <section id="achievements" class="section">
         <div class="card">
             <h2>🏆 Достижения</h2>
@@ -1203,10 +1332,10 @@
 
 const alphabetData = [
     {l:'A', s:'æ', w:'Apple', e:'🍎'}, {l:'B', s:'b', w:'Bear', e:'🐻'}, {l:'C', s:'k', w:'Cat', e:'🐱'},
-    {l:'D', s:'d', w:'Dog', e:'🐶'}, {l:'E', s:'ɛ', w:'Egg', e:''}, {l:'F', s:'f', w:'Fish', e:'🐟'},
-    {l:'G', s:'g', w:'Giraffe', e:'🦒'}, {l:'H', s:'h', w:'Hat', e:''}, {l:'I', s:'ɪ', w:'Igloo', e:'🏠'},
-    {l:'J', s:'dʒ', w:'Juice', e:'🧃'}, {l:'K', s:'k', w:'Kite', e:'🪁'}, {l:'L', s:'l', w:'Leaf', e:''},
-    {l:'M', s:'m', w:'Monkey', e:''}, {l:'N', s:'n', w:'Nest', e:'🪺'}, {l:'O', s:'ɒ', w:'Orange', e:'🍊'},
+    {l:'D', s:'d', w:'Dog', e:'🐶'}, {l:'E', s:'ɛ', w:'Egg', e:'🥚'}, {l:'F', s:'f', w:'Fish', e:'🐟'},
+    {l:'G', s:'g', w:'Giraffe', e:'🦒'}, {l:'H', s:'h', w:'Hat', e:'🎩'}, {l:'I', s:'ɪ', w:'Igloo', e:'🏠'},
+    {l:'J', s:'dʒ', w:'Juice', e:'🧃'}, {l:'K', s:'k', w:'Kite', e:'🪁'}, {l:'L', s:'l', w:'Leaf', e:'🍃'},
+    {l:'M', s:'m', w:'Monkey', e:'🐒'}, {l:'N', s:'n', w:'Nest', e:'🪺'}, {l:'O', s:'ɒ', w:'Orange', e:'🍊'},
     {l:'P', s:'p', w:'Pumpkin', e:'🎃'}, {l:'Q', s:'kw', w:'Queen', e:'👸'}, {l:'R', s:'r', w:'Rabbit', e:'🐰'},
     {l:'S', s:'s', w:'Sun', e:'☀️'}, {l:'T', s:'t', w:'Tree', e:'🌳'}, {l:'U', s:'ʌ', w:'Umbrella', e:'☂️'},
     {l:'V', s:'v', w:'Van', e:'🚐'}, {l:'W', s:'w', w:'Whale', e:'🐳'}, {l:'X', s:'ks', w:'Fox', e:'🦊'},
@@ -1216,164 +1345,187 @@ const alphabetData = [
 const cvcData = {
     a: [
         {w:'cat', p:['c','a','t'], e:'🐱', ru:'кот'}, {w:'hat', p:['h','a','t'], e:'🎩', ru:'шляпа'},
-        {w:'bat', p:['b','a','t'], e:'🦇', ru:'летучая мышь'}, {w:'mat', p:['m','a','t'], e:'', ru:'коврик'},
+        {w:'bat', p:['b','a','t'], e:'🦇', ru:'летучая мышь'}, {w:'mat', p:['m','a','t'], e:'🧶', ru:'коврик'},
         {w:'rat', p:['r','a','t'], e:'🐀', ru:'крыса'}, {w:'van', p:['v','a','n'], e:'🚐', ru:'фургон'},
         {w:'fan', p:['f','a','n'], e:'🌀', ru:'вентилятор'}, {w:'can', p:['c','a','n'], e:'🥫', ru:'банка'},
         {w:'man', p:['m','a','n'], e:'👨', ru:'мужчина'}, {w:'pan', p:['p','a','n'], e:'🍳', ru:'сковорода'},
         {w:'bag', p:['b','a','g'], e:'👜', ru:'сумка'}, {w:'tag', p:['t','a','g'], e:'🏷️', ru:'бирка'},
-        {w:'rag', p:['r','a','g'], e:'🧹', ru:'тряпка'}, {w:'jam', p:['j','a','m'], e:'🍓', ru:'варенье'},
-        {w:'map', p:['m','a','p'], e:'🗺️', ru:'карта'}, {w:'tap', p:['t','a','p'], e:'🚰', ru:'кран'}
+        {w:'jam', p:['j','a','m'], e:'🍓', ru:'варенье'}, {w:'map', p:['m','a','p'], e:'🗺️', ru:'карта'},
+        {w:'tap', p:['t','a','p'], e:'🚰', ru:'кран'}, {w:'ham', p:['h','a','m'], e:'🍖', ru:'ветчина'}
     ],
     e: [
-        {w:'bed', p:['b','e','d'], e:'️', ru:'кровать'}, {w:'red', p:['r','e','d'], e:'🔴', ru:'красный'},
+        {w:'bed', p:['b','e','d'], e:'🛏️', ru:'кровать'}, {w:'red', p:['r','e','d'], e:'🔴', ru:'красный'},
         {w:'hen', p:['h','e','n'], e:'🐔', ru:'курица'}, {w:'pen', p:['p','e','n'], e:'🖊️', ru:'ручка'},
-        {w:'ten', p:['t','e','n'], e:'🔟', ru:'десять'}, {w:'men', p:['m','e','n'], e:'👥', ru:'мужчины'},
-        {w:'leg', p:['l','e','g'], e:'🦵', ru:'нога'}, {w:'peg', p:['p','e','g'], e:'📌', ru:'колышек'},
-        {w:'jet', p:['j','e','t'], e:'✈️', ru:'реактивный самолёт'}, {w:'net', p:['n','e','t'], e:'', ru:'сеть'},
+        {w:'ten', p:['t','e','n'], e:'🔟', ru:'десять'}, {w:'leg', p:['l','e','g'], e:'🦵', ru:'нога'},
+        {w:'jet', p:['j','e','t'], e:'✈️', ru:'реактивный самолёт'}, {w:'net', p:['n','e','t'], e:'🥅', ru:'сеть'},
         {w:'pet', p:['p','e','t'], e:'🐾', ru:'питомец'}, {w:'wet', p:['w','e','t'], e:'💧', ru:'мокрый'},
-        {w:'bell', p:['b','e','l','l'], e:'🔔', ru:'колокольчик'}, {w:'well', p:['w','e','l','l'], e:'️', ru:'колодец'}
+        {w:'bell', p:['b','e','l','l'], e:'🔔', ru:'колокольчик'}, {w:'well', p:['w','e','l','l'], e:'🕳️', ru:'колодец'}
     ],
     i: [
-        {w:'pig', p:['p','i','g'], e:'🐷', ru:'свинья'}, {w:'big', p:['b','i','g'], e:'', ru:'большой'},
-        {w:'dig', p:['d','i','g'], e:'⛏️', ru:'копать'}, {w:'fig', p:['f','i','g'], e:'🌰', ru:'инжир'},
+        {w:'pig', p:['p','i','g'], e:'🐷', ru:'свинья'}, {w:'big', p:['b','i','g'], e:'🐘', ru:'большой'},
+        {w:'dig', p:['d','i','g'], e:'⛏️', ru:'копать'}, {w:'fig', p:['f','i','g'], e:'🍇', ru:'инжир'},
         {w:'wig', p:['w','i','g'], e:'💇', ru:'парик'}, {w:'pin', p:['p','i','n'], e:'📌', ru:'булавка'},
-        {w:'bin', p:['b','i','n'], e:'🗑️', ru:'мусорка'}, {w:'fin', p:['f','i','n'], e:'', ru:'плавник'},
+        {w:'bin', p:['b','i','n'], e:'🗑️', ru:'мусорка'}, {w:'fin', p:['f','i','n'], e:'🐟', ru:'плавник'},
         {w:'win', p:['w','i','n'], e:'🏆', ru:'побеждать'}, {w:'sit', p:['s','i','t'], e:'🪑', ru:'сидеть'},
         {w:'hit', p:['h','i','t'], e:'🥊', ru:'ударять'}, {w:'bit', p:['b','i','t'], e:'🦷', ru:'кусочек'},
         {w:'fit', p:['f','i','t'], e:'👌', ru:'подходить'}, {w:'lip', p:['l','i','p'], e:'👄', ru:'губа'},
-        {w:'zip', p:['z','i','p'], e:'🤐', ru:'молния'}, {w:'hip', p:['h','i','p'], e:'', ru:'бедро'},
+        {w:'zip', p:['z','i','p'], e:'🤐', ru:'молния'}, {w:'hip', p:['h','i','p'], e:'🕺', ru:'бедро'},
         {w:'rib', p:['r','i','b'], e:'🦴', ru:'ребро'}, {w:'bib', p:['b','i','b'], e:'🍼', ru:'слюнявчик'}
     ],
     o: [
         {w:'dog', p:['d','o','g'], e:'🐶', ru:'собака'}, {w:'log', p:['l','o','g'], e:'🪵', ru:'бревно'},
         {w:'fog', p:['f','o','g'], e:'🌫️', ru:'туман'}, {w:'hog', p:['h','o','g'], e:'🐖', ru:'кабан'},
         {w:'jog', p:['j','o','g'], e:'🏃', ru:'бегать трусцой'}, {w:'cog', p:['c','o','g'], e:'⚙️', ru:'шестерёнка'},
-        {w:'hot', p:['h','o','t'], e:'🔥', ru:'горячий'}, {w:'pot', p:['p','o','t'], e:'', ru:'горшок'},
+        {w:'hot', p:['h','o','t'], e:'🔥', ru:'горячий'}, {w:'pot', p:['p','o','t'], e:'🍲', ru:'горшок'},
         {w:'dot', p:['d','o','t'], e:'⚫', ru:'точка'}, {w:'lot', p:['l','o','t'], e:'🎟️', ru:'лот'},
         {w:'not', p:['n','o','t'], e:'❌', ru:'не'}, {w:'cot', p:['c','o','t'], e:'🛏️', ru:'детская кроватка'},
-        {w:'fox', p:['f','o','x'], e:'', ru:'лиса'}, {w:'box', p:['b','o','x'], e:'', ru:'коробка'},
-        {w:'pox', p:['p','o','x'], e:'🤒', ru:'оспа'}, {w:'mom', p:['m','o','m'], e:'👩', ru:'мама'},
-        {w:'pop', p:['p','o','p'], e:'🍿', ru:'лопаться'}, {w:'top', p:['t','o','p'], e:'⬆️', ru:'верх'}
+        {w:'fox', p:['f','o','x'], e:'🦊', ru:'лиса'}, {w:'box', p:['b','o','x'], e:'📦', ru:'коробка'},
+        {w:'mom', p:['m','o','m'], e:'👩', ru:'мама'}, {w:'pop', p:['p','o','p'], e:'🍿', ru:'лопаться'},
+        {w:'top', p:['t','o','p'], e:'⬆️', ru:'верх'}
     ],
     u: [
         {w:'sun', p:['s','u','n'], e:'☀️', ru:'солнце'}, {w:'fun', p:['f','u','n'], e:'🎉', ru:'веселье'},
         {w:'run', p:['r','u','n'], e:'🏃', ru:'бежать'}, {w:'bun', p:['b','u','n'], e:'🥐', ru:'булочка'},
         {w:'gun', p:['g','u','n'], e:'🔫', ru:'пушка'}, {w:'nun', p:['n','u','n'], e:'👩‍🦰', ru:'монахиня'},
-        {w:'pup', p:['p','u','p'], e:'', ru:'щенок'}, {w:'cup', p:['c','u','p'], e:'', ru:'чашка'},
+        {w:'pup', p:['p','u','p'], e:'🐶', ru:'щенок'}, {w:'cup', p:['c','u','p'], e:'☕', ru:'чашка'},
         {w:'hug', p:['h','u','g'], e:'🤗', ru:'обнимать'}, {w:'bug', p:['b','u','g'], e:'🐛', ru:'жук'},
-        {w:'mug', p:['m','u','g'], e:'☕', ru:'кружка'}, {w:'rug', p:['r','u','g'], e:'🟫', ru:'ковёр'},
-        {w:'tug', p:['t','u','g'], e:'💪', ru:'тянуть'}, {w:'bus', p:['b','u','s'], e:'', ru:'автобус'},
+        {w:'mug', p:['m','u','g'], e:'🥤', ru:'кружка'}, {w:'rug', p:['r','u','g'], e:'🟫', ru:'ковёр'},
+        {w:'tug', p:['t','u','g'], e:'💪', ru:'тянуть'}, {w:'bus', p:['b','u','s'], e:'🚌', ru:'автобус'},
         {w:'cut', p:['c','u','t'], e:'✂️', ru:'резать'}, {w:'nut', p:['n','u','t'], e:'🌰', ru:'орех'},
         {w:'but', p:['b','u','t'], e:'🤔', ru:'но'}
     ]
 };
 
+const wordFamiliesData = [
+    {label:'-at', words:['cat','bat','hat','mat','rat','sat']},
+    {label:'-an', words:['can','fan','man','pan','van']},
+    {label:'-ap', words:['cap','map','nap','tap']},
+    {label:'-ag', words:['bag','tag','wag']},
+    {label:'-ed', words:['bed','red','fed','led']},
+    {label:'-en', words:['hen','pen','ten','men']},
+    {label:'-et', words:['jet','net','pet','wet']},
+    {label:'-ig', words:['big','dig','fig','pig','wig']},
+    {label:'-in', words:['bin','fin','pin','win']},
+    {label:'-it', words:['bit','fit','hit','sit']},
+    {label:'-og', words:['dog','fog','hog','log']},
+    {label:'-op', words:['hop','mop','pop','top']},
+    {label:'-ot', words:['cot','dot','hot','pot']},
+    {label:'-ug', words:['bug','hug','mug','rug','tug']},
+    {label:'-un', words:['bun','fun','run','sun']},
+    {label:'-ut', words:['but','cut','nut']}
+];
+
+const nonsenseWords = [
+    {w:'laf', p:['l','a','f']}, {w:'mib', p:['m','i','b']}, {w:'sot', p:['s','o','t']},
+    {w:'feg', p:['f','e','g']}, {w:'dut', p:['d','u','t']}, {w:'zap', p:['z','a','p']},
+    {w:'vip', p:['v','i','p']}, {w:'nom', p:['n','o','m']}, {w:'kud', p:['k','u','d']},
+    {w:'rax', p:['r','a','x']}, {w:'jeb', p:['j','e','b']}, {w:'wot', p:['w','o','t']},
+    {w:'bup', p:['b','u','p']}, {w:'hib', p:['h','i','b']}, {w:'gav', p:['g','a','v']}
+];
+
+const doubleConsonantData = [
+    {w:'stop → stopped', e:'🛑', ru:'остановился'}, {w:'drip → dripping', e:'💧',
+    {w:'drip → dripping', e:'💧', ru:'капает'}, {w:'big → bigger', e:'🐘', ru:'больше'},
+    {w:'run → running', e:'🏃', ru:'бежит'}, {w:'sit → sitting', e:'🪑', ru:'сидит'},
+    {w:'hop → hopping', e:'🐰', ru:'прыгает'}, {w:'clap → clapping', e:'👏', ru:'хлопает'},
+    {w:'plan → planned', e:'📋', ru:'запланировал'}, {w:'swim → swimming', e:'🏊', ru:'плавает'},
+    {w:'shop → shopping', e:'🛍️', ru:'делает покупки'}, {w:'flat → flatter', e:'📐', ru:'площе'}
+];
+
 const cvceData = {
     a: [
         {w:'cake', e:'🎂', ru:'торт'}, {w:'lake', e:'🏞️', ru:'озеро'}, {w:'make', e:'🔨', ru:'делать'},
-        {w:'take', e:'✋', ru:'брать'}, {w:'bake', e:'🥐', ru:'печь'}, {w:'fake', e:'🎭', ru:'поддельный'},
-        {w:'gate', e:'🚪', ru:'ворота'}, {w:'late', e:'⏰', ru:'поздно'}, {w:'mate', e:'', ru:'приятель'},
-        {w:'rate', e:'⭐', ru:'оценка'}, {w:'cane', e:'🦯', ru:'трость'}, {w:'lane', e:'🛣️', ru:'полоса'},
+        {w:'take', e:'✋', ru:'брать'}, {w:'bake', e:'🥐', ru:'печь'}, {w:'gate', e:'🚪', ru:'ворота'},
+        {w:'late', e:'⏰', ru:'поздно'}, {w:'cane', e:'🦯', ru:'трость'}, {w:'lane', e:'🛣️', ru:'полоса'},
         {w:'mane', e:'🦁', ru:'грива'}, {w:'pane', e:'🪟', ru:'оконное стекло'}, {w:'game', e:'🎮', ru:'игра'},
         {w:'name', e:'📛', ru:'имя'}, {w:'same', e:'👯', ru:'такой же'}, {w:'flame', e:'🔥', ru:'пламя'}
     ],
     i: [
         {w:'bike', e:'🚲', ru:'велосипед'}, {w:'hike', e:'🥾', ru:'поход'}, {w:'like', e:'👍', ru:'нравиться'},
-        {w:'mike', e:'🎤', ru:'микрофон'}, {w:'pine', e:'🌲', ru:'сосна'}, {w:'vine', e:'', ru:'лоза'},
-        {w:'wine', e:'🍷', ru:'вино'}, {w:'line', e:'📏', ru:'линия'}, {w:'mine', e:'⛏️', ru:'шахта'},
-        {w:'nine', e:'9️', ru:'девять'}, {w:'fine', e:'✨', ru:'отличный'}, {w:'five', e:'5️⃣', ru:'пять'},
-        {w:'give', e:'🎁', ru:'давать'}, {w:'live', e:'🏠', ru:'жить'}, {w:'time', e:'⏰', ru:'время'},
-        {w:'kite', e:'🪁', ru:'воздушный змей'}, {w:'bite', e:'🦷', ru:'кусать'}, {w:'site', e:'🌐', ru:'сайт'}
+        {w:'pine', e:'🌲', ru:'сосна'}, {w:'vine', e:'🌿', ru:'лоза'}, {w:'wine', e:'🍷', ru:'вино'},
+        {w:'line', e:'📏', ru:'линия'}, {w:'mine', e:'⛏️', ru:'шахта'}, {w:'nine', e:'9️⃣', ru:'девять'},
+        {w:'fine', e:'✨', ru:'отличный'}, {w:'five', e:'5️⃣', ru:'пять'}, {w:'give', e:'🎁', ru:'давать'},
+        {w:'live', e:'🏠', ru:'жить'}, {w:'time', e:'⏰', ru:'время'}, {w:'kite', e:'🪁', ru:'воздушный змей'},
+        {w:'bite', e:'🦷', ru:'кусать'}, {w:'site', e:'🌐', ru:'сайт'}
     ],
     o: [
-        {w:'home', e:'', ru:'дом'}, {w:'bone', e:'🦴', ru:'кость'}, {w:'cone', e:'🍦', ru:'рожок'},
-        {w:'phone', e:'', ru:'телефон'}, {w:'stone', e:'🪨', ru:'камень'}, {w:'zone', e:'', ru:'зона'},
-        {w:'hole', e:'🕳️', ru:'дыра'}, {w:'pole', e:'', ru:'шест'}, {w:'role', e:'🎭', ru:'роль'},
-        {w:'tore', e:'', ru:'рвал'}, {w:'rope', e:'🪢', ru:'верёвка'}, {w:'hope', e:'🙏', ru:'надежда'},
-        {w:'note', e:'📝', ru:'заметка'}, {w:'vote', e:'️', ru:'голосовать'}, {w:'cute', e:'🥰', ru:'милый'}
+        {w:'home', e:'🏠', ru:'дом'}, {w:'bone', e:'🦴', ru:'кость'}, {w:'cone', e:'🍦', ru:'рожок'},
+        {w:'phone', e:'📞', ru:'телефон'}, {w:'stone', e:'🪨', ru:'камень'}, {w:'zone', e:'📍', ru:'зона'},
+        {w:'hole', e:'🕳️', ru:'дыра'}, {w:'pole', e:'🪵', ru:'шест'}, {w:'role', e:'🎭', ru:'роль'},
+        {w:'rope', e:'🪢', ru:'верёвка'}, {w:'hope', e:'🙏', ru:'надежда'}, {w:'note', e:'📝', ru:'заметка'},
+        {w:'vote', e:'🗳️', ru:'голосовать'}, {w:'nose', e:'👃', ru:'нос'}, {w:'rose', e:'🌹', ru:'роза'}
     ],
     u: [
-        {w:'cube', e:'🧊', ru:'куб'}, {w:'tube', e:'🧴', ru:'тюбик'}, {w:'lute', e:'🎸', ru:'лютня'},
-        {w:'cute', e:'🥰', ru:'милый'}, {w:'mute', e:'🔇', ru:'немой'}, {w:'mule', e:'🫏', ru:'мул'},
-        {w:'rule', e:'📏', ru:'правило'}, {w:'June', e:'📅', ru:'июнь'}, {w:'flute', e:'🎵', ru:'флейта'},
-        {w:'brute', e:'🦍', ru:'грубый'}, {w:'use', e:'🔧', ru:'использовать'}, {w:'huge', e:'🏔️', ru:'огромный'}
+        {w:'cube', e:'🧊', ru:'куб'}, {w:'tube', e:'🧴', ru:'тюбик'}, {w:'cute', e:'🥰', ru:'милый'},
+        {w:'mute', e:'🔇', ru:'немой'}, {w:'mule', e:'🫏', ru:'мул'}, {w:'rule', e:'📏', ru:'правило'},
+        {w:'June', e:'📅', ru:'июнь'}, {w:'flute', e:'🎵', ru:'флейта'}, {w:'use', e:'🔧', ru:'использовать'},
+        {w:'huge', e:'🏔️', ru:'огромный'}
     ]
 };
 
 const digraphData = {
     sh: [
         {w:'ship', e:'🚢', ru:'корабль'}, {w:'fish', e:'🐟', ru:'рыба'}, {w:'dish', e:'🍽️', ru:'тарелка'},
-        {w:'wish', e:'🌠', ru:'желание'}, {w:'brush', e:'🖌️', ru:'щётка'}, {w:'crash', e:'💥', ru:'авария'},
-        {w:'flash', e:'⚡', ru:'вспышка'}, {w:'shell', e:'', ru:'ракушка'}, {w:'shelf', e:'📚', ru:'полка'},
-        {w:'sheep', e:'🐑', ru:'овца'}, {w:'sheet', e:'🛏️', ru:'простыня'}, {w:'shoe', e:'👟', ru:'туфля'},
-        {w:'shop', e:'🏪', ru:'магазин'}, {w:'shot', e:'💉', ru:'укол'}, {w:'show', e:'🎭', ru:'шоу'},
-        {w:'shut', e:'🚪', ru:'закрывать'}, {w:'shy', e:'😳', ru:'застенчивый'}
+        {w:'wish', e:'🌠', ru:'желание'}, {w:'brush', e:'🖌️', ru:'щётка'}, {w:'shell', e:'🐚', ru:'ракушка'},
+        {w:'shelf', e:'📚', ru:'полка'}, {w:'sheep', e:'🐑', ru:'овца'}, {w:'shoe', e:'👟', ru:'туфля'},
+        {w:'shop', e:'🏪', ru:'магазин'}, {w:'show', e:'🎭', ru:'шоу'}, {w:'shy', e:'😳', ru:'застенчивый'}
     ],
     ch: [
-        {w:'chair', e:'🪑', ru:'стул'}, {w:'cheese', e:'', ru:'сыр'}, {w:'cherry', e:'🍒', ru:'вишня'},
-        {w:'chest', e:'📦', ru:'сундук'}, {w:'chick', e:'🐤', ru:'цыплёнок'}, {w:'child', e:'', ru:'ребёнок'},
-        {w:'chin', e:'🧔', ru:'подбородок'}, {w:'chip', e:'🍟', ru:'чипс'}, {w:'chop', e:'🪓', ru:'рубить'},
-        {w:'church', e:'⛪', ru:'церковь'}, {w:'lunch', e:'', ru:'обед'}, {w:'much', e:'📊', ru:'много'},
-        {w:'such', e:'👉', ru:'такой'}, {w:'teach', e:'👩‍🏫', ru:'учить'}, {w:'watch', e:'', ru:'часы'},
-        {w:'catch', e:'🤾', ru:'ловить'}, {w:'match', e:'🔥', ru:'спичка/матч'}
+        {w:'chair', e:'🪑', ru:'стул'}, {w:'cheese', e:'🧀', ru:'сыр'}, {w:'cherry', e:'🍒', ru:'вишня'},
+        {w:'chest', e:'📦', ru:'сундук'}, {w:'chick', e:'🐤', ru:'цыплёнок'}, {w:'chin', e:'🧔', ru:'подбородок'},
+        {w:'chip', e:'🍟', ru:'чипс'}, {w:'church', e:'⛪', ru:'церковь'}, {w:'lunch', e:'🍱', ru:'обед'},
+        {w:'much', e:'📊', ru:'много'}, {w:'teach', e:'👩‍🏫', ru:'учить'}, {w:'watch', e:'⌚', ru:'часы'}
     ],
     th: [
         {w:'think', e:'🤔', ru:'думать'}, {w:'thank', e:'🙏', ru:'благодарить'}, {w:'three', e:'3️⃣', ru:'три'},
-        {w:'thick', e:'📚', ru:'толстый'}, {w:'thin', e:'📏', ru:'тонкий'}, {w:'thing', e:'', ru:'вещь'},
+        {w:'thick', e:'📚', ru:'толстый'}, {w:'thin', e:'📏', ru:'тонкий'}, {w:'thing', e:'📦', ru:'вещь'},
         {w:'thumb', e:'👍', ru:'большой палец'}, {w:'thunder', e:'⛈️', ru:'гром'}, {w:'this', e:'👉', ru:'этот'},
-        {w:'that', e:'👈', ru:'тот'}, {w:'the', e:'📖', ru:'определённый артикль'}, {w:'they', e:'👥', ru:'они'},
-        {w:'them', e:'👥', ru:'их'}, {w:'then', e:'⏭️', ru:'потом'}, {w:'there', e:'', ru:'там'},
-        {w:'with', e:'🤝', ru:'с'}, {w:'mother', e:'👩', ru:'мама'}, {w:'father', e:'👨', ru:'папа'}
+        {w:'that', e:'👈', ru:'тот'}, {w:'mother', e:'👩', ru:'мама'}, {w:'father', e:'👨', ru:'папа'}
     ],
     ph: [
-        {w:'phone', e:'📞', ru:'телефон'}, {w:'photo', e:'', ru:'фото'}, {w:'phrase', e:'💬', ru:'фраза'},
-        {w:'phoenix', e:'🔥', ru:'феникс'}, {w:'dolphin', e:'🐬', ru:'дельфин'}, {w:'elephant', e:'', ru:'слон'},
-        {w:'graph', e:'📊', ru:'график'}, {w:'alphabet', e:'🔤', ru:'алфавит'}, {w:'pharmacy', e:'💊', ru:'аптека'},
-        {w:'phantom', e:'', ru:'призрак'}
+        {w:'phone', e:'📞', ru:'телефон'}, {w:'photo', e:'📷', ru:'фото'}, {w:'phrase', e:'💬', ru:'фраза'},
+        {w:'dolphin', e:'🐬', ru:'дельфин'}, {w:'elephant', e:'🐘', ru:'слон'}, {w:'graph', e:'📊', ru:'график'},
+        {w:'alphabet', e:'🔤', ru:'алфавит'}, {w:'pharmacy', e:'💊', ru:'аптека'}
     ],
     wh: [
-        {w:'whale', e:'🐳', ru:'кит'}, {w:'white', e:'⚪', ru:'белый'}, {w:'wheel', e:'', ru:'колесо'},
-        {w:'whip', e:'', ru:'кнут'}, {w:'whisper', e:'🤫', ru:'шептать'}, {w:'whistle', e:'🎵', ru:'свистеть'},
-        {w:'what', e:'❓', ru:'что'}, {w:'when', e:'⏰', ru:'когда'}, {w:'where', e:'📍', ru:'где'},
-        {w:'which', e:'🤔', ru:'какой'}, {w:'why', e:'❓', ru:'почему'}
+        {w:'whale', e:'🐳', ru:'кит'}, {w:'white', e:'⚪', ru:'белый'}, {w:'wheel', e:'🛞', ru:'колесо'},
+        {w:'whisper', e:'🤫', ru:'шептать'}, {w:'whistle', e:'🎵', ru:'свистеть'}, {w:'what', e:'❓', ru:'что'},
+        {w:'when', e:'⏰', ru:'когда'}, {w:'where', e:'📍', ru:'где'}, {w:'which', e:'🤔', ru:'какой'},
+        {w:'why', e:'❓', ru:'почему'}
     ],
     ck: [
         {w:'duck', e:'🦆', ru:'утка'}, {w:'luck', e:'🍀', ru:'удача'}, {w:'truck', e:'🚚', ru:'грузовик'},
         {w:'sock', e:'🧦', ru:'носок'}, {w:'rock', e:'🪨', ru:'камень'}, {w:'lock', e:'🔒', ru:'замок'},
-        {w:'clock', e:'⏰', ru:'часы'}, {w:'block', e:'🧱', ru:'блок'}, {w:'flock', e:'🐑', ru:'стадо'},
-        {w:'knock', e:'🚪', ru:'стучать'}, {w:'snack', e:'', ru:'перекус'}, {w:'track', e:'🛤️', ru:'тропа'},
-        {w:'brick', e:'🧱', ru:'кирпич'}, {w:'chick', e:'🐤', ru:'цыплёнок'}, {w:'trick', e:'🎩', ru:'трюк'}
+        {w:'clock', e:'⏰', ru:'часы'}, {w:'block', e:'🧱', ru:'блок'}, {w:'knock', e:'🚪', ru:'стучать'},
+        {w:'snack', e:'🍿', ru:'перекус'}, {w:'brick', e:'🧱', ru:'кирпич'}, {w:'trick', e:'🎩', ru:'трюк'}
     ]
 };
 
 const blendsData = {
     l: [
-        {w:'black', e:'⚫', ru:'чёрный'}, {w:'blanket', e:'🛌', ru:'одеяло'}, {w:'blue', e:'🔵', ru:'синий'},
-        {w:'blow', e:'💨', ru:'дуть'}, {w:'class', e:'🏫', ru:'класс'}, {w:'clap', e:'👏', ru:'хлопать'},
-        {w:'clean', e:'🧹', ru:'чистый'}, {w:'climb', e:'', ru:'лазить'}, {w:'clock', e:'⏰', ru:'часы'},
-        {w:'flag', e:'🚩', ru:'флаг'}, {w:'flat', e:'🏢', ru:'плоский'}, {w:'fly', e:'🪁', ru:'летать'},
-        {w:'glass', e:'🥛', ru:'стекло'}, {w:'glow', e:'✨', ru:'светить'}, {w:'glue', e:'🧴', ru:'клей'},
-        {w:'plane', e:'️', ru:'самолёт'}, {w:'play', e:'🎮', ru:'играть'}, {w:'please', e:'', ru:'пожалуйста'},
-        {w:'sleep', e:'😴', ru:'спать'}, {w:'slide', e:'🛝', ru:'горка'}, {w:'slow', e:'🐢', ru:'медленный'}
+        {w:'black', e:'⚫', ru:'чёрный'}, {w:'blue', e:'🔵', ru:'синий'}, {w:'blow', e:'💨', ru:'дуть'},
+        {w:'class', e:'🏫', ru:'класс'}, {w:'clap', e:'👏', ru:'хлопать'}, {w:'clean', e:'🧹', ru:'чистый'},
+        {w:'clock', e:'⏰', ru:'часы'}, {w:'flag', e:'🚩', ru:'флаг'}, {w:'flat', e:'🏢', ru:'плоский'},
+        {w:'fly', e:'🪁', ru:'летать'}, {w:'glass', e:'🥛', ru:'стекло'}, {w:'glue', e:'🧴', ru:'клей'},
+        {w:'plane', e:'✈️', ru:'самолёт'}, {w:'play', e:'🎮', ru:'играть'}, {w:'sleep', e:'😴', ru:'спать'},
+        {w:'slide', e:'🛝', ru:'горка'}, {w:'slow', e:'🐢', ru:'медленный'}
     ],
     r: [
-        {w:'bread', e:'🍞', ru:'хлеб'}, {w:'break', e:'☕', ru:'перерыв'}, {w:'brown', e:'🟫', ru:'коричневый'},
-        {w:'brush', e:'️', ru:'щётка'}, {w:'crab', e:'🦀', ru:'краб'}, {w:'cry', e:'😢', ru:'плакать'},
-        {w:'crop', e:'🌾', ru:'урожай'}, {w:'crown', e:'👑', ru:'корона'}, {w:'drum', e:'🥁', ru:'барабан'},
-        {w:'drop', e:'💧', ru:'капля'}, {w:'drink', e:'🥤', ru:'пить'}, {w:'dress', e:'👗', ru:'платье'},
-        {w:'frog', e:'🐸', ru:'лягушка'}, {w:'friend', e:'👫', ru:'друг'}, {w:'fruit', e:'🍎', ru:'фрукт'},
-        {w:'grass', e:'🌿', ru:'трава'}, {w:'green', e:'🟢', ru:'зелёный'}, {w:'grow', e:'', ru:'расти'},
-        {w:'prize', e:'🏆', ru:'приз'}, {w:'print', e:'🖨️', ru:'печатать'}, {w:'train', e:'🚂', ru:'поезд'},
-        {w:'tree', e:'🌳', ru:'дерево'}, {w:'trip', e:'🧳', ru:'поездка'}
+        {w:'bread', e:'🍞', ru:'хлеб'}, {w:'brown', e:'🟫', ru:'коричневый'}, {w:'brush', e:'🖌️', ru:'щётка'},
+        {w:'crab', e:'🦀', ru:'краб'}, {w:'cry', e:'😢', ru:'плакать'}, {w:'crown', e:'👑', ru:'корона'},
+        {w:'drum', e:'🥁', ru:'барабан'}, {w:'drop', e:'💧', ru:'капля'}, {w:'drink', e:'🥤', ru:'пить'},
+        {w:'dress', e:'👗', ru:'платье'}, {w:'frog', e:'🐸', ru:'лягушка'}, {w:'friend', e:'👫', ru:'друг'},
+        {w:'grass', e:'🌿', ru:'трава'}, {w:'green', e:'🟢', ru:'зелёный'}, {w:'prize', e:'🏆', ru:'приз'},
+        {w:'train', e:'🚂', ru:'поезд'}, {w:'tree', e:'🌳', ru:'дерево'}, {w:'trip', e:'🧳', ru:'поездка'}
     ],
     s: [
-        {w:'school', e:'🏫', ru:'школа'}, {w:'score', e:'', ru:'счёт'}, {w:'sky', e:'☁️', ru:'небо'},
-        {w:'skin', e:'🧴', ru:'кожа'}, {w:'skip', e:'🤸', ru:'прыгать'}, {w:'sleep', e:'😴', ru:'спать'},
-        {w:'slow', e:'🐢', ru:'медленный'}, {w:'small', e:'🐜', ru:'маленький'}, {w:'smile', e:'😊', ru:'улыбка'},
-        {w:'smoke', e:'💨', ru:'дым'}, {w:'snake', e:'🐍', ru:'змея'}, {w:'snow', e:'❄️', ru:'снег'},
-        {w:'snail', e:'🐌', ru:'улитка'}, {w:'space', e:'🚀', ru:'космос'}, {w:'spoon', e:'🥄', ru:'ложка'},
-        {w:'spin', e:'🌀', ru:'крутить'}, {w:'star', e:'⭐', ru:'звезда'}, {w:'stop', e:'', ru:'стоп'},
-        {w:'store', e:'🏪', ru:'магазин'}, {w:'swim', e:'🏊', ru:'плавать'}, {w:'sweet', e:'🍬', ru:'сладкий'}
+        {w:'school', e:'🏫', ru:'школа'}, {w:'sky', e:'☁️', ru:'небо'}, {w:'skin', e:'🧴', ru:'кожа'},
+        {w:'skip', e:'🤸', ru:'прыгать'}, {w:'sleep', e:'😴', ru:'спать'}, {w:'slow', e:'🐢', ru:'медленный'},
+        {w:'small', e:'🐜', ru:'маленький'}, {w:'smile', e:'😊', ru:'улыбка'}, {w:'smoke', e:'💨', ru:'дым'},
+        {w:'snake', e:'🐍', ru:'змея'}, {w:'snow', e:'❄️', ru:'снег'}, {w:'snail', e:'🐌', ru:'улитка'},
+        {w:'space', e:'🚀', ru:'космос'}, {w:'spoon', e:'🥄', ru:'ложка'}, {w:'star', e:'⭐', ru:'звезда'},
+        {w:'stop', e:'🛑', ru:'стоп'}, {w:'store', e:'🏪', ru:'магазин'}, {w:'swim', e:'🏊', ru:'плавать'},
+        {w:'sweet', e:'🍬', ru:'сладкий'}
     ]
 };
 
@@ -1382,42 +1534,40 @@ const vowelTeamsData = {
         {w:'rain', e:'🌧️', ru:'дождь'}, {w:'train', e:'🚂', ru:'поезд'}, {w:'brain', e:'🧠', ru:'мозг'},
         {w:'pain', e:'🤕', ru:'боль'}, {w:'mail', e:'📬', ru:'почта'}, {w:'tail', e:'🦊', ru:'хвост'},
         {w:'sail', e:'⛵', ru:'парус'}, {w:'play', e:'🎮', ru:'играть'}, {w:'day', e:'🌞', ru:'день'},
-        {w:'say', e:'💬', ru:'говорить'}, {w:'may', e:'🌸', ru:'май/можно'}, {w:'way', e:'🛣️', ru:'путь'},
-        {w:'stay', e:'', ru:'оставаться'}, {w:'pay', e:'💰', ru:'платить'}
+        {w:'say', e:'💬', ru:'говорить'}, {w:'may', e:'🌸', ru:'май'}, {w:'way', e:'🛣️', ru:'путь'},
+        {w:'stay', e:'🛏️', ru:'оставаться'}, {w:'pay', e:'💰', ru:'платить'}
     ],
     ee: [
-        {w:'tree', e:'🌳', ru:'дерево'}, {w:'bee', e:'', ru:'пчела'}, {w:'see', e:'👁️', ru:'видеть'},
+        {w:'tree', e:'🌳', ru:'дерево'}, {w:'bee', e:'🐝', ru:'пчела'}, {w:'see', e:'👁️', ru:'видеть'},
         {w:'sea', e:'🌊', ru:'море'}, {w:'tea', e:'🍵', ru:'чай'}, {w:'read', e:'📖', ru:'читать'},
         {w:'eat', e:'🍽️', ru:'есть'}, {w:'meat', e:'🥩', ru:'мясо'}, {w:'head', e:'🧠', ru:'голова'},
-        {w:'bread', e:'🍞', ru:'хлеб'}, {w:'dead', e:'💀', ru:'мёртвый'}, {w:'green', e:'🟢', ru:'зелёный'},
-        {w:'sheep', e:'🐑', ru:'овца'}, {w:'sleep', e:'😴', ru:'спать'}, {w:'sweet', e:'🍬', ru:'сладкий'},
-        {w:'feet', e:'🦶', ru:'ступни'}, {w:'meet', e:'🤝', ru:'встречать'}, {w:'week', e:'📅', ru:'неделя'}
+        {w:'bread', e:'🍞', ru:'хлеб'}, {w:'green', e:'🟢', ru:'зелёный'}, {w:'sheep', e:'🐑', ru:'овца'},
+        {w:'sleep', e:'😴', ru:'спать'}, {w:'sweet', e:'🍬', ru:'сладкий'}, {w:'feet', e:'🦶', ru:'ступни'},
+        {w:'meet', e:'🤝', ru:'встречать'}, {w:'week', e:'📅', ru:'неделя'}
     ],
     oa: [
         {w:'boat', e:'⛵', ru:'лодка'}, {w:'coat', e:'🧥', ru:'пальто'}, {w:'goat', e:'🐐', ru:'коза'},
-        {w:'road', e:'🛣️', ru:'дорога'}, {w:'toad', e:'🐸', ru:'жаба'}, {w:'load', e:'', ru:'груз'},
-        {w:'snow', e:'❄️', ru:'снег'}, {w:'grow', e:'🌱', ru:'расти'}, {w:'show', e:'🎭', ru:'шоу'},
-        {w:'slow', e:'🐢', ru:'медленный'}, {w:'blow', e:'', ru:'дуть'}, {w:'bowl', e:'🥣', ru:'миска'},
-        {w:'own', e:'🏠', ru:'владеть'}, {w:'low', e:'⬇️', ru:'низкий'}
+        {w:'road', e:'🛣️', ru:'дорога'}, {w:'toad', e:'🐸', ru:'жаба'}, {w:'snow', e:'❄️', ru:'снег'},
+        {w:'grow', e:'🌱', ru:'расти'}, {w:'show', e:'🎭', ru:'шоу'}, {w:'slow', e:'🐢', ru:'медленный'},
+        {w:'bowl', e:'🥣', ru:'миска'}, {w:'own', e:'🏠', ru:'владеть'}, {w:'low', e:'⬇️', ru:'низкий'}
     ],
     oo: [
-        {w:'moon', e:'🌙', ru:'луна'}, {w:'spoon', e:'', ru:'ложка'}, {w:'food', e:'🍎', ru:'еда'},
+        {w:'moon', e:'🌙', ru:'луна'}, {w:'spoon', e:'🥄', ru:'ложка'}, {w:'food', e:'🍎', ru:'еда'},
         {w:'cool', e:'😎', ru:'крутой'}, {w:'pool', e:'🏊', ru:'бассейн'}, {w:'school', e:'🏫', ru:'школа'},
-        {w:'zoo', e:'🦁', ru:'зоопарк'}, {w:'book', e:'', ru:'книга'}, {w:'cook', e:'👨‍', ru:'повар'},
+        {w:'zoo', e:'🦁', ru:'зоопарк'}, {w:'book', e:'📖', ru:'книга'}, {w:'cook', e:'👨‍🍳', ru:'повар'},
         {w:'look', e:'👀', ru:'смотреть'}, {w:'good', e:'👍', ru:'хороший'}, {w:'foot', e:'🦶', ru:'ступня'},
         {w:'wood', e:'🪵', ru:'дерево'}, {w:'wool', e:'🧶', ru:'шерсть'}
     ],
     ou: [
         {w:'house', e:'🏠', ru:'дом'}, {w:'mouse', e:'🐭', ru:'мышь'}, {w:'mouth', e:'👄', ru:'рот'},
-        {w:'cloud', e:'☁️', ru:'облако'}, {w:'loud', e:'🔊', ru:'громкий'}, {w:'pound', e:'💷', ru:'фунт'},
-        {w:'round', e:'⭕', ru:'круглый'}, {w:'found', e:'🔍', ru:'нашёл'}, {w:'cow', e:'🐄', ru:'корова'},
-        {w:'how', e:'❓', ru:'как'}, {w:'now', e:'', ru:'сейчас'}, {w:'brown', e:'🟫', ru:'коричневый'},
-        {w:'down', e:'️', ru:'вниз'}, {w:'town', e:'🏘️', ru:'город'}
+        {w:'cloud', e:'☁️', ru:'облако'}, {w:'loud', e:'🔊', ru:'громкий'}, {w:'round', e:'⭕', ru:'круглый'},
+        {w:'cow', e:'🐄', ru:'корова'}, {w:'how', e:'❓', ru:'как'}, {w:'now', e:'⏱️', ru:'сейчас'},
+        {w:'brown', e:'🟫', ru:'коричневый'}, {w:'down', e:'⬇️', ru:'вниз'}, {w:'town', e:'🏘️', ru:'город'}
     ],
     oi: [
         {w:'coin', e:'🪙', ru:'монета'}, {w:'oil', e:'🛢️', ru:'масло'}, {w:'boil', e:'🫖', ru:'кипятить'},
-        {w:'soil', e:'🌱', ru:'почва'}, {w:'foil', e:'', ru:'фольга'}, {w:'boy', e:'👦', ru:'мальчик'},
-        {w:'toy', e:'🧸', ru:'игрушка'}, {w:'joy', e:'😄', ru:'радость'}, {w:'royal', e:'', ru:'королевский'}
+        {w:'soil', e:'🌱', ru:'почва'}, {w:'foil', e:'🥡', ru:'фольга'}, {w:'boy', e:'👦', ru:'мальчик'},
+        {w:'toy', e:'🧸', ru:'игрушка'}, {w:'joy', e:'😄', ru:'радость'}, {w:'royal', e:'👑', ru:'королевский'}
     ],
     ar: [
         {w:'car', e:'🚗', ru:'машина'}, {w:'star', e:'⭐', ru:'звезда'}, {w:'farm', e:'🚜', ru:'ферма'},
@@ -1428,10 +1578,40 @@ const vowelTeamsData = {
     or: [
         {w:'corn', e:'🌽', ru:'кукуруза'}, {w:'fork', e:'🍴', ru:'вилка'}, {w:'horse', e:'🐴', ru:'лошадь'},
         {w:'horn', e:'📯', ru:'рог'}, {w:'storm', e:'⛈️', ru:'шторм'}, {w:'sport', e:'⚽', ru:'спорт'},
-        {w:'short', e:'', ru:'короткий'}, {w:'north', e:'🧭', ru:'север'}, {w:'forest', e:'', ru:'лес'},
+        {w:'short', e:'📏', ru:'короткий'}, {w:'north', e:'🧭', ru:'север'}, {w:'forest', e:'🌲', ru:'лес'},
         {w:'morning', e:'🌅', ru:'утро'}, {w:'orange', e:'🍊', ru:'апельсин'}
     ]
 };
+
+const syllablesLeData = [
+    {w:'table', e:'🪑', ru:'стол', dots:'ta·ble'},
+    {w:'little', e:'🤏', ru:'маленький', dots:'lit·tle'},
+    {w:'apple', e:'🍎', ru:'яблоко', dots:'ap·ple'},
+    {w:'bubble', e:'🫧', ru:'пузырь', dots:'bub·ble'},
+    {w:'candle', e:'🕯️', ru:'свеча', dots:'can·dle'},
+    {w:'handle', e:'🚪', ru:'ручка', dots:'han·dle'},
+    {w:'purple', e:'🟣', ru:'фиолетовый', dots:'pur·ple'},
+    {w:'turtle', e:'🐢', ru:'черепаха', dots:'tur·tle'},
+    {w:'circle', e:'⭕', ru:'круг', dots:'cir·cle'},
+    {w:'uncle', e:'👨', ru:'дядя', dots:'un·cle'},
+    {w:'simple', e:'✨', ru:'простой', dots:'sim·ple'},
+    {w:'middle', e:'🎯', ru:'середина', dots:'mid·dle'}
+];
+
+const syllablesTwoData = [
+    {w:'inside', e:'📦', ru:'внутри', dots:'in·side'},
+    {w:'carpet', e:'🟥', ru:'ковёр', dots:'car·pet'},
+    {w:'rabbit', e:'🐰', ru:'кролик', dots:'rab·bit'},
+    {w:'button', e:'🔘', ru:'кнопка', dots:'but·ton'},
+    {w:'winter', e:'❄️', ru:'зима', dots:'win·ter'},
+    {w:'garden', e:'🌷', ru:'сад', dots:'gar·den'},
+    {w:'monster', e:'👹', ru:'монстр', dots:'mon·ster'},
+    {w:'pencil', e:'✏️', ru:'карандаш', dots:'pen·cil'},
+    {w:'basket', e:'🧺', ru:'корзина', dots:'bas·ket'},
+    {w:'helmet', e:'⛑️', ru:'шлем', dots:'hel·met'},
+    {w:'sunset', e:'🌇', ru:'закат', dots:'sun·set'},
+    {w:'napkin', e:'🧻', ru:'салфетка', dots:'nap·kin'}
+];
 
 const sightWordsData = {
     1: ['the','be','to','of','and','a','in','that','have','I','it','for','not','on','with','he','as','you','do','at'],
@@ -1445,101 +1625,100 @@ const vocabData = {
         {w:'cat', e:'🐱', ru:'кот'}, {w:'dog', e:'🐶', ru:'собака'}, {w:'bird', e:'🐦', ru:'птица'},
         {w:'fish', e:'🐟', ru:'рыба'}, {w:'rabbit', e:'🐰', ru:'кролик'}, {w:'mouse', e:'🐭', ru:'мышь'},
         {w:'bear', e:'🐻', ru:'медведь'}, {w:'fox', e:'🦊', ru:'лиса'}, {w:'wolf', e:'🐺', ru:'волк'},
-        {w:'deer', e:'🦌', ru:'олень'}, {w:'horse', e:'🐴', ru:'лошадь'}, {w:'cow', e:'', ru:'корова'},
-        {w:'pig', e:'🐷', ru:'свинья'}, {w:'sheep', e:'', ru:'овца'}, {w:'goat', e:'🐐', ru:'коза'},
+        {w:'deer', e:'🦌', ru:'олень'}, {w:'horse', e:'🐴', ru:'лошадь'}, {w:'cow', e:'🐄', ru:'корова'},
+        {w:'pig', e:'🐷', ru:'свинья'}, {w:'sheep', e:'🐑', ru:'овца'}, {w:'goat', e:'🐐', ru:'коза'},
         {w:'chicken', e:'🐔', ru:'курица'}, {w:'duck', e:'🦆', ru:'утка'}, {w:'frog', e:'🐸', ru:'лягушка'},
         {w:'snake', e:'🐍', ru:'змея'}, {w:'turtle', e:'🐢', ru:'черепаха'}, {w:'lion', e:'🦁', ru:'лев'},
         {w:'tiger', e:'🐯', ru:'тигр'}, {w:'elephant', e:'🐘', ru:'слон'}, {w:'giraffe', e:'🦒', ru:'жираф'},
-        {w:'monkey', e:'🐒', ru:'обезьяна'}, {w:'panda', e:'🐼', ru:'панда'}, {w:'whale', e:'', ru:'кит'},
-        {w:'dolphin', e:'🐬', ru:'дельфин'}, {w:'shark', e:'', ru:'акула'}, {w:'butterfly', e:'🦋', ru:'бабочка'},
+        {w:'monkey', e:'🐒', ru:'обезьяна'}, {w:'panda', e:'🐼', ru:'панда'}, {w:'whale', e:'🐳', ru:'кит'},
+        {w:'dolphin', e:'🐬', ru:'дельфин'}, {w:'shark', e:'🦈', ru:'акула'}, {w:'butterfly', e:'🦋', ru:'бабочка'},
         {w:'bee', e:'🐝', ru:'пчела'}, {w:'ant', e:'🐜', ru:'муравей'}, {w:'spider', e:'🕷️', ru:'паук'}
     ],
     food: [
-        {w:'apple', e:'🍎', ru:'яблоко'}, {w:'banana', e:'', ru:'банан'}, {w:'orange', e:'🍊', ru:'апельсин'},
+        {w:'apple', e:'🍎', ru:'яблоко'}, {w:'banana', e:'🍌', ru:'банан'}, {w:'orange', e:'🍊', ru:'апельсин'},
         {w:'grape', e:'🍇', ru:'виноград'}, {w:'strawberry', e:'🍓', ru:'клубника'}, {w:'cherry', e:'🍒', ru:'вишня'},
-        {w:'peach', e:'', ru:'персик'}, {w:'lemon', e:'🍋', ru:'лимон'}, {w:'watermelon', e:'', ru:'арбуз'},
-        {w:'carrot', e:'🥕', ru:'морковь'}, {w:'potato', e:'', ru:'картофель'}, {w:'tomato', e:'🍅', ru:'помидор'},
+        {w:'peach', e:'🍑', ru:'персик'}, {w:'lemon', e:'🍋', ru:'лимон'}, {w:'watermelon', e:'🍉', ru:'арбуз'},
+        {w:'carrot', e:'🥕', ru:'морковь'}, {w:'potato', e:'🥔', ru:'картофель'}, {w:'tomato', e:'🍅', ru:'помидор'},
         {w:'corn', e:'🌽', ru:'кукуруза'}, {w:'broccoli', e:'🥦', ru:'брокколи'}, {w:'bread', e:'🍞', ru:'хлеб'},
-        {w:'cheese', e:'🧀', ru:'сыр'}, {w:'egg', e:'🥚', ru:'яйцо'}, {w:'milk', e:'', ru:'молоко'},
+        {w:'cheese', e:'🧀', ru:'сыр'}, {w:'egg', e:'🥚', ru:'яйцо'}, {w:'milk', e:'🥛', ru:'молоко'},
         {w:'butter', e:'🧈', ru:'масло'}, {w:'rice', e:'🍚', ru:'рис'}, {w:'meat', e:'🥩', ru:'мясо'},
-        {w:'chicken', e:'🍗', ru:'курица'}, {w:'fish', e:'🐟', ru:'рыба'}, {w:'pizza', e:'', ru:'пицца'},
+        {w:'chicken', e:'🍗', ru:'курица'}, {w:'fish', e:'🐟', ru:'рыба'}, {w:'pizza', e:'🍕', ru:'пицца'},
         {w:'cake', e:'🎂', ru:'торт'}, {w:'cookie', e:'🍪', ru:'печенье'}, {w:'chocolate', e:'🍫', ru:'шоколад'},
         {w:'ice cream', e:'🍦', ru:'мороженое'}, {w:'candy', e:'🍬', ru:'конфета'}, {w:'tea', e:'🍵', ru:'чай'},
-        {w:'coffee', e:'☕', ru:'кофе'}, {w:'juice', e:'', ru:'сок'}, {w:'water', e:'💧', ru:'вода'}
+        {w:'coffee', e:'☕', ru:'кофе'}, {w:'juice', e:'🧃', ru:'сок'}, {w:'water', e:'💧', ru:'вода'}
     ],
     colors: [
-        {w:'red', e:'🔴', ru:'красный'}, {w:'blue', e:'', ru:'синий'}, {w:'yellow', e:'🟡', ru:'жёлтый'},
-        {w:'green', e:'🟢', ru:'зелёный'}, {w:'orange', e:'🟠', ru:'оранжевый'}, {w:'purple', e:'', ru:'фиолетовый'},
-        {w:'pink', e:'', ru:'розовый'}, {w:'brown', e:'🟫', ru:'коричневый'}, {w:'black', e:'⚫', ru:'чёрный'},
+        {w:'red', e:'🔴', ru:'красный'}, {w:'blue', e:'🔵', ru:'синий'}, {w:'yellow', e:'🟡', ru:'жёлтый'},
+        {w:'green', e:'🟢', ru:'зелёный'}, {w:'orange', e:'🟠', ru:'оранжевый'}, {w:'purple', e:'🟣', ru:'фиолетовый'},
+        {w:'pink', e:'🩷', ru:'розовый'}, {w:'brown', e:'🟫', ru:'коричневый'}, {w:'black', e:'⚫', ru:'чёрный'},
         {w:'white', e:'⚪', ru:'белый'}, {w:'gray', e:'🩶', ru:'серый'}, {w:'gold', e:'🏅', ru:'золотой'},
         {w:'silver', e:'🥈', ru:'серебряный'}
     ],
     numbers: [
-        {w:'one', e:'1️⃣', ru:'один'}, {w:'two', e:'2️⃣', ru:'два'}, {w:'three', e:'3️', ru:'три'},
+        {w:'one', e:'1️⃣', ru:'один'}, {w:'two', e:'2️⃣', ru:'два'}, {w:'three', e:'3️⃣', ru:'три'},
         {w:'four', e:'4️⃣', ru:'четыре'}, {w:'five', e:'5️⃣', ru:'пять'}, {w:'six', e:'6️⃣', ru:'шесть'},
         {w:'seven', e:'7️⃣', ru:'семь'}, {w:'eight', e:'8️⃣', ru:'восемь'}, {w:'nine', e:'9️⃣', ru:'девять'},
-        {w:'ten', e:'', ru:'десять'}, {w:'eleven', e:'1️⃣1️⃣', ru:'одиннадцать'}, {w:'twelve', e:'1️⃣2️⃣', ru:'двенадцать'},
+        {w:'ten', e:'🔟', ru:'десять'}, {w:'eleven', e:'1️⃣1️⃣', ru:'одиннадцать'}, {w:'twelve', e:'1️⃣2️⃣', ru:'двенадцать'},
         {w:'thirteen', e:'🔢', ru:'тринадцать'}, {w:'fourteen', e:'🔢', ru:'четырнадцать'}, {w:'fifteen', e:'🔢', ru:'пятнадцать'},
-        {w:'sixteen', e:'🔢', ru:'шестнадцать'}, {w:'seventeen', e:'🔢', ru:'семнадцать'}, {w:'eighteen', e:'', ru:'восемнадцать'},
-        {w:'nineteen', e:'', ru:'девятнадцать'}, {w:'twenty', e:'2️⃣0️', ru:'двадцать'}, {w:'thirty', e:'3️⃣0️⃣', ru:'тридцать'},
-        {w:'forty', e:'4️0️⃣', ru:'сорок'}, {w:'fifty', e:'5️⃣0️⃣', ru:'пятьдесят'}, {w:'hundred', e:'💯', ru:'сто'}
+        {w:'sixteen', e:'🔢', ru:'шестнадцать'}, {w:'seventeen', e:'🔢', ru:'семнадцать'}, {w:'eighteen', e:'🔢', ru:'восемнадцать'},
+        {w:'nineteen', e:'🔢', ru:'девятнадцать'}, {w:'twenty', e:'2️⃣0️⃣', ru:'двадцать'}, {w:'thirty', e:'3️⃣0️⃣', ru:'тридцать'},
+        {w:'forty', e:'4️⃣0️⃣', ru:'сорок'}, {w:'fifty', e:'5️⃣0️⃣', ru:'пятьдесят'}, {w:'hundred', e:'💯', ru:'сто'}
     ],
     family: [
-        {w:'mom', e:'👩', ru:'мама'}, {w:'dad', e:'👨', ru:'папа'}, {w:'sister', e:'', ru:'сестра'},
-        {w:'brother', e:'👦', ru:'брат'}, {w:'baby', e:'', ru:'малыш'}, {w:'grandma', e:'👵', ru:'бабушка'},
-        {w:'grandpa', e:'👴', ru:'дедушка'}, {w:'aunt', e:'👩', ru:'тётя'}, {w:'uncle', e:'👨', ru:'дядя'},
-        {w:'cousin', e:'👫', ru:'двоюродный брат/сестра'}, {w:'family', e:'👨‍👩‍', ru:'семья'}, {w:'friend', e:'👫', ru:'друг'}
+        {w:'mom', e:'👩', ru:'мама'}, {w:'dad', e:'👨', ru:'папа'}, {w:'sister', e:'👧', ru:'сестра'},
+        {w:'brother', e:'👦', ru:'брат'}, {w:'baby', e:'👶', ru:'малыш'}, {w:'grandma', e:'👵', ru:'бабушка'},
+        {w:'grandpa', e:'👴', ru:'дедушка'}, {w:'aunt', e:'👩‍🦰', ru:'тётя'}, {w:'uncle', e:'👨‍🦱', ru:'дядя'},
+        {w:'cousin', e:'👫', ru:'двоюродный брат/сестра'}, {w:'family', e:'👨‍👩‍👧', ru:'семья'}, {w:'friend', e:'👫', ru:'друг'}
     ],
     body: [
-        {w:'head', e:'🧠', ru:'голова'}, {w:'hair', e:'', ru:'волосы'}, {w:'eye', e:'👁️', ru:'глаз'},
-        {w:'ear', e:'', ru:'ухо'}, {w:'nose', e:'👃', ru:'нос'}, {w:'mouth', e:'👄', ru:'рот'},
-        {w:'tooth', e:'🦷', ru:'зуб'}, {w:'tongue', e:'', ru:'язык'}, {w:'face', e:'😊', ru:'лицо'},
-        {w:'neck', e:'🦒', ru:'шея'}, {w:'shoulder', e:'🤷', ru:'плечо'}, {w:'arm', e:'💪', ru:'рука'},
-        {w:'hand', e:'✋', ru:'кисть'}, {w:'finger', e:'👆', ru:'палец'}, {w:'leg', e:'', ru:'нога'},
-        {w:'foot', e:'🦶', ru:'ступня'}, {w:'toe', e:'', ru:'палец ноги'}, {w:'back', e:'🔙', ru:'спина'},
-        {w:'heart', e:'❤️', ru:'сердце'}, {w:'stomach', e:'🫃', ru:'живот'}
+        {w:'head', e:'🧠', ru:'голова'}, {w:'hair', e:'💇', ru:'волосы'}, {w:'eye', e:'👁️', ru:'глаз'},
+        {w:'ear', e:'👂', ru:'ухо'}, {w:'nose', e:'👃', ru:'нос'}, {w:'mouth', e:'👄', ru:'рот'},
+        {w:'tooth', e:'🦷', ru:'зуб'}, {w:'tongue', e:'👅', ru:'язык'},         {w:'face', e:'😊', ru:'лицо'}, {w:'neck', e:'🦒', ru:'шея'}, {w:'shoulder', e:'🤷', ru:'плечо'},
+        {w:'arm', e:'💪', ru:'рука'}, {w:'hand', e:'✋', ru:'кисть'}, {w:'finger', e:'👆', ru:'палец'},
+        {w:'leg', e:'🦵', ru:'нога'}, {w:'foot', e:'🦶', ru:'ступня'}, {w:'toe', e:'👣', ru:'палец ноги'},
+        {w:'back', e:'🔙', ru:'спина'}, {w:'heart', e:'❤️', ru:'сердце'}, {w:'stomach', e:'🫃', ru:'живот'}
     ],
     emotions: [
         {w:'happy', e:'😊', ru:'счастливый'}, {w:'sad', e:'😢', ru:'грустный'}, {w:'angry', e:'😠', ru:'злой'},
         {w:'scared', e:'😨', ru:'испуганный'}, {w:'surprised', e:'😲', ru:'удивлённый'}, {w:'tired', e:'😴', ru:'уставший'},
         {w:'hungry', e:'🤤', ru:'голодный'}, {w:'thirsty', e:'🥵', ru:'хочет пить'}, {w:'cold', e:'🥶', ru:'холодный'},
-        {w:'hot', e:'🥵', ru:'жаркий'}, {w:'sick', e:'🤒', ru:'больной'}, {w:'brave', e:'', ru:'храбрый'},
+        {w:'hot', e:'🥵', ru:'жаркий'}, {w:'sick', e:'🤒', ru:'больной'}, {w:'brave', e:'🦁', ru:'храбрый'},
         {w:'shy', e:'😳', ru:'застенчивый'}, {w:'proud', e:'🦚', ru:'гордый'}, {w:'excited', e:'🤩', ru:'в восторге'},
-        {w:'bored', e:'😒', ru:'скучающий'}, {w:'calm', e:'', ru:'спокойный'}, {w:'funny', e:'😄', ru:'смешной'}
+        {w:'bored', e:'😒', ru:'скучающий'}, {w:'calm', e:'😌', ru:'спокойный'}, {w:'funny', e:'😄', ru:'смешной'}
     ],
     weather: [
         {w:'sun', e:'☀️', ru:'солнце'}, {w:'cloud', e:'☁️', ru:'облако'}, {w:'rain', e:'🌧️', ru:'дождь'},
         {w:'snow', e:'❄️', ru:'снег'}, {w:'wind', e:'💨', ru:'ветер'}, {w:'storm', e:'⛈️', ru:'шторм'},
-        {w:'thunder', e:'⚡', ru:'гром'}, {w:'lightning', e:'️', ru:'молния'}, {w:'fog', e:'🌫️', ru:'туман'},
+        {w:'thunder', e:'⚡', ru:'гром'}, {w:'lightning', e:'🌩️', ru:'молния'}, {w:'fog', e:'🌫️', ru:'туман'},
         {w:'rainbow', e:'🌈', ru:'радуга'}, {w:'hot', e:'🔥', ru:'жарко'}, {w:'cold', e:'🥶', ru:'холодно'},
         {w:'warm', e:'🌤️', ru:'тепло'}, {w:'cool', e:'😎', ru:'прохладно'}, {w:'weather', e:'🌦️', ru:'погода'}
     ],
     seasons: [
-        {w:'spring', e:'🌸', ru:'весна'}, {w:'summer', e:'☀️', ru:'лето'}, {w:'autumn', e:'', ru:'осень'},
+        {w:'spring', e:'🌸', ru:'весна'}, {w:'summer', e:'☀️', ru:'лето'}, {w:'autumn', e:'🍂', ru:'осень'},
         {w:'fall', e:'🍁', ru:'осень (амер.)'}, {w:'winter', e:'❄️', ru:'зима'}, {w:'season', e:'🗓️', ru:'время года'}
     ],
     clothes: [
         {w:'shirt', e:'👕', ru:'рубашка'}, {w:'pants', e:'👖', ru:'брюки'}, {w:'dress', e:'👗', ru:'платье'},
         {w:'skirt', e:'👗', ru:'юбка'}, {w:'coat', e:'🧥', ru:'пальто'}, {w:'jacket', e:'🧥', ru:'куртка'},
         {w:'sweater', e:'🧶', ru:'свитер'}, {w:'socks', e:'🧦', ru:'носки'}, {w:'shoes', e:'👟', ru:'туфли'},
-        {w:'boots', e:'', ru:'сапоги'}, {w:'hat', e:'🎩', ru:'шляпа'}, {w:'cap', e:'🧢', ru:'кепка'},
+        {w:'boots', e:'👢', ru:'сапоги'}, {w:'hat', e:'🎩', ru:'шляпа'}, {w:'cap', e:'🧢', ru:'кепка'},
         {w:'scarf', e:'🧣', ru:'шарф'}, {w:'gloves', e:'🧤', ru:'перчатки'}, {w:'belt', e:'👔', ru:'ремень'},
         {w:'tie', e:'👔', ru:'галстук'}
     ],
     school: [
-        {w:'school', e:'🏫', ru:'школа'}, {w:'teacher', e:'👩‍🏫', ru:'учитель'}, {w:'student', e:'‍🎓', ru:'ученик'},
+        {w:'school', e:'🏫', ru:'школа'}, {w:'teacher', e:'👩‍🏫', ru:'учитель'}, {w:'student', e:'👨‍🎓', ru:'ученик'},
         {w:'book', e:'📚', ru:'книга'}, {w:'pen', e:'🖊️', ru:'ручка'}, {w:'pencil', e:'✏️', ru:'карандаш'},
         {w:'paper', e:'📄', ru:'бумага'}, {w:'desk', e:'🪑', ru:'парта'}, {w:'chair', e:'🪑', ru:'стул'},
-        {w:'bag', e:'🎒', ru:'сумка'}, {w:'ruler', e:'📏', ru:'линейка'}, {w:'scissors', e:'️', ru:'ножницы'},
-        {w:'glue', e:'🧴', ru:'клей'}, {w:'paint', e:'🎨', ru:'краска'}, {w:'computer', e:'', ru:'компьютер'},
-        {w:'lesson', e:'📖', ru:'урок'}, {w:'homework', e:'', ru:'домашнее задание'}, {w:'test', e:'📝', ru:'тест'}
+        {w:'bag', e:'🎒', ru:'сумка'}, {w:'ruler', e:'📏', ru:'линейка'}, {w:'scissors', e:'✂️', ru:'ножницы'},
+        {w:'glue', e:'🧴', ru:'клей'}, {w:'paint', e:'🎨', ru:'краска'}, {w:'computer', e:'💻', ru:'компьютер'},
+        {w:'lesson', e:'📖', ru:'урок'}, {w:'homework', e:'📝', ru:'домашнее задание'}, {w:'test', e:'📝', ru:'тест'}
     ],
     home: [
         {w:'house', e:'🏠', ru:'дом'}, {w:'room', e:'🚪', ru:'комната'}, {w:'door', e:'🚪', ru:'дверь'},
         {w:'window', e:'🪟', ru:'окно'}, {w:'bed', e:'🛏️', ru:'кровать'}, {w:'table', e:'🪑', ru:'стол'},
         {w:'chair', e:'🪑', ru:'стул'}, {w:'kitchen', e:'🍳', ru:'кухня'}, {w:'bathroom', e:'🚿', ru:'ванная'},
         {w:'living room', e:'🛋️', ru:'гостиная'}, {w:'garden', e:'🌳', ru:'сад'}, {w:'tree', e:'🌳', ru:'дерево'},
-        {w:'flower', e:'🌸', ru:'цветок'}, {w:'lamp', e:'💡', ru:'лампа'}, {w:'tv', e:'', ru:'телевизор'},
+        {w:'flower', e:'🌸', ru:'цветок'}, {w:'lamp', e:'💡', ru:'лампа'}, {w:'tv', e:'📺', ru:'телевизор'},
         {w:'phone', e:'📞', ru:'телефон'}
     ]
 };
@@ -1576,7 +1755,7 @@ const storiesData = {
         {en:'<br>', ru:''},
         {en:'Some', ru:'Некоторые'}, {en:'are', ru:''}, {en:'running,', ru:'бегают,'}, {en:'some', ru:'некоторые'}, {en:'are', ru:''}, {en:'jumping.', ru:'прыгают.'},
         {en:'<br>', ru:''},
-        {en:'It', ru:'Это'}, {en:'is', ru:''}, {en:'so', ru:'так'}, {en:'much', ru:'очень'}, {en:'fun!', ru:'весело!'}, {en:'', ru:''}
+        {en:'It', ru:'Это'}, {en:'is', ru:''}, {en:'so', ru:'так'}, {en:'much', ru:'очень'}, {en:'fun!', ru:'весело!'}
     ]
 };
 
@@ -1593,7 +1772,7 @@ const sentencesData = [
 
 const achievementsData = [
     {id:'first_star', badge:'⭐', name:'Первая звезда', desc:'Заработай первую звезду', condition: () => score >= 1},
-    {id:'ten_stars', badge:'', name:'10 звёзд', desc:'Заработай 10 звёзд', condition: () => score >= 10},
+    {id:'ten_stars', badge:'🌟', name:'10 звёзд', desc:'Заработай 10 звёзд', condition: () => score >= 10},
     {id:'fifty_stars', badge:'💫', name:'50 звёзд', desc:'Заработай 50 звёзд', condition: () => score >= 50},
     {id:'hundred_stars', badge:'🏆', name:'100 звёзд', desc:'Заработай 100 звёзд', condition: () => score >= 100},
     {id:'first_flower', badge:'🌸', name:'Первый цветок', desc:'Заработай первый цветок', condition: () => flowers >= 1},
@@ -1620,6 +1799,8 @@ let currentSpellLetters = [];
 let currentSpellInput = [];
 let currentSentence = null;
 let currentSentenceInput = [];
+let speedTimer = null;
+let confettiActive = false;
 
 // ==================== UTILS ====================
 function speak(text, rate = 0.85) {
@@ -1631,6 +1812,19 @@ function speak(text, rate = 0.85) {
         u.pitch = 1.15;
         window.speechSynthesis.speak(u);
     }
+}
+
+function speakLetters(letters, word, rate = 0.7) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    letters.forEach((l, i) => {
+        const u = new SpeechSynthesisUtterance(l);
+        u.lang = 'en-US'; u.rate = rate; u.pitch = 1.15;
+        setTimeout(() => window.speechSynthesis.speak(u), i * 450);
+    });
+    const u = new SpeechSynthesisUtterance(word);
+    u.lang = 'en-US'; u.rate = 0.8; u.pitch = 1.15;
+    setTimeout(() => window.speechSynthesis.speak(u), letters.length * 450 + 200);
 }
 
 function addScore(val) {
@@ -1722,15 +1916,48 @@ function initCVC() {
             const div = document.createElement('div');
             div.className = 'word-card';
             div.innerHTML = `<div class="emoji">${item.e}</div><div class="word">${item.w}</div><div class="trans">${item.ru}</div>`;
-            div.onclick = () => {
-                item.p.forEach((l, i) => setTimeout(() => speak(l), i * 400));
-                setTimeout(() => speak(item.w), item.p.length * 400 + 200);
-            };
+            div.onclick = () => speakLetters(item.p, item.w);
             grid.appendChild(div);
         });
     });
     currentBlendList = [...cvcData.a, ...cvcData.e, ...cvcData.i, ...cvcData.o, ...cvcData.u];
     loadBlend();
+    initWordFamilies();
+    initNonsense();
+    initDoubleConsonants();
+}
+
+function initWordFamilies() {
+    const cont = document.getElementById('wordFamilies');
+    wordFamiliesData.forEach(fam => {
+        const row = document.createElement('div');
+        row.className = 'family-row';
+        row.innerHTML = `<div class="fam-label">${fam.label}</div>
+            <div class="fam-words">${fam.words.map(w => `<span class="fam-word" onclick="speak('${w}')">${w}</span>`).join('')}</div>`;
+        cont.appendChild(row);
+    });
+}
+
+function initNonsense() {
+    const grid = document.getElementById('nonsenseGrid');
+    nonsenseWords.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'nonsense-card';
+        div.innerText = item.w;
+        div.onclick = () => speakLetters(item.p, item.w);
+        grid.appendChild(div);
+    });
+}
+
+function initDoubleConsonants() {
+    const grid = document.getElementById('doubleGrid');
+    doubleConsonantData.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'word-card';
+        div.innerHTML = `<div class="emoji">${item.e}</div><div class="word">${item.w}</div><div class="trans">${item.ru}</div>`;
+        div.onclick = () => speak(item.w.split(' → ')[1]);
+        grid.appendChild(div);
+    });
 }
 
 function loadBlend() {
@@ -1818,7 +2045,27 @@ function initVowelTeams() {
     });
 }
 
-// ==================== MODULE 7: SIGHT WORDS ====================
+// ==================== MODULE 7: SYLLABLES ====================
+function initSyllables() {
+    const leGrid = document.getElementById('sylLeGrid');
+    syllablesLeData.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'syllable-card';
+        div.innerHTML = `<div class="syl-word">${item.e} ${item.w}</div><div class="syl-dots">${item.dots}</div><div class="trans">${item.ru}</div>`;
+        div.onclick = () => speak(item.w);
+        leGrid.appendChild(div);
+    });
+    const twoGrid = document.getElementById('sylTwoGrid');
+    syllablesTwoData.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'syllable-card';
+        div.innerHTML = `<div class="syl-word">${item.e} ${item.w}</div><div class="syl-dots">${item.dots}</div><div class="trans">${item.ru}</div>`;
+        div.onclick = () => speak(item.w);
+        twoGrid.appendChild(div);
+    });
+}
+
+// ==================== MODULE 8: SIGHT WORDS ====================
 function initSight() {
     for (let i = 1; i <= 4; i++) {
         const grid = document.getElementById(`sw${i}Grid`);
@@ -1832,7 +2079,7 @@ function initSight() {
     }
 }
 
-// ==================== MODULE 8: VOCABULARY ====================
+// ==================== MODULE 9: VOCABULARY ====================
 function initVocab() {
     const map = {
         animals:'vAnimals', food:'vFood', colors:'vColors', numbers:'vNumbers',
@@ -1851,18 +2098,18 @@ function initVocab() {
     });
 }
 
-// ==================== MODULE 9: STORIES ====================
+// ==================== MODULE 10: STORIES ====================
 function initStories() {
     for (let i = 1; i <= 3; i++) {
         const cont = document.getElementById(`story${i}Text`);
         storiesData[i].forEach(item => {
             if (item.en === '<br>') {
-                cont.innerHTML += '<br>';
+                cont.appendChild(document.createElement('br'));
             } else if (item.en.match(/^[🌸🐱🌳]$/)) {
                 const span = document.createElement('span');
                 span.className = 'story-word';
-                span.innerHTML = item.en;
-                span.onclick = () => speak('love');
+                span.innerText = item.en;
+                span.onclick = () => speak('flower');
                 cont.appendChild(span);
                 cont.appendChild(document.createTextNode(' '));
             } else {
@@ -1878,15 +2125,19 @@ function initStories() {
 }
 
 function speakStory(num) {
-    const text = storiesData[num].filter(x => x.en !== '<br>' && !x.en.match(/^[🌸🌳]$/)).map(x => x.en.replace(/[.,!?]/g, '')).join(' ');
+    const text = storiesData[num]
+        .filter(x => x.en !== '<br>' && !x.en.match(/^[🌸🐱🌳]$/))
+        .map(x => x.en.replace(/[.,!?]/g, ''))
+        .join(' ');
     speak(text, 0.75);
 }
 
-// ==================== MODULE 10: QUIZ ====================
+// ==================== MODULE 11: QUIZ ====================
 function initQuiz() {
     loadPhonicsQuiz();
     loadWordsQuiz();
     loadListeningQuiz();
+    loadProgressQuiz();
 }
 
 function loadPhonicsQuiz() {
@@ -1898,7 +2149,6 @@ function loadPhonicsQuiz() {
         if (!options.includes(rnd)) options.push(rnd);
     }
     options.sort(() => Math.random() - 0.5);
-
     cont.innerHTML = `
         <div class="quiz-question">Какой звук у буквы "${letter.l}"?</div>
         <div class="quiz-options">
@@ -1931,7 +2181,6 @@ function loadWordsQuiz() {
         if (!options.includes(rnd)) options.push(rnd);
     }
     options.sort(() => Math.random() - 0.5);
-
     cont.innerHTML = `
         <div class="quiz-question">Что означает "${word.w}"?</div>
         <div class="quiz-options">
@@ -1964,9 +2213,8 @@ function loadListeningQuiz() {
         if (!options.includes(rnd)) options.push(rnd);
     }
     options.sort(() => Math.random() - 0.5);
-
     cont.innerHTML = `
-        <div class="quiz-question"> Послушай и выбери правильное слово</div>
+        <div class="quiz-question">👂 Послушай и выбери правильное слово</div>
         <button class="reset-btn" onclick="speak('${word.w}')" style="margin:20px 0">🔊 Прослушать</button>
         <div class="quiz-options">
             ${options.map(opt => `<button class="quiz-option" onclick="checkListeningAnswer(this, '${opt}', '${word.w}')">${opt}</button>`).join('')}
@@ -1989,7 +2237,71 @@ function checkListeningAnswer(btn, selected, correct) {
     }
 }
 
-// ==================== MODULE 11: SENTENCE BUILDER ====================
+// ==================== PROGRESS CHECK ====================
+let progressCheckWords = [];
+let progressCheckIndex = 0;
+let progressCheckCorrect = 0;
+
+function loadProgressQuiz() {
+    const cont = document.getElementById('progressQuiz');
+    // 10 слов: 6 по правилам + 4 sight words
+    const ruleWords = [];
+    const pool = [...cvcData.a, ...cvcData.e, ...cvcData.i, ...cvcData.o, ...cvcData.u];
+    while (ruleWords.length < 6) {
+        const rnd = pool[Math.floor(Math.random() * pool.length)];
+        if (!ruleWords.find(x => x.w === rnd.w)) ruleWords.push(rnd);
+    }
+    const sightPool = [...sightWordsData[1], ...sightWordsData[2]];
+    const sightPicked = [];
+    while (sightPicked.length < 4) {
+        const rnd = sightPool[Math.floor(Math.random() * sightPool.length)];
+        if (!sightPicked.includes(rnd)) sightPicked.push(rnd);
+    }
+    progressCheckWords = [
+        ...ruleWords.map(x => ({w: x.w, type: 'rule'})),
+        ...sightPicked.map(x => ({w: x, type: 'sight'}))
+    ];
+    progressCheckWords.sort(() => Math.random() - 0.5);
+    progressCheckIndex = 0;
+    progressCheckCorrect = 0;
+    renderProgressWord();
+}
+
+function renderProgressWord() {
+    const cont = document.getElementById('progressQuiz');
+    if (progressCheckIndex >= progressCheckWords.length) {
+        const pct = Math.round(progressCheckCorrect / progressCheckWords.length * 100);
+        let msg = '🌟 Отлично!';
+        if (pct < 50) msg = '💪 Нужно ещё потренироваться';
+        else if (pct < 80) msg = '👍 Хорошо, продолжай!';
+        cont.innerHTML = `
+            <div class="quiz-question">Результат: ${progressCheckCorrect} / ${progressCheckWords.length} (${pct}%)</div>
+            <div style="font-size:1.5rem; margin:20px 0;">${msg}</div>
+            <button class="reset-btn" onclick="loadProgressQuiz()">🔄 Пройти заново</button>
+        `;
+        if (pct >= 80) addScore(30);
+        return;
+    }
+    const item = progressCheckWords[progressCheckIndex];
+    cont.innerHTML = `
+        <div class="quiz-question">Слово ${progressCheckIndex + 1} из ${progressCheckWords.length}</div>
+        <div style="font-family:'Patrick Hand',cursive; font-size:3rem; color:var(--purple); margin:20px 0;">${item.w}</div>
+        <p class="desc">Прочитай вслух. Получилось без подсказки?</p>
+        <div class="game-options" style="margin-top:20px;">
+            <button class="game-btn" onclick="progressAnswer(true)">✅ Да, прочитал</button>
+            <button class="game-btn" onclick="progressAnswer(false)">❌ Нет, с трудом</button>
+        </div>
+        <button class="reset-btn" onclick="speak('${item.w}')" style="margin-top:15px;">🔊 Подсказка</button>
+    `;
+}
+
+function progressAnswer(correct) {
+    if (correct) progressCheckCorrect++;
+    progressCheckIndex++;
+    renderProgressWord();
+}
+
+// ==================== MODULE 12: SENTENCE BUILDER ====================
 function loadSentence() {
     currentSentenceInput = [];
     currentSentence = sentencesData[Math.floor(Math.random() * sentencesData.length)];
@@ -2012,7 +2324,6 @@ function loadSentence() {
 function handleSentenceClick(word, idx) {
     currentSentenceInput.push({word, idx});
     document.getElementById(`sent-btn-${idx}`).classList.add('used');
-    
     const zone = document.getElementById('sentenceZone');
     const span = document.createElement('span');
     span.className = 'sentence-word';
@@ -2031,15 +2342,12 @@ function checkSentence() {
     } else {
         speak('Try again');
         currentSentenceInput = [];
-        document.querySelectorAll('.sentence-word').forEach(b => {
-            if (!b.classList.contains('used')) b.remove();
-        });
-        document.querySelectorAll('#wordBank .sentence-word').forEach(b => b.classList.remove('used'));
         document.getElementById('sentenceZone').innerHTML = '';
+        document.querySelectorAll('#wordBank .sentence-word').forEach(b => b.classList.remove('used'));
     }
 }
 
-// ==================== MODULE 12: GAMES ====================
+// ==================== MODULE 13: GAMES ====================
 function switchGame(type) {
     document.getElementById('btnMatch').classList.toggle('active', type === 'match');
     document.getElementById('btnSpell').classList.toggle('active', type === 'spell');
@@ -2095,10 +2403,11 @@ function loadSpellGame() {
     const allWords = [...cvcData.a, ...cvcData.e, ...cvcData.i, ...cvcData.o, ...cvcData.u, ...cvceData.a, ...cvceData.i];
     currentSpellWord = allWords[Math.floor(Math.random() * allWords.length)];
     document.getElementById('spellEmoji').innerText = currentSpellWord.e;
-    currentSpellLetters = currentSpellWord.p.slice().sort(() => Math.random() - 0.5);
+    const letters = currentSpellWord.p || currentSpellWord.w.split('');
+    currentSpellLetters = letters.slice().sort(() => Math.random() - 0.5);
     
     const resText = document.getElementById('spellResultText');
-    resText.innerHTML = '<span style="color:#cbd5e1">_ </span>'.repeat(currentSpellWord.p.length);
+    resText.innerHTML = '<span style="color:#cbd5e1">_ </span>'.repeat(letters.length);
     
     const cont = document.getElementById('spellLetters');
     cont.innerHTML = '';
@@ -2117,8 +2426,9 @@ function handleSpellClick(letter, idx) {
     document.getElementById(`spell-btn-${idx}`).classList.add('used');
     
     const resText = document.getElementById('spellResultText');
+    const len = currentSpellWord.p ? currentSpellWord.p.length : currentSpellWord.w.length;
     let html = '';
-    for(let i=0; i<currentSpellWord.p.length; i++) {
+    for (let i = 0; i < len; i++) {
         if (i < currentSpellInput.length) {
             html += `<span class="placed">${currentSpellInput[i].letter}</span> `;
         } else {
@@ -2127,7 +2437,7 @@ function handleSpellClick(letter, idx) {
     }
     resText.innerHTML = html;
 
-    if (currentSpellInput.length === currentSpellWord.p.length) {
+    if (currentSpellInput.length === len) {
         const formed = currentSpellInput.map(x => x.letter).join('');
         if (formed === currentSpellWord.w) {
             speak(currentSpellWord.w);
@@ -2138,7 +2448,7 @@ function handleSpellClick(letter, idx) {
             speak("Try again");
             currentSpellInput = [];
             document.querySelectorAll('.spell-letter').forEach(b => b.classList.remove('used'));
-            resText.innerHTML = '<span style="color:#cbd5e1">_ </span>'.repeat(currentSpellWord.p.length);
+            resText.innerHTML = '<span style="color:#cbd5e1">_ </span>'.repeat(len);
         }
     }
 }
@@ -2159,8 +2469,8 @@ function loadMemoryGame() {
     
     const cards = [];
     selected.forEach(item => {
-        cards.push({type:'emoji', content:item.e, pair:item.w});
-        cards.push({type:'word', content:item.w, pair:item.e});
+        cards.push({type:'emoji', content:item.e, pair:item.w, word:item.w});
+        cards.push({type:'word', content:item.w, pair:item.e, word:item.w});
     });
     cards.sort(() => Math.random() - 0.5);
 
@@ -2179,6 +2489,7 @@ function loadMemoryGame() {
         `;
         div.dataset.idx = idx;
         div.dataset.pair = card.pair;
+        div.dataset.word = card.word;
         div.onclick = () => {
             if (div.classList.contains('flipped') || div.classList.contains('matched') || flipped.length >= 2) return;
             div.classList.add('flipped');
@@ -2187,9 +2498,7 @@ function loadMemoryGame() {
             
             if (flipped.length === 2) {
                 const [a, b] = flipped;
-                const cardA = cards[a.dataset.idx];
-                const cardB = cards[b.dataset.idx];
-                if (cardA.pair === cardB.content || cardB.pair === cardA.content) {
+                if (a.dataset.word === b.dataset.word) {
                     setTimeout(() => {
                         a.classList.add('matched');
                         b.classList.add('matched');
@@ -2215,6 +2524,7 @@ function loadMemoryGame() {
 }
 
 function loadSpeedGame() {
+    if (speedTimer) clearInterval(speedTimer);
     const allWords = [...vocabData.animals, ...vocabData.food];
     const correct = allWords[Math.floor(Math.random() * allWords.length)];
     document.getElementById('speedEmoji').innerText = correct.e;
@@ -2239,7 +2549,7 @@ function loadSpeedGame() {
                 speak(correct.w);
                 addScore(15);
                 gamesWon++;
-                clearInterval(timer);
+                clearInterval(speedTimer);
                 setTimeout(loadSpeedGame, 1500);
             } else {
                 btn.classList.add('wrong');
@@ -2251,18 +2561,18 @@ function loadSpeedGame() {
 
     let timeLeft = 10;
     document.getElementById('speedTimer').innerText = `Время: ${timeLeft}`;
-    const timer = setInterval(() => {
+    speedTimer = setInterval(() => {
         timeLeft--;
         document.getElementById('speedTimer').innerText = `Время: ${timeLeft}`;
         if (timeLeft <= 0) {
-            clearInterval(timer);
+            clearInterval(speedTimer);
             speak('Time is up!');
             setTimeout(loadSpeedGame, 1500);
         }
     }, 1000);
 }
 
-// ==================== MODULE 13: ACHIEVEMENTS ====================
+// ==================== MODULE 14: ACHIEVEMENTS ====================
 function renderAchievements() {
     const grid = document.getElementById('achievementsGrid');
     grid.innerHTML = '';
@@ -2276,6 +2586,8 @@ function renderAchievements() {
 
 // ==================== CONFETTI ====================
 function triggerConfetti() {
+    if (confettiActive) return;
+    confettiActive = true;
     const canvas = document.getElementById('confettiCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -2311,8 +2623,13 @@ function triggerConfetti() {
             p.angle += 0.1;
         });
         frames++;
-        if (frames < 100) requestAnimationFrame(animate);
-        else { canvas.style.display = 'none'; ctx.clearRect(0, 0, canvas.width, canvas.height); }
+        if (frames < 100) {
+            requestAnimationFrame(animate);
+        } else {
+            canvas.style.display = 'none';
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            confettiActive = false;
+        }
     }
     animate();
 }
@@ -2324,6 +2641,7 @@ initCVCe();
 initDigraphs();
 initBlends();
 initVowelTeams();
+initSyllables();
 initSight();
 initVocab();
 initStories();
